@@ -1,0 +1,13 @@
+*.pdf
+*.aux
+*.bbl
+*.blg
+*.dvi
+*.log
+*.out
+*.pdf
+*.backup
+*~
+*.log
+*.bak*
+book-template*

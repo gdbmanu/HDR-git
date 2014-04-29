@@ -1,0 +1,302 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% LaTeX book template                           %%
+%% Author:  Amber Jain (http://amberj.devio.us/) %%
+%% License: ISC license                          %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[a4paper,11pt]{book}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Source: http://en.wikibooks.org/wiki/LaTeX/Hyperlinks %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage[francais]{babel}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 'dedication' environment: To add a dedication paragraph at the start of book %
+% Source: http://www.tug.org/pipermail/texhax/2010-June/015184.html            %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newenvironment{dedication}
+{
+   \cleardoublepage
+   \thispagestyle{empty}
+   \vspace*{\stretch{1}}
+   \hfill\begin{minipage}[t]{0.66\textwidth}
+   \raggedright
+}
+{
+   \end{minipage}
+   \vspace*{\stretch{3}}
+   \clearpage
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Chapter quote at the start of chapter        %
+% Source: http://tex.stackexchange.com/a/53380 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+\renewcommand{\@chapapp}{}% Not necessary...
+\newenvironment{chapquote}[2][2em]
+  {\setlength{\@tempdima}{#1}%
+   \def\chapquote@author{#2}%
+   \parshape 1 \@tempdima \dimexpr\textwidth-2\@tempdima\relax%
+   \itshape}
+  {\par\normalfont\hfill--\ \chapquote@author\hspace*{\@tempdima}\par\bigskip}
+\makeatother
+
+
+% Babel ``Sommaire'' à la place de ``table des matières''
+\renewcommand{\contentsname}{Sommaire}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% First page of book which contains 'stuff' like: %
+%  - Book title, subtitle                         %
+%  - Book author name                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Book's title and subtitle
+\title{\Huge \textbf{Apprentissage dans les architectures cognitives}   \\ \huge contributions pour l'informatique et les neurosciences}
+% Author
+\author{\textsc{Emmanuel Daucé}}%\thanks{\url{www.example.com}}}
+
+
+\begin{document}
+
+\frontmatter
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Add a dedication paragraph to dedicate your book to someone %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{dedication}
+Dedicated to Calvin and Hobbes.
+\end{dedication}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Auto-generated table of contents, list of figures and list of tables %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents
+\listoffigures
+\listoftables
+
+\mainmatter
+
+\section*{Remerciements}
+\begin{itemize}
+\item A special word of thanks goes to Professor Don Knuth\footnote{\url{http://www-cs-faculty.stanford.edu/~uno/}} (for \TeX{}) and Leslie Lamport\footnote{\url{http://www.lamport.org/}} (for \LaTeX{}).
+\item I'll also like to thank Gummi\footnote{\url{http://gummi.midnightcoding.org/}} developers and LaTeXila\footnote{\url{http://projects.gnome.org/latexila/}} development team for their awesome \LaTeX{} editors.
+\item I'm deeply indebted my parents, colleagues and friends for their support and encouragement.
+\end{itemize}
+\mbox{}\\
+%\mbox{}\\
+\noindent Amber Jain \\
+\noindent \url{http://amberj.devio.us/}
+
+%%%%%%%%%%%%%%%%
+% NEW CHAPTER! %
+%%%%%%%%%%%%%%%%
+\chapter{Introduction}
+
+\begin{chapquote}{Author's name, \textit{Source of this quote}}
+``This is a quote and I don't know who said this.''
+\end{chapquote}
+
+% le modèle de Hopfield
+% Qu'est-ce que le chaos?
+
+% Qu'est-ce qu'un système apprenant
+Qu'est-ce qu'un système apprenant? 
+Cette question agite les sciences cognitives depuis leurs fondations [Turing, Hebb, McCullogh-Pitts].
+Les Fondateurs des sciences cognitives ont placé très tôt la question de l'apprentissage  au coeur de leur problématique 
+(qu'est-ce qu'une machine intelligente - cf. Turing)
+
+Il s'agit ici de décrire, modéliser mathématiquement et reproduire mécaniquement le sujet cognitif, capable de:
+
+1. raisonner (agglomérer différents faits pour déduire des faits nouveaux - et/ou des réponses)
+
+2. se rappeler (prendre en considération certains faits anciens (acquis) en plus des faits imédiatement disponibles) 
+
+3. apprendre (intégrer de nouveaux faits acquis, remettre en cause certains faits acquis)
+
+% 1. Décrire le sujet 
+Dans le domaine de la psychologie, l'émergence des sciences cognitives est venu en réaction au behaviorisme.
+A l'origine, il s'agit de contester la description de l'activité du sujet comme simple courroie de transmission 
+(un tableau de branchement) entre des stimuli et des réponses. Par opposition, il s'agit de décrire (proposer un modèle)
+du sujet en tant qu'acteur. Notion d'agentivité (imputabilité de l'action)
+Deux approches/réponses se dessinent dès l'origine :  
+
+- Systèmes dynamiques. Notion d'équilibre dynamique (forces opposantes). Homéostasie. Wiener. Architectures de contrôle basées sur des variables de contrôle. Notion d'écart/erreur.  
+L'agentivité se caractérise par le maintien actif de variables de contrôle à l'intérieur d'un certain intervalle. + Palo Alto. 
+
+- Machine à états. Manipulaton de symboles. Connaissances et croyances. L'essentiel de l'effort a porté sur le traitement symbolique de l'information: 
+la mémoire - la perception - les grammaires génératives - la logique formelle. 
+
+Dans ces deux formalismes, la question de l'apprentissage a eu tendance à progressivement se marginaliser au profit (1) du traitement logique des symboles et de modèles
+ descriptifs du langage (grammaires génératives) et (2) l'ingéniérie et la conception de systèmes d'asservissement de plus en plus complexes.
+
+A l'inverse, la question de l'apprentissage est restée présente dans le domaine des sciences de l'information et l'informatique naissante. 
+La question de l'apprentissage  devient la question de construire des programmes (des automates) capables de se modifier, de s'amender pour mieux répondre aux sollicitations
+de l'environnement. Cette question étant posée (comment modifier le programme sans intervention humaine), le formalisme des réseaux de neurones et du calcul distribué 
+s'est révélé le plus apte à traiter la question --> le perceptron. 
+
+Analogie biologique. Calcul distribué. Le perceptron est à la base un modèle de la perception visuelle. 
+
+Il apartient à double titre à une famille des modèles ``behavioristes''. Le perceptron est bien un tableau de branchement.
+Sa règle de mise à jour repose sur des causalités stimulus-réponse.  
+
+A différentes époques, les neurosciences se sont mises à l'agenda des sciences cognitives. C'est en puisant dans les connaisances biologiques
+de leur époque que les sciences cognitives ont pu se renouveler.
+Si le perceptron constitue un pas en arrière par rapport à certains prémisses des sciences cognitives (agentivité), il constitue néanmoins un pas en avant important 
+puisqu'il produit un modèle généralisable de calcul distribué, c'est à dire qu'il propose une première implémentation décentralisée de l'activité cognitive. 
+Il s'agit d'un modèle nouveau qui ne tire ses prémisses ni du calcul symbolique centralisé (machine de Turing), ni de la théorie des systèmes dynamiques, mais
+plutot de l'observation de l'organisation à l'oeuvre dans les premières couches du traitement visuel. L'apprentissage des paramètres du système est bien guidé par la 
+correction d'erreurs. 
+
+Réseaux de neurones et boite noire.
+Qui dit décentralisé dit boite noire difficile à interpréter...
+
+L'apprentissage automatique s'est développé/autonomisé et se ramène souvent à des statistiques descriptives...
+Dans ce cadre, un système apprenant est une machine à entrées-sorties, une fonction paramétrique, dont les paralètres on au choix : 
+un degré de vraisemblance élevé, maximisent la séparation des données, ...
+l'apprentissage devient un des branches de l'optimisation mathématique.
+
+
+la théorie de l'information : caractériser le caractère informatif (ou non) d'un message par son degré de prédictabilité. Problème : les deux extrêmes (information nulle,
+information maximale) sont inintéressants...
+\--- Transmission de l'information \--- Emetteur et récepteur \--- débit. 
+
+% Architectures de contrôle. Point de vue de la robotique. Automates embarqués. 
+
+% L'émergence des neurosciences computationnelles
+L'inspiration naturelle. Au cours de l'histoire des sciences cognitives, plusieurs rapprochements ont eu lieu avec les sciences du vivant et les neurosciences:
+
+- Années 40 : modèle McCullogh et Pitts, plasticité de Hebb. Assemblée neuronale. Notion de représentation distribuée.
+
+- Années 60 : modèles de la vision, le perceptron. Implémentation. Filtre. Classifieur. Feed-forward.
+
+- Années 80 : modèle de Hopfield. Physique statistique. 
+
+
+% Philo
+Créer du neuf à partir de rien.
+Qu'est-ce que la nouveauté?
+D'où vient l'information?
+
+Potentialité et émergence. Notion d'historique. Constructivisme.
+% Importance de l'activité intrinsèque
+% Activité centrale flutuante, émergence, historique
+% couplage sans fonction (corps sans organe)
+% triptique : corps- société- organe (à différents niveaux) - organisme = société des organes
+% analogie eonomique : composants - emploi - produit (composé)
+
+% Ce que j'ai fait, quelles sont mes questions?
+
+Les enjeux :
+
+- Substrat apprenant (universel). 
+
+
+
+
+\chapter{Parcours}
+
+%Je propose dans cette partie de parcourire certains de mes travaux passés en essayant de proposer un éclairage/dégager une cohérence.
+
+Un cadre unique pour l'apprentissage et la plasticité. La difficulté consiste à éclairer les méthodes de machine learning à partir de concepts issus des sciences cognitives. 
+Essayer de construire un cadre conceptuel (ou de réexaminer des cadres conceptuels existants mais non explicités). 
+
+Aller au delà des modèles actuels de l'apprentissage (essentiellement behavioristes) en reprenant toute la structure conceptuelle de l'apprentissage. 
+
+D'un côté, le point de vue des sciences cognitives :
+Agent incarné. Corps. Extension (du corps, du territoire) limitée. Ressources (computationnelles) limitées. 
+Déplacement du corps et emploi du corps visant le retour à l'équilibre (dominé par des variables de type contrôle des apports énergétiques. Vient ensuite recherche d'abri, recherche de partenaires, ...). 
+Autonomie.
+
+De l'autre, du point de vue du machine learning : extraterritorialité des données (peu de limite spatiale, ou absence d'extension spatiale). 
+Ressources computationnelles distribuées (non localisées). Hétéronomie. L'accès aux ressources n'est pas un enjeu (dépend d'un agent extérieur).
+
+
+En particulier : la notion d'expressivité du substrat est prometteuse. En particulier on pourra distinguer expressivité discrète (argmax discret) et expressivité continue (neural field).
+
+
+- Substrat. Des ressources limitées (nombre de neurones N, pas de recrutement). Expressivité du substrat (discret/réel, dimension, richesse du comportement intrinsèque).  
+(exemple de substrat à expressivité limitée : carte de Kohonen, réseau de Hopfield). (ART ajoute le recrutement).  Clustering.
+L'universalité implique la mise en oeuvre de ressources indépendamment de la tâche (task-independent device). Le substrat doit au mieux exploiter ses ressources. 
+
+- Potentialité et instanciation. Réservoir. Emergence = instanciation. Irréversibilité (historique). Sculpture du vivant. Réduction d'incertitude. Plasticité, STDP, Hebb...
+
+- Fluctuation. Bruit - activité fluctuante. Activité intrinsèque. Activité de base. Création d'information. Capture. (Exemples de capture : le modèle acteur-critique, le réservoir computing).
+Notion d'activité centrale fluctuante. Le chaos. Le bruit comme élément générateur, source de nouveauté.
+L'activité intrinsèque n'est pas uniquement feed-forward (traitement du signal), lateral (inference) ou feedback (rappel). 
+Il faut considérer la fluctuation imprévue et la création d'information. 
+L'exploration apparait nécessaire dans les environements complexes : lorsque l'espace des tâches est complexe. Periode de jeu chez les mammifères. 
+{\bf Fonction des fluctations = capture de nouveaux couplages dans un environnement complexe}
+
+- Perception et non-sens. Pattern matching. UP/DOWN states. Ecart au modèle (Bayesian surprise). Predictive coding.
+Activité de base. Reconnaissance par franchissement d'un seuil (``vigilance''). Distinction  entre connu et non-perçu (non-sens).
+Modèles de la perception. Freeman.
+
+- Engagement et action. Commande. Architectures de contrôle. Espace des tâches. Couplages corps-environnement (Friston). Organisme transitoire (Société des organes). 
+
+- Variables de contrôle. Equilibre dynamique. Homeostasie. Emploi et Couplage sans emploi. Répertoire (dictionnaire?) d'emplois. 
+
+- Séquence. Causalité
+
+- Apprendre et oublier. Online learning. 
+
+
+Question : atteint-on une limite des rapprochements entre sciences cognitives et machine learning. Quels concepts sont-ils utiles pour construire des machines intelligentes. 
+A-t-on besoin du hasard pour apprendre à gérer des actuateurs complexes (puisque les limites naturelles type code génétique n'existent pas).   
+La plupart des besoins naturels sont non pertinents pour les machines (apports énergétiques, abri, partenaire).
+Le tryptique Orientation-déplacement-emploi est inopérant dans le cadre ML.
+
+
+
+
+% DEA :
+% - conditions de la destabilisation : etude des effets de petite taille. 
+
+
+
+% Histoires
+\section{La chasse aux papillons}
+
+% L'idée de Freeman. L'enregistrement multi-électrodes. Potentialité et instanciation (choix d'une orbite). 
+% L'état central fluctuant est popularisé par J-D Vincent
+
+Le choix 
+
+\subsection{Etrange attraction}
+L'activité intrinsèque. 
+
+\subsection{Plasticité séquentielle}
+
+
+% Image du papillon-chenille
+
+\section{Mouvements}
+% continuous RL
+
+\section{Carte et Territoire}
+% MAPS
+
+\section{Multistabilités}
+% DTI
+
+\section{}
+
+
+\chapter{Projet scientifique}
+
+\section{Le radeau des cîmes}
+
+
+\chapter{Conclusion}
+
+\chapter*{Annexes}
+
+\end{document}
