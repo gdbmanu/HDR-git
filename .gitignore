@@ -10,4 +10,7 @@
 *~
 *.log
 *.bak*
+*.lof
+*.lot
+*.toc
 book-template*

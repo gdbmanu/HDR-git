@@ -14,6 +14,7 @@
 \usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage[francais]{babel}
+\usepackage{pdfpages}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 'dedication' environment: To add a dedication paragraph at the start of book %
@@ -116,11 +117,11 @@ Les Fondateurs des sciences cognitives ont placé très tôt la question de l'ap
 
 Il s'agit ici de décrire, modéliser mathématiquement et reproduire mécaniquement le sujet cognitif, capable de:
 
-1. raisonner (agglomérer différents faits pour déduire des faits nouveaux - et/ou des réponses)
+1. raisonner (agglomérer différents faits pour déduire des faits nouveaux - et/ou des réponses) - compatible paradigme behavioriste
 
-2. se rappeler (prendre en considération certains faits anciens (acquis) en plus des faits imédiatement disponibles) 
+2. se rappeler (prendre en considération certains faits anciens (acquis) en plus des faits imédiatement disponibles) - la memoire est liée à la notion d'``etat interne''. Croyance, Prior.
 
-3. apprendre (intégrer de nouveaux faits acquis, remettre en cause certains faits acquis)
+3. apprendre (intégrer de nouveaux faits acquis, remettre en cause certains faits acquis) - compatible paradigme behavioriste.
 
 % 1. Décrire le sujet 
 Dans le domaine de la psychologie, l'émergence des sciences cognitives est venu en réaction au behaviorisme.
@@ -131,30 +132,45 @@ Deux approches/réponses se dessinent dès l'origine :
 
 - Systèmes dynamiques. Notion d'équilibre dynamique (forces opposantes). Homéostasie. Wiener. Architectures de contrôle basées sur des variables de contrôle. Notion d'écart/erreur.  
 L'agentivité se caractérise par le maintien actif de variables de contrôle à l'intérieur d'un certain intervalle. + Palo Alto. 
+La contestation du paradigme behavioriste passe par la notion de contrôle ``reactif'' et d'ecart à l'equilibre. Notion de contrôleur/fonction de contrôle. On ne considère pas des 
+``mappings'' stimulus-réponse discrets (x => y, LUT) mais des couples $(x_0,k)$ avec $y = k (x - x_0) $.    
+Modèle inverse.  Architecture de contrôle et autonomie.
 
 - Machine à états. Manipulaton de symboles. Connaissances et croyances. L'essentiel de l'effort a porté sur le traitement symbolique de l'information: 
-la mémoire - la perception - les grammaires génératives - la logique formelle. 
+la mémoire - la perception - les grammaires génératives - la logique formelle. Ces modèles cognitifs se focalisent sur la notion de croyance, c'est à dire 
+d'état interne qui conditionne la réponse. (x, etat => y, LUT). Par extension, etat = connaissance, prior. Le prior peut biaiser la reponse. 
+Mais (péché) traitement symbolique = examen séquentiel des faits. Peu de prise en compte de l'extension spatiale.
+
+L'enjeu principal est celui d'un côté du traitement analogique et de l'autre le traitement symbolique. Du point de vue des sciencers cognitives naissantes, c'est le traitement
+symbolique qui gagne dans un premier temps.
 
 Dans ces deux formalismes, la question de l'apprentissage a eu tendance à progressivement se marginaliser au profit (1) du traitement logique des symboles et de modèles
- descriptifs du langage (grammaires génératives) et (2) l'ingéniérie et la conception de systèmes d'asservissement de plus en plus complexes.
+ descriptifs du langage (grammaires génératives) et (2) l'ingéniérie et la conception de systèmes d'asservissement de plus en plus complexes et/ou psychologie et constructivisme (Palo Alto)
 
 A l'inverse, la question de l'apprentissage est restée présente dans le domaine des sciences de l'information et l'informatique naissante. 
 La question de l'apprentissage  devient la question de construire des programmes (des automates) capables de se modifier, de s'amender pour mieux répondre aux sollicitations
 de l'environnement. Cette question étant posée (comment modifier le programme sans intervention humaine), le formalisme des réseaux de neurones et du calcul distribué 
 s'est révélé le plus apte à traiter la question --> le perceptron. 
 
-Analogie biologique. Calcul distribué. Le perceptron est à la base un modèle de la perception visuelle. 
+Analogie biologique. Calcul distribué. Le perceptron est à la base un modèle de la perception visuelle. Le perceptron apporte de nombreux concepts nouveaux qui 
+vont s'avérer féconds pour les sciences cognitives.   
 
-Il apartient à double titre à une famille des modèles ``behavioristes''. Le perceptron est bien un tableau de branchement.
+D'un côté, il appartient à double titre à une famille des modèles ``behavioristes''. Le perceptron est bien un tableau de branchement.
 Sa règle de mise à jour repose sur des causalités stimulus-réponse.  
+De l'autre, il introduit les concepts de filtres, de pattern matching et de calcul distribué, avec un fonctionnement qui diffère à  la fois 
+du traitement logico-symbolique et du contrôle intensif/analogique.
+
+Si le perceptron constitue un pas en arrière par rapport à certains prémisses des sciences cognitives (agentivité), il constitue néanmoins un pas en avant important 
+puisqu'il produit un modèle généralisable de calcul distribué, c'est à dire qu'il propose une première implémentation décentralisée de l'apprentissage et de la plasticité.
+On sort des approches logico-symboliques avec la prise en compte de l'organisation (extension) spatiale des stimuli.
+
+
+Il s'agit d'un modèle nouveau qui ne tire ses prémisses ni du calcul symbolique centralisé (machine de Turing), ni de la théorie des systèmes dynamiques, mais
+plutot de l'observation de l'organisation à l'oeuvre dans les premières couches du traitement visuel. L'apprentissage est bien guidé par la 
+correction d'erreurs, mais agit dans l'espace des paramètres. 
 
 A différentes époques, les neurosciences se sont mises à l'agenda des sciences cognitives. C'est en puisant dans les connaisances biologiques
 de leur époque que les sciences cognitives ont pu se renouveler.
-Si le perceptron constitue un pas en arrière par rapport à certains prémisses des sciences cognitives (agentivité), il constitue néanmoins un pas en avant important 
-puisqu'il produit un modèle généralisable de calcul distribué, c'est à dire qu'il propose une première implémentation décentralisée de l'activité cognitive. 
-Il s'agit d'un modèle nouveau qui ne tire ses prémisses ni du calcul symbolique centralisé (machine de Turing), ni de la théorie des systèmes dynamiques, mais
-plutot de l'observation de l'organisation à l'oeuvre dans les premières couches du traitement visuel. L'apprentissage des paramètres du système est bien guidé par la 
-correction d'erreurs. 
 
 Réseaux de neurones et boite noire.
 Qui dit décentralisé dit boite noire difficile à interpréter...
@@ -200,8 +216,6 @@ Les enjeux :
 - Substrat apprenant (universel). 
 
 
-
-
 \chapter{Parcours}
 
 %Je propose dans cette partie de parcourire certains de mes travaux passés en essayant de proposer un éclairage/dégager une cohérence.
@@ -213,7 +227,8 @@ Aller au delà des modèles actuels de l'apprentissage (essentiellement behavior
 
 D'un côté, le point de vue des sciences cognitives :
 Agent incarné. Corps. Extension (du corps, du territoire) limitée. Ressources (computationnelles) limitées. 
-Déplacement du corps et emploi du corps visant le retour à l'équilibre (dominé par des variables de type contrôle des apports énergétiques. Vient ensuite recherche d'abri, recherche de partenaires, ...). 
+Déplacement du corps et emploi du corps visant le retour à l'équilibre (dominé par des variables de type contrôle des apports énergétiques. 
+Vient ensuite recherche d'abri, recherche de partenaires, etc...). 
 Autonomie.
 
 De l'autre, du point de vue du machine learning : extraterritorialité des données (peu de limite spatiale, ou absence d'extension spatiale). 
@@ -226,6 +241,9 @@ En particulier : la notion d'expressivité du substrat est prometteuse. En parti
 - Substrat. Des ressources limitées (nombre de neurones N, pas de recrutement). Expressivité du substrat (discret/réel, dimension, richesse du comportement intrinsèque).  
 (exemple de substrat à expressivité limitée : carte de Kohonen, réseau de Hopfield). (ART ajoute le recrutement).  Clustering.
 L'universalité implique la mise en oeuvre de ressources indépendamment de la tâche (task-independent device). Le substrat doit au mieux exploiter ses ressources. 
+A rappeler également : les niveaux de Marr : du substrat au modèle.
+{\bf computation/traitement du signal basé sur la pattern matching (filtres) et non sur un traitement intensif/analogique (architectures de contrôle). Glissement de l'espace des actions 
+à l'espace des paramètres}
 
 - Potentialité et instanciation. Réservoir. Emergence = instanciation. Irréversibilité (historique). Sculpture du vivant. Réduction d'incertitude. Plasticité, STDP, Hebb...
 
@@ -261,17 +279,52 @@ Le tryptique Orientation-déplacement-emploi est inopérant dans le cadre ML.
 % - conditions de la destabilisation : etude des effets de petite taille. 
 
 
+\section{Perception et action}
 
+Principe du miroir (environnement ``agissant sur'' l'agent)
+
+L'environnement inclut le corps et les actuateurs.
+
+slow external / fast internal
+
+
+
+% David Marr : fonctions du cervelet, du neocortex et de l'hippocampe.
+
+
+
+Karl Friston
+
+%\fbox{
+%\begin{minipage}
+\includepdf[pages=1-10]{pdf/epj-st-2007.pdf}
+%\end{minipage}
+%}
 % Histoires
-\section{La chasse aux papillons}
+\section{Modèles pour la perception spatio-temporelle}
+
+% un point important : la prise en compte des delais!!! conditionne l'anticipation sensorielle, la synchronisation agent-environnement, l'apprentissage de séquences.
+
+% perception et non-sens
 
 % L'idée de Freeman. L'enregistrement multi-électrodes. Potentialité et instanciation (choix d'une orbite). 
 % L'état central fluctuant est popularisé par J-D Vincent
 
 Le choix 
 
-\subsection{Etrange attraction}
+\subsection{Substrat - codage topographique}
+Mean field
+
+Field computation
+
+Expressivité discrète - continue
+
+
+\subsection{Bruit et choix}
+% Modèlmes RL - Actor--critic
 L'activité intrinsèque. 
+
+Les variables de contrôle (rewards) arrivent par d'autres canaux. 
 
 \subsection{Plasticité séquentielle}
 
