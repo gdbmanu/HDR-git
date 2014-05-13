@@ -110,38 +110,74 @@ Dedicated to Calvin and Hobbes.
 % Qu'est-ce que le chaos?
 
 % Qu'est-ce qu'un système apprenant
-Qu'est-ce qu'un système apprenant? 
-Cette question agite les sciences cognitives depuis leurs fondations [Turing, Hebb, McCullogh-Pitts].
-Les Fondateurs des sciences cognitives ont placé très tôt la question de l'apprentissage  au coeur de leur problématique 
+
+
+
+% Architectures de contrôle. Point de vue de la robotique. Automates embarqués. 
+
+
+
+
+% Philo
+Créer du neuf à partir de rien.
+Qu'est-ce que la nouveauté?
+D'où vient l'information?
+
+Potentialité et émergence. Notion d'historique. Constructivisme.
+% Importance de l'activité intrinsèque
+% Activité centrale flutuante, émergence, historique
+% couplage sans fonction (corps sans organe)
+% triptique : corps- société- organe (à différents niveaux) - organisme = société des organes
+% analogie eonomique : composants - emploi - produit (composé)
+
+% Ce que j'ai fait, quelles sont mes questions?
+
+Les enjeux :
+
+- Substrat apprenant (universel). 
+
+\chapter{Architectures cognitives}
+
+\section{Problématique}
+
+Une architectures cognitives est un dispositif logiciel dont le but est de permettre à un appareil (disposant de capteurs et
+d'actuateurs) d'interagir de façon ``intelligente'' avec son environnement. Le concept de comportement intelligent reste bien sûr assez flou.
+On assimilera ici  dispositif logiciel et controlleur. On parlera de signal d'entrée pour qualifier les données analogiques ou digitales à traiter.     
+On parlera de commande pour qualifier la réponse (analogique ou digitale) produite par le dispositif.
+
+Ce problème d'une définition opérationnelle de l'intelligence a été posé au sortir de la deuxième guerre mondiale. Il s'agissait de 
+construire un programme de recherche, une feuille de route détaillant les étapes nécessaires et suffisantes pour construire un dispositif artificiel
+intelligent.
+Il s'agit ici de décrire, modéliser mathématiquement et reproduire mécaniquement le sujet cognitif, capable de:
+\begin{enumerate}
+\item raisonner (agglomérer différents faits pour déduire des faits nouveaux - et/ou des réponses) - l'acuité (perspicacité) du raisonnement, 
+c'est à dire la capacité à établir des faits nouveaux à partir de faisceaux d'indices (par déduction) - {\color{red} compatible paradigme behavioriste}
+\item se rappeler (prendre en considération certains faits anciens (acquis) en plus des faits imédiatement disponibles) - la memoire est liée à la notion d'``etat interne''. Croyance, Prior.
+\item apprendre (intégrer de nouveaux faits, remettre en cause certains faits acquis) - {\color{red} compatible paradigme behavioriste}.
+\item planifier et faire des choix, c'est à dire évaluer les bénéfices et les pertes attendus des actions ou des réponses produites.
+\end{enumerate}
+Les fondateurs des sciences cognitives ont placé très tôt la question de l'apprentissage  au coeur de leur problématique 
 (qu'est-ce qu'une machine intelligente - cf. Turing)
 
-Il s'agit ici de décrire, modéliser mathématiquement et reproduire mécaniquement le sujet cognitif, capable de:
+A un niveau très général, il s'agit de produire un dispositif dont les réponses s'apparenteraient dans la forme et dans le contenu à celles d'un être humain [TEST DE TURING],
+tout en reposant sur des opérations élémentaires issues d'un traitement mécanico-logique de l'information.
+Toujours à ce niveau très général, une des notions clés de l'intelligence artificielle naissante est la notion d'agentivité, autrement dit
+l'imputabilité de l'action. Un dispositif logico-mécanique pourrait être dit intelligent s'il était considéré comme responsable de ses actes, 
+celui auquel on pourrait imputer les actions produites. 
+Ces deux notions (test de Turing, agentivité) ne sont pas opérationnelles. Elles permettent de tracer des frontières par exclusion. Un dispositif logiciel
+n'est pas véritablement intelligent s'il ne passe pas le test de Turing, ou si on ne peut pas lui imputer les réponses qu'il a produites.
+Elles sont néanmoins toutes deux imparfaites, puisque reposant in fine sur la subjectivité de l'observateur.
 
-1. raisonner (agglomérer différents faits pour déduire des faits nouveaux - et/ou des réponses) - compatible paradigme behavioriste
-
-2. se rappeler (prendre en considération certains faits anciens (acquis) en plus des faits imédiatement disponibles) - la memoire est liée à la notion d'``etat interne''. Croyance, Prior.
-
-3. apprendre (intégrer de nouveaux faits acquis, remettre en cause certains faits acquis) - compatible paradigme behavioriste.
-
-% 1. Décrire le sujet 
 Dans le domaine de la psychologie, l'émergence des sciences cognitives est venu en réaction au behaviorisme.
 A l'origine, il s'agit de contester la description de l'activité du sujet comme simple courroie de transmission 
 (un tableau de branchement) entre des stimuli et des réponses. Par opposition, il s'agit de décrire (proposer un modèle)
-du sujet en tant qu'acteur. Notion d'agentivité (imputabilité de l'action)
+du sujet en tant qu'acteur. Notion d'agentivité (imputabilité de l'action).
 Deux approches/réponses se dessinent dès l'origine :  
-
-- Systèmes dynamiques. (MECANIQUE) Notion d'équilibre dynamique (forces opposantes). Homéostasie. Wiener. Architectures de contrôle basées sur des variables de contrôle. Notion d'écart/erreur.  
-L'agentivité se caractérise par le maintien actif de variables de contrôle à l'intérieur d'un certain intervalle. + Palo Alto. 
-La contestation du paradigme behavioriste passe par la notion de contrôle ``reactif'' et d'ecart à l'equilibre. Notion de contrôleur/fonction de contrôle. On ne considère pas des 
-``mappings'' stimulus-réponse discrets (x => y, LUT) mais des couples $(x_0,k)$ avec $y = k (x - x_0) $.    
-Modèle inverse.  Architecture de contrôle et autonomie.
-
-- Machine à états. (CALCUL - CALCULABILITE) Manipulaton de symboles. Connaissances et croyances. L'essentiel de l'effort a porté sur le traitement symbolique de l'information: 
-la mémoire - la perception - les grammaires génératives - la logique formelle. Ces modèles cognitifs se focalisent sur la notion de croyance, c'est à dire 
-d'état interne qui conditionne la réponse. (x, etat => y, LUT). Par extension, etat = connaissance, prior. Le prior peut biaiser la reponse. 
-Mais (péché) traitement symbolique = examen séquentiel des faits. Peu de prise en compte de l'extension spatiale.
-
-L'enjeu principal est celui d'un côté du traitement analogique et de l'autre le traitement symbolique. Du point de vue des sciencers cognitives naissantes, c'est le traitement
+\begin{itemize}
+ \item traitement symbolique
+ \item traitement analogique
+\end{itemize}
+L'enjeu principal est celui d'un côté du traitement analogique et de l'autre le traitement symbolique. Du point de vue des sciences cognitives naissantes, c'est le traitement
 symbolique qui gagne dans un premier temps.
 
 Dans ces deux formalismes, la question de l'apprentissage a eu tendance à progressivement se marginaliser au profit (1) du traitement logique des symboles et de modèles
@@ -151,6 +187,66 @@ A l'inverse, la question de l'apprentissage est restée présente dans le domain
 La question de l'apprentissage  devient la question de construire des programmes (des automates) capables de se modifier, de s'amender pour mieux répondre aux sollicitations
 de l'environnement. Cette question étant posée (comment modifier le programme sans intervention humaine), le formalisme des réseaux de neurones et du calcul distribué 
 s'est révélé le plus apte à traiter la question --> le perceptron. 
+
+
+Une architecture cognitive est alors une proposition de réalisation logicielle de ce cahier des charges (un logiciel capable de raisonner, se souvenir et faire des choix).
+On distingue classiquement 3 approches de réalisation de telles architectures. 
+\begin{enumerate}
+ \item approche logico-mathématique 
+ \item approche mécanique
+ \item approche traitement du signal
+\end{enumerate}
+
+On regarde dans le détail ces trois approches avec un focus particulier sur l'apprentissage et l'autonomie. 
+
+\subsection{Approche logico-mathématique}
+
+(CALCUL - CALCULABILITE)
+
+Focus sur le langage et le traitement syntaxique - l'intelligence est manipulation de symboles - structuralisme - arbitraire du signe - tout est langage
+
+Machine à états.  Manipulaton de symboles. Connaissances et croyances. L'essentiel de l'effort a porté sur le traitement symbolique de l'information: 
+la mémoire - la perception - les grammaires génératives - la logique formelle. Ces modèles cognitifs se focalisent sur la notion de croyance, c'est à dire 
+d'état interne qui conditionne la réponse. (x, etat => y, LUT). Par extension, etat = connaissance, prior. Le prior peut biaiser la reponse. 
+Mais (péché) traitement symbolique = examen séquentiel des faits. Peu de prise en compte de l'extension spatiale.
+
+
+\subsection{Approche mécanique}
+
+(FEEDBACK)
+
+Systèmes dynamiques. (MECANIQUE) Notion d'équilibre dynamique (forces opposantes). Homéostasie. Wiener. Architectures de contrôle basées sur des variables de contrôle. Notion d'écart/erreur.  
+L'agentivité se caractérise par le maintien actif de variables de contrôle à l'intérieur d'un certain intervalle. + Palo Alto. 
+La contestation du paradigme behavioriste passe par la notion de contrôle ``reactif'' et d'ecart à l'equilibre. Notion de contrôleur/fonction de contrôle. On ne considère pas des 
+``mappings'' stimulus-réponse discrets (x => y, LUT) mais des couples $(x_0,k)$ avec $y = k (x - x_0) $.    
+Modèle inverse.  Architecture de contrôle et autonomie.
+
+La plupart des logiciels et les
+applications utilisées dans la vie courante sont considérés comme ``non intelligents''. Ce sont des dispostifs ``commandés'', c'est à dire obéissant aux consignes 
+et dont la réponse ne varie pas au cours du temps, ou d'une utilisation à l'autre. Ce comportement (conformité de la réponse à la consigne) est souhaitable dans la plupart
+des cas. 
+Toujours dans le domaine de la vie courante, est ``non intelligent'' tout ce qui est prévisible, ce que l'on peut manipuler, exploiter.
+
+Il ressort : est intelligent ce qui n'est pas prévisible, 
+
+
+
+
+
+\subsection{Approche traitement du signal}
+
+(OPTIMISATION)
+
+
+% L'émergence des neurosciences computationnelles
+L'inspiration naturelle. Au cours de l'histoire des sciences cognitives, plusieurs rapprochements ont eu lieu avec les sciences du vivant et les neurosciences:
+
+- Années 40 : modèle McCullogh et Pitts, plasticité de Hebb. Assemblée neuronale. Notion de représentation distribuée?
+
+- Années 60 : modèles de la vision, le perceptron. Implémentation. Filtre. Classifieur. Feed-forward.
+
+- Années 80 : modèle de Hopfield. Physique statistique. 
+
 
 Analogie biologique. Calcul distribué. Le perceptron est à la base un modèle de la perception visuelle. Le perceptron apporte de nombreux concepts nouveaux qui 
 vont s'avérer féconds pour les sciences cognitives.   
@@ -187,35 +283,48 @@ la théorie de l'information : caractériser le caractère informatif (ou non) d
 information maximale) sont inintéressants...
 \--- Transmission de l'information \--- Emetteur et récepteur \--- débit. 
 
-% Architectures de contrôle. Point de vue de la robotique. Automates embarqués. 
+\section{Questions ouvertes}
 
-% L'émergence des neurosciences computationnelles
-L'inspiration naturelle. Au cours de l'histoire des sciences cognitives, plusieurs rapprochements ont eu lieu avec les sciences du vivant et les neurosciences:
+\paragraph{Autonomisation des questions}
 
-- Années 40 : modèle McCullogh et Pitts, plasticité de Hebb. Assemblée neuronale. Notion de représentation distribuée.
+- question du langage
 
-- Années 60 : modèles de la vision, le perceptron. Implémentation. Filtre. Classifieur. Feed-forward.
+- question de l'apprentissage
 
-- Années 80 : modèle de Hopfield. Physique statistique. 
+- question 
 
 
-% Philo
-Créer du neuf à partir de rien.
-Qu'est-ce que la nouveauté?
-D'où vient l'information?
+\paragraph{Problèmes de consistance}
 
-Potentialité et émergence. Notion d'historique. Constructivisme.
-% Importance de l'activité intrinsèque
-% Activité centrale flutuante, émergence, historique
-% couplage sans fonction (corps sans organe)
-% triptique : corps- société- organe (à différents niveaux) - organisme = société des organes
-% analogie eonomique : composants - emploi - produit (composé)
+D'un côté (calculabilité). Le programme qui interprète des programmes. Dualité donnée / programme. Récursivité.  
 
-% Ce que j'ai fait, quelles sont mes questions?
+Feedback négatif. Réponse soumise à l'entrée qui est soumise à la réponse.
 
-Les enjeux :
+Récurrence. Hystérèse.
 
-- Substrat apprenant (universel). 
+
+EM
+
+
+\paragraph{La question (le problème) de l'autonomie}
+
+Le ``noeud'' du problème. Imputabilité.
+Les points 1, 2 et 3 peuvent être réalisés sans imputabilité. Seul 4 (choix) a des 
+
+Dans le langage courant, on entend par ``intelligence'' la capacité à agir de façon appropriée en différentes circonstances, autrement dit de produire
+les réponses qui sont les plus à même de produire un bénéfice à l'agent 
+
+Une première manière est de définir un dispositif cognitif par opposition à un dispositif ``commandé'', c'est à dire
+capable de développer des comportements intelligents de façon autonome.
+
+\paragraph{Intérêt}
+
+\begin{itemize}
+ \item déplacement de la charge cognitive (mais augmente la dépendance de l'homme au dispositif)
+ \item personnalisation - accès à l'information (mais risque de ``flicage'' - problème de confidentialité)
+ \item véhicules autonomes
+ \item maison/environnement intelligent
+\end{itemize}
 
 
 \chapter{Parcours}
