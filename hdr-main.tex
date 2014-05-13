@@ -130,13 +130,13 @@ A l'origine, il s'agit de contester la description de l'activité du sujet comme
 du sujet en tant qu'acteur. Notion d'agentivité (imputabilité de l'action)
 Deux approches/réponses se dessinent dès l'origine :  
 
-- Systèmes dynamiques. Notion d'équilibre dynamique (forces opposantes). Homéostasie. Wiener. Architectures de contrôle basées sur des variables de contrôle. Notion d'écart/erreur.  
+- Systèmes dynamiques. (MECANIQUE) Notion d'équilibre dynamique (forces opposantes). Homéostasie. Wiener. Architectures de contrôle basées sur des variables de contrôle. Notion d'écart/erreur.  
 L'agentivité se caractérise par le maintien actif de variables de contrôle à l'intérieur d'un certain intervalle. + Palo Alto. 
 La contestation du paradigme behavioriste passe par la notion de contrôle ``reactif'' et d'ecart à l'equilibre. Notion de contrôleur/fonction de contrôle. On ne considère pas des 
 ``mappings'' stimulus-réponse discrets (x => y, LUT) mais des couples $(x_0,k)$ avec $y = k (x - x_0) $.    
 Modèle inverse.  Architecture de contrôle et autonomie.
 
-- Machine à états. Manipulaton de symboles. Connaissances et croyances. L'essentiel de l'effort a porté sur le traitement symbolique de l'information: 
+- Machine à états. (CALCUL - CALCULABILITE) Manipulaton de symboles. Connaissances et croyances. L'essentiel de l'effort a porté sur le traitement symbolique de l'information: 
 la mémoire - la perception - les grammaires génératives - la logique formelle. Ces modèles cognitifs se focalisent sur la notion de croyance, c'est à dire 
 d'état interne qui conditionne la réponse. (x, etat => y, LUT). Par extension, etat = connaissance, prior. Le prior peut biaiser la reponse. 
 Mais (péché) traitement symbolique = examen séquentiel des faits. Peu de prise en compte de l'extension spatiale.
@@ -163,11 +163,13 @@ du traitement logico-symbolique et du contrôle intensif/analogique.
 Si le perceptron constitue un pas en arrière par rapport à certains prémisses des sciences cognitives (agentivité), il constitue néanmoins un pas en avant important 
 puisqu'il produit un modèle généralisable de calcul distribué, c'est à dire qu'il propose une première implémentation décentralisée de l'apprentissage et de la plasticité.
 On sort des approches logico-symboliques avec la prise en compte de l'organisation (extension) spatiale des stimuli.
-
+(THERMODYNAMIQUE - PHYSIQUE STAT - TRAITEMENT DU SIGNAL - CHAMP)
 
 Il s'agit d'un modèle nouveau qui ne tire ses prémisses ni du calcul symbolique centralisé (machine de Turing), ni de la théorie des systèmes dynamiques, mais
 plutot de l'observation de l'organisation à l'oeuvre dans les premières couches du traitement visuel. L'apprentissage est bien guidé par la 
 correction d'erreurs, mais agit dans l'espace des paramètres. 
+
+Voir aussi Hubel et Wiesel.
 
 A différentes époques, les neurosciences se sont mises à l'agenda des sciences cognitives. C'est en puisant dans les connaisances biologiques
 de leur époque que les sciences cognitives ont pu se renouveler.
@@ -291,9 +293,10 @@ slow external / fast internal
 
 % David Marr : fonctions du cervelet, du neocortex et de l'hippocampe.
 
+% Distinction entre l'espace metrique/physique et l'espace intentionnel (controlleur. Distinction reposant principalement sur les constantes de temps.
 
+% le robot qui tourne. UP/DOWN? ``accochage/résonnance'' - point de vue global - analogie itinerance
 
-Karl Friston
 
 %\fbox{
 %\begin{minipage}
@@ -308,27 +311,73 @@ Karl Friston
 % perception et non-sens
 
 % L'idée de Freeman. L'enregistrement multi-électrodes. Potentialité et instanciation (choix d'une orbite). 
-% L'état central fluctuant est popularisé par J-D Vincent
 
-Le choix 
+Karl Friston : ce qui est perçu est principalement l'ecart à la prediction (predictive coding).  Dynamical Causal modelling.
+``Modern reformulations suggest
+that both inference on states (that is, perception) and
+inference on parameters (that is, learning) minimize
+free energy (that is, minimize prediction error) and
+serve to bound surprising exchanges with the world.'' (Friston, 2010)
+
+et aussi ``rewards correspond to innate priors that constrain policies.''
+
+
+% D'apres le mecanisme de Hopfield, la memoire est principalement un mecanisme d'interpolation
+
+% Le point de vue informationnel : 
 
 \subsection{Substrat - codage topographique}
+
+% Re
+
 Mean field
 
 Field computation
 
 Expressivité discrète - continue
 
+La structure (ou l'expressivité) du substrat conditionne/caractérise la manière dont l'environnement est perçu (attention raisonnemnt qui se mord la queue). 
+Par exemple, l'existence d'un procesus de pattern matching avec seuil conditionne la perception du monde sous forme de transitions brusques et de relaxations
+vers des attracteurs.
+L'existence d'un modèle linéaire conditionne la perception du monde sous la forme de reponse linéaire (asservissement) à l'erreur de prédiction.
+L'existence de delais conditionne la perception des causalités temporelles. 
+
+
 
 \subsection{Bruit et choix}
+
 % Modèlmes RL - Actor--critic
-L'activité intrinsèque. 
+L'activité intrinsèque (non necessairement bruit). ``sculpte'' la reponse comportementale par des phénomènes de résonance.  
+Bruit destructeur / bruit createur. Darwinisme. On peut voir le bruit d'etat comme un facteur perturbateur de couplage. 
+
+
+Rappels sur les 2 approches synthétisees dans EPJST : supervisé et renforcement.
+
+L'apprentissage par renforcement apporte une notion nouvelle : bruit générateur (créateur). ``création d'information'' : ``enact'' (promulguer) 
+création de faits nouveaux (orientations nouvelles, deplacements nouveaux, emplois nouveaux). ``Angle mort'' des sciences cognitives. 
+Contingence et capture. 
+Il est important de distinguer l'approche ``pattern matching'' qui repose sur une capture passive des regularites statistiques et l'approche RL qui à la fois capture 
+et genere les patterns.
+Conceptuellement problematique du point de vue de la theorie de l'information (notion d'emetteur et de recepteur brouillées), sauf peut-etre du point de vue global (inobservé)
+auquel cas il n'y a ni emetteur ni recepteur.
+
+On peut assimiler un fait à un couple (perception, action).
+
+Et bien sûr approche énactive : on ne perçoit que ce sur quoi on peut agir. 
+"Le monde (visuel) est (quelque chose qui est) constitué par l'action" (Varela)
+
+La théorie du renforcement a tendance à définir l'activité comme reflétant la valeur de la situation (du couple (s,a)).
+Dans ce cadre, l'état du système n'est pas une représentation du monde exterieur mais plutot une batterie de ``notes'' attribuées
+aux différentes réponses motrices potentielles étant donnée la situation .
+
+% L'état central fluctuant est popularisé par J-D Vincent
+
 
 Les variables de contrôle (rewards) arrivent par d'autres canaux. 
 
 \subsection{Plasticité séquentielle}
 
-
+% STDP
 % Image du papillon-chenille
 
 \section{Mouvements}
