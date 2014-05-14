@@ -665,4 +665,233 @@ Les variables de contrôle (rewards) arrivent par d'autres canaux.
 
 \chapter*{Annexes}
 
+
+
+Theme / Problematique
+- La branche “pattern matching” de l’IA  : perceptron, RN, ART, Hopfield, …
+
+- Recusation de la demarche behavioriste (et problème de l’agentivité) (au sein du machine learning?).
+    1. L’expressivité du substrat conditionne le “monde perceptif” (au sens des categories et des relations de voisinage, d’identité, de similarité entre les stimuli sensoriels) (exemple : substrat 1D-2D de la carte de Kohonen). Puissance d’expression. Rq : la demarche de chomsky s’inscrit dans cette démarche (contraintes sur ce qui est exprimable). Notion de “reservoir”. Emergence = instanciation.
+    2. L’autonomie (sous l’angle des systemes dynamiques et sous l’angle des sciences sociales) vs l’heteronomie (la commande). L’activité autonome, le “free-will”, l’association d’idées (Hebb), l’itinerance.  
+    3. L’autonomie sous l’angle des variables de contrôle (ou paramètre d’ordre?). Il s’agit d’un paramètre endémique à réguler, comme l’acces aux biens materiels et/ou vitaux.
+    4. L’autonomie sous la forme elementaire de resonances de la fonction de transfert. Feedback et causalité circulaire. 
+    5. L’autonomie comme mécanisme d’hystérèse. “Résistance au changement”
+    6. La mémoire, en tant que base de faits (LUT) et/ou de type interpolation (Hopfield) - lien avec Turing (ruban)? Lien entre interpolation et “predictive coding”
+    7. Le pattern matching, les bases de filtres, les dictionnaires = traitement distribué. Gestalt (le tout est plus que la somme de ses parties). gestalt = “figures”.
+
+- Les rendez-vous de l’IA et de la biologie. Reintroductions periodiques de la problematique de l’apprentissage et de la plasticité (horizon, perspective toujours repoussé dans les neurosciences et l’IA “classique”).
+
+
+Mon apport :
+Architectures perceptives (ou perceptuo-motrices) avec predictive coding en feedback positif (completion perceptive), contrairement au predictive coding qui repose sur un feedback negatif. Les deux approches reposent sur des premisses differentes. Le probleme de l’explosion catastrophique de l’activité (feedback positif) est resolu (1) par mecanisme de fatigue - la désynchronisation suit la synchronisation, (2) par la resistance au changement et (3) par le retour vers l’etat “OFF” par dissonance (mecanisme analogue à l’erreur perceptive).
+
+Critique du feedback négatif : modele purement reactif. Pas de mecanisme pour la persistance des croyances (memoire à court terme)
+
+analogie : le fond et la forme. Le paysage (par defaut) est non perçu. Soudain j’aperçois la  tete de mon voisin par dessus la haie (surprise par rapport au prior). Ce faisant, je suppose que le reste de son corps est caché par la haie (que la tete ne “flotte” pas en l’air). si je constate soudain que la tete flotte en l’air, je perçois tres fortement cette absence de corps (alors que le corps, comme etant une partie de la “cause” voisin, est anticipée sans etre perçue)
+
+Idée : affecter des attributs à un “employé/employeur” (un agent - meilleur terme à trouver). Analogie de la bulle qui se deplace sur la carte. Je constate que mon voisin a un pull rouge. Je lui attribue (institue) l’attribut “rouge”. Mon voisin se deplace dans mon champ visuel. La qualité “rouge” se deplace avec lui par effet du binding (entrainement du binding) ⇒ Nous passons notre temps à “peindre” le monde, à dessiner un tableau vivant. 
+
+Perspectives :
+- Substrat apprenant universel
+- Field computation. Patron (fenêtre) d’interaction anisotropique. La reponse n’est pas un vecteur ou un scalaire mais une distribution.
+- Regles de plasticité, information mutuelle et binding. Synchronie des systemes en interaction. Le binding au niveau des schémas d’interaction en miroir. Co-evolution. Mutual information (avec mutual emission et reception). Accrochage de phase. Emergence et non-sens. Independance : est “bindé” ce qui évolue ensemble (non indépendamment). Est “non bindé” ce qui évolue indépendamment. Lié aux DDL? 
+⇒ Le substrat est le support de plusieurs processus indépendants. Par analogie au neural field, on peut avoir plusieurs “bulles” sur la carte.
+- idée de perméabilité / imperméabilité des echelles BOTTOM → UP. Les etats et les processus des echelles inferieures ne sont pas impactées par les phenomenes d’ordre superieur autrement que par les signaux et les tâches traitées à leur échelle. Exemple : une couche motrice est principalement en train de stabiliser des couplages, pas d’instituer (proclamer/décréter) un nouvel “emploi”. (pas de “downward causation”)
+
+
+Les évolutions (chronolgie)
+
+1998
+- Une méthode d’apprentissage “non-supervisée” (il s’agit de capturer un mode dynamique)
+- mecanisme de base de la route inverse. Notion de “reduction” de la dynamique par apprentissage (baisse de l’impredictibilité, analogie possible avec exploration/exploitation)
+- mean field, variables macroscopiques, prémisse multi-echelle, etc...
+
+1999
+- Synchronisation dans les réseaux à 2 populations (ECM)
+- reseaux à 2 pop : couche primaire et couche perceptive. Mecanisme de “resonance perceptive” (et “resistance au changement”).
+- patrons conditionnants (= contexte)
+- règle de covariance
+- Philo 1 : non-extensivité des sensations - analogie “zone aveugle”
+
+2000-2001
+- Perception par feedback positif. Apprentisage “supervisé par la couche primaire”. La couche primaire est à la fois l’entrée et la sortie.
+- réponse aux patrons à “dynamique lente” - réservoir - apprentissage = elargissement d’un mode dynamique particulier.
+- couplage = utilisation = perte d’autonomie transitoire (voir aussi introduction Hermes).  
+- travail de biblio sur l’hippocampe. 
+- controle supervise par modele inverse
+
+2002
+- Tentatives contrôle en boucle fermée (Khepera). Premieres implementation du RL (reward-based learning) avec Hebb et anti-Hebb. 
+
+2003-2004. 
+- Introduction d’un neural field. Memoire à court terme (=“resistance au changement”).
+- RL hebbien concurrent  : signal/bruit
+- prémisses de la règle de policy gradient (1-P) xi(t) xj(t-1)
+- Philo 2: pensée à l’échelle temporelle de nos actes
+
+2005 
+- analogie TD - STDP.  regle de la difference : (Si(t+1) - Si(t)) Sj(t)
+- RL / chaos = exploration 
+
+2006 
+- STDP / anti STDP pour le RL 
+
+2007 
+- Modele en miroir
+- extension du Q-learning aux espaces d’entrée/sortie vectoriels. Idee etat interne = valeur.
+- synaptic scaling
+- regles de Hebb ordre 0 ou 1. Contrast enhancement vs. covariance (sequence) enhancement 
+- MAPS : idée de codage topographique (autrement dit Kernel encoding). 
+
+2008
+- modèles à 2 couches. Balanced networks et STDP.
+
+2009
+- “Free membr. potential” (synaptic input) / modeles ECM à “horizon fini” 
+- Slow noise for RL in spiking neural networks
+- travail sur les structures sous-corticales : striatum/tectum/cervelet 
+
+2010
+- RL in continuous time and space (avec Alain D)
+- A. Mouraud : mecanisme integrateur. Dual drive. 
+- Gaurav : attention temporelle. Modele EM. 
+- Premier modele (nu,theta)
+
+2011
+- suite Gaurav. Scalar property.  
+- approche Hopfield / connectome. Adatron pour “connectome inverse”
+- Policy gradient dans les BCI. Reward adaptatif. Baseline optimale. 
+
+2012
+- Connectome-based simulation : multistabilité spatiale et temporelle 
+
+2013
+- Oddball problem / lien avec convolution networks et/ou ranking.
+- Approche adaptative des BCI : label free logistic gradient descent avec accumulation d’évidence + subject-independent classifier.
+- Hongliang : Passive Agressive + bandit feedback
+
+2014
+- population response (population “spike”) avec STDP. Importance des termes de reequilibrage des poids et de la SFA.  Idée de multi-échelle et de detecteur d’information mutuelle à travers l’activité. Idée de STDP comme sequence enhancement.
+- Connectome : identification de patchs à travers les patrons statiques (modele verre de spin). 
+Les idées fortes présentes dans les papiers :
+
+NN (1998)
+- encodage - patrons statiques - route vers le chaos - destabilisation - frontière du chaos
+
+Thèse (2000)
+- Notion de circuit d’activation (synfire chain). Réservoir de circuits. Relation entre structure et instances de circuit. 
+- Importance des delais. Architectures à 2 couches (couche primaire et couche secondaire).
+- Règle d’ordre 2 (différence-based / covariance rule) 
+- Effet des patrons “conditionnants”.
+
+(Implicitement : 
+(1) Réseau aléatoire avec delais = réservoir de séquences instables dont certaines s’instancient (“emergence”)
+(2) Predictive coding avant l’heure (de type interpolation)
+(3) Controle moteur “supervisé”
+)
+
+NPL (2001)
+- Champ moyen multi-populations
+- Mise en évidence d’un régime périodique synchronisé dans les modèles à 2 populations. 
+
+Biol. Cyber (2002)
+- implémentation d’un mécanisme de résonance support de la perception et de la mémoire (en particulier generalisation du principe d’interpolation de Hopfield dans le domaine spatio-temporel). Importance des delais dans le traitement temporel.
+- alternances synchronisation (perçu) / non-sens. Système de perception dual. Figure sur fond (Gestalt). 
+- Comportement d’itinerance au niveau du couple agent/environnement (robot ETIS). “Accrochage” = perte d’autonomie / information mutuelle. Alternance entre synchronisation et désynchronisation (bruit destructeur).
+
+Natural Computing (2004)
+- “pseudo”-spikes (sans leak)
+- dynamic neural field
+
+SAB (2004)
+- lien Hebb et PG?
+- alternance bruit/signal (selon la classe de liens)
+
+
+
+
+Notes : la demarche behavioriste : Dressage = apprentissage ! Tableau de branchement (LUT). Le conditionnement opérant utilise le bruit créateur / l’exploration. 
+
+
+1. Architectures cognitives
+Dès l’origine, un des objectifs de la cybernetique est d’imiter le vivant. Notion de variable de controle et d’homeostasie. Erreur perceptive et correction de l’erreur perceptive. Grandeurs réelles (mécanistiques). Système de contrôle Newtonien. (aucune autonomie)
+
+La metaphore de l’ordinateur (Von neumann). Neurosciences “computationnelles” (calculatoires). L’ordinateur effectue des calculs selon des recettes (algorithmes). Notion de processus. Programmabilité. Mémoire. (mais aucune autonomie).
+Mais : obstacle du “test de Turing” : intelligence “machinique” (de type joueur d’échec). Problèmes (1) d’imputabilité et d’autonomie, (2) de raisonnement analogique (3) d’émotions et (4) reconnaissance de formes.
+ 
+Une architecture cognitive est un
+
+historique :
+- Les architectures de contrôle. Cybernetique.  Asservissement lineaire. Wiener.
+- Filtre de Kalman - Modele en miroir. Notion de bruit (d’etat et de mesure). Le bruit est l’expression la plus simple de l’autonomie d’un systeme.
+- Gibson / affordance (employabilité/actionnabilité). 
+- la synergetique
+- les RN et l’apprentissage de la commande: régression (predicteur = classifieur ou regresseur) 
+- le RL (acteur/critique)
+- Robotique developpementale : Brooks / la subsumption.
+- l’espace de contrôle et l’approche “point fixe” du contrôle
+- Mosaic
+- Friston
+
+Ce qu’il faut retenir de Friston :
+- un modèle en miroir. 
+- les actuateurs sont une partie de l’env.
+- perception = inference on states / learning = inference on parameters 
+- l’action vient rectifier une erreur de prediction
+- le reward est un prior sur la solution cherchée.
+Rq : le concept d’energie libre est repris de Prigogine?.
+Après relecture :
+- Le terme d’energie libre se divise entre accuracy (distance entre les causes predites et les causes observées - innovation : idem Kalman et/ou Hidden Markov) et complexity (entropie du modele de la mesure).
+- La structure de resolution est analogue à EM. 
+E est l’inference des causes (par modele - ou mesure - inverse)
+avec modele : estimation de x* par filtre de Kalman ou particulaire ou Viterbi 
+avec identification du modele (recherche du modele generatif par inference - avec prior sur le nombre de causes...) - exemple typique = apprentissage d’un dictionnaire (base orthonormale ou non). Pb : explosion combinatoire si sequences temporelles ou etats vectoriels (ou combinaison d’etats). Probleme mal posé.
+modele libre (absence de modele)
+Action based. RL classique. Analogie etat caché / valeur (sortie du modele representationnel. L’etat interne ne represente pas l’etat du monde exterieur mais simplement l’avantage qu’on peut en attendre. Rq : le couple (actionneurs + environnement = systeme controllé = domaine extensif - masses en deplacements) est en general connu , c’est à dire qu’on a une connaissance complete. Le couple acteur + critique est l’agent - domaine intensif). Model free -  Policy gradient. Apprentissage direct du repertoire d’actions
+(hierarchique) - Le prior est le posterior de la couche superieure (projection predictive en feed-back). La vraisemblance est le “matching” entre le signal de la couche inferieure et le filtre (feed-forward). “Bayesian surprise” - innovation = erreur perceptive
+Le modele libre est distinct du modele search. Ca conduit à l’idée d’information mutuelle sans d’identité.  
+M est l’identification (adaptative) du processus de mesure (ou du modele generatif ou du forward model). 
+Etape qu’on identifie à l’apprentissage. Idem apprentissage du perceptron et des reseaux de neurones en general (supervisé)  : pattern matching, max likelihood, ...
+Etape absente pour le filtre de Kalman ou les HMM. 
+Friston propose une maniere originale d’augmenter la likelihood (action qui maximise la vraisemblance perceptive) = passage du côté “obscur” de l’”action-oriented” perception (consequence perceptive de l’action) ⇒ agir, c’est mettre le monde à l’epreuve
+En lien avec l’idée de sparsité ⇒ minimiser la complexité en produisant des bases “sparse”
+- La logique EM est fondamentalement circulaire. Se resout classiquement par iteration sequentielle. On peut egalement supposer une difference d’échelle temporelle entre processus E (rapide) et processus M (lent). 
+-  Le RL peut etre vu comme un algo EM avec prior sur le modele (dans ce cas les causes sont essentiellement les actions). L’etape E est le calcul de la valeur des transitions (vraisemblance (posterior) de l’action etant donné la sensation). L’etape M est la mise à jour de la fonction de valeur (etant donné le reward - ici vu comme une mesure de la likelihood de la consequence perceptive). → consequence (ou inversion de l’argument): est vraisemblable un patron perceptif qui est recompensé - Tout ce qui n’est pas soumis à un mecanisme de recompense n’est pas perçu (perception ou non-sens - Cf. Merleau Ponty - Phénoménologie de la perception).
+(IDEE : DU POINT DE VUE DU NEURONE HEDONISTE, LES SPIKES EMIS DOIVENT AVOIR POUR CONSEQUENCE DE MIEUX SOUMETTRE LE NEURONE A DE NOUVELLES STIMULATIONS - PRIOR SUR L’EXPOSITION AUX STIMULATIONS FUTURES)
+- F est la log vraisemblance marginale (sur posterior q(.) et mesure f(.)) qui se decompose en 2 termes : la divergence (surprise bayesienne - accuracy) servant à optimiser q(.) et la log vraisemblance conditionnelle (complexité) servant à optimiser f(.)
+- La dualité accuracy / complexity peut etre vue comme le substrat d’autres dualités findamentales selon que l’on met l’accent sur l’un ou sur l’autre (exploration/exploitation), conservation /innovation etc… On peut imaginer un seuil d’innovation (== vigilance) qui permet de remettre en cause le posterior courant.
+- Il y a un lien entre l’exigence de parcimonie et le principe de substrat à ressource/expressivité limitée. 
+
+- Le predictive coding est une théorie des rôles complementaires des connexions feed-forward et feed-back + implementations mathematique du principe “perception = correction d’erreur”
+
+ 
+
+2. Modeles de la perception
+
+3. Substrat et neural field
+expressivité = “nombre de symboles” (selon la théorie de l’info).
+Typologie :
+- à nombre d’etats fixe : 
+- à nombre d’etats combinatoire :
+- espace discret d’attracteurs : switching. Notion de “pôle” (ou “mode”?).
+- existence (ou non) de l’etat “je ne sais pas” (OFF state). Resistance au changement (hysteresis). ODE.
+- line attractors : possibilité de tracking ou de switch . EDP.
+- prise en compte (ou non) des dépendances temporelles. 
+
+(inclut les ECM?)
+Le projet MAPS a 
+
+4. STDP et temporal coding. CAUSALITE (interp. de la STDP en termes de causalité). SYNCHRONISATION (Information mutuelle acausale/simultanée = co-évolution).
+
+4.1 règle TD
+
+4.2 Frequences, rythmes, periodicités
+
+4.3 Attention temporelle (temporal orientation)
+
+
+5. Bruit createur / bruit destructeur
+
+
+
 \end{document}
