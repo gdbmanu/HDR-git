@@ -178,7 +178,7 @@ Les enjeux :
 
 \section{Problématique}
 
-Une architectures cognitives est un dispositif logiciel dont le but est de permettre à un appareil 
+Une architecture cognitive est un dispositif logiciel dont le but est de permettre à un appareil 
 (disposant de capteurs et d'actuateurs) d'interagir de façon ``intelligente'' avec son environnement. 
 Le concept de comportement intelligent reste bien sûr assez flou.
 On assimilera ici  dispositif logiciel et contrôleur. 
@@ -189,26 +189,17 @@ Ce problème d'une définition opérationnelle de l'intelligence a été posé a
 Il s'agissait de construire un programme de recherche, une feuille de route détaillant les étapes nécessaires 
 et suffisantes pour construire un dispositif artificiel intelligent.
 
-A un niveau très général, le but est de produire un dispositif dont les réponses s'apparenteraient dans la forme et dans le contenu à celles d'un être humain,
-tout en reposant sur des opérations élémentaires issues d'un traitement mécanico-logique de l'information.
+A un niveau très général, le but est de produire un dispositif dont les réponses s'apparenteraient dans la forme 
+et dans le contenu à celles d'un être humain,
+tout en reposant sur des opérations élémentaires issues d'un traitement logico-mécanique de l'information.
 Cet objectif est exprimé de façon claire par le test de Turing [REF]: un dispositif intelligent doit être capable 
 de communiquer avec un être humain de manière naturelle, c'est à dire qu'il soit impossible pour l'opérateur humain,
 en l'absence de contact visuel, 
 de savoir s'il s'adresse à une machine ou à un être humain.
-
-Dans le domaine de la psychologie, l'émergence des sciences cognitives est venu en réaction au behaviorisme.
-A l'origine, il s'agit de contester la description de l'activité du sujet comme simple courroie de transmission 
-(un tableau de branchement) entre des stimuli et des réponses. Par opposition, il s'agit de décrire (proposer un modèle)
-du sujet en tant qu'acteur. Notion d'agentivité (imputabilité de l'action).
-%Toujours à ce niveau très général, une des notions clés de l'intelligence artificielle naissante est la notion d'agentivité, %autrement dit
-%l'imputabilité de l'action. 
-Un dispositif logico-mécanique pourrait être dit intelligent s'il était considéré comme responsable de ses actes, 
-celui auquel on pourrait imputer les actions produites. 
-
-Ces deux notions (test de Turing, agentivité) ne sont pas opérationnelles. Elles permettent de tracer des frontières par exclusion. Un dispositif logiciel
-n'est pas vu comme intelligent s'il ne passe pas le test de Turing, 
-ou si on ne peut pas lui imputer les réponses qu'il a produites.
-Elles sont néanmoins toutes deux imparfaites, puisque reposant in fine sur la subjectivité de l'observateur.
+Cette approche n'est pas opérationnelle mais permet de tracer une frontières par exclusion. 
+Un dispositif logiciel
+n'est pas vu comme intelligent s'il ne passe pas le test de Turing.
+Cette ``mesure'' est par nature imparfaite, puisque reposant in fine sur la subjectivité de l'observateur.
 Différents contre-exemples peuvent d'ailleurs être trouvés dans lesquels des dispositifs
 logico-mécaniques (machines) produisant des illusions, autrement dit sont tels que l'opérateur humain tend à 
 leur attribuer des intentions qui n'y sont pas [BRAITENBERG]. Attribuer des intentions est un biais perceptif humain.
@@ -217,21 +208,21 @@ Une approche plus opérationnelle consiste à décrire (lister) les compétences
 Si on se réfère aux conceptions courantes de l'intelligence, 
 il s'agit de décrire, modéliser mathématiquement et reproduire mécaniquement le sujet cognitif, capable de:
 \begin{enumerate}
-\item raisonner (agglomérer différents faits pour déduire des faits nouveaux - et/ou des réponses) - l'acuité (perspicacité) du raisonnement, 
+\item {\bf Calcul}. raisonner (agglomérer différents faits pour déduire des faits nouveaux - et/ou des réponses) - l'acuité (perspicacité) du raisonnement, 
 c'est à dire la capacité à établir des faits nouveaux à partir de faisceaux d'indices (par déduction) - {\color{red} compatible paradigme behavioriste}
-\item se rappeler (prendre en considération certains faits anciens (acquis) en plus des faits imédiatement disponibles) - la memoire est liée à la notion d'``etat interne''. Croyance, Prior.
-\item apprendre (intégrer de nouveaux faits, remettre en cause certains faits acquis) - {\color{red} compatible paradigme behavioriste}.
-\item planifier et faire des choix, c'est à dire évaluer les bénéfices et les pertes attendus des actions ou des réponses produites.
+\item {\bf Mémoire}. Se rappeler (prendre en considération certains faits connus (acquis) en plus des faits imédiatement disponibles) - la memoire est liée à la notion d'``etat interne''. Croyance, Prior.
+\item {\bf Plasticité}. Apprendre (intégrer de nouveaux faits, remettre en cause certains faits acquis) - {\color{red} compatible paradigme behavioriste}.
+\item {\bf Décision}. Planifier et faire des choix, c'est à dire évaluer les bénéfices et les pertes attendus des actions ou des réponses produites.
 \item etc.
 \end{enumerate}
 
-Dans ce cas (définition extensive de l'intelligence), plusieurs problèmes se posent. Il est (1) difficile de séparer les différents items et (2) difficile de fermer la liste. Selon le point de vue que l'on adopte, raisonner (établir de faits) 
+Dans ce cas (définition extensive de l'intelligence), plusieurs problèmes se posent. Il est (a) difficile de séparer les différents items et (b) difficile de fermer la liste. Selon le point de vue que l'on adopte, raisonner (établir de faits) 
 peut s'apparenter à décider (établir des actes). La mémoire, c'est à la fois se rappeler et intégrer des faits nouveaux.
 Le raisonnement ne peut s'établir sur la base des observations immédiates, il doit intégrer des faits mémorisés etc. 
-Chacune de ces capacités (raisonner, stocker en mémoire, planifier,...) peut être implémentée
-dans certains contextes sans que le comportement du logiciel soit considéré comme intelligent au sens plein. 
-On pensera par exemple aux logiciels d'échec ou de go qui tendent à atteindre les capacités des experts humains,
-aux logiciels d'aide à la décision, aux pilotes automatiques, ... 
+%Chacune de ces capacités (raisonner, stocker en mémoire, planifier,...) peut être implémentée
+%dans certains contextes sans que le comportement du logiciel soit considéré comme intelligent au sens plein. 
+%On pensera par exemple aux logiciels d'échec ou de go qui tendent à atteindre les capacités des experts humains,
+%aux logiciels d'aide à la décision, aux pilotes automatiques, ... 
 Enfin, il est difficile d'exclure de la liste certaines capacités comme l'intelligence pratique (sens
 pratique, capacités opérationnelles, répertoire de comportements, agilité...)
 ou encore l'intelligence émotionnelle, intelligence verbale, etc... qui ont reçu chacune des tentatives de définition. 
@@ -244,11 +235,56 @@ Dans le cas des système experts par exemple, le pur raisonnement sur les faits 
 à une réponse réellement exploitable. Les logiciels de traduction ou correction automatiques les plus efficaces 
 reposent sur les régularité statistiques, pas sur l'analyse de la structure de la phrase. 
 
-Chaque item : calcul - mémoire - décision est un problème en soi, 
-sujet à débat et controverse.
-Chaque item semble aussi peu opérationnel que le terme plus englobant d'intelligence.
+\paragraph{Autonomisation des questions}
 
-Problème de la compétence universelle (ou et quand appliquer la bonne méthode). 
+- question du langage
+
+- question de l'apprentissage
+
+- question du contrôle
+
+- question du calcul
+
+- etc...
+
+Néanmoins, l'identification de ces items : calcul - mémoire - plasticité - décision a permis d'aborder
+ces problème en tant que tels, des problèmes vastes qui ont à eux seuls fondé des champs disciplinaires. 
+Le calcul conduit aux calculateurs, aux processeurs, à l'informatique. 
+La mémoire aux bases de données et à la recherche d'information.
+La plasticité à l'apprentissage statistique (Machine learning).
+La décision conduit à la recherche opérationnelle, et à la théorie du choix rationnel.
+etc.
+
+Au final, la recherche de l'automate ``intelligent'' semble être le terreau de nombreuses innovations 
+dans les sciences de l'information au cours des 60 dernières années.
+C'est bien en questionnant l'intelligence humaine et en cherchant à la reproduire
+que les sciences de l'information semblent avancer.
+
+Il semble également que plus les compétences des machines augmentent, plus elles semblent se rapprocher de l'intelligence,
+plus nous voyons notre définition de l'intelligence évoluer/se transformer, comme un horizon qui s'éloigne sans cesse.
+Ni les capacités de calcul symbolique, ni les capacités à jouer à des jeux de plateau, ni celle de fouiller dans des bases 
+de données immenses,
+ni bientôt celle de conduire une voiture ne semblent constituer des réalisations en relation suffisante avec l'intelligence
+humaine.
+Il semble y avoir une frontière infranchissable, une différence de nature entre l'intelligence machinique et l'intelligence humaine, 
+entre hyperspécialisation et généricité, entre activité commandée et activité autonome, entre rigidité et adaptivité,
+entre dématérialisation (virtualité) et incarnation, entre déterminisme et création etc.
+Ces points seront abordés dans les prochains paragraphes.
+
+D'un point de vue plus pratique, développer de véritables architectures cognitives, c'est ouvrir de nouveaux champs d'application variés:
+\begin{itemize}
+ \item déplacement de la charge cognitive (mais augmente la dépendance de l'homme au dispositif). Exemple de la démonstration automatique de théorèmes
+ \item personnalisation - accès à l'information (mais risque de ``flicage'' - problème de confidentialité)
+ \item véhicules autonomes
+ \item maison/environnement intelligent
+ \item IHM immersives/empathiques. Repondeurs conviviaux. Avatars. 
+ \item simulation économique et sociale
+\end{itemize}
+
+
+\section{Les problèmes connus de la démarche réductionniste}
+
+\subsection{Problème de la compétence universelle (ou et quand appliquer la bonne méthode)} 
 Choix de la méthode. 
 Versatilité.
 Compétences multiples (séquentielle) vs. compétence intégrée (toutes les compétences en même temps).
@@ -261,36 +297,155 @@ Chaque brique résout un problème spécifique. Tendance à l'``usine à gaz''.
 ref : general proble solver (Simon - Newell).
 Architecture SOAR (voir Wikipedia)
 
+Le problème devient : produire quelque chose de neuf.
 Le problème devient : l'intelligence, c'est atteindre un comportement adapté 
-qui n'avat pas été prévu au départ par le concepteur. Capacité ``créative''. Capacité à faire face,
+qui n'avait pas été prévu au départ par le concepteur. Capacité ``créative''. Capacité à faire face,
 adaptivité.
 Déplacement du problème : qu'est-ce qu'un comportement adapté?
+Par extension. Peut-on définir un système dont le comportement s'adapte en permanence. 
+A l'extrême : un système parfaitement vierge qui s'adapte aux conditions qui se présentent à lui.
  
 Par opposition à l'approche réductionniste, nous 
-considérerons dans la suite de ce document l'approche dite constructiviste, ou développementale, 
+considérerons ainsi dans la suite de ce document l'approche dite constructiviste, ou développementale, 
 consistant à établir des règles de construction plutôt que des prescriptions.
 On parle également de démarche ``bottom-up''.
-Principe fondateur.
 
+Nécessité d'un principe fondateur.
+
+\subsection{La question de l'autonomie}
+
+Dans le domaine de la psychologie, l'émergence des sciences cognitives est venu en réaction au behaviorisme.
+A l'origine, il s'agit de contester la description de l'activité du sujet comme simple courroie de transmission 
+(un tableau de branchement) entre des stimuli et des réponses. Par opposition, il s'agit de décrire (proposer un modèle)
+du sujet en tant qu'acteur. Notion d'agentivité (imputabilité de l'action).
+%Toujours à ce niveau très général, une des notions clés de l'intelligence artificielle naissante est la notion d'agentivité, %autrement dit
+%l'imputabilité de l'action. 
+Un dispositif logico-mécanique pourrait être dit intelligent s'il était considéré comme responsable de ses actes, 
+celui auquel on pourrait imputer les actions produites. 
+
+Le ``noeud'' du problème. Imputabilité.
+Les points 1, 2 et 3 peuvent être réalisés sans imputabilité. Seul 4 (choix) a des 
+
+Dans le langage courant, on entend par ``intelligence'' la capacité à agir de façon appropriée en différentes circonstances, autrement dit de produire les réponses qui sont les plus à même de produire un bénéfice à l'agent.
+
+Une première manière est de définir un dispositif cognitif par opposition à un dispositif ``commandé'', c'est à dire
+capable de développer des comportements intelligents de façon autonome.
+
+- Recusation de la demarche behavioriste (et problème de l’agentivité) (au sein du machine learning?).
+
+    
+    2. L’autonomie (sous l’angle des systemes dynamiques et sous l’angle des sciences sociales) vs l’heteronomie (la commande). L’activité autonome, le “free-will”, l’association d’idées (Hebb), l’itinerance.  
+    
+    3. L’autonomie sous l’angle des variables de contrôle (ou paramètre d’ordre?). Il s’agit d’un paramètre endémique à réguler, comme l’acces aux biens materiels et/ou vitaux.
+    
+    4. L’autonomie sous la forme elementaire de resonances de la fonction de transfert. Feedback et causalité circulaire. 
+    
+    5. L’autonomie comme mécanisme d’hystérèse. “Résistance au changement”
+    
+    6. La mémoire, en tant que base de faits (LUT) et/ou de type interpolation (Hopfield) - lien avec Turing (ruban)? Lien entre interpolation et “predictive coding”
+    
+    7. Le pattern matching, les bases de filtres, les dictionnaires = traitement distribué. Gestalt (le tout est plus que la somme de ses parties). gestalt = “figures”.
+
+Toujours dans cette idée de réfutation du behaviorisme :
+notion d'état interne. ou encore de ``délai'' entre le stimulus et la réponse (Hebb). Délibération interne. 
+
+Point de vue informatique : augmentation de l'autonomie des programmes au cours du temps. Décharge cognitive mais pas 
+d'autonomie véritable. %Déplacement de la définition de l'intelligence (concept insaisissable).
+La plupart des logiciels et les
+applications utilisées dans la vie courante sont considérés comme ``non intelligents''. Ce sont des dispostifs ``commandés'', c'est à dire obéissant aux consignes 
+et dont la réponse ne varie pas au cours du temps, ou d'une utilisation à l'autre. Ce comportement (conformité de la réponse à la consigne) est souhaitable dans la plupart
+des cas. 
+Toujours dans le domaine de la vie courante, est ``non intelligent'' tout ce qui est prévisible, ce que l'on peut manipuler, exploiter.
+
+Il ressort : est intelligent ce qui n'est pas prévisible, 
+
+
+\subsection{Problème de la représentation}
+
+Tendance à faire reposer l'intelligence sur un modèle du monde. Plus le modèle est complet, exhaustif, 
+meilleure sera la réponse. Exercer l'intelligence, ce serait simuler l'environnement, le monde extérieur,
+pour estimer les conséquences attendues. Atteindre un but à long terme. 
+
+Le modele du monde seul ne contient pas les actions produites par le sujet. La
+simulation doit donc inclure un modele du monde et un modele du sujet agissant. Modèle du sujet se voyant agir. 
+Simulation des conséquences.
+(explosion combinatoire évitée par des approches de type Q-learning)
+Délibération.
+
+Modèle de l'adversaire. Min-Max.
+
+Mais : 
+
+1. Nature des représentations. Quelle est la représentation adéquate. Représentation de type symbolique (langagière)?
+Représentation de type mécanique (copie du système extérieur). La nature du monde interieur est-elle in fine symbolique ou 
+mecanistique?
+
+Le monde le l'information est intensif. Le monde extérieur est extensif. 
+
+champ physique vs. champ neuronal???
+
+2. Gibson. Monde caché / pb de la mesure. Ce qui est perçu n'est pas le monde en soi mais la relation du sujet au monde.
+Les lignes verticales, les couleurs, sont des propriétés des récepteurs. La perception est (de plus) 
+une relation entre les différentes sensations
+(contraste, variation --> ordre 1).
+
+Par extension : ce qui est perçu n'est pas l'outil en tant que tel, mais la relation du sujet à l'outil,
+c'est à dire l'utilisabilité (= affordance).  
+
+Le monde en soi n'est pas accessible, ou en tout cas est le résultat d'une reconstruction à partir des mesures.
+Le monde en soi doit être inféré, il n'est pas donné en tant que tel (monde ``caché'').
+
+Perception et non-sens.
+
+3. Problème du monde ``en soi''. Constructivisme radical. Il n'y a pas de monde indépendamment du sujet. 
+Seule la relation du sujet au monde est atteignable. Le reste est une spéculation. 
+Tradition philosophique kantienne puis phénoménologique. Le monde ets mis entre parenthèses.
+
+Enaction. La relation du sujet au monde passe par des opérations autoritaires (le monde/la règle est constitué par décret). 
+(par décret / innovation / création)
+Gouvernance de l'environnement. Le sujet cherche à imposer sa vison, à façonner le monde pour qu'il se conforme 
+à l'idée qu'il s'en fait. La réfutation passe par le conflit (non conformité). Le monde (ou la perception) se construit dans le conflit / 
+est le résultat d'un consensus (``c'est en se cognant qu'on apprend'').
+
+\subsection{La question de l'incarnation}
+
+Le ``retour au corps''. Brooks. 
+Point de vue local. Répertoire moteur limité.
+Améliorations par couches successives (empilement). Approche pratique/pragmatique. Viabilité.
+Un circuit de régulation s'empile sur un eutre circuit de régulation. Parallélisme.
+
+\section{L'approche bottom-up (ou constructiviste)}
+
+Cette approche bottom-up était naturellement présente dès le début des sciences cognitives. 
 Problème : plusieurs principes fondateurs en concurrence. 
 
-Dans ce cas, plusieurs ``bases'' possibles : (1) logico-symbolique et dualité donnée-programme. Traitement (calculateur) ``digital''.
+Dans ce cas, plusieurs ``bases'' possibles : 
+(1) logico-symbolique. Focus sur la dualité donnée-programme. Traitement (calculateur) ``digital''.
 Historiquement la plus ancienne. Possibilité d'écrire 
 dans le programme. Principalement notion de méta programme (programme constructeur de programme). 
 Métaphore de l'ordinateur. Un ordinateur est doué de capacités de calcul, de mémoire et d'actuateurs.
 L'IA revient ici à définir/décrire le méta programme. 
-(2) Mécanique. Principe de la régulation (cybernétique). Action et imputabilité. Traitement (calculateur) ``analogique''. 
-Importance des interactions mécaniques (approche située). Variables de contrôle. 
+
+(2) Mécanique. Focus sur l'action et l'imputabilité. Question : qui commande? Principe de la régulation (cybernétique). Traitement (calculateur) ``analogique''. 
+Importance des interactions mécaniques (approche située). Variables de contrôle. Zone de viabilité.
 Comportement d'écart/retour à l'équilibre. Mais : calcul? mémoire? ODE. 
-(3) Traitement du signal + neuro-inspiré. Calcul distribué. Filtre. Auto-organisation. Population. Emergence. Attracteur. EDP? 
+Développement de l'intelligence par ``subsumption'' et/ou empilement de mécanismes régulateurs (mesure / contre-mesure / contre-contre-mesure etc.). Régulation de variables internes.
+Systémique et étude des relations entre les composants (``société des organes'').
+
+(3) Focus sur la plasticité, le traitement du signal + neuro-inspiré. Calcul distribué. Filtre. Auto-organisation. Population. Emergence. Attracteur. EDP? 
 
 De façon intéressante, on retrouve dans les 3 cas un raisonnement ``qui se mord la queue''. 
 
+Une architecture cognitive est alors une proposition de réalisation logicielle de ce cahier des charges (un logiciel capable de raisonner, se souvenir et faire des choix).
+On distingue classiquement 3 approches pour la réalisation de telles architectures. 
+\begin{enumerate}
+ \item approche logico-mathématique 
+ \item approche mécanique
+ \item approche traitement du signal
+\end{enumerate}
+
 Les fondateurs des sciences cognitives ont placé très tôt la question de l'apprentissage  au coeur de leur problématique 
 (qu'est-ce qu'une machine intelligente - cf. Turing)
-
-Question de l'autonomie. Augmentation de l'autonomie des programmes au cours du temps. Décharge cognitive mais pas 
-d'autonomie véritable. Déplacement de la définition de l'intelligence (concept insaisissable).
 
 Deux approches/réponses se dessinent dès l'origine :  
 \begin{itemize}
@@ -308,27 +463,24 @@ La question de l'apprentissage  devient la question de construire des programmes
 de l'environnement. Cette question étant posée (comment modifier le programme sans intervention humaine), le formalisme des réseaux de neurones et du calcul distribué 
 s'est révélé le plus apte à traiter la question --> le perceptron. 
 
-\paragraph{Intérêt}
-
+historique :
 \begin{itemize}
- \item déplacement de la charge cognitive (mais augmente la dépendance de l'homme au dispositif)
- \item personnalisation - accès à l'information (mais risque de ``flicage'' - problème de confidentialité)
- \item véhicules autonomes
- \item maison/environnement intelligent
-\end{itemize}
+\item Les architectures de contrôle. Cybernetique.  Asservissement lineaire. Wiener.
+\item Filtre de Kalman - Modele en miroir. Notion de bruit (d’etat et de mesure). Le bruit est l’expression la plus simple de l’autonomie d’un systeme.
+\item Gibson / affordance (employabilité/actionnabilité). 
+\item synergetique
+\item les RN et l’apprentissage de la commande: régression (predicteur = classifieur ou regresseur) 
+\item le RL (acteur/critique)
+\item Robotique developpementale : Brooks / la subsumption.
+\item l’espace de contrôle et l’approche “point fixe” du contrôle
+\item Mosaic
+\item Friston
 
 
-Une architecture cognitive est alors une proposition de réalisation logicielle de ce cahier des charges (un logiciel capable de raisonner, se souvenir et faire des choix).
-On distingue classiquement 3 approches pour la réalisation de telles architectures. 
-\begin{enumerate}
- \item approche logico-mathématique 
- \item approche mécanique
- \item approche traitement du signal
-\end{enumerate}
 
 On regarde dans le détail ces trois approches avec un focus particulier sur l'apprentissage et l'autonomie. 
 
-\subsection{Approche logico-mathématique}
+\subsection{Constructivisme logico-mathématique}
 
 (CALCUL - CALCULABILITE)
 
@@ -339,8 +491,14 @@ la mémoire - la perception - les grammaires génératives - la logique formelle
 d'état interne qui conditionne la réponse. (x, etat => y, LUT). Par extension, etat = connaissance, prior. Le prior peut biaiser la reponse. 
 Mais (péché) traitement symbolique = examen séquentiel des faits. Peu de prise en compte de l'extension spatiale.
 
+Le modèle de von Neumann (automate auto-reproducteur)
 
-\subsection{Approche mécanique}
+Le modèle de Varela-Maturana. Clôture. L'automate qui produit l'automate qui produit l'automate qui...
+
+Le modèle de Chomsky
+
+
+\subsection{Constructivisme mécanique}
 
 (FEEDBACK)
 
@@ -350,21 +508,83 @@ La contestation du paradigme behavioriste passe par la notion de contrôle ``rea
 ``mappings'' stimulus-réponse discrets (x => y, LUT) mais des couples $(x_0,k)$ avec $y = k (x - x_0) $.    
 Modèle inverse.  Architecture de contrôle et autonomie.
 
-La plupart des logiciels et les
-applications utilisées dans la vie courante sont considérés comme ``non intelligents''. Ce sont des dispostifs ``commandés'', c'est à dire obéissant aux consignes 
-et dont la réponse ne varie pas au cours du temps, ou d'une utilisation à l'autre. Ce comportement (conformité de la réponse à la consigne) est souhaitable dans la plupart
-des cas. 
-Toujours dans le domaine de la vie courante, est ``non intelligent'' tout ce qui est prévisible, ce que l'on peut manipuler, exploiter.
-
-Il ressort : est intelligent ce qui n'est pas prévisible, 
-
-
-\subsection{Approche traitement du signal}
+\subsection{Constructivisme ``thermodynamique''}
 
 (OPTIMISATION)
+Basé sur l'optimisation d'une grandeur extensive (un champ).
 
+Soupe primitive auto-organisatrice.
+
+Basé sur un substrat apprenant (expressivité limitée). 
+L’expressivité du substrat conditionne le “monde perceptif” (au sens des categories et des relations de voisinage, d’identité, de similarité entre les stimuli sensoriels) (exemple : substrat 1D-2D de la carte de Kohonen). 
+Puissance d’expression. 
+Rq : la demarche de Chomsky s’inscrit dans cette démarche (contraintes sur ce qui est exprimable). 
+Notion de “reservoir”. Emergence = instanciation.
+
+Le traitement du signal / la communication.
+
+Approche statistique / particulaire. Représentation distribuée. Substrat. Boîte noire.
+
+Canal de transmission (bruité). Bruit générateur.
 
 % L'émergence des neurosciences computationnelles
+
+La théorie de l'information : caractériser le caractère informatif (ou non) d'un message par son degré de prédictabilité. 
+Problème : les deux extrêmes (information nulle, information maximale) sont inintéressants...
+\--- Transmission de l'information \--- Emetteur et récepteur \--- débit. 
+
+Théorie bayesienne 
+
+Plasticité + sparsité (parcimonie).
+
+\subsection{Problèmes avec l'approche constructiviste}
+
+Risque du raisonnement circulaire. Auto-explicatif.
+(exemple chez Friston : le comportement est la minimisation de l'énergie libre.
+Chez Varela : la vie est l'autopoièse. 
+Chez )
+Les principes fondateurs ne sont pas prouvés.
+
+Des définitions qui se tiennent ``au dessus du vide''.
+
+Approches difficiles à falsifier.
+
+Le feedback, la systémique sont des approches plus qualitatives que quantitatives. Risque de rester au niveau des principes.
+
+D'un côté (calculabilité). Le programme qui interprète des programmes. Dualité donnée / programme. Récursivité.  
+
+Feedback négatif. Réponse soumise à l'entrée qui est soumise à la réponse.
+
+Récurrence. Hystérèse.
+
+EM
+
+\section{La robotique autonome}
+
+
+
+
+\section{Architectures de contrôle}
+
+\subsection{Filtre de Kalman}
+
+\subsection{Acteur-critique}
+
+\subsection{Brooks}
+
+\subsection{Mixture d'experts}
+
+
+\section{Le cerveau comme modèle vs. le cerveau modélisé}
+
+\subsection{Le cerveau comme modèle}
+
+A différentes époques, les neurosciences se sont mises à l'agenda des sciences cognitives. 
+C'est en puisant dans les connaisances biologiques
+de leur époque que les sciences cognitives ont pu se renouveler.
+
+- Les rendez-vous de l’IA et de la biologie. Reintroductions periodiques de la problematique de l’apprentissage et de la plasticité (horizon, perspective toujours repoussé dans les neurosciences et l’IA “classique”).
+
 L'inspiration naturelle. Au cours de l'histoire des sciences cognitives, plusieurs rapprochements ont eu lieu avec les sciences du vivant et les neurosciences:
 
 - Années 40 : modèle McCullogh et Pitts, plasticité de Hebb. Assemblée neuronale. Notion de représentation distribuée?
@@ -373,17 +593,18 @@ L'inspiration naturelle. Au cours de l'histoire des sciences cognitives, plusieu
 
 - Années 80 : modèle de Hopfield. Physique statistique. 
 
-
-Analogie biologique. Calcul distribué. Le perceptron est à la base un modèle de la perception visuelle. Le perceptron apporte de nombreux concepts nouveaux qui 
-vont s'avérer féconds pour les sciences cognitives.   
+Analogie biologique. Calcul distribué. Le perceptron est à la base un modèle de la perception visuelle. 
+Le perceptron apporte de nombreux concepts nouveaux qui vont s'avérer féconds pour les sciences cognitives.   
 
 D'un côté, il appartient à double titre à une famille des modèles ``behavioristes''. Le perceptron est bien un tableau de branchement.
 Sa règle de mise à jour repose sur des causalités stimulus-réponse.  
 De l'autre, il introduit les concepts de filtres, de pattern matching et de calcul distribué, avec un fonctionnement qui diffère à  la fois 
 du traitement logico-symbolique et du contrôle intensif/analogique.
 
-Si le perceptron constitue un pas en arrière par rapport à certains prémisses des sciences cognitives (agentivité), il constitue néanmoins un pas en avant important 
-puisqu'il produit un modèle généralisable de calcul distribué, c'est à dire qu'il propose une première implémentation décentralisée de l'apprentissage et de la plasticité.
+Si le perceptron constitue un pas en arrière par rapport à certains prémisses des sciences cognitives (agentivité), 
+il constitue néanmoins un pas en avant important 
+puisqu'il produit un modèle généralisable de calcul distribué ET adaptatif 
+(il propose une première implémentation décentralisée de l'apprentissage et de la plasticité).
 On sort des approches logico-symboliques avec la prise en compte de l'organisation (extension) spatiale des stimuli.
 (THERMODYNAMIQUE - PHYSIQUE STAT - TRAITEMENT DU SIGNAL - CHAMP)
 
@@ -392,9 +613,6 @@ plutot de l'observation de l'organisation à l'oeuvre dans les premières couche
 correction d'erreurs, mais agit dans l'espace des paramètres. 
 
 Voir aussi Hubel et Wiesel.
-
-A différentes époques, les neurosciences se sont mises à l'agenda des sciences cognitives. C'est en puisant dans les connaisances biologiques
-de leur époque que les sciences cognitives ont pu se renouveler.
 
 Réseaux de neurones et boite noire.
 Qui dit décentralisé dit boite noire difficile à interpréter...
@@ -405,58 +623,57 @@ un degré de vraisemblance élevé, maximisent la séparation des données, ...
 l'apprentissage devient un des branches de l'optimisation mathématique.
 
 
-la théorie de l'information : caractériser le caractère informatif (ou non) d'un message par son degré de prédictabilité. Problème : les deux extrêmes (information nulle,
-information maximale) sont inintéressants...
-\--- Transmission de l'information \--- Emetteur et récepteur \--- débit. 
+\subsection{Le cerveau modélisé : les neurosciences computationnelles}
 
-\section{Questions ouvertes}
+\paragraph{Modèles du neurone}
 
-\paragraph{Autonomisation des questions}
+\paragraph{Plasticité}
 
-- question du langage
+\paragraph{Réseau et multi-scale}
 
-- question de l'apprentissage
-
-- question du contrôle
-
-- question du calcul
-
-- etc...
-
-
-\paragraph{Problèmes de consistance}
-
-D'un côté (calculabilité). Le programme qui interprète des programmes. Dualité donnée / programme. Récursivité.  
-
-Feedback négatif. Réponse soumise à l'entrée qui est soumise à la réponse.
-
-Récurrence. Hystérèse.
-
-
-EM
-
-
-\paragraph{La question (le problème) de l'autonomie}
-
-Le ``noeud'' du problème. Imputabilité.
-Les points 1, 2 et 3 peuvent être réalisés sans imputabilité. Seul 4 (choix) a des 
-
-Dans le langage courant, on entend par ``intelligence'' la capacité à agir de façon appropriée en différentes circonstances, autrement dit de produire
-les réponses qui sont les plus à même de produire un bénéfice à l'agent 
-
-Une première manière est de définir un dispositif cognitif par opposition à un dispositif ``commandé'', c'est à dire
-capable de développer des comportements intelligents de façon autonome.
-
-
-\paragraph{Neurosciences computationnelles}
+connectivité fonctionnelle
 
 
 
+\paragraph{Friston}
 
+Ce qu’il faut retenir de Friston :
+- un modèle en miroir. 
+- les actuateurs sont une partie de l’env.
+- perception = inference on states / learning = inference on parameters 
+- l’action vient rectifier une erreur de prediction
+- le reward est un prior sur la solution cherchée.
+Rq : le concept d’energie libre est repris de Prigogine?.
+Après relecture :
+- Le terme d’energie libre se divise entre accuracy (distance entre les causes predites et les causes observées - innovation : idem Kalman et/ou Hidden Markov) et complexity (entropie du modele de la mesure).
+- La structure de resolution est analogue à EM. 
+E est l’inference des causes (par modele - ou mesure - inverse)
+avec modele : estimation de x* par filtre de Kalman ou particulaire ou Viterbi 
+avec identification du modele (recherche du modele generatif par inference - avec prior sur le nombre de causes...) - exemple typique = apprentissage d’un dictionnaire (base orthonormale ou non). Pb : explosion combinatoire si sequences temporelles ou etats vectoriels (ou combinaison d’etats). Probleme mal posé.
+modele libre (absence de modele)
+Action based. RL classique. Analogie etat caché / valeur (sortie du modele representationnel. L’etat interne ne represente pas l’etat du monde exterieur mais simplement l’avantage qu’on peut en attendre. Rq : le couple (actionneurs + environnement = systeme controllé = domaine extensif - masses en deplacements) est en general connu , c’est à dire qu’on a une connaissance complete. Le couple acteur + critique est l’agent - domaine intensif). Model free -  Policy gradient. Apprentissage direct du repertoire d’actions
+(hierarchique) - Le prior est le posterior de la couche superieure (projection predictive en feed-back). La vraisemblance est le “matching” entre le signal de la couche inferieure et le filtre (feed-forward). “Bayesian surprise” - innovation = erreur perceptive
+Le modele libre est distinct du modele search. Ca conduit à l’idée d’information mutuelle sans d’identité.  
+M est l’identification (adaptative) du processus de mesure (ou du modele generatif ou du forward model). 
+Etape qu’on identifie à l’apprentissage. Idem apprentissage du perceptron et des reseaux de neurones en general (supervisé)  : pattern matching, max likelihood, ...
+Etape absente pour le filtre de Kalman ou les HMM. 
+Friston propose une maniere originale d’augmenter la likelihood (action qui maximise la vraisemblance perceptive) = passage du côté “obscur” de l’”action-oriented” perception (consequence perceptive de l’action) ⇒ agir, c’est mettre le monde à l’epreuve
+En lien avec l’idée de sparsité ⇒ minimiser la complexité en produisant des bases “sparse”
+- La logique EM est fondamentalement circulaire. Se resout classiquement par iteration sequentielle. On peut egalement supposer une difference d’échelle temporelle entre processus E (rapide) et processus M (lent). 
+-  Le RL peut etre vu comme un algo EM avec prior sur le modele (dans ce cas les causes sont essentiellement les actions). L’etape E est le calcul de la valeur des transitions (vraisemblance (posterior) de l’action etant donné la sensation). L’etape M est la mise à jour de la fonction de valeur (etant donné le reward - ici vu comme une mesure de la likelihood de la consequence perceptive). → consequence (ou inversion de l’argument): est vraisemblable un patron perceptif qui est recompensé - Tout ce qui n’est pas soumis à un mecanisme de recompense n’est pas perçu (perception ou non-sens - Cf. Merleau Ponty - Phénoménologie de la perception).
+(IDEE : DU POINT DE VUE DU NEURONE HEDONISTE, LES SPIKES EMIS DOIVENT AVOIR POUR CONSEQUENCE DE MIEUX SOUMETTRE LE NEURONE A DE NOUVELLES STIMULATIONS - PRIOR SUR L’EXPOSITION AUX STIMULATIONS FUTURES)
+- F est la log vraisemblance marginale (sur posterior q(.) et mesure f(.)) qui se decompose en 2 termes : la divergence (surprise bayesienne - accuracy) servant à optimiser q(.) et la log vraisemblance conditionnelle (complexité) servant à optimiser f(.)
+- La dualité accuracy / complexity peut etre vue comme le substrat d’autres dualités findamentales selon que l’on met l’accent sur l’un ou sur l’autre (exploration/exploitation), conservation /innovation etc… On peut imaginer un seuil d’innovation (== vigilance) qui permet de remettre en cause le posterior courant.
+- Il y a un lien entre l’exigence de parcimonie et le principe de substrat à ressource/expressivité limitée. 
 
+- Le predictive coding est une théorie des rôles complementaires des connexions feed-forward et feed-back + implementations mathematique du principe “perception = correction d’erreur”
 
-
-
+ Karl Friston : ce qui est perçu est principalement l'ecart à la prediction (predictive coding).  Dynamical Causal modelling.
+``Modern reformulations suggest
+that both inference on states (that is, perception) and
+inference on parameters (that is, learning) minimize
+free energy (that is, minimize prediction error) and
+serve to bound surprising exchanges with the world.'' (Friston, 2010)
 
 
 
@@ -474,19 +691,27 @@ capable de développer des comportements intelligents de façon autonome.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-
-
-
-
-
-
-
-
-
 %Je propose dans cette partie de parcourire certains de mes travaux passés en essayant de proposer un éclairage/dégager une cohérence.
 
-Un cadre unique pour l'apprentissage et la plasticité. La difficulté consiste à éclairer les méthodes de machine learning à partir de concepts issus des sciences cognitives. 
+
+Mon theme / Problematique:
+- La branche “pattern matching” de l’IA  : perceptron, RN, ART, Hopfield, …
+
+Le fil rouge : réseaux aléatoires. La fluctuation. Le bruit créateur.
+
+Mon apport :
+Architectures perceptives (ou perceptuo-motrices) avec predictive coding en feedback positif (completion perceptive), contrairement au predictive coding qui repose sur un feedback negatif. Les deux approches reposent sur des premisses differentes. Le probleme de l’explosion catastrophique de l’activité (feedback positif) est resolu (1) par mecanisme de fatigue - la désynchronisation suit la synchronisation, (2) par la resistance au changement et (3) par le retour vers l’etat “OFF” par dissonance (mecanisme analogue à l’erreur perceptive).
+
+Critique du feedback négatif : modele purement reactif. Pas de mecanisme pour la persistance des croyances (memoire à court terme)
+
+analogie : le fond et la forme. Le paysage (par defaut) est non perçu. Soudain j’aperçois la  tete de mon voisin par dessus la haie (surprise par rapport au prior). Ce faisant, je suppose que le reste de son corps est caché par la haie (que la tete ne “flotte” pas en l’air). si je constate soudain que la tete flotte en l’air, je perçois tres fortement cette absence de corps (alors que le corps, comme etant une partie de la “cause” voisin, est anticipée sans etre perçue)
+
+Idée : affecter des attributs à un “employé/employeur” (un agent - meilleur terme à trouver). Analogie de la bulle qui se deplace sur la carte. Je constate que mon voisin a un pull rouge. Je lui attribue (institue) l’attribut “rouge”. Mon voisin se deplace dans mon champ visuel. La qualité “rouge” se deplace avec lui par effet du binding (entrainement du binding) ⇒ Nous passons notre temps à “peindre” le monde, à dessiner un tableau vivant. 
+
+
+
+Un cadre unique pour l'apprentissage et la plasticité. 
+La difficulté consiste à éclairer les méthodes de machine learning à partir de concepts issus des sciences cognitives. 
 Essayer de construire un cadre conceptuel (ou de réexaminer des cadres conceptuels existants mais non explicités). 
 
 Aller au delà des modèles actuels de l'apprentissage (essentiellement behavioristes) en reprenant toute la structure conceptuelle de l'apprentissage. 
@@ -500,16 +725,17 @@ Autonomie.
 De l'autre, du point de vue du machine learning : extraterritorialité des données (peu de limite spatiale, ou absence d'extension spatiale). 
 Ressources computationnelles distribuées (non localisées). Hétéronomie. L'accès aux ressources n'est pas un enjeu (dépend d'un agent extérieur).
 
+En particulier : la notion d'expressivité du substrat est prometteuse. 
+En particulier on pourra distinguer expressivité discrète (argmax discret) et expressivité continue (neural field).
 
-En particulier : la notion d'expressivité du substrat est prometteuse. En particulier on pourra distinguer expressivité discrète (argmax discret) et expressivité continue (neural field).
-
-
-- Substrat. Des ressources limitées (nombre de neurones N, pas de recrutement). Expressivité du substrat (discret/réel, dimension, richesse du comportement intrinsèque).  
+- Substrat. Des ressources limitées (nombre de neurones N, pas de recrutement). 
+Expressivité du substrat (discret/réel, dimension, richesse du comportement intrinsèque).  
 (exemple de substrat à expressivité limitée : carte de Kohonen, réseau de Hopfield). (ART ajoute le recrutement).  Clustering.
-L'universalité implique la mise en oeuvre de ressources indépendamment de la tâche (task-independent device). Le substrat doit au mieux exploiter ses ressources. 
+L'universalité implique la mise en oeuvre de ressources indépendamment de la tâche (task-independent device). 
+Le substrat doit au mieux exploiter ses ressources. 
 A rappeler également : les niveaux de Marr : du substrat au modèle.
-{\bf computation/traitement du signal basé sur la pattern matching (filtres) et non sur un traitement intensif/analogique (architectures de contrôle). Glissement de l'espace des actions 
-à l'espace des paramètres}
+{\bf computation/traitement du signal basé sur la pattern matching (filtres) et non sur un traitement intensif/analogique 
+(architectures de contrôle). Glissement de l'espace des actions à l'espace des paramètres.}
 
 - Potentialité et instanciation. Réservoir. Emergence = instanciation. Irréversibilité (historique). Sculpture du vivant. Réduction d'incertitude. Plasticité, STDP, Hebb...
 
@@ -532,20 +758,17 @@ Modèles de la perception. Freeman.
 
 - Apprendre et oublier. Online learning. 
 
-
 Question : atteint-on une limite des rapprochements entre sciences cognitives et machine learning. Quels concepts sont-ils utiles pour construire des machines intelligentes. 
 A-t-on besoin du hasard pour apprendre à gérer des actuateurs complexes (puisque les limites naturelles type code génétique n'existent pas).   
 La plupart des besoins naturels sont non pertinents pour les machines (apports énergétiques, abri, partenaire).
 Le tryptique Orientation-déplacement-emploi est inopérant dans le cadre ML.
 
 
-
-
 % DEA :
 % - conditions de la destabilisation : etude des effets de petite taille. 
 
 
-\section{Perception et action}
+\section{Architectures de contrôle en neurosciences}
 
 Principe du miroir (environnement ``agissant sur'' l'agent)
 
@@ -568,7 +791,7 @@ slow external / fast internal
 %\end{minipage}
 %}
 % Histoires
-\section{Modèles pour la perception spatio-temporelle}
+\section{Feedback positif et perception}
 
 % un point important : la prise en compte des delais!!! conditionne l'anticipation sensorielle, la synchronisation agent-environnement, l'apprentissage de séquences.
 
@@ -576,12 +799,7 @@ slow external / fast internal
 
 % L'idée de Freeman. L'enregistrement multi-électrodes. Potentialité et instanciation (choix d'une orbite). 
 
-Karl Friston : ce qui est perçu est principalement l'ecart à la prediction (predictive coding).  Dynamical Causal modelling.
-``Modern reformulations suggest
-that both inference on states (that is, perception) and
-inference on parameters (that is, learning) minimize
-free energy (that is, minimize prediction error) and
-serve to bound surprising exchanges with the world.'' (Friston, 2010)
+
 
 et aussi ``rewards correspond to innate priors that constrain policies.''
 
@@ -590,23 +808,39 @@ et aussi ``rewards correspond to innate priors that constrain policies.''
 
 % Le point de vue informationnel : 
 
-\subsection{Substrat - codage topographique}
+
+\section{Réseaux aléatoires équilibrés}
+ 
+On-off states?
+
+\subsection{}
+
+\subsection{Plasticité séquentielle}
+
+% STDP
+% Image du papillon-chenille
+
+
+\section{Substrat - codage topographique}
 
 % Re
 
+\subsection{Réservoir}
+
+
+\subsection{}
 Mean field
 
 Field computation
 
 Expressivité discrète - continue
 
-La structure (ou l'expressivité) du substrat conditionne/caractérise la manière dont l'environnement est perçu (attention raisonnemnt qui se mord la queue). 
+La structure (ou l'expressivité) du substrat conditionne/caractérise la manière dont l'environnement est perçu 
+(attention raisonnemnt qui se mord la queue). 
 Par exemple, l'existence d'un procesus de pattern matching avec seuil conditionne la perception du monde sous forme de transitions brusques et de relaxations
 vers des attracteurs.
 L'existence d'un modèle linéaire conditionne la perception du monde sous la forme de reponse linéaire (asservissement) à l'erreur de prédiction.
 L'existence de delais conditionne la perception des causalités temporelles. 
-
-
 
 \subsection{Bruit et choix}
 
@@ -639,10 +873,6 @@ aux différentes réponses motrices potentielles étant donnée la situation .
 
 Les variables de contrôle (rewards) arrivent par d'autres canaux. 
 
-\subsection{Plasticité séquentielle}
-
-% STDP
-% Image du papillon-chenille
 
 \section{Mouvements}
 % continuous RL
@@ -658,45 +888,22 @@ Les variables de contrôle (rewards) arrivent par d'autres canaux.
 
 \chapter{Projet scientifique}
 
-\section{Le radeau des cîmes}
+Perspectives :
+\begin{itemize}
+\item Substrat apprenant universel
+\item Field computation. Patron (fenêtre) d’interaction anisotropique. La reponse n’est pas un vecteur ou un scalaire mais une distribution.
+\item Regles de plasticité, information mutuelle et binding. Synchronie des systemes en interaction. Le binding au niveau des schémas d’interaction en miroir. Co-evolution. Mutual information (avec mutual emission et reception). Accrochage de phase. Emergence et non-sens. Independance : est “bindé” ce qui évolue ensemble (non indépendamment). Est “non bindé” ce qui évolue indépendamment. Lié aux DDL? 
+$\Rightarrow$ Le substrat est le support de plusieurs processus indépendants. Par analogie au neural field, on peut avoir plusieurs “bulles” sur la carte.
+\item idée de perméabilité / imperméabilité des echelles BOTTOM → UP. Les etats et les processus des echelles inferieures ne sont pas impactées par les phenomenes d’ordre superieur autrement que par les signaux et les tâches traitées à leur échelle. Exemple : une couche motrice est principalement en train de stabiliser des couplages, pas d’instituer (proclamer/décréter) un nouvel “emploi”. (pas de “downward causation”)
+\end{itemize}
+
+
+\section{}
 
 
 \chapter{Conclusion}
 
 \chapter*{Annexes}
-
-
-
-Theme / Problematique
-- La branche “pattern matching” de l’IA  : perceptron, RN, ART, Hopfield, …
-
-- Recusation de la demarche behavioriste (et problème de l’agentivité) (au sein du machine learning?).
-    1. L’expressivité du substrat conditionne le “monde perceptif” (au sens des categories et des relations de voisinage, d’identité, de similarité entre les stimuli sensoriels) (exemple : substrat 1D-2D de la carte de Kohonen). Puissance d’expression. Rq : la demarche de chomsky s’inscrit dans cette démarche (contraintes sur ce qui est exprimable). Notion de “reservoir”. Emergence = instanciation.
-    2. L’autonomie (sous l’angle des systemes dynamiques et sous l’angle des sciences sociales) vs l’heteronomie (la commande). L’activité autonome, le “free-will”, l’association d’idées (Hebb), l’itinerance.  
-    3. L’autonomie sous l’angle des variables de contrôle (ou paramètre d’ordre?). Il s’agit d’un paramètre endémique à réguler, comme l’acces aux biens materiels et/ou vitaux.
-    4. L’autonomie sous la forme elementaire de resonances de la fonction de transfert. Feedback et causalité circulaire. 
-    5. L’autonomie comme mécanisme d’hystérèse. “Résistance au changement”
-    6. La mémoire, en tant que base de faits (LUT) et/ou de type interpolation (Hopfield) - lien avec Turing (ruban)? Lien entre interpolation et “predictive coding”
-    7. Le pattern matching, les bases de filtres, les dictionnaires = traitement distribué. Gestalt (le tout est plus que la somme de ses parties). gestalt = “figures”.
-
-- Les rendez-vous de l’IA et de la biologie. Reintroductions periodiques de la problematique de l’apprentissage et de la plasticité (horizon, perspective toujours repoussé dans les neurosciences et l’IA “classique”).
-
-
-Mon apport :
-Architectures perceptives (ou perceptuo-motrices) avec predictive coding en feedback positif (completion perceptive), contrairement au predictive coding qui repose sur un feedback negatif. Les deux approches reposent sur des premisses differentes. Le probleme de l’explosion catastrophique de l’activité (feedback positif) est resolu (1) par mecanisme de fatigue - la désynchronisation suit la synchronisation, (2) par la resistance au changement et (3) par le retour vers l’etat “OFF” par dissonance (mecanisme analogue à l’erreur perceptive).
-
-Critique du feedback négatif : modele purement reactif. Pas de mecanisme pour la persistance des croyances (memoire à court terme)
-
-analogie : le fond et la forme. Le paysage (par defaut) est non perçu. Soudain j’aperçois la  tete de mon voisin par dessus la haie (surprise par rapport au prior). Ce faisant, je suppose que le reste de son corps est caché par la haie (que la tete ne “flotte” pas en l’air). si je constate soudain que la tete flotte en l’air, je perçois tres fortement cette absence de corps (alors que le corps, comme etant une partie de la “cause” voisin, est anticipée sans etre perçue)
-
-Idée : affecter des attributs à un “employé/employeur” (un agent - meilleur terme à trouver). Analogie de la bulle qui se deplace sur la carte. Je constate que mon voisin a un pull rouge. Je lui attribue (institue) l’attribut “rouge”. Mon voisin se deplace dans mon champ visuel. La qualité “rouge” se deplace avec lui par effet du binding (entrainement du binding) ⇒ Nous passons notre temps à “peindre” le monde, à dessiner un tableau vivant. 
-
-Perspectives :
-- Substrat apprenant universel
-- Field computation. Patron (fenêtre) d’interaction anisotropique. La reponse n’est pas un vecteur ou un scalaire mais une distribution.
-- Regles de plasticité, information mutuelle et binding. Synchronie des systemes en interaction. Le binding au niveau des schémas d’interaction en miroir. Co-evolution. Mutual information (avec mutual emission et reception). Accrochage de phase. Emergence et non-sens. Independance : est “bindé” ce qui évolue ensemble (non indépendamment). Est “non bindé” ce qui évolue indépendamment. Lié aux DDL? 
-⇒ Le substrat est le support de plusieurs processus indépendants. Par analogie au neural field, on peut avoir plusieurs “bulles” sur la carte.
-- idée de perméabilité / imperméabilité des echelles BOTTOM → UP. Les etats et les processus des echelles inferieures ne sont pas impactées par les phenomenes d’ordre superieur autrement que par les signaux et les tâches traitées à leur échelle. Exemple : une couche motrice est principalement en train de stabiliser des couplages, pas d’instituer (proclamer/décréter) un nouvel “emploi”. (pas de “downward causation”)
 
 
 Les évolutions (chronolgie)
@@ -730,7 +937,7 @@ Les évolutions (chronolgie)
 - Philo 2: pensée à l’échelle temporelle de nos actes
 
 2005 
-- analogie TD - STDP.  regle de la difference : (Si(t+1) - Si(t)) Sj(t)
+- analogie TD - STDP.  Règle de la difference : (Si(t+1) - Si(t)) Sj(t)
 - RL / chaos = exploration 
 
 2006 
@@ -821,50 +1028,7 @@ Mais : obstacle du “test de Turing” : intelligence “machinique” (de type
  
 Une architecture cognitive est un
 
-historique :
-- Les architectures de contrôle. Cybernetique.  Asservissement lineaire. Wiener.
-- Filtre de Kalman - Modele en miroir. Notion de bruit (d’etat et de mesure). Le bruit est l’expression la plus simple de l’autonomie d’un systeme.
-- Gibson / affordance (employabilité/actionnabilité). 
-- la synergetique
-- les RN et l’apprentissage de la commande: régression (predicteur = classifieur ou regresseur) 
-- le RL (acteur/critique)
-- Robotique developpementale : Brooks / la subsumption.
-- l’espace de contrôle et l’approche “point fixe” du contrôle
-- Mosaic
-- Friston
 
-Ce qu’il faut retenir de Friston :
-- un modèle en miroir. 
-- les actuateurs sont une partie de l’env.
-- perception = inference on states / learning = inference on parameters 
-- l’action vient rectifier une erreur de prediction
-- le reward est un prior sur la solution cherchée.
-Rq : le concept d’energie libre est repris de Prigogine?.
-Après relecture :
-- Le terme d’energie libre se divise entre accuracy (distance entre les causes predites et les causes observées - innovation : idem Kalman et/ou Hidden Markov) et complexity (entropie du modele de la mesure).
-- La structure de resolution est analogue à EM. 
-E est l’inference des causes (par modele - ou mesure - inverse)
-avec modele : estimation de x* par filtre de Kalman ou particulaire ou Viterbi 
-avec identification du modele (recherche du modele generatif par inference - avec prior sur le nombre de causes...) - exemple typique = apprentissage d’un dictionnaire (base orthonormale ou non). Pb : explosion combinatoire si sequences temporelles ou etats vectoriels (ou combinaison d’etats). Probleme mal posé.
-modele libre (absence de modele)
-Action based. RL classique. Analogie etat caché / valeur (sortie du modele representationnel. L’etat interne ne represente pas l’etat du monde exterieur mais simplement l’avantage qu’on peut en attendre. Rq : le couple (actionneurs + environnement = systeme controllé = domaine extensif - masses en deplacements) est en general connu , c’est à dire qu’on a une connaissance complete. Le couple acteur + critique est l’agent - domaine intensif). Model free -  Policy gradient. Apprentissage direct du repertoire d’actions
-(hierarchique) - Le prior est le posterior de la couche superieure (projection predictive en feed-back). La vraisemblance est le “matching” entre le signal de la couche inferieure et le filtre (feed-forward). “Bayesian surprise” - innovation = erreur perceptive
-Le modele libre est distinct du modele search. Ca conduit à l’idée d’information mutuelle sans d’identité.  
-M est l’identification (adaptative) du processus de mesure (ou du modele generatif ou du forward model). 
-Etape qu’on identifie à l’apprentissage. Idem apprentissage du perceptron et des reseaux de neurones en general (supervisé)  : pattern matching, max likelihood, ...
-Etape absente pour le filtre de Kalman ou les HMM. 
-Friston propose une maniere originale d’augmenter la likelihood (action qui maximise la vraisemblance perceptive) = passage du côté “obscur” de l’”action-oriented” perception (consequence perceptive de l’action) ⇒ agir, c’est mettre le monde à l’epreuve
-En lien avec l’idée de sparsité ⇒ minimiser la complexité en produisant des bases “sparse”
-- La logique EM est fondamentalement circulaire. Se resout classiquement par iteration sequentielle. On peut egalement supposer une difference d’échelle temporelle entre processus E (rapide) et processus M (lent). 
--  Le RL peut etre vu comme un algo EM avec prior sur le modele (dans ce cas les causes sont essentiellement les actions). L’etape E est le calcul de la valeur des transitions (vraisemblance (posterior) de l’action etant donné la sensation). L’etape M est la mise à jour de la fonction de valeur (etant donné le reward - ici vu comme une mesure de la likelihood de la consequence perceptive). → consequence (ou inversion de l’argument): est vraisemblable un patron perceptif qui est recompensé - Tout ce qui n’est pas soumis à un mecanisme de recompense n’est pas perçu (perception ou non-sens - Cf. Merleau Ponty - Phénoménologie de la perception).
-(IDEE : DU POINT DE VUE DU NEURONE HEDONISTE, LES SPIKES EMIS DOIVENT AVOIR POUR CONSEQUENCE DE MIEUX SOUMETTRE LE NEURONE A DE NOUVELLES STIMULATIONS - PRIOR SUR L’EXPOSITION AUX STIMULATIONS FUTURES)
-- F est la log vraisemblance marginale (sur posterior q(.) et mesure f(.)) qui se decompose en 2 termes : la divergence (surprise bayesienne - accuracy) servant à optimiser q(.) et la log vraisemblance conditionnelle (complexité) servant à optimiser f(.)
-- La dualité accuracy / complexity peut etre vue comme le substrat d’autres dualités findamentales selon que l’on met l’accent sur l’un ou sur l’autre (exploration/exploitation), conservation /innovation etc… On peut imaginer un seuil d’innovation (== vigilance) qui permet de remettre en cause le posterior courant.
-- Il y a un lien entre l’exigence de parcimonie et le principe de substrat à ressource/expressivité limitée. 
-
-- Le predictive coding est une théorie des rôles complementaires des connexions feed-forward et feed-back + implementations mathematique du principe “perception = correction d’erreur”
-
- 
 
 2. Modeles de la perception
 
