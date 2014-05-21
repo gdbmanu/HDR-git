@@ -203,13 +203,54 @@ Les enjeux :
 
 - Substrat apprenant (universel). 
 
+- Aller au delà des modèles actuels de l'apprentissage (essentiellement behavioristes) en reprenant toute la structure conceptuelle de l'apprentissage. 
+
 
 Aux sources de la subjectivité.
 
 Dans ce rapport : orientation mecanises cognitifs $\rightarrow$ architectures logicielles.
 
+D'un côté, le point de vue des sciences cognitives :
+Agent incarné. Corps. Extension (du corps, du territoire) limitée. Ressources (computationnelles) limitées. 
+Déplacement du corps et emploi du corps visant le retour à l'équilibre (dominé par des variables de type contrôle des apports énergétiques. 
+Vient ensuite recherche d'abri, recherche de partenaires, etc...). 
+Autonomie.
+
+De l'autre, du point de vue du machine learning : extraterritorialité des données (peu de limite spatiale, ou absence d'extension spatiale). 
+Ressources computationnelles distribuées (non localisées). Hétéronomie. L'accès aux ressources n'est pas un enjeu (dépend d'un agent extérieur).
+
+Question : atteint-on une limite des rapprochements entre sciences cognitives et machine learning. Quels concepts sont-ils utiles pour construire des machines intelligentes. 
+A-t-on besoin du hasard pour apprendre à gérer des actuateurs complexes (puisque les limites naturelles type code génétique n'existent pas).   
+
+La plupart des besoins naturels sont non pertinents pour les machines (apports énergétiques, abri, partenaire).
+
+Le tryptique Orientation-déplacement-emploi est inopérant dans le cadre ML.
 
 
+Une architecture cognitive est alors une proposition de réalisation logicielle de ce cahier des charges (un logiciel capable de raisonner, se souvenir et faire des choix).
+On distingue classiquement 3 approches pour la réalisation de telles architectures. 
+\begin{enumerate}
+ \item approche logico-mécanique (CALCUL)
+ \item approche informationnelle / régulationnelle / décisionnelle (DECISION)
+ \item approche  / pattern matching (APPRENTISSAGE)
+\end{enumerate}
+
+Historique :
+\begin{itemize}
+\item Les architectures de contrôle. Cybernetique.  Asservissement lineaire. Wiener.
+\item Filtre de Kalman - Modele en miroir. Notion de bruit (d’etat et de mesure). Le bruit est l’expression la plus simple de l’autonomie d’un systeme.
+\item Gibson / affordance (employabilité/actionnabilité). 
+\item synergetique
+\item les RN et l’apprentissage de la commande: régression (predicteur = classifieur ou regresseur) 
+\item le RL (acteur/critique)
+\item Robotique developpementale : Brooks / la subsumption.
+\item l’espace de contrôle et l’approche “point fixe” du contrôle
+\item Mosaic
+\item Friston
+\end{itemize}
+
+
+On regarde dans le détail ces trois approches avec un focus particulier sur l'apprentissage et l'autonomie. 
 
 
 
@@ -497,49 +538,7 @@ Emergence. Attracteur. EDP? gestalt / attracteur / agencement
 
 De façon intéressante, on retrouve dans les 3 cas un raisonnement ``qui se mord la queue''. 
 
-Une architecture cognitive est alors une proposition de réalisation logicielle de ce cahier des charges (un logiciel capable de raisonner, se souvenir et faire des choix).
-On distingue classiquement 3 approches pour la réalisation de telles architectures. 
-\begin{enumerate}
- \item approche logico-mécanique (CALCUL)
- \item approche informationnelle / régulationnelle / décisionnelle (DECISION)
- \item approche  / pattern matching (APPRENTISSAGE)
-\end{enumerate}
 
-Les fondateurs des sciences cognitives ont placé très tôt la question de l'apprentissage  au coeur de leur problématique 
-(qu'est-ce qu'une machine intelligente - cf. Turing)
-
-Deux approches/réponses se dessinent dès l'origine :  
-\begin{itemize}
- \item traitement symbolique
- \item traitement analogique
-\end{itemize}
-L'enjeu principal est celui d'un côté du traitement analogique et de l'autre le traitement symbolique. Du point de vue des sciences cognitives naissantes, c'est le traitement
-symbolique qui gagne dans un premier temps.
-
-Dans ces deux formalismes, la question de l'apprentissage a eu tendance à progressivement se marginaliser au profit (1) du traitement logique des symboles et de modèles
- descriptifs du langage (grammaires génératives) et (2) l'ingéniérie et la conception de systèmes d'asservissement de plus en plus complexes et/ou psychologie et constructivisme (Palo Alto)
-
-A l'inverse, la question de l'apprentissage est restée présente dans le domaine des sciences de l'information et l'informatique naissante. 
-La question de l'apprentissage  devient la question de construire des programmes (des automates) capables de se modifier, de s'amender pour mieux répondre aux sollicitations
-de l'environnement. Cette question étant posée (comment modifier le programme sans intervention humaine), le formalisme des réseaux de neurones et du calcul distribué 
-s'est révélé le plus apte à traiter la question --> le perceptron. 
-
-historique :
-\begin{itemize}
-\item Les architectures de contrôle. Cybernetique.  Asservissement lineaire. Wiener.
-\item Filtre de Kalman - Modele en miroir. Notion de bruit (d’etat et de mesure). Le bruit est l’expression la plus simple de l’autonomie d’un systeme.
-\item Gibson / affordance (employabilité/actionnabilité). 
-\item synergetique
-\item les RN et l’apprentissage de la commande: régression (predicteur = classifieur ou regresseur) 
-\item le RL (acteur/critique)
-\item Robotique developpementale : Brooks / la subsumption.
-\item l’espace de contrôle et l’approche “point fixe” du contrôle
-\item Mosaic
-\item Friston
-\end{itemize}
-
-
-On regarde dans le détail ces trois approches avec un focus particulier sur l'apprentissage et l'autonomie. 
 
 \subsection{Constructivisme logico-mécanique}
 
@@ -796,33 +795,64 @@ serve to bound surprising exchanges with the world.}'' (Friston, 2010)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-Mon theme / Problematique:
-- La branche “pattern matching” de l’IA  : perceptron, RN, ART, Hopfield, …
+Sont rassemblées dans cette section mes différentes contributions à la question des architectures cognitives. Mes travaux
+se concentrent autour de la construction d'un ``sujet'' artificiel, c'est à dire
+décrire des mécanismes qui vont construire et autonomiser la réponse de l'agent vis à vis des sollicitations sensorielles de son
+environnement.
 
+Ces travaux se situent à l'interface de la branche “pattern matching” de l’IA (perceptron, RN, ART, Hopfield, ...) et des 
+neurosciences. Nous travaillons sur des modèles qui ont à la fois vocation à développer des architectures logicielles ``universelles''
+propres à capturer les régularités de leur environnement, et de l'autre à expliquer certaines propriétés du substrat neuronal (plasticité) 
+et de la communication nerveuse. 
 Le fil rouge : réseaux aléatoires. La fluctuation. Le bruit créateur. ET Le feedback positif.
-
-
 Un cadre unique pour l'apprentissage et la plasticité. 
 La difficulté consiste à éclairer les méthodes de machine learning à partir de concepts issus des sciences cognitives. 
 Essayer de construire un cadre conceptuel (ou de réexaminer des cadres conceptuels existants mais non explicités). 
 
-Aller au delà des modèles actuels de l'apprentissage (essentiellement behavioristes) en reprenant toute la structure conceptuelle de l'apprentissage. 
+Dans la première section, nous regardons la question de substrat, en tant que matière première ou support de la communication (le hardware). 
+En suivant l'analogie neuromimétique, nous étudions les conditions qui vont permettre à une population de calculateurs (les neurones) 
+de s'organiser dynamiquement en activant ou désactivant sélectivement certains circuits.
+Selon les caractéristiques des calculateurs élémentaires et les caractéristiques du patron de connectivité, 
+les propriétés de discrimination (et par conséquent la nature de l'information produite ou transférée) seront différentes.
+Nous considérons en particulier le problème de l'expressivité limitéee (tout substrat ne peut pas tout exprimer) 
+et le principe de la capacité limitée (limitation du nombre de ``symboles'' ou de circuits ``effectifs'').
+Nous terminons ce tour d'horizon avec une étude plus appliquée consistant à analyser le nombre et l'étendue de patrons spatio-temporels au
+sein d'un réseau construit à partir d'une matrice de connectivité structurelle obtenue par une technique de tractographie chez l'humain.
 
-D'un côté, le point de vue des sciences cognitives :
-Agent incarné. Corps. Extension (du corps, du territoire) limitée. Ressources (computationnelles) limitées. 
-Déplacement du corps et emploi du corps visant le retour à l'équilibre (dominé par des variables de type contrôle des apports énergétiques. 
-Vient ensuite recherche d'abri, recherche de partenaires, etc...). 
-Autonomie.
+La deuxième série de résultats est regroupée sous le thème de la ``subjectivité perceptive''. Les modèles présentés
+explorent l'idée d'une autonomie partielle de la réponse logicielle à la commande. Vu sous l'angle neuromimétique, la 
+subjectivité perceptive consiste d'une part à ignorer certaines entrées sensorielles, du fait de leur non-pertinence ou de leur 
+non-conformité, et d'autre part à compléter certaines entrées sensorielles manquantes à l'aide de connaissances issues de l'expérience passée. 
+Nous regardons plus particulièrement la question de l'apprentissage, ou comment les règles de plasticité synaptique (le méta-programme) vont permettre à un certaines
+stimulations sensorielles (désignées comme intéressantes) de ``creuser'' au sein du substrat un mode de réponse particulier (une ``résonance''),
+cette résonance étant le support des interpolations perceptives futures. Nous regardons également en quoi ces architectures dites ``à feedback positif'' 
+se distinguent du modèle classique du ``predictive coding'' organisé autour du principe du feedback négatif, et en particulier comment les premières
+implémentent le comportement de  ``résistance au changement'' (ou persévération). 
 
-De l'autre, du point de vue du machine learning : extraterritorialité des données (peu de limite spatiale, ou absence d'extension spatiale). 
-Ressources computationnelles distribuées (non localisées). Hétéronomie. L'accès aux ressources n'est pas un enjeu (dépend d'un agent extérieur).
+La troisième section aborde la question plus globale de la formation des comportements moteurs. 
+Nous commençons par rappeler certains principes et problèmes d'ordre général, comme la différence d'extensivité et d'expressivité du contrôleur et de son environnement.
+Nous présentons ensuite un certain nombre de résultats ayant en commun le principe du contrôle en ``boucle fermée''.
+Nous abordons ainsi successivement la question de la stabilisation et de la destabilisation des patrons d'interaction
+vus comme des transitions entre activité autonome et activité commandée, et la question de l'activité autonome (chaos, bruits ``structurés'') pour l'implémentation
+des mécanismes d'exploration dans le cadre de l'apprentissage par renforcement, sur divers substrats neuromimétiques. 
+De manière plus appliquée, nous détaillons les principes d'une architecture de contrôle destinée à supplémenter des déficiences
+motrices à partir de l'analyse de l'EEG de surface (interfaces cerveau-machines non-invasives).
 
-Question : atteint-on une limite des rapprochements entre sciences cognitives et machine learning. Quels concepts sont-ils utiles pour construire des machines intelligentes. 
-A-t-on besoin du hasard pour apprendre à gérer des actuateurs complexes (puisque les limites naturelles type code génétique n'existent pas).   
+La quatrième présente une série de résultats relatifs à des projets plus directement orientés vers la modélisation des mécanismes perceptifs et moteurs
+tels qu'ils apparaissent dans les études neurophysiologiques et comportementales. 
+L'orientation est une des modalités fondamentales de l'activité motrice, consistant à déplacer les organes récepteurs dans une direction qui optimise
+leur exposition à des signaux d'intérêt. Nous étudions deux modalités de ce comportement d'orientation : d'une part l'orientation 
+spatiale, et plus particulièrement la saccade oculaire, en tant que modèle de boucle sensori-motrice élémentaire, et de l'autre l'orientation 
+temporelle, c'est à dire la capacité du sujet à concentrer ses ressources attentionnelles à un instant choisi dans le temps.
 
-La plupart des besoins naturels sont non pertinents pour les machines (apports énergétiques, abri, partenaire).
 
-Le tryptique Orientation-déplacement-emploi est inopérant dans le cadre ML.
+
+
+
+
+
+
+
 
 
 % DEA :
@@ -871,6 +901,7 @@ L'approche ``Multi-scale''
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     1.1      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsection{Réseaux aléatoires équilibrés}
 
 {\bf 1998}:
@@ -910,6 +941,7 @@ On-off states?
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     1.2      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsection{Réservoir}
 
 Thèse (2000)
@@ -1022,7 +1054,7 @@ Critique du feedback négatif : modele purement reactif. Pas de mecanisme pour l
 
 analogie : le fond et la forme. Le paysage (par defaut) est non perçu. Soudain j’aperçois la  tete de mon voisin par dessus la haie (surprise par rapport au prior). Ce faisant, je suppose que le reste de son corps est caché par la haie (que la tete ne “flotte” pas en l’air). si je constate soudain que la tete flotte en l’air, je perçois tres fortement cette absence de corps (alors que le corps, comme etant une partie de la “cause” voisin, est anticipée sans etre perçue)
 
-Idée : affecter des attributs à un “employé/employeur” (un agent - meilleur terme à trouver). Analogie de la bulle qui se deplace sur la carte. Je constate que mon voisin a un pull rouge. Je lui attribue (institue) l’attribut “rouge”. Mon voisin se deplace dans mon champ visuel. La qualité “rouge” se deplace avec lui par effet du binding (entrainement du binding) $\Rightarrow$ Nous passons notre temps à “peindre” le monde, à dessiner un tableau vivant. 
+Idée : j'affecte des attributs à un sujet. Analogie de la bulle qui se deplace sur la carte. Je constate que mon voisin a un pull rouge. Je lui attribue (institue) l’attribut “rouge”. Mon voisin se deplace dans mon champ visuel. La qualité “rouge” se deplace avec lui par effet du binding (entrainement du binding) $\Rightarrow$ Nous passons notre temps à “peindre” le monde, à dessiner un tableau vivant. 
 
 % un point important : la prise en compte des delais!!! conditionne l'anticipation sensorielle, la synchronisation agent-environnement, l'apprentissage de séquences.
 
@@ -1149,19 +1181,17 @@ SYNCHRONISATION (Information mutuelle acausale/simultanée = co-évolution).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Architectures de contrôle pour les neurosciences}
+\section{Bruit générateur/bruit destructeur dans les couplages sensori-moteurs}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-principe général : 
-- comportement based
-- mapping des architectures de contrôle sur le SNC
 
 Mon apport :
 
 Principe du miroir (environnement ``agissant sur'' l'agent)
 
 L'environnement inclut le corps et les actuateurs.
+
+L'action est intrinsèquement relationnelle/communicationnelle (transactionnnelle?).
 
 % Modèlmes RL - Actor--critic
 L'activité intrinsèque (non necessairement bruit). ``sculpte'' la reponse comportementale par des phénomènes de résonance.  
@@ -1294,7 +1324,21 @@ NB : modèles feed-forward pour saccade - bras - BCI
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     3.4      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     4      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Architectures de contrôle pour les neurosciences}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+principe général : 
+- comportement based
+- mapping des architectures de contrôle sur le SNC
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     4.1      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Modèles de l'orientation spatiale}
@@ -1305,7 +1349,7 @@ NB : modèles feed-forward pour saccade - bras - BCI
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     3.3      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     4.2      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Modèles de l'orientation temporelle}
@@ -1323,7 +1367,7 @@ $\Rightarrow$ prior $\simeq$ ``\% up to now'' (subjective time)
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     3.5      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     4.3      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Apprendre et oublier dans les environnements non-stationnaires}
@@ -1386,6 +1430,7 @@ IDEE : DU POINT DE VUE DU NEURONE HEDONISTE, LES SPIKES EMIS DOIVENT AVOIR POUR 
 
 
 
+
 Perspectives :
 \begin{itemize}
 \item Substrat apprenant universel
@@ -1396,5 +1441,24 @@ $\Rightarrow$ Le substrat est le support de plusieurs processus indépendants. P
 \end{itemize}
 
 \chapter{Conclusion}
+
+Les fondateurs des sciences cognitives ont placé très tôt la question de l'apprentissage  au coeur de leur problématique 
+(qu'est-ce qu'une machine intelligente - cf. Turing)
+
+Deux approches/réponses se dessinent dès l'origine :  
+\begin{itemize}
+ \item traitement symbolique
+ \item traitement analogique
+\end{itemize}
+L'enjeu principal est celui d'un côté du traitement analogique et de l'autre le traitement symbolique. Du point de vue des sciences cognitives naissantes, c'est le traitement
+symbolique qui gagne dans un premier temps.
+
+Dans ces deux formalismes, la question de l'apprentissage a eu tendance à progressivement se marginaliser au profit (1) du traitement logique des symboles et de modèles
+ descriptifs du langage (grammaires génératives) et (2) l'ingéniérie et la conception de systèmes d'asservissement de plus en plus complexes et/ou psychologie et constructivisme (Palo Alto)
+
+A l'inverse, la question de l'apprentissage est restée présente dans le domaine des sciences de l'information et l'informatique naissante. 
+La question de l'apprentissage  devient la question de construire des programmes (des automates) capables de se modifier, de s'amender pour mieux répondre aux sollicitations
+de l'environnement. Cette question étant posée (comment modifier le programme sans intervention humaine), le formalisme des réseaux de neurones et du calcul distribué 
+s'est révélé le plus apte à traiter la question --> le perceptron. 
 
 \end{document}
