@@ -204,7 +204,9 @@ Les enjeux :
 - Substrat apprenant (universel). 
 
 
+Aux sources de la subjectivité.
 
+Dans ce rapport : orientation mecanises cognitifs $\rightarrow$ architectures logicielles.
 
 
 
@@ -236,10 +238,6 @@ Les enjeux :
 Une architecture cognitive est un dispositif logiciel dont le but est de permettre à un appareil 
 (disposant de capteurs et d'actuateurs) d'interagir de façon ``intelligente'' avec son environnement. 
 Le concept de comportement intelligent reste bien sûr assez flou.
-On assimilera ici  dispositif logiciel et contrôleur. 
-On parlera de signal d'entrée pour qualifier les données analogiques ou digitales à traiter.     
-On parlera de commande pour qualifier la réponse (analogique ou digitale) produite par le dispositif.
-
 Ce problème d'une définition opérationnelle de l'intelligence a été posé au sortir de la deuxième guerre mondiale. 
 Il s'agissait de construire un programme de recherche, une feuille de route détaillant les étapes nécessaires 
 et suffisantes pour construire un dispositif artificiel intelligent.
@@ -472,7 +470,7 @@ Point de vue local. Répertoire moteur limité.
 Améliorations par couches successives (empilement). Approche pratique/pragmatique. Viabilité.
 Un circuit de régulation s'empile sur un eutre circuit de régulation. Parallélisme.
 
-\section{L'approche bottom-up (ou constructiviste)}
+\section{L'approche constructiviste (ou ``bottom-up'')}
 
 Cette approche bottom-up était naturellement présente dès le début des sciences cognitives. 
 Problème : plusieurs principes fondateurs en concurrence. 
@@ -587,7 +585,6 @@ Puissance d’expression.
 Rq : la demarche de Chomsky s’inscrit dans cette démarche (contraintes sur ce qui est exprimable). 
 Notion de “reservoir”. Emergence = instanciation.
 
-Le traitement du signal / la communication.
 
 Approche statistique / particulaire. Représentation distribuée. Substrat. Boîte noire.
 
@@ -595,11 +592,6 @@ Canal de transmission (bruité). Bruit générateur.
 
 % L'émergence des neurosciences computationnelles
 
-La théorie de l'information : caractériser le caractère informatif (ou non) d'un message par son degré de prédictabilité. 
-Problème : les deux extrêmes (information nulle, information maximale) sont inintéressants...
-\--- Transmission de l'information \--- Emetteur et récepteur \--- débit. 
-
-Théorie bayesienne 
 
 Plasticité + sparsité (parcimonie).
 
@@ -628,7 +620,15 @@ EM
 
 \section{Architectures de contrôle}
 
+Les architectures de contrôle sont des dispositifs logico-mécaniques destinés à produire des commandes via des effecteurs à
+partir d'un signal issu de ses capteurs (actuateurs).
+La nature des effecteurs et des actuateurs permet de distinguer les dispositifs purement logiciels 
+des dispositifs électro-mécaniques ayant une action directe sur leur environnement via des 
+dépacemements de masses. 
 
+On assimilera ici  dispositif logiciel et contrôleur. 
+On parlera de signal d'entrée pour qualifier les données analogiques ou digitales à traiter.     
+On parlera de commande pour qualifier la réponse (analogique ou digitale) produite par le dispositif.
 
 \subsection{Filtre de Kalman}
 
@@ -686,6 +686,8 @@ Dans ce cadre, un système apprenant est une machine à entrées-sorties, une fo
 un degré de vraisemblance élevé, maximisent la séparation des données, ...
 l'apprentissage devient un des branches de l'optimisation mathématique.
 
+\paragraph{Orientation \--- Déplacement \--- Emploi}
+Bases du contrôle moteur
 
 \subsection{Le cerveau modélisé : les neurosciences computationnelles}
 
@@ -700,6 +702,15 @@ Mais : obstacle du “test de Turing” : intelligence “machinique” (de type
 
 connectivité fonctionnelle
 
+\paragraph{Communication}
+
+Le traitement du signal / la communication.
+
+La théorie de l'information : caractériser le caractère informatif (ou non) d'un message par son degré de prédictabilité. 
+Problème : les deux extrêmes (information nulle, information maximale) sont inintéressants...
+\--- Transmission de l'information \--- Emetteur et récepteur \--- débit. 
+
+Théorie bayesienne 
 
 
 \paragraph{Friston}
@@ -748,7 +759,6 @@ En lien avec l’idée de sparsité $\Rightarrow$ minimiser la complexité en pr
 - La logique EM est fondamentalement circulaire. Se resout classiquement par iteration sequentielle. On peut egalement supposer une difference d’échelle temporelle entre processus E (rapide) et processus M (lent). 
 
 -  Le RL peut etre vu comme un algo EM avec prior sur le modele (dans ce cas les causes sont essentiellement les actions). L’etape E est le calcul de la valeur des transitions (vraisemblance (posterior) de l’action etant donné la sensation). L’etape M est la mise à jour de la fonction de valeur (etant donné le reward - ici vu comme une mesure de la likelihood de la consequence perceptive). $\rightarrow$ consequence (ou inversion de l’argument): est vraisemblable un patron perceptif qui est recompensé - Tout ce qui n’est pas soumis à un mecanisme de recompense n’est pas perçu (perception ou non-sens - Cf. Merleau Ponty - Phénoménologie de la perception).
-(IDEE : DU POINT DE VUE DU NEURONE HEDONISTE, LES SPIKES EMIS DOIVENT AVOIR POUR CONSEQUENCE DE MIEUX SOUMETTRE LE NEURONE A DE NOUVELLES STIMULATIONS - PRIOR SUR L’EXPOSITION AUX STIMULATIONS FUTURES)
 
 - F est la log vraisemblance marginale (sur posterior q(.) et mesure f(.)) qui se decompose en 2 termes : la divergence (surprise bayesienne - accuracy) servant à optimiser q(.) et la log vraisemblance conditionnelle (complexité) servant à optimiser f(.)
 
@@ -1287,7 +1297,7 @@ NB : modèles feed-forward pour saccade - bras - BCI
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     3.4      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Codage spatial et ``dual drive'' pour la commande oculo-motrice}
+\subsection{Modèles de l'orientation spatiale}
 
 {\bf 2010}
 
@@ -1370,6 +1380,10 @@ $\Rightarrow$ prior $\simeq$ ``\% up to now'' (subjective time)
 En particulier : la notion d'expressivité du substrat est prometteuse. 
 
 - Variables de contrôle. Equilibre dynamique. Homeostasie. Emploi et Couplage sans emploi. Répertoire (dictionnaire?) d'emplois. 
+
+- Neurone hédoniste.
+IDEE : DU POINT DE VUE DU NEURONE HEDONISTE, LES SPIKES EMIS DOIVENT AVOIR POUR CONSEQUENCE DE MIEUX SOUMETTRE LE NEURONE A DE NOUVELLES STIMULATIONS - PRIOR SUR L’EXPOSITION AUX STIMULATIONS FUTURES.
+
 
 
 Perspectives :
