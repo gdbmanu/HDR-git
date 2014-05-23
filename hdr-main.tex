@@ -312,7 +312,8 @@ c'est à dire la capacité à établir des faits nouveaux à partir de faisceaux
 \item etc.
 \end{enumerate}
 
-Dans ce cas (définition extensive de l'intelligence), plusieurs problèmes se posent. Il est (a) difficile de séparer les différents items et (b) difficile de fermer la liste. Selon le point de vue que l'on adopte, raisonner (établir de faits) 
+Dans ce cas (définition extensive de l'intelligence), plusieurs problèmes se posent. Il est (a) difficile de séparer les différents 
+items et (b) difficile de fermer la liste. Selon le point de vue que l'on adopte, raisonner (établir de faits) 
 peut s'apparenter à décider (établir des actes). La mémoire, c'est à la fois se rappeler et intégrer des faits nouveaux.
 Le raisonnement ne peut s'établir sur la base des observations immédiates, il doit intégrer des faits mémorisés etc. 
 %Chacune de ces capacités (raisonner, stocker en mémoire, planifier,...) peut être implémentée
@@ -527,7 +528,7 @@ dans le programme. Principalement notion de méta programme (programme construct
 Métaphore de l'ordinateur. Un ordinateur est doué de capacités de calcul, de mémoire et d'actuateurs.
 L'IA revient ici à définir/décrire le méta programme. 
 
-NOTION IMPORTANTE DE META-PROGRAMME
+NOTION DE META-PROGRAMME
 
 NOTION D'OPERATION
 
@@ -603,9 +604,6 @@ Plasticité + sparsité (parcimonie).
 
 \subsection{Problèmes avec l'approche constructiviste}
 
-
-
-
 Parfois risque du raisonnement circulaire. Auto-explicatif.
 (exemple chez Friston : le comportement est la minimisation de l'énergie libre.
 Chez Varela : la vie est l'autopoièse. 
@@ -629,9 +627,9 @@ EM
 
 \section{Architectures de contrôle}
 
-Les architectures de contrôle sont des dispositifs logico-mécaniques destinés à produire des commandes via des effecteurs à
-partir d'un signal issu de ses capteurs (actuateurs).
-La nature des effecteurs et des actuateurs permet de distinguer les dispositifs purement logiciels 
+Les architectures de contrôle sont des dispositifs logico-mécaniques destinés à produire des commandes via des effecteurs (actuateurs) à
+partir d'un signal issu de ses capteurs.
+La nature des effecteurs (ou des actuateurs) permet de distinguer les dispositifs purement logiciels 
 des dispositifs électro-mécaniques ayant une action directe sur leur environnement via des 
 dépacemements de masses. 
 
@@ -817,9 +815,9 @@ Ces travaux se situent à l'interface de la branche “pattern matching” de l�
 neurosciences. Nous travaillons sur des modèles qui ont à la fois vocation à développer des architectures logicielles ``universelles''
 propres à capturer les régularités de leur environnement, et de l'autre à expliquer certaines propriétés du substrat neuronal (plasticité) 
 et de la communication nerveuse. 
-Le fil rouge : réseaux aléatoires. La fluctuation. Le bruit créateur. ET Le feedback positif.
+{\color{Violet} Le fil rouge : réseaux aléatoires. La fluctuation. Le bruit créateur. ET Le feedback positif.
 Un cadre unique pour l'apprentissage et la plasticité. 
-Essayer de construire un cadre conceptuel (ou de réexaminer des cadres conceptuels existants mais non explicités). 
+Essayer de construire un cadre conceptuel (ou de réexaminer des cadres conceptuels existants mais non explicités). }
 
 {\color{red} La difficulté consiste à éclairer les méthodes de machine learning à partir de concepts issus des sciences cognitives. }
 
@@ -838,7 +836,7 @@ La deuxième série de résultats est regroupée sous le thème de la ``subjecti
 explorent l'idée d'une autonomie partielle de la réponse logicielle à la commande. Vu sous l'angle neuromimétique, la 
 subjectivité perceptive consiste d'une part à ignorer certaines entrées sensorielles, du fait de leur non-pertinence ou de leur 
 non-conformité, et d'autre part à compléter certaines entrées sensorielles manquantes à l'aide de connaissances issues de l'expérience passée. 
-Nous regardons plus particulièrement la question de l'apprentissage, ou comment les règles de plasticité synaptique (le méta-programme) vont permettre à un certaines
+Nous regardons plus particulièrement la question de l'apprentissage, ou comment les règles de plasticité synaptique (le méta-programme) vont permettre à certaines
 stimulations sensorielles (désignées comme intéressantes) de ``creuser'' au sein du substrat un mode de réponse particulier (une ``résonance''),
 cette résonance étant le support des interpolations perceptives futures. Nous regardons également en quoi ces architectures dites ``à feedback positif'' 
 se distinguent du modèle classique du ``predictive coding'' organisé autour du principe du feedback négatif, et en particulier comment les premières
@@ -909,6 +907,9 @@ Une définition quantitative populaire de l'expressivité d'un tel substrat est 
 plus ou moins complexe d'un classifieur, en terme de nombre de pivots utilisé pour
 séparer les données. 
 
+{\color{Violet} - substrat à nombre d’etats fixe : }
+
+
 Néanmoins, l'expressivité d'un substrat ne se limite pas au nombre de symboles. Elle repose également sur la nature du processus 
 par lequel des données ou des signaux sont \emph{encodés} dans le substrat.
 L'encodage est le processus par lequel une classe a priori illimitée de signaux d'entrée sera traduit sous la forme d'un patron d'activité similaire,
@@ -922,23 +923,29 @@ le modèle ART de Grossberg [CITATION] qui ajoute à son modèle la possibilité
 nouveaux noeuds (apportant à son substrat une expressivité non-bornée mais limitée par la dimension 
 de la couche d'entrée).
 
-{\color{Violet}- espace discret d’attracteurs : switching. Notion de “pôle” (ou “mode”?).}
+{\color{Violet}
+- substrat à nombre d’etats combinatoire :
+
+- espace discret d’attracteurs : switching. Notion de “pôle” (ou “mode”?).
+}
 
 L'exemple des réseaux de Hopfield [CITATION] offre un éclairage différent sur l'expressivité d'un substrat en mettant en 
 avant le caractère distribué (non-local) de l'encodage. Contrairement à l'idée classique d'un noeud comme unité de représentation 
-(ou unité de séparation dans le cas des classifieurs), l'expressivité d'un substrat est vue en tant que nombre
-de patrons distribués (patterns) obtenus en réponse à une stimulation. Si l'expressivité se trouve en principe augmentée
+(ou unité de séparation dans le cas des classifieurs), l'expressivité du substrat est vue sous l'angle du nombre
+de patrons distribués (patterns) pouvant être obtenus en réponse à une stimulation. Si l'expressivité se trouve en principe augmentée
 d'un facteur exponentiel ($2^N$ configurations distribuées possibles), la capacité effective est en pratique beaucoup plus réduite, 
 se limitant à un nombre de symboles (attracteurs) distincts de l'ordre de $N$ (nombre de noeuds).
+La capacité s'exprime ici en nombre de \emph{modes} (configurations atteignables) et non en nombre de symboles.
 
 {\color{Violet} line attractors : possibilité de tracking ou de switch . EDP.}
 
-Le champ des possibilités d'expression s'étend encore selon le modèle considéré. Ainsi, le modèle du 
-``Champ neuronal dynamique'' [CITATION] offre un cadre à la description d'un substrat décrit par un support  
+Le champ des possibilités d'expression varie fortement d'un modèle à l'autre. Ainsi, la théorie du 
+``Champ neuronal dynamique'' [CITATION] décrit un substrat à support  
 continu (un champ et non plus un réseau de noeuds discrets), dont la dynamique spatio-temporelle est décrite par un jeu
-d'équation aux dérivées partielles. L'intérêt de ce modèle est de produire une description explicitement spatialisée
-du substrat, et porte en lui une meilleure capacité de représentation (ou de reproduction) 
-des caractéristiques spatiales et temporelles d'un environnement physique continu.  
+d'équation aux dérivées partielles. Ce modèle propose une description explicitement spatialisée
+du substrat, et porte en lui une capacité de représentation (ou de reproduction) 
+des caractéristiques spatiales et temporelles d'un environnement physique continu. Le nombre de modes possibles devient ici infini,
+le substrat ayant la puissance du continu.
 
 {\color{Violet} L'approche ``Multi-scale''}
 
@@ -948,27 +955,24 @@ supérieure (par des variables dites ``macroscopiques''). L'idée est ici encore
 microscopique caractérisés par des processus rapides localisés et un environnement
 physique caractérisé par des processus macroscopiques lents et spatialement étendus.
 
-L'exemple des réseaux de neurones artificiels nous offre ainsi une expression logicielle de la notion de substrat matériel
+L'exemple des réseaux de neurones artificiels nous offre ainsi un équivalent logiciel de l'idée de substrat matériel
 (tout réseau de neurone étant néanmoins en principe implémentable sous forme de hardware). Cette démarche est 
 celle que nous poursuivons ici en passant en revue un certain nombre de substrats logiciels neuro-inspirés 
 en vue d'étudier leurs capacités de traitement et de représentation.
 
-Le fil rouge de notre approche est celui des réseaux de neurones à connectivité aléatoire, qui nous permet
-de faire un pas supplémentaire en direction des réseaux de neurones naturels.
-Le caractère aléatoire des patrons de connectivité tel que nous les modélisons est un cadre permettant de traiter de manière formelle et de quantifier 
+Le fil rouge de notre approche est celui des réseaux de neurones à connectivité aléatoire, permettant de traiter de manière formelle et de quantifier 
 le caractère extrêmement inhomogène des réseaux de neurones naturels~: variété des types cellulaires, variété des délais de
 transmission, variété de la forme et du nombre d'arborisations synaptiques, etc.
 A travers l'analyse de la distribution des patrons de connexions, de la distribution leur intensité, de la distribution des délais associés,
-nous posons la question du rôle de ces distributions dans la formation de patrons d'activité variés, supports potentiels
-d'opérations variées. 
+nous posons la question du rôle de ces distributions dans la formation de patrons d'activité (ou modes) variés, supports potentiels
+d'opérations cognitives. 
 
-Notre approche consiste donc à analyser les capacités d'un réseau de neurones en tant que support potentiel de traitement de l'information. 
+Notre approche consiste donc à analyser les capacités d'un réseau de neurones en tant que support potentiel d'opérations cognitives. 
 Dans ces différentes études, nous n'abordons pas la question de la plasticité, ne regardons pas l'encodage ou le rappel effectif des signaux. 
 Notre approche se concentre plutôt sur la notion de régime dynamique et d'\emph{attracteurs}. L'idée principale est que notre substrat
 neuronal doit être capable d'exprimer différents ``modes'' de fonctionnement. Ces modes se traduisent soit par des régimes dynamiques
 variés (synchrone/asynchrone, point fixe/périodique/chaos), soit par des répartitions spatiales différenciées, appelés ``patrons d'activité''.
 Nous étudions ainsi le nombre et la variété de ces patrons d'activité, leur stabilité, leur répartition et leur résistance aux perturbations.
-
 
 {\color{Violet}
 
@@ -981,18 +985,9 @@ Echelles temporelles
 
 Typologie :
 
-- à nombre d’etats fixe : 
-
-- à nombre d’etats combinatoire :
-
-
 - existence (ou non) de l’etat “je ne sais pas” (OFF state). Resistance au changement (hysteresis). ODE.
 
-- 
-
 - prise en compte (ou non) des dépendances temporelles. 
-
-
 
 
 {\bf computation/traitement du signal basé sur la pattern matching (filtres) et non sur un traitement intensif/analogique 
@@ -1005,6 +1000,40 @@ Typologie :
 
 \subsection{Réseaux aléatoires équilibrés}
 
+Les premières études auxquelles j'ai participé portaient sur l'étude des transitions de phase dans les réseaux de neurones
+aléatoires. 
+La notion d'aléa ne porte pas sur la dynamique d'état mais sur le patron de connexions du réseau. 
+On parle de bruit ``figé'' dans les connexions (``quenched disorder'').
+Il s'agit d'un système dynamique déterministe, constitué de $N$ neurones, défini par la matrice des 
+couplages $J = \{J_{i,j}\}_{i \in 1..N,j \in 1..N}$ où chaque lien $J_{ij}$ est donc issu d'un tirage aléatoire indépendant.
+
+L'indépendance entre les différents liens est une caractéristique importante, qui permet d'analyser le comportement du modèle 
+à la limite des grandes tailles, c'est à dire en faisant tendre la taille $N$ vers l'infini. Avec un \emph{scaling} des poids approprié 
+(Espérance/variance de la loi de tirage initial en $O(\frac{1}{N}$), on peut montrer que la dynamique (déterministe) tend à la limite thermodynamique 
+vers un processus aléatoire, la corrélation entre les noeuds tendant vers 0. 
+Les premières études sur ce  type de modèle ont été faites par Sompolinsky [CITATION] sur un système dynamique continu. l'analyse d'une variante à temps
+discret a été proposée par Cessac et Samuelidès [CITATIONS]. La démonstration de cette propriété (dite de ``chaos local'') a été faite 
+dans le cas discret par Moynot et Samuelides [CITATIONS].
+
+Le comportement d'une classe de réseaux (l'ensemble des réseaux définis par la même loi de tirage initial) peut ête décrit à la limite thermodynamique par 
+des équations dites de ``champ moyen''. Ces équations définissent le processus aléatoire limite, autrement dit la dynamique temporelle de grandeurs caractéristiques comme l'activité moyenne, 
+le moments d'ordre 2 et la covariance dans le temps [CITATION]. 
+Les équations de champ moyen offrent ainsi une description ``macroscopiques'' de l'activité d'un réseau,
+représentative de l'activité qu'on peut attendre dans un réseau de taille finie issu d'un tirage particulier.
+
+Il est intéressant de constater que l'activité ``aléatoire'', telle que décrite par les équations de champ moyen, a une traduction à taille finie
+sous la forme d'une activité de chaos déterministe. L'existence d'un 
+paramètre d'ordre (le gain de la fonction de transfert des neurones) permet de reproduire dans ces réseaux aléatoires 
+un  comportement générique de destabilisation, appelé route vers le chaos par ``quasi-périodicité'' [CITATION Bergé Pommeau; Quoy Cessac].
+L'existence d'une telle frontière entre l'ordre et le chaos est également prouvée à la limite thermodynamique, mais dans ce
+cas la transition se fait brutalement, avec un passage brusque d'un processus de type point fixe à un processus stochastique [REF?].
+Ramenée à des réseaux de talle finie, l'existence d'une telle frontière entre ordre et chaos est par principe intéressante puisqu'elle indique le lieu
+où la variabilité des dynamiques, et donc potentiellement l'expressivité du réseau est la plus importante. 
+
+En collaboration avec Moynot, Samuelides et Pinaud [CITATIONS], j'ai travaillé sur la définition et l'étude du comportement à taille finie d'un modèle de 
+réseau de neurones aléatoire (RNA) à deux populations. Il s'agissait ici de modéliser et reproduire certains comportements observés dans les 
+réseaux de neurones naturels composés d'une population deneurones excitateurs et d'une population de neurones inhibiteurs. 
+Diférents régimes dynamiques avaient déjà été mis en évidences au sein de telles architectures (oscillations synchronisées, )
 
 
 
@@ -1020,9 +1049,11 @@ Typologie :
 
 {\bf Daucé, E., Moynot, O., Pinaud, O. and Samuelides, M. (2001) Mean Field Theory and Synchronization in Random Recurrent Neural Networks, Neural Processing Letters 14:115-126}
 
+
+
+
 - Champ moyen multi-populations
 - Mise en évidence d’un régime périodique synchronisé dans les modèles à 2 populations. 
-
 
 {\bf 2008}
 
