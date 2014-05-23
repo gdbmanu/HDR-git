@@ -24,6 +24,8 @@
 \usepackage{varioref}
 \usepackage{makeidx}
 
+\usepackage[usenames,dvipsnames]{color}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -525,6 +527,10 @@ dans le programme. Principalement notion de méta programme (programme construct
 Métaphore de l'ordinateur. Un ordinateur est doué de capacités de calcul, de mémoire et d'actuateurs.
 L'IA revient ici à définir/décrire le méta programme. 
 
+NOTION IMPORTANTE DE META-PROGRAMME
+
+NOTION D'OPERATION
+
 (2) cybernetique. {\bf Performative}. Focus sur l'action et l'imputabilité. {\bf Boucle fermée}. 
 Question : qui commande? Principe de la régulation (cybernétique). Traitement (calculateur) ``analogique''. 
 Importance des interactions mécaniques (approche située). Variables de contrôle. Zone de viabilité.
@@ -573,7 +579,7 @@ Modèle inverse.  Architecture de contrôle et autonomie.
 
 Importance du modèle de la robotique autonome comme application/implementaton la plus naturelle pour les architectures cognitives. 
 
-\subsection{Constructivisme ``thermodynamique''}
+\subsection{Constructivisme distributif}
 
 (OPTIMISATION)
 Basé sur l'optimisation d'une grandeur extensive (un champ). Espace vectoriel ou espace de Hilbert.
@@ -589,7 +595,6 @@ Notion de “reservoir”. Emergence = instanciation.
 
 Approche statistique / particulaire. Représentation distribuée. Substrat. Boîte noire.
 
-Canal de transmission (bruité). Bruit générateur.
 
 % L'émergence des neurosciences computationnelles
 
@@ -598,7 +603,10 @@ Plasticité + sparsité (parcimonie).
 
 \subsection{Problèmes avec l'approche constructiviste}
 
-Risque du raisonnement circulaire. Auto-explicatif.
+
+
+
+Parfois risque du raisonnement circulaire. Auto-explicatif.
 (exemple chez Friston : le comportement est la minimisation de l'énergie libre.
 Chez Varela : la vie est l'autopoièse. 
 Chez )
@@ -707,6 +715,9 @@ connectivité fonctionnelle
 
 Le traitement du signal / la communication.
 
+Canal de transmission (bruité). Bruit générateur.
+
+
 La théorie de l'information : caractériser le caractère informatif (ou non) d'un message par son degré de prédictabilité. 
 Problème : les deux extrêmes (information nulle, information maximale) sont inintéressants...
 \--- Transmission de l'information \--- Emetteur et récepteur \--- débit. 
@@ -808,8 +819,10 @@ propres à capturer les régularités de leur environnement, et de l'autre à ex
 et de la communication nerveuse. 
 Le fil rouge : réseaux aléatoires. La fluctuation. Le bruit créateur. ET Le feedback positif.
 Un cadre unique pour l'apprentissage et la plasticité. 
-La difficulté consiste à éclairer les méthodes de machine learning à partir de concepts issus des sciences cognitives. 
 Essayer de construire un cadre conceptuel (ou de réexaminer des cadres conceptuels existants mais non explicités). 
+
+{\color{red} La difficulté consiste à éclairer les méthodes de machine learning à partir de concepts issus des sciences cognitives. }
+
 
 Dans la première section, nous regardons la question de substrat, en tant que matière première ou support de la communication (le hardware). 
 En suivant l'analogie neuromimétique, nous étudions les conditions qui vont permettre à une population de calculateurs (les neurones) 
@@ -848,15 +861,6 @@ spatiale, et plus particulièrement la saccade oculaire, en tant que modèle de 
 temporelle, c'est à dire la capacité du sujet à concentrer ses ressources attentionnelles à un instant choisi dans le temps.
 
 
-
-
-
-
-
-
-
-
-
 % DEA :
 % - conditions de la destabilisation : etude des effets de petite taille. 
 
@@ -866,12 +870,114 @@ temporelle, c'est à dire la capacité du sujet à concentrer ses ressources att
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Substrat}
+\section{Expressivité des substrats neuronaux}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Substrat et neural field
-expressivité = “nombre de symboles” (selon la théorie de l’info).
+Un substrat est un domaine matériel extensif, défini par des caractéristiques physiques homogènes, sujet à des flux de matière ou d'énergie,
+et support d'une activité se traduisant par des changements d'état.
+Derrière le terme substrat, nous entendrons ici principalement un domaine physique bien délimité, naturel (corps) ou artificiel (machine), 
+capable de communication, c'est à dire capable de traiter des inputs (sensoriels) et de produire des outputs (déplacements, signaux).
+Un modèle de substrat est un ensemble de variables d'état et un modèle de transitions d'état censé traduire ces changement de la matière.
+
+Nous nous intéressons ici à des substrats ``actifs'', qui dépassent par leurs propriétés de simples canaux de communication (la simple amplification)~: 
+activité endogène, sélection des signaux, mémoire, plasticité...
+
+Nous avons vu qu'un des problèmes posé par la construction d'architectures cognitives est celle de la non-exhaustivité: sur un hardware donné,
+seul un nombre limité de faits peuvent être pris en compte, et un nombre limité de réponses produites.
+L'universalité implique la mise en oeuvre de ressources indépendamment de la tâche (task-independent device). 
+Le substrat doit au mieux exploiter ses ressources. 
+Autrement dit, un programme à compétence universelle sera avant tout un programme qui devra gérer ses ressources de traitement pour les répartir au
+mieux en fonction du nombre et de la complexité des tâches qui se présentent.
+
+La question de l'expressivité d'un substrat tourne autour de cette notion de limitation~: analyser un certain nombre de
+substrats (à mémoire limitée, à apports
+d'énergie limités, soumis à du bruit, etc...) et estimer le nombre et le type d'opérations qu'il est capable de produire. 
+
+
+Les réseaux de neurones naturel nous offrent un tel exemple de substrat universel, dans la mesure où, à 
+travers l'ensemble des espèces animales, le même substrat (un réseau de neurones communiquant via des synapses) traite  
+des signaux sensoriels variés et produit des réponses adaptées tout aussi variées. 
+{\color{Violet}
+A rappeler également : les niveaux de Marr : du substrat au modèle.}
+
+Par analogie aux substrats matériels, il existe un certain nombre de substrats \emph{logiciels} dans le domaine de l'apprentissage automatique. 
+Tous les modèles de l'approche distribuée, tels qu'il se sont définis depuis le perceptron, reposent sur
+une notion implicite de ressource limitée, qui se traduit en particulier par un ``choix'' effectué par le
+concepteur sur le nombre de neurones à mettre dans la couche cachée.
+Une définition quantitative populaire de l'expressivité d'un tel substrat est la dimension de Vapnik-Chervonenkis [CITATION], qui représente donc le caractère 
+plus ou moins complexe d'un classifieur, en terme de nombre de pivots utilisé pour
+séparer les données. 
+
+Néanmoins, l'expressivité d'un substrat ne se limite pas au nombre de symboles. Elle repose également sur la nature du processus 
+par lequel des données ou des signaux sont \emph{encodés} dans le substrat.
+L'encodage est le processus par lequel une classe a priori illimitée de signaux d'entrée sera traduit sous la forme d'un patron d'activité similaire,
+ce patron étant le reflet au sein du substrat de cette classe de signaux. 
+L'illustration la plus caractéristique d'un tel processus d'encodage est celle des réseaux de Kohonen [CITATION] pour lesquels un nombre fixé de centres mobiles 
+vont servir à encoder la distribution des entrées. Le substrat ``codant'' est caractérisé par un réseau de noeuds liés 
+par des relations de voisinage. L'encodage permet ainsi de regrouper/traduire la similarité des données d'entrée
+par le degré de voisinage des noeuds dont elles suscitent l'activation.  
+On trouve dans cette même famille de réseaux constitué d'une couche de lecture et d'une couche d'encodage
+le modèle ART de Grossberg [CITATION] qui ajoute à son modèle la possibilité de recrutement de
+nouveaux noeuds (apportant à son substrat une expressivité non-bornée mais limitée par la dimension 
+de la couche d'entrée).
+
+{\color{Violet}- espace discret d’attracteurs : switching. Notion de “pôle” (ou “mode”?).}
+
+L'exemple des réseaux de Hopfield [CITATION] offre un éclairage différent sur l'expressivité d'un substrat en mettant en 
+avant le caractère distribué (non-local) de l'encodage. Contrairement à l'idée classique d'un noeud comme unité de représentation 
+(ou unité de séparation dans le cas des classifieurs), l'expressivité d'un substrat est vue en tant que nombre
+de patrons distribués (patterns) obtenus en réponse à une stimulation. Si l'expressivité se trouve en principe augmentée
+d'un facteur exponentiel ($2^N$ configurations distribuées possibles), la capacité effective est en pratique beaucoup plus réduite, 
+se limitant à un nombre de symboles (attracteurs) distincts de l'ordre de $N$ (nombre de noeuds).
+
+{\color{Violet} line attractors : possibilité de tracking ou de switch . EDP.}
+
+Le champ des possibilités d'expression s'étend encore selon le modèle considéré. Ainsi, le modèle du 
+``Champ neuronal dynamique'' [CITATION] offre un cadre à la description d'un substrat décrit par un support  
+continu (un champ et non plus un réseau de noeuds discrets), dont la dynamique spatio-temporelle est décrite par un jeu
+d'équation aux dérivées partielles. L'intérêt de ce modèle est de produire une description explicitement spatialisée
+du substrat, et porte en lui une meilleure capacité de représentation (ou de reproduction) 
+des caractéristiques spatiales et temporelles d'un environnement physique continu.  
+
+{\color{Violet} L'approche ``Multi-scale''}
+
+L'approche ``Multi-scale'' [CITATION] consiste à considérer un substrat dont les variables d'état évoluent (ou peuvent être décrites) 
+selon différentes échelles spatiales et temporelles, chaque échelle de description étant explicative du comportement observé à l'échelle
+supérieure (par des variables dites ``macroscopiques''). L'idée est ici encore d'établir des passerelles entre un substrat constitué d'éléments 
+microscopique caractérisés par des processus rapides localisés et un environnement
+physique caractérisé par des processus macroscopiques lents et spatialement étendus.
+
+L'exemple des réseaux de neurones artificiels nous offre ainsi une expression logicielle de la notion de substrat matériel
+(tout réseau de neurone étant néanmoins en principe implémentable sous forme de hardware). Cette démarche est 
+celle que nous poursuivons ici en passant en revue un certain nombre de substrats logiciels neuro-inspirés 
+en vue d'étudier leurs capacités de traitement et de représentation.
+
+Le fil rouge de notre approche est celui des réseaux de neurones à connectivité aléatoire, qui nous permet
+de faire un pas supplémentaire en direction des réseaux de neurones naturels.
+Le caractère aléatoire des patrons de connectivité tel que nous les modélisons est un cadre permettant de traiter de manière formelle et de quantifier 
+le caractère extrêmement inhomogène des réseaux de neurones naturels~: variété des types cellulaires, variété des délais de
+transmission, variété de la forme et du nombre d'arborisations synaptiques, etc.
+A travers l'analyse de la distribution des patrons de connexions, de la distribution leur intensité, de la distribution des délais associés,
+nous posons la question du rôle de ces distributions dans la formation de patrons d'activité variés, supports potentiels
+d'opérations variées. 
+
+Notre approche consiste donc à analyser les capacités d'un réseau de neurones en tant que support potentiel de traitement de l'information. 
+Dans ces différentes études, nous n'abordons pas la question de la plasticité, ne regardons pas l'encodage ou le rappel effectif des signaux. 
+Notre approche se concentre plutôt sur la notion de régime dynamique et d'\emph{attracteurs}. L'idée principale est que notre substrat
+neuronal doit être capable d'exprimer différents ``modes'' de fonctionnement. Ces modes se traduisent soit par des régimes dynamiques
+variés (synchrone/asynchrone, point fixe/périodique/chaos), soit par des répartitions spatiales différenciées, appelés ``patrons d'activité''.
+Nous étudions ainsi le nombre et la variété de ces patrons d'activité, leur stabilité, leur répartition et leur résistance aux perturbations.
+
+
+{\color{Violet}
+
+Expressivité du substrat (discret/réel, dimension, richesse du comportement intrinsèque).  
+
+Extensivité/intensivité
+
+Echelles temporelles
+
 
 Typologie :
 
@@ -879,32 +985,28 @@ Typologie :
 
 - à nombre d’etats combinatoire :
 
-- espace discret d’attracteurs : switching. Notion de “pôle” (ou “mode”?).
 
 - existence (ou non) de l’etat “je ne sais pas” (OFF state). Resistance au changement (hysteresis). ODE.
 
-- line attractors : possibilité de tracking ou de switch . EDP.
+- 
 
 - prise en compte (ou non) des dépendances temporelles. 
 
-En particulier on pourra distinguer expressivité discrète (argmax discret) et expressivité continue (neural field).
 
-- Substrat. Des ressources limitées (nombre de neurones N, pas de recrutement). 
-Expressivité du substrat (discret/réel, dimension, richesse du comportement intrinsèque).  
-(exemple de substrat à expressivité limitée : carte de Kohonen, réseau de Hopfield). (ART ajoute le recrutement).  Clustering.
-L'universalité implique la mise en oeuvre de ressources indépendamment de la tâche (task-independent device). 
-Le substrat doit au mieux exploiter ses ressources. 
-A rappeler également : les niveaux de Marr : du substrat au modèle.
+
+
 {\bf computation/traitement du signal basé sur la pattern matching (filtres) et non sur un traitement intensif/analogique 
 (architectures de contrôle). Glissement de l'espace des actions à l'espace des paramètres.}
-
-L'approche ``Multi-scale''
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     1.1      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Réseaux aléatoires équilibrés}
+
+
+
 
 {\bf 1998}:
 
