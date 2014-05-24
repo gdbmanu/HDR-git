@@ -876,7 +876,7 @@ Un substrat est un domaine matériel extensif, défini par des caractéristiques
 et support d'une activité se traduisant par des changements d'état.
 Derrière le terme substrat, nous entendrons ici principalement un domaine physique bien délimité, naturel (corps) ou artificiel (machine), 
 capable de communication, c'est à dire capable de traiter des inputs (sensoriels) et de produire des outputs (déplacements, signaux).
-Un modèle de substrat est un ensemble de variables d'état et un modèle de transitions d'état censé traduire ces changement de la matière.
+Un modèle de substrat est un ensemble de variables d'état et une fonction de transition d'état censé traduire ces changement de la matière.
 
 Nous nous intéressons ici à des substrats ``actifs'', qui dépassent par leurs propriétés de simples canaux de communication (la simple amplification)~: 
 activité endogène, sélection des signaux, mémoire, plasticité...
@@ -893,7 +893,7 @@ substrats (à mémoire limitée, à apports
 d'énergie limités, soumis à du bruit, etc...) et estimer le nombre et le type d'opérations qu'il est capable de produire. 
 
 
-Les réseaux de neurones naturel nous offrent un tel exemple de substrat universel, dans la mesure où, à 
+Les réseaux de neurones naturels nous offrent un tel exemple de substrat universel, dans la mesure où, à 
 travers l'ensemble des espèces animales, le même substrat (un réseau de neurones communiquant via des synapses) traite  
 des signaux sensoriels variés et produit des réponses adaptées tout aussi variées. 
 {\color{Violet}
@@ -949,7 +949,7 @@ le substrat ayant la puissance du continu.
 
 {\color{Violet} L'approche ``Multi-scale''}
 
-L'approche ``Multi-scale'' [CITATION] consiste à considérer un substrat dont les variables d'état évoluent (ou peuvent être décrites) 
+L'approche ``Multi-échelle'' [CITATION] consiste à considérer un substrat dont les variables d'état évoluent (ou peuvent être décrites) 
 selon différentes échelles spatiales et temporelles, chaque échelle de description étant explicative du comportement observé à l'échelle
 supérieure (par des variables dites ``macroscopiques''). L'idée est ici encore d'établir des passerelles entre un substrat constitué d'éléments 
 microscopique caractérisés par des processus rapides localisés et un environnement
@@ -1009,33 +1009,72 @@ couplages $J = \{J_{i,j}\}_{i \in 1..N,j \in 1..N}$ où chaque lien $J_{ij}$ est
 
 L'indépendance entre les différents liens est une caractéristique importante, qui permet d'analyser le comportement du modèle 
 à la limite des grandes tailles, c'est à dire en faisant tendre la taille $N$ vers l'infini. Avec un \emph{scaling} des poids approprié 
-(Espérance/variance de la loi de tirage initial en $O(\frac{1}{N}$), on peut montrer que la dynamique (déterministe) tend à la limite thermodynamique 
+(Espérance, variance de la loi de tirage initial en $O(\frac{1}{N}$)), on peut montrer que la dynamique (déterministe) tend à la limite thermodynamique 
 vers un processus aléatoire, la corrélation entre les noeuds tendant vers 0. 
-Les premières études sur ce  type de modèle ont été faites par Sompolinsky [CITATION] sur un système dynamique continu. l'analyse d'une variante à temps
+Les premières études sur ce  type de modèle ont été faites par Sompolinsky [CITATION] sur un système dynamique continu. 
+L'analyse d'une variante à temps
 discret a été proposée par Cessac et Samuelidès [CITATIONS]. La démonstration de cette propriété (dite de ``chaos local'') a été faite 
 dans le cas discret par Moynot et Samuelides [CITATIONS].
 
-Le comportement d'une classe de réseaux (l'ensemble des réseaux définis par la même loi de tirage initial) peut ête décrit à la limite thermodynamique par 
+Le comportement d'une classe de réseaux (l'ensemble des réseaux définis par la même loi de tirage initial) peut être décrit à la limite thermodynamique par 
 des équations dites de ``champ moyen''. Ces équations définissent le processus aléatoire limite, autrement dit la dynamique temporelle de grandeurs caractéristiques comme l'activité moyenne, 
 le moments d'ordre 2 et la covariance dans le temps [CITATION]. 
 Les équations de champ moyen offrent ainsi une description ``macroscopiques'' de l'activité d'un réseau,
-représentative de l'activité qu'on peut attendre dans un réseau de taille finie issu d'un tirage particulier.
+représentative de l'activité qu'on peut attendre dans un réseau de taille finie issu d'un tirage particulier, et 
+constituent de fait un cadre d'analyse adapté à une approche ``multi-échelles''.
 
-Il est intéressant de constater que l'activité ``aléatoire'', telle que décrite par les équations de champ moyen, a une traduction à taille finie
-sous la forme d'une activité de chaos déterministe. L'existence d'un 
-paramètre d'ordre (le gain de la fonction de transfert des neurones) permet de reproduire dans ces réseaux aléatoires 
+Il est intéressant de constater que le processus stochastique limite, telle que décrit par les équations de champ moyen, 
+a une traduction à taille finie
+sous la forme d'une activité de type chaos déterministe. L'existence d'un 
+paramètre d'ordre (le gain de la fonction de transfert des neurones) permet de reproduire, dans ces réseaux aléatoires, 
 un  comportement générique de destabilisation, appelé route vers le chaos par ``quasi-périodicité'' [CITATION Bergé Pommeau; Quoy Cessac].
 L'existence d'une telle frontière entre l'ordre et le chaos est également prouvée à la limite thermodynamique, mais dans ce
-cas la transition se fait brutalement, avec un passage brusque d'un processus de type point fixe à un processus stochastique [REF?].
-Ramenée à des réseaux de talle finie, l'existence d'une telle frontière entre ordre et chaos est par principe intéressante puisqu'elle indique le lieu
+cas la transition se fait brutalement, avec un passage discret d'un processus de type point fixe à un processus stochastique [REF?].
+Cette frontière entre ordre et chaos est par principe intéressante puisqu'elle indique le lieu
 où la variabilité des dynamiques, et donc potentiellement l'expressivité du réseau est la plus importante. 
 
-En collaboration avec Moynot, Samuelides et Pinaud [CITATIONS], j'ai travaillé sur la définition et l'étude du comportement à taille finie d'un modèle de 
-réseau de neurones aléatoire (RNA) à deux populations. Il s'agissait ici de modéliser et reproduire certains comportements observés dans les 
-réseaux de neurones naturels composés d'une population deneurones excitateurs et d'une population de neurones inhibiteurs. 
-Diférents régimes dynamiques avaient déjà été mis en évidences au sein de telles architectures (oscillations synchronisées, )
+En collaboration avec Moynot, Samuelides et Pinaud [CITATIONS], j'ai travaillé sur la définition et 
+l'étude du comportement à taille finie d'un modèle de réseau de neurones aléatoire (RNA) multi-populations.
 
+Le point de départ consistait à modéliser et reproduire certains comportements observés dans les 
+réseaux de neurones naturels composés d'une population de neurones excitateurs et d'une population de neurones inhibiteurs.
+Cette classe de réseaux de neurones (constitués d'une population de noeuds inhibiteurs et d'une population de noeuds excitateurs)
+est appelé réseau de neurones ``équilibré'' (balanced neural networks), l'équilibre se référant à l'idée d'équilibre
+dynamique entre deux forces opposantes. La dynamique du réseau est amenée à converger vers un point d'équilibre
+traduisant localement (et globalement) le ``poids'' des deux influences. Une configuration des poids se traduisant
+par une activité endogène soutenue 
+traduit une domination de l'influence excitatrice. 
+A l'inverse, une configuration où l'activité intrinsèque disparait après un certain temps 
+traduit une domination de l'activité inhibitrice.
+Comme dans le cas des réseaux aléatoires simples, il existe un paramètre d'ordre correspondant au rapport entre l'influence 
+excitatrice et l'influence inhibitrice. De manière intéressante, une grande variété de comportements dynamiques peuvent être observés
+à la frontière, et entre l'extinction et l'activité soutenue, comme les oscillations synchronisées [Brunel] et/ou le chaos [VV-Sompo]. 
 
+L'étude que nous avons présentée dans [NPL 2001] étudie le comportement d'un réseau équilibré de ce type. Ce papier 
+étend pour la première fois le modèle de champ moyen pour le cas des réseaux à connectivité aléatoire à populations multiples
+(auquel cas les tirages aléatoires sont effectués sur des ``paquets d'axones'' reliant une population de neurones $p \in 1..K$ à une
+population de neurones $q \in 1..K$, où $K$ est le nombre de populations).
+
+L'étude numérique un rapport excitation/ inhibition qui est fixé à 1/2 (correspondant à un régime
+de faible activité). Nous étudions le rôle contrasté de deux paramètres d'ordre. 
+Le premier paramètre, $J$, représente l'amplification du signal. L'augmentation
+continue de ce paramètre tend à produire une bifurcation entre un régime simple (point fixe) et une activité 
+complexe (de type chaotique) comme précédemment.
+Un second paramètre, nommé $d$, représente l'inverse du \emph{coefficient de variation} des liens, autrement dit leur 
+degré d'homogénéite. Augmenter ce paramètre tend à rendre les poids plus homogènes. De manière intéressante, 
+l'augmentation continue de ce second paramètre (augmentation de l'``ordre'') produit une transition 
+entre un régime stationnaire et un régime non-stationnaire périodique. Nous mettons en évidence une carte
+de bifurcation à 4 régions, comprenant un régime stationnaire de point fixe, un régime stationnaire complexe,
+un régime d'oscillations simple, et un régime d'oscillations complexes analogue à processus stochastique cyclostationnaire,
+ce dernier régime étant à notre connaissance mis en évidence pour la première fois dans ce type de réseaux.
+
+Notre étude a donc ouvert la voie à l'étude multi-population systématique des réseaux de neurones à connectivité aléatoire,
+une des continuations principales étant le papier [CESSAC - FAUGERAS]
+
+{\color{Violet}
+[O. Faugeras, J. Touboul, B. Cessac, “A constructive mean field analysis of multi population neural networks with random synaptic weights and stochastic inputs”, Front. Comput. Neurosci. (2009) 3:1.}
+
+La question de l'hologénéité/hétérogénéité est revenue à l'ordre du jour. Plusieurs papiers récents bla bla...
 
 {\bf 1998}:
 
