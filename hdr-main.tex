@@ -1034,6 +1034,10 @@ où la variabilité des dynamiques, et donc potentiellement l'expressivité du r
 En collaboration avec Moynot, Samuelides et Pinaud [CITATIONS], j'ai travaillé sur la définition et 
 l'étude du comportement à taille finie d'un modèle de réseau de neurones aléatoire (RNA) multi-populations.
 
+{\bf Daucé, E., Moynot, O., Pinaud, O., Samuelides, M. and Doyon, B. (1999) Mean Field Equations reveal synchronisation in a 2-population neural network model, proc. of the 7th European Symposium On Artificial Neural Networks (ESANN'99), Verleysen, M. ed.:7-12, April 21-23, Bruges, Belgium}
+
+{\bf Daucé, E., Moynot, O., Pinaud, O. and Samuelides, M. (2001) Mean Field Theory and Synchronization in Random Recurrent Neural Networks, Neural Processing Letters 14:115-126}
+
 Le point de départ consistait à modéliser et reproduire certains comportements observés dans les 
 réseaux de neurones naturels composés d'une population de neurones excitateurs et d'une population de neurones inhibiteurs.
 Cette classe de réseaux de neurones (constitués d'une population de noeuds inhibiteurs et d'une population de noeuds excitateurs)
@@ -1048,22 +1052,27 @@ Comme dans le cas des réseaux aléatoires simples, il existe un paramètre d'or
 excitatrice et l'influence inhibitrice. De manière intéressante, une grande variété de comportements dynamiques peuvent être observés
 à la frontière, et entre l'extinction et l'activité soutenue, comme les oscillations synchronisées [Brunel] et/ou le chaos [VV-Sompo]. 
 
-L'étude que nous avons présentée dans [NPL 2001] étudie le comportement d'un réseau équilibré de ce type. Ce papier 
+L'étude que nous avons présentée dans [ESANN'99, NPL 2001] étudie le comportement d'un réseau équilibré de ce type. Ce papier 
 étend pour la première fois le modèle de champ moyen pour le cas des réseaux à connectivité aléatoire à populations multiples
-(auquel cas les tirages aléatoires sont effectués sur des ``paquets d'axones'' reliant une population de neurones $p \in 1..K$ à une
+(auquel cas les tirages aléatoires sont effectués sur des ``faisceaux d'axones'' reliant une population de neurones $p \in 1..K$ à une
 population de neurones $q \in 1..K$, où $K$ est le nombre de populations).
+Ce modèle renouvelle l'approche large-échelle classique [WILSON-COWAN] en prenant en compte l'hétérogénéité des faisceaux
+d'axones reliant différentes régions du réseau.  
+Il sert de base à la définition d'architectures neuronales fondées sur des 
+substrats à connectivité aléatoire. 
 
 {\color{Violet}
 [Multi-pop = base pour l'approche multi-échelle. Construction / architecture neuronale. Prise en compte de l'hétérogénéité.]
 Multi-pop = travail de master d'O Pinaud.
-Demlonstration champ moyen = O Moynot (avec généralisation à la connectivité diluée)}
+Demonstration champ moyen = O Moynot (avec généralisation à la connectivité diluée)}
 
-L'étude numérique un rapport excitation/ inhibition qui est fixé à 1/2 (correspondant à un régime
-de faible activité). Nous étudions le rôle contrasté de deux paramètres d'ordre. 
+L'étude numérique proposée dans le papier fixe le rapport excitation/ inhibition à 1/2,
+ce qui correspond à un régime de faible activité [REFERENCES]. 
+Nous étudions le rôle contrasté de deux paramètres d'ordre. 
 Le premier paramètre, $J$, représente l'amplification du signal. L'augmentation
 continue de ce paramètre tend à produire une bifurcation entre un régime simple (point fixe) et une activité 
 complexe (de type chaotique) comme précédemment.
-Un second paramètre, nommé $d$, représente l'inverse du \emph{coefficient de variation} des liens, autrement dit leur 
+Un second paramètre, nommé $d$, représente l'inverse du \emph{coefficient de variation} des liens, autrement dit le 
 degré d'homogénéite. Augmenter ce paramètre tend à rendre les poids plus homogènes. De manière intéressante, 
 l'augmentation continue de ce second paramètre (augmentation de l'``ordre'') produit une transition 
 entre un régime stationnaire et un régime non-stationnaire périodique. Nous mettons en évidence une carte
@@ -1077,46 +1086,13 @@ une des continuations principales étant le papier [CESSAC - FAUGERAS]
 {\color{Violet}
 [O. Faugeras, J. Touboul, B. Cessac, “A constructive mean field analysis of multi population neural networks with random synaptic weights and stochastic inputs”, Front. Comput. Neurosci. (2009) 3:1.
 
-Large Deviations, Dynamics and Phase Transitions in Large Stochastic and Disordered Neural Networks
-Tanguy Cabana1 and Jonathan Touboul (2013)}
-
-La question de l'homogénéité/hétérogénéité est revenue à l'ordre du jour. Plusieurs papiers récents bla bla...
-
-{\bf 1998}:
-
-- mean field, variables macroscopiques, prémisse multi-echelle, etc...
-
-{\bf 1999}:
-
-- Synchronisation dans les réseaux à 2 populations (ECM)
-
-{\bf Daucé, E., Moynot, O., Pinaud, O., Samuelides, M. and Doyon, B. (1999) Mean Field Equations reveal synchronisation in a 2-population neural network model, proc. of the 7th European Symposium On Artificial Neural Networks (ESANN'99), Verleysen, M. ed.:7-12, April 21-23, Bruges, Belgium}
-
-{\bf Daucé, E., Moynot, O., Pinaud, O. and Samuelides, M. (2001) Mean Field Theory and Synchronization in Random Recurrent Neural Networks, Neural Processing Letters 14:115-126}
-
-
-
-
-- Champ moyen multi-populations
-- Mise en évidence d’un régime périodique synchronisé dans les modèles à 2 populations. 
-
-{\bf 2008}
-
-- modèles à 2 couches (strictly excitatory/inhibitory). 
-
-{\bf 2009}
-
-- “Free membr. potential” (synaptic input) / modeles ECM à “horizon fini” 
-
-Mean field
-
-Mon apport :
-- Multi-pop
-- Délais
-- frontiere
-- contrib. Reseaux equilibrés --> comportementdes réseaux équilibrés à la frontière
+et aussi 
  
-On-off states?
+Large Deviations, Dynamics and Phase Transitions in Large Stochastic and Disordered Neural Networks
+Tanguy Cabana1 and Jonathan Touboul (2013)
+
+La question de l'homogénéité/hétérogénéité est revenue à l'ordre du jour. Plusieurs papiers récents bla bla...}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     1.2      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1124,28 +1100,46 @@ On-off states?
 
 \subsection{Réservoir}
 
-Thèse (2000)
+Un des intérêts principaux des réseaux à connectivité aléatoire est leur capacité à générer des dynamiques complexes
+endogènes (donc sans stimulation extérieure). Ces dynamiques, bien que reposant sur des équations déterministes,
+se comportent comme des processus stochastique indépendants sur chaque neurone. Ce comportement n'est pourtant pas analogue
+à un simple bruit passif. 
 
-- Notion de circuit d’activation (synfire chain). Réservoir de circuits. Relation entre structure et instances de circuit. 
+Une manière simple de caractériser le comportement non-linéaire (ou critique) d'une population de neurones consiste à introduire de petites perturbations
+dans la dynamique du réseau. 
+Une étude proposée dans le 3ème chapitre de l'ouvrage que nous avons co-dirigé avec Agnès Guillot [REF] illustre bien le propos.
+Cette étude porte sur le modèle le plus simple, un réseau récurrent aléatoire comportant une seule population. Le paramètre d'amplification
+choisi place le réseau dans une région chaotique, proche de la transition vers le cycle limite.  
+Le réseau est soumis à une stimulation extérieure quasi stationnaire, évoluant à une vitesse très lente par rapport à la vitesse de 
+mise à jour du réseau. Une succession de régimes quasi-stationnaires séparés par des transitions brusques est mis en évidence.
+Chaque régime est caractérisé par un patron d'activité différent, qui se manifeste par la présence de fréquences caractéristiques
+distinctes dans le spectre de Fourier du signal moyen.  
 
-- Importance des delais. Architectures à 2 couches (couche primaire et couche secondaire).
+Une autre étude, présente dans mon manuscrit de thèse [REF], développe l'analyse spatio-temporelle des patrons d'activité de type cycle limite.
+L'existence d'une chaîne d'activation spontanée (synfire chain [CITATION]) est mise en évidence par analyse de la matrice de covariance. 
+Différents modes (patrons d'activation spatio-temporels) se développent spontanément lorsque le réseau est soumis à des entrées statiques différentes [SAB 2000].
+Enfin, l'analyse de la réponse du réseau à une stimulation périodique indique une ``bande passante'' de quelques unités temporelles, le réseau étant capable 
+de ``capturer'' (et donc d'amplifier) des signaux dont la période varie entre 2 et 10\--12 unités de temps
+(autrement dit à sélectionner un mode dynamique périodique interne compatible avec la période imposée) [SAB2000].
 
-- Règle d’ordre 2 (différence-based / covariance rule) 
+Le comportements spontané des réseaux récurrents aléatoires est par ailleurs à la base du mécanisme de perception par feedback positif
+présentés dans la section \ref{sec:}. 
 
-- Effet des patrons “conditionnants”.
+L'intérêt du comportement spontané des réseaux récurrents à connnectivité aléatoires a été largement confirmé depuis. 
+Une étude plus systématique de la réponse linéaire dans les réseaux récurrents [CESSAC-SAMUELIDES EPJ-ST] met en évidence 
+l'existence de modes et de résonances extrêmement variés lorsque le signal est applique sur un seul noeud du réseau (micro-stimulation). 
+Les modèles de ``réservoir
+computing'' proposés par l'équipe de Wolfgang Maas [CITATION] reposent sur le même principe : un réseau de neurones aléatoire récurrent soumis à un signal
+spatio-temporel est capable de conserver une mémoire de quelques unités de temps utilisables pour produire des classifieurs sensibles
+au contexte temporel.
 
+{\color{Violet} Image du papillon-chenille.}
 
-
-
-{\bf 2000-2001}
-
-- réponse aux patrons à “dynamique lente” - réservoir - apprentissage = elargissement d’un mode dynamique particulier.
-
-La frontiere
-
-Le comportement à taille finie
-
-% Image du papillon-chenille
+Ce modèle de réseau à connexions aléatoire offre un exemple de substrat dont la caractéristique principale est la \emph{capture dynamique}, reposant
+sur des transformatios morphologiques des patrons d'activités (changements des distributions spatiales et temporelles des activités). Bien que reposant sur
+un tirage aléatoire arbitraire, ils offrent donc un bon support pour le traitement (et la transformation) des signaux temporels. 
+Faire reposer le traitement sur un tirage arbitraire rejoint d'ailleurs un certain nombre de techniques de plongement (ou projection) aléatoires
+utilisées en apprentissage automatique [COMPRESSED SENSING, EXTREME LEARNING].
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1199,6 +1193,27 @@ L'existence de delais conditionne la perception des causalités temporelles.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     1.4      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Extension aux populations de neurones à spikes}
+
+{\bf 2008}
+
+- modèles à 2 couches (strictly excitatory/inhibitory). 
+
+{\bf 2009}
+
+- “Free membr. potential” (synaptic input) / modeles ECM à “horizon fini” 
+
+Mean field
+
+Mon apport :
+- Multi-pop
+- Délais
+- frontiere
+- contrib. Reseaux equilibrés --> comportementdes réseaux équilibrés à la frontière
+ 
+On-off states?
+
 
 \subsection{Modèles ``large échelle''}
 
