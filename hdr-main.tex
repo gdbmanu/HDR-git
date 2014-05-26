@@ -805,10 +805,9 @@ serve to bound surprising exchanges with the world.}'' (Friston, 2010)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
 Sont rassemblées dans cette section mes différentes contributions à la question des architectures cognitives. Mes travaux
 se concentrent autour de la construction d'un ``sujet'' artificiel, c'est à dire
-décrire des mécanismes qui vont construire et autonomiser la réponse de l'agent vis à vis des sollicitations sensorielles de son
+décrire des mécanismes qui vont construire et autonomiser la réponse d'un agent vis à vis des sollicitations sensorielles de son
 environnement.
 
 Ces travaux se situent à l'interface de la branche “pattern matching” de l’IA (perceptron, RN, ART, Hopfield, ...) et des 
@@ -855,7 +854,7 @@ La quatrième présente une série de résultats relatifs à des projets plus di
 tels qu'ils apparaissent dans les études neurophysiologiques et comportementales. 
 L'orientation est une des modalités fondamentales de l'activité motrice, consistant à déplacer les organes récepteurs dans une direction qui optimise
 leur exposition à des signaux d'intérêt. Nous étudions deux modalités de ce comportement d'orientation : d'une part l'orientation 
-spatiale, et plus particulièrement la saccade oculaire, en tant que modèle de boucle sensori-motrice élémentaire, et de l'autre l'orientation 
+visuelle, et plus particulièrement la saccade oculaire, en tant que modèle de boucle sensori-motrice élémentaire, et de l'autre l'orientation 
 temporelle, c'est à dire la capacité du sujet à concentrer ses ressources attentionnelles à un instant choisi dans le temps.
 
 
@@ -872,6 +871,8 @@ temporelle, c'est à dire la capacité du sujet à concentrer ses ressources att
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\subsection{Introduction}
+
 Un substrat est un domaine matériel extensif, défini par des caractéristiques physiques homogènes, sujet à des flux de matière ou d'énergie,
 et support d'une activité se traduisant par des changements d'état.
 Derrière le terme substrat, nous entendrons ici principalement un domaine physique bien délimité, naturel (corps) ou artificiel (machine), 
@@ -882,7 +883,7 @@ Nous nous intéressons ici à des substrats ``actifs'', qui dépassent par leurs
 activité endogène, sélection des signaux, mémoire, plasticité...
 
 Nous avons vu qu'un des problèmes posé par la construction d'architectures cognitives est celle de la non-exhaustivité: sur un hardware donné,
-seul un nombre limité de faits peuvent être pris en compte, et un nombre limité de réponses produites.
+seul un nombre limité de faits peut être pris en compte, et un nombre limité de réponses produites.
 L'universalité implique la mise en oeuvre de ressources indépendamment de la tâche (task-independent device). 
 Le substrat doit au mieux exploiter ses ressources. 
 Autrement dit, un programme à compétence universelle sera avant tout un programme qui devra gérer ses ressources de traitement pour les répartir au
@@ -890,30 +891,24 @@ mieux en fonction du nombre et de la complexité des tâches qui se présentent.
 
 La question de l'expressivité d'un substrat tourne autour de cette notion de limitation~: analyser un certain nombre de
 substrats (à mémoire limitée, à apports
-d'énergie limités, soumis à du bruit, etc...) et estimer le nombre et le type d'opérations qu'il est capable de produire. 
-
+d'énergie limités, à capacités de traitement limitées, soumis à du bruit, etc...) et estimer le nombre et le type d'opérations qu'ils sont capables de produire. 
 
 Les réseaux de neurones naturels nous offrent un tel exemple de substrat universel, dans la mesure où, à 
 travers l'ensemble des espèces animales, le même substrat (un réseau de neurones communiquant via des synapses) traite  
 des signaux sensoriels variés et produit des réponses adaptées tout aussi variées. 
 {\color{Violet}
-A rappeler également : les niveaux de Marr : du substrat au modèle.}
+A rappeler également : les niveaux de Marr : du substrat au modèle... et Turing bien sûr}
 
 Par analogie aux substrats matériels, il existe un certain nombre de substrats \emph{logiciels} dans le domaine de l'apprentissage automatique. 
-Tous les modèles de l'approche distribuée, tels qu'il se sont définis depuis le perceptron, reposent sur
+Tous les modèles de l'approche distribuée, tels qu'il se sont définis depuis le perceptron [CITATION], reposent sur
 une notion implicite de ressource limitée, qui se traduit en particulier par un ``choix'' effectué par le
 concepteur sur le nombre de neurones à mettre dans la couche cachée.
 Une définition quantitative populaire de l'expressivité d'un tel substrat est la dimension de Vapnik-Chervonenkis [CITATION], qui représente donc le caractère 
 plus ou moins complexe d'un classifieur, en terme de nombre de pivots utilisé pour
 séparer les données. 
 
-{\color{Violet} - substrat à nombre d’etats fixe : }
-
-
-Néanmoins, l'expressivité d'un substrat ne se limite pas au nombre de symboles. Elle repose également sur la nature du processus 
-par lequel des données ou des signaux sont \emph{encodés} dans le substrat.
 L'encodage est le processus par lequel une classe a priori illimitée de signaux d'entrée sera traduit sous la forme d'un patron d'activité similaire,
-ce patron étant le reflet au sein du substrat de cette classe de signaux. 
+ce patron étant le reflet, au sein du substrat, de cette classe de signaux. 
 L'illustration la plus caractéristique d'un tel processus d'encodage est celle des réseaux de Kohonen [CITATION] pour lesquels un nombre fixé de centres mobiles 
 vont servir à encoder la distribution des entrées. Le substrat ``codant'' est caractérisé par un réseau de noeuds liés 
 par des relations de voisinage. L'encodage permet ainsi de regrouper/traduire la similarité des données d'entrée
@@ -923,27 +918,27 @@ le modèle ART de Grossberg [CITATION] qui ajoute à son modèle la possibilité
 nouveaux noeuds (apportant à son substrat une expressivité non-bornée mais limitée par la dimension 
 de la couche d'entrée).
 
-{\color{Violet}
-- substrat à nombre d’etats combinatoire :
-
-- espace discret d’attracteurs : switching. Notion de “pôle” (ou “mode”?).
-}
-
-L'exemple des réseaux de Hopfield [CITATION] offre un éclairage différent sur l'expressivité d'un substrat en mettant en 
-avant le caractère distribué (non-local) de l'encodage. Contrairement à l'idée classique d'un noeud comme unité de représentation 
-(ou unité de séparation dans le cas des classifieurs), l'expressivité du substrat est vue sous l'angle du nombre
-de patrons distribués (patterns) pouvant être obtenus en réponse à une stimulation. Si l'expressivité se trouve en principe augmentée
+Néanmoins, l'expressivité d'un substrat ne se limite pas au nombre de symboles. Elle repose également sur la nature (la ``qualité'')
+des opérations (et des transformations) qui peuvent prendre place dans le substrat. 
+L'exemple des réseaux de Hopfield [CITATION] offre ainsi un éclairage différent sur l'expressivité d'un substrat en mettant en 
+avant le caractère distribué (non-local) de l'activité. Contrairement à l'idée classique d'un noeud comme unité d'expression 
+(par exemple unité de séparation dans le cas des classifieurs, unité de description dans le cas des cartes auto-organisées etc.), 
+la capacité du substrat est vue sous l'angle du nombre
+de patrons distribués (patterns) pouvant être obtenus en tant qu'état final (attracteur) atteint par le système
+dynamique décrit par les poids (arêtes) du réseau.
+La capacité s'exprime ici en nombre de \emph{modes} (configurations atteignables) et non en nombre de noeuds/vecteurs supports etc.
+Si la capacité se trouve en principe augmentée
 d'un facteur exponentiel ($2^N$ configurations distribuées possibles), la capacité effective est en pratique beaucoup plus réduite, 
-se limitant à un nombre de symboles (attracteurs) distincts de l'ordre de $N$ (nombre de noeuds).
-La capacité s'exprime ici en nombre de \emph{modes} (configurations atteignables) et non en nombre de symboles.
-
-{\color{Violet} line attractors : possibilité de tracking ou de switch . EDP.}
-
+se limitant à un nombre de modes (attracteurs) distincts en $O(N)$, c'est à dire de l'ordre du nombre de noeuds [CITATIONS].
+La nature des opérations réalisables par le substrat est également différent puisqu'il s'agit principalement ici d'une
+dynamique de relaxation adaptée à des opération de complétion et d'interpolation de données manquantes, implémentant un
+mécanisme de mémoire dite ``auto-associative''. 
+ 
 Le champ des possibilités d'expression varie fortement d'un modèle à l'autre. Ainsi, la théorie du 
 ``Champ neuronal dynamique'' [CITATION] décrit un substrat à support  
 continu (un champ et non plus un réseau de noeuds discrets), dont la dynamique spatio-temporelle est décrite par un jeu
 d'équation aux dérivées partielles. Ce modèle propose une description explicitement spatialisée
-du substrat, et porte en lui une capacité de représentation (ou de reproduction) 
+du substrat, et porte en lui une capacité de description (ou de reproduction) 
 des caractéristiques spatiales et temporelles d'un environnement physique continu. Le nombre de modes possibles devient ici infini,
 le substrat ayant la puissance du continu.
 
@@ -958,7 +953,7 @@ physique caractérisé par des processus macroscopiques lents et spatialement é
 L'exemple des réseaux de neurones artificiels nous offre ainsi un équivalent logiciel de l'idée de substrat matériel
 (tout réseau de neurone étant néanmoins en principe implémentable sous forme de hardware). Cette démarche est 
 celle que nous poursuivons ici en passant en revue un certain nombre de substrats logiciels neuro-inspirés 
-en vue d'étudier leurs capacités de traitement et de représentation.
+en vue d'étudier leurs capacités de traitement et d'expression.
 
 Le fil rouge de notre approche est celui des réseaux de neurones à connectivité aléatoire, permettant de traiter de manière formelle et de quantifier 
 le caractère extrêmement inhomogène des réseaux de neurones naturels~: variété des types cellulaires, variété des délais de
@@ -1080,7 +1075,10 @@ Notre étude a donc ouvert la voie à l'étude multi-population systématique de
 une des continuations principales étant le papier [CESSAC - FAUGERAS]
 
 {\color{Violet}
-[O. Faugeras, J. Touboul, B. Cessac, “A constructive mean field analysis of multi population neural networks with random synaptic weights and stochastic inputs”, Front. Comput. Neurosci. (2009) 3:1.}
+[O. Faugeras, J. Touboul, B. Cessac, “A constructive mean field analysis of multi population neural networks with random synaptic weights and stochastic inputs”, Front. Comput. Neurosci. (2009) 3:1.
+
+Large Deviations, Dynamics and Phase Transitions in Large Stochastic and Disordered Neural Networks
+Tanguy Cabana1 and Jonathan Touboul (2013)}
 
 La question de l'homogénéité/hétérogénéité est revenue à l'ordre du jour. Plusieurs papiers récents bla bla...
 
@@ -1155,6 +1153,20 @@ Le comportement à taille finie
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Codage topographique}
+
+La vocation des modèles de champ neuronal est principalement la modélisation d'un substrat neuronal spatialisé vu à ``large échelle'' 
+(continuum d'activité sur la surface corticale).
+Ce modèle partage avec le réseau de Hopfield la capacité à conserver et entretenir 
+une activité autonome indépendamment de son signal d'entrée. 
+Il implémente néanmoins des opérations tout à fait spécifiques et intéressantes du point de vue computationnel. 
+Un réseau de type champ neuronal implémente simultanément une ``mémoire de travail'' (capacité à conserver la trace d'une stimulation passée), et 
+un mécanisme de traitement (ici résumé à quelques opérations simples : émergence, extinction, fusion, poursuite) [REF SCHONER]. 
+La combinaison de ces deux compétences (mémoire et calcul)
+au sein d'une architecture unique fait en principe du neural field un environnement computationnel complet, bien 
+que les références manquent encore sur la question [REF?]. 
+
+{\color{Violet} une seule référence sur la question : \bf Universal neural field computation
+Peter beim Graben, Roland Potthast}
 
 {\bf 2003-2004} 
 
