@@ -24,6 +24,9 @@
 \usepackage{varioref}
 \usepackage{makeidx}
 
+%\usepackage{apacite}
+%\usepackage[longnamesfirst,nonamebreak]{natbib}
+
 \usepackage[usenames,dvipsnames]{color}
 
 
@@ -45,6 +48,12 @@
 \renewcommand{\headrulewidth}{0pt} % and the line
 }
 
+
+%% Apalike hyphenation %%%
+%\let\oldbibitem=\bibitem
+%\renewcommand{\bibitem}[2][]{\oldbibitem[#1]{#2}\newline}
+
+%%% Margins %%%
 \voffset -1.04cm
 \textheight 25cm
 \hoffset -1in
@@ -246,7 +255,7 @@ Historique :
 \item les RN et l’apprentissage de la commande: régression (predicteur = classifieur ou regresseur) 
 \item le RL (acteur/critique)
 \item Robotique developpementale : Brooks / la subsumption.
-\item l’espace de contrôle et l’approche “point fixe” du contrôle
+\item l’espace de la tâche / des actuateurs et l’approche “point fixe” du contrôle
 \item Mosaic
 \item Friston
 \end{itemize}
@@ -285,10 +294,26 @@ Ce problème d'une définition opérationnelle de l'intelligence a été posé a
 Il s'agissait de construire un programme de recherche, une feuille de route détaillant les étapes nécessaires 
 et suffisantes pour construire un dispositif artificiel intelligent.
 
+Q: pourquoi parle-t-on d'architecture et pas de programme (ou de ``méta programme'')? Inclut le hardware. Architecture
+est ici à mettre en relation avec architecture des calculateurs. l'approche RN consiste à revoir l'architecture meme du ``calculateur'' 
+pour atteindre l'autonomie opérationnelle (``gouvernement de soi'').
+
+D'un point de vue plus pratique, développer de véritables architectures cognitives, c'est ouvrir de nouveaux champs d'application variés:
+\begin{itemize}
+ \item déplacement de la charge cognitive (mais augmente la dépendance de l'homme au dispositif). Exemple de la démonstration automatique de théorèmes.
+ \item personnalisation - accès à l'information (mais risque de ``flicage'' - problème de confidentialité)
+ \item décision automatique / aide à la décision / conseil
+ \item véhicules autonomes
+ \item supplétion de l'homme pour les tâches ingrates ou dangereuses. 
+ \item smart trucs. Environnement intelligent
+ \item IHM immersives/empathiques. Repondeurs conviviaux. Avatars. 
+ \item simulation économique et sociale
+\end{itemize}
+
 A un niveau très général, le but est de produire un dispositif dont les réponses s'apparenteraient dans la forme 
 et dans le contenu à celles d'un être humain,
 tout en reposant sur des opérations élémentaires issues d'un traitement logico-mécanique de l'information.
-Cet objectif est exprimé de façon claire par le test de Turing [REF]: un dispositif intelligent doit être capable 
+Cet objectif est exprimé de façon claire par le test de Turing \cite{TURING50}: un dispositif intelligent doit être capable 
 de communiquer avec un être humain de manière naturelle, c'est à dire qu'il soit impossible pour l'opérateur humain,
 en l'absence de contact visuel, 
 de savoir s'il s'adresse à une machine ou à un être humain.
@@ -298,7 +323,7 @@ n'est pas vu comme intelligent s'il ne passe pas le test de Turing.
 Cette ``mesure'' est par nature imparfaite, puisque reposant in fine sur la subjectivité de l'observateur.
 Différents contre-exemples peuvent d'ailleurs être trouvés dans lesquels des dispositifs
 logico-mécaniques (machines) produisant des illusions, autrement dit sont tels que l'opérateur humain tend à 
-leur attribuer des intentions qui n'y sont pas [BRAITENBERG]. Attribuer des intentions est un biais perceptif humain.
+leur attribuer des intentions qui n'y sont pas \cite{Braitenberg1986}. Attribuer des intentions est un biais perceptif humain.
 
 Une approche plus opérationnelle consiste à décrire (lister) les compétences attendues de la part du logiciel.
 Si on se réfère aux conceptions courantes de l'intelligence, 
@@ -313,8 +338,8 @@ c'est à dire la capacité à établir des faits nouveaux à partir de faisceaux
 \end{enumerate}
 
 Dans ce cas (définition extensive de l'intelligence), plusieurs problèmes se posent. Il est (a) difficile de séparer les différents 
-items et (b) difficile de fermer la liste. Selon le point de vue que l'on adopte, raisonner (établir de faits) 
-peut s'apparenter à décider (établir des actes). La mémoire, c'est à la fois se rappeler et intégrer des faits nouveaux.
+items et (b) difficile de fermer la liste. Selon le point de vue que l'on adopte, raisonner (estimer la véracité de certains faits) 
+peut s'apparenter à décider (faire un choix). La mémoire, c'est à la fois se rappeler et intégrer des faits nouveaux.
 Le raisonnement ne peut s'établir sur la base des observations immédiates, il doit intégrer des faits mémorisés etc. 
 %Chacune de ces capacités (raisonner, stocker en mémoire, planifier,...) peut être implémentée
 %dans certains contextes sans que le comportement du logiciel soit considéré comme intelligent au sens plein. 
@@ -368,17 +393,7 @@ entre hyperspécialisation et généricité, entre activité commandée et activ
 entre dématérialisation (virtualité) et incarnation, entre déterminisme et création etc.
 Ces points seront abordés dans les prochains paragraphes.
 
-D'un point de vue plus pratique, développer de véritables architectures cognitives, c'est ouvrir de nouveaux champs d'application variés:
-\begin{itemize}
- \item déplacement de la charge cognitive (mais augmente la dépendance de l'homme au dispositif). Exemple de la démonstration automatique de théorèmes.
- \item personnalisation - accès à l'information (mais risque de ``flicage'' - problème de confidentialité)
- \item décision automatique / aide à la décision / conseil
- \item véhicules autonomes
- \item supplétion de l'homme pour les tâches ingrates ou dangereuses. 
- \item smart trucs. Environnement intelligent
- \item IHM immersives/empathiques. Repondeurs conviviaux. Avatars. 
- \item simulation économique et sociale
-\end{itemize}
+
 
 \section{Les problèmes connus de la démarche réductionniste}
 
@@ -436,7 +451,7 @@ autrement dit de produire les réponses qui sont les plus à même de produire u
 Une première manière est de définir un dispositif cognitif par opposition à un dispositif ``commandé'', c'est à dire
 capable de développer des comportements intelligents de façon autonome.
 
-Recusation de la demarche behavioriste (et problème de l’agentivité). Plusieurs approches de l'autonomie (du point de vue des sciences expérimentales : expliquer le comportement variable d'un essai à l'autreautrement que par du bruit?):
+Recusation de la demarche behavioriste (et problème de l’agentivité). Plusieurs approches de l'autonomie (du point de vue des sciences expérimentales : expliquer le comportement variable d'un essai à l'autre autrement que par du bruit?):
 
 1. Le délai. La délibération (Hebb).  ``délai'' entre le stimulus et la réponse (Hebb). Délibération interne. 
 
@@ -470,6 +485,9 @@ pour estimer les conséquences attendues. Atteindre un but à long terme.
 
 Le modele du monde seul ne contient pas les actions produites par le sujet. La
 simulation doit donc inclure un modele du monde et un modele du sujet agissant. Modèle du sujet se voyant agir. 
+Modèle des motivations du sujet agissant???
+Régression infinie...
+
 Simulation des conséquences.
 (explosion combinatoire évitée par des approches de type Q-learning)
 Délibération.
@@ -479,7 +497,7 @@ Modèle de l'adversaire. Min-Max.
 Mais : 
 
 1. Nature des représentations. Quelle est la représentation adéquate. Représentation de type symbolique (qualitative / langagière)?
-Représentation quantitative (copie du système extérieur). La nature du monde interieur est-elle in fine symbolique ou 
+Représentation quantitative/extensive (copie du système extérieur). La nature du monde interieur est-elle in fine symbolique ou 
 quantitative?
 
 Le monde le l'information est intensif. Le monde extérieur est extensif. 
@@ -495,18 +513,20 @@ Par extension : ce qui est perçu n'est pas l'outil en tant que tel, mais la rel
 c'est à dire l'utilisabilité (= affordance).  
 
 Le monde en soi n'est pas accessible, ou en tout cas est le résultat d'une reconstruction à partir des mesures.
-Le monde en soi doit être inféré, il n'est pas donné en tant que tel (monde ``caché'').
+Le monde en soi doit être inféré, il n'est pas donné en tant que tel (monde ``caché''). Variable latente.
 
 Perception et non-sens.
 
 3. Problème du monde ``en soi''. Constructivisme radical. Il n'y a pas de monde indépendamment du sujet. 
 Seule la relation du sujet au monde est atteignable. Le reste est une spéculation. 
-Tradition philosophique kantienne puis phénoménologique. Le monde ets mis entre parenthèses.
+Tradition philosophique kantienne puis phénoménologique. Le monde est mis entre parenthèses.
 
 Enaction. La relation du sujet au monde passe par des opérations autoritaires/créatives (le monde/la règle est constitué par décret). 
 (par décret / innovation / création)
-Gouvernance de l'environnement. Le sujet cherche à imposer sa vison, à façonner le monde pour qu'il se conforme 
-à l'idée qu'il s'en fait. La réfutation passe par le conflit (non conformité). Le monde (ou la perception) se construit dans le conflit / 
+Gouvernance de l'environnement. Le sujet cherche à imposer sa vison, à façonner le monde (le soi) pour qu'il se conforme 
+à l'idée qu'il s'en fait. La réfutation passe par le conflit (non conformité) - la rébellion de l'environnement contre 
+la volonté d'assujetissement). 
+Le monde (ou la perception) se construit dans le conflit / 
 est le résultat d'un consensus (``c'est en se cognant qu'on apprend'').
 
 \subsection{La question de l'incarnation}
@@ -514,7 +534,7 @@ est le résultat d'un consensus (``c'est en se cognant qu'on apprend'').
 Le ``retour au corps''. Brooks. 
 Point de vue local. Répertoire moteur limité.
 Améliorations par couches successives (empilement). Approche pratique/pragmatique. Viabilité.
-Un circuit de régulation s'empile sur un eutre circuit de régulation. Parallélisme.
+Un circuit de régulation s'empile sur un autre circuit de régulation. Parallélisme.
 
 \section{L'approche constructiviste (ou ``bottom-up'')}
 
@@ -555,7 +575,7 @@ De façon intéressante, on retrouve dans les 3 cas un raisonnement ``qui se mor
 
 Focus sur le langage et le traitement syntaxique - l'intelligence est manipulation de symboles - structuralisme - arbitraire du signe - tout est langage
 
-Machine à états.  Manipulaton de symboles. Connaissances et croyances. L'essentiel de l'effort a porté sur le traitement symbolique de l'information: 
+Machine à états.  Manipulation de symboles. Connaissances et croyances. L'essentiel de l'effort a porté sur le traitement symbolique de l'information: 
 la mémoire - la perception - les grammaires génératives - la logique formelle. Ces modèles cognitifs se focalisent sur la notion de croyance, c'est à dire 
 d'état interne qui conditionne la réponse. (x, etat => y, LUT). Par extension, etat = connaissance, prior. Le prior peut biaiser la reponse. 
 
@@ -588,8 +608,13 @@ Basé sur l'optimisation d'une grandeur extensive (un champ). Espace vectoriel o
 Soupe primitive auto-organisatrice.
 
 Basé sur un substrat apprenant (expressivité limitée). 
-L’expressivité du substrat conditionne le “monde perceptif” (au sens des categories et des relations de voisinage, d’identité, de similarité entre les stimuli sensoriels) (exemple : substrat 1D-2D de la carte de Kohonen). 
+L’expressivité du substrat conditionne le “monde perceptif” (au sens des categories et des relations de voisinage, 
+d’identité, de similarité entre les stimuli sensoriels) (exemple : substrat 1D-2D de la carte de Kohonen). 
+
+monde perceptif $\Leftrightarrow$ soi perceptif
+
 Puissance d’expression. 
+
 Rq : la demarche de Chomsky s’inscrit dans cette démarche (contraintes sur ce qui est exprimable). 
 Notion de “reservoir”. Emergence = instanciation.
 
@@ -806,8 +831,9 @@ serve to bound surprising exchanges with the world.}'' (Friston, 2010)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Sont rassemblées dans cette section mes différentes contributions à la question des architectures cognitives. Mes travaux
-se concentrent autour de la construction d'un ``sujet'' artificiel, c'est à dire
-décrire des mécanismes qui vont construire et autonomiser la réponse d'un agent vis à vis des sollicitations sensorielles de son
+se concentrent autour de la description d'architectures logicielles visant à favoriser l'autonomie opérationnelle, 
+%construction d'un ``sujet'' artificiel, 
+c'est à dire autorisant le programme à construire et autonomiser sa réponse vis à vis des sollicitations sensorielles de son
 environnement.
 
 Ces travaux se situent à l'interface de la branche “pattern matching” de l’IA (perceptron, RN, ART, Hopfield, ...) et des 
@@ -825,7 +851,7 @@ Dans la première section, nous regardons la question de substrat, en tant que m
 En suivant l'analogie neuromimétique, nous étudions les conditions qui vont permettre à une population de calculateurs (les neurones) 
 de s'organiser dynamiquement en activant ou désactivant sélectivement certains circuits.
 Selon les caractéristiques des calculateurs élémentaires et les caractéristiques du patron de connectivité, 
-les propriétés de discrimination (et par conséquent la nature de l'information produite ou transférée) seront différentes.
+les capacités d'expression (et par conséquent la nature de l'information produite ou transférée) seront différentes.
 Nous considérons en particulier le problème de l'expressivité limitéee (tout substrat ne peut pas tout exprimer) 
 et le principe de la capacité limitée (limitation du nombre de ``symboles'' ou de circuits ``effectifs'').
 Nous terminons ce tour d'horizon avec une étude plus appliquée consistant à analyser le nombre et l'étendue de patrons spatio-temporels au
@@ -875,7 +901,7 @@ temporelle, c'est à dire la capacité du sujet à concentrer ses ressources att
 
 Un substrat est un domaine matériel extensif, défini par des caractéristiques physiques homogènes, sujet à des flux de matière ou d'énergie,
 et support d'une activité se traduisant par des changements d'état.
-Derrière le terme substrat, nous entendrons ici principalement un domaine physique bien délimité, naturel (corps) ou artificiel (machine), 
+Derrière le terme substrat, nous entendrons ici principalement un domaine physique bien délimité, naturel (corps) ou artificiel (machine, circuit imprimé), 
 capable de communication, c'est à dire capable de traiter des inputs (sensoriels) et de produire des outputs (déplacements, signaux).
 Un modèle de substrat est un ensemble de variables d'état et une fonction de transition d'état censé traduire ces changement de la matière.
 
@@ -893,34 +919,40 @@ La question de l'expressivité d'un substrat tourne autour de cette notion de li
 substrats (à mémoire limitée, à apports
 d'énergie limités, à capacités de traitement limitées, soumis à du bruit, etc...) et estimer le nombre et le type d'opérations qu'ils sont capables de produire. 
 
+
 Les réseaux de neurones naturels nous offrent un tel exemple de substrat universel, dans la mesure où, à 
 travers l'ensemble des espèces animales, le même substrat (un réseau de neurones communiquant via des synapses) traite  
 des signaux sensoriels variés et produit des réponses adaptées tout aussi variées. 
-{\color{Violet}
-A rappeler également : les niveaux de Marr : du substrat au modèle... et Turing bien sûr}
+%{\color{Violet}
+%A rappeler également : les niveaux de Marr : du substrat au modèle... et Turing bien sûr}
 
 Par analogie aux substrats matériels, il existe un certain nombre de substrats \emph{logiciels} dans le domaine de l'apprentissage automatique. 
-Tous les modèles de l'approche distribuée, tels qu'il se sont définis depuis le perceptron [CITATION], reposent sur
+Tous les modèles de l'approche distribuée, tels qu'il se sont définis depuis le perceptron \cite{Rosen58}, reposent sur
 une notion implicite de ressource limitée, qui se traduit en particulier par un ``choix'' effectué par le
 concepteur sur le nombre de neurones à mettre dans la couche cachée.
-Une définition quantitative populaire de l'expressivité d'un tel substrat est la dimension de Vapnik-Chervonenkis [CITATION], qui représente donc le caractère 
+Une définition quantitative populaire de l'expressivité d'un tel substrat est la dimension de Vapnik-Chervonenkis \cite{Vap95}, qui représente le caractère 
 plus ou moins complexe d'un classifieur, en terme de nombre de pivots utilisé pour
 séparer les données. 
 
 L'encodage est le processus par lequel une classe a priori illimitée de signaux d'entrée sera traduit sous la forme d'un patron d'activité similaire,
 ce patron étant le reflet, au sein du substrat, de cette classe de signaux. 
-L'illustration la plus caractéristique d'un tel processus d'encodage est celle des réseaux de Kohonen [CITATION] pour lesquels un nombre fixé de centres mobiles 
+L'illustration la plus caractéristique d'un tel processus d'encodage est celle des réseaux de Kohonen \cite{KOHONEN} pour lesquels un nombre fixé de centres mobiles 
 vont servir à encoder la distribution des entrées. Le substrat ``codant'' est caractérisé par un réseau de noeuds liés 
 par des relations de voisinage. L'encodage permet ainsi de regrouper/traduire la similarité des données d'entrée
 par le degré de voisinage des noeuds dont elles suscitent l'activation.  
 On trouve dans cette même famille de réseaux constitué d'une couche de lecture et d'une couche d'encodage
-le modèle ART de Grossberg [CITATION] qui ajoute à son modèle la possibilité de recrutement de
+le modèle ART de Grossberg \cite{ART98} qui ajoute à son modèle la possibilité de recrutement de
 nouveaux noeuds (apportant à son substrat une expressivité non-bornée mais limitée par la dimension 
 de la couche d'entrée).
 
 Néanmoins, l'expressivité d'un substrat ne se limite pas au nombre de symboles. Elle repose également sur la nature (la ``qualité'')
 des opérations (et des transformations) qui peuvent prendre place dans le substrat. 
-L'exemple des réseaux de Hopfield [CITATION] offre ainsi un éclairage différent sur l'expressivité d'un substrat en mettant en 
+Par exemple, l'existence d'un processus de pattern matching avec seuil conditionne la perception du monde sous forme de 
+transitions brusques et de relaxations vers des attracteurs.
+L'existence d'un modèle linéaire conditionne la perception du monde sous la forme de reponse linéaire (asservissement) à l'erreur de prédiction.
+L'existence de delais conditionne la perception des causalités temporelles etc. 
+
+L'exemple des réseaux de Hopfield \cite{Hop82} offre ainsi un éclairage différent sur l'expressivité d'un substrat en mettant en 
 avant le caractère distribué (non-local) de l'activité. Contrairement à l'idée classique d'un noeud comme unité d'expression 
 (par exemple unité de séparation dans le cas des classifieurs, unité de description dans le cas des cartes auto-organisées etc.), 
 la capacité du substrat est vue sous l'angle du nombre
@@ -929,13 +961,13 @@ dynamique décrit par les poids (arêtes) du réseau.
 La capacité s'exprime ici en nombre de \emph{modes} (configurations atteignables) et non en nombre de noeuds/vecteurs supports etc.
 Si la capacité se trouve en principe augmentée
 d'un facteur exponentiel ($2^N$ configurations distribuées possibles), la capacité effective est en pratique beaucoup plus réduite, 
-se limitant à un nombre de modes (attracteurs) distincts en $O(N)$, c'est à dire de l'ordre du nombre de noeuds [CITATIONS].
+se limitant à un nombre de modes (attracteurs) distincts en $O(N)$, c'est à dire de l'ordre du nombre de noeuds \cite{Amit1987,Tso88}.
 La nature des opérations réalisables par le substrat est également différent puisqu'il s'agit principalement ici d'une
 dynamique de relaxation adaptée à des opération de complétion et d'interpolation de données manquantes, implémentant un
 mécanisme de mémoire dite ``auto-associative''. 
  
 Le champ des possibilités d'expression varie fortement d'un modèle à l'autre. Ainsi, la théorie du 
-``Champ neuronal dynamique'' [CITATION] décrit un substrat à support  
+``Champ neuronal dynamique'' \cite{Ama77B} décrit un substrat à support  
 continu (un champ et non plus un réseau de noeuds discrets), dont la dynamique spatio-temporelle est décrite par un jeu
 d'équation aux dérivées partielles. Ce modèle propose une description explicitement spatialisée
 du substrat, et porte en lui une capacité de description (ou de reproduction) 
@@ -944,16 +976,16 @@ le substrat ayant la puissance du continu.
 
 {\color{Violet} L'approche ``Multi-scale''}
 
-L'approche ``Multi-échelle'' [CITATION] consiste à considérer un substrat dont les variables d'état évoluent (ou peuvent être décrites) 
+L'approche ``Multi-échelle'' \cite{WILSON89,Varela2001} consiste à considérer un substrat dont les variables d'état évoluent (ou peuvent être décrites) 
 selon différentes échelles spatiales et temporelles, chaque échelle de description étant explicative du comportement observé à l'échelle
 supérieure (par des variables dites ``macroscopiques''). L'idée est ici encore d'établir des passerelles entre un substrat constitué d'éléments 
 microscopique caractérisés par des processus rapides localisés et un environnement
 physique caractérisé par des processus macroscopiques lents et spatialement étendus.
 
 L'exemple des réseaux de neurones artificiels nous offre ainsi un équivalent logiciel de l'idée de substrat matériel
-(tout réseau de neurone étant néanmoins en principe implémentable sous forme de hardware). Cette démarche est 
-celle que nous poursuivons ici en passant en revue un certain nombre de substrats logiciels neuro-inspirés 
-en vue d'étudier leurs capacités de traitement et d'expression.
+(tout réseau de neurone étant néanmoins en principe implémentable sous forme de hardware). J'utilise cet éclairage
+pour passer en revue les  substrats neuro-inspirés étudiés dans le cadre de ma thèse et après,
+sous l'angle donc de leurs capacités de traitement et d'expression.
 
 Le fil rouge de notre approche est celui des réseaux de neurones à connectivité aléatoire, permettant de traiter de manière formelle et de quantifier 
 le caractère extrêmement inhomogène des réseaux de neurones naturels~: variété des types cellulaires, variété des délais de
@@ -962,9 +994,18 @@ A travers l'analyse de la distribution des patrons de connexions, de la distribu
 nous posons la question du rôle de ces distributions dans la formation de patrons d'activité (ou modes) variés, supports potentiels
 d'opérations cognitives. 
 
-Notre approche consiste donc à analyser les capacités d'un réseau de neurones en tant que support potentiel d'opérations cognitives. 
-Dans ces différentes études, nous n'abordons pas la question de la plasticité, ne regardons pas l'encodage ou le rappel effectif des signaux. 
-Notre approche se concentre plutôt sur la notion de régime dynamique et d'\emph{attracteurs}. L'idée principale est que notre substrat
+Cette étude a été entamée au milieu des années 90 au sein d'un petit groupe animé par Manuel Samuelidès, professeur à Supaéro, et Bernard Doyon, chercheur
+à l'INSERM. Les premiers réssultats portaient sur l'étude de réseaux aléatoires très simples, dont le patron de connexion
+était issu d'un tirage gaussien centré. L'étude du système dynamique issu de ce patron de connexion met en évidence
+un comportement de route vers le chaos par quasi-périodicité \cite{Doyon1993,CESSAC94}, dont le comportement à large échelle (limite
+``thermodynamique'') s'apparente à un processus aléatoire gaussien \cite{Ces95}.
+C'est au sein de cette équipe que j'ai effectué mon stage de DEA \cite{Dau95} ainsi que ma thèse \cite{Dau00}.
+
+L'approche que je mets en avant dans cette section 
+est donc l'analyse des capacités d'un réseau de neurones en tant que support potentiel d'opérations cognitives. 
+Dans ces différentes études, nous n'abordons pas la question de la plasticité, ne regardons pas les questions de communication ou de mémoire
+comme l'encodage ou le traitement effectif des signaux. 
+Notre approche se concentre sur la notion de régime dynamique et d'\emph{attracteurs}. L'idée principale est que notre substrat
 neuronal doit être capable d'exprimer différents ``modes'' de fonctionnement. Ces modes se traduisent soit par des régimes dynamiques
 variés (synchrone/asynchrone, point fixe/périodique/chaos), soit par des répartitions spatiales différenciées, appelés ``patrons d'activité''.
 Nous étudions ainsi le nombre et la variété de ces patrons d'activité, leur stabilité, leur répartition et leur résistance aux perturbations.
@@ -1004,39 +1045,39 @@ couplages $J = \{J_{i,j}\}_{i \in 1..N,j \in 1..N}$ où chaque lien $J_{ij}$ est
 
 L'indépendance entre les différents liens est une caractéristique importante, qui permet d'analyser le comportement du modèle 
 à la limite des grandes tailles, c'est à dire en faisant tendre la taille $N$ vers l'infini. Avec un \emph{scaling} des poids approprié 
-(Espérance, variance de la loi de tirage initial en $O(\frac{1}{N}$)), on peut montrer que la dynamique (déterministe) tend à la limite thermodynamique 
+(espérance, variance de la loi de tirage initial en $O(\frac{1}{N}$)), on peut montrer que la dynamique (déterministe) tend à la limite thermodynamique 
 vers un processus aléatoire, la corrélation entre les noeuds tendant vers 0. 
 
 {\color{Violet} activité intrinsèque}
 
-Les premières études sur ce  type de modèle ont été faites par Sompolinsky [CITATION] sur un système dynamique continu. 
+Les premières études sur ce  type de modèle avaient été faites par Sompolinsky \cite{Som88} sur un système dynamique continu. 
 L'analyse d'une variante à temps
-discret a été proposée par Cessac et Samuelidès [CITATIONS]. La démonstration de cette propriété (dite de ``chaos local'') a été faite 
-dans le cas discret par Moynot et Samuelides [CITATIONS].
+discret avait été proposée par Cessac et Samuelidès \cite{Ces94}. La démonstration de cette propriété (dite de ``chaos local'') a été  
+formellement achebvée, dans le cas discret, par Moynot et Samuelides \cite{Moy00a} en 2000.
 
 Le comportement d'une classe de réseaux (l'ensemble des réseaux définis par la même loi de tirage initial) peut être décrit à la limite thermodynamique par 
 des équations dites de ``champ moyen''. Ces équations définissent le processus aléatoire limite, autrement dit la dynamique temporelle de grandeurs caractéristiques comme l'activité moyenne, 
-le moments d'ordre 2 et la covariance dans le temps [CITATION]. 
+le moments d'ordre 2 et la covariance dans le temps \cite{Ces95}. 
 Les équations de champ moyen offrent ainsi une description ``macroscopiques'' de l'activité d'un réseau,
 représentative de l'activité qu'on peut attendre dans un réseau de taille finie issu d'un tirage particulier, et 
 constituent de fait un cadre d'analyse adapté à une approche ``multi-échelles''.
 
-Il est intéressant de constater que le processus stochastique limite, telle que décrit par les équations de champ moyen, 
+Il est intéressant de constater que le processus stochastique limite, tel que décrit par les équations de champ moyen, 
 a une traduction à taille finie
 sous la forme d'une activité de type chaos déterministe. L'existence d'un 
 paramètre d'ordre (le gain de la fonction de transfert des neurones) permet de reproduire, dans ces réseaux aléatoires, 
-un  comportement générique de destabilisation, appelé route vers le chaos par ``quasi-périodicité'' [CITATION Bergé Pommeau; Quoy Cessac].
+un  comportement générique de destabilisation, appelé route vers le chaos par ``quasi-périodicité'' \cite{Berger1988,Doyon1993}.
 L'existence d'une telle frontière entre l'ordre et le chaos est également prouvée à la limite thermodynamique, mais dans ce
-cas la transition se fait brutalement, avec un passage discret d'un processus de type point fixe à un processus stochastique [REF?].
+cas la transition se fait brutalement, avec un passage discret d'un processus de type point fixe à un processus stochastique \cite{Ces95}.
 Cette frontière entre ordre et chaos est par principe intéressante puisqu'elle indique le lieu
-où la variabilité des dynamiques, et donc potentiellement l'expressivité du réseau est la plus importante. 
+où la variabilité de la dynamique, et donc potentiellement l'expressivité du réseau est la plus importante. 
 
-En collaboration avec Moynot, Samuelides et Pinaud [CITATIONS], j'ai travaillé sur la définition et 
+En collaboration avec Moynot, Samuelides et Pinaud \cite{Dau99A,dauce01a}, j'ai travaillé sur la définition et 
 l'étude du comportement à taille finie d'un modèle de réseau de neurones aléatoire (RNA) multi-populations.
 
-{\bf Daucé, E., Moynot, O., Pinaud, O., Samuelides, M. and Doyon, B. (1999) Mean Field Equations reveal synchronisation in a 2-population neural network model, proc. of the 7th European Symposium On Artificial Neural Networks (ESANN'99), Verleysen, M. ed.:7-12, April 21-23, Bruges, Belgium}
+%{\bf Daucé, E., Moynot, O., Pinaud, O., Samuelides, M. and Doyon, B. (1999) Mean Field Equations reveal synchronisation in a 2-population neural network model, proc. of the 7th European Symposium On Artificial Neural Networks (ESANN'99), Verleysen, M. ed.:7-12, April 21-23, Bruges, Belgium}
 
-{\bf Daucé, E., Moynot, O., Pinaud, O. and Samuelides, M. (2001) Mean Field Theory and Synchronization in Random Recurrent Neural Networks, Neural Processing Letters 14:115-126}
+%{\bf Daucé, E., Moynot, O., Pinaud, O. and Samuelides, M. (2001) Mean Field Theory and Synchronization in Random Recurrent Neural Networks, Neural Processing Letters 14:115-126}
 
 Le point de départ consistait à modéliser et reproduire certains comportements observés dans les 
 réseaux de neurones naturels composés d'une population de neurones excitateurs et d'une population de neurones inhibiteurs.
@@ -1050,13 +1091,13 @@ A l'inverse, une configuration où l'activité intrinsèque disparait après un 
 traduit une domination de l'activité inhibitrice.
 Comme dans le cas des réseaux aléatoires simples, il existe un paramètre d'ordre correspondant au rapport entre l'influence 
 excitatrice et l'influence inhibitrice. De manière intéressante, une grande variété de comportements dynamiques peuvent être observés
-à la frontière, et entre l'extinction et l'activité soutenue, comme les oscillations synchronisées [Brunel] et/ou le chaos [VV-Sompo]. 
+à la frontière, et entre l'extinction et l'activité soutenue, comme les oscillations synchronisées \cite{brunel00} et/ou le chaos \cite{Van98}. 
 
-L'étude que nous avons présentée dans [ESANN'99, NPL 2001] étudie le comportement d'un réseau équilibré de ce type. Ce papier 
+L'étude que nous avons présentée \cite{Dau99A,dauce01a} étudie le comportement d'un réseau équilibré de ce type. Ce papier 
 étend pour la première fois le modèle de champ moyen pour le cas des réseaux à connectivité aléatoire à populations multiples
 (auquel cas les tirages aléatoires sont effectués sur des ``faisceaux d'axones'' reliant une population de neurones $p \in 1..K$ à une
 population de neurones $q \in 1..K$, où $K$ est le nombre de populations).
-Ce modèle renouvelle l'approche large-échelle classique [WILSON-COWAN] en prenant en compte l'hétérogénéité des faisceaux
+Ce modèle renouvelle l'approche large-échelle classique \cite{WILSON89} en prenant en compte l'hétérogénéité des faisceaux
 d'axones reliant différentes régions du réseau.  
 Il sert de base à la définition d'architectures neuronales fondées sur des 
 substrats à connectivité aléatoire. 
@@ -1067,7 +1108,7 @@ Multi-pop = travail de master d'O Pinaud.
 Demonstration champ moyen = O Moynot (avec généralisation à la connectivité diluée)}
 
 L'étude numérique proposée dans le papier fixe le rapport excitation/ inhibition à 1/2,
-ce qui correspond à un régime de faible activité [REFERENCES]. 
+ce qui correspond à un régime de faible activité \cite{Amit1989}. 
 Nous étudions le rôle contrasté de deux paramètres d'ordre. 
 Le premier paramètre, $J$, représente l'amplification du signal. L'augmentation
 continue de ce paramètre tend à produire une bifurcation entre un régime simple (point fixe) et une activité 
@@ -1080,8 +1121,7 @@ de bifurcation à 4 régions, comprenant un régime stationnaire de point fixe, 
 un régime d'oscillations simple, et un régime d'oscillations complexes analogue à processus stochastique cyclostationnaire,
 ce dernier régime étant à notre connaissance mis en évidence pour la première fois dans ce type de réseaux.
 
-Notre étude a donc ouvert la voie à l'étude multi-population systématique des réseaux de neurones à connectivité aléatoire,
-une des continuations principales étant le papier [CESSAC - FAUGERAS]
+Notre étude a donc ouvert la voie à l'étude multi-population systématique des réseaux de neurones à connectivité aléatoire \cite{Faugeras2009,Cabana2013} 
 
 {\color{Violet}
 [O. Faugeras, J. Touboul, B. Cessac, “A constructive mean field analysis of multi population neural networks with random synaptic weights and stochastic inputs”, Front. Comput. Neurosci. (2009) 3:1.
@@ -1107,39 +1147,39 @@ se comportent comme des processus stochastique indépendants sur chaque neurone.
 
 Une manière simple de caractériser le comportement non-linéaire (ou critique) d'une population de neurones consiste à introduire de petites perturbations
 dans la dynamique du réseau. 
-Une étude proposée dans le 3ème chapitre de l'ouvrage que nous avons co-dirigé avec Agnès Guillot [REF] illustre bien le propos.
+Une étude proposée dans le 3ème chapitre de l'ouvrage que nous avons co-dirigé avec Agnès Guillot \cite{Beslon2002} illustre bien le propos.
 Cette étude porte sur le modèle le plus simple, un réseau récurrent aléatoire comportant une seule population. Le paramètre d'amplification
 choisi place le réseau dans une région chaotique, proche de la transition vers le cycle limite.  
 Le réseau est soumis à une stimulation extérieure quasi stationnaire, évoluant à une vitesse très lente par rapport à la vitesse de 
-mise à jour du réseau. Une succession de régimes quasi-stationnaires séparés par des transitions brusques est mis en évidence.
+mise à jour du réseau. Une succession de régimes dynamiques distincts, séparés par des transitions brusques, est mis en évidence.
 Chaque régime est caractérisé par un patron d'activité différent, qui se manifeste par la présence de fréquences caractéristiques
 distinctes dans le spectre de Fourier du signal moyen.  
 
-Une autre étude, présente dans mon manuscrit de thèse [REF], développe l'analyse spatio-temporelle des patrons d'activité de type cycle limite.
-L'existence d'une chaîne d'activation spontanée (synfire chain [CITATION]) est mise en évidence par analyse de la matrice de covariance. 
-Différents modes (patrons d'activation spatio-temporels) se développent spontanément lorsque le réseau est soumis à des entrées statiques différentes [SAB 2000].
+Une autre étude, présente dans mon manuscrit de thèse \cite{Dau00}, développe l'analyse spatio-temporelle des patrons d'activité de type cycle limite
+ou chaos léger.
+L'existence d'une chaîne d'activation spontanée (synfire chain \cite{ABELES91}) est mise en évidence par analyse de la matrice de covariance des signaux individuels. 
+Différents modes (patrons d'activation spatio-temporels) se développent spontanément lorsque le réseau est soumis à des entrées statiques différentes \cite{Dau01b}.
 Enfin, l'analyse de la réponse du réseau à une stimulation périodique indique une ``bande passante'' de quelques unités temporelles, le réseau étant capable 
 de ``capturer'' (et donc d'amplifier) des signaux dont la période varie entre 2 et 10\--12 unités de temps
-(autrement dit à sélectionner un mode dynamique périodique interne compatible avec la période imposée) [SAB2000].
-
+(autrement dit à sélectionner un mode dynamique périodique interne compatible avec la période imposée) \cite{Dau01b}.
 Le comportements spontané des réseaux récurrents aléatoires est par ailleurs à la base du mécanisme de perception par feedback positif
-présentés dans la section \ref{sec:}. 
+présentés dans la section \ref{sec:FPos}. 
 
-L'intérêt du comportement spontané des réseaux récurrents à connnectivité aléatoires a été largement confirmé depuis. 
-Une étude plus systématique de la réponse linéaire dans les réseaux récurrents [CESSAC-SAMUELIDES EPJ-ST] met en évidence 
+L'intérêt du comportement spontané des réseaux récurrents à connectivité aléatoires a été largement confirmé depuis. 
+Une étude plus systématique de la réponse linéaire dans les réseaux récurrents \cite{Cessac2007} met en évidence 
 l'existence de modes et de résonances extrêmement variés lorsque le signal est applique sur un seul noeud du réseau (micro-stimulation). 
 Les modèles de ``réservoir
-computing'' proposés par l'équipe de Wolfgang Maas [CITATION] reposent sur le même principe : un réseau de neurones aléatoire récurrent soumis à un signal
+computing'' proposés par l'équipe de Wolfgang Maas \cite{Maass2002} reposent sur le même principe : un réseau de neurones aléatoire récurrent soumis à un signal
 spatio-temporel est capable de conserver une mémoire de quelques unités de temps utilisables pour produire des classifieurs sensibles
 au contexte temporel.
 
 {\color{Violet} Image du papillon-chenille.}
 
 Ce modèle de réseau à connexions aléatoire offre un exemple de substrat dont la caractéristique principale est la \emph{capture dynamique}, reposant
-sur des transformatios morphologiques des patrons d'activités (changements des distributions spatiales et temporelles des activités). Bien que reposant sur
+sur des transformations morphologiques des patrons d'activités (changements des distributions spatiales et temporelles des activités). Bien que construits sur
 un tirage aléatoire arbitraire, ils offrent donc un bon support pour le traitement (et la transformation) des signaux temporels. 
 Faire reposer le traitement sur un tirage arbitraire rejoint d'ailleurs un certain nombre de techniques de plongement (ou projection) aléatoires
-utilisées en apprentissage automatique [COMPRESSED SENSING, EXTREME LEARNING].
+utilisées en apprentissage automatique, tels le ``compressive sensing'' \cite{Baraniuk2007} ou l'architecture ``extreme learning'' \cite{Huang2006}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1148,46 +1188,92 @@ utilisées en apprentissage automatique [COMPRESSED SENSING, EXTREME LEARNING].
 
 \subsection{Codage topographique}
 
-La vocation des modèles de champ neuronal est principalement la modélisation d'un substrat neuronal spatialisé vu à ``large échelle'' 
+La vocation des modèles de champ neuronal \cite{Ama77B} est principalement la modélisation d'un substrat neuronal spatialisé vu à ``large échelle'' 
 (continuum d'activité sur la surface corticale).
 Ce modèle partage avec le réseau de Hopfield la capacité à conserver et entretenir 
 une activité autonome indépendamment de son signal d'entrée. 
 Il implémente néanmoins des opérations tout à fait spécifiques et intéressantes du point de vue computationnel. 
-Un réseau de type champ neuronal implémente simultanément une ``mémoire de travail'' (capacité à conserver la trace d'une stimulation passée), et 
-un mécanisme de traitement (ici résumé à quelques opérations simples : émergence, extinction, fusion, poursuite) [REF SCHONER]. 
+Un champ neuronal implémente simultanément une ``mémoire de travail'' (capacité à conserver la trace d'une stimulation passée), et 
+un mécanisme de traitement (ici résumé à quelques opérations simples : émergence, extinction, fusion, poursuite) \cite{Schoner95}. 
 La combinaison de ces deux compétences (mémoire et calcul)
-au sein d'une architecture unique fait en principe du neural field un environnement computationnel complet, bien 
-que les références manquent encore sur la question [REF?]. 
+au sein d'une architecture unique fait en principe du neural field un environnement computationnel complet \cite{Siegelmann1999,Maclennan1999,Potthast2013}. 
 
-{\color{Violet} une seule référence sur la question : \bf Universal neural field computation
-Peter beim Graben, Roland Potthast}
+La question adressée par le modèle publié en 2004 \cite{Dau04} est celle de l'implémentation de ce modèle sur un support composé
+d'unités discrètes.
+%, comme l'activité dite ``persistante'' ainsi qu'une bonne sensibilité au signal d'entrée (switch). 
+Sur les modèles jusqu'alors proposés, dans un cas l'activité focale était soit uniquement réactive \cite{Han96},  
+dans l'autre cas,
+l'activité persistante reposait sur un mécanisme de bistabilité cellulaire \cite{Cam98} ou encore sur une
+plasticité synaptique à court terme \cite{Com00}. 
+Notre modèle est une des premières implémentations d'un champ neuronal sur support discret reposant sur des mécanismes de réseau
+uniquement.
 
-{\bf 2003-2004} 
+Le papier étend le modèle récurrent aléatoire \cite{Dau01a} à des connectivités
+plus complexes, incluant des délais variables et les connexions dépendantes de la distance. 
+Un des apports du papier est de montrer 
+la stabilité de certains indicateurs (comme le niveau de réponse moyen) à travers les modèles. 
+Par exemple, l'introduction de délais différents entre les populations excitatrices et les populations inhibitrices conduit 
+à des changements qualitatifs (régime d'oscillations lentes synchronisées) mais non quantitatif (même réponse
+moyenne). 
 
-- Introduction d’un neural field. Memoire à court terme (=“resistance au changement”).
+L'introduction d'une connectivité dépendante de la distance opère un changement plus radical, 
+puisque l'hypothèse fondatrice du modèle (indépendance des tirages) n'est plus vérifiée, 
+et donc l'hypothèse de chaos local (indépendance des activités) n'est plus valide.
+Les unités neuronales de chaque population reçoivent des coordonnées spatiales (ici prises uniformément sur l'intervale $[-\pi,\pi]$).
+Le tirage des poids synaptiques devient dépendant de la distance qui sépare deux unités.
+La valeur moyenne d'un poids est identique à celle du modèle précédent, 
+mais les noeuds les plus proches ont en espérance une valeur
+plus forte, et les noeuds les plus éloignés une valeur plus faible 
+(la distribution des poids synaptiques repose sur le produit
+entre la distribution uniforme initiale et un noyau gaussien conservatif).
+Le mécanisme du champ neuronal, qui se caractérise par une connectivité majoritairement excitatrice à 
+courte distance, et inhibitrice à longue distance, est implémenté à l'aide de ces noyaux gaussiens 
+tels que le rayon du noyau des liens excitateurs est plus faible que celui des liens inhibiteurs.  
 
-{\bf Daucé, E. (2004) Short term memory in recurrent networks of spiking neurons, Natural Computing 3:135-157}
+Le papier montre alors que les propriétés des réseaux aléatoires récurrents et celles des champs neuronaux s'additionnent dans ce modèle,
+puisqu'on peut mettre en évidence sur ce substrat la présence simultanée d'une activité de fond chaotique,
+de grandes oscillations lentes et de foyers d'activité de type champ neuronal. 
+Comme dans le cas du champ neuronal, l'activité persistante repose sur l'activité excitatrice locale, avec 
+un effet de lissage lié à l'hétérogénéité des connexions. Les oscillations lentes reposent comme précédemment
+l'existence de délais différentiés. Ce sont ces oscillations qui donnent au substrat 
+la capacité de répondre à des changements de faible amplitude (augmentent donc la sensibilité 
+du substrat au signal d'entrée). Il en résulte une implémentation d'un champ neuronal 
+sur un substrat composé d'unités neuronales discrètes.
 
-- “pseudo”-spikes (sans leak)
+De manière plus générale, ce modèle nous fournit un premier exemple, dans le cadre des réseaux récurrents aléatoires,
+de l'effet de mémoire produit par une boucle de rétroaction positive. La rétroaction positive, et les effets de mémoire qu'elle
+permet, sont probablement un composant essentiel des opérations réalisées dans le cerveau \cite{Compte2006}.    
+Ce mécanisme  dit de ``réverbération'' \cite{Heb49} a été modélisé de longue date \cite{Wilson1972, Ama77B, Hop82},
+mais reste peu utilisé (sous-utilisé?) dans le domaine des architectures cognitives. On note quand même 
+un contexte applicatif proposé par G. Schöner en robotique mobile \cite{Schoner95}.
 
-- dynamic neural field
+A mon sens, le manque de développements applicatifs vient probablement d'une difficulté pratique à doser le
+seuil de réponse aux changements de l'environnement. Avec un seuil de réponse trop élevé, l'effet de mémoire s'avanouit. Avec 
+un seuil de réponse trop faible, le réseau devient résistant au changement (autrement dit ignore le signal d'entrée).
+Le réglage de ce seuil dépend du modèle choisi et du problème posé.
+Plus généralement, les mécanismes de feedback positif introduisent une dose d'autonomie dans les architectures neuronales, 
+rendant la réponse du réseau dépendante du contexte. Cet effet de réponse contextuelle (ou de mémoire) offre bien sûr une plus
+grande panoplie de comportements, mais augmente la difficulté d'analyse du controleur (cadre non-Makovien),
+et donc de la connaissance des risques de dysfonctionnement. Cette difficulté est encore augmentée lorsqu'on introduit
+un mécanisme de plasticité, ce que nous verrons dans la prochaine partie \ref{sec:FPos}.
+
+Notre modèle propose une passerelle simple entre les modèles de champ neuronal continus et de
+réseaux de neurones à état et à temps discret. Il s'étend facilement à des réseaux de neurones intègre-et-tire (non publié).
+L'activité produite repose néanmoins essentiellement sur la fréquence de tir des neurones (et non sur l'ordre de tir
+ou la co-activation). Les propriétés obtenues ne sont donc pas différentes qualitativement de celles qu'on 
+obtient avec des modèles à fréquence de décharge.
+Ce modèle a été utilisé en tant que couche perceptive dans une architecture de contrôle \cite{Dau04b}. 
+D'autres modèles visant une plus grande fidélité aux processus biologiques 
+étudient l'effet de délais variables et de patrons de connexion hétérogènes (voir par exemple \cite{Roxin2005}),
+et plus généralement l'étude de l'interaction entre délais variables, topographie et dynamique reste un sujet d'actualité 
+en neurosciences computationnelles \cite{Voges2012,Lundqvist2012}.
 
 
-{\bf 2007}
+{\color{Violet}{\bf 2007}
 
 - MAPS : idée de codage topographique (autrement dit Kernel encoding). 
+}
 
-
-Field computation
-
-Expressivité discrète - continue
-
-La structure (ou l'expressivité) du substrat conditionne/caractérise la manière dont l'environnement est perçu 
-(attention raisonnemnt qui se mord la queue). 
-Par exemple, l'existence d'un processus de pattern matching avec seuil conditionne la perception du monde sous forme de transitions brusques et de relaxations
-vers des attracteurs.
-L'existence d'un modèle linéaire conditionne la perception du monde sous la forme de reponse linéaire (asservissement) à l'erreur de prédiction.
-L'existence de delais conditionne la perception des causalités temporelles. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1243,7 +1329,7 @@ connectivité structurelle / fonctionnelle
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Modèles de la perception à feedback positif}
+\section{Modèles de la perception à feedback positif} \label{sec:FPos}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1393,6 +1479,15 @@ SYNCHRONISATION (Information mutuelle acausale/simultanée = co-évolution).
 \section{Bruit générateur/bruit destructeur dans les couplages sensori-moteurs}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Intro : la logique du vivant : processus de fabrication qui construit les briques permettant de réparer/entretenir  
+le processus de fabrication lui-même.
+Le processus n'a pas d'autre finalité que l'entretien indéfini de lui-même (dans le cadre d'un système fermé ``poreux'' loin
+de l'équilibre, avec des intrants (nutriments, énergie) et des déchets).
+Si la cognition s'incarne dans le vivant, elle ne peut avoir de fonction autre que d'augmenter la robustesse du
+procesus qui lui donne naissance. 
+
+Questino : ``où'' est prise la décision? ``Lieu'' de la décision à l'interface entre intérieur et extérieur.
 
 Mon apport :
 
@@ -1669,5 +1764,9 @@ A l'inverse, la question de l'apprentissage est restée présente dans le domain
 La question de l'apprentissage  devient la question de construire des programmes (des automates) capables de se modifier, de s'amender pour mieux répondre aux sollicitations
 de l'environnement. Cette question étant posée (comment modifier le programme sans intervention humaine), le formalisme des réseaux de neurones et du calcul distribué 
 s'est révélé le plus apte à traiter la question --> le perceptron. 
+
+\bibliographystyle{unsrt}%{apacite}
+\bibliography{biblio}
+
 
 \end{document}
