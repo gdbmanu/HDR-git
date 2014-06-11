@@ -1353,15 +1353,16 @@ Ainsi, le mécanisme de réseau produisant ces régimes d'oscillations lentes n'
 au type de cellules utilisées (à sortie discrète ou continue), mais comme reposant plutôt 
 sur les fréquences moyennes, le taux d'amplification et les délais de transmission entre les différentes populations.
 
-Par ailleurs, la présence de séquences d'activation spatio-temporelles (dites ``groupes polychrones'') 
+Cependant, la présence de séquences d'activation spatio-temporelles (dites ``groupes polychrones''), 
 plus spécifiques aux modèles à spikes, telles que postulées par [IZHIKEVICH] en tant
-qu'unités opérationnelles élémentaires, sont exploités comme supports d'une mémoire à court terme dans 
-\cite{Dau06,Hen07}.
-
-
-
-
-
+qu'unités opérationnelles élémentaires, peuvent en partie retrouvées dans nos réseaux aléatoires.
+L'étude récente d'un modèle utilisant des unités neuronales un peu plus détaillées \cite{Dau14a} 
+montre que la réponse de
+population à des stimuli-spatio temporels suit une séquence reproductible (mais bruitée) qui 
+peut être amplifiée par la plasticité.
+Cette reproductibilité dans le temps et dans l'espace de la réponse du réseau au
+signal d'entrée peut expliquer les effets de mémoire à court terme mis en évidence dans
+les réseaux aléatoires à spikes \cite{Dau06,henry07}, sur le principe du ``réservoir'' vu précédemment.
 
 
 {\bf 2008}
