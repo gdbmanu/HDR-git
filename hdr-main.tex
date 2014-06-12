@@ -1308,7 +1308,7 @@ L'action et la contre-action, c'est à dire l'équilibre dynamique entre
 deux forces opposées, est au coeur des opérations réalisées par le système nerveux. 
 
 Les neurones à potentiel d'action disposent en principe d'une expressivité 
-supérieure à celle des neurones à fréquence de décharge [CITATIONS -- Izhikevich, etc..].
+supérieure à celle des neurones à fréquence de décharge \cite{Izh06}.
 Ils offrent des possibilités d'opérations (tels le codage par rang, la polychronisation,...)
 ainsi qu'un support pour un traitement parallèle distribué (``multiplexage'') par décalage de phase
 ou par bande de fréquences [CITATIONS].
@@ -1327,7 +1327,67 @@ Les changements principaux sont donc : sortie discrète (spikes), mise à jour p
 (et non plus équation aux différences finies), prise en compte explicite des délais et des constantes temporelles,
 spécialisation des neurones (excitation/inhibition).
 Ce projet collaboratif a abouti à la publication d'un numéro spécial dans la revue ``European Physical Journal \---
-Special Topics'' \cite{Dau07b}
+Special Topics'' \cite{Dau07b}.
+De ces collaborations, 
+
+{\color{Violet}
+Fred Henry : Master en 2005.
+
+bourse these : 
+juin 2005 Ste Marguerite (initiation de neurocomp)
+
+These Fred : pb : le lien avec le mouvement?
+
+* 2005-2006 * 
+
+oct. 2005 NOLTA - 
+
+jan 2006 institut H Poincaré - 
+
+juillet 2006 CNS à Edinbourg (modèle Gaussien du Master)
+
+* 2006-2007 *
+
+Dyva en sept 2006 présenté par Fred - idées orientées neural field + colliculus + LIF simple
+
+oct. 2006 premiere conf. Neurocomp - 
+idées RL + couche récurrente intermédiaire. 
+Policy Gradient (Bartlett) = local changes = Hebb/anti-Hebb
+Idée d'interversion bruit/signal dans les modèles à 2 couches (Gaussiennes centrées?).
+Illustration avec simu Khepera.
+
+juin 2007 - NIPS (refusé). 
+modèle LIF/SRM à courant (avec free mb. potential h). 
+- Connexions gaussiennes centrées . DELAI FIXE (10 ms)
+STDP --> activité périodique non synchronisée
+
+papier EPJ-ST : modèle RL Hebb/anti-Hebb avec terme (1-H) (comme SAB) sur liens excitateurs - separation exc/inh.
+
+* 2007-2008 *  
+
+Dyva en sept 2007 (signé Daucé) - poursuite approche RL-PG appliquée aux saccades.
+(Fred ne participe pas à ce projet)
+
+ESANN avril 2008 : idem NIPS sauf DELAI VARIABLE (Poisson moy. 10 ms). STDP produit oscillations lentes.
+
+Tentative publi dans neurocomputing - echec. (calcul plus fin de la ``loading capacity'' - !! sur ordi Centrale only)
+
+
+* ATER Lille 2008-2009 *
+
+oct. 2008 - 2eme Neurocomp. Distinction input courant/input potentiel. differents regimes sont obtenus selon le type
+d'input / les parametres internes.
+
+juillet 2009 : CNS - séparation excitateurs/inhib. Plasticité sur exc. seulement. delais variables. effet 
+stdp sur delais.
+
+septembre 2009 : suite projet RL. 
+
+ACI 'temps et cerveau' va de 2002 à 2007 (5 ans???)
+
+MAPS commence en septembre 2007 (le dossier a été monté en janvier-février 2007)
+}
+
 
 Le principe qui, dans notre cas, unifie l'approche des neurones à sortie continue 
 et des neurones à sortie discrète est présenté dans \cite{Dau07}. Il repose sur 
@@ -1357,7 +1417,7 @@ au type de cellules utilisées (à sortie discrète ou continue), mais comme rep
 sur les fréquences moyennes, le taux d'amplification et les délais de transmission entre les différentes populations.
 
 Cependant, la présence de séquences d'activation spatio-temporelles (dites ``groupes polychrones''), 
-plus spécifiques aux modèles à spikes, telles que postulées par [IZHIKEVICH] en tant
+plus spécifiques aux modèles à spikes, telles que postulées par \cite{Izh06} en tant
 qu'unités opérationnelles élémentaires, peuvent en partie retrouvées dans nos réseaux aléatoires.
 L'étude récente d'un modèle utilisant des unités neuronales un peu plus détaillées \cite{Dau14a} 
 montre que la réponse de
