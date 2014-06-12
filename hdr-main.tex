@@ -1285,8 +1285,90 @@ en neurosciences computationnelles \cite{Voges2012,Lundqvist2012}.
 
 \subsection{Extension aux populations de neurones à spikes}
 
-{\bf 2008}
+Le signal produit par les neurones biologiques n'est pas une grandeur continue. Les neurones
+ont un comportement fortement non-linéaire, caractérisé par le franchissement d'un seuil d'activation.
+La cellule neuronale intègre les multiples potentiels post-synaptiques issus de ses synapses afférentes
+et émet un bref potentiel d'action lorsque le potentiel total atteint le seuil d'activation (on
+dit que la membrane se dépolarise).
+Après une brève période de repos (``remise à zéro''), le neurone recommence à intégrer les signaux entrants etc.
+Le système nerveux est donc caractérisé par l'émission et la réception de signaux discrets, qui présentent 
+à première vue une certaine analogie avec le matériel électronique, 
+à ceci près qu'il n'existe pas d'horloge centrale pour cadencer les opérations.
+C'est ce caractère discret des opérations neuronales qui avait inspiré les premiers modèles de neurones,
+au sein desquels les unités neuronales se comportaient comme des portes logiques \cite{MCu43}, par analogie avec 
+les circuits logiques des architectures informatiques.
 
+Les neurones biologiques sont également caractérisés par le type de neurotransmetteurs qu'ils émettent
+au niveau des synapses de leur arborisation terminale. On distingue les neurones inhibiteurs produisant des
+synapses GABAergiques et les neurones excitateurs produisant des synapses excitatrices variées 
+(glutamate, acétylcholine, dopamine, ...). 
+L'action synaptique inhibitrice est une ``contre-action'' qui vient s'opposer
+à l'effet des synapses excitatrices.
+L'action et la contre-action, c'est à dire l'équilibre dynamique entre
+deux forces opposées, est au coeur des opérations réalisées par le système nerveux. 
+
+Les neurones à potentiel d'action disposent en principe d'une expressivité 
+supérieure à celle des neurones à fréquence de décharge [CITATIONS -- Izhikevich, etc..].
+Ils offrent des possibilités d'opérations (tels le codage par rang, la polychronisation,...)
+ainsi qu'un support pour un traitement parallèle distribué (``multiplexage'') par décalage de phase
+ou par bande de fréquences [CITATIONS].
+Un des enjeux connus est la possibilité d'émuler un mécanisme de synchronisation/coordination 
+longue distance supposé à l'oeuvre dans le cerveau pour l'integration multimodale \cite{Rod99}.
+
+Mes contributions dans ce domaine portent sur l'extension et la généralisation des modèles
+récurrents aléatoires au cas des réseaux de neurones à potentiels d'action ainsi qu'aux 
+patrons de connectivité séparant clairement neurones excitateurs et neurones inhibiteurs.
+Ce travail a été initié dans le cadre du programme de collaboration de l'ACI en neurosciences
+intégratives et computationnelles ''temps et cerveau'', projet ``DYNN'' 
+(Dynamique des réseaux de neurones artificiels
+biologiquement plausibles)
+\cite{Sam07}.
+Les changements principaux sont donc : sortie discrète (spikes), mise à jour par equation différentielle 
+(et non plus équation aux différences finies), prise en compte explicite des délais et des constantes temporelles,
+spécialisation des neurones (excitation/inhibition).
+Ce projet collaboratif a abouti à la publication d'un numéro spécial dans la revue ``European Physical Journal \---
+Special Topics'' \cite{Dau07b}
+
+Le principe qui, dans notre cas, unifie l'approche des neurones à sortie continue 
+et des neurones à sortie discrète est présenté dans \cite{Dau07}. Il repose sur 
+un modèle de neurone intègre-et-tire normalisé à résolution temporelle variable. Le passage du neurone 
+discret ``à fuite'' au neurones binaires (McCullogh et Pitts), puis au neurone à sortie continue est obtenu 
+par simple variation du pas d'intégration du schéma d'Euler de l'équation différentielle qui définit le neurone.
+Il en ressort une unification des modèles à travers les échelles temporelles où les neurones 
+intègre-et-tire représentent une résolution de l'ordre de la milliseconde, les neurones binaires une résolution
+de l'ordre de la dizaine de millisecondes et les neurones à sortie continue une résolution de l'ordre de la centaine
+de millisecondes.
+
+Les architectures à populations excitatrices et inhibitrices ``équilibrées'' présentent, 
+dans les mêmes gammes de paramètres que précédemment, 
+des comportements de population très similaires.
+Ainsi, les régimes d'oscillations lentes synchronisées
+se retrouvent également dans ces modèles. 
+Des transitions de phase sont observables entre
+différents régimes dynamiques sous l'effet de la variation de certains paramètres d'ordre, 
+ou sous l'effet de la plasticité synaptique \cite{Hen08,Hen08B,Henry09}. 
+Le choix de résolutions temporelle et spatiale variées permet d'estimer les éléments
+structurels communs aux différents modèles indépendamment du niveau de résolution (et, 
+de façon complémentaire, d'identifier les éléments structurels spécifiques à un niveau de 
+résolution spatial ou temporel donné, et/ou d'estimer les limites d'expressivité des modèles 
+à basse résolution).
+Ainsi, le mécanisme de réseau produisant ces régimes d'oscillations lentes n'apparait pas conditionné 
+au type de cellules utilisées (à sortie discrète ou continue), mais comme reposant plutôt 
+sur les fréquences moyennes, le taux d'amplification et les délais de transmission entre les différentes populations.
+
+Cependant, la présence de séquences d'activation spatio-temporelles (dites ``groupes polychrones''), 
+plus spécifiques aux modèles à spikes, telles que postulées par [IZHIKEVICH] en tant
+qu'unités opérationnelles élémentaires, peuvent en partie retrouvées dans nos réseaux aléatoires.
+L'étude récente d'un modèle utilisant des unités neuronales un peu plus détaillées \cite{Dau14a} 
+montre que la réponse de
+population à des stimuli-spatio temporels suit une séquence reproductible (mais bruitée) qui 
+peut être amplifiée par la plasticité.
+Cette reproductibilité dans le temps et dans l'espace de la réponse du réseau au
+signal d'entrée peut expliquer les effets de mémoire à court terme mis en évidence dans
+les réseaux aléatoires à spikes \cite{Dau06,henry07}, sur le principe du ``réservoir'' vu précédemment.
+
+
+{\bf 2008}
 - modèles à 2 couches (strictly excitatory/inhibitory). 
 
 {\bf 2009}
