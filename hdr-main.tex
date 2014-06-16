@@ -1107,7 +1107,7 @@ substrats à connectivité aléatoire.
 Multi-pop = travail de master d'O Pinaud.
 Demonstration champ moyen = O Moynot (avec généralisation à la connectivité diluée)}
 
-L'étude numérique proposée dans le papier fixe le rapport excitation/ inhibition à 1/2,
+L'étude numérique proposée dans le papier fixe le rapport excitation/inhibition à $\frac{1}{2}$,
 ce qui correspond à un régime de faible activité \cite{Amit1989}. 
 Nous étudions le rôle contrasté de deux paramètres d'ordre. 
 Le premier paramètre, $J$, représente l'amplification du signal. L'augmentation
@@ -1317,8 +1317,8 @@ ou par bande de fréquences [CITATIONS].
 Un des enjeux connus est la possibilité d'émuler un mécanisme de synchronisation/coordination 
 longue distance supposé à l'oeuvre dans le cerveau pour l'integration multimodale \cite{Rod99}.
 
-Ce travail a été initié dans le cadre du programme de collaboration de l'ACI en neurosciences
-intégratives et computationnelles ''temps et cerveau'', projet ``DYNN'' 
+Le travail sur les neurones à impulsion a été initié dans le cadre du programme de collaboration de l'ACI en neurosciences
+intégratives et computationnelles ``temps et cerveau'', projet ``DYNN'' 
 (Dynamique des réseaux de neurones artificiels
 biologiquement plausibles) \cite{Sam07}.
 Une des questions au coeur de ce projet était la possibilité d'étendre l'analyse de champ moyen 
@@ -1349,7 +1349,8 @@ de la définition spatiale. Les divers paramètres d'ordre en jeu, à savoir le 
 le délai moyen participent à définir des architectures fonctionnelles diversifiées définies principalement par le nombre 
 et la fonction des populations en jeu, permettant de tester le comportement de certaines architectures fonctionnelles.  
 D'autres paramètres, comme la densité de connexion, le poids synaptique moyen etc.  apparaissent conditionnés aux  paramètres structurels principaux.
-En particulier, les architectures à populations excitatrices et inhibitrices ``équilibrées'' présentent, 
+
+Les architectures à populations excitatrices et inhibitrices ``équilibrées'' présentent, 
 dans les mêmes gammes de paramètres que précédemment, 
 des comportements de population très similaires.
 Les régimes d'oscillations lentes synchronisées
@@ -1364,8 +1365,8 @@ de façon complémentaire, d'identifier les éléments structurels spécifiques 
 résolution spatial ou temporel donné, et/ou d'estimer les limites d'expressivité des modèles 
 à basse résolution). 
 Ainsi, nous avons pu confirmer le caractère \emph{non spécifique} des régimes d'oscillations lentes,
-qui n'apparait pas conditionné 
-au type de cellule utilisée (à sortie discrète ou continue), mais repose plutôt 
+qui n'apparaissent pas conditionnés 
+au type de cellule utilisée (à sortie discrète ou continue), mais reposent plutôt 
 sur les paramètres et effets de réseau, comme les fréquences moyennes, le taux d'amplification et les délais de transmission entre les différentes populations.
 Les effets de réseau (de ``masses'' neuronales) apparaissent prédominants dans les réseaux récurrents aléatoires et
 les simulations à ``haute résolution'' viennent souvent confirmer des comportements déjà 
@@ -1451,7 +1452,7 @@ septembre 2009 : suite projet RL.
 ACI 'temps et cerveau' va de 2002 à 2007 (5 ans???)
 
 MAPS commence en septembre 2007 (le dossier a été monté en janvier-février 2007)
-}
+
 
 {\bf 2008}
 - modèles à 2 couches (strictly excitatory/inhibitory). 
@@ -1469,17 +1470,59 @@ Mon apport :
 - contrib. Reseaux equilibrés --> comportementdes réseaux équilibrés à la frontière
  
 On-off states?
+}
 
+\subsection{Multistabilité dans les modèles ``large échelle''}
 
-\subsection{Modèles ``large échelle''}
+L'organisation à large échelle de l'activité du cerveau reposait jusqu'à récemment sur l'étude des différentiels d'activation
+observé en imagerie fonctionnelle. L'apparition récente des techniques de tractographie par tenseurs de diffusion \cite{leBihan2001} permet d'analyser 
+la matière blanche du cerveau pour suivre la direction des  faisceaux de fibres. 
+Il est possible d'en déduire un patron de connectivité (le ``connectome'') reliant les principales régions du cortex. 
+Le patron de connectivité issu de cette analyse forme un réseau, constitué par deux matrices, l'une fournissant la distance entre les
+régions connectées, l'autre fournissant le ``poids'' de cette connexion en terme de densité de fibres.
+Ce réseau est relativement stable à travers les sujets.
+%Différents indicateurs globaux ont été proposés [CIITATIONS] dont la déviation par rapport 
+%à la moyenne vise à repérer (ou améliorer l'identifications) de pathologies [CITATIONS].
 
-La simulation de réseaux constitués de multiples populations permet de tester certaines hypothèses concernant 
-le fonctionnement à ``large échelle'' du système nerveux. 
+Le connectome offre bien sûr une ouverture incomparable sur l'architecture du cerveau, qui vient en complément
+de l'analyse des patrons d'activité observés dans l'exercice d'une tâche.
+%(les mêmes grandes autoroutes sont présentes)
+L'analyse ``structurelle'' vient donc en complément de l'analyse fonctionnelle.
+Plusieurs indicateurs ont par exemple été proposées pour distinguer les noeuds les plus centraux (les plus ``importants'')
+des noeuds périphériques. Il en résulte la mise en évidence d'un ``noyau central'' \cite{Hagmann2008}  
+qui présente des points communs avec le patron d'activité ``par défaut'' observé en imagerie fonctionnelle 
+(l'activité observée lorsque le sujet n'est pas occupé à accomplir une tâche) \cite{Raichle2001}. 
 
+Le projet ``The Virtual Brain'' (TVB) \cite{Leon2013}, porté par Viktor Jirsa, vise à combiner la connaissance anatomique et connectomique pour 
+produire des simulations de l'activité à large échelle du cerveau. Le modèle proposé repose d'une part sur la diffusion isotropique de
+l'activité électrique sur la surface corticale (de type ``Neural Field''), 
+et d'autre part la prise en compte de la connectivité longue distance. 
 
+Dans le cadre d'un travail de co-direction de la thèse de Mathieu Golos à l'Institut de Neurosciences des Systèmes, 
+j'ai contribué à une étude sur la multistablité dans les systèmes neuronaux artificiels
+construits à partir du connectome \cite{Golos2014}. Chaque noeud du réseau est identifié à une masse neuronale. 
+Partant de l'analogie avec les réseaux de Hopfield \cite{Hop82}, le but
+était d'identifier les principaux le nombre et la disposition anatomique des
+attracteurs se développant au sein d'un tel réseau.
+Nous avons étudié différentes variantes du modèle ``à réponse graduelle'' de Hopfield \cite{Hopfield1984}, 
+en changeant les caractéristiques du seuil d'activation afin de contrôle le niveau d'activation moyen.
+Ces travaux ont permis de mettre en évidence un nombre très important d'attracteurs dans certaines gammes de paramètres.
+Ainsi, en condition de ``basse température'', le nombre d'attracteurs distincts peut atteindre plusieurs milliers
+(sur un modèle comportant 998 noeuds). %cette prolifération d'attracteurs est un indicateur du caractère 
+L'analyse des ensembles d'attracteurs obtenus permet d'identifier une douzaine de ``modes'' différents, chaque
+mode correspondant à l'activation d'une région anatomique particulière. Ces modes peuvent être comparés aux modules 
+régionaux mis en évidence par une analyse purement structurelle \cite{Hagmann2008} ainsi qu'avec les composants indépendants 
+identifiés sur les signaux fMRI de l'état de repos \cite{Damoiseaux2006}.
 
-Dans le cadre d'une collaboration avec V. Jirsa, INS, M Golos, bla bla...
+L'ajout d'un terme de bruit dans l'équation de mise à jour permet de simuler une activité multistable \emph{temporellement}, 
+s'apparentant aux régimes dits de ``dynamique itinérante'' \cite{Tsuda1992,Kaneko2003},
+et dont les catactéristiques sont plus proches des signaux observés à l'état de repos. 
+Cette multistabilité temporelle conduit fréquemment le réseau vers des régimes d'activité plus simples (noeuds uniformément actifs
+ou inactifs) par dérive lente de l'activité moyenne. 
+Une multistabilité temporelle à long terme est néanmoins possible sur les modèles à ``feedback négatif global'',
+sur lesquels le niveau d'activité globale est controlé par le feedback.
 
+{\color{Violet}
 
 {\bf 2011}
 
@@ -1500,6 +1543,7 @@ DTI
 dualité covariance/causalité. 
 
 connectivité structurelle / fonctionnelle
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
