@@ -1235,7 +1235,7 @@ puisqu'on peut mettre en évidence sur ce substrat la présence simultanée d'un
 de grandes oscillations lentes et de foyers d'activité de type champ neuronal. 
 Comme dans le cas du champ neuronal, l'activité persistante repose sur l'activité excitatrice locale, avec 
 un effet de lissage lié à l'hétérogénéité des connexions. Les oscillations lentes reposent comme précédemment
-l'existence de délais différentiés. Ce sont ces oscillations qui donnent au substrat 
+l'existence de délais différenciés. Ce sont ces oscillations qui donnent au substrat 
 la capacité de répondre à des changements de faible amplitude (augmentent donc la sensibilité 
 du substrat au signal d'entrée). Il en résulte une implémentation d'un champ neuronal 
 sur un substrat composé d'unités neuronales discrètes.
@@ -1258,13 +1258,15 @@ et donc de la connaissance des risques de dysfonctionnement. Cette difficulté e
 un mécanisme de plasticité, ce que nous verrons dans la prochaine partie \ref{sec:FPos}.
 
 Notre modèle propose une passerelle simple entre les modèles de champ neuronal continus et de
-réseaux de neurones à état et à temps discret. Il s'étend facilement à des réseaux de neurones intègre-et-tire (non publié).
-L'activité produite repose néanmoins essentiellement sur la fréquence de tir des neurones (et non sur l'ordre de tir
-ou la co-activation). Les propriétés obtenues ne sont donc pas différentes qualitativement de celles qu'on 
+réseaux de neurones à état et à temps discret. 
+Il s'étend facilement à des réseaux de neurones intègre-et-tire (non publié), avec des
+%L'activité produite repose néanmoins essentiellement sur la fréquence de tir des neurones (et non sur l'ordre de tir
+%ou la co-activation). Les propriétés obtenues ne sont donc 
+propriétés peu différentes qualitativement de celles qu'on 
 obtient avec des modèles à fréquence de décharge.
 Ce modèle a été utilisé en tant que couche perceptive dans des architectures de contrôle \cite{Dau04b,Dau07}. 
 D'autres modèles visant une plus grande fidélité aux processus biologiques 
-étudient l'effet de délais variables et de patrons de connexion hétérogènes (voir par exemple \cite{Roxin2005}),
+ont étudié l'effet de délais variables et de patrons de connexion hétérogènes (voir par exemple \cite{Roxin2005}),
 et plus généralement l'étude de l'interaction entre délais variables, topographie et dynamique reste un sujet d'actualité 
 en neurosciences computationnelles \cite{Voges2012,Lundqvist2012}.
 
@@ -1292,7 +1294,7 @@ et émet un bref potentiel d'action lorsque le potentiel total atteint le seuil 
 dit que la membrane se dépolarise).
 Après une brève période de repos (``remise à zéro''), le neurone recommence à intégrer les signaux entrants etc.
 Le système nerveux est donc caractérisé par l'émission et la réception de signaux discrets, qui présentent 
-à première vue une certaine analogie avec le matériel électronique, 
+à première vue une certaine analogie avec les signaux numériques, 
 à ceci près qu'il n'existe pas d'horloge centrale pour cadencer les opérations.
 C'est ce caractère discret des opérations neuronales qui avait inspiré les premiers modèles de neurones,
 au sein desquels les unités neuronales se comportaient comme des portes logiques \cite{MCu43}, par analogie avec 
@@ -1315,20 +1317,83 @@ ou par bande de fréquences [CITATIONS].
 Un des enjeux connus est la possibilité d'émuler un mécanisme de synchronisation/coordination 
 longue distance supposé à l'oeuvre dans le cerveau pour l'integration multimodale \cite{Rod99}.
 
-Mes contributions dans ce domaine portent sur l'extension et la généralisation des modèles
-récurrents aléatoires au cas des réseaux de neurones à potentiels d'action ainsi qu'aux 
-patrons de connectivité séparant clairement neurones excitateurs et neurones inhibiteurs.
 Ce travail a été initié dans le cadre du programme de collaboration de l'ACI en neurosciences
 intégratives et computationnelles ''temps et cerveau'', projet ``DYNN'' 
 (Dynamique des réseaux de neurones artificiels
-biologiquement plausibles)
-\cite{Sam07}.
+biologiquement plausibles) \cite{Sam07}.
+Une des questions au coeur de ce projet était la possibilité d'étendre l'analyse de champ moyen 
+des réseaux  récurrents aléatoires au cas des neurones à spikes, ainsi bien sûr que d'exploiter les
+possibilités dynamiques de ces modèles pour l'apprentissage et le contrôle.
 Les changements principaux sont donc : sortie discrète (spikes), mise à jour par equation différentielle 
 (et non plus équation aux différences finies), prise en compte explicite des délais et des constantes temporelles,
 spécialisation des neurones (excitation/inhibition).
 Ce projet collaboratif a abouti à la publication d'un numéro spécial dans la revue ``European Physical Journal \---
-Special Topics'' \cite{Dau07b}.
-De ces collaborations, 
+Special Topics'' \cite{ces07b}.
+
+Mes contributions dans ce domaine portent sur l'étude des transferts d'échelle 
+entre neurones fréquentiels et neurones à potentiels d'action, à la définition de 
+patrons de connectivité séparant clairement neurones excitateurs et neurones inhibiteurs,
+et à la mise en place d'un formalisme architectural indépendant des modèles.
+Le principe qui, dans notre cas, unifie l'approche des neurones à sortie continue 
+et des neurones à sortie discrète est présenté dans \cite{Dau07}. Il repose sur 
+un modèle de neurone intègre-et-tire normalisé à résolution temporelle variable. Le passage du neurone 
+discret ``à fuite'' au neurones binaires (McCullogh et Pitts), puis au neurone à sortie continue est obtenu 
+par simple variation du pas d'intégration du schéma d'Euler de l'équation différentielle qui définit le neurone.
+Il en ressort une unification des modèles à travers les échelles temporelles où les neurones 
+intègre-et-tire représentent une résolution de l'ordre de la milliseconde, les neurones binaires une résolution
+de l'ordre de la dizaine de millisecondes et les neurones à sortie continue une résolution de l'ordre de la centaine
+de millisecondes.
+
+Les architectures multi-populations ont été approfondies à partir de l'approche par ``faisceaux d'axones'', indépendants
+de la définition spatiale. Les divers paramètres d'ordre en jeu, à savoir le taux d'amplification, le coefficient de variation, 
+le délai moyen participent à définir des architectures fonctionnelles diversifiées définies principalement par le nombre 
+et la fonction des populations en jeu, permettant de tester le comportement de certaines architectures fonctionnelles.  
+D'autres paramètres, comme la densité de connexion, le poids synaptique moyen etc.  apparaissent conditionnés aux  paramètres structurels principaux.
+En particulier, les architectures à populations excitatrices et inhibitrices ``équilibrées'' présentent, 
+dans les mêmes gammes de paramètres que précédemment, 
+des comportements de population très similaires.
+Les régimes d'oscillations lentes synchronisées
+se retrouvent également dans ces modèles. 
+Des transitions de phase sont observables entre
+différents régimes dynamiques sous l'effet de la variation de certains paramètres d'ordre, 
+ou sous l'effet de la plasticité synaptique \cite{Hen08,Hen08B,Henry09}. 
+
+Manipuler des architectires neuronales à différentes résolutions spatiales et temporelles permet d'estimer les éléments
+structurels communs aux différents modèles indépendamment du niveau de résolution (et, 
+de façon complémentaire, d'identifier les éléments structurels spécifiques à un niveau de 
+résolution spatial ou temporel donné, et/ou d'estimer les limites d'expressivité des modèles 
+à basse résolution). 
+Ainsi, nous avons pu confirmer le caractère \emph{non spécifique} des régimes d'oscillations lentes,
+qui n'apparait pas conditionné 
+au type de cellule utilisée (à sortie discrète ou continue), mais repose plutôt 
+sur les paramètres et effets de réseau, comme les fréquences moyennes, le taux d'amplification et les délais de transmission entre les différentes populations.
+Les effets de réseau (de ``masses'' neuronales) apparaissent prédominants dans les réseaux récurrents aléatoires et
+les simulations à ``haute résolution'' viennent souvent confirmer des comportements déjà 
+obtenus sur les modèles à basse résolution.
+
+Nos études n'ont pas permis de mettre en évidence des régimes dynamiques nouveaux propres aux échelles temporelles fines et 
+à l'activité discrète.
+Cependant, certains effets de mémoire à court terme, %ont pu être mis en évidence dans
+%les réseaux aléatoires à spikes, 
+sur le principe du ``réservoir'' de dynamiques vu précédemment,
+ont montré que l'activité auto-entretenue 
+permet la prise en compte de dépendances entre des événements séparés par 
+plus de 100 ms \cite{henry07}.
+La présence de séquences d'activation spatio-temporelles reproductibles (dites ``groupes polychrones''), 
+telles que postulées par \cite{Izh06} en tant
+qu'unités opérationnelles élémentaires, peut être mise en évidence dans nos réseaux aléatoires.
+Une étude que j'ai publiée récemment, utilisant des unités neuronales un peu plus détaillées \cite{Dau14a} 
+montre que la réponse de
+population à des stimuli spatio-temporels suit une séquence reproductible (mais bruitée) qui 
+peut être amplifiée par la plasticité.
+La sensibilité acquise à des patrons spatio-temporels spécifiques, telles qu'existant également dans les modèles fréquentiels (voir \ref{sec:FPos}), 
+peut donc etre observée à l'échelle de quelques millisecondes, mettant en jeu un faible nombre de spikes par neurone.
+La clé semble donc être la mise en évience de mécanismes similaires à différentes échelles, les opérations
+à échelle temporelle courte étant elles-même ``portées'' (ou embarquées) dans des opérations à échelle temporelle plus larges.
+
+
+%Cette reproductibilité dans le temps et dans l'espace de la réponse du réseau au
+%signal d'entrée offre un cadre d'explication intéressant pour 
 
 {\color{Violet}
 Fred Henry : Master en 2005.
@@ -1388,46 +1453,6 @@ ACI 'temps et cerveau' va de 2002 à 2007 (5 ans???)
 MAPS commence en septembre 2007 (le dossier a été monté en janvier-février 2007)
 }
 
-
-Le principe qui, dans notre cas, unifie l'approche des neurones à sortie continue 
-et des neurones à sortie discrète est présenté dans \cite{Dau07}. Il repose sur 
-un modèle de neurone intègre-et-tire normalisé à résolution temporelle variable. Le passage du neurone 
-discret ``à fuite'' au neurones binaires (McCullogh et Pitts), puis au neurone à sortie continue est obtenu 
-par simple variation du pas d'intégration du schéma d'Euler de l'équation différentielle qui définit le neurone.
-Il en ressort une unification des modèles à travers les échelles temporelles où les neurones 
-intègre-et-tire représentent une résolution de l'ordre de la milliseconde, les neurones binaires une résolution
-de l'ordre de la dizaine de millisecondes et les neurones à sortie continue une résolution de l'ordre de la centaine
-de millisecondes.
-
-Les architectures à populations excitatrices et inhibitrices ``équilibrées'' présentent, 
-dans les mêmes gammes de paramètres que précédemment, 
-des comportements de population très similaires.
-Ainsi, les régimes d'oscillations lentes synchronisées
-se retrouvent également dans ces modèles. 
-Des transitions de phase sont observables entre
-différents régimes dynamiques sous l'effet de la variation de certains paramètres d'ordre, 
-ou sous l'effet de la plasticité synaptique \cite{Hen08,Hen08B,Henry09}. 
-Le choix de résolutions temporelle et spatiale variées permet d'estimer les éléments
-structurels communs aux différents modèles indépendamment du niveau de résolution (et, 
-de façon complémentaire, d'identifier les éléments structurels spécifiques à un niveau de 
-résolution spatial ou temporel donné, et/ou d'estimer les limites d'expressivité des modèles 
-à basse résolution).
-Ainsi, le mécanisme de réseau produisant ces régimes d'oscillations lentes n'apparait pas conditionné 
-au type de cellules utilisées (à sortie discrète ou continue), mais comme reposant plutôt 
-sur les fréquences moyennes, le taux d'amplification et les délais de transmission entre les différentes populations.
-
-Cependant, la présence de séquences d'activation spatio-temporelles (dites ``groupes polychrones''), 
-plus spécifiques aux modèles à spikes, telles que postulées par \cite{Izh06} en tant
-qu'unités opérationnelles élémentaires, peuvent en partie retrouvées dans nos réseaux aléatoires.
-L'étude récente d'un modèle utilisant des unités neuronales un peu plus détaillées \cite{Dau14a} 
-montre que la réponse de
-population à des stimuli-spatio temporels suit une séquence reproductible (mais bruitée) qui 
-peut être amplifiée par la plasticité.
-Cette reproductibilité dans le temps et dans l'espace de la réponse du réseau au
-signal d'entrée peut expliquer les effets de mémoire à court terme mis en évidence dans
-les réseaux aléatoires à spikes \cite{Dau06,henry07}, sur le principe du ``réservoir'' vu précédemment.
-
-
 {\bf 2008}
 - modèles à 2 couches (strictly excitatory/inhibitory). 
 
@@ -1447,6 +1472,14 @@ On-off states?
 
 
 \subsection{Modèles ``large échelle''}
+
+La simulation de réseaux constitués de multiples populations permet de tester certaines hypothèses concernant 
+le fonctionnement à ``large échelle'' du système nerveux. 
+
+
+
+Dans le cadre d'une collaboration avec V. Jirsa, INS, M Golos, bla bla...
+
 
 {\bf 2011}
 
@@ -1509,6 +1542,8 @@ Idée : j'affecte des attributs à un sujet. Analogie de la bulle qui se deplace
 Activité de base. Reconnaissance par franchissement d'un seuil (``vigilance''). Distinction  entre connu et non-perçu (non-sens).
 Modèles de la perception. Freeman.
 
+OPERATION DE BASE :
+La sensibilité \emph{acquise} à des patrons spatio-temporels spécifiques
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     2.1      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
