@@ -1482,30 +1482,37 @@ L'apparition récente des techniques de tractographie par tenseurs de diffusion 
 la matière blanche du cerveau pour suivre la direction des  faisceaux de fibres. 
 Il est possible d'en déduire un patron de connectivité (le ``connectome'') reliant les principales régions du cortex. 
 Le patron de connectivité issu de cette analyse forme un réseau, constitué par deux matrices, l'une fournissant la distance entre les
-régions connectées, l'autre fournissant le ``poids'' de cette connexion en terme de densité de fibres.
+régions connectées, l'autre fournissant le ``poids'' de cette connexion en fonction de la densité de fibres.
 Ce réseau est relativement stable à travers les sujets.
 %Différents indicateurs globaux ont été proposés [CIITATIONS] dont la déviation par rapport 
 %à la moyenne vise à repérer (ou améliorer l'identifications) de pathologies [CITATIONS].
 
-Le connectome offre bien sûr une ouverture incomparable sur l'architecture du cerveau, qui vient en complément
-de l'analyse des patrons d'activité observés dans l'exercice d'une tâche.
+Le connectome offre une vue d'ensemble de l'architecture du cerveau.
+L'analyse du connectome (analyse ``structurelle'')  vient en complément
+de l'analyse des patrons d'activité observés dans l'exercice d'une tâche (analyse fonctionnelle).
 %(les mêmes grandes autoroutes sont présentes)
-L'analyse ``structurelle'' vient donc en complément de l'analyse fonctionnelle.
-Plusieurs indicateurs ont par exemple été proposées pour distinguer les noeuds les plus centraux (les plus ``importants'')
-des noeuds périphériques. Il en résulte la mise en évidence d'un ``noyau central'' \cite{Hagmann2008}  
-qui présente des points communs avec le patron d'activité ``par défaut'' observé en imagerie fonctionnelle 
+Dans le cadre de cette analyse structurelle, 
+plusieurs indicateurs ont été proposées pour distinguer les noeuds les plus centraux (les plus ``importants'')
+des noeuds périphériques. Il est possible de mettre en évidence d'un ``noyau central'' \cite{Hagmann2008}  
+regroupant des noeuds médians servant de lien (ou de relais) entre la plupart des autres régions.
+Cet ensemble de noeuds présente des points communs avec le patron d'activité ``par défaut'' observé en imagerie fonctionnelle 
 (l'activité observée lorsque le sujet n'est pas occupé à accomplir une tâche) \cite{Raichle2001}. 
 
-Le projet ``The Virtual Brain'' (TVB) \cite{Leon2013}, porté par Viktor Jirsa, vise à combiner la connaissance anatomique et connectomique pour 
-produire des simulations de l'activité à large échelle du cerveau. Le modèle proposé repose d'une part sur la diffusion isotropique de
+En complément de cette analyse structurelle, 
+le projet ``The Virtual Brain'' (TVB) \cite{Leon2013}, 
+porté par Viktor Jirsa, vise à combiner la connaissance anatomique et connectomique pour 
+produire des simulations de l'activité électrique à large échelle du cerveau. 
+Le modèle proposé repose d'une part sur la diffusion isotropique de
 l'activité électrique sur la surface corticale (de type ``Neural Field''), 
 et d'autre part la prise en compte de la connectivité longue distance. 
 
 Dans le cadre d'un travail de co-direction de la thèse de Mathieu Golos à l'Institut de Neurosciences des Systèmes, 
 j'ai contribué à une étude sur la multistablité dans les systèmes neuronaux artificiels
-construits à partir du connectome \cite{Golos2014}. Chaque noeud du réseau est identifié à une masse neuronale. 
+construits à partir du connectome \cite{Golos2014}. Nous sommes partis d'un 
+modèle simplifié ignorant le terme de diffusion latérale. 
+Chaque noeud du réseau est simplement identifié à une masse neuronale. 
 Partant de l'analogie avec les réseaux de Hopfield \cite{Hop82}, le but
-était d'identifier les principaux le nombre et la disposition anatomique des
+était d'identifier le nombre et l'organisation anatomique des
 attracteurs se développant au sein d'un tel réseau.
 Nous avons étudié différentes variantes du modèle ``à réponse graduelle'' de Hopfield \cite{Hopfield1984}, 
 en changeant les caractéristiques du seuil d'activation afin de contrôle le niveau d'activation moyen.
@@ -1514,16 +1521,17 @@ Ainsi, en condition de ``basse température'', le nombre d'attracteurs distincts
 (sur un modèle comportant 998 noeuds). %cette prolifération d'attracteurs est un indicateur du caractère 
 L'analyse des ensembles d'attracteurs obtenus permet d'identifier une douzaine de ``modes'' différents, chaque
 mode correspondant à l'activation d'une région anatomique particulière. Ces modes peuvent être comparés aux modules 
-régionaux mis en évidence par une analyse purement structurelle \cite{Hagmann2008} ainsi qu'avec les composants indépendants 
+régionaux mis en évidence par une analyse structurelle \cite{Hagmann2008} ainsi qu'avec les composants indépendants 
 identifiés sur les signaux fMRI de l'état de repos \cite{Damoiseaux2006}.
 
 L'ajout d'un terme de bruit dans l'équation de mise à jour permet de simuler une activité multistable \emph{temporellement}, 
 s'apparentant aux régimes dits de ``dynamique itinérante'' \cite{Tsuda1992,Kaneko2003},
 et dont les catactéristiques sont plus proches des signaux observés à l'état de repos. 
-Cette multistabilité temporelle conduit fréquemment le réseau vers des régimes d'activité plus simples (noeuds uniformément actifs
+Cette multistabilité temporelle conduit fréquemment le réseau vers des régimes d'activité plus simples 
+(noeuds uniformément actifs
 ou inactifs) par dérive lente de l'activité moyenne. 
-Une multistabilité temporelle à long terme est néanmoins possible sur les modèles à ``feedback négatif global'',
-sur lesquels le niveau d'activité globale est controlé par le feedback.
+Seul un modèle à ``feedback négatif global'' présente une multistabilité temporelle à long terme,
+grâce au conrôle du niveau d'activité  qui empêche d'atteindre les régimes triviaux.
 
 {\color{Violet}
 
@@ -1557,6 +1565,84 @@ connectivité structurelle / fonctionnelle
 \section{Modèles de la perception à feedback positif} \label{sec:FPos}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introduction}
+
+La plasticité est un processus physique qui impacte le comportement d'un substrat,
+en modifiant son activité, sa réactivité à certaines entrées, ou le type de
+réponse qu'il produit. 
+La plasticité est la propriété qui donne au substrat une mémoire physique (par opposition
+la mémoire dynamique), qui provoque un changement
+d'état durable.
+La plasticité permet d'inscrire sur
+le support la trace de faits passés en vue d'une utilisation future.
+
+Selon la perpective biologique et développementale, l'apprentissage
+est le processus de changement comportemental, 
+en relation avec ce mécanisme de plasticité. 
+L'apprentissage est au sens large
+l'ensemble des processus épigénétiques (historiques) inscrivant dans l'animal ou l'individu 
+les éléments d'expérience qui contribuent à accroitre l'adaptation de ses réponses à son
+milieu.  
+
+La capacité à inscrire des événements en vue de les exploiter est une des
+propriétés essentielle du système nerveux des être vivants, assez difficile
+à reproduire en tant que telle sur un support artificiel.
+Par exemple, dans une perspective computationnelle autonome, un programme doit pouvoir se passer d'utilisateur. 
+La consigne doit provenir d'un programme interne (un "méta programme") qui 
+agit sur le programme courant au fur et à mesure que de nouveaux événements se présentent.
+Même si la notion de méta-programme ne pose pas de difficulté conceptuelle, elle est
+en pratique difficile à mettre en oeuvre dans les architectures informatiques traditionnelles. 
+La difficulté réside dans 
+le choix des événements à considérer parmi l'ensemble des événements qui se présentent, et surtout 
+dans la manière dont les événements pris en compte influencent le comportement logiciel futur.
+
+Par analogie avec la biologie et le système nerveux, le principe de méta programme 
+a principalement été implémenté dans 
+un cadre logiciel qui est celui des réseaux de neurones artificiels.
+On parle d'apprentissage automatique ("machine learning").
+L'apprentissage est alors le processus qui modifie graduellement la
+valeur des liaisons synaptiques entre les différents noeuds du réseau, dans 
+le but d'augmenter la pertinence des réponses et des comportements produits.
+Selon une perspective "supervisée", il s'agit d'inscrire dans la mémoire la trace de faits 
+passés, dans le but de faciliter leur réapparition ou au contraire d'éviter qu'ils
+ne se reproduisent.
+Selon une perspective "non supervisée", il s'agit plutôt de réduire l'incertitude sur les faits nouveaux
+grâce à la prise en compte des faits passés.
+
+Le choix du modèle (du substrat artificiel) conditionne le type d'opérations, la nature des réponses
+produites ainsi que la nature des changements autorisés.
+L'ensemble de ces règles qui conditionnement l'évolution du substrat sous l'influence
+des signaux à traiter constituent le méta-programme. 
+Selon le cadre choisi, la convergence du modèle vers un comportement cible
+adapté pourra être garanti sous certaines conditions (par exemple,
+sous une condition de séparabilité linéaire dans le cadre du perceptron [CITATION]).
+
+Les nombreux développements de l'apprentissage automatique permettent
+BLA BLA BLA... prédicteur / classifieur. interpolation. 
+Néanmoins, des pbs restent :
+
+prise en compte des dépendances temporelles dans les données. persévérance
+
+apprentissage "en ligne"
+
+interpolation. auto-association. feedback positif
+
+perception. connaissance et non-sens.
+
+L'étude d'architectures neuronales à connectivité aléatoire ont permis 
+de mettre en évidence des comportements de réseau conduisant 
+à des formes d'organisation spontanée~: comportement critique, bifurcations,
+transitions entre différents régimes dynamiques, activité persistante,
+mémoire à court terme (rémanence) etc...
+L'aléa des patrons de connexion et le caractère non-linéaire des opérateurs 
+permet de produire une grande variété de configurations
+d'activité, difficiles à prédire dans le détail.  
+
+Le caractère pseudo-stochastique et organisé de la dynamique intrinsèque des réseaux
+récurrents aléatoires peut servir de base à 
+
+Existence de modes au sein du substrat
 
 UP/DOWN + criticalité
 
@@ -1718,9 +1804,9 @@ Questino : ``où'' est prise la décision? ``Lieu'' de la décision à l'interfa
 
 Mon apport :
 
-Principe du miroir (environnement ``agissant sur'' l'agent)
+Principe du miroir (environnement (milieu) ``agissant sur'' l'agent)
 
-L'environnement inclut le corps et les actuateurs.
+L'environnement (milieu) inclut le corps et les actuateurs.
 
 L'action est intrinsèquement relationnelle/communicationnelle (transactionnnelle?).
 
