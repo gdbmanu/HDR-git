@@ -1525,8 +1525,8 @@ régionaux mis en évidence par une analyse structurelle \cite{Hagmann2008} ains
 identifiés sur les signaux fMRI de l'état de repos \cite{Damoiseaux2006}.
 
 L'ajout d'un terme de bruit dans l'équation de mise à jour permet de simuler une activité multistable \emph{temporellement}, 
-s'apparentant aux régimes dits de ``dynamique itinérante'' \cite{Tsuda1992,Kaneko2003},
-et dont les catactéristiques sont plus proches des signaux observés à l'état de repos. 
+s'apparentant aux régimes dits de ``dynamique itinérante'' \cite{Tsuda92,Kan90},
+et dont les caractéristiques sont plus proches des signaux observés à l'état de repos. 
 Cette multistabilité temporelle conduit fréquemment le réseau vers des régimes d'activité plus simples 
 (noeuds uniformément actifs
 ou inactifs) par dérive lente de l'activité moyenne. 
@@ -1577,7 +1577,7 @@ d'état durable.
 La plasticité permet d'inscrire sur
 le support la trace de faits passés en vue d'une utilisation future.
 
-Selon la perpective biologique et développementale, l'apprentissage
+Selon une perpective biologique et développementale, l'apprentissage
 est le processus de changement comportemental, 
 en relation avec ce mécanisme de plasticité. 
 L'apprentissage est au sens large
@@ -1585,10 +1585,11 @@ l'ensemble des processus épigénétiques (historiques) inscrivant dans l'animal
 les éléments d'expérience qui contribuent à accroitre l'adaptation de ses réponses à son
 milieu.  
 
-La capacité à inscrire des événements en vue de les exploiter est une des
+La capacité à inscrire des événements ou des faits particuliers en vue de les exploiter dans le futur est une des
 propriétés essentielle du système nerveux des être vivants, assez difficile
 à reproduire en tant que telle sur un support artificiel.
-Par exemple, dans une perspective computationnelle autonome, un programme doit pouvoir se passer d'utilisateur. 
+Plaçons-nous par exemple dans une perspective computationnelle autonome, 
+dans laquelle un programme doit pouvoir se passer d'utilisateur. 
 La consigne doit provenir d'un programme interne (un "méta programme") qui 
 agit sur le programme courant au fur et à mesure que de nouveaux événements se présentent.
 Même si la notion de méta-programme ne pose pas de difficulté conceptuelle, elle est
@@ -1597,12 +1598,12 @@ La difficulté réside dans
 le choix des événements à considérer parmi l'ensemble des événements qui se présentent, et surtout 
 dans la manière dont les événements pris en compte influencent le comportement logiciel futur.
 
-Par analogie avec la biologie et le système nerveux, le principe de méta programme 
+Par analogie avec la biologie et le système nerveux, le principe de méta-programme 
 a principalement été implémenté dans 
 un cadre logiciel qui est celui des réseaux de neurones artificiels.
 On parle d'apprentissage automatique ("machine learning").
 L'apprentissage est alors le processus qui modifie graduellement la
-valeur des liaisons synaptiques entre les différents noeuds du réseau, dans 
+valeur des liaisons synaptiques (le ``programme'') entre les différents noeuds du réseau, dans 
 le but d'augmenter la pertinence des réponses et des comportements produits.
 Selon une perspective "supervisée", il s'agit d'inscrire dans la mémoire la trace de faits 
 passés, dans le but de faciliter leur réapparition ou au contraire d'éviter qu'ils
@@ -1616,9 +1617,9 @@ L'ensemble de ces règles qui conditionnement l'évolution du substrat sous l'in
 des signaux à traiter constituent le méta-programme. 
 Selon le cadre choisi, la convergence du modèle vers un comportement cible
 adapté pourra être garanti sous certaines conditions (par exemple,
-sous une condition de séparabilité linéaire dans le cadre du perceptron [CITATION]).
+sous une condition de séparabilité linéaire dans le cadre du perceptron  \cite{Rosen58}).
 
-Les nombreux développements de l'apprentissage automatique permettent
+{\color{Violet} Les nombreux développements de l'apprentissage automatique permettent
 BLA BLA BLA... prédicteur / classifieur. interpolation. 
 Néanmoins, des pbs restent :
 
@@ -1628,19 +1629,49 @@ apprentissage "en ligne"
 
 interpolation. auto-association. feedback positif
 
-perception. connaissance et non-sens.
+perception. connaissance et non-sens.}
+
+La plupart des résultats présentés dans cette section portent sur l'application 
+de la plasticité synaptique dans des réseaux de neurones récurrents aléatoires 
+dans le but de modifier son comportement à long terme. 
+Comme nous l'avons vu, les réseaux récurrents aléatoires sont des substrats 
+actifs capables de manifester des formes d'organisation spontanée~: comportement critique, 
+transitions entre différentes configurations d'activité, activité persistante et mémoire 
+à court terme (rémanence) etc.
+L'ajout d'un mécanisme de plasticité a pour objectif d'exploiter la richesse intrinsèque 
+de la dynamique pour que le réseau puisse acquérir des connaissances et des compétences nouvelles.
+
+Nous partons en général d'un principe de tabula rasa, où le réseau ne possède initialement
+aucune compétence. L'idée est d'exploiter et d'amplifier par la plasticité certaines régularités internes (des 
+activités reproductibles) pour les associer à des signaux extérieurs. Le but est
+d'obtenir par apprentissage des réactions différenciées du réseau face à des signaux de même nature, 
+mais de formes différente. 
+La réduction de la complexité qui accompagne la présentation de certains de ces signaux 
+est alors le signe d'une réactivité acquise à ces formes, liées à leurs caractéristiques 
+spatiales et temporelles particulières.
+
+Ce mécanisme de reconnaissance est assez peu calculatoire puisqu'il s'agit principalement 
+d'une réaction accrue à certains signaux. Il permet néanmoins de tracer une frontière entre le ``connu'' et l'``inconnu'',
+et peut donc servir de base à des modèles de la perception, puis d'interpolation sur le principe de la 
+complétion perceptive \cite{Hop82}.
+Les formes produisant une réponse accrue sont ``vues'', les autres sont ignorées et demeurent ``non-perçues''. 
+Le mécanisme permettant de passer de l'ignorance à la perception repose sur la répétition (les signaux apparaissant le 
+plus souvent sont appris, ceux qui apparaissent rarement sont ignorés) 
+et sur leur faculté à produire des réponses différenciées dans le substrat (c'est le substrat qui fixe le
+caractère différent ou similaire de deux formes).
+
+
 
 L'étude d'architectures neuronales à connectivité aléatoire ont permis 
 de mettre en évidence des comportements de réseau conduisant 
-à des formes d'organisation spontanée~: comportement critique, bifurcations,
-transitions entre différents régimes dynamiques, activité persistante,
-mémoire à court terme (rémanence) etc...
+à 
+
 L'aléa des patrons de connexion et le caractère non-linéaire des opérateurs 
 permet de produire une grande variété de configurations
 d'activité, difficiles à prédire dans le détail.  
 
 Le caractère pseudo-stochastique et organisé de la dynamique intrinsèque des réseaux
-récurrents aléatoires peut servir de base à 
+récurrents aléatoires 
 
 Existence de modes au sein du substrat
 
@@ -1683,9 +1714,59 @@ La sensibilité \emph{acquise} à des patrons spatio-temporels spécifiques
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Route inverse}
 
-{\bf Daucé, E., Quoy, M., Cessac, B., Doyon, B. and Samuelides, M. (1998) Self-organization and dynamics reduction in recurrent networks : stimulus presentation and learning, Neural Network 11:521-533}
+L'étude de ces mécanismes de reconnaissance par ``réduction'' de la dynamique a été initiée dans le cadre
+de ma thèse, sous la direction
+de Bernard Doyon, chercheur à L'INSERM au sein de l'équipe dirigée par Manuel Samuelidès à l'ONERA 
+de Toulouse, entre 1996 et 1999. 
+Certains travaux préliminaires \cite{Quo94} avaient déjà montré l'effet de réduction produit par 
+la plasticité Hebbienne dans les réseaux aléatoire récurrents à 
+dynamique chaotique intrinsèque.
 
-{\bf Daucé E. and Doyon, B. (1998) Novelty Learning in a Discrete Time Chaotic Network, proc. of the 8th International Conference on Artificial Neural Networks (ICANN'98), L. Niklasson et al. eds, Vol. 2: 1051-1056, Springer, September 2-4, Skövde, Sweden}
+Le papier qui présente ces idées de la manière la plus complète est celui de Neural Networks, datant de 1998.
+Il reprend pour ce qui me concerne des travaux réalisés pendant ma première année de thèse \cite{Dau98A, DAU98B}. 
+Le cadre de l'étude est l'étude de la réaction (spontanée ou acquise) d'un réseau de neurones récurrent aléatoire
+à des patrons (stimuli) également aléatoires. Les réseaux étudiés étant normalisés, 
+leur comportement est réglé par deux paramètres~: le gain de la fonction de transfert (assimilable
+à l'inverse d'une température) et la variabilité du seuil d'activation.
+Le signal présenté au réseau prend la forme d'un patron aléatoire statique qui vient se surimposer au seuil 
+d'activation (rendant donc les neurones plus ou moins excitables).
+Le réseau soumis à un tel signal converge vers un nouvel attracteur (autrement dit se réorganise).
+
+Le point important est que le réseau ne produit pas de réponse (de ``read out'').
+Le changement d'activité produit par la surimposition du patron statique n'a pas de signification
+particulière. Il juste est possible de distinguer la nouvelle organisation de l'ancienne, à partir de 
+différents observables (indice de complexité, période interne, répartition des niveaux d'activité).
+
+Il ne s'agit pas de multistabilité au sens classique puisque le stimulus fait partie des ``paramètres'' du
+réseau. Ainsi, chaque stimulus distinct définit système dynamique distinct convergeant vers un attracteur distinct. 
+Le fait de modifier le stimulus au cours d'une même simulation revient à modifier le système dynamique ``en cours de route''. 
+
+Une règle de plasticité synaptique est ajoutée, correspondant à un dynamique lente sur les couplages, qui modifie 
+le patron d'interaction selon une règle inspirée de Hebb \cite{Heb49} (à savoir que le lien entre deux neurones se renforce s'il
+existe une corrélation temporelle entre l'activité pré-synaptique et l'activité post-synaptique). 
+Le papier met en évidence des changements de comportements liés à cette dynamique sur les poids, conduisant 
+systématiquement à une simplification de l'activité intrinsèque (par exemple passage d'une activité
+chaotique à une activité de type cycle limite). On parle de ``réduction'' de la dynamique, la plasticité 
+produisant une ``route inverse'' de la complexité vers le point fixe.
+
+Une fois la session d'``apprentissage'' terminée, la présentation du stimulus appris tend à induire
+une activité qualitativement différente, plus simple que l'activité induite par les autres stimuli. 
+La plasticité permet donc d'obtenir une réaction spécifique à une forme particulière (ici une
+forme arbitraire générée par un tirage aléatoire). La plasticité hebbienne, en renforçant les liens 
+entre les neurones les plus actifs, tend à produire des classes de réactions distinctes (réaction acquise) face
+à certains motifs dont les caractéristiques spatiales sont ``reconnues''. Le reste des motifs
+ne présentant pas ces caractéristiques spécifiques, induit une réaction ``par défaut''  
+(motifs quantitativement identiques mais qualitativement différents).
+Ce mécanisme de séparation entre le connu et l'inconnu à travers des caractéristiques dynamiques
+de la réponse rejoint l'hypothèse formulée par Freeman \cite{Ska87} à propos de la perception des odeurs~: 
+activité simplifiée pour des odeurs connues, activité de fond chaotique pour les odeurs non familières.
+
+
+
+\cite{Dau98A} {\bf Daucé, E., Quoy, M., Cessac, B., Doyon, B. and Samuelides, M. (1998) Self-organization and dynamics reduction in recurrent networks : stimulus presentation and learning, Neural Network 11:521-533}
+
+\cite{Dau98B} {\bf Daucé E. and Doyon, B. (1998) Novelty Learning in a Discrete Time Chaotic Network, proc. of the 8th International Conference on Artificial Neural Networks (ICANN'98), L. Niklasson et al. eds, Vol. 2: 1051-1056, Springer, September 2-4, Skövde, Sweden}
+
 
 
 - Une méthode d’apprentissage “non-supervisée” (il s’agit de capturer un mode dynamique)
@@ -1699,6 +1780,12 @@ La sensibilité \emph{acquise} à des patrons spatio-temporels spécifiques
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     2.2      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Architectures multi-couches}
+
+L'essentiel des résultats de la thèse et des publication associées \cite{Dau00,Dau02} porte sur une architecture 
+neuronale à deux couches permettant d'implémenter un mécanisme de perception de signaux spatio-temporels,
+sur la base d'un apprentissage hebbien qui crée un lien de feedback positif entre une couche sensorielle
+et une couche associative récurrente. 
+
 
 {\bf 1999}
 
@@ -1731,6 +1818,15 @@ La sensibilité \emph{acquise} à des patrons spatio-temporels spécifiques
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Plasticité dans les réseaux équilibrés}
+
+
+
+
+Ils ont été poursuivis dans le cadre de l'ACI ``Temps et Cerveau'' (20), qui a permis d'étendre
+certains résultats à des architectures plus complexes, 
+
+
+
 
 {\bf 2008}
 
