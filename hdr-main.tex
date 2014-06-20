@@ -1661,7 +1661,7 @@ et sur leur faculté à produire des réponses différenciées dans le substrat 
 caractère différent ou similaire de deux formes).
 
 
-
+{\color{Violet}
 L'étude d'architectures neuronales à connectivité aléatoire ont permis 
 de mettre en évidence des comportements de réseau conduisant 
 à 
@@ -1709,12 +1709,14 @@ Modèles de la perception. Freeman.
 OPERATION DE BASE :
 La sensibilité \emph{acquise} à des patrons spatio-temporels spécifiques
 
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     2.1      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Route inverse}
 
-L'étude de ces mécanismes de reconnaissance par ``réduction'' de la dynamique a été initiée dans le cadre
+L'étude du mécanisme de reconnaissance par ``réduction'' de la dynamique constitue le coeur
 de ma thèse, sous la direction
 de Bernard Doyon, chercheur à L'INSERM au sein de l'équipe dirigée par Manuel Samuelidès à l'ONERA 
 de Toulouse, entre 1996 et 1999. 
@@ -1722,10 +1724,14 @@ Certains travaux préliminaires \cite{Quo94} avaient déjà montré l'effet de r
 la plasticité Hebbienne dans les réseaux aléatoire récurrents à 
 dynamique chaotique intrinsèque.
 
-Le papier qui présente ces idées de la manière la plus complète est celui de Neural Networks, datant de 1998.
-Il reprend pour ce qui me concerne des travaux réalisés pendant ma première année de thèse \cite{Dau98A, DAU98B}. 
-Le cadre de l'étude est l'étude de la réaction (spontanée ou acquise) d'un réseau de neurones récurrent aléatoire
-à des patrons (stimuli) également aléatoires. Les réseaux étudiés étant normalisés, 
+Le papier qui présente ces idées de la manière la plus complète est celui de Neural Networks, datant de 1998 \cite{Dau98A}.
+Il porte sur l'étude de la réaction (spontanée ou acquise) d'un réseau de neurones récurrent aléatoire
+à des patrons (stimuli) également aléatoires.
+Il fait la synthèse de plusieurs résultats sur les réseaux récurrents aléatoires, 
+à la fois sur les comportements de grande taille et 
+sur les effets de taille finie, et présente pour la première fois les effets de la plasticité sur ce type de réseau.
+Il reprend pour ce qui me concerne des travaux réalisés pendant ma première année de thèse. %DAU98B}. 
+Les réseaux étudiés étant normalisés, 
 leur comportement est réglé par deux paramètres~: le gain de la fonction de transfert (assimilable
 à l'inverse d'une température) et la variabilité du seuil d'activation.
 Le signal présenté au réseau prend la forme d'un patron aléatoire statique qui vient se surimposer au seuil 
@@ -1733,35 +1739,95 @@ d'activation (rendant donc les neurones plus ou moins excitables).
 Le réseau soumis à un tel signal converge vers un nouvel attracteur (autrement dit se réorganise).
 
 Le point important est que le réseau ne produit pas de réponse (de ``read out'').
-Le changement d'activité produit par la surimposition du patron statique n'a pas de signification
-particulière. Il juste est possible de distinguer la nouvelle organisation de l'ancienne, à partir de 
+Le changement d'activité induit par la surimposition du patron statique n'a pas de signification
+particulière. Il est juste possible, du point de vue extérieur, 
+de distinguer la nouvelle organisation de l'ancienne, à partir de 
 différents observables (indice de complexité, période interne, répartition des niveaux d'activité).
 
-Il ne s'agit pas de multistabilité au sens classique puisque le stimulus fait partie des ``paramètres'' du
-réseau. Ainsi, chaque stimulus distinct définit système dynamique distinct convergeant vers un attracteur distinct. 
-Le fait de modifier le stimulus au cours d'une même simulation revient à modifier le système dynamique ``en cours de route''. 
+Le changement observé suite à l'imposition d'un stimulus statique ne correspond pas à 
+de la multistabilité au sens classique (un système dynamique multistable pouvant converger 
+vers différents attracteurs pour des conditions initiales différentes).
+Ici le stimulus fait partie des ``paramètres'' du
+réseau. Ainsi, chaque stimulus distinct définit système dynamique distinct 
+convergeant vers un attracteur distinct. 
+Le fait de modifier le stimulus au cours d'une même simulation 
+revient à modifier le système dynamique ``en cours de route''. 
+La réalisation d'une opération (sous la forme d'une réorganisation de la dynamique
+suite à l'imposition d'un motif statique) repose
+donc sur un mécanisme différent de celui poposé par Hopfield.
+Il s'agit essentiellement d'une relaxation sous contrainte, chaque
+stimulus étant l'expression d'une contrainte différente.
+L'ensemble des réponses aux contraintes statiques possibles constitue le répertoire 
+dynamique du réseau.
 
 Une règle de plasticité synaptique est ajoutée, correspondant à un dynamique lente sur les couplages, qui modifie 
-le patron d'interaction selon une règle inspirée de Hebb \cite{Heb49} (à savoir que le lien entre deux neurones se renforce s'il
-existe une corrélation temporelle entre l'activité pré-synaptique et l'activité post-synaptique). 
+le patron d'interaction selon une règle inspirée de Hebb \cite{Heb49} 
+(à savoir que le lien entre deux neurones se renforce s'il
+existe une corrélation temporelle entre l'activité pré-synaptique et l'activité post-synaptique).
+Le papier étudie les changements dans le répertoire dynamique lorsque le réseau est soumis à ces changements 
+synaptiques dans le contexte d'une contrainte statique spécifique.  
 Le papier met en évidence des changements de comportements liés à cette dynamique sur les poids, conduisant 
 systématiquement à une simplification de l'activité intrinsèque (par exemple passage d'une activité
 chaotique à une activité de type cycle limite). On parle de ``réduction'' de la dynamique, la plasticité 
 produisant une ``route inverse'' de la complexité vers le point fixe.
 
-Une fois la session d'``apprentissage'' terminée, la présentation du stimulus appris tend à induire
-une activité qualitativement différente, plus simple que l'activité induite par les autres stimuli. 
+Une fois la session d'apprentissage terminée, la présentation du stimulus appris 
+a pour effet d'induire cette dynamique moins complexe (obtenue en fin de session).
+Cette activité est qualitativement différente, plus simple que l'activité induite par les autres stimuli. 
 La plasticité permet donc d'obtenir une réaction spécifique à une forme particulière (ici une
-forme arbitraire générée par un tirage aléatoire). La plasticité hebbienne, en renforçant les liens 
-entre les neurones les plus actifs, tend à produire des classes de réactions distinctes (réaction acquise) face
-à certains motifs dont les caractéristiques spatiales sont ``reconnues''. Le reste des motifs
-ne présentant pas ces caractéristiques spécifiques, induit une réaction ``par défaut''  
-(motifs quantitativement identiques mais qualitativement différents).
-Ce mécanisme de séparation entre le connu et l'inconnu à travers des caractéristiques dynamiques
-de la réponse rejoint l'hypothèse formulée par Freeman \cite{Ska87} à propos de la perception des odeurs~: 
+forme arbitraire générée par un tirage aléatoire). 
+
+La plasticité Hebbienne a donc pour effet de créer des comportements ``acquis'' spécifiques.
+En renforçant les liens entre les neurones les plus actifs, 
+elle tend à produire une classe de réactions différente
+face aux motifs appris. Les motifs en question sont ``reconnus''. 
+Le reste des motifs,
+ne présentant pas ces caractéristiques spatiales spécifiques, induisent une réaction ``par défaut''
+qualitativement différente.
+Il y a donc, pour des motifs quantitativement similaires (issus d'un tirage aléatoire de même loi), 
+des réponses qualitativement différentes.
+Ce mécanisme de séparation entre le connu et l'inconnu par le comportement dynamique du substrat
+rejoint l'hypothèse formulée par Freeman \cite{Ska87} à propos de la perception des odeurs~: 
 activité simplifiée pour des odeurs connues, activité de fond chaotique pour les odeurs non familières.
 
-TODO : impact du papier
+Du point de vue computationnel, la plasticité synaptique inscript dans le substrat une séparation de l'espace
+des stimuli entre une région reconnue et une région inconnue. Il s'agit donc en premier lieu d'une opération de 
+discrimination. Deuxièmement, chaque réponse à un motif se traduit par une activité spatio-temporellement distincte,
+l'apprentissage ayant pour effet de capturer (ou plutôt accentuer) un \emph{mode dynamique} particulier.
+Le réseau est vu comme un ``réservoir'' de comportements dynamiques spatio-temporellement différents. Le comportement
+spatio-temporel asocié au motif change sous l'effet de la plasticité, en conservant certaines
+de ses caractéristiques comme la période intrinsèque, qui se manifeste de façon ``pure'' 
+sous la forme d'un cycle limite. Ce comportement temporellement périodique 
+finit par disparaître si l'apprentissage est poussé jusqu'au point fixe. La règle 
+de plasticité Hebbienne, dans sa forme simple étudiée ici, n'est pas convergente et 
+l'apprentissage est stoppé de manière arbitraire à l'apparition du cycle limite
+pour les besoins de l'étude. 
+
+La principale difficulté rencontrée pour ces réseaux est la contamination 
+de la réaction induite à des patrons non appris. Si des motifs voisins du motif initialement appris
+induisent également une réduction de la dynamique, la réitération de l'apprentissage sur plusieurs motifs différents
+conduit invariablement à un effondrement généralisé de la complexité, étendant la réduction de
+dynamique à l'ensemble des motifs. 
+La capacité d'un réseau est définie comme le nombre de motifs pouvant être 
+appris sans provoquer cet effondrement.
+Cette capacité s'avère assez faible en pratique. 
+Comme dans le cas du réseau de Hopfield, elle semble
+dépendre linéairement de la taille du réseau.
+
+Des changements marginaux de la règle de plasticité, en limitant drastiquement le nombre
+de liens éligibles,
+permettent d'augmenter significativement la capacité des réseaux \cite{Dau98B,Dau98C},
+avec une 'loading capacity' empirique de l'ordre de 8\% (le nombre de
+motifs pouvant être appris avant l'effondrement catastrophique est de l'ordre de
+8 \% du nombre de neurones, ce qui reste relativement faible).
+ 
+{\color{Violet}
+
+Impact du papier?
+
+Le papier de Neural Networks, en démontrant pour la première fois l'effet de la plasticité Hebbienne sur 
+la dynamique intrinsèque des réseaux récurrents aléatoires, a reçu une bonne audience.
+BLA BLA
 
 \cite{Dau98A} {\bf Daucé, E., Quoy, M., Cessac, B., Doyon, B. and Samuelides, M. (1998) Self-organization and dynamics reduction in recurrent networks : stimulus presentation and learning, Neural Network 11:521-533}
 
@@ -1774,7 +1840,7 @@ TODO : impact du papier
 - mecanisme de base de la route inverse. Notion de “reduction” de la dynamique par apprentissage (baisse de l’impredictibilité, analogie possible avec exploration/exploitation)
 
 - encodage - patrons statiques - route vers le chaos - destabilisation - frontière du chaos
-
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     2.2      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
