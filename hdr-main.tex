@@ -1034,7 +1034,7 @@ Typologie :
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     1.1      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Réseaux aléatoires équilibrés}
+\subsection{Réseaux aléatoires équilibrés}\label{sec:balanced}
 
 Les premières études auxquelles j'ai participé portaient sur l'étude des transitions de phase dans les réseaux de neurones
 aléatoires. 
@@ -1813,10 +1813,10 @@ dynamique à l'ensemble des motifs.
 La capacité d'un réseau est définie comme le nombre de motifs pouvant être 
 appris sans provoquer cet effondrement.
 Cette capacité s'avère assez faible en pratique. 
-Comme dans le cas du réseau de Hopfield, elle semble
+Dans notre cas, comme dans le cas du réseau de Hopfield, elle semble
 dépendre linéairement de la taille du réseau.
 
-Des changements marginaux de la règle de plasticité, en limitant drastiquement le nombre
+Des changements marginaux sur la règle de plasticité, en limitant drastiquement le nombre
 de liens éligibles,
 permettent d'augmenter significativement la capacité des réseaux \cite{Dau98B,Dau98C},
 avec une 'loading capacity' empirique de l'ordre de 8\% (le nombre de
@@ -1850,9 +1850,9 @@ BLA BLA
 \subsection{Architectures multi-couches}
 
 La troisième série de résultats de la thèse et des publication associées \cite{Dau00,Dau02} porte sur une architecture 
-neuronale à deux couches permettant d'implémenter un mécanisme de perception de signaux spatio-temporels.
-Ces résultats reposent sur une architecture de réseaux récurrents aléatoires à plusieurs couches (deux ou trois),
-selon le même formalisme que l'étude sur les effets de synchronisation sur les réseaux équilibrés.
+neuronale  permettant d'implémenter un modèle de la perception des signaux spatio-temporels.
+Ces résultats reposent sur une architecture de réseaux récurrents aléatoires à plusieurs couches (deux ou trois).
+Le formalisme multi-couches est le même que celui utilisé dans les réseaux équilibrés (voir section \ref{sec:balanced}).
 Ici les couches se distinguent non par la nature de leurs neurones mais par le rôle qu'elles prennent dans le processus
 d'apprentissage : une (ou deux) couche(s) primaire(s) ayant un rôle passif (sans dynamique intrinsèque)
 et une couche secondaire (ou associative) possédant une dynamique intrinsèque, analogue aux réseaux récurents aléatoires
@@ -1861,61 +1861,80 @@ simples présentés dans la section précédente.
 Le modèle se présente comme une architecture générique pour l'apprentissage 
 de motifs spatio-temporels. Comme dans le cas précédent, il ne s'agit pas de l'apprentissage d'une réponse 
 (d'un read-out) mais d'une modification du comportement du système dynamique en présence
-de certains signaux. Contrairement au modèle précédent, la contrainte externe se manifeste sous
+de certains signaux. La contrainte externe se manifeste ici sous
 la forme d'un signal spatiotemporel périodique, et la relaxation s'apparente à celle d'un oscillateur
 forcé. 
 Dans cette étude comme dans l'étude précédente, l'accent est mis sur la plasticité et l'apprentissage, où 
 le comportement ``différent'' est un comportement acquis. 
 
-La règle Hebbienne utilisée ici est une règle d'ordre 1 (basée sur les différences d'activité), qui
+La règle Hebbienne utilisée est une règle d'ordre 1 (basée sur les différences d'activité), qui
 modifie les couplages synaptiques selon une estimation locale de la covariance entre les neurones 
 pré et post-synaptiques, en tenant compte du délai de transmission. Cette règle, contrairement à la précédente, 
 tend à amplifier les variations d'activité. Elle tend asymptotiquement
-vers une activité constituée de grandes oscillations périodiques (et non vers un point fixe).
+vers une activité de type cycle limite très robuste à large amplitude individuelle (et non vers un point fixe).
 Comme dans le cas précédent, du fait de la non-convergence asymptotique,
 la durée d'apprentissage est fixée par l'utilisateur/concepteur
 en vue d'optimiser un certain comportement (ici la résonance perceptive). 
 
-Dans sa configuration initiale, la couche primaire reçoit passivement le signal spatio-temporel (séquence 
+Dans la configuration initiale, la couche primaire reçoit passivement le signal spatio-temporel (séquence 
 périodique de motifs). Les liens feed-forward aléatoires transmettent ce signal à la couche 
-secondaire. L'activité résultante est le résultat de la concurrence entre cette projection aléatoire
-du signal d'entrée et de l'activité intrinsèque chaotique (entretenue par les liens latéraux
+secondaire. L'activité de la couche associative est un mélange entre cette projection aléatoire
+du signal d'entrée et l'activité intrinsèque chaotique (entretenue par les liens latéraux
 aléatoires de la couche secondaire). Les liens de feedback (secondaire vers primaire) sont initialement nuls.
 
 La mise en route de la plasticité synaptique a lieu sur deux classes de liens~: latéraux et feedback.  
 La règle de couplage Hebbien tend à favoriser et amplifier les régularités (les 
 séquence d'activation prédictibles) au sein de l'activité neuronale. 
-Dans ce cas, l'existence de correspondances statistiques entre l'activité interne et l'activité 
-sensorielle produit une intensification des motifs d'entrée par l'activité de feedback.
 Outre la réduction de la complexité de l'activité,
-l'activation des liens de feedback crée une boucle d'amplification positive entre la couche associative
+la plasticité des liens de feedback crée une boucle d'amplification positive entre la couche associative
 et la couche sensorielle, qui transforme la corrélation statistique 
-en lien de causalité. Cette projection induite de l'activité interne vers la couche sensorielle
+en lien de causalité.
+L'existence de correspondances statistiques entre l'activité interne et l'activité 
+sensorielle produit une intensification des motifs d'entrée par cette activité de feedback.
+Cette projection induite de l'activité interne vers la couche sensorielle
 agit comme une prédiction \emph{dans le présent}, autrement dit fait reposer la connaissance de l'entrée
 sensorielle actuelle sur des informations observées dans le passé.
 
 Le fait de pouvoir \emph{prédire le présent} correspond fonctionnellement à un mécanisme de filtrage. 
-Le feedback correspond à la meilleure prédiction actuelle, tandis que l'entrée sensorielle correspond
+Le feedback correspond à la prédiction actuelle, tandis que l'entrée sensorielle correspond
 à l'observation effective. Tout écart entre la prédiction et l'observation fait entrer le système dans un 
 conflit qui peut se résoudre de deux manières. Si l'écart est faible, le système tend à ignorer ce changement
-et persévérer dans sa prédiction. Si l'écart est important et/ou réitéré, le système met
+et persévère dans sa prédiction. Si l'écart est important et/ou réitéré, le système met
 à jour son activité interne (son ``modèle'') afin de mieux anticiper l'entrée.  
 La persévération présente de nombreuses analogies avec les mécanismes de mémoire à court terme 
 décrits précédemment. Si une partie du signal disparait par exemple, l'activité interne est 
 capable de compléter les morceaux manquants, selon un mécanisme auto-associatif qui s'apparente
-à celui des réseaux de Hopfield. Le réseau peut continuer par exemple à ``croire'' à des éléments de la scène visuelle
-(sensorielle) non perçus dans le signal actuel, à cause de phénomènes d'occlusion par exemple.
+à celui des réseaux de Hopfield. Le réseau peut continuer par exemple à ``croire'' à l'intégrité des éléments de la scène visuelle
+(sensorielle) non perçus à cause de phénomènes d'occlusion.
 
-Cette capacité de persévération est donc un mécanisme de stabilisation de l'activité, qui 
-résiste aux changements sensoriels. Selon le degré de résistance, le système plus ou moins ``flexible''.
-Il existe en pratique un seuil au delà duquel BLA BLA
-
-
-Le cas limite correspond au réseau qui ignore totalement son entrée sensorielle, 
+D'un point de vue computationnel, le feedback sensoriel positif fonctionne selon un principe de ``pattern matching'',
+qui s'oppose dans son principe aux mécanismes de correction d'erreur basés sur la feedback négatif (``pattern mismatch'').
+Les modèles de la perception basés sur un feedback négatif \cite{Rao1999,Friston2009} font disparaître de la scène visuelle les
+éléments prédits, de sorte que, selon cette théorie, ce qui est ``perçu'' est l'erreur sensorielle,
+autrement dit la différence entre sensation et la prédiction.
+Chacun des mécanismes présente des avantages et des inconvénients. Le feedback positif apporte de la robustesse, de la
+mémoire à court terme (complétion, interpolation des données manquantes, traitement des ambiguïtés perceptives) 
+mais peut également produire une résistance excessive aux changements
+de la scène sensorielle. Le cas limite correspond au réseau qui ignore totalement son entrée sensorielle, 
 persévérant indéfiniment sur un illusion perceptive produite par l'activité interne (``hallucination'').
-Le feedback positif est donc à double tranchant puisqu'il porte en lui le risque 
-de ``croire trop fort'', autrement dit de 
+Le feedback négatif apporte une parcimonie (perception de la différence d'activité), qui permet d'implémenter 
+un principe de ``matching pursuit'' pour un traitement rapide du flux visuel \cite{Perrinet2010},
+mais présente une sensibilité au bruit de mesure (fluctuations aléatoire), et nécessite la mise en place d'un reset 
+périodique, qui peut être réalisé par une alternance entre mesure de l'erreur (perception) et correction 
+d'erreur (déplacement moteur).
 
+L'architecture proposée dans \cite{Dau02} implémente de manière plus explicite le principe de traitement
+sélectif de la scène sensorielle, en séparant l'espace des sensations entre ce qui est connu (produit 
+un changement qualitatif sous forme de résonance 
+perceptive) et ce qui est inconnu (pas de changement qualitatif), puis en cas
+de reconnaissance,  développe une activité 
+spécifique qui participe à la consolidation et l'entretien de la résonance.
+Le changement par rapport au modèle à une couche réside dans l'utilisation effective des changements qualitatifs 
+induits par la plasticité sous la forme du signal de feedback. 
+
+
+
+{\color{Violet}
 MECANISME DE DESYNCHRO VITAL POU LE FEEDBACK POSITIF. PASSE PAR DES ``CASSURES''.
 
 Après apprentissage, la séparation de l'espace d'entrée entre
@@ -1935,7 +1954,7 @@ POINT DE VUE COMPUTATIONNEL
 L'idée d'un feedback positif comme support de la perception n'est pas nouvelle.
 Il a été postulé de longue date comme support des opérations neuronales. 
 
-
+}
 
 
 
