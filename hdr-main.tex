@@ -1396,85 +1396,11 @@ La clé semble donc être la mise en évience de mécanismes similaires à diff�
 %Cette reproductibilité dans le temps et dans l'espace de la réponse du réseau au
 %signal d'entrée offre un cadre d'explication intéressant pour 
 
-{\color{Violet}
-Fred Henry : Master en 2005.
 
-bourse these : 
-juin 2005 Ste Marguerite (initiation de neurocomp)
-
-These Fred : pb : le lien avec le mouvement?
-
-* 2005-2006 * 
-
-oct. 2005 NOLTA - 
-
-jan 2006 institut H Poincaré - 
-
-juillet 2006 CNS à Edinbourg (modèle Gaussien du Master)
-
-* 2006-2007 *
-
-Dyva en sept 2006 présenté par Fred - idées orientées neural field + colliculus + LIF simple
-
-oct. 2006 premiere conf. Neurocomp - 
-idées RL + couche récurrente intermédiaire. 
-Policy Gradient (Bartlett) = local changes = Hebb/anti-Hebb
-Idée d'interversion bruit/signal dans les modèles à 2 couches (Gaussiennes centrées?).
-Illustration avec simu Khepera.
-
-juin 2007 - NIPS (refusé). 
-modèle LIF/SRM à courant (avec free mb. potential h). 
-- Connexions gaussiennes centrées . DELAI FIXE (10 ms)
-STDP --> activité périodique non synchronisée
-
-papier EPJ-ST : modèle RL Hebb/anti-Hebb avec terme (1-H) (comme SAB) sur liens excitateurs - separation exc/inh.
-
-* 2007-2008 *  
-
-Dyva en sept 2007 (signé Daucé) - poursuite approche RL-PG appliquée aux saccades.
-(Fred ne participe pas à ce projet)
-
-ESANN avril 2008 : idem NIPS sauf DELAI VARIABLE (Poisson moy. 10 ms). STDP produit oscillations lentes.
-
-Tentative publi dans neurocomputing - echec. (calcul plus fin de la ``loading capacity'' - !! sur ordi Centrale only)
-
-
-* ATER Lille 2008-2009 *
-
-oct. 2008 - 2eme Neurocomp. Distinction input courant/input potentiel. differents regimes sont obtenus selon le type
-d'input / les parametres internes.
-
-juillet 2009 : CNS - séparation excitateurs/inhib. Plasticité sur exc. seulement. delais variables. effet 
-stdp sur delais.
-
-septembre 2009 : suite projet RL. 
-
-ACI 'temps et cerveau' va de 2002 à 2007 (5 ans???)
-
-MAPS commence en septembre 2007 (le dossier a été monté en janvier-février 2007)
-
-
-{\bf 2008}
-- modèles à 2 couches (strictly excitatory/inhibitory). 
-
-{\bf 2009}
-
-- “Free membr. potential” (synaptic input) / modeles ECM à “horizon fini” 
-
-Mean field
-
-Mon apport :
-- Multi-pop
-- Délais
-- frontiere
-- contrib. Reseaux equilibrés --> comportementdes réseaux équilibrés à la frontière
- 
-On-off states?
-}
 
 \subsection{Multistabilité dans les modèles ``large échelle''}
 
-L'organisation à large échelle de l'activité du cerveau nécessite l'emploi de techniques d'imagerie BLA BLA.
+{\color{Violet} L'organisation à large échelle de l'activité du cerveau nécessite l'emploi de techniques d'imagerie BLA BLA.}
 
 
 
@@ -1591,7 +1517,7 @@ propriétés essentielle du système nerveux des être vivants, assez difficile
 Plaçons-nous par exemple dans une perspective computationnelle autonome, 
 dans laquelle un programme doit pouvoir se passer d'utilisateur. 
 La consigne doit provenir d'un programme interne (un ``méta programme'') qui 
-agit sur le programme courant au fur et à mesure que de nouveaux événements se présentent.
+agit sur le programme courant pour l'``améliorer'' en fonction des événements se présentent.
 Même si la notion de méta-programme ne pose pas de difficulté conceptuelle, elle est
 en pratique difficile à mettre en oeuvre dans les architectures informatiques traditionnelles. 
 La difficulté réside dans 
@@ -1926,11 +1852,25 @@ d'erreur (déplacement moteur).
 L'architecture proposée dans \cite{Dau02} implémente de manière plus explicite le principe de traitement
 sélectif de la scène sensorielle, en séparant l'espace des sensations entre ce qui est connu (produit 
 un changement qualitatif sous forme de résonance 
-perceptive) et ce qui est inconnu (pas de changement qualitatif), puis en cas
-de reconnaissance,  développe une activité 
+perceptive) et ce qui est inconnu (pas de changement qualitatif).
+La reconnaissance est produite par le franchissement d'un seuil (seuil de ``vigilance''),
+favorisant le développement d'une activité 
 spécifique qui participe à la consolidation et l'entretien de la résonance.
 Le changement par rapport au modèle à une couche réside dans l'utilisation effective des changements qualitatifs 
 induits par la plasticité sous la forme du signal de feedback. 
+La plasticité permet d'instituer des processus attentionnels spécifiques à certaines configurations
+spatio-temporelles apprises. Ces configurations connues, en activant une résonance, révèlent la nature
+des connaissance acquises par le réseau.
+
+
+Plusieurs papiers de conférences apportent des éclairages complémentaires sur certains aspects du modèle. 
+Le papier de la conférence ICANN 2001 \cite{Dau01} présente une version préliminaire du modèle perceptif à deux couches
+avec une règle d'apprentissage légèrement plus simple que celle du papier de Biological Cybernetics. 
+Le papier de SAB (2001) \cite{Dau01b} comporte une partie montrant l'effet de l'apprentissage sur des signaux mixtes composés
+d'une partie statique et d'une partie périodique. L'association apprise entre motifs statiques et motifs dynamiques 
+se manifeste alors par un niveau de correlation élévé entre la dynamique induite par les motifs mixtes
+et la dynamique induite par les motifs statiques seuls (les activités étant par contre qualitativement différentes).
+Une étude de 2005 \cite{dauce05} montre l'effet symétrique des règles Hebbienne et anti-Hebbienne (d'ordre 1): 
 
 
 
@@ -1944,7 +1884,7 @@ signaux connus et signaux inconnus passe par la capacité à provoquer une réso
 
 NOTION D'ATTRACTEUR / DISCRETISATION / SIMPLIFICATION / CATEGORISATION
 
-CARACTERE SUPERVISE / NON SUPERVISE
+CARACTERE SUPERVISE / NON SUPERVISE ?
 
 POINT DE VUE COGNITIF
 
@@ -1954,7 +1894,7 @@ POINT DE VUE COMPUTATIONNEL
 L'idée d'un feedback positif comme support de la perception n'est pas nouvelle.
 Il a été postulé de longue date comme support des opérations neuronales. 
 
-}
+
 
 
 
@@ -1982,20 +1922,118 @@ Il a été postulé de longue date comme support des opérations neuronales.
 - alternances synchronisation (perçu) / non-sens. Système de perception dual. Figure sur fond (Gestalt). 
 
 
-
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     2.3      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Plasticité dans les réseaux équilibrés}
+\subsection{Plasticité dans les réseaux aléatoires équilibrés}
 
+Les réseaux aléatoires équilibrés offrent, comme on l'a vu, a possibilité de développer des régimes 
+dynamiques plus variés, permettant en particulier la production d'oscillations synchronisées de
+grande amplitude dans certaines configurations.
+Il est intéresant dans ce cadre d'étudier comment la plasticité interagit avec la dynamique de population 
+pour produire des comportements nouveaux.
 
+Les premières études que j'ai publiées sur cette question se situent dans le cadre applicatif de contrôle moteur \cite{Dau04b},
+et seront détaillée dans la partie suivante. Les principaux résultats concernant l'application de la plasticité 
+sur des réseaux équilibrés sont détaillés dans le papier EPJ-ST de 2007 \cite{Dau07}.
+Il s'agit d'un papier un peu fourre-tout, qui offre une revue sur la plasticité dans les réseaux récurrents ainsi
+que quelques résultats originaux.
+Entre autres, le papier présente une étude sur l'effet d'une nouvelle règle de plasticité Hebbienne, 
+la règle TD (qui présente des analogies avec la règle des différences teporelles de Sutton et Barto \cite{SUTTON98}), qui est 
+une règle du premier ordre stricte basée sur la corrélation des différences d'activité.
+L'étude présente en premier lieu une région paramétrique dans laquelle on peut observer des transitions entre 
+un régime de faible activité et un régime chaotique synchronisé, en fonction du coefficient de variation 
+(une moindre variabilité des poids produisant ici un régime plus chaotique).  
+En partant d'un de ces régime à activité faible non-synchronisée, la plasticité 
+a pour effet de produire une transition vers un régime à activité synchronisée. 
+La passage d'une activité non-synchrone à une activité synchronisée est spécifique aux réseaux équilibrés
+(la synchronisation à grande échelle reposant sur les effets de balancier entre population excitatrice et inhibitrice).
+Comme dans les autres études, il est possible d'appliquer la plasticité lorsque le réseau
+est soumis à un motif statique. Dans ce cas, la plasticité inscrit dans le réseau des comportements
+qualitativement différents (ici de grandes oascillations snchronisées) associées aux motifs appris. 
 
+{\color{Violet} (seule différence avec SAB : liens inhib-inhib plus faibles )}
 
 Ils ont été poursuivis dans le cadre de l'ACI ``Temps et Cerveau'' (20), qui a permis d'étendre
 certains résultats à des architectures plus complexes, 
 
+{\color{Violet}
+Fred Henry : Master en 2005.
+
+bourse these : 
+juin 2005 Ste Marguerite (initiation de neurocomp)
+
+These Fred : pb : le lien avec le mouvement?
+
+* 2005-2006 * 
+
+oct. 2005 NOLTA - 
+
+jan 2006 institut H Poincaré - 
+
+juillet 2006 CNS à Edinbourg (modèle Gaussien du Master)
+
+* 2006-2007 *
+
+Dyva en sept 2006 présenté par Fred - idées orientées neural field + colliculus + LIF simple
+
+oct. 2006 premiere conf. Neurocomp - 
+idées RL + couche récurrente intermédiaire. 
+Policy Gradient (Bartlett) = local changes = Hebb/anti-Hebb
+Idée d'interversion bruit/signal dans les modèles à 2 couches (Gaussiennes centrées?).
+Illustration avec simu Khepera.
+
+juin 2007 - NIPS (refusé). 
+modèle LIF/SRM à courant (avec free mb. potential h). 
+- Connexions gaussiennes centrées . DELAI FIXE (10 ms)
+STDP --> activité périodique non synchronisée
+
+papier EPJ-ST : modèle RL Hebb/anti-Hebb avec terme (1-H) (comme SAB) sur liens excitateurs - separation exc/inh.
+
+* 2007-2008 *  
+
+Dyva en sept 2007 (signé Daucé) - poursuite approche RL-PG appliquée aux saccades.
+(Fred ne participe pas à ce projet)
+
+ESANN avril 2008 : idem NIPS sauf DELAI VARIABLE (Poisson moy. 10 ms). STDP produit oscillations lentes.
+
+Tentative publi dans neurocomputing - echec. (calcul plus fin de la ``loading capacity'' - !! sur ordi Centrale only)
+
+
+* ATER Lille 2008-2009 *
+
+oct. 2008 - 2eme Neurocomp. Distinction input courant/input potentiel. differents regimes sont obtenus selon le type
+d'input / les parametres internes.
+
+juillet 2009 : CNS - séparation excitateurs/inhib. Plasticité sur exc. seulement. delais variables. effet 
+stdp sur delais.
+
+septembre 2009 : suite projet RL. 
+
+ACI 'temps et cerveau' va de 2002 à 2007 (5 ans???)
+
+MAPS commence en septembre 2007 (le dossier a été monté en janvier-février 2007)
+
+
+{\bf 2008}
+- modèles à 2 couches (strictly excitatory/inhibitory). 
+
+{\bf 2009}
+
+- “Free membr. potential” (synaptic input) / modeles ECM à “horizon fini” 
+
+Mean field
+
+Mon apport :
+- Multi-pop
+- Délais
+- frontiere
+- contrib. Reseaux equilibrés --> comportementdes réseaux équilibrés à la frontière
+ 
+On-off states?
 
 
 
@@ -2014,7 +2052,7 @@ Brunel
 Frequences, rythmes, periodicités
 
 
-
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     2.4      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
