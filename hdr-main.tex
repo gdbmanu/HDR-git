@@ -2118,6 +2118,9 @@ l'ordre ou les instants de tir.
 Une explication possible est le caractère très désordonné des activités individuelles, rendant difficile
 la capture de dépendances aux échelles temporelles fines.
 
+Les réponses de population s'apparentent à des ``bursts'' d'activité, qui impliquent 
+une grande partie des neurones. Une analyse plus détaillée permet d'identifier une séquence reproductible
+au sein de ces bursts, qui peut en principe servir de support un traitement ultérieur (non publié).
 
 {\color{Violet}
 Fred Henry : Master en 2005.
@@ -2218,25 +2221,48 @@ Frequences, rythmes, periodicités
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Plasticité séquentielle}
 
-Les protocoles d'apprentissage présentés jusqu'ici reposent sur la 
-mise en place d'une réponse induite par la plasticité, 
+Les protocoles d'apprentissage présentés jusqu'ici 
+forment une réponse induite, 
 qui rend le réseau plus réactif à certains motifs désignés 
 par l'expérimentateur.
-Le cadre est donc celui de l'apprentissage supervisé. 
-Il s'agit de produire une dynamique de relaxation qui se 
+Il n'y a pas de read-out, il s'agit juste de produire une dynamique de relaxation qui se 
 conforme à la contrainte imposée.
 
-L'étude présentée ici a été initiée pendant dans le cadre du master de 
-Frédéric Henry et poursuivie et approfondie pendant sa première année
-passée à Marseille, et a fait l'objet de deux publications de conférences
-et d'un article \cite{Dau06,Henry06,Henry07}.
+L'étude présentée maintenant a été initiée pendant dans le cadre du master de 
+Frédéric Henry sous la supervision d'Hedi Soula et poursuivie et approfondie pendant sa première année
+passée à Marseille. Elle a fait l'objet de deux publications de conférences
+et d'un article \cite{Henry06,Dau06,Henry07}.
+
+L'étude porte sur la discrimination de signaux temporels. Il montre comment l'utilisation
+alternée d'une rège Hebbienne et d'une règle anti-Hebbienne permet de former une réponse 
+qui exploite la mémoire d'un substrat récurrent aléatoire.
+L'architecture est cette fois-ci
+à entrées-sorties complète.
+Le réseau possède une couche d'entrée qui 
+transmet passivement le signal, une couche récurrente aléatoire, et une couche de sortie
+constituée dans ce cas de quelques neurones dont la sortie est ``lue''.
+
 Le protocole exploite comme précédemment la dynamique d'un réseau récurrent 
-aléatoire constitué de neurones impulsionnels.
+aléatoire constitué de neurones impulsionnels. 
+Il utilise sur les effets symétriques des règles hebbiennes et anti-hebbiennes 
+sur la dynamique des réseaux récurrents aléatoires, montrés dans \cite{dauce05}.
+Par exemple, l'anti-STDP (règle miroir de la STDP) a pour effet d'augmenter la complexité
+de la dynamique intrinsèque, soit un effet contraire à la STDP. L'application successive
+de la STDP puis de l'anti-STDP sur un réseau récurrent aléatoire 
+a pour effet de réduire la complexité puis de l'augmenter à nouveau.
 
-
-
-exprimés par 
-le signal externe.
+La tâche consiste à discriminer quatre motifs spatio-temporels possédant
+des éléments en communs, de telles sorte qu'il soit impossible de séparer les signaux
+sur la base de l'entrée instantanée.
+Chaque neurones de sortie représente une des catégories.
+Le neurone gagnant est celui qui émet le premier potentiel d'action.
+Si la réponse est correcte, la STDP est appliquée sur la couche de sortie et sur la couche récurrente,
+ce qui tend à accélérer la réponse du neurone.
+Si la réponse est incorrecte, selon
+un principe qui se rapproche de l'apprentissage par renforcement, c'est l'anti-STDP qui est appliquée, 
+tendant à retarder la réponse.
+Différents ``niveaux'' de difficulté ont été utilisés. 
+Pour des signaux temporels 
 
 
 
