@@ -1359,7 +1359,7 @@ Des transitions de phase sont observables entre
 différents régimes dynamiques sous l'effet de la variation de certains paramètres d'ordre, 
 ou sous l'effet de la plasticité synaptique \cite{Hen08,Hen08B,Henry09}. 
 
-Manipuler des architectires neuronales à différentes résolutions spatiales et temporelles permet d'estimer les éléments
+Manipuler des architectures neuronales à différentes résolutions spatiales et temporelles permet d'estimer les éléments
 structurels communs aux différents modèles indépendamment du niveau de résolution (et, 
 de façon complémentaire, d'identifier les éléments structurels spécifiques à un niveau de 
 résolution spatial ou temporel donné, et/ou d'estimer les limites d'expressivité des modèles 
@@ -1962,7 +1962,7 @@ constitués d'unités binaires (autrement dit neurones à spikes sans mémoire).
 Les principaux résultats concernant l'application de la plasticité 
 sur ces réseaux  sont détaillés dans le papier EPJ-ST de 2007 \cite{Dau07}.
 Entre autres, le papier présente une nouvelle règle de plasticité Hebbienne, 
-la règle TD (qui présente des analogies avec la règle des différences teporelles de Sutton et Barto \cite{SUTTON98}), qui est 
+la règle TD (qui présente des analogies avec la règle des différences temporelles de Sutton et Barto \cite{SUTTON98}), qui est 
 une règle du premier ordre stricte basée sur la conjugaison de l'activité entrante et la \emph{différence d'activité} sortante.
 L'étude présente en premier lieu une région paramétrique dans laquelle on peut observer des transitions entre 
 un régime de faible activité et un régime chaotique synchronisé, en fonction du coefficient de variation 
@@ -1988,7 +1988,7 @@ plus fine des aspects temporels de l'activité neuronale, en considérant les d�
 variés) et l'ordre de tir sur des échelles de temps de l'ordre de la milliseconde.
 Frédéric Henry a travaillé sur un simulateur de résaux de neurones à spikes qu'il a développé lui-même.
 Ce simulateur permettait de simuler des délais de transmission variables entre les différents
-neurones. Il implémentait également différentes règles de plasticité synamtique, dont la STDP (Spike-Timing Dependent
+neurones. Il implémentait également différentes règles de plasticité synaptique, dont la STDP (Spike-Timing Dependent
 Plasticity).
 
 La STDP est donc une règle de plasticité dépendant de l'ordre de tir des neurones pré-synaptique et post-synaptique.
@@ -2000,7 +2000,7 @@ l'inverse, de déprimer les synapses où l'activité post-synaptique précède (
 Il s'agit donc bien de favoriser les conjugaisons d'activité causalement liées, mais surtout, de manière symétrique, d'empêcher les 
 activités non causalement liées. La mise en évidence de cette règle sur les synapses naturelles \cite{Bi98} a
 favorisé le dévelopement de nombreux modèles computationnels.  
-Dans des architectures feed-forward, un des effets importants de la STDP est qu'elle réduit la latence de la réponse des neurones 
+Dans des architectures feed-forward,  la STDP  réduit la latence de réponse des neurones 
 aux patrons spatio-temporels appris, permettant d'implémenter un codage par rang \cite{song00,guyonneau05}.
 Le cas des réseaux récurrents est plus ambigu: dans certaines implémentations, la STDP semble favoriser 
 l'émergence de séquences d'activation stables \cite{izhikevich04,izhikevich06}.
@@ -2011,19 +2011,113 @@ L'effet de la STDP sur l'activité des réseaux récurrents aléatoires a d'abor
 constitué de connexions gaussiennes centrées. Le passage des neurones binaires aux neurones à potentiels d'action 
 modifie la nature des régimes dynamiques produits par le réseau. Une différence importante avec les modèles à sortie 
 continue est la définition précise de l'échelle temporelle sur les délais de transmission comme sur 
-les constantes de temps et les périodes réfreactaires. L'activité produite par ces réseaux apparaît
+les constantes de temps et les périodes réfractaires. L'activité produite par ces réseaux apparaît
 plus ``désordonnée'' que celle des réseaux à sortie continue. Ainsi, aucune activité de type cycle limite
-n'est mise en évidence dans ces réseaux : seules les activités de type chaotiques
+n'est mise en évidence : seules les activités de type chaotiques
 sont observées lorsque le réseau est actif; si les liens 
 récurrents ne sont pas assez forts, l'activité s'éteint.
-L'existence d'une période intrinsèque forte, qui était une des caractéristique des réseaux récurrents 
-aléatoires à soprtie continue, n'est pas mis en évidence dans ces modèles.
+Pas de paramètre d'ordre ici permettant de décrire une route
+vers le chaos par quasi-périodicité, qui était une des caractéristique des réseaux récurrents 
+aléatoires à sortie continue.
 
-L'ac
+En utilisant la technique de transfert d'échelle temporelle (augmentation du pas de discrétisation d'Euler), il est facile
+d'établir la correspondance entre la STDP et la règle TD décrite précédemment \cite{Dau07},
+comme cela avait déjà été noté par \cite{Rao01}.
 
+Plusieurs indicateurs de complexité ont été mis en place pour mesurer la nature de la dynamique spontanée.
+L'analyse du spectre de Fourier ne permet pas d'établir de fréquence caractéristique.
+L'autocorrélogramme du signal moyen montre une décroissance exponentielle caractéristique d'un bruit lissé. 
+Nous utilisons également un indicateur du nombre de degrés de liberté (basé sur l'ACP \cite{wright01}) qui montre
+une dimension intrinsèque du signal de l'ordre de 35 pour un réseau de 100 neurones, ce qui indique
+une très faible corrélation entre l'activité des différents neurones.
+Le réseau développe dont un régime de chaos fort.
 
+L'application de la STDP sur cette dynamique conduit la dynamique vers   
+un régime plus simple. La dimension intrinsèque décroit continument jusqu'à atteindre une valeur faible (entre 2 et 3),
+qui caractérise l'entrée dans un régime périodique  \cite{Hen08,Hen08B}. Cette
+activité périodique est maintenue de manière asymptotique,
+ce qui confirme l'appartenance de la STDP aux règles de plasticité d'ordre 1.
+La STDP a également un effet régulateur sur le niveau d'activité moyen. Pour
+différents taux d'activité individuels initiaux 
+(entre 50 et 400 Hz), la STDP conduit le système vers un régime où l'activité individuelle est de l'ordre de 200 Hz.
+Le caractère régulateur (homéostatique) de la STDP sur le taux de décharge moyen 
+est une caractéristique connue déjà notée par \cite{KEMPTER99}.
 
-- analogie TD - STDP.  Règle de la difference : (Si(t+1) - Si(t)) Sj(t)
+L'activité finale est caractérisée par une périodicité intrinsèque marquée,
+de l'ordre de 20 ms (50 Hz). Cette période correspond à environ deux fois le délai moyen \cite{Hen08B},
+avec une même séquence d'activation qui se répète en boucle.
+L'effet de simplification et de stabilisation d'un régime périodique 
+dans les réseaux développant activité intrinsèque a été 
+moins souvent noté dans la littérature.
+Il semble ici être le résultat de la capture de régularités présentes dans la dynamique initiale,
+qui se distingue donc d'un pur processus aléatoire.
+La différence entre périodicité globale (50 Hz) et activité individuelle (200 Hz) s'explique par le fait
+que les neurones tirent en moyenne quatre fois par cycle.
+
+L'activité périodique finale est une activité très robuste. Deux papier
+de conférences \cite{Hen08,Hen08B} étudient un protocole d'apprentissage où un réseau aléatoire est 
+soumis à des motifs statiques aléatoires (comme dans \cite{Dau98A}). Les dynamiques contraintes 
+relaxent vers des régime présentant le même degré de chaos que la dynamique spontanée.
+Seule la répartition des niveaux d'activité varie.
+Les réponses induites par les motifs ne sont pas qualitativement différentes.
+Pour séparer les réponses, on applique la STDP sous l'influence
+d'un motif particulier. Selon les gammes de paramètres, deux effets peuvent être observés. Dans
+certains cas \cite{Hen08}, un régime synchronisé est obtenu avec de grandes oscillations 
+et une période de l'ordre de 50 à 100 ms (10-15 Hz), lorsque la dynamique est soutenue
+par la stimulation (et s'éteint en l'absence de stimulation). Dans ce cas, la dynamique 
+finale s'éteint puis renait périodiquement sous
+l'effet de la stimulation externe. Dans d'autres cas, le régime est très proche du régime périodique asynchrone
+obtenu en dynamique spontanée \cite{Hen08B}, avec un comportement ``quasi synchrone'' observable lorsque le
+réseau est soumis à des motifs binaires.
+Si l'on interrompt l'apprentissage suffisamment tôt, le comportement du réseau permet de séparer l'activité
+induite par le (ou les) motif(s) appris de celle induite par les autres motifs \cite{Hen08}. 
+En optimisant la durée d'apprentissage, une étude (non publiée) montre
+une capacité d'encodage similaire à celle des réseaux continus: le nombre maximal de motifs 
+pouvant induire une réponse spécifique est de l'ordre de 5\% du nombre de neurones dans le réseau.
+
+D'un point de vue computationnel, il n'y a qualitativement pas de différence entre le nouveau modèle et
+l'ancien. Le comportement induit par la STDP ne semble donc pas reposer sur l'ordre ou 
+l'instant de tir des potentiels d'action, mais plutôt sur leur fréquence de décharge.
+
+L'utilisation d'un patron de connectivité plus réaliste a été proposé dans une étude datée de 2009 \cite{Henry09},
+avec séparation fonctionnelle des neurones excitateurs et inhibiteurs, et utilisation de neurones à conductance \cite{Kepler1992}. 
+L'étude sur un réseau équilibré
+permet de mettre en évidence un comportement très analogue à celui observé sur le modèle binaire \cite{Dau07},
+confirmant la parenté fonctionnelle entre la règle TD et la STDP. La STDP est appliquée uniquement sur les connexions 
+entre neurones excitateurs. Une convergence vers un régime d'oscillations synchronisées avec une période globales de 
+l'ordre de 25 Hz (et une fréquence moyenne individuelle de l'ordre de 200 Hz) est mis en 
+évidence. Il s'agit d'une synchronisation observable au niveau de la population, les activités individuelles
+restant relativement irrégulières et hétérogènes. Une analyse de la plasticité en fonction des délais met en évidence la potentiation des 
+délais longs ($>$ 8 ms) et une dépression des délais intermédiaires (4-8 ms) qui favorise l'entretien du comportement synchronisé (non publié).
+
+Une dernière étude, publiée récemment dans les proceedings d'ESANN \cite{Dau14a}, étudie l'effet de la STDP 
+dans un réseau équilibré sous influence d'un signal spatio-temporel. Deux cas sont considérés : signal périodique
+(se répétant toutes les 30 ms) ou signal non-périodique. L'activité spontanée sous influence de ces deux types de signaux
+est qualitativement la même initialement. La plasticité est appliquée 
+dans les deux situations.
+Lorsque le stimulus est apériodique, aucun changement qualitatif n'est observé.
+Lorsque le stimulus est périodique, l'activité devient plus régulière, avec 
+de grandes oscillations (période 16 Hz) observables au niveau de la population.
+Le comportement est assez proche du comportement de grandes oscillations lentes
+obtenu sous influence statique. On observe 
+néanmoins une synchronisation des oscillations du réseau avec la période 
+du stimulus, autrement dit il y a un accrochage de phase de sorte que la période interne (60 ms)
+est exactement le double de la période du signal (30 ms). Ce comportement d'accrochage est assez comparable
+à celui observé sur les réseaux plus simples. Le réseau devient ``réactif'' aux motifs périodiques appris,
+développant une ``action de population'' qui est un analogue global des potentiels
+d'action neuronaux.
+
+A l'issue de ce tour d'horizon des effets de la STDP sur la dynamique intrinsèque des réseaux
+récurrents aléatoires, il apparait de nombreux points communs entre les réseaux de neurones à
+sortie fréquentielle et les réseaux de neurones impulsionnels. Des comportements
+qualitativement similaires se retrouvent entre les deux familles de modèles, traduisant 
+une plasticité essentiellement fondée sur les fréquences de décharges.
+L'application de la STDP dans les réseaux de neurones à impulsions ne semble pas,
+selon ces études, exploiter les capacités d'expression plus étendues du substrat, comme
+l'ordre ou les instants de tir.
+Une explication possible est le caractère très désordonné des activités individuelles, rendant difficile
+la capture de dépendances aux échelles temporelles fines.
+
 
 {\color{Violet}
 Fred Henry : Master en 2005.
@@ -2124,8 +2218,29 @@ Frequences, rythmes, periodicités
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Plasticité séquentielle}
 
+Les protocoles d'apprentissage présentés jusqu'ici reposent sur la 
+mise en place d'une réponse induite par la plasticité, 
+qui rend le réseau plus réactif à certains motifs désignés 
+par l'expérimentateur.
+Le cadre est donc celui de l'apprentissage supervisé. 
+Il s'agit de produire une dynamique de relaxation qui se 
+conforme à la contrainte imposée.
+
+L'étude présentée ici a été initiée pendant dans le cadre du master de 
+Frédéric Henry et poursuivie et approfondie pendant sa première année
+passée à Marseille, et a fait l'objet de deux publications de conférences
+et d'un article \cite{Dau06,Henry06,Henry07}.
+Le protocole exploite comme précédemment la dynamique d'un réseau récurrent 
+aléatoire constitué de neurones impulsionnels.
 
 
+
+exprimés par 
+le signal externe.
+
+
+
+{\color{Violet}
 {\bf 2005}
 
 
@@ -2152,7 +2267,7 @@ SYNCHRONISATION (Information mutuelle acausale/simultanée = co-évolution).
 
 % Le point de vue informationnel : MI??
 
-
+}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
