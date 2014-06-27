@@ -1867,7 +1867,7 @@ des connaissance acquises par le réseau.
 
 
 Plusieurs papiers de conférences apportent des éclairages complémentaires sur certains aspects du modèle. 
-Le papier de la conférence ICANN 2001 \cite{Dau01} présente une version préliminaire du modèle perceptif à deux couches
+Le papier de la conférence ICANN 2001 \cite{Dau01c} présente une version préliminaire du modèle perceptif à deux couches
 avec une règle d'apprentissage légèrement plus simple que celle du papier de Biological Cybernetics. 
 Le papier de SAB (2001) \cite{Dau01b} comporte une partie montrant l'effet de l'apprentissage sur des signaux mixtes composés
 d'une partie statique et d'une partie périodique. L'association apprise entre motifs statiques et motifs dynamiques 
@@ -2032,7 +2032,7 @@ une dimension intrinsèque du signal de l'ordre de 35 pour un réseau de 100 neu
 une très faible corrélation entre l'activité des différents neurones.
 Le réseau développe dont un régime de chaos fort.
 
-L'application de la STDP sur cette dynamique conduit la dynamique vers   
+L'application de la STDP conduit la dynamique vers   
 un régime plus simple. La dimension intrinsèque décroit continument jusqu'à atteindre une valeur faible (entre 2 et 3),
 qui caractérise l'entrée dans un régime périodique  \cite{Hen08,Hen08B}. Cette
 activité périodique est maintenue de manière asymptotique,
@@ -2221,50 +2221,86 @@ Frequences, rythmes, periodicités
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Plasticité séquentielle}
 
-Les protocoles d'apprentissage présentés jusqu'ici 
-forment une réponse induite, 
-qui rend le réseau plus réactif à certains motifs désignés 
-par l'expérimentateur.
-Il n'y a pas de read-out, il s'agit juste de produire une dynamique de relaxation qui se 
-conforme à la contrainte imposée.
+Les protocoles d'apprentissage présentés jusqu'à présent avaient pour but de 
+former une réponse induite. La forme de la réponse n'était pas 
+fixée à priori et dépendait des caractéristiques du substrat.
+Il n'y avait pas de read-out, il s'agissait juste de produire une dynamique de relaxation qui se 
+conforme à (prenne forme avec) la contrainte imposée, en rendant le réseau plus réactif à certains 
+motifs présentés.
 
-L'étude présentée maintenant a été initiée pendant dans le cadre du master de 
-Frédéric Henry sous la supervision d'Hedi Soula et poursuivie et approfondie pendant sa première année
-passée à Marseille. Elle a fait l'objet de deux publications de conférences
-et d'un article \cite{Henry06,Dau06,Henry07}.
-
-L'étude porte sur la discrimination de signaux temporels. Il montre comment l'utilisation
+L'étude présentée maintenant est en fait antérieure à la section précédente.
+Elle exploite comme précédemment la dynamique d'un réseau récurrent 
+aléatoire constitué de neurones impulsionnels, et montre comment l'utilisation
 alternée d'une rège Hebbienne et d'une règle anti-Hebbienne permet de former une réponse 
 qui exploite la mémoire d'un substrat récurrent aléatoire.
+
+Elle a été initiée dans le cadre du master de 
+Frédéric Henry sous la supervision d'Hedi Soula et poursuivie et approfondie pendant sa première année
+passée à Marseille. Elle a fait l'objet de deux publications de conférences
+et d'un article \cite{Henry06,Dau06,henry07}.
+
 L'architecture est cette fois-ci
 à entrées-sorties complète.
 Le réseau possède une couche d'entrée qui 
 transmet passivement le signal, une couche récurrente aléatoire, et une couche de sortie
-constituée dans ce cas de quelques neurones dont la sortie est ``lue''.
+constituée dans ce cas de quelques neurones dont la sortie est lue.
+La forme de la réponse induite est cette fois-ci imposée par l'expérimentateur,
+de manière supervisée ou semi-supervisée.
 
-Le protocole exploite comme précédemment la dynamique d'un réseau récurrent 
-aléatoire constitué de neurones impulsionnels. 
-Il utilise sur les effets symétriques des règles hebbiennes et anti-hebbiennes 
+La tâche consiste à discriminer quatre motifs spatio-temporels.
+Ces motifs possèdent des éléments en communs, de telles sorte qu'il est impossible de séparer les signaux
+sur la base de l'entrée instantanée.
+Chaque neurone de sortie représente une catégorie.
+La réponse est fixée par le neurone qui émet le premier potentiel d'action suite
+à la présentation du motif.
+
+Le protocole d'apprentissage consiste à présenter les séquences périodiquement, 
+lire les réponses produites, informer le réseau du caractère correct ou incorrect de sa
+réponse et appliquer une règle de plasticité visant à augmenter le taux de réponses correctes, selon
+un principe qui se rapproche de l'apprentissage par renforcement.
+
+L'apprentissage utilise sur les effets symétriques des règles hebbiennes et anti-hebbiennes 
 sur la dynamique des réseaux récurrents aléatoires, montrés dans \cite{dauce05}.
 Par exemple, l'anti-STDP (règle miroir de la STDP) a pour effet d'augmenter la complexité
 de la dynamique intrinsèque, soit un effet contraire à la STDP. L'application successive
 de la STDP puis de l'anti-STDP sur un réseau récurrent aléatoire 
 a pour effet de réduire la complexité puis de l'augmenter à nouveau.
 
-La tâche consiste à discriminer quatre motifs spatio-temporels possédant
-des éléments en communs, de telles sorte qu'il soit impossible de séparer les signaux
-sur la base de l'entrée instantanée.
-Chaque neurones de sortie représente une des catégories.
-Le neurone gagnant est celui qui émet le premier potentiel d'action.
+L'étude est également une implémentation originale du codage par rang, utilisant un principe 
+concurrent d'anticipation vs. retardement de la réponse.
 Si la réponse est correcte, la STDP est appliquée sur la couche de sortie et sur la couche récurrente,
-ce qui tend à accélérer la réponse du neurone.
-Si la réponse est incorrecte, selon
-un principe qui se rapproche de l'apprentissage par renforcement, c'est l'anti-STDP qui est appliquée, 
+ce qui tend à anticiper l'instant de réponse du neurone ayant tiré.
+Si la réponse est incorrecte, c'est l'anti-STDP qui est appliquée, 
 tendant à retarder la réponse.
-Différents ``niveaux'' de difficulté ont été utilisés. 
-Pour des signaux temporels 
+Le papier \cite{henry07} utilise des signaux temporels très lents, où
+la séquence est composée de 4 motifs durant chacun 100 ms, de sorte qu'une séquence
+complète dure 400 ms. Dans ce cas, le temps ncessaire pour atteindre des taux
+de réussite raisonnables s'exprime en heures (environ 100000 essais).
+Les résultats présentés dans \cite{Dau06} utilisent un pas des séquences plus courtes (40 ms).
+Dans ce cas, environ 500 essais suffisent pour obtenir une discrimination parfaite.
 
+La discrimination entre les différentes séquences temporelles repose sur l'entretien
+au niveau de la couche récurrente d'une activité qui permet de conserver la mémoire 
+de faits passés, sur le principe du réservoir déjà évoqué \cite{Maass2002}.
+La différence de taux d'apprentissage et de taux de réussite s'explique principalement par 
+la différence d'échelle temporelle des séquences à apprendre. La mémoire d'une unité neuronale est de l'ordre de
+sa constante de membrane, soit 10 à 20 ms. Dans le cas d'une activité fortement
+irrégulière (chaos profond), la population de neurones semble garder une 
+mémoire assez faible des faits passés (autocorrélation du même ordre de grandeur). Néanmoins, à la
+lumière des résultats de la section précédente, la plasticité semble 
+capable d'induire suffisamment de régularité dans la dynamique intrinsèque
+pour conserver une mémoire plus importante 
+au sein de la population. La difficulté à discriminer les séquences de 400 ms semble
+néanmoins fixer la limite supérieure de cette capacité (100 ms étant en pratique suffisants 
+pour discriminer deux séquences).
+Cette étude semble donc a posteriori confirmer certains résultats suggérés plus haut sur 
+le caractère plus séquentiel de l'activité induite par la plasticité, support ici de la mémoire à court terme.
 
+L'application alternée des plasticités hebbienne et anti-hebbienne ouvre par ailleurs la voie
+à l'implémentation de mécanismes d'apprentissage par renforcement dans les substrats neuronaux, 
+ainsi qu'à une modélisation plus précise des mécanismes de plasticité liés à la récompense et 
+à la punition dans le cerveau \cite{Barto1995,Schultz1997,Gurney2001}. Ces aspects sont analysés 
+plus en détail dans la section suivante.
 
 {\color{Violet}
 {\bf 2005}
