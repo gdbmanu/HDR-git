@@ -2404,20 +2404,41 @@ et aussi ``rewards correspond to innate priors that constrain policies.''}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Généralités}
 
+Le cadre que nous avons regardé jusqu'à présent est l'apprentissage en ``boucle ouverte'',
+dans lequel les actions physiques sur le milieu sont découplées des sensations. 
+C'est le cadre classique du conditionnement Pavlovien où les stimuli déclenchent
+des réponses comportementales automatiques ou induites par l'apprentissages.
+
+La prise en compte plus réaliste
+des deux domaines matériels que sont le circuit logiciel et le milieu physique
+environnant conduit à déplacer 
+le cadre conceptuel de l'apprentissage vers l'apprentissage en ``boucle fermée''.
+Il se définit formellement par la présence de correlations entre les actions ou 
+les réponses produites et les manifestations sensorielles suivantes.
+Ce lien entre les actions et les perceptions est décrit, au niveau le plus général, par le modèle physique 
+au sein duquel le logiciel est plongé.
+Une séance d'apprentisage consiste à effectuer une série de ``choix'' qui orientent
+le cours futur de la séance. 
+La tâche n'est plus définie par rapport à la justesse des réponses instantanées, mais par rapport
+à la justesse de ce parcours dans l'espace des trajectoires possibles.
+
+Les systèmes de contrôle en boucle fermée appartiennent à la tradition cybernétique BLA BLA...
+
 Les échelles de temps et d'espace des comportements macroscopiques (mouvements, déplacements, activité courante)  
 se distinguent des échelles de temps et d'espace observées au niveau de l'activité
 nerveuse.
-Les actions produites par le corps sont à une échelle temporelle lente en comparaison des potentiels d'action
+Par exemple, dans domaine biologique, 
+les actions produites par le corps sont à une échelle temporelle lente en comparaison des potentiels d'action
 produits par les neurones.
 En plus de la disparité d'échelle, les lois régissant les deux systèmes ne sont pas de même nature. 
 Le monde physique est assez bien décrit par 
 l'approximation newtonienne des masses en mouvement dans un milieu tri-dimensionnel.
 On parlera pour simplifier du milieu extensif pour désigner le monde physique, l'endroit où sont
 possibles des déplacements de masses par l'action des forces, les frottements et le contact. 
-A l'inverse, l'activité nerveuse s'inscrit dans un substrat où l'intensité des interactions est 
+A l'inverse, l'activité logicielle s'inscrit dans un substrat où l'intensité des interactions est 
 faiblement liée à la disposition spatiale, essentiellement produite par la connectique et 
 les transports d'activité électrique.
-On parle pour simplifier de milieu intensif (ou milieu logiciel).
+On parle pour simplifier de milieu intensif. % (ou milieu logiciel).
 
 L'interaction d'un substrat logiciel avec un domaine extensif passe par des transducteurs qui sont les canaux de 
 communication entre les deux mondes.
@@ -2425,22 +2446,6 @@ Appareils sensoriels et proprioceptifs chez les animaux, et contractions muscula
 articulées. Senseurs et actuateurs pour les dispositifs de contrôle artificiels : capteurs qui traduisent des signaux physiques
 en signaux électriques, moteurs, joints et pistons pour les déplacements de masses.
 
-
-Le cadre que nous avons regardé jusqu'à présent est l'apprentissage en ``boucle ouverte'',
-dans lequel les actions physiques sur le milieu sont découplées des sensations. 
-C'est le cadre classique du conditionnement Pavlovien où les stimuli déclenchent
-des réponses comportementales automatiques ou induites par l'apprentissages.
-La prise en compte des deux domaines matériels que sont le circuit logiciel et le milieu physique
-environnant conduit à déplacer le cadre conceptuel de l'apprentissage.
-On parle d'apprentissage en ``boucle fermée''.
-Il se définit formellement par la présence de correlations entre les actions ou 
-les réponses produites et les manifestations sensorielles suivantes.
-Ce lien entre les actions et les perceptions est décrit, au niveau le plus général, par le modèle physique 
-au sein duquel le logiciel est plongé.
-Une séance d'apprentisage consiste à effectuer une série de ``choix'' qui orientent
-le cours futur de la séance. 
-La tâche n'est plus définie par rapport à la justesse des réponses, mais par rapport
-à la justesse de ce parcours dans l'espace des trajectoires possibles.
 
 Le niveau explicatif macroscopique
 
