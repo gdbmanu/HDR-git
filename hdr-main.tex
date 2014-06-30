@@ -2407,7 +2407,7 @@ et aussi ``rewards correspond to innate priors that constrain policies.''}
 Le cadre que nous avons regardé jusqu'à présent est l'apprentissage en ``boucle ouverte'',
 dans lequel les actions physiques sur le milieu sont découplées des sensations. 
 C'est le cadre classique du conditionnement Pavlovien où les stimuli déclenchent
-des réponses comportementales automatiques ou induites par l'apprentissages.
+des réponses comportementales automatiques ou induites par l'apprentissage.
 
 La prise en compte plus réaliste
 des deux domaines matériels que sont le circuit logiciel et le milieu physique
@@ -2422,7 +2422,70 @@ le cours futur de la séance.
 La tâche n'est plus définie par rapport à la justesse des réponses instantanées, mais par rapport
 à la justesse de ce parcours dans l'espace des trajectoires possibles.
 
-Les systèmes de contrôle en boucle fermée appartiennent à la tradition cybernétique BLA BLA...
+L'interaction d'un substrat logiciel avec son milieu passe par des transducteurs, qui sont les canaux de 
+communication entre les deux mondes~:
+appareils sensoriels et proprioceptifs chez les animaux, et contractions musculaires permettant de déplacer des masses
+articulées; senseurs et actuateurs pour les dispositifs de contrôle artificiels : capteurs qui traduisent des signaux physiques
+en signaux électriques, moteurs, joints et pistons pour les déplacements de masses.
+
+Les systèmes de contrôle en boucle fermée appartiennent à la tradition cybernétique, initialement 
+formée autour de la commande à feedback négatif [CITATION]. 
+Les systèmes cybernetiques sont essentiellement des boucles de régulation, qui maintiennent un certain
+nombre de variables de contrôle dans un domaine de viabilité via un mécanisme de correction
+d'erreur. Dans ce schéma, la perception est principalement l'écart à la valeur nominale et la commande
+est un déplacement moteur qui corrige l'écart observé.
+Les systèmes cybernétiques offrent un exemple élémentaire d'autonomie logicielle,
+avec une ``prise de décision'' basée sur des échanges de signaux entre le
+controleur et son environnement.
+Le point d'opération (le point où l'on retourne) d'un tel système est analogue
+formellement aux attracteurs des systèmes dynamiques contraints. Un changement
+du signal d'entrée induit un déplacement vers un nouvel attracteur (une nouvelle configuration
+mécanique ou spatiale) où l'appareil se stabilise.
+[CONTROLE MOTEUR - SCHONER]
+Concevoir bon contrôleur nécessite donc de connaître l'ensemble du dispositif, autrement dit le circuit
+logiciel, les mécanismes de transduction et l'effet des commandes motrices sur le
+signal sensoriel (le ``modèle du monde''). 
+Cet ensemble constitue un système dynamique, soumis à des influences extérieures 
+(les facteurs non modélisés) face auxquels le système produit des réponses.
+
+Considérons un dispositif logiciel contrôlant un appareil 
+ayant des interactions répétées avec son milieu.
+Dans des environnements complexes où il est difficile de tout prévoir, la machine doit 
+adapter son comportement face aux situations particulières qui se présentent.
+Ce cahier des charges rejoint l'idée de méta-programme : il s'agit de produire des ajustements 
+qui améliorent les interactions du logiciel avec le milieu physique. 
+
+Un tel problème se formule de différentes manières.
+Une première approche consiste à faire en sorte que le logiciel enrichisse le modèle de monde, 
+c'est à dire ``acquière des connaissances'' pour mieux prévoir les effets de ses actions sur 
+son environnement. Cette phase d'acquisition passe par le fait de ``tester'' le produit
+de ses actions par essai/erreur. Le simple fait de produire une commande arbitraire
+(aléatoire) permet de tester la conséquence sensorielle de cette commande, qui peut
+être confrontée au modèle. [BABBLING], utile en particulier pour l'apprentissage
+des contingences sensori-motrices [SMC - eSMCs].
+Cette importance de la commande aléatoire dans l'acquisition de connaissance a été formalisé
+dans le cadre de \emph{l'apprentissage par renforcement}. [BARTO SUTTON]
+Cette approche repose sur la notion de signal de renforcement, qui est un ``méta signal'' 
+dont le rôle est de transformer le manière dont le logiciel traite le signal,
+selon des modalités variées comme la consommation énergétique, l'exposition aux signaux nociceptifs ou euceptifs, 
+ou encore la réduction d'incertitude.
+Si le milieu contient des éléments nocifs ou aversifs par exemple, l'amélioration 
+peut passer par une augmentation de la sensibilité logicielle à une classe de signaux 
+associés à (ou précurseurs de) la sensation aversive, et à une facilitation des comportements permettant de
+mieux éviter les situations où le signal aversif est présent. 
+La plupart des modèles de renforcement reposent sur des [LUT] et souffrent de problèmes
+d'explosion combinatoire.
+
+Une autre manière de formaliser ce problème est proposée par [FRISTON]: 
+
+ces améliorations peuvent passer par deux stratégies : 
+l'amélioration du logiciel et/ou l'amélioration du milieu.
+
+Un autre stratégie est d'agir sur le milieu, en éloignant physiquement
+les facteurs aversifs du lieu où l'appareil évolue. 
+Dans les deux cas, un changement physique (modification du logiciel ou modification du milieu)
+se traduit par une réduction de l'exposition au signal aversif. 
+
 
 Les échelles de temps et d'espace des comportements macroscopiques (mouvements, déplacements, activité courante)  
 se distinguent des échelles de temps et d'espace observées au niveau de l'activité
@@ -2440,62 +2503,29 @@ faiblement liée à la disposition spatiale, essentiellement produite par la con
 les transports d'activité électrique.
 On parle pour simplifier de milieu intensif. % (ou milieu logiciel).
 
-L'interaction d'un substrat logiciel avec un domaine extensif passe par des transducteurs qui sont les canaux de 
-communication entre les deux mondes.
-Appareils sensoriels et proprioceptifs chez les animaux, et contractions musculaires permettant de déplacer des masses
-articulées. Senseurs et actuateurs pour les dispositifs de contrôle artificiels : capteurs qui traduisent des signaux physiques
-en signaux électriques, moteurs, joints et pistons pour les déplacements de masses.
-
+[VARELA]
 
 Le niveau explicatif macroscopique
-
-Le logiciel induit des déplacements ou des transformations du monde physique
-qui en retour induisent des 
-
-
-Considérons un dispositif logiciel controlant un appareil 
-ayant des interactions répétées avec son milieu.
-Dans des environnements complexes où il est difficile de tout prévoir, la machine doit 
-adapter son comportement face aux situations particulières qui se présentent.
-Ce cahier des charges rejoint l'idée de méta-programme : il s'agit de produire des ajustements 
-qui améliorent les interactions du logiciel avec le milieu physique. 
-Avec une nuance : ces améliorations peuvent passer par deux stratégies : l'amélioration du logiciel et/ou l'amélioration du milieu.
-Si le milieu contient des éléments nocifs ou aversifs par exemple, l'amélioration 
-peut asser par une augmentation de la sensibilité logicielle à une classe de signaux 
-associés à la sensation aversive, afin de mieux les éviter. 
-Un autre stratégie est d'agir sur le milieu, en éloignant physiquement
-les facteurs aversifs du lieu où l'appareil évolue. 
-Dans les deux cas, un changement physique (modification du logiciel ou modification du milieu)
-se traduit par une réduction de l'exposition au signal aversif. 
-
-
-
-[C'EST QUOI UNE REPONSE? DEPLACEMENT MOTEUR? ]
-
-Dans le cadre de l'apprentissage en boucle fermée, les actions physiques sur le milieu sont couplées 
-aux signaux sensoriels. 
-
-
 
 à travers la notion d'action conjuguée. [AGIR SUR]
 
 
-
-selon des in
-dicateurs variés
-comme la consommation énergétique, l'exposition aux signaux nociceptifs ou euceptifs, ou encore 
-la réduction d'incertitude, le tout 
-
-
-
-
-{\bf 2000-2001}
+Le point de départ pour notre étude dans ce contexte est l'idée de chaos + augmentation/réduction
+de la complexité (du bruit) en fonction du degré de connaissance.
 
 {\bf Daucé, E. (2002) Systèmes dynamiques pour les sciences cognitives, in Approche dynamique de la cognition artificielle, Guillot, A. and Daucé, E. eds :33-44, Lavoisier, Paris, France}
 
 - couplage = utilisation = perte d’autonomie transitoire (voir aussi introduction Hermes).  
 
 - controle supervise par modele inverse
+
+
+Ensuite, notion de bruit lent, de correspondance des échelles temporelles.
+
+
+{\bf 2000-2001}
+
+
 
 {\bf Daucé, E., Quoy, M. and Doyon, B. (2002) Resonant spatio-temporal learning in large random recurrent networks, Biol.Cybern. 87(3):185-198}
 
