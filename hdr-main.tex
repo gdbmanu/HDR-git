@@ -664,6 +664,69 @@ On parlera de commande pour qualifier la réponse (analogique ou digitale) produ
 
 \subsection{Filtre de Kalman}
 
+{\color{Violet}
+Ce qu’il faut retenir de Friston :
+
+- un modèle en miroir. 
+
+- les actuateurs sont une partie de l’env.
+
+- perception = inference on states / learning = inference on parameters 
+
+- l’action vient rectifier une erreur de prediction
+
+- le reward est un prior sur la solution cherchée.
+
+Rq : le concept d’energie libre est repris de Prigogine?.
+
+Après relecture :
+
+- Le terme d’energie libre se divise entre accuracy (distance entre les causes predites et les causes observées - innovation : idem Kalman et/ou Hidden Markov) et complexity (entropie du modele de la mesure).
+
+- La structure de resolution est analogue à EM. 
+E est l’inference des causes (par modele - ou mesure - inverse)
+avec modele : estimation de x* par filtre de Kalman ou particulaire ou Viterbi 
+avec identification du modele (recherche du modele generatif par inference - avec prior sur le nombre de causes...) 
+
+- exemple typique = apprentissage d’un dictionnaire (base orthonormale ou non). Pb : explosion combinatoire si sequences temporelles ou etats vectoriels (ou combinaison d’etats). Probleme mal posé.
+modele libre (absence de modele)
+
+Action based. RL classique. Analogie etat caché / valeur (sortie du modele representationnel. L’etat interne ne represente pas l’etat du monde exterieur mais simplement l’avantage qu’on peut en attendre. Rq : le couple (actionneurs + environnement = systeme controllé = domaine extensif - masses en deplacements) est en general connu , c’est à dire qu’on a une connaissance complete. Le couple acteur + critique est l’agent - domaine intensif). Model free -  Policy gradient. Apprentissage direct du repertoire d’actions
+(hierarchique) - Le prior est le posterior de la couche superieure (projection predictive en feed-back). La vraisemblance est le “matching” entre le signal de la couche inferieure et le filtre (feed-forward). “Bayesian surprise” - innovation = erreur perceptive
+
+Le modele libre est distinct du modele search. Ca conduit à l’idée d’information mutuelle sans d’identité.  
+
+M est l’identification (adaptative) du processus de mesure (ou du modele generatif ou du forward model). 
+
+Etape qu’on identifie à l’apprentissage. Idem apprentissage du perceptron et des reseaux de neurones en general (supervisé)  : pattern matching, max likelihood, ...
+
+Etape absente pour le filtre de Kalman ou les HMM. 
+
+Friston propose une maniere originale d’augmenter la likelihood (action qui maximise la vraisemblance perceptive) = passage du côté “obscur” de l’”action-oriented” perception (consequence perceptive de l’action) $\Rightarrow$ agir, c’est mettre le monde à l’epreuve
+
+En lien avec l’idée de sparsité $\Rightarrow$ minimiser la complexité en produisant des bases “sparse”
+
+- La logique EM est fondamentalement circulaire. Se resout classiquement par iteration sequentielle. On peut egalement supposer une difference d’échelle temporelle entre processus E (rapide) et processus M (lent). 
+
+-  Le RL peut etre vu comme un algo EM avec prior sur le modele (dans ce cas les causes sont essentiellement les actions). L’etape E est le calcul de la valeur des transitions (vraisemblance (posterior) de l’action etant donné la sensation). L’etape M est la mise à jour de la fonction de valeur (etant donné le reward - ici vu comme une mesure de la likelihood de la consequence perceptive). $\rightarrow$ consequence (ou inversion de l’argument): est vraisemblable un patron perceptif qui est recompensé - Tout ce qui n’est pas soumis à un mecanisme de recompense n’est pas perçu (perception ou non-sens - Cf. Merleau Ponty - Phénoménologie de la perception).
+
+- F est la log vraisemblance marginale (sur posterior q(.) et mesure f(.)) qui se decompose en 2 termes : la divergence (surprise bayesienne - accuracy) servant à optimiser q(.) et la log vraisemblance conditionnelle (complexité) servant à optimiser f(.)
+
+- La dualité accuracy / complexity peut etre vue comme le substrat d’autres dualités findamentales selon que l’on met l’accent sur l’un ou sur l’autre (exploration/exploitation), conservation /innovation etc… On peut imaginer un seuil d’innovation (== vigilance) qui permet de remettre en cause le posterior courant.
+
+- Il y a un lien entre l’exigence de parcimonie et le principe de substrat à ressource/expressivité limitée. 
+
+- Le predictive coding est une théorie des rôles complementaires des connexions feed-forward et feed-back + implementations mathematique du principe “perception = correction d’erreur”
+
+ Karl Friston : ce qui est perçu est principalement l'ecart à la prediction (predictive coding).  Dynamical Causal modelling.
+``{\emph Modern reformulations suggest
+that both inference on states (that is, perception) and
+inference on parameters (that is, learning) minimize
+free energy (that is, minimize prediction error) and
+serve to bound surprising exchanges with the world.}'' (Friston, 2010)
+}
+
+
 \subsection{Acteur-critique}
 
 \subsection{Brooks}
@@ -750,65 +813,6 @@ Théorie bayesienne
 
 \paragraph{Friston}
 
-Ce qu’il faut retenir de Friston :
-
-- un modèle en miroir. 
-
-- les actuateurs sont une partie de l’env.
-
-- perception = inference on states / learning = inference on parameters 
-
-- l’action vient rectifier une erreur de prediction
-
-- le reward est un prior sur la solution cherchée.
-
-Rq : le concept d’energie libre est repris de Prigogine?.
-
-Après relecture :
-
-- Le terme d’energie libre se divise entre accuracy (distance entre les causes predites et les causes observées - innovation : idem Kalman et/ou Hidden Markov) et complexity (entropie du modele de la mesure).
-
-- La structure de resolution est analogue à EM. 
-E est l’inference des causes (par modele - ou mesure - inverse)
-avec modele : estimation de x* par filtre de Kalman ou particulaire ou Viterbi 
-avec identification du modele (recherche du modele generatif par inference - avec prior sur le nombre de causes...) 
-
-- exemple typique = apprentissage d’un dictionnaire (base orthonormale ou non). Pb : explosion combinatoire si sequences temporelles ou etats vectoriels (ou combinaison d’etats). Probleme mal posé.
-modele libre (absence de modele)
-
-Action based. RL classique. Analogie etat caché / valeur (sortie du modele representationnel. L’etat interne ne represente pas l’etat du monde exterieur mais simplement l’avantage qu’on peut en attendre. Rq : le couple (actionneurs + environnement = systeme controllé = domaine extensif - masses en deplacements) est en general connu , c’est à dire qu’on a une connaissance complete. Le couple acteur + critique est l’agent - domaine intensif). Model free -  Policy gradient. Apprentissage direct du repertoire d’actions
-(hierarchique) - Le prior est le posterior de la couche superieure (projection predictive en feed-back). La vraisemblance est le “matching” entre le signal de la couche inferieure et le filtre (feed-forward). “Bayesian surprise” - innovation = erreur perceptive
-
-Le modele libre est distinct du modele search. Ca conduit à l’idée d’information mutuelle sans d’identité.  
-
-M est l’identification (adaptative) du processus de mesure (ou du modele generatif ou du forward model). 
-
-Etape qu’on identifie à l’apprentissage. Idem apprentissage du perceptron et des reseaux de neurones en general (supervisé)  : pattern matching, max likelihood, ...
-
-Etape absente pour le filtre de Kalman ou les HMM. 
-
-Friston propose une maniere originale d’augmenter la likelihood (action qui maximise la vraisemblance perceptive) = passage du côté “obscur” de l’”action-oriented” perception (consequence perceptive de l’action) $\Rightarrow$ agir, c’est mettre le monde à l’epreuve
-
-En lien avec l’idée de sparsité $\Rightarrow$ minimiser la complexité en produisant des bases “sparse”
-
-- La logique EM est fondamentalement circulaire. Se resout classiquement par iteration sequentielle. On peut egalement supposer une difference d’échelle temporelle entre processus E (rapide) et processus M (lent). 
-
--  Le RL peut etre vu comme un algo EM avec prior sur le modele (dans ce cas les causes sont essentiellement les actions). L’etape E est le calcul de la valeur des transitions (vraisemblance (posterior) de l’action etant donné la sensation). L’etape M est la mise à jour de la fonction de valeur (etant donné le reward - ici vu comme une mesure de la likelihood de la consequence perceptive). $\rightarrow$ consequence (ou inversion de l’argument): est vraisemblable un patron perceptif qui est recompensé - Tout ce qui n’est pas soumis à un mecanisme de recompense n’est pas perçu (perception ou non-sens - Cf. Merleau Ponty - Phénoménologie de la perception).
-
-- F est la log vraisemblance marginale (sur posterior q(.) et mesure f(.)) qui se decompose en 2 termes : la divergence (surprise bayesienne - accuracy) servant à optimiser q(.) et la log vraisemblance conditionnelle (complexité) servant à optimiser f(.)
-
-- La dualité accuracy / complexity peut etre vue comme le substrat d’autres dualités findamentales selon que l’on met l’accent sur l’un ou sur l’autre (exploration/exploitation), conservation /innovation etc… On peut imaginer un seuil d’innovation (== vigilance) qui permet de remettre en cause le posterior courant.
-
-- Il y a un lien entre l’exigence de parcimonie et le principe de substrat à ressource/expressivité limitée. 
-
-- Le predictive coding est une théorie des rôles complementaires des connexions feed-forward et feed-back + implementations mathematique du principe “perception = correction d’erreur”
-
- Karl Friston : ce qui est perçu est principalement l'ecart à la prediction (predictive coding).  Dynamical Causal modelling.
-``{\emph Modern reformulations suggest
-that both inference on states (that is, perception) and
-inference on parameters (that is, learning) minimize
-free energy (that is, minimize prediction error) and
-serve to bound surprising exchanges with the world.}'' (Friston, 2010)
 
 
 
@@ -2402,13 +2406,27 @@ et aussi ``rewards correspond to innate priors that constrain policies.''}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     3.1      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Généralités}
+
+
+\subsection{Alternance comportementale en robotique autonome}
+
+L'approche dite ``située'' en robotique
+mobile et en intelligence artificielle \cite{Bro91,Varela91} prône la prise en compte de cette contrainte du corps
+comme élément structurant du développement de capacités cogitives plus élaborées.
+Cette contrainte, qui s'exprime par les dépendances sensori-motrices, et 
+la prise en compte des disparités d'échelle, augmente néanmoins considérablement la complexité des tâches
+d'apprentissage et de leur implémentation par plasticité synaptique. 
+
+L'interaction d'un substrat logiciel avec son environnement passe par des transducteurs, qui sont les canaux de 
+communication entre les deux milieux~:
+appareils sensoriels et proprioceptifs chez les animaux, et contractions musculaires permettant de déplacer des masses
+articulées; senseurs et actuateurs pour les dispositifs de contrôle artificiels : capteurs qui traduisent des signaux physiques
+en signaux électriques, moteurs, joints et pistons pour les déplacements de masses.
 
 Le cadre que nous avons regardé jusqu'à présent est l'apprentissage en ``boucle ouverte'',
 dans lequel les actions physiques sur le milieu sont découplées des sensations. 
 C'est le cadre classique du conditionnement Pavlovien où les stimuli déclenchent
 des réponses comportementales automatiques ou induites par l'apprentissage.
-
 La prise en compte plus réaliste
 des deux domaines matériels que sont le circuit logiciel et le milieu physique
 environnant conduit à déplacer 
@@ -2422,12 +2440,6 @@ le cours futur de la séance.
 La tâche n'est plus définie par rapport à la justesse des réponses instantanées, mais par rapport
 à la justesse de ce parcours dans l'espace des trajectoires possibles.
 
-L'interaction d'un substrat logiciel avec son environnement passe par des transducteurs, qui sont les canaux de 
-communication entre les deux milieux~:
-appareils sensoriels et proprioceptifs chez les animaux, et contractions musculaires permettant de déplacer des masses
-articulées; senseurs et actuateurs pour les dispositifs de contrôle artificiels : capteurs qui traduisent des signaux physiques
-en signaux électriques, moteurs, joints et pistons pour les déplacements de masses.
-
 Les systèmes de contrôle en boucle fermée appartiennent à la tradition cybernétique, initialement 
 formée autour de la commande à feedback négatif \cite{Wiener1965}. 
 Les systèmes cybernetiques sont essentiellement des boucles de régulation, qui maintiennent un certain
@@ -2436,17 +2448,98 @@ d'erreur. Dans ce schéma, la perception est principalement l'écart à la valeu
 est un déplacement moteur qui corrige l'écart observé.
 Les systèmes cybernétiques offrent un exemple élémentaire d'autonomie logicielle,
 avec une ``prise de décision'' basée sur des échanges de signaux entre le
-controleur et son environnement.
+contrôleur et son environnement.
 Le point d'opération (le point où l'on retourne) d'un tel système est analogue
 formellement aux attracteurs des systèmes dynamiques contraints. Un changement
 du signal d'entrée induit un déplacement vers un nouvel attracteur (une nouvelle configuration
 mécanique ou spatiale) où l'appareil se stabilise.
-[CONTROLE MOTEUR - SCHONER]
+%[CONTROLE MOTEUR - SCHONER]
 Concevoir bon contrôleur nécessite donc de connaître l'ensemble du dispositif, autrement dit le circuit
 logiciel, les mécanismes de transduction et l'effet des commandes motrices sur le
 signal sensoriel (le ``modèle du monde''). 
 Cet ensemble constitue un système dynamique, soumis à des influences extérieures 
 (les facteurs non modélisés) face auxquels le système produit des réponses.
+
+Le point de départ des études auxquelles j'ai participé dans ce contexte repose toujours sur les mêmes
+prémisses~: l'étude de mécanismes de plasticité permettant d'induire dans le substrat des dynamiques 
+plus simples face aux signaux appris. Placé dans le contexte de l'apprentissage en boucle fermée, l'idée est 
+qu'une activité interne plus simple se traduit par des couplages sensori-moteurs plus simples (ou plus prévisibles).
+l'apprentissage dans ce contexte revient à stabiliser certains patrons d'interaction (certains couplages sensori-moteurs
+particuliers). La mise en application de ces idées a été effectuiée dans le cadre d'un court séjour de fin de thèse (juillet 1999)
+au sein de l'équipe de neurocybernetique dirigée par Philippe Gaussier au laboratoire ETIS (Cergy-Pontoise).
+L'expérience a été conduite sur la plateforme de contrôle robotique PerAc \cite{Gaussier1995}. 
+
+L'architecture de contrôle était constituée de trois couches~: 
+deux couches primaires (une couche visuelle et une couche motrice) et une couche associative. L'apprentissage reposait
+sur l'imposition sur la couche motrice d'une commande périodique constituée d'une séquence de trois 
+déplacements angulaires distincts répétés indéfiniment. 
+A l'issue de l'apprentissage, les liens de feedback positif de la couche associative vers les couches primaires permettent au
+robot de produire une commande motrice (périodique) conforme à la séquence sensori-motrice observée pendant l'apprentissage
+(autrement dit de prédire son entrée visuelle en même temps que sa commande motrice). 
+Les entrées sensorielles et motrices sont contrôlées afin que la séquence visuelle soit bien prévisible pendant l'apprentissage.
+Pendant le test, on laisse de petits décalages angulaires liés aux frottements se produire, 
+introduisent un décalage progressif de la scène visuelle, et une perte de correspondance entre la prédiction et 
+l'observation.
+On observe alors, au niveau comportemental, une alternance claire entre un comportement périodique, correspondant à
+la tâche apprise, et un comportement irrégulier sans correspondance avec la tâche.
+Les rotations irrégulières induisent une succession de signaux visuels qui, par hasard, se mettent à correspondre 
+à la séquence apprise, et font basculer l'ensemble dans le régime périodique où les entrées visuelles redeviennent prévisibles.
+
+Cette expérience robotique offre un exemple clair de couplage entre une activité mécanique (des déplacements) et une activité 
+logicielle (un réseau de neurones récurrent). Une activité neuronale périodique couplée avec une activité mécanique périodique et/ou  
+une activité neuronale irrégulière couplée avec une activité mécanique irrégulière. 
+Le contrôle ne fonctionne pas sur la correction d'erreur, comme dans les systèmes cybernétiques, mais sur 
+la reconnaissance de formes spatio-temporelles (pattern matching) et sur la persistance de cette reconnaissance
+pour des versions dégradées du signal appris. 
+L'erreur (la non-correspondance) ne produit pas une correction mais une transition vers une activité irrégulière
+qui s'apparente à une exploration aléatoire de l'espace des couplages jusqu'à atteindre un nouvel
+attracteur comportemental.
+
+Une interprétation possible de ces résultats du point de vue de l'approche dynamique de la
+cognition articielle a été proposée dans le livre que j'ai co-édité avec Agnès Guillot en 2002 \cite{Gui02}
+est lié aux disparités spatiales et temporelles des couplages entre le milieu physique et le milieu logiciel.
+%Un dernier aspect de ces problématiques d'apprentissage en boucle fermée concerne les disparités spatiales et temporelles. 
+Par exemple, dans domaine biologique, les échelles de temps et d'espace des comportements macroscopiques 
+(mouvements, déplacements, activité courante)  
+se distinguent des échelles de temps et d'espace observées au niveau de l'activité
+nerveuse.
+Les actions produites par le corps sont à une échelle temporelle lente en comparaison des potentiels d'action
+produits par les neurones.
+En plus de la disparité d'échelle, les lois régissant les deux systèmes ne sont pas de même nature. 
+Le monde physique est assez bien décrit par 
+l'approximation newtonienne des masses en mouvement dans un milieu tri-dimensionnel.
+%On parlera pour simplifier du milieu extensif pour désigner le monde physique, l'endroit où sont
+%possibles des déplacements de masses par l'action des forces, les frottements et le contact. 
+A l'inverse, l'activité logicielle s'inscrit dans un substrat où l'intensité des interactions est 
+faiblement liée à la disposition spatiale, essentiellement produite par la connectique et 
+les transports d'activité électrique.
+%On parle pour simplifier de milieu intensif. % (ou milieu logiciel).
+La simplification qui consiste à considérer un milieu intérieur (intensif) et un milieu extérieur (extensif)
+couplés comme un seul et même système dynamique se heurte souvent au caractère inhomogène de ce couplage.
+
+L'idée est d'identifier le mécanisme de synchronisation transitoire, ou de résonance, au sein de systèmes constitués de nombreuses unités couplées, 
+\cite{Dau02c1} au mécanisme fondateur des transitions d'échelle. La non-reconnaissance correspondrait à une situation où le milieu neuronal 
+produit une activité à haut degré de liberté, sans effet macroscopique par absence de coordination. La reconnaissance correspondrait à 
+une situation où le milieu neuronal ``renonce'' transitoirement à ses degrés de liberté et se coordonne, favorisant le couplage 
+avec la dynamique macroscopique. La coordination de la population permet le passage à une description en terme de de masse neuronale, 
+perceptible au niveau de description supérieur, 
+caractérisé par une échelle spatiale plus large et une échelle temporelle plus lente,
+le même mécanisme pouvant en principe se décliner à différentes échelles.
+Cet type de mécanisme n'a pas encore, à ma connaissance, été implémenté dans des architectures de contrôle, 
+mais déjà a également été exprimé dans des formes voisines dans \cite{Konig1995} et \cite{Varela2001}.
+
+
+{\color{Violet}
+{\bf Daucé, E. (2002) Systèmes dynamiques pour les sciences cognitives, in Approche dynamique de la cognition artificielle, Guillot, A. and Daucé, E. eds :33-44, Lavoisier, Paris, France}
+
+- couplage = utilisation = perte d’autonomie transitoire (voir aussi introduction Hermes).  
+
+- controle supervise par modele inverse
+
+Dans EPJST, le corps fait partie de l'environnement
+}
+
+\subsection{Bruit créateur dans les architectures sensori-motrices}
 
 Considérons un dispositif logiciel contrôlant un appareil 
 ayant des interactions répétées avec son milieu.
@@ -2456,70 +2549,58 @@ Ce cahier des charges rejoint l'idée de méta-programme : il s'agit de produire
 qui améliorent les interactions du logiciel avec le milieu physique. 
 
 Un tel problème se formule de différentes manières.
-Une première approche consiste à faire en sorte que le logiciel enrichisse le modèle de monde, 
+Une première approche consiste à faire en sorte que le logiciel enrichisse le modèle du monde, 
 c'est à dire ``acquière des connaissances'' pour mieux prévoir les effets de ses actions sur 
 son environnement. Cette phase d'acquisition passe par le fait de ``tester'' le produit
 de ses actions par essai/erreur. Le simple fait de produire une commande arbitraire
 (aléatoire) permet de tester la conséquence sensorielle de cette commande, qui peut
-être confrontée au modèle. [BABBLING], utile en particulier pour l'apprentissage
-des contingences sensori-motrices [SMC - eSMCs].
+être confrontée au modèle, utile en particulier pour l'apprentissage
+des contingences sensori-motrices \cite{Andry2001}.
 Cette importance de la commande aléatoire dans l'acquisition de connaissance a été formalisé
-dans le cadre de \emph{l'apprentissage par renforcement}. [BARTO SUTTON]
+dans le cadre de \emph{l'apprentissage par renforcement} \cite{SUTTON98}
 Cette approche repose sur la notion de signal de renforcement, qui est un ``méta signal'' 
 dont le rôle est de transformer le manière dont le logiciel traite le signal,
-selon des modalités variées comme la consommation énergétique, l'exposition aux signaux nociceptifs ou euceptifs, 
+selon des modalités variées comme la consommation énergétique, l'exposition aux signaux nociceptifs ou bénéfiques, 
 ou encore la réduction d'incertitude.
 Si le milieu contient des éléments nocifs ou aversifs par exemple, l'amélioration 
 peut passer par une augmentation de la sensibilité logicielle à une classe de signaux 
 associés à (ou précurseurs de) la sensation aversive, et à une facilitation des comportements permettant de
 mieux éviter les situations où le signal aversif est présent. 
-La plupart des modèles de renforcement reposent sur des [LUT] et souffrent de problèmes
-d'explosion combinatoire.
+La plupart des modèles de renforcement reposent sur des tables de correspondance (``Look-up table''), adaptées
+aux environnements et aux choix d'action discrets, mais souffrent de problèmes
+d'explosion combinatoire dans des environnements continus et/ou complexes.
 
-Une autre manière de formaliser ce problème est proposée par [FRISTON]: 
-
-ces améliorations peuvent passer par deux stratégies : 
+Une autre manière de formaliser ce problème, comme proposée par Karl Friston \cite{Friston2010},
+repose sur l'idée d'une minimisation de la distance entre les éléments prédits et 
+observés de la scène perceptive (incluant les conséquence sensorielles
+des commandes motrices), sous la contrainte de l'expressivité du substrat, c'est à dire
+le nombre et le type de configurations (ou  formes) qu'il peut atteindre (ou atteint effectivement).
+Cette théorie de l'apprentissage en boucle fermée est une reformulation dans un contexte bio-inspiré des
+algorithmes d'optimisation utilisés en contrôle optimal \cite{Kalman1960} et en analyse des données \cite{Dempster1977}.
+Contrairement à l'apprentissage par renforcement, il s'agit d'une approche non-supervisée, fondée non sur un 
+modèle explicite (correspondance entre le modèle et la réalisté physique extérieure) 
+mais sur des jeux de contraintes entre le milieu extérieur et le milieu intérieur. 
+L'apport original de Friston est en particulier de considérer la commande motrice 
+comme une des modalités permettent de rectifier l'erreur de
+prédiction, au même titre que la plasticité synaptique par exemple.  
+La commande motrice permet ici de replacer les éléments de la scène à l'emplacement où le logiciel souhaite les voir,
+selon une configuration cible (un attracteur) que les couplages sensori-moteurs passés ont dicté.
+{\color{Violet} Le principe d'un déplacement moteur servant à confirmer (ou tester) la prédiction rejoint
+l'idée de perception active [SCANNING] - comportement d'orientation.}
+Ces améliorations de prédiction peuvent ainsi passer par deux stratégies : 
 l'amélioration du logiciel et/ou l'amélioration du milieu.
-
-Un autre stratégie est d'agir sur le milieu, en éloignant physiquement
-les facteurs aversifs du lieu où l'appareil évolue. 
+En reprenant l'exemple précédent (signaux aversifs dans l'environnement), un exemple de stratégie 
+d'action sur le milieu serait d'éloigner physiquement
+les facteurs aversifs du lieu où l'appareil évolue (sa niche). 
 Dans les deux cas, un changement physique (modification du logiciel ou modification du milieu)
 se traduit par une réduction de l'exposition au signal aversif. 
 
-
-Les échelles de temps et d'espace des comportements macroscopiques (mouvements, déplacements, activité courante)  
-se distinguent des échelles de temps et d'espace observées au niveau de l'activité
-nerveuse.
-Par exemple, dans domaine biologique, 
-les actions produites par le corps sont à une échelle temporelle lente en comparaison des potentiels d'action
-produits par les neurones.
-En plus de la disparité d'échelle, les lois régissant les deux systèmes ne sont pas de même nature. 
-Le monde physique est assez bien décrit par 
-l'approximation newtonienne des masses en mouvement dans un milieu tri-dimensionnel.
-On parlera pour simplifier du milieu extensif pour désigner le monde physique, l'endroit où sont
-possibles des déplacements de masses par l'action des forces, les frottements et le contact. 
-A l'inverse, l'activité logicielle s'inscrit dans un substrat où l'intensité des interactions est 
-faiblement liée à la disposition spatiale, essentiellement produite par la connectique et 
-les transports d'activité électrique.
-On parle pour simplifier de milieu intensif. % (ou milieu logiciel).
-
-[VARELA]
-
-Le niveau explicatif macroscopique
-
-à travers la notion d'action conjuguée. [AGIR SUR]
+{\color{Violet}
+Dualité exploration / exploitation}
 
 
-Le point de départ pour notre étude dans ce contexte est l'idée de chaos + augmentation/réduction
-de la complexité (du bruit) en fonction du degré de connaissance.
+{\color{Violet} A METTRE PLUS LOIN}
 
-{\bf Daucé, E. (2002) Systèmes dynamiques pour les sciences cognitives, in Approche dynamique de la cognition artificielle, Guillot, A. and Daucé, E. eds :33-44, Lavoisier, Paris, France}
-
-- couplage = utilisation = perte d’autonomie transitoire (voir aussi introduction Hermes).  
-
-- controle supervise par modele inverse
-
-Dans EPJST, le corps fait partie de l'environnement
 
 
 Ensuite, notion de bruit lent, de correspondance des échelles temporelles.
