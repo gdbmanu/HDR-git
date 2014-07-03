@@ -1190,7 +1190,7 @@ utilisées en apprentissage automatique, tels le ``compressive sensing'' \cite{B
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     1.3      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Codage topographique}
+\subsection{Codage topographique}\label{sec:NField}
 
 La vocation des modèles de champ neuronal \cite{Ama77B} est principalement la modélisation d'un substrat neuronal spatialisé vu à ``large échelle'' 
 (continuum d'activité sur la surface corticale).
@@ -1406,7 +1406,7 @@ La clé semble donc être la mise en évience de mécanismes similaires à diff�
 
 {\color{Violet} L'organisation à large échelle de l'activité du cerveau nécessite l'emploi de techniques d'imagerie BLA BLA.}
 
-
+{\bf [PASSAGE A UNE ARCHITECTURE COGNITIVE OBSERVEE (Connectome = archi cognitive)]}
 
 L'apparition récente des techniques de tractographie par tenseurs de diffusion \cite{leBihan2001} permet d'analyser 
 la matière blanche du cerveau pour suivre la direction des  faisceaux de fibres. 
@@ -2539,6 +2539,7 @@ mécanisme de désynchronisation, qui peut reposer sur des facteurs déstabilisa
 mauvaise correspondance internes ou externe, 
 mais également sur des mécanismes actifs de désynchronisation, comme la fatigue neuronale par exemple.
 
+%- Comportement d’itinerance au niveau du couple agent/environnement (robot ETIS). “Accrochage” = perte d’autonomie / information mutuelle. Alternance entre synchronisation et désynchronisation (bruit destructeur).
 
 {\color{Violet}
 {\bf Daucé, E. (2002) Systèmes dynamiques pour les sciences cognitives, in Approche dynamique de la cognition artificielle, Guillot, A. and Daucé, E. eds :33-44, Lavoisier, Paris, France}
@@ -2560,7 +2561,13 @@ Dans EPJST, le corps fait partie de l'environnement
 {\bf Quoy, M., Banquet, J.-P. and Daucé, E. (2001) Learning and control with chaos : from biology to robotics, Behavioral and Brain Sciences 24(5):824-825}
 }
 
-\subsection{Bruit créateur dans les architectures sensori-motrices}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     3.2      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Contrôle adaptatif en boucle fermée dans les réseaux récurrents aléatoires}
 
 Considérons un dispositif logiciel contrôlant un appareil 
 ayant des interactions répétées avec son milieu.
@@ -2621,30 +2628,41 @@ Dualité exploration / exploitation}
 
 Les réseaux de neurones récurrents aléatoires offrent, comme nous l'avons vu,
 un cadre propice à l'étude des couplages entre un milieu logiciel neuronal et un environnement
-physique. La dynamique contrainte d'un tel réseau présente des propriétés de système
+physique. 
+Notre approche se situe a posteriori à l'intersection de ces deux démarches. 
+D'une part, la dynamique contrainte d'un tel réseau présente des propriétés de système
 critique qui suggèrent une capacité à explorer différents répertoires comportementaux
 au cours d'un historique d'interactions avec un environnement.
-L'idée est donc d'exploiter cette complexité intrinsèque de la dynamique interne
+D'autre part, l'idée d'exploiter cette complexité intrinsèque de la dynamique interne
 pour stabiliser des couplages sensori-moteurs par des mécanismes de plasticité 
-utilisant des méta-signaux de type ``réussite/échec'', selon le principe de 
+utilisant des méta-signaux de type ``réussite/échec'' obéit aux principes de 
 l'apprentissage par renforcement.
 
-
-
 La traduction naturelle des algorithmes de renforcement dans un contexte de réseau de neurones récurrent est 
-l'application d'une règle Hebbienne pour favoriser les comportements conduisant à un méta-signal de positif,
-et l'application d'une plasticité anti-hebbienne pour défavoriser les comportements conduisant à un méta-signal négatif.
-Une différence enfin liée à la nature de la tâche est la nécessité de prendre en compte (et produire les 
+l'application d'une règle de plasticité dont le but est de favoriser les comportements conduisant à un méta-signal  positif.
+Ce type de tâche nécessite de prendre en compte (et produire les 
 modifications synaptiques) liées à la totalité de la trajectoire dans le cas de récompenses ponctuelles 
 (problème du ``temporal credit assignment'' \cite{SUTTON98}).
-L'utilisation de récompenses ponctuelles nécessite par ailleurs de mettre en place un mécanisme de trace synaptique, 
+L'utilisation de récompenses ponctuelles nécessite ainsi de mettre en place un mécanisme de trace synaptique, 
 c'est à dire une mémoire locale des co-activations récentes pour appliquer la modification synaptique, dans un sens
 Hebbien ou anti-Hebbien selon les cas. 
 
 Cette approche a été tentée sur des architectures analogues à \cite{Dau02} (couches primaires vs. couche associative récurrente)
 dans des environnements variés à états continus (robotiques simulée, pendule inverse, ...).
-Le comportement organisateur des règles Hebbiennes et le comportement désorganisateur des règles anti-Hebbiennes 
-était censé produire une comportement plus prédictible tendant à accroître la récompense moyenne.
+Ce principe conduit à la définition d'architectures où la commande motrice est 
+issue de l'activité de la (ou des) couche(s) associative.
+Les changements comportementaux reposent sur l'activité de cette couche associative, soumise à
+à une influence interne (l'activité intrinsèque) et une influence externe (signal en provenance de la couche sensorielle).
+%Le principe de base était d'assimiler la couche secondaire à une couche motrice, c'est à dire 
+%%d'assimiler l'activité irrégulière produite par cette couche à une activité motrice.
+En l'absence de consigne, la commande motrice doit en effet être le produit
+de l'activité interne. Le caractère irrégulier de l'activité initiale doit traduire 
+l'absence de direction privilégiée de la réponse motrice. 
+Le caractère organisateur des règles Hebbiennes était censé induire un comportement plus prédictible 
+au fil du temps.
+La prise en compte du signal de renforcement dans la règle de plasticité était censé augmenter la
+l'adéquation des comportements à la contrainte exprimée par le signal.
+
 Cette tâche s'est révélée beaucoup plus difficile à implémenter que la précédente. 
 Dans le cas précédent, la séquence à apprendre (le répertoire comportemental) était fixée par le concepteur. 
 Ici, le répertoire comportemental est supposé émerger des interactions avec l'environnement.
@@ -2666,10 +2684,7 @@ plusieurs influences, interne ou externe.
 Le terme limitatif  bloque la plasticité lorsqu'une classe de liens afférents atteint à elle seule
 le seuil d'activation du neurone.
 
-Ce principe conduit à la définition d'architectures où la commande motrice est 
-issue de l'activité de la (ou des) couche(s) associative.
-Les changements comportementaux reposent sur l'activité de cette couche secondaire, soumise à
-à une influence interne (l'activité intrinsèque) et une influence externe (signal en provenance de la couche sensorielle).
+
 Le premier papier présentant une application des problèmes de renforcement 
 dans le cadre de réseaux récurrents aléatoires a été publié dans les proceedings de 
 la conférence SAB'04 (Simulation of Adaptive Behaviors) \cite{Dau04b}. 
@@ -2701,6 +2716,7 @@ synapses différentes dans le cas de signaux de renforcement positifs et négati
 
 Un second modèle, présenté dans \cite{Dau07}, implémente cette fois-ci le principe 
 d'une application alternée de règles Hebbiennes (resp. anti-Hebbiennes) pour les récompenses positives (resp. négatives),
+conformément ausx idées exprimées dans \cite{dauce05},
 sur les liens excitateurs uniquement.
 L'architecture comprend cette fois-ci deux modules~: un module perceptif et un module moteur, constitués chacun d'une population
 excitatrice et d'une population inhibitrice.
@@ -2741,37 +2757,140 @@ selon la récompense, pour modifier la synapse.
 Cette règle présente de bonnes propriétés de convergence, et peut donc être appliquée de manière continuelle
 sans risque de faire diverger l'activité du réseau.
 
-L'implémentation de cette règle dans le cadre des réseaux récurrents aléatoires 
+L'interprétation de cette règle, dans le cadre des réseaux récurrents aléatoires, consiste à définir des activités
+``concurrentes'', et à leur assigner des rôles différents (bruit ou signal) selon les lieux. 
+Dans le schéma le plus simple (une couche
+primaire et une couche associative récurrente aléatoire), le signal d'origine sensorielle est interprété comme
+un terme de bruit par les synapses des axones récurrents, et, inversement le signal intrinsèque est interprété comme du bruit
+par les synapses des axones afférents.
+La plasticité repose ainsi sur l'écart entre la prédiction d'activité liée à l'influence d'un faisceau d'axones particulier
+et l'activité effective observée.
+Cette règle cherche dans ce cas à atteindre un point d`'équilibre entre les influences interne et externe pour établir la réponse motrice. 
+Dans un cadre de robotique simulée (non publié), cette règle a permis 
+de faire émerger un comportement d'évitement d'obstacles à partir de la perception d'un méta-signal aversif aux collisions.
 
-Premières implémentations : interprétation concurrente activité / bruit.
 
-L'activité chaotique intrinsèque est remplacée par unn bruit ``lent''. 
-Notion de bruit lent, de correspondance des échelles temporelles.
-
-
-
-
-%- Comportement d’itinerance au niveau du couple agent/environnement (robot ETIS). “Accrochage” = perte d’autonomie / information mutuelle. Alternance entre synchronisation et désynchronisation (bruit destructeur).
-
+{\color{Violet}
 {\bf 2007}
 
 - Modele en miroir
 
-- extension du Q-learning aux espaces d’entrée/sortie vectoriels. Idee etat interne = valeur.
+- Extension du Q-learning aux espaces d’entrée/sortie vectoriels. Idee etat interne = valeur. 
 
 slow external / fast internal
 
 intensif / extensif
 
-codage topographique / codage scalaire
 
-Closed form
+Closed loop
+}
+
+\subsection{Codage topographique et renforcement}
+
+J'ai contribué début 2007 à l'ecriture d'un projet ANR blanc intitulé ``MAPS'' (Mapping, Adaptation, Plasticity and Spatial Computation)
+qui a reçu un financement entre septembre 2007 et septembre 2010. 
+Cette recherche collaborative impliquait entre uatres Frédéric Alexandre, chercheur en neurosciences computationnelles au LORIA (Nancy), 
+Hélène Paugam-Moisy, professeur à l'université de Lyon, et Laurent Goffart, chercheur en neurosciences à l'INCM (Marseille).
+L'idée de ce projet était d'étudier la formation des comportements 
+
+Ce projet portait sur la notion de codage et de calcul par cartes topologiques. 
+Le codage topographique est une des manière d'exprimer des grandeurs
+continues (par exemple des vecteurs) dans un substrat neuronal. Le débat n'est pas tranché à l'heure actuelle pour savoir l'activité neuronale, 
+par nature discrète, traduit les grandeur continues de manière extensive (différents neurones étant assignés à différentes valeurs - ou intervalles) ou intensive (chaque neurone
+pouvant exprimer plusieurs valeurs par sa fréquence de décharge).
+L'étude du système visuel primaire, organisé autour de la topographie de la rétine, semble obéir à une organisation extensive où les différentes coordonnées
+du champ visuel sont assignées à des populations de neurones distinctes. 
+L'étude des zones motrices primaires plaident plutôt pour le caractère intensif de la commande musculaire,
+la contraction des muscles étant proportionnelle au taux de décharge.
+
+Le modèle fondateur du codage topographique est le champ neuronal (``Neural Field'') d'Amari \cite{Ama77B},
+déjà mentionné dans la section \ref{sec:NField}. Selon le noyau choisi, le réseau développe un ou plusieurs 
+foyers d'activité métastables dont les barycentres sont interprétables au choix comme un patron d'activité ou comme un
+ensemble de grandeurs scalaires.
+Le codage topographique est la manière la plus naturelle de représenter les signaux sensoriels 
+dans les architectures neuronales.
+Il correspond également aux observations sur l'organisation des couches sensorielles primaires (à l'exception de l'olfaction).
+Le codage topographique joue par ailleurs un rôle qui s'apparente à celui des fonctions noyau utilisées en 
+apprentissage automatique \cite{Scholkopf2002}.
+Le plongement des données d'entrée dans un espace de fonctions à noyau reproductible garantit en effet 
+l'existence d'un hyperplan séparateur permettant la discrimination des données.
+Cette meilleure séparabilité des données est obtenue au prix d'une augmentation de
+la complexité du classifieur (dimension de Vapnik).
+Dans le cas des architectures neuronales, le codage topographique repose sur l'activité de larges populations de neurones et
+représente donc un coût plus élevé que le codage fréquentiel, en principe implémentable sur un neurone isolé. 
+
+L'avantage du codage topographique est sa plus grande expressivité. Un foyer d'activité unique sur un substrat 
+bidimensionnel exprime ainsi une grandeur vectorielle (typiquement la position d'une cible sur une rétine).
+Les patrons d'activité plus complexes observés dans les couches primaires \cite{Bonhoeffer1991} caractérisent des relations spatiales entre des contours
+difficiles à exprimer à l'aide de simples neurones fréquentiels.
+Les patrons d'activité obtenus en codage topographique ont des caractéristiques qui suggèrent des mécanismes
+de contrôle de type ``point fixe'' dans lesquels la commande motrice est définie comme le point d'équilibre 
+entre différentes postures dans l'espace des tâches \cite{Schoner95,Mussa2004,Flash2005}. Cette théorie permet d'expliquer comment des
+variations d'activité, en agissant linéairement sur les différentes forces, ne déplacent pas le point d'équilibre.
+Le codage topographique suggère également un apprentissage ``par coeur'' des relations métriques entre les différents 
+référentiels sensoriels (extéroceptifs ou proprioceptifs). Dans ce schéma, la conséquence proprioceptive d'une commande motrice 
+visuelle (excentricité finale de l'oeil dans le globe oculaire suite à une saccade oculaire par exemple) doit être appris par
+essai/erreur. 
+ 
+%apprentissage ``par coeur'' pour lesquels l'apprentissage de multiples cartes . l'implémentation d'opérations d'additions par exemple nécessiterait l
+% l'apprentissage des tables d'addition pour prédire l'effet d'un déplacement moteur (référentiel rétinien) sur l'excentricité de l'oeil
+%(référentiel tête)
+
+Deux études portant sur des mécanismes d'apprentissage par renforcement dans des architectures neuronales ont
+été publiées dans ce cadre. 
+
+La première étude, publiée dans \cite{Dau09}, est une extension des architectures présentées dans la section
+précédente. La tâche est l'apprentissage d'un comportement de poursuite oculaire dans un environnement en
+forme de tore (de ``donut'').
+L'environnement contient une cible visuelle effectuant un mouvement circulaire simple.
+Deux populations de neurones à spikes sont utilisées. Le signal de renforcement est basé sur la distance
+entre l'orientation visuelle courante et la position de la cible. La couche primaire est une rétine avec
+une déformation ``fovéale'', sur la quelle la position de la cible est codée sous la forme d'une ``bulle'' d'activité.
+La deuxième couche est une couche motrice primaire constituée de 32 neurones, chaque neurone codant pour une direction différente. 
+La commande finale est la composition de ces commandes individuelles. 
+La principale différence avec le modèle précédent est l'absence d'activité intrinsèque dans la couche secondaire.
+Celle-ci est remplacée par un bruit exploratoire plus conforme à la théorie du Policy gradient.
+La plasticité porte alors sur les liens afférents qui vont progressivement faire émerger des champs récepteurs
+sur les neurones de la couche motrice.
+Les neurones se spécialisent progessivement en devenant plus sensibles aux activités 
+situées dans le champ visuel opposé à leur mouvement,
+implémentant un mécanisme de correction d'erreur.
+Le caractère régulier (et donc prévisible) du mouvement de la cible induit 
+de plus un composant rotatif, visible sur le diagramme du champ
+de mouvement.
+La différence principale avec les modèles ayant implémenté cette approche dans la littérature \cite{florian06}
+est l'utilisation d'un bruit ``lent'' dont le diagramme d'autocorrélation se rapproche de
+celui de l'erreur motrice (la distance à la cible). 
+Ce bruit lent est un composant essentiel permettant de réduire considérablement les durées d'apprentissage,
+puisqu'il permet de tester des réponses (des écarts à l'activité induite par la couche primaire) situés sur 
+la même échelle temporelle que l'erreur motrice.
+
+L'activité intrinsèque structurée des modèles précédents est donc remplacée par un bruit structuré dont
+les caractéristiques sont plus faciles à maîtriser, au prix de la perte des possibilité de mise 
+en résonance de l'activité intrinsèque étudiée dans les premiers modèles.
+
+Le deuxième modèle [TODO]
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     3.2      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Contrôle adaptatif en boucle fermée} 
+
+
+
+
+\subsection{Apprendre et oublier dans les environnements non-stationnaires}
+
+{\bf 2011}
+
+- Policy gradient dans les BCI. Reward adaptatif. Baseline optimale. 
+
+{\bf 2013}
+
+- Oddball problem / lien avec convolution networks et/ou ranking.
+
+- Approche adaptative des BCI : label free logistic gradient descent avec accumulation d’évidence + subject-independent classifier.
+
+- Hongliang : Passive Agressive + bandit feedback
+
+
 
 
 NB : modèles feed-forward pour saccade - bras - BCI 
@@ -2842,6 +2961,14 @@ principe général :
 
 \subsection{Modèles de l'orientation spatiale}
 
+Un des buts du projet ANR MAPS était de proposer une modélisation du comportement d'orientation visuelle,  à travers
+l'étude du système saccadique. Ce système, situé dans le tectum (partie supérieure du tronc cérébral) au niveau des couches profondes
+du colliculus supérieur, développe une activité topographiqement organisée responsable de la commande
+des mouvements rapides des globes oculaires, certains aspects de la commande (déplacement relatif) semblant directement
+liés à la position du foyer d'activité à la surface du colliculus, et d'autres aspects (comme la vitesse de déplacement)
+semblant liés à la fréquence de écharge des neurones.
+
+
 {\bf 2010}
 
 - A. Mouraud : mecanisme integrateur. Dual drive. 
@@ -2868,20 +2995,6 @@ $\Rightarrow$ prior $\simeq$ ``\% up to now'' (subjective time)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     4.3      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Apprendre et oublier dans les environnements non-stationnaires}
-
-{\bf 2011}
-
-- Policy gradient dans les BCI. Reward adaptatif. Baseline optimale. 
-
-{\bf 2013}
-
-- Oddball problem / lien avec convolution networks et/ou ranking.
-
-- Approche adaptative des BCI : label free logistic gradient descent avec accumulation d’évidence + subject-independent classifier.
-
-- Hongliang : Passive Agressive + bandit feedback
 
 
 
@@ -2960,7 +3073,7 @@ La question de l'apprentissage  devient la question de construire des programmes
 de l'environnement. Cette question étant posée (comment modifier le programme sans intervention humaine), le formalisme des réseaux de neurones et du calcul distribué 
 s'est révélé le plus apte à traiter la question --> le perceptron. 
 
-\bibliographystyle{unsrt}%{apacite}
+\bibliographystyle{apalike}%{apacite}
 \bibliography{biblio}
 
 
