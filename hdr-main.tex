@@ -2789,24 +2789,27 @@ Closed loop
 
 J'ai contribué début 2007 à l'ecriture d'un projet ANR blanc intitulé ``MAPS'' (Mapping, Adaptation, Plasticity and Spatial Computation)
 qui a reçu un financement entre septembre 2007 et septembre 2010. 
-Cette recherche collaborative impliquait entre uatres Frédéric Alexandre, chercheur en neurosciences computationnelles au LORIA (Nancy), 
+Cette recherche collaborative impliquait entre autres Frédéric Alexandre, chercheur en neurosciences computationnelles au LORIA (Nancy), 
 Hélène Paugam-Moisy, professeur à l'université de Lyon, et Laurent Goffart, chercheur en neurosciences à l'INCM (Marseille).
-L'idée de ce projet était d'étudier la formation des comportements 
 
-Ce projet portait sur la notion de codage et de calcul par cartes topologiques. 
+Ce projet portait sur la notion de codage topographique et de calcul par champ (``Field computation'' [REF]). 
 Le codage topographique est une des manière d'exprimer des grandeurs
-continues (par exemple des vecteurs) dans un substrat neuronal. Le débat n'est pas tranché à l'heure actuelle pour savoir l'activité neuronale, 
-par nature discrète, traduit les grandeur continues de manière extensive (différents neurones étant assignés à différentes valeurs - ou intervalles) ou intensive (chaque neurone
+continues dans un substrat neuronal. 
+Le débat n'est pas tranché à l'heure actuelle pour savoir l'activité neuronale, 
+par nature discrète, traduit les grandeur continues de manière extensive 
+(différents neurones étant assignés à différentes valeurs - ou intervalles) 
+ou intensive (chaque neurone
 pouvant exprimer plusieurs valeurs par sa fréquence de décharge).
-L'étude du système visuel primaire, organisé autour de la topographie de la rétine, semble obéir à une organisation extensive où les différentes coordonnées
+Le système visuel primaire, organisé autour de la topographie de la rétine, semble par exemple 
+obéir à une organisation extensive où les différentes coordonnées
 du champ visuel sont assignées à des populations de neurones distinctes. 
-L'étude des zones motrices primaires plaident plutôt pour le caractère intensif de la commande musculaire,
+L'étude des zones motrices primaires plaident plutôt pour un caractère intensif de l'activité motrice,
 la contraction des muscles étant proportionnelle au taux de décharge.
 
 Le modèle fondateur du codage topographique est le champ neuronal (``Neural Field'') d'Amari \cite{Ama77B},
 déjà mentionné dans la section \ref{sec:NField}. Selon le noyau choisi, le réseau développe un ou plusieurs 
-foyers d'activité métastables dont les barycentres sont interprétables au choix comme un patron d'activité ou comme un
-ensemble de grandeurs scalaires.
+foyers d'activité métastables  interprétables au choix comme un patron d'activité ou comme un
+ensemble de grandeurs scalaires (en fonction des barycentres des foyers d'activité).
 Le codage topographique est la manière la plus naturelle de représenter les signaux sensoriels 
 dans les architectures neuronales.
 Il correspond également aux observations sur l'organisation des couches sensorielles primaires (à l'exception de l'olfaction).
@@ -2816,25 +2819,29 @@ Le plongement des données d'entrée dans un espace de fonctions à noyau reprod
 l'existence d'un hyperplan séparateur permettant la discrimination des données.
 Cette meilleure séparabilité des données est obtenue au prix d'une augmentation de
 la complexité du classifieur (dimension de Vapnik).
-Dans le cas des architectures neuronales, le codage topographique repose sur l'activité de larges populations de neurones et
-représente donc un coût plus élevé que le codage fréquentiel, en principe implémentable sur un neurone isolé. 
+Dans le cas des architectures neuronales, le codage topographique repose sur l'activité 
+de larges populations de neurones, et
+représente donc un coût plus élevé que le codage fréquentiel, 
+en principe implémentable sur un neurone isolé. 
 
-L'avantage du codage topographique est sa plus grande expressivité. Un foyer d'activité unique sur un substrat 
+L'avantage du codage topographique est sa plus grande expressivité. 
+Un foyer d'activité unique sur un substrat 
 bidimensionnel exprime ainsi une grandeur vectorielle (typiquement la position d'une cible sur une rétine).
 Les patrons d'activité plus complexes observés dans les couches primaires \cite{Bonhoeffer1991} caractérisent des relations spatiales entre des contours
 difficiles à exprimer à l'aide de simples neurones fréquentiels.
-Les patrons d'activité obtenus en codage topographique ont des caractéristiques qui suggèrent des mécanismes
-de contrôle de type ``point fixe'' dans lesquels la commande motrice est définie comme le point d'équilibre 
-entre différentes postures dans l'espace des tâches \cite{Schoner95,Mussa2004,Flash2005}. Cette théorie permet d'expliquer comment des
+Les caractéristiques du codage topographique suggèrent par ailleurs des mécanismes
+de contrôle de type ``point fixe'' où la commande motrice est définie comme le point d'équilibre 
+entre différentes postures dans l'espace des tâches \cite{Schoner95,Mussa2004,Flash2005}. 
+Cette théorie permet d'expliquer comment les
 variations d'activité, en agissant linéairement sur les différentes forces, ne déplacent pas le point d'équilibre.
-Le codage topographique suggère également un apprentissage ``par coeur'' des relations métriques entre les différents 
-référentiels sensoriels (extéroceptifs ou proprioceptifs). Dans ce schéma, la conséquence proprioceptive d'une commande motrice 
-visuelle (excentricité finale de l'oeil dans le globe oculaire suite à une saccade oculaire par exemple) doit être appris par
+Le codage topographique suggère également un apprentissage ``par coeur'' des relations 
+métriques entre les différents 
+référentiels sensoriels (extéroceptifs ou proprioceptifs). 
+Dans ce schéma, la conséquence proprioceptive d'une commande motrice 
+visuelle (excentricité finale de l'oeil dans le globe oculaire suite 
+à une saccade oculaire par exemple) doit être appris par
 essai/erreur. 
  
-%apprentissage ``par coeur'' pour lesquels l'apprentissage de multiples cartes . l'implémentation d'opérations d'additions par exemple nécessiterait l
-% l'apprentissage des tables d'addition pour prédire l'effet d'un déplacement moteur (référentiel rétinien) sur l'excentricité de l'oeil
-%(référentiel tête)
 
 Deux études portant sur des mécanismes d'apprentissage par renforcement dans des architectures neuronales ont
 été publiées dans ce cadre. 
@@ -2846,34 +2853,50 @@ L'environnement contient une cible visuelle effectuant un mouvement circulaire s
 Deux populations de neurones à spikes sont utilisées. Le signal de renforcement est basé sur la distance
 entre l'orientation visuelle courante et la position de la cible. La couche primaire est une rétine avec
 une déformation ``fovéale'', sur la quelle la position de la cible est codée sous la forme d'une ``bulle'' d'activité.
-La deuxième couche est une couche motrice primaire constituée de 32 neurones, chaque neurone codant pour une direction différente. 
+La deuxième couche est une couche motrice primaire constituée de 32 neurones, 
+chaque neurone codant pour une direction différente. 
 La commande finale est la composition de ces commandes individuelles. 
-La principale différence avec le modèle précédent est l'absence d'activité intrinsèque dans la couche secondaire.
+La principale différence avec le dernier modèle 
+de la section précédente est l'absence d'activité intrinsèque dans la couche secondaire.
 Celle-ci est remplacée par un bruit exploratoire plus conforme à la théorie du Policy gradient.
 La plasticité porte alors sur les liens afférents qui vont progressivement faire émerger des champs récepteurs
 sur les neurones de la couche motrice.
-Les neurones se spécialisent progessivement en devenant plus sensibles aux activités 
+Les neurones se spécialisent progressivement en devenant plus sensibles aux activités 
 situées dans le champ visuel opposé à leur mouvement,
 implémentant un mécanisme de correction d'erreur.
 Le caractère régulier (et donc prévisible) du mouvement de la cible induit 
-de plus un composant rotatif, visible sur le diagramme du champ
+de plus un composant rotationnel, visible sur le champ
 de mouvement.
-La différence principale avec les modèles ayant implémenté cette approche dans la littérature \cite{florian06}
+La différence principale avec des modèles similaires \cite{florian06}
 est l'utilisation d'un bruit ``lent'' dont le diagramme d'autocorrélation se rapproche de
 celui de l'erreur motrice (la distance à la cible). 
-Ce bruit lent est un composant essentiel permettant de réduire considérablement les durées d'apprentissage,
-puisqu'il permet de tester des réponses (des écarts à l'activité induite par la couche primaire) situés sur 
-la même échelle temporelle que l'erreur motrice.
+Ce bruit lent permet de réduire 
+considérablement les durées d'apprentissage,
+en testant les réponses (les écarts à l'activité induite par la couche primaire) sur une échelle 
+temporelle similaire à l'erreur motrice.
 
-L'activité intrinsèque structurée des modèles précédents est donc remplacée par un bruit structuré dont
-les caractéristiques sont plus faciles à maîtriser, au prix de la perte des possibilité de mise 
-en résonance de l'activité intrinsèque étudiée dans les premiers modèles.
+L'activité intrinsèque des modèles précédents est donc remplacée par un bruit structuré dont
+les caractéristiques sont plus faciles à maîtriser, au prix de la perte de certaines caractéristiques 
+comme la réduction de complexité (la réduction du bruit) à l'issue de l'apprentissage.
 
-Le deuxième modèle [TODO]
+Le deuxième modèle, présenté dans \cite{Dauce Dutech}, est l'équivalent linéaire de l'architecture 
+précédente. Ce modèle simplifié est appliqué à des tâches de contrôle plus complexes.
+Il fournit également une méthodologie d'apprentissage par renforcement relativement originale, 
+bien adaptée aux environnements continus.
+Le traitement d'etats continus passe, comme déjà proposé par \cite{Dya00}, par l'utilisation
+de fonctions noyau qui réalisent un codage topographique des grandeur extensives perçues~: position 
+(et vitesse) de
+la cible et de l'effecteur final dans l'espace visuel rétinocentré, et données proprioceptives 
+(positions angulaires des joints des effecteurs).
+Deux tâches sont étudiées. Une première tâche, en boucle ouverte, 
+est l'apprentissage de saccades vers des cibles en
+mouvement, avec une rétine fovéale. 
+[TODO permet de tester principalement l'hypothèse de double drive (Keller)) 
+- voir les transparents RNCM + apprentissage par coeur]
 
-
-
-
+La seconde tâche est l'apprentissage du contrôle
+d'un bras articulé à nombreux degrés de liberté (tâche dite de cynématique inverse).
+[TODO : optimisation non convexe. Apprentissage par coeur des changements de référentiel]
 
 
 \subsection{Apprendre et oublier dans les environnements non-stationnaires}
