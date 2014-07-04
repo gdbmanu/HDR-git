@@ -1496,7 +1496,7 @@ connectivité structurelle / fonctionnelle
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Introduction}
+\subsection{Introduction}
 
 La plasticité est un processus physique qui impacte le comportement d'un substrat,
 en modifiant son activité, sa réactivité à certaines entrées, ou le type de
@@ -1985,13 +1985,13 @@ L'extension de ces résultats à des modèles plus réalistes biologiquement a �
 avec Frédéric Henry, un étudiant ayant fait son master de sciences cognitives à Lyon, qui 
 a obtenu une bourse ministérielle de l'école doctorale de sciences du mouvement (ED 463).
 J'ai co-dirigé les travaux de cet étudiant avec Gilles Montagne entre septembre 2005 et juin 2008.
-Frédéric Henry a continué à travailler sur le sujet une année supplémentaire en tant qu'ATER à l'université de Lille
-(2008-2009).
+%Frédéric Henry a continué à travailler sur le sujet une année supplémentaire en tant qu'ATER à l'université de Lille
+%(2008-2009).
 L'enjeu du passage aux réseaux de neurones à potentiels d'action était la possibilité d'une prise en compte
 plus fine des aspects temporels de l'activité neuronale, en considérant les délais de transmission (qui peuvent être
 variés) et l'ordre de tir sur des échelles de temps de l'ordre de la milliseconde.
-Frédéric Henry a travaillé sur un simulateur de résaux de neurones impulsionnels qu'il a développé lui-même.
-Ce simulateur permettait de simuler des délais de transmission variables entre les différents
+Frédéric Henry a travaillé sur un simulateur de résaux de neurones impulsionnels,
+ce simulateur permettant de simuler des délais de transmission variables entre les différents
 neurones. Il implémentait également différentes règles de plasticité synaptique, dont la STDP (Spike-Timing Dependent
 Plasticity).
 
@@ -2278,7 +2278,7 @@ Si la réponse est incorrecte, c'est l'anti-STDP qui est appliquée,
 tendant à retarder la réponse.
 Le papier \cite{henry07} utilise des signaux temporels très lents, où
 la séquence est composée de 4 motifs durant chacun 100 ms, de sorte qu'une séquence
-complète dure 400 ms. Dans ce cas, le temps ncessaire pour atteindre des taux
+complète dure 400 ms. Dans ce cas, le temps nécessaire pour atteindre des taux
 de réussite raisonnables s'exprime en heures (environ 100000 essais).
 Les résultats présentés dans \cite{Dau06} utilisent un pas des séquences plus courtes (40 ms).
 Dans ce cas, environ 500 essais suffisent pour obtenir une discrimination parfaite.
@@ -2783,6 +2783,30 @@ intensif / extensif
 
 
 Closed loop
+
+{\bf 2002}
+
+- Tentatives contrôle en boucle fermée (Khepera). Premieres implementation du RL (reward-based learning) avec Hebb et anti-Hebb. 
+
+{\bf 2003-2004}
+
+- RL hebbien concurrent  : signal/bruit
+
+- prémisses de la règle de policy gradient (1-P) xi(t) xj(t-1)
+
+{\bf Daucé, E. (2004) Hebbian reinforcement learning in a modular dynamic network, proc. of the eighth international conference on Simulation of Adaptive Behavior : From Animals to Animats (SAB*04), Schaal, S. et al. eds:305-314, July 13-17, Los Angeles, CA, USA}
+
+- lien Hebb et PG?
+
+- alternance bruit/signal (selon la classe de liens)
+
+
+{\bf 2005}
+
+{\bf Daucé, E., Soula, H. and Beslon, G. (2005) Learning Methods for Dynamic Neural Networks, proc. of the 2005 International Symposium on Nonlinear Theory and its Applications (NOLTA'05):598-601, Oct. 18-21, Bruges, Belgium}
+
+- RL / chaos $\Rightarrow$ exploration chaotique
+
 }
 
 \subsection{Codage topographique et renforcement}
@@ -2842,7 +2866,6 @@ visuelle (excentricité finale de l'oeil dans le globe oculaire suite
 à une saccade oculaire par exemple) doit être appris par
 essai/erreur. 
  
-
 Deux études portant sur des mécanismes d'apprentissage par renforcement dans des architectures neuronales ont
 été publiées dans ce cadre. 
 
@@ -2891,13 +2914,69 @@ la cible et de l'effecteur final dans l'espace visuel rétinocentré, et donnée
 Deux tâches sont étudiées. Une première tâche, en boucle ouverte, 
 est l'apprentissage de saccades vers des cibles en
 mouvement, avec une rétine fovéale. 
-[TODO permet de tester principalement l'hypothèse de double drive (Keller)) 
-- voir les transparents RNCM + apprentissage par coeur]
+La commande motrice est ici sous l'influence de deux couches topographiques primaires 
+(une couche qui perçoit la position et une couche qui perçoit la vitesse)
+et la commande apprise est la combinaison linéaire de deux commandes (deux champs
+de mouvement) distincts, conformément à l'hypothèse de ``double drive'' proposée
+par \cite{KELLER} dans le cadre de l'étude de la saccade occulaire.
+Le point intéressant est que les différents termes de bruit sur les noeuds de
+sortie développent une variabilité suffisante pour permettre à
+la règle de plasticité de dissocier les deux composantes de la commande.
+[- voir les transparents RNCM + apprentissage par coeur]
 
 La seconde tâche est l'apprentissage du contrôle
 d'un bras articulé à nombreux degrés de liberté (tâche dite de cynématique inverse).
-[TODO : optimisation non convexe. Apprentissage par coeur des changements de référentiel]
+La scène visuelle est constituée d'une carte bidimensionnelle donnant la position de
+la cible. Les données proprioceptives sont 
+également apportées sous forme de quatre cartes unidimensionnelles traduisant la position 
+angulaire des différents joints.
+La tâche consistant à guider l'extrémité du bras vers la cible est une tâche de contrôle
+inversé (il faut trouver la combinaison de positions angulaires qui fait coïncider la position
+effective de la cible avec la position effective de l'extrémité du bras).
+Il s'agit d'une tâche d'optimisation non convexe (de nombreuses 
+solutions existent). L'utilisation d'une entrée topographique permet néanmoins 
+de ``lisser'' la solution, des positions visuellement proches conduisant à
+des réponses motrices proches.
+Dans le cadre de la tâche en boucle fermée, 
+la cible effectue périodiquement des ``sauts'' aléatoires dans l'espace visuel.
+La tâche consiste donc à suivre les mouvements de cette cible avec le
+bras articulé.
+La commande motrice produit des déplacements angulaires, ce qui permet d'apprendre
+un mouvement relatif à la position courante du bras
+(et non un mouvement absolu par rapport à la position de la cible dans le champ visuel
+seul, comme dans le cas de la tâche en boucle ouverte).
+Le contrôleur doit donc utiliser l'information proprioceptive pour produire sa commande motrice.
+Dans ce cas, le contrôleur apprend une commande liée à la différence entre la position de 
+la cible et la position de l'effecteur final déduite des données proprioceptives,
+par combinaison linéaire du champ récepteur visuel et des champs proprioceptifs angulaires.
+Une autre façon de voir les choses est de dire que la commande motrice est calculée
+à partir du référentiel constitué par la position courante du bras articulé.
 
+{\color{red} [TODO : modèle complémentaire (pour saccade ou bras articulé) : 
+entrée visuelle relative (rétinienne) et commande motrice de type point fixe]}
+
+Cette étude permet d'aborder la question de la prise en compte de différents référentiels
+dans l'élaboration d'une commande motrice. Certaines donnéess sensorielles sont définies dans un certain référentiel
+(référentiel de la rétine pour l'oeil par exemple) tandis que 
+les commandes opèrent dans un référentiel différent (référentiel du tronc
+dans le cas de la saccade). 
+Cette étude apporte une intuition sur le principe d'un apprentissage 
+``par coeur'' des règles de translation permettant de pendre en compte la
+position du corps dans l'élaboration de la commande motrice dans le cadre
+du codage topographiqe.
+
+
+{\color{Violet}
+NB : modèles feed-forward pour saccade - bras - BCI 
+
+{\bf 2009}
+
+- Slow noise for RL in spiking neural networks
+
+{\bf 2010}
+
+- RL in continuous time and space (avec Alain D)
+}
 
 \subsection{Apprendre et oublier dans les environnements non-stationnaires}
 
@@ -2916,38 +2995,7 @@ d'un bras articulé à nombreux degrés de liberté (tâche dite de cynématique
 
 
 
-NB : modèles feed-forward pour saccade - bras - BCI 
 
-{\bf 2002}
-
-- Tentatives contrôle en boucle fermée (Khepera). Premieres implementation du RL (reward-based learning) avec Hebb et anti-Hebb. 
-
-{\bf 2003-2004}
-
-- RL hebbien concurrent  : signal/bruit
-
-- prémisses de la règle de policy gradient (1-P) xi(t) xj(t-1)
-
-{\bf Daucé, E. (2004) Hebbian reinforcement learning in a modular dynamic network, proc. of the eighth international conference on Simulation of Adaptive Behavior : From Animals to Animats (SAB*04), Schaal, S. et al. eds:305-314, July 13-17, Los Angeles, CA, USA}
-
-- lien Hebb et PG?
-
-- alternance bruit/signal (selon la classe de liens)
-
-
-{\bf 2005}
-
-{\bf Daucé, E., Soula, H. and Beslon, G. (2005) Learning Methods for Dynamic Neural Networks, proc. of the 2005 International Symposium on Nonlinear Theory and its Applications (NOLTA'05):598-601, Oct. 18-21, Bruges, Belgium}
-
-- RL / chaos $\Rightarrow$ exploration chaotique
-
-{\bf 2009}
-
-- Slow noise for RL in spiking neural networks
-
-{\bf 2010}
-
-- RL in continuous time and space (avec Alain D)
 
 
 % David Marr : fonctions du cervelet, du neocortex et de l'hippocampe.
