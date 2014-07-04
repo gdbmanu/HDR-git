@@ -2280,7 +2280,7 @@ Le papier \cite{henry07} utilise des signaux temporels très lents, où
 la séquence est composée de 4 motifs durant chacun 100 ms, de sorte qu'une séquence
 complète dure 400 ms. Dans ce cas, le temps nécessaire pour atteindre des taux
 de réussite raisonnables s'exprime en heures (environ 100000 essais).
-Les résultats présentés dans \cite{Dau06} utilisent un pas des séquences plus courtes (40 ms).
+Les résultats présentés dans \cite{Dau06} utilisent des séquences plus courtes (40 ms).
 Dans ce cas, environ 500 essais suffisent pour obtenir une discrimination parfaite.
 
 La discrimination entre les différentes séquences temporelles repose sur l'entretien
@@ -2298,7 +2298,7 @@ au sein de la population. La difficulté à discriminer les séquences de 400 ms
 néanmoins fixer la limite supérieure de cette capacité (100 ms étant en pratique suffisants 
 pour discriminer deux séquences).
 Cette étude semble donc a posteriori confirmer certains résultats suggérés plus haut sur 
-le caractère plus séquentiel de l'activité induite par la plasticité, support ici de la mémoire à court terme.
+le caractère séquentiel de l'activité induite par la plasticité, support ici de la mémoire à court terme.
 
 L'application alternée des plasticités hebbienne et anti-hebbienne ouvre par ailleurs la voie
 à l'implémentation de mécanismes d'apprentissage par renforcement dans les substrats neuronaux, 
@@ -2521,7 +2521,7 @@ couplés comme un seul et même système dynamique, se heurte souvent au caract�
 
 L'idée est d'interpréter le mécanisme de synchronisation transitoire, ou de résonance, au sein de systèmes constitués de nombreuses unités couplées, 
  comme un mécanisme dont le rôle est de favoriser la communication entre les différentes échelles \cite{Dau02c1}. 
- Cet type de mécanisme n'est pas encore, à ma connaissance, implémenté dans des architectures de contrôle, 
+ Ce type de mécanisme n'est pas encore, à ma connaissance, implémenté dans des architectures de contrôle, 
 mais son importance a déjà été souligné dans \cite{Konig1995} et \cite{Varela2001}.
 La non-reconnaissance correspondrait à une situation où le milieu neuronal 
 produit une activité à haut degré de liberté, sans effet macroscopique par absence de coordination. La reconnaissance correspondrait à 
@@ -2609,7 +2609,7 @@ Contrairement à l'apprentissage par renforcement, il s'agit d'une approche non-
 modèle explicite (correspondance entre le modèle et la réalisté physique extérieure) 
 mais sur des jeux de contraintes entre le milieu extérieur et le milieu intérieur. 
 L'apport original de Friston est en particulier de considérer la commande motrice 
-comme une des modalités permettent de rectifier l'erreur de
+comme une des modalités permettant de rectifier l'erreur de
 prédiction, au même titre que la plasticité synaptique par exemple.  
 La commande motrice permet ici de replacer les éléments de la scène à l'emplacement où le logiciel souhaite les voir,
 selon une configuration cible (un attracteur) que les couplages sensori-moteurs passés ont dicté.
@@ -2629,7 +2629,7 @@ Dualité exploration / exploitation}
 Les réseaux de neurones récurrents aléatoires offrent, comme nous l'avons vu,
 un cadre propice à l'étude des couplages entre un milieu logiciel neuronal et un environnement
 physique. 
-Notre approche se situe a posteriori à l'intersection de ces deux démarches. 
+Notre approche se situe  à l'intersection des deux démarches évoquées. 
 D'une part, la dynamique contrainte d'un tel réseau présente des propriétés de système
 critique qui suggèrent une capacité à explorer différents répertoires comportementaux
 au cours d'un historique d'interactions avec un environnement.
@@ -2651,7 +2651,7 @@ Cette approche a été tentée sur des architectures analogues à \cite{Dau02} (
 dans des environnements variés à états continus (robotiques simulée, pendule inverse, ...).
 Ce principe conduit à la définition d'architectures où la commande motrice est 
 issue de l'activité de la (ou des) couche(s) associative.
-Les changements comportementaux reposent sur l'activité de cette couche associative, soumise à
+Les changements comportementaux reposent sur l'activité de cette couche associative, soumise 
 à une influence interne (l'activité intrinsèque) et une influence externe (signal en provenance de la couche sensorielle).
 %Le principe de base était d'assimiler la couche secondaire à une couche motrice, c'est à dire 
 %%d'assimiler l'activité irrégulière produite par cette couche à une activité motrice.
@@ -2660,7 +2660,7 @@ de l'activité interne. Le caractère irrégulier de l'activité initiale doit t
 l'absence de direction privilégiée de la réponse motrice. 
 Le caractère organisateur des règles Hebbiennes était censé induire un comportement plus prédictible 
 au fil du temps.
-La prise en compte du signal de renforcement dans la règle de plasticité était censé augmenter la
+La prise en compte du signal de renforcement dans la règle de plasticité était censé augmenter
 l'adéquation des comportements à la contrainte exprimée par le signal.
 
 Cette tâche s'est révélée beaucoup plus difficile à implémenter que la précédente. 
@@ -2979,6 +2979,61 @@ NB : modèles feed-forward pour saccade - bras - BCI
 }
 
 \subsection{Apprendre et oublier dans les environnements non-stationnaires}
+
+J'ai obtenu une délégation INRIA entre septembre 2008 et aout 2009 au sein de l'équipe
+SequeL (Sequential Learning) dirigée par Rémi Munos au sein du centre INRIA Lille-Nord Europe.
+L'équipe de Rémi Munos travaille sur l'apprentissage statistique et plus particulièrement 
+sur le dilemne exploration/exploitation bien connu en apprentissage automatique, exprimé sous sa
+forme la plus simple 
+comme un problème d'échantillonnage aléatoire de l'espace des choix (problème dit du ``bandit manchot'').
+Chaque tirage apporte une information qu'il convient d'exploiter au mieux, en établissant un compromis
+entre recherche d'information (réduction d'incertitude) et exploitation effective de l'information 
+(pour maximiser le gain).
+Cette forme d'apprentissage séquentiel établit des modèles qui visent à réduire 
+la différence entre les gains obtenus par l'algorithme et les gains
+attendus en toute connaissance du modèle.
+L'apprentissage séquentiel statistique est le socle d'une famille de méthodes d'apprentissage 
+fondée sur l'échantillonnage de l'environnement, comme le Q-learning ou le TD-learning dans le
+cadre de l'apprentissage par renforcement classiques. Cette approche a renouvelé le domaine, en proposant 
+par exemple des politiques non-stochastiques (algorithme UCB), ou en étendant le modèle au cas ``adversairial'' 
+(théorie des jeux) \cite{Auer2002}. 
+
+Ce séjour à Lille a été le point de départ d'un travail de collaboration qui s'est concrétisé
+sous la forme d'un projet ANR ``Défis'', portant sur l'application de stratégies adaptatives dans le
+cadre des interfaces cerveau-ordinateur (projet CO-ADAPT). Ce projet, porté par Maureen Clerc
+de l'INRIA Sophia-Antipolis, impliquait des expérimentateurs et des théoriciens, entre autres
+Rémi Munos, Boris Burle (LNC, Marseille), Jérémie Mattout (CRNL, Lyon) et Bruno Torresani (LATP, Marseille).
+
+Une interface cerveau-machine (ICM) est un dispositif qui mesure l'activité électrique 
+à la surface du cerveau (en général de manière non-invasive) afin de produire une commande,
+avec des applications possibles en supplétion motrice pour des handicapés moteurs sévères. 
+
+[Nécessite souvent un apprentissage de la part du sujet]
+
+L'idée de départ était de définir un cadre dans lequel le contrôleur s'adapte au sujet, c'est à dire
+fait évoluer son fonctionnement selon des caractéristiques propres au sujet.
+Il a été pour moi l'occasion de développer différentes approches dans le cadre 
+d'une des applications les plus connues des interfaces cerveau machine (ICM)~: le ``P300-speller''.  
+
+
+LIVA - TIM - RACHEZ 
+
+
+J'ai travaillé dans ce cadre sur des modèles de classification probabilistes \cite{Bishop2006} permettant 
+d'inscrire les stratégies de choix stochastiques (stratégie du ``softmax''), telles
+qu'utilisées dans les modèles acteur-critique, dans un contexte 
+d'estimation en-ligne de la probabilité a posteriori d'appartenance à 
+une classe. Ce type de modèle est très proche dans sa formulation de l'apprentissage supervisé en-ligne 
+de classifieurs multi-classes (comme l'algorithme du perceptron, ou encore le gradient logistique multi-classe),
+la différence reposant sur le type d'information fournie au classifieur (ici information de
+type ``bien''/``mal'').
+
+Ces algorithmes 
+
+en 
+
+
+
 
 {\bf 2011}
 
