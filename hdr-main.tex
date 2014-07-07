@@ -1549,6 +1549,34 @@ Selon le cadre choisi, la convergence du modèle vers un comportement cible
 adapté pourra être garanti sous certaines conditions (par exemple,
 sous une condition de séparabilité linéaire dans le cadre du perceptron  \cite{Rosen58}).
 
+L'apprentissage statistique (le ``Machine learning'') étudie les mécanismes de plasticité
+sous l'aspect de processus d'optimisation dans des espaces vectoriels de grande dimension. 
+Le calcul repose essentiellement sur des produits scalaire entre les données d'entrée et 
+une ou plusieurs variétés séparatrices (ou caractéristiques). 
+On parle d'apprentissage en ligne lorsque les données d'entrée sont présentées séquentiellement.
+L'apprentissage consiste à appliquer de petits ajustements à chaque nouvelle donnée dans un 
+sens qui augmente localement l'espérance de la récompense, en espérant que chacun de ces ajustements locaux 
+augmente la récompense globale,
+selon le principe de la descente de gradient ``stochastique''.
+Les variétés qui émergent de ces processus tirent leurs caractéristiques des données qui ont été présentées. 
+Le ``programme'' final (classifieur, régresseur, ...) est constitué d'un ensemble de vecteurs
+caractéristiques qui sont les meilleurs ``représentants'' des données qui ont été présentées (au sens de la 
+discrimination, de la régression, de l'interpolation, ...).
+
+Le bruit (le ``hasard'') est souvent une composante de ces algorithmes. 
+La théorie de l'apprentissage 
+statistique repose sur l'hypothèse
+que les données sont des échantillons d'une même distribution génératrice ``cachée'',
+qui peut être sujette à des bruits d`'état, et à des bruits de mesure. 
+L'apprentissage est dans ce cas un processus qui va tendre à séparer des données d'entrée les composantes
+non-prédictibes (bruit) des composantes prédictibles (signal), c'est à dire  identifier l'un et l'autre 
+pour estimer au mieux le degré de certitude (le posterior) \cite{Bishop2006}.
+%L'apprentissage repose sur des 
+%estimateurs de l'erreur, ou de la récompense, basés sur ces échantillons.  
+Le choix de la réponse peut lui aussi reposer sur la prise en compte de l'incertitude sur 
+la réponse à proposer (ambiguité perceptive), sous la forme d'une réponse ``je ne sais pas'', ou 
+encore sous la forme d'une réponse issue d'un tirage pondéré entre différentes réponses plausibles.
+
 {\color{Violet} Les nombreux développements de l'apprentissage automatique permettent
 BLA BLA BLA... prédicteur / classifieur. interpolation. 
 Néanmoins, des pbs restent :
@@ -2598,6 +2626,17 @@ La plupart des modèles de renforcement reposent sur des tables de correspondanc
 aux environnements et aux choix d'action discrets, mais souffrent de problèmes
 d'explosion combinatoire dans des environnements continus et/ou complexes.
 
+Les signaux de renforcement (méta-signaux) servent à ``sculpter'' le programme
+au cours des interactions entre le logiciel et son environnement.
+Le programme qui résulte de ces interactions varie 
+selon l'expressivité du substrat (la structure du circuit logique),
+le caractère déterministe ou stochastique des politiques d'exploration
+et enfin le caractère convexe ou non de la tâche. 
+Le choix entre les réponses peut être départagé selon l'espérance de récompense 
+associée à chacune d'elles, mais aussi selon le degré d'incertitude associé, 
+certaines réponses mal connues (ou certaines sources et/ou chemins mal modélisés) pouvant potentiellement apporter des 
+récompenses supérieures. C'est le fameux dilemne ``exploration/exploitation''.
+
 Une autre manière de formaliser ce problème, comme proposée par Karl Friston \cite{Friston2010},
 repose sur l'idée d'une minimisation de la distance entre les éléments prédits et 
 observés de la scène perceptive (incluant les conséquence sensorielles
@@ -2622,9 +2661,6 @@ d'action sur le milieu serait d'éloigner physiquement
 les facteurs aversifs du lieu où l'appareil évolue (sa niche). 
 Dans les deux cas, un changement physique (modification du logiciel ou modification du milieu)
 se traduit par une réduction de l'exposition au signal aversif. 
-
-{\color{Violet}
-Dualité exploration / exploitation}
 
 Les réseaux de neurones récurrents aléatoires offrent, comme nous l'avons vu,
 un cadre propice à l'étude des couplages entre un milieu logiciel neuronal et un environnement
@@ -2902,7 +2938,7 @@ L'activité intrinsèque des modèles précédents est donc remplacée par un br
 les caractéristiques sont plus faciles à maîtriser, au prix de la perte de certaines caractéristiques 
 comme la réduction de complexité (la réduction du bruit) à l'issue de l'apprentissage.
 
-Le deuxième modèle, présenté dans \cite{Dauce Dutech}, est l'équivalent linéaire de l'architecture 
+Le deuxième modèle, présenté dans \cite{Dauce2010}, est l'équivalent linéaire de l'architecture 
 précédente. Ce modèle simplifié est appliqué à des tâches de contrôle plus complexes.
 Il fournit également une méthodologie d'apprentissage par renforcement relativement originale, 
 bien adaptée aux environnements continus.
@@ -2918,11 +2954,12 @@ La commande motrice est ici sous l'influence de deux couches topographiques prim
 (une couche qui perçoit la position et une couche qui perçoit la vitesse)
 et la commande apprise est la combinaison linéaire de deux commandes (deux champs
 de mouvement) distincts, conformément à l'hypothèse de ``double drive'' proposée
-par \cite{KELLER} dans le cadre de l'étude de la saccade occulaire.
+par \cite{Keller1996} dans le cadre de l'étude de la saccade occulaire.
 Le point intéressant est que les différents termes de bruit sur les noeuds de
 sortie développent une variabilité suffisante pour permettre à
 la règle de plasticité de dissocier les deux composantes de la commande.
-[- voir les transparents RNCM + apprentissage par coeur]
+
+%[- voir les transparents RNCM + apprentissage par coeur]
 
 La seconde tâche est l'apprentissage du contrôle
 d'un bras articulé à nombreux degrés de liberté (tâche dite de cynématique inverse).
@@ -2980,41 +3017,84 @@ NB : modèles feed-forward pour saccade - bras - BCI
 
 \subsection{Apprendre et oublier dans les environnements non-stationnaires}
 
+
+
 J'ai obtenu une délégation INRIA entre septembre 2008 et aout 2009 au sein de l'équipe
 SequeL (Sequential Learning) dirigée par Rémi Munos au sein du centre INRIA Lille-Nord Europe.
 L'équipe de Rémi Munos travaille sur l'apprentissage statistique et plus particulièrement 
-sur le dilemne exploration/exploitation bien connu en apprentissage automatique, exprimé sous sa
-forme la plus simple 
+sur le dilemne exploration/exploitation, exprimé sous sa forme la plus simple 
 comme un problème d'échantillonnage aléatoire de l'espace des choix (problème dit du ``bandit manchot'').
 Chaque tirage apporte une information qu'il convient d'exploiter au mieux, en établissant un compromis
 entre recherche d'information (réduction d'incertitude) et exploitation effective de l'information 
 (pour maximiser le gain).
 Cette forme d'apprentissage séquentiel établit des modèles qui visent à réduire 
 la différence entre les gains obtenus par l'algorithme et les gains
-attendus en toute connaissance du modèle.
+attendus en toute connaissance de cause.
 L'apprentissage séquentiel statistique est le socle d'une famille de méthodes d'apprentissage 
 fondée sur l'échantillonnage de l'environnement, comme le Q-learning ou le TD-learning dans le
 cadre de l'apprentissage par renforcement classiques. Cette approche a renouvelé le domaine, en proposant 
-par exemple des politiques non-stochastiques (algorithme UCB), ou en étendant le modèle au cas ``adversairial'' 
+par exemple des politiques non-stochastiques (algorithme UCB), ou en étendant le modèle au cas ``adversarial'' 
 (théorie des jeux) \cite{Auer2002}. 
 
-Ce séjour à Lille a été le point de départ d'un travail de collaboration qui s'est concrétisé
+Ce séjour a été pour moi l'occasion de m'intéresser à la question de la stationnarité 
+des processus d'apprentissage.
+Les modèles probabiliste de l'apprentissage utilisent souvent une hypothèse de stationnarité qui 
+suppose que les données d'entrée sont issues d'un processus stochastique dont les caractéristiques
+ne varient pas au cours du temps.
+Seule le programme voit ses caractéristiques évoluer par effet de la plasticité au cours du temps.
+Cette hypothèse n'est pas vérifiée dans le cas du contrôle en boucle fermée.
+Nous avons vu comment un bruit générateur interne est une des composantes 
+qui va permettre de faire des choix en stabilisant certaines réponses 
+dans le cadre de processus d'optimisation non-convexes (plusieurs contrôleurs/solutions possibles),
+conduisant à des solutions différentes (et donc des environnements perceptifs différents) selon le hasard
+des initialisation et des choix aléatoires produits par le modèle.
+
+La non-stationnarité est plus généralement une caractéristique d'environnements eux-mêmes soumis à des transformations,
+soit par l'action du contrôleur, soit par des actions exterieures (sans rapport avec le contrôleur). 
+Cette prise en compte du ``vieillissement'' de l'environnement conduit à accorder plus de crédit à des observations
+récentes qu'à des observations anciennes. 
+[APPRENDRE ET OUBLIER]. Le papier de Kivinen.
+
+
+Ce séjour a également été le point de départ d'un travail de collaboration qui s'est concrétisé
 sous la forme d'un projet ANR ``Défis'', portant sur l'application de stratégies adaptatives dans le
 cadre des interfaces cerveau-ordinateur (projet CO-ADAPT). Ce projet, porté par Maureen Clerc
 de l'INRIA Sophia-Antipolis, impliquait des expérimentateurs et des théoriciens, entre autres
 Rémi Munos, Boris Burle (LNC, Marseille), Jérémie Mattout (CRNL, Lyon) et Bruno Torresani (LATP, Marseille).
 
-Une interface cerveau-machine (ICM) est un dispositif qui mesure l'activité électrique 
+Une interface cerveau-machine (``Brain Computer INterface'' - BCI) est un dispositif qui mesure l'activité électrique 
 à la surface du cerveau (en général de manière non-invasive) afin de produire une commande,
 avec des applications possibles en supplétion motrice pour des handicapés moteurs sévères. 
+Dans ce cadre, le sujet humain est la source des signaux (il joue le rôle  de l'``environnement'' du 
+logiciel BCI).
+Le logiciel doit donc apprendre, pour chaque sujet, à discriminer les différentes activités électriques 
+produites.
+La maîtrise de ces interfaces nécessite souvent un apprentissage de la part du sujet, ce qui signifie
+que l'activité qu'il produit peut évoluer au cours de l'utilisation, dans le sens d'une plus grande maîtrise,
+mais aussi dans le sens de la lassitude, de la distraction, de l'endormissement....
 
-[Nécessite souvent un apprentissage de la part du sujet]
-
-L'idée de départ était de définir un cadre dans lequel le contrôleur s'adapte au sujet, c'est à dire
-fait évoluer son fonctionnement selon des caractéristiques propres au sujet.
-Il a été pour moi l'occasion de développer différentes approches dans le cadre 
+L'idée de départ de ce projet était d'utiliser le cadre de l'apprentissage en ligne et de l'apprentissage par renforcement pour que le
+contrôleur s'adapte au sujet à chaque instant, c'est à dire
+qui fasse évoluer son fonctionnement selon des caractéristiques propres à chaque sujet.
+Il a été pour moi l'occasion d'appliquer quelques principes de l'apprentisage statistique
+sur une base de signaux EEG dans le cadre
 d'une des applications les plus connues des interfaces cerveau machine (ICM ou BCI en anglais)~: 
 le ``P300-speller''.  
+
+Les données ont été récoltées lors d'une expérience .. sur 20 sujets...
+
+
+
+(les échanges, la commnuication)
+entre s de  un environnement , dont la dynamique collective 
+
+[Apprentissage statistique - Forme - pater matching -]
+
+[bruit créateur]
+
+[Online learing]
+
+
 
 
 LIVA - TIM - RACHEZ 
