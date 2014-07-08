@@ -1528,49 +1528,35 @@ La difficulté réside dans
 le choix des événements à considérer parmi l'ensemble des événements qui se présentent, et surtout 
 dans la manière dont les événements pris en compte influencent le comportement logiciel futur.
 
-Par analogie avec la biologie et le système nerveux, le principe de méta-programme 
-a principalement été implémenté dans 
-un cadre logiciel qui est celui des réseaux de neurones artificiels.
-On parle d'apprentissage automatique (``machine learning'').
-L'apprentissage est alors le processus qui modifie graduellement la
-valeur des liaisons synaptiques (le ``programme'') entre les différents noeuds du réseau, dans 
-le but d'augmenter la pertinence des réponses et des comportements produits.
-Selon une perspective \emph{supervisée}, il s'agit d'inscrire dans la mémoire la trace de faits 
-passés, dans le but de faciliter leur réapparition ou au contraire d'éviter qu'ils
-ne se reproduisent.
-Selon une perspective \emph{non supervisée}, il s'agit plutôt de réduire l'incertitude sur les faits nouveaux
-grâce à la prise en compte des faits passés.
-
-Le choix du modèle (du substrat artificiel) conditionne le type d'opérations, la nature des réponses
-produites ainsi que la nature des changements autorisés.
-L'ensemble de ces règles qui conditionnement l'évolution du substrat sous l'influence
-des signaux à traiter constituent le méta-programme. 
-Selon le cadre choisi, la convergence du modèle vers un comportement cible
-adapté pourra être garanti sous certaines conditions (par exemple,
-sous une condition de séparabilité linéaire dans le cadre du perceptron  \cite{Rosen58}).
-
-L'apprentissage statistique (le ``Machine learning'') étudie les mécanismes de plasticité
+L'apprentissage automatique (le ``Machine learning'') étudie les mécanismes de plasticité
 sous l'aspect de processus d'optimisation dans des espaces vectoriels de grande dimension. 
-Le calcul repose essentiellement sur des produits scalaire entre les données d'entrée et 
-une ou plusieurs variétés séparatrices (ou caractéristiques). 
-On parle d'apprentissage en ligne lorsque les données d'entrée sont présentées séquentiellement.
+Le but de l'apprentissage est d'extraire des données d'entrée des régularités, des facteurs explicatifs,
+permettant de mieux prédire et classifier les données nouvelles. 
+On parle d'apprentissage en ligne lorsque les données sont présentées séquentiellement.
 L'apprentissage consiste à appliquer de petits ajustements à chaque nouvelle donnée dans un 
-sens qui augmente localement l'espérance de la récompense, en espérant que chacun de ces ajustements locaux 
-augmente la récompense globale,
+sens qui augmente localement la justesse du comportement, en espérant que chacun de ces ajustements locaux 
+augmente la justesse globale,
 selon le principe de la descente de gradient ``stochastique''.
+
+Selon l'approche ``discriminative'' \cite{Vap95}, le calcul repose essentiellement sur des produits scalaire entre ces données et 
+une ou plusieurs variétés séparatrices (ou caractéristiques). 
 Les variétés qui émergent de ces processus tirent leurs caractéristiques des données qui ont été présentées. 
 Le ``programme'' final (classifieur, régresseur, ...) est constitué d'un ensemble de vecteurs
 caractéristiques qui sont les meilleurs ``représentants'' des données qui ont été présentées (au sens de la 
-discrimination, de la régression, de l'interpolation, ...).
+discrimination, de la régression, de l'interpolation, ...). 
 
-Le bruit (le ``hasard'') est souvent une composante de ces algorithmes. 
+Selon l'approche statistique  \cite{Bishop2006}, le bruit (le ``hasard'') est une des composantes principales de l'algorithme. 
+Les algorithmes d'apprentissage statistiques reposent sur le principe 
+des modèles inverses. Un processus caché produit un flux de données (des observations).
 La théorie de l'apprentissage 
 statistique repose sur l'hypothèse
-que les données sont des échantillons d'une même distribution génératrice ``cachée'',
-qui peut être sujette à des bruits d`'état, et à des bruits de mesure. 
+que les données sont des échantillons d'une même distribution génératrice cachée,
+qui peut être sujette à des bruits d'état, et à des bruits de mesure. 
 L'apprentissage est dans ce cas un processus qui va tendre à séparer des données d'entrée les composantes
 non-prédictibes (bruit) des composantes prédictibles (signal), c'est à dire  identifier l'un et l'autre 
-pour estimer au mieux le degré de certitude (le posterior) \cite{Bishop2006}.
+pour estimer au mieux le degré de certitude (le posterior).
+Les facteurs explicatifs sont ici les différentes distributions représentatives des états du modèle
+génératif caché. 
 %L'apprentissage repose sur des 
 %estimateurs de l'erreur, ou de la récompense, basés sur ces échantillons.  
 Le choix de la réponse peut lui aussi reposer sur la prise en compte de l'incertitude sur 
@@ -1588,6 +1574,32 @@ apprentissage "en ligne"
 interpolation. auto-association. feedback positif
 
 perception. connaissance et non-sens.}
+
+Les approches descriptives extraients des représentants caractéristiques des données (vecteurs supports). Les approches explicatives 
+identifient la source cachée des observations. La troisième famille d'approches est celle des réseaux de neurones, 
+qui définit un substrat dont les caractéristiques propres (nombre de neurones, nombre de couches cachées, architecture
+et patron de connexions) définissent la manière dont les données vont être traitées et interprétées.
+
+Par analogie avec la biologie et le système nerveux, %le principe de méta-programme 
+%a principalement été implémenté dans 
+%un cadre logiciel qui est celui des réseaux de neurones artificiels.
+%On parle d'apprentissage automatique (``machine learning'').
+l'apprentissage est alors le processus qui modifie graduellement la
+valeur des liaisons synaptiques entre les différents noeuds du réseau, dans 
+le but d'augmenter la pertinence des réponses et des comportements produits.
+Selon une perspective \emph{supervisée}, il s'agit d'inscrire dans la mémoire la trace de faits 
+passés, dans le but de faciliter leur réapparition ou au contraire d'éviter qu'ils
+ne se reproduisent.
+Selon une perspective \emph{non supervisée}, il s'agit plutôt de réduire l'incertitude sur les faits nouveaux
+grâce à la prise en compte des faits passés.
+
+Le choix du modèle (du substrat artificiel) conditionne le type d'opérations, la nature des réponses
+produites ainsi que la nature des changements autorisés.
+%L'ensemble de ces règles qui conditionnement l'évolution du substrat sous l'influence
+%des signaux à traiter constituent le méta-programme. 
+Selon le cadre choisi, la convergence du modèle vers un comportement cible
+adapté pourra être garanti sous certaines conditions (par exemple,
+sous une condition de séparabilité linéaire dans le cadre du perceptron  \cite{Rosen58}).
 
 La plupart des résultats présentés dans cette section portent sur l'application 
 de la plasticité synaptique dans des réseaux de neurones récurrents aléatoires 
@@ -2493,7 +2505,7 @@ prémisses~: l'étude de mécanismes de plasticité permettant d'induire dans le
 plus simples face aux signaux appris. Placé dans le contexte de l'apprentissage en boucle fermée, l'idée est 
 qu'une activité interne plus simple se traduit par des couplages sensori-moteurs plus simples (ou plus prévisibles).
 L'apprentissage dans ce contexte revient à stabiliser certains patrons d'interaction (certains couplages sensori-moteurs
-particuliers). La mise en application de ces idées a été effectuiée dans le cadre d'un court séjour de fin de thèse (juillet 1999)
+particuliers). La mise en application de ces idées a été effectuée dans le cadre d'un court séjour de fin de thèse (juillet 1999)
 au sein de l'équipe de neurocybernetique dirigée par Philippe Gaussier au laboratoire ETIS (Cergy-Pontoise).
 L'expérience a été conduite sur la plateforme de contrôle robotique PerAc \cite{Gaussier1995}, et publiée dans 
 \cite{Quo00,Dau00b,Quoy2001,Dau02}. 
@@ -3017,8 +3029,6 @@ NB : modèles feed-forward pour saccade - bras - BCI
 
 \subsection{Apprendre et oublier dans les environnements non-stationnaires}
 
-
-
 J'ai obtenu une délégation INRIA entre septembre 2008 et aout 2009 au sein de l'équipe
 SequeL (Sequential Learning) dirigée par Rémi Munos au sein du centre INRIA Lille-Nord Europe.
 L'équipe de Rémi Munos travaille sur l'apprentissage statistique et plus particulièrement 
@@ -3052,28 +3062,70 @@ des initialisation et des choix aléatoires produits par le modèle.
 La non-stationnarité est plus généralement une caractéristique d'environnements eux-mêmes soumis à des transformations,
 soit par l'action du contrôleur, soit par des actions exterieures (sans rapport avec le contrôleur). 
 Cette prise en compte du ``vieillissement'' de l'environnement conduit à accorder plus de crédit à des observations
-récentes qu'à des observations anciennes. 
-[APPRENDRE ET OUBLIER]. Le papier de Kivinen.
+récentes qu'à des observations anciennes \cite{Kivinen2004}. 
+Le modèle proposé utilise un terme de régularisation combiné à un paramètre d'apprentissage permettant
+de définir une constante de temps caractéristique correspondant à la durée pendant laquelle les données 
+du passé sont prises en compte avant d'être oubliées. L'ajustement permanent du contrôleur  
+lui permet de suivre les changements environnementaux en mettant à jour son ``modèle''.
 
+%[APPRENDRE ET OUBLIER]. Le papier de Kivinen.
 
-Ce séjour a également été le point de départ d'un travail de collaboration qui s'est concrétisé
+L'idée de cette stratégie ``versatile'' été le point de départ de ma participation
+à un travail de collaboration qui s'est concrétisé
 sous la forme d'un projet ANR ``Défis'', portant sur l'application de stratégies adaptatives dans le
 cadre des interfaces cerveau-ordinateur (projet CO-ADAPT). Ce projet, porté par Maureen Clerc
 de l'INRIA Sophia-Antipolis, impliquait des expérimentateurs et des théoriciens, entre autres
 Rémi Munos, Boris Burle (LNC, Marseille), Jérémie Mattout (CRNL, Lyon) et Bruno Torresani (LATP, Marseille).
 
-Une interface cerveau-machine (``Brain Computer INterface'' - BCI) est un dispositif qui mesure l'activité électrique 
+Une interface cerveau-machine (``Brain Computer Interface'' - BCI) est un dispositif qui mesure l'activité électrique 
 à la surface du cerveau (en général de manière non-invasive) afin de produire une commande,
 avec des applications possibles en supplétion motrice pour des handicapés moteurs sévères. 
+Les dispositifs BCI sont de bons exemples de systèmes ``embarqués'', avec des possibilité
+d'interaction en boucle fermée entre le logiciel et l'humain. 
+La réponse produite par le logiciel (le feedback) a une conséquence directement mesurable 
+sur l'activité électrique émise par le sujet, et vice versa.
 Dans ce cadre, le sujet humain est la source des signaux (il joue le rôle  de l'``environnement'' du 
-logiciel BCI).
-Le logiciel doit donc apprendre, pour chaque sujet, à discriminer les différentes activités électriques 
+logiciel BCI). 
+Le lien avec l'apprentissage par renforcement apparait dans ce cadre naturel.
+Le projet CO-ADAPT consistait précisément à étudier des méthodes adaptatives 
+pour faire en sorte que logiciel utilise les réactions du sujet pour améliorer ses
+peformances (temps de réponse, potentiels d'erreur, ...).
+
+Ma contribution dans ce projet a principalement porté sur une des interfaces les plus 
+classiques appelée le ``P300 speller''.
+L'onde ``P300'' est une activité positive à dominante occipitale qui apparait environ 300 ms après un stimulus 
+``surprenant'', ou différent des autres, dans une série de stimuli qui lui est préssentée.
+Le P300-speller est constitué d'une grille de symboles. Des groupes de symboles sont illuminés 
+de façon brève et aléatoire à fréquence élevée.  Le sujet doit simplement fixer le symbole qu'il souhaite 
+épeler. Une réponse distincte de l'activité de fond est attendue chaque fois que la lettre souhaitée est illuminée.
+En recoupant les groupes de symboles qui ont induit une réponse P300, le symbole attendu est écrit à 
+l'écran et une nouvelle série de flash démarre.
+
+Dans un cadre adaptatif, le logiciel doit donc apprendre, pour chaque sujet, 
+à discriminer les différentes activités électriques 
 produites.
 La maîtrise de ces interfaces nécessite souvent un apprentissage de la part du sujet, ce qui signifie
-que l'activité qu'il produit peut évoluer au cours de l'utilisation, dans le sens d'une plus grande maîtrise,
+que l'activité électro-encéphalographique produite par le sujet peut évoluer au cours de l'utilisation, dans le sens d'une plus grande maîtrise,
 mais aussi dans le sens de la lassitude, de la distraction, de l'endormissement....
 
-L'idée de départ de ce projet était d'utiliser le cadre de l'apprentissage en ligne et de l'apprentissage par renforcement pour que le
+La qualité de la réponse repose sur la justesse du classifieur qui doit discriminer les signaux P300 des signaux non-P300.
+Une première étude a consisté à étudier le comportement d'un tel classifieur lorsqu'il est soumis à des signaux de renforcement
+et non des signaux d'erreur classiques, selon le principe du Policy-gradient (apprentisage direct de la politique). 
+Cette étude a été entamée dans le cadre d'un stage de deuxième année de deux étudiants de Centrale Marseille : Timothée Proix et Arnaud Rachez
+(en 2010). La première étude sur l'apprentissage par renforcement du P300-speller a fait l'objet d'une communication dans la conférence TOBI
+en [REF] à Rome. 
+Timothée a continué à travailler sur le sujet dans le cadre de son master recherche en 2011, en collaboration avec Liva Ralaivola du LIF
+(Laboratoire d'Informatique Fondamentale, Marseille),
+en étudiant les caractéristiques du problème 
+dans un cadre plus général des classifieurs à noyau. Nous avons également 
+regardé comment le choix d'une baseline sur la récompense permet de réduire la variance de l'estimateur. 
+Nous avons enfin regardé la tolérance de l'algorithme au bruit, soit en dégradant le signal 
+traité, soit en dégradant le signal de renforcement. 
+Ces travaux ont été publiés dans plusieurs conférences [REFS]. Un article pour IEEE TNNLS a également été soumis.
+
+[ICI]
+
+d'utiliser le cadre de l'apprentissage en ligne et de l'apprentissage par renforcement pour que le
 contrôleur s'adapte au sujet à chaque instant, c'est à dire
 qui fasse évoluer son fonctionnement selon des caractéristiques propres à chaque sujet.
 Il a été pour moi l'occasion d'appliquer quelques principes de l'apprentisage statistique
