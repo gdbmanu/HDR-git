@@ -3051,7 +3051,7 @@ des processus d'apprentissage.
 Les modèles probabiliste de l'apprentissage utilisent souvent une hypothèse de stationnarité qui 
 suppose que les données d'entrée sont issues d'un processus stochastique dont les caractéristiques
 ne varient pas au cours du temps.
-Seule le programme voit ses caractéristiques évoluer par effet de la plasticité au cours du temps.
+Seul le programme voit ses caractéristiques évoluer par effet de la plasticité au cours du temps.
 Cette hypothèse n'est pas vérifiée dans le cas du contrôle en boucle fermée.
 Nous avons vu comment un bruit générateur interne est une des composantes 
 qui va permettre de faire des choix en stabilisant certaines réponses 
@@ -3059,37 +3059,60 @@ dans le cadre de processus d'optimisation non-convexes (plusieurs contrôleurs/s
 conduisant à des solutions différentes (et donc des environnements perceptifs différents) selon le hasard
 des initialisation et des choix aléatoires produits par le modèle.
 
-La non-stationnarité est plus généralement une caractéristique d'environnements eux-mêmes soumis à des transformations,
-soit par l'action du contrôleur, soit par des actions exterieures (sans rapport avec le contrôleur). 
-Cette prise en compte du ``vieillissement'' de l'environnement conduit à accorder plus de crédit à des observations
-récentes qu'à des observations anciennes \cite{Kivinen2004}. 
-Le modèle proposé utilise un terme de régularisation combiné à un paramètre d'apprentissage permettant
-de définir une constante de temps caractéristique correspondant à la durée pendant laquelle les données 
-du passé sont prises en compte avant d'être oubliées. L'ajustement permanent du contrôleur  
-lui permet de suivre les changements environnementaux en mettant à jour son ``modèle''.
-
 %[APPRENDRE ET OUBLIER]. Le papier de Kivinen.
 
-L'idée de cette stratégie ``versatile'' été le point de départ de ma participation
+L'idée générale de cette stratégie ``versatile'' été le point de départ de ma participation
 à un travail de collaboration qui s'est concrétisé
 sous la forme d'un projet ANR ``Défis'', portant sur l'application de stratégies adaptatives dans le
-cadre des interfaces cerveau-ordinateur (projet CO-ADAPT). Ce projet, porté par Maureen Clerc
+cadre des interfaces cerveau-ordinateur (projet CO-ADAPT - 2010-2014). Ce projet, porté par Maureen Clerc
 de l'INRIA Sophia-Antipolis, impliquait des expérimentateurs et des théoriciens, entre autres
 Rémi Munos, Boris Burle (LNC, Marseille), Jérémie Mattout (CRNL, Lyon) et Bruno Torresani (LATP, Marseille).
 
 Une interface cerveau-machine (``Brain Computer Interface'' - BCI) est un dispositif qui mesure l'activité électrique 
-à la surface du cerveau (en général de manière non-invasive) afin de produire une commande,
-avec des applications possibles en supplétion motrice pour des handicapés moteurs sévères. 
+à la surface du cerveau (en général de manière non-invasive) afin de produire une commande.
+Les applications possibles sont en premier lieu la supplétion motrice pour des handicapés moteurs sévères,
+mais également les jeux, le monitoring, la réhabilitation motrice, etc. 
 Les dispositifs BCI sont de bons exemples de systèmes ``embarqués'', avec des possibilité
-d'interaction en boucle fermée entre le logiciel et l'humain. 
-La réponse produite par le logiciel (le feedback) a une conséquence directement mesurable 
+d'interaction en boucle fermée entre le logiciel et l'humain~:
+la réponse produite par le logiciel (le feedback) a une conséquence directement mesurable 
 sur l'activité électrique émise par le sujet, et vice versa.
 Dans ce cadre, le sujet humain est la source des signaux (il joue le rôle  de l'``environnement'' du 
-logiciel BCI). 
-Le lien avec l'apprentissage par renforcement apparait dans ce cadre naturel.
+logiciel BCI).
+
+L'interaction entre le logiciel et l'humain produit un historique d'interactions, correspondant
+généralement à des étapes de calibration côté logiciel et à une ``prise en main'' 
+de l'interface par l'humain (l'humain apprend à se servir de l'interface).
+La calibration du logiciel est généralement effectuée sous le contrôle d'un
+assistant. La calibration correspond à des étapes au cours desquelles on 
+impose au sujet une série de commandes, permettant de calculer par des méthodes
+supervisés
+un classifieur spécifique. 
+Le principe de ce projet était d'approfondir cette adapation mutuelle, 
+en autonomisant l'adaptation du logiciel, afin de permettre une prise en main 
+du logiciel par le patient sans assistance extérieure.
 Le projet CO-ADAPT consistait précisément à étudier des méthodes adaptatives 
 pour faire en sorte que logiciel utilise les réactions du sujet pour améliorer ses
 peformances (temps de réponse, potentiels d'erreur, ...).
+
+Dans un cadre adaptatif, le logiciel doit apprendre, pour chaque sujet, 
+à discriminer les différentes activités électriques 
+produites.
+La maîtrise de l'interfaces comprend une phase d'apprentissage de la part du sujet, 
+pouvant induire des modifications dans l'activité électro-encéphalographique 
+dans le sens d'un signal plus net, mais aussi dans la répartition et les temps de réponse
+de l'activité électrique.
+Par ailleurs, des dégradations du signal peuvent aussi 
+être observées en cas de lassitude, de distraction, de somnolence...
+
+La non-stationnarité est plus généralement une caractéristique d'environnements eux-mêmes soumis à des transformations,
+soit par l'action du contrôleur, soit par des actions exterieures (sans rapport avec le contrôleur). 
+Cette prise en compte du ``vieillissement'' de l'environnement conduit à accorder plus de crédit à des observations
+récentes qu'à des observations anciennes \cite{Kivinen2004}. 
+Le modèle proposé utilisait un terme de régularisation combiné à un paramètre d'apprentissage permettant
+de définir une constante de temps caractéristique correspondant à la durée pendant laquelle les données 
+du passé sont prises en compte avant d'être oubliées. L'ajustement permanent du contrôleur  
+lui permet de suivre les changements environnementaux en mettant à jour son modèle.
+Le lien avec l'apprentissage par renforcement apparait dans ce cadre naturel.
 
 Ma contribution dans ce projet a principalement porté sur une des interfaces les plus 
 classiques appelée le ``P300 speller''.
@@ -3101,29 +3124,47 @@ de façon brève et aléatoire à fréquence élevée.  Le sujet doit simplement
 En recoupant les groupes de symboles qui ont induit une réponse P300, le symbole attendu est écrit à 
 l'écran et une nouvelle série de flash démarre.
 
-Dans un cadre adaptatif, le logiciel doit donc apprendre, pour chaque sujet, 
-à discriminer les différentes activités électriques 
-produites.
-La maîtrise de ces interfaces nécessite souvent un apprentissage de la part du sujet, ce qui signifie
-que l'activité électro-encéphalographique produite par le sujet peut évoluer au cours de l'utilisation, dans le sens d'une plus grande maîtrise,
-mais aussi dans le sens de la lassitude, de la distraction, de l'endormissement....
-
 La qualité de la réponse repose sur la justesse du classifieur qui doit discriminer les signaux P300 des signaux non-P300.
-Une première étude a consisté à étudier le comportement d'un tel classifieur lorsqu'il est soumis à des signaux de renforcement
+La première étude sur l'apprentissage par renforcement du P300-speller reprenait précisément
+le schéma de Kivinen (prise en compte de l'oubli) lorsqu'il est soumis à des signaux de renforcement
 et non des signaux d'erreur classiques, selon le principe du Policy-gradient (apprentisage direct de la politique). 
-Cette étude a été entamée dans le cadre d'un stage de deuxième année de deux étudiants de Centrale Marseille : Timothée Proix et Arnaud Rachez
-(en 2010). La première étude sur l'apprentissage par renforcement du P300-speller a fait l'objet d'une communication dans la conférence TOBI
-en [REF] à Rome. 
-Timothée a continué à travailler sur le sujet dans le cadre de son master recherche en 2011, en collaboration avec Liva Ralaivola du LIF
+Cette étude a été entamée dans le cadre d'un stage de deuxième année de deux étudiants de Centrale Marseille : 
+Timothée Proix et Arnaud Rachez (en 2010).
+Elle a fait l'objet 
+d'une communication dans la conférence TOBI (TOwards Brain-computer Interfaces)
+en décembre 2010 à Rome \cite{Rachez2011}. 
+Timothée a continué à travailler sur le sujet dans le cadre de son master recherche en 2011, 
+en collaboration avec Liva Ralaivola du LIF
 (Laboratoire d'Informatique Fondamentale, Marseille),
 en étudiant les caractéristiques du problème 
-dans un cadre plus général des classifieurs à noyau. Nous avons également 
-regardé comment le choix d'une baseline sur la récompense permet de réduire la variance de l'estimateur. 
+dans un cadre plus général des classifieurs à noyaux. Nous avons également 
+regardé comment le choix d'un biais sur la récompense permet de réduire la variance de l'estimateur. 
 Nous avons enfin regardé la tolérance de l'algorithme au bruit, soit en dégradant le signal 
 traité, soit en dégradant le signal de renforcement. 
-Ces travaux ont été publiés dans plusieurs conférences [REFS]. Un article pour IEEE TNNLS a également été soumis.
+Ces travaux ont été publiés dans plusieurs conférences \cite{Dauce2012,Dauce2013a,Dauce2013b}. 
+Un article pour IEEE TNNLS a également été soumis\cite{Dauce2014sub}.
 
-[ICI]
+Dans une deuxième étude, j'ai travaillé dans le cadre d'une collaboration 
+avec Maureen Clerc, Eoin Thomas, Dieter Devlaminck et Loïc Mahé,
+travaillant à Sophia-Antipolis, 
+sur un modèle de gradient logistique dans la cadre de classifieurs 
+probabilistes calculés sur un groupe de sujets. 
+Ce type de modèle est très proche dans sa formulation de l'apprentissage supervisé en-ligne 
+de classifieurs multi-classes (comme l'algorithme du perceptron, ou encore le gradient logistique multi-classe)
+\cite{Bishop2006}.
+Il a été proposé dans le cadre du P300 par \cite{Kindermans}
+Le cadre probabilistes  permet 
+d'inscrire les stratégies de choix stochastiques (stratégie du ``softmax''), telles
+qu'utilisées dans les modèles acteur-critique, dans un contexte 
+d'estimation en-ligne de la probabilité a posteriori d'appartenance à une classe. 
+
+La formulation Bayesienne du problème de détection du P300 permet de construire 
+un modèle qui exprime pour chaque symbole la probabilité qu'il soit le symbole désiré.
+Chaque illumination d'un nouveau groupe de lettres permet de mattre à jour à la fois la probabilité
+attachée aux lettres flashées mais également celle attachée aux lettres non-flashées.
+
+la différence reposant sur le type d'information fournie au classifieur (ici information de
+type ``bien''/``mal'').
 
 d'utiliser le cadre de l'apprentissage en ligne et de l'apprentissage par renforcement pour que le
 contrôleur s'adapte au sujet à chaque instant, c'est à dire
@@ -3152,14 +3193,7 @@ entre s de  un environnement , dont la dynamique collective
 LIVA - TIM - RACHEZ 
 
 
-J'ai travaillé dans ce cadre sur des modèles de classification probabilistes \cite{Bishop2006} permettant 
-d'inscrire les stratégies de choix stochastiques (stratégie du ``softmax''), telles
-qu'utilisées dans les modèles acteur-critique, dans un contexte 
-d'estimation en-ligne de la probabilité a posteriori d'appartenance à 
-une classe. Ce type de modèle est très proche dans sa formulation de l'apprentissage supervisé en-ligne 
-de classifieurs multi-classes (comme l'algorithme du perceptron, ou encore le gradient logistique multi-classe),
-la différence reposant sur le type d'information fournie au classifieur (ici information de
-type ``bien''/``mal'').
+
 
 Ces algorithmes 
 
