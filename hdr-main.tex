@@ -3190,6 +3190,8 @@ Le schéma d'accumulation d'évidence fait partie de la mise à jour du logiciel
 entre autres à l'INRIA, et a fait l'objet de plusieurs publications dans des conférences \cite{Thomas2013,Thomas2014}.
 
 
+
+
 {\color{Violet}
 [Apprentissage statistique - Forme - pater matching -]
 
@@ -3236,9 +3238,64 @@ entre autres à l'INRIA, et a fait l'objet de plusieurs publications dans des co
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-principe général : 
-- comportement based
-- mapping des architectures de contrôle sur le SNC
+%principe général : 
+%- comportement based
+%- mapping des architectures de contrôle sur le SNC
+
+Si les principes de fonctionnement élémentaires du système nerveux central (neurones, synapses) commencent à être bien connus, 
+le fonctionnement intégré du système dans son ensemble reste l'objet de nombreuses conjectures.
+L'utilisation de modèles mathématiques et de simulations informatiques permet de proposer des hypothèses de fonctionnement et/ou 
+de valider certaines hypothèses issues de l'observation. 
+Les neurosciences computationnelles sont ainsi la branche de l'informatique qui, d'une part, élabore des modèles de calcul 
+inspirés par les hypothèses proposées en neurosciences, et, d'autre part, propose des interprétations
+de données biologiques à partir de principes et modèles issus des sciences de l'information.
+Selon le typologie traditionnelles proposée par David Marr \cite{Marr82}, 
+un modèle peut appartenir à différents niveaux de généralité, à savoir le niveau computationnel (la 
+logique), 
+le niveau algorithmique (encodage et opérations réalisées), et
+la réalisation matérielle (le substrat).   
+%Ces niveaux peuvent aussi être assimilés à des niveaux de description,
+%du niveau psychophysique (ou macroscopique), au niveau architectural (mésoscopique) et au niveau 
+%microscopique (neuronal).
+
+%Du point de vue architectural, l'étude d'organismes relativement primitifs permet 
+%d'identifier les tâches élémentaires, celles qui sont présentes à
+%tous les niveaux du règne animal et qui structurent l'organisation du système nerveux central.
+%On distingue ainsi chez la lamproie trois grandes catégories d'activités motrices, à savoir l'orientation 
+%(déplacement les organes des sens vers les stimuli), la locomotion (déplacement du corps) 
+%et l'emploi (activité alimentaire).
+
+Le point de vue computationnel est souvent assimilé au niveau macroscopique (ou psychophysique). 
+L'étude des temps de réponse, des courbes d'apprentissage et des
+taux d'erreur permet d'explorer les caractéristiques limites d'un comportement et d'exprimer
+des contraintes sur le système qui l'implémente physiquement.
+L'élaboration d'un modèle descriptif à large échelle permet alors d'émettre des hypothèeses 
+sur les raisons pour lesquelles le comportement présente les caractéristiques observées. 
+
+De même, le point de vue algorithmique est souvent assimilé au mésoscopique (ou architectural). 
+%les opérations réalisées par le cerveau
+%ne peuvent se réduire à de simples traitements de données issues des organes sensoriels. 
+Nous avons vu dans les parties précédentes des modèles constitués de quelques 
+centaines de neurones développant une activité autonome, s'organisent sous la pression d'un signal externe et 
+se transforment sous l'effet de la plasticité synaptique.
+La connectivité entre le cortex et les structures sous-corticales (striatum, ganglions de la base, thalamus,
+amygdale, hippocampe, cervelet, ...) met en évidence de nombreuses boucles réentrantes suggérent une 
+prépondérance de l'activité interne sur les entrées sensorielles. Comprendre le rôle de ces boucles
+réentrantes est un des grands enjeux actuels.
+La simulation de circuits corticaux et sous-corticaux 
+plus fidèles aux observations anatomiques permet de tester la validité de certaines hypothèses en assignant
+des fonctions spécifiques aux différentes structures participant au circuit et en étudiant les conditions permettant
+au circuit de produire une activité répondant aux contraintes fonctionnelles. 
+
+A travers deux projets ANR, j'ai pu aborder ces aspects de modélisation selon ces différents niveaux 
+autour de l'étude des comportements d'orientation. Dans le cadre du projet MAPS déjà présenté, j'ai participé à une étude portant 
+sur l'orientation visuelle à partir des données anatomiques et électrophysiologiques du tectum et des neurones prémoteurs du tronc cérébral,
+en collaboration avec Alain Guillaume, travaillant à l'Institut des Sciences du Mouvement, et Anthony Mouraud, qui a effectué un séjour
+post-doctoral en 2010 sous notre supervision. 
+Dans le cadre du projet ANR NOAT, en collaboration avec Jennifer Coull (LNC, Marseille) et 
+Daniele Schön (INCM, Marseille), j'ai également travaillé sur des modèles génératifs du comportement d'orientation temporelle,
+en colaboration avec Gaurav Malhotra qui a effectué un séjour postdoctoral en 2010-2011 sur cette question.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     4.1      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -3251,13 +3308,18 @@ l'étude du système saccadique. Ce système, situé dans le tectum (partie sup�
 du colliculus supérieur, développe une activité topographiqement organisée responsable de la commande
 des mouvements rapides des globes oculaires, certains aspects de la commande (déplacement relatif) semblant directement
 liés à la position du foyer d'activité à la surface du colliculus, et d'autres aspects (comme la vitesse de déplacement)
-semblant liés à la fréquence de écharge des neurones.
+semblant liés à la fréquence de décharge des neurones.
+
+Notre travail de modélisation a principalement porté sur le problème de la transformation visuo-motrice (ou visuo-spatiale), c'est à dire expliquer comment une
+activité focale, telle qu'elle se développe sur le colliculus supérieur, se traduit sous la forme d'un déplacement moteur oculaire initialement défini par la position
+(le barycentre) de la bulle sur la carte. 
 
 
+{\color{Violet}
 {\bf 2010}
 
 - A. Mouraud : mecanisme integrateur. Dual drive. 
-
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     4.2      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
