@@ -1554,14 +1554,16 @@ sens qui augmente localement la justesse du comportement, en espérant que chacu
 augmente la justesse globale,
 selon le principe de la descente de gradient ``stochastique''.
 
-Selon l'approche ``discriminative'' \cite{Vap95}, le calcul repose essentiellement sur des produits scalaire entre ces données et 
+Selon l'approche ``discriminative'' \cite{Vap95}, le calcul repose essentiellement sur des produits 
+scalaire entre ces données et 
 une ou plusieurs variétés séparatrices (ou caractéristiques). 
 Les variétés qui émergent de ces processus tirent leurs caractéristiques des données qui ont été présentées. 
 Le ``programme'' final (classifieur, régresseur, ...) est constitué d'un ensemble de vecteurs
 caractéristiques qui sont les meilleurs ``représentants'' des données qui ont été présentées (au sens de la 
 discrimination, de la régression, de l'interpolation, ...). 
 
-Selon l'approche statistique  \cite{Bishop2006}, le bruit (le ``hasard'') est une des composantes principales de l'algorithme. 
+Selon l'approche statistique  \cite{Bishop2006}, le bruit (le ``hasard'') est une des composantes 
+principales de l'algorithme. 
 Les algorithmes d'apprentissage statistiques reposent sur le principe 
 des modèles inverses. Un processus caché produit un flux de données (des observations).
 La théorie de l'apprentissage 
@@ -1591,7 +1593,8 @@ interpolation. auto-association. feedback positif
 
 perception. connaissance et non-sens.}
 
-Les approches descriptives extraients des représentants caractéristiques des données (vecteurs supports). Les approches explicatives 
+Les approches descriptives extraients des représentants caractéristiques des données (vecteurs supports). 
+Les approches explicatives 
 identifient la source cachée des observations. La troisième famille d'approches est celle des réseaux de neurones, 
 qui définit un substrat dont les caractéristiques propres (nombre de neurones, nombre de couches cachées, architecture
 et patron de connexions) définissent la manière dont les données vont être traitées et interprétées.
@@ -2140,7 +2143,8 @@ l'ancien. Le comportement induit par la STDP ne semble donc pas reposer sur l'or
 l'instant de tir des potentiels d'action, mais plutôt sur leur fréquence de décharge.
 
 L'utilisation d'un patron de connectivité plus réaliste a été proposé dans une étude datée de 2009 \cite{Henry09},
-avec séparation fonctionnelle des neurones excitateurs et inhibiteurs, et utilisation de neurones à conductance \cite{Kepler1992}. 
+avec séparation fonctionnelle des neurones excitateurs et inhibiteurs, et utilisation de neurones à 
+conductance \cite{Kepler1992}. 
 L'étude sur un réseau équilibré
 permet de mettre en évidence un comportement très analogue à celui observé sur le modèle binaire \cite{Dau07},
 confirmant la parenté fonctionnelle entre la règle TD et la STDP. La STDP est appliquée uniquement sur les connexions 
@@ -2575,14 +2579,18 @@ les transports d'activité électrique.
 La simplification, qui consiste à considérer un milieu intérieur (intensif) et un milieu extérieur (extensif)
 couplés comme un seul et même système dynamique, se heurte souvent au caractère inhomogène de ce couplage.
 
-L'idée est d'interpréter le mécanisme de synchronisation transitoire, ou de résonance, au sein de systèmes constitués de nombreuses unités couplées, 
- comme un mécanisme dont le rôle est de favoriser la communication entre les différentes échelles \cite{Dau02c1}. 
- Ce type de mécanisme n'est pas encore, à ma connaissance, implémenté dans des architectures de contrôle, 
+L'idée est d'interpréter le mécanisme de synchronisation transitoire, ou de résonance, 
+au sein de systèmes constitués de nombreuses unités couplées, 
+comme un mécanisme dont le rôle est de favoriser la communication entre les différentes échelles \cite{Dau02c1}. 
+Ce type de mécanisme n'est pas encore, à ma connaissance, implémenté dans des architectures de contrôle, 
 mais son importance a déjà été souligné dans \cite{Konig1995} et \cite{Varela2001}.
 La non-reconnaissance correspondrait à une situation où le milieu neuronal 
-produit une activité à haut degré de liberté, sans effet macroscopique par absence de coordination. La reconnaissance correspondrait à 
-une situation où le milieu neuronal ``renonce'' transitoirement à ses degrés de liberté et se coordonne, favorisant le couplage 
-avec la dynamique macroscopique. La coordination de la population permettrait le passage à une description en terme de de masse neuronale, 
+produit une activité à haut degré de liberté, sans effet macroscopique par absence de coordination. 
+La reconnaissance correspondrait à 
+une situation où le milieu neuronal ``renonce'' transitoirement à ses degrés de liberté et se coordonne, 
+favorisant le couplage 
+avec la dynamique macroscopique. 
+La coordination de la population permettrait le passage à une description en terme de masse neuronale, 
 perceptible au niveau de description supérieur, 
 caractérisé par une échelle spatiale plus large et une échelle temporelle plus lente,
 le même mécanisme pouvant en principe se décliner à différentes échelles.
@@ -2829,7 +2837,7 @@ un terme de bruit par les synapses des axones récurrents, et, inversement le si
 par les synapses des axones afférents.
 La plasticité repose ainsi sur l'écart entre la prédiction d'activité liée à l'influence d'un faisceau d'axones particulier
 et l'activité effective observée.
-Cette règle cherche dans ce cas à atteindre un point d`'équilibre entre les influences interne et externe pour établir la réponse motrice. 
+Cette règle cherche dans ce cas à atteindre un point d'équilibre entre les influences interne et externe pour établir la réponse motrice. 
 Dans un cadre de robotique simulée (non publié), cette règle a permis 
 de faire émerger un comportement d'évitement d'obstacles à partir de la perception d'un méta-signal aversif aux collisions.
 
@@ -3242,58 +3250,101 @@ entre autres à l'INRIA, et a fait l'objet de plusieurs publications dans des co
 %- comportement based
 %- mapping des architectures de contrôle sur le SNC
 
-Si les principes de fonctionnement élémentaires du système nerveux central (neurones, synapses) commencent à être bien connus, 
+Si les principes de fonctionnement élémentaires du système nerveux central (neurones, synapses) 
+commencent à être bien connus, 
 le fonctionnement intégré du système dans son ensemble reste l'objet de nombreuses conjectures.
-L'utilisation de modèles mathématiques et de simulations informatiques permet de proposer des hypothèses de fonctionnement et/ou 
+L'utilisation de modèles mathématiques et de simulations informatiques permet de proposer des hypothèses 
+de fonctionnement et/ou 
 de valider certaines hypothèses issues de l'observation. 
 Les neurosciences computationnelles sont ainsi la branche de l'informatique qui, d'une part, élabore des modèles de calcul 
 inspirés par les hypothèses proposées en neurosciences, et, d'autre part, propose des interprétations
 de données biologiques à partir de principes et modèles issus des sciences de l'information.
-Selon le typologie traditionnelles proposée par David Marr \cite{Marr82}, 
+Selon la typologie classique proposée par David Marr \cite{Marr82}, 
 un modèle peut appartenir à différents niveaux de généralité, à savoir le niveau computationnel (la 
 logique), 
 le niveau algorithmique (encodage et opérations réalisées), et
 la réalisation matérielle (le substrat).   
-%Ces niveaux peuvent aussi être assimilés à des niveaux de description,
-%du niveau psychophysique (ou macroscopique), au niveau architectural (mésoscopique) et au niveau 
-%microscopique (neuronal).
 
-%Du point de vue architectural, l'étude d'organismes relativement primitifs permet 
-%d'identifier les tâches élémentaires, celles qui sont présentes à
-%tous les niveaux du règne animal et qui structurent l'organisation du système nerveux central.
-%On distingue ainsi chez la lamproie trois grandes catégories d'activités motrices, à savoir l'orientation 
-%(déplacement les organes des sens vers les stimuli), la locomotion (déplacement du corps) 
-%et l'emploi (activité alimentaire).
+Cette distinction en trois niveaux permet principalement de distinguer ce qui relève de la définition du problème~:
+définition de la tâche, en fonction des contraintes physiques et de l'appareillage sensoriel et moteur, d'une part, et
+d'autre part ce qui relève de la réalisation (algorithmique) de la tâche, c'est à dire principalement le circuit de 
+traitement. C'est, en terminologie informatique, la distinction entre
+l'équation à résoudre, la brique logicielle qui la résout et le circuit logique qui l'implémente.
+Marr postule une relative indépendance entre les différents niveaux de description, en établissant une
+claire séparation entre le substrat, le circuit de traitement et l'espace de la tâche.
+Cette séparation correspond assez bien au problème des disparités d'échelle 
+évoqué plus haut. La contrainte physique du corps, engagé dans différentes tâches, à des échelles
+spatiales macroscopiques et des échelles temporelles lentes d'une part.
+La containte du circuit microscopique, constitué d'unité neuronales échangeant rapidement des signaux discrets
+d'autre part.
+Entre les deux, un niveau architectural, constitué de circuits imbriqués intégrant l'activité de
+larges portion du cerveau, 
+constituant un niveau de description relativement indépendant des deux autres.
+Par contraste avec la méthodologie ``bottom-up'' qui consiste à étudier les
+conditions d'émergence de fonctions de haut niveau à partir d'un substrat plongé dans un
+environnement contraignant, la méthodologie ``top-down'' consiste à étudier les conditions de réalisation
+d'une certaine tâche par étapes descendantes, de la contrainte générale du corps engagé dans la tâche
+à la réalisation matérielle du circuit qui la résout.
 
-Le point de vue computationnel est souvent assimilé au niveau macroscopique (ou psychophysique). 
-L'étude des temps de réponse, des courbes d'apprentissage et des
-taux d'erreur permet d'explorer les caractéristiques limites d'un comportement et d'exprimer
-des contraintes sur le système qui l'implémente physiquement.
-L'élaboration d'un modèle descriptif à large échelle permet alors d'émettre des hypothèeses 
-sur les raisons pour lesquelles le comportement présente les caractéristiques observées. 
-
-De même, le point de vue algorithmique est souvent assimilé au mésoscopique (ou architectural). 
-%les opérations réalisées par le cerveau
-%ne peuvent se réduire à de simples traitements de données issues des organes sensoriels. 
+Une approche descendante bien menée consiste souvent à identifier les aspects non-triviaux
+d'une tâche. L'étude des temps de réponse, des courbes d'apprentissage et des
+taux d'erreur permet d'explorer les caractéristiques limites d'un comportement et de mieux appréhender
+les contraintes posées par système qui l'implémente physiquement.
+Ce peuvent être des contraintes physiques (limites d'extension, de course, ...) mais
+également des limites provenant des caractéristiques physiques du système neuronal sous-jacent.
+L'élaboration d'un modèle descriptif prenant en compte plusieurs échelles permet alors d'émettre des hypothèeses 
+sur les sources (physiques ou logiques) des limitations comportementales observées. 
 Nous avons vu dans les parties précédentes des modèles constitués de quelques 
 centaines de neurones développant une activité autonome, s'organisent sous la pression d'un signal externe et 
 se transforment sous l'effet de la plasticité synaptique.
-La connectivité entre le cortex et les structures sous-corticales (striatum, ganglions de la base, thalamus,
-amygdale, hippocampe, cervelet, ...) met en évidence de nombreuses boucles réentrantes suggérent une 
-prépondérance de l'activité interne sur les entrées sensorielles. Comprendre le rôle de ces boucles
-réentrantes est un des grands enjeux actuels.
+%La connectivité entre le cortex et les structures sous-corticales (striatum, ganglions de la base, thalamus,
+%amygdale, hippocampe, cervelet, ...) met en évidence de nombreuses boucles réentrantes suggérent une 
+%prépondérance de l'activité interne sur les entrées sensorielles. Comprendre le rôle de ces boucles
+%réentrantes est un des grands enjeux actuels.
 La simulation de circuits corticaux et sous-corticaux 
 plus fidèles aux observations anatomiques permet de tester la validité de certaines hypothèses en assignant
 des fonctions spécifiques aux différentes structures participant au circuit et en étudiant les conditions permettant
 au circuit de produire une activité répondant aux contraintes fonctionnelles. 
 
+
+%On distingue ainsi chez la lamproie trois grandes catégories d'activités motrices, à savoir 
+
+D'un point de vue architectural, il existe de nombreuses preuves d'une organisation parallèle
+du système nerveux, avec de nombreux circuits dédiés à des tâches distinctes.  
+L'étude d'organismes relativement primitifs permet 
+d'identifier les tâches élémentaires, celles qui sont présentes à
+tous les niveaux du règne animal et qui structurent l'organisation du système nerveux central.
+On distingue ainsi classiquement l'orientation (déplacement les organes des sens vers les stimuli d'intérêt, 
+éloignement et évitement des stimuli aversifs), 
+la locomotion (déplacement du corps) 
+et l'ensemble des comportements consistant à utiliser les ressources de l'environnement (activité alimentaire
+par exemple) \cite{brembs03,Grillner2008,Stephenson2011}.
+En particulier, un circuit parmi les plus primitifs est celui 
+de la sélection de l'action organisé autour des structures sous-corticales (ganglions de la base) 
+fonctionnant par désinhibition  
+sélective de choix d'actions concurrents, comme mis en évidence par 
+\cite{Grillner2008}. D'autres circuits plus récents, comme ceux de l'hippocampe, 
+sont impliqués dans la navigation spatiale, et la mémorisation \cite{McClelland1995},  
+exprimant en particulier la situation de l'animal dans un environnement connu mémorisé (son territoire) 
+d'un point de vue extérieur, implémentant un mécanisme d'orientation dans un
+référentiel extéro-centré \cite{OKe78}. 
+La dérivation de la commande motrice à travers le cervelet conduit 
+à des ajustements posturaux associés à un contrôle fin et adaptatif des commandes motrices \cite{Wolpert1998,Zeeuw1998}.
+Les boucles entre le cortex, le striatum et le cervelet semblent également associées 
+chez certains mammifères à la simulation motrice
+précédent le déclenchement de l'action \cite{Jeannerod2001}, etc.
+
 A travers deux projets ANR, j'ai pu aborder ces aspects de modélisation selon ces différents niveaux 
-autour de l'étude des comportements d'orientation. Dans le cadre du projet MAPS déjà présenté, j'ai participé à une étude portant 
-sur l'orientation visuelle à partir des données anatomiques et électrophysiologiques du tectum et des neurones prémoteurs du tronc cérébral,
-en collaboration avec Alain Guillaume, travaillant à l'Institut des Sciences du Mouvement, et Anthony Mouraud, qui a effectué un séjour
+autour de l'étude des comportements d'orientation. 
+Dans le cadre du projet MAPS déjà présenté, j'ai participé à une étude portant 
+sur l'orientation visuelle à partir des données anatomiques et électrophysiologiques du tectum 
+et des neurones prémoteurs du tronc cérébral,
+en collaboration avec Alain Guillaume, travaillant à l'Institut des Sciences du Mouvement, 
+et Anthony Mouraud, qui a effectué un séjour
 post-doctoral en 2010 sous notre supervision. 
 Dans le cadre du projet ANR NOAT, en collaboration avec Jennifer Coull (LNC, Marseille) et 
-Daniele Schön (INCM, Marseille), j'ai également travaillé sur des modèles génératifs du comportement d'orientation temporelle,
+Daniele Schön (INCM, Marseille), j'ai également travaillé sur des modèles génératifs du comportement 
+d'orientation temporelle,
 en colaboration avec Gaurav Malhotra qui a effectué un séjour postdoctoral en 2010-2011 sur cette question.
 
 
@@ -3303,12 +3354,34 @@ en colaboration avec Gaurav Malhotra qui a effectué un séjour postdoctoral en 
 
 \subsection{Modèles de l'orientation spatiale}
 
+Le comportement d'orientation, par opposition aux comportements locomoteurs
+ou alimentaires, est constitué de mouvements brefs (discrets).
+Ce type de comportement pris en charge par la partie supérieure du tectum
+appeleée le colliculus.
+
 Un des buts du projet ANR MAPS était de proposer une modélisation du comportement d'orientation visuelle,  à travers
-l'étude du système saccadique. Ce système, situé dans le tectum (partie supérieure du tronc cérébral) au niveau des couches profondes
+l'étude du système saccadique. Ce système, situé dans le tectum (partie supérieure du tronc cérébral) 
+au niveau des couches profondes
 du colliculus supérieur, développe une activité topographiqement organisée responsable de la commande
 des mouvements rapides des globes oculaires, certains aspects de la commande (déplacement relatif) semblant directement
 liés à la position du foyer d'activité à la surface du colliculus, et d'autres aspects (comme la vitesse de déplacement)
 semblant liés à la fréquence de décharge des neurones.
+
+La saccade oculaire est un mouvement considéré comme élémentaire, consistant à 
+
+Le référentiel rétinien (qui n'est pas le référentiel tête). Nécessité d'une intégration.
+
+Mouvement interrompu. 
+
+
+
+mais constitue un excellent
+sujet d'étude à la fois en ce qui concerne 
+
+présente à la fois du point de vue
+
+
+
 
 Notre travail de modélisation a principalement porté sur le problème de la transformation visuo-motrice (ou visuo-spatiale), c'est à dire expliquer comment une
 activité focale, telle qu'elle se développe sur le colliculus supérieur, se traduit sous la forme d'un déplacement moteur oculaire initialement défini par la position
@@ -3359,6 +3432,17 @@ $\Rightarrow$ prior $\simeq$ ``\% up to now'' (subjective time)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Projet :
+
+- FRISTON - APPRENTISSAGE - REDUCTION D'INCERTITUDE (DIFFERENT DE REWARD-BASED) - SUBSTRAT -BABBLING - SMC
+
+- SYNCHRO BODY/ENV. - BCI - INVERSE MODELLING
+
+- BINDING + SPATIAL CODING - FIELD COMPUTATION - ATTRACTOR-BASED MOTOR CONTROLE
+
+- ACTIVITE INTRINSEQUE ET ``FREE WILL''
+
 
 {\bf 1999}
 
