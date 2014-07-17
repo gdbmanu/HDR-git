@@ -189,11 +189,11 @@ Dedicated to Calvin and Hobbes.
 
 % Qu'est-ce qu'un système apprenant
 
-
+{\color{Violet}
 
 % Architectures de contrôle. Point de vue de la robotique. Automates embarqués. 
 
-Quelle est la question?
+{\bf Quelle est la question?}
 
 
 % Philo
@@ -235,7 +235,7 @@ A-t-on besoin du hasard pour apprendre à gérer des actuateurs complexes (puisq
 
 La plupart des besoins naturels sont non pertinents pour les machines (apports énergétiques, abri, partenaire).
 
-Le tryptique Orientation-déplacement-emploi est inopérant dans le cadre ML.
+Le tryptique {\bf Orientation-déplacement-emploi} est inopérant dans le cadre ML.
 
 
 Une architecture cognitive est alors une proposition de réalisation logicielle de ce cahier des charges (un logiciel capable de raisonner, se souvenir et faire des choix).
@@ -264,7 +264,7 @@ Historique :
 On regarde dans le détail ces trois approches avec un focus particulier sur l'apprentissage et l'autonomie. 
 
 
-
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -294,6 +294,7 @@ Ce problème d'une définition opérationnelle de l'intelligence a été posé a
 Il s'agissait de construire un programme de recherche, une feuille de route détaillant les étapes nécessaires 
 et suffisantes pour construire un dispositif artificiel intelligent.
 
+{\color{Violet}
 Q: pourquoi parle-t-on d'architecture et pas de programme (ou de ``méta programme'')? Inclut le hardware. Architecture
 est ici à mettre en relation avec architecture des calculateurs. l'approche RN consiste à revoir l'architecture meme du ``calculateur'' 
 pour atteindre l'autonomie opérationnelle (``gouvernement de soi'').
@@ -309,6 +310,7 @@ D'un point de vue plus pratique, développer de véritables architectures cognit
  \item IHM immersives/empathiques. Repondeurs conviviaux. Avatars. 
  \item simulation économique et sociale
 \end{itemize}
+}
 
 A un niveau très général, le but est de produire un dispositif dont les réponses s'apparenteraient dans la forme 
 et dans le contenu à celles d'un être humain,
@@ -326,7 +328,7 @@ logico-mécaniques (machines) produisant des illusions, autrement dit sont tels 
 leur attribuer des intentions qui n'y sont pas \cite{Braitenberg1986}. Attribuer des intentions est un biais perceptif humain.
 
 Une approche plus opérationnelle consiste à décrire (lister) les compétences attendues de la part du logiciel.
-Si on se réfère aux conceptions courantes de l'intelligence, 
+{\color{Violet} Si on se réfère aux conceptions courantes de l'intelligence, 
 il s'agit de décrire, modéliser mathématiquement et reproduire mécaniquement le sujet cognitif, capable de:
 \begin{enumerate}
 \item {\bf Calcul}. raisonner (agglomérer différents faits pour déduire des faits nouveaux - et/ou des réponses) - l'acuité (perspicacité) du raisonnement, 
@@ -336,6 +338,7 @@ c'est à dire la capacité à établir des faits nouveaux à partir de faisceaux
 \item {\bf Décision}. Planifier et faire des choix, c'est à dire évaluer les bénéfices et les pertes attendus des actions ou des réponses produites.
 \item etc.
 \end{enumerate}
+}
 
 Dans ce cas (définition extensive de l'intelligence), plusieurs problèmes se posent. Il est (a) difficile de séparer les différents 
 items et (b) difficile de fermer la liste. Selon le point de vue que l'on adopte, raisonner (estimer la véracité de certains faits) 
@@ -349,6 +352,8 @@ Enfin, il est difficile d'exclure de la liste certaines capacités comme l'intel
 pratique, capacités opérationnelles, répertoire de comportements, agilité...)
 ou encore l'intelligence émotionnelle, intelligence verbale, etc... qui ont reçu chacune des tentatives de définition. 
 
+{\color{Violet}
+
 Cette approche (lister des compétences) est une approche typiquement réductionniste, consistant à découper un problème
 en sous-problèmes pour mieux les analyser et les résoudre.
 Malgré les nombreuses tentatives, il s'avère souvent que l'assemblage de briques
@@ -357,7 +362,7 @@ Dans le cas des système experts par exemple, le pur raisonnement sur les faits 
 à une réponse réellement exploitable. %Les logiciels de traduction ou correction automatiques les plus efficaces 
 %reposent sur les régularité statistiques, pas sur l'analyse de la structure de la phrase. 
 
-\paragraph{Autonomisation des questions}
+{\bf Autonomisation des questions}
 
 - question du langage
 
@@ -368,6 +373,8 @@ Dans le cas des système experts par exemple, le pur raisonnement sur les faits 
 - question du calcul
 
 - etc...
+
+
 
 L'identification de ces items : calcul - mémoire - plasticité - décision a permis d'aborder
 ces problème en tant que tels, des problèmes vastes qui ont à eux seuls fondé des champs disciplinaires. 
@@ -392,12 +399,15 @@ Il semble y avoir une frontière infranchissable, une différence de nature entr
 entre hyperspécialisation et généricité, entre activité commandée et activité autonome, entre rigidité et adaptivité,
 entre dématérialisation (virtualité) et incarnation, entre déterminisme et création etc.
 Ces points seront abordés dans les prochains paragraphes.
-
+}
 
 
 \section{Les problèmes connus de la démarche réductionniste}
 
 \subsection{Problème de la compétence universelle (ou et quand appliquer la bonne méthode)} 
+
+{\color{Violet}
+
 Choix de la méthode. 
 Versatilité.
 Compétences multiples (séquentielle) vs. compétence intégrée (toutes les compétences en même temps).
@@ -424,10 +434,14 @@ consistant à établir des règles de construction plutôt que des prescriptions
 On parle également de démarche ``bottom-up''.
 
 Nécessité d'un principe fondateur.
+}
 
 \subsection{La question de l'autonomie}
 
+{\color{Violet}
+
 Autonomie = s'affranchir de la commande.
+}
 
 Dans le domaine de la psychologie, l'émergence des sciences cognitives est venu en réaction au behaviorisme.
 A l'origine, il s'agit de contester la description de l'activité du sujet comme simple courroie de transmission 
@@ -437,6 +451,8 @@ du sujet en tant qu'acteur. Notion d'agentivité (imputabilité de l'action).
 %l'imputabilité de l'action. 
 Un dispositif logico-mécanique pourrait être dit intelligent s'il était considéré comme responsable de ses actes, 
 celui auquel on pourrait imputer les actions produites. 
+
+{\color{Violet}
 
 Notes : la demarche behavioriste : Dressage = apprentissage ! Tableau de branchement (LUT). Le conditionnement opérant utilise le bruit créateur / l’exploration. 
 
@@ -475,7 +491,7 @@ des cas.
 Toujours dans le domaine de la vie courante, est ``non intelligent'' tout ce qui est prévisible, ce que l'on peut manipuler, exploiter.
 
 Il ressort : est intelligent ce qui n'est pas prévisible, 
-
+}
 
 \subsection{Problème de la représentation}
 
@@ -1438,7 +1454,7 @@ et d'autre part la prise en compte de la connectivité longue distance.
 
 Dans le cadre d'un travail de co-direction de la thèse de Mathieu Golos à l'Institut de Neurosciences des Systèmes, 
 j'ai contribué à une étude sur la multistablité dans les systèmes neuronaux artificiels
-construits à partir du connectome \cite{Golos2014}. Nous sommes partis d'un 
+construits à partir du connectome \cite{Golos2013,Golos2014}. Nous sommes partis d'un 
 modèle simplifié ignorant le terme de diffusion latérale. 
 Chaque noeud du réseau est simplement identifié à une masse neuronale. 
 Partant de l'analogie avec les réseaux de Hopfield \cite{Hop82}, le but
@@ -2017,7 +2033,7 @@ La passage d'une activité non-synchrone à une activité synchronisée est spé
 (la synchronisation à grande échelle reposant sur les effets de balancier entre population excitatrice et inhibitrice).
 Comme dans les autres études, il est possible d'appliquer la plasticité lorsque le réseau
 est soumis à un motif statique. Dans ce cas, la plasticité inscrit dans le réseau des comportements
-spécifiques (ici de grandes oscillations snchronisées) associées aux motifs appris. 
+spécifiques (ici de grandes oscillations synchronisées) associées aux motifs appris. 
 
 {\color{Violet} (seule différence avec SAB : liens inhib-inhib plus faibles )}
 
@@ -2077,7 +2093,7 @@ une très faible corrélation entre l'activité des différents neurones.
 Le réseau développe dont un régime de chaos fort.
 
 L'application de la STDP conduit la dynamique vers   
-un régime plus simple. La dimension intrinsèque décroit continument jusqu'à atteindre une valeur faible (entre 2 et 3),
+un régime plus simple. La dimension intrinsèque décroît continument jusqu'à atteindre une valeur faible (entre 2 et 3),
 qui caractérise l'entrée dans un régime périodique  \cite{Hen08,Hen08B}. Cette
 activité périodique est maintenue de manière asymptotique,
 ce qui confirme l'appartenance de la STDP aux règles de plasticité d'ordre 1.
@@ -2452,7 +2468,7 @@ et aussi ``rewards correspond to innate priors that constrain policies.''}
 
 L'approche dite ``située'' en robotique
 mobile et en intelligence artificielle \cite{Bro91,Varela91} prône la prise en compte de cette contrainte du corps
-comme élément structurant du développement de capacités cogitives plus élaborées.
+comme élément structurant du développement de capacités cognitives plus élaborées.
 Cette contrainte, qui s'exprime par les dépendances sensori-motrices, et 
 la prise en compte des disparités d'échelle, augmente néanmoins considérablement la complexité des tâches
 d'apprentissage et de leur implémentation par plasticité synaptique. 
@@ -3010,7 +3026,7 @@ dans l'élaboration d'une commande motrice. Certaines donnéess sensorielles son
 les commandes opèrent dans un référentiel différent (référentiel du tronc
 dans le cas de la saccade). 
 Cette étude apporte une intuition sur le principe d'un apprentissage 
-``par coeur'' des règles de translation permettant de pendre en compte la
+``par coeur'' des règles de translation permettant de prendre en compte la
 position du corps dans l'élaboration de la commande motrice dans le cadre
 du codage topographiqe.
 
@@ -3052,12 +3068,17 @@ Les modèles probabiliste de l'apprentissage utilisent souvent une hypothèse de
 suppose que les données d'entrée sont issues d'un processus stochastique dont les caractéristiques
 ne varient pas au cours du temps.
 Seul le programme voit ses caractéristiques évoluer par effet de la plasticité au cours du temps.
-Cette hypothèse n'est pas vérifiée dans le cas du contrôle en boucle fermée.
+Cette hypothèse n'est pas vérifiée dans le cas du contrôle en boucle fermée, où non seulement le programme 
+mais également l'environnement voient leurs caractéristiques évoluer au cours du temps. 
 Nous avons vu comment un bruit générateur interne est une des composantes 
 qui va permettre de faire des choix en stabilisant certaines réponses 
 dans le cadre de processus d'optimisation non-convexes (plusieurs contrôleurs/solutions possibles),
 conduisant à des solutions différentes (et donc des environnements perceptifs différents) selon le hasard
 des initialisation et des choix aléatoires produits par le modèle.
+Ainsi les régularités observéees durant les premières phases de l'apprentisage ne sont plus nécessairement présentes
+à une étape ultérieure de l'apprentissage~: certaines trajectoires sont ``abandonnées''. Dans une perspective de parcimonie 
+(ou de ressource limitée), il est avantageux d'oublier certains faits passés pour mieux appréhender les faits nouveaux, autrement
+dit oublier pour mieux apprendre.
 
 %[APPRENDRE ET OUBLIER]. Le papier de Kivinen.
 
@@ -3092,14 +3113,14 @@ en autonomisant l'adaptation du logiciel, afin de permettre une prise en main
 du logiciel par le patient sans assistance extérieure.
 Le projet CO-ADAPT consistait précisément à étudier des méthodes adaptatives 
 pour faire en sorte que logiciel utilise les réactions du sujet pour améliorer ses
-peformances (temps de réponse, potentiels d'erreur, ...).
+performances (temps de réponse, potentiels d'erreur, ...).
 
 Dans un cadre adaptatif, le logiciel doit apprendre, pour chaque sujet, 
 à discriminer les différentes activités électriques 
 produites.
-La maîtrise de l'interfaces comprend une phase d'apprentissage de la part du sujet, 
-pouvant induire des modifications dans l'activité électro-encéphalographique 
-dans le sens d'un signal plus net, mais aussi dans la répartition et les temps de réponse
+De la part du sujet, la maîtrise de l'interfaces comprend également une phase d'apprentissage  
+pouvant induire des modifications dans son activité électro-encéphalographique,
+dans le sens d'un signal plus net, mais aussi dans la répartition spatiale et les temps de réponse
 de l'activité électrique.
 Par ailleurs, des dégradations du signal peuvent aussi 
 être observées en cas de lassitude, de distraction, de somnolence...
@@ -3115,7 +3136,7 @@ lui permet de suivre les changements environnementaux en mettant à jour son mod
 Le lien avec l'apprentissage par renforcement apparait dans ce cadre naturel.
 
 Ma contribution dans ce projet a principalement porté sur une des interfaces les plus 
-classiques appelée le ``P300 speller''.
+classiques appelée ``P300 speller''.
 L'onde ``P300'' est une activité positive à dominante occipitale qui apparait environ 300 ms après un stimulus 
 ``surprenant'', ou différent des autres, dans une série de stimuli qui lui est préssentée.
 Le P300-speller est constitué d'une grille de symboles. Des groupes de symboles sont illuminés 
@@ -3149,63 +3170,34 @@ avec Maureen Clerc, Eoin Thomas, Dieter Devlaminck et Loïc Mahé,
 travaillant à Sophia-Antipolis, 
 sur un modèle de gradient logistique dans la cadre de classifieurs 
 probabilistes calculés sur un groupe de sujets. 
-Un classifieur probabiliste fournit pour chaque flash une probabilité (a posteriori) 
-de l'événement P300.
-Ce classifieur ayant été calculé sur un ensemble de sujets, la fiablité de cette réponse unique
-est assez faible. Il faut donc 
-
-Ce type de modèle est très proche dans sa formulation de l'apprentissage supervisé en-ligne 
-de classifieurs multi-classes (comme l'algorithme du perceptron, ou encore le gradient logistique multi-classe)
-\cite{Bishop2006}.
-Il a été proposé dans le cadre du P300 par \cite{Kindermans}
-Le cadre probabilistes  permet 
-d'inscrire les stratégies de choix stochastiques (stratégie du ``softmax''), telles
-qu'utilisées dans les modèles acteur-critique, dans un contexte 
-d'estimation en-ligne de la probabilité a posteriori d'appartenance à une classe. 
-
-La formulation Bayesienne du problème de détection du P300 permet de construire 
-un modèle qui exprime pour chaque symbole la probabilité qu'il soit le symbole désiré.
-Chaque illumination d'un nouveau groupe de lettres permet de mattre à jour à la fois la probabilité
-attachée aux lettres flashées mais également celle attachée aux lettres non-flashées.
-
-la différence reposant sur le type d'information fournie au classifieur (ici information de
-type ``bien''/``mal'').
-
-d'utiliser le cadre de l'apprentissage en ligne et de l'apprentissage par renforcement pour que le
-contrôleur s'adapte au sujet à chaque instant, c'est à dire
-qui fasse évoluer son fonctionnement selon des caractéristiques propres à chaque sujet.
-Il a été pour moi l'occasion d'appliquer quelques principes de l'apprentisage statistique
-sur une base de signaux EEG dans le cadre
-d'une des applications les plus connues des interfaces cerveau machine (ICM ou BCI en anglais)~: 
-le ``P300-speller''.  
-
-Les données ont été récoltées lors d'une expérience .. sur 20 sujets...
+Ce type de modèle a été proposé dans le cadre du P300 par \cite{Kindermans2012}.
+Considérons un classifieur 
+probabiliste qui, à chaque illumination d'un nouveau groupe de lettres (toutes les 200 ms),  
+donne un nombre entre 0 et 1, interprété comme la probabilité que ce groupe de lettre aît produit un P300.
+A l'aide de ce nombre, il est possible mettre à jour
+les probabilités attachées à chaque symbole de la grille. 
+Ainsi, à chaque nouveau flash, la probablité s'affine jusqu'à ce qu'un symbole soit déclaré ``gagnant''
+lorsque la probabilité qui lui est attachée dépasse un certain seuil (dans notre cas 0.9).
+Il est possible de construire un classifieur générique 
+à l'aide des données issues d'un groupe de sujet et de l'appliquer sans calibration sur un nouveau sujet,
+avec des taux de réussites proches de l'état de l'art des classifieurs spécifiques aux sujets. 
+Le principe d'accumulation permet également d'optimiser le nombre
+de flash (le nombre de flash est adaptatif). Enfin, en ajoutant une hypothèse Gaussienne, il est possible de 
+définir un algorithme adaptatif (gradient logistique) qui met à jour en permanence le classifieur afin mieux correspondre aux
+données du sujet et améliorer le taux de réussite et la vitesse de la réponse. 
+La validation du modèle adaptatif Gaussien sur des données P300 a été présenté à \cite{Dau14b}.
+Le schéma d'accumulation d'évidence fait partie de la mise à jour du logiciel OpenVibes \cite{Renard2010} développé
+entre autres à l'INRIA, et a fait l'objet de plusieurs publications dans des conférences \cite{Thomas2013,Thomas2014}.
 
 
 
-(les échanges, la commnuication)
-entre s de  un environnement , dont la dynamique collective 
 
+{\color{Violet}
 [Apprentissage statistique - Forme - pater matching -]
 
 [bruit créateur]
 
-[Online learing]
-
-
-
-
-LIVA - TIM - RACHEZ 
-
-
-
-
-Ces algorithmes 
-
-en 
-
-
-
+[Online learning]
 
 {\bf 2011}
 
@@ -3218,10 +3210,7 @@ en
 - Approche adaptative des BCI : label free logistic gradient descent avec accumulation d’évidence + subject-independent classifier.
 
 - Hongliang : Passive Agressive + bandit feedback
-
-
-
-
+}
 
 
 
@@ -3249,9 +3238,64 @@ en
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-principe général : 
-- comportement based
-- mapping des architectures de contrôle sur le SNC
+%principe général : 
+%- comportement based
+%- mapping des architectures de contrôle sur le SNC
+
+Si les principes de fonctionnement élémentaires du système nerveux central (neurones, synapses) commencent à être bien connus, 
+le fonctionnement intégré du système dans son ensemble reste l'objet de nombreuses conjectures.
+L'utilisation de modèles mathématiques et de simulations informatiques permet de proposer des hypothèses de fonctionnement et/ou 
+de valider certaines hypothèses issues de l'observation. 
+Les neurosciences computationnelles sont ainsi la branche de l'informatique qui, d'une part, élabore des modèles de calcul 
+inspirés par les hypothèses proposées en neurosciences, et, d'autre part, propose des interprétations
+de données biologiques à partir de principes et modèles issus des sciences de l'information.
+Selon le typologie traditionnelles proposée par David Marr \cite{Marr82}, 
+un modèle peut appartenir à différents niveaux de généralité, à savoir le niveau computationnel (la 
+logique), 
+le niveau algorithmique (encodage et opérations réalisées), et
+la réalisation matérielle (le substrat).   
+%Ces niveaux peuvent aussi être assimilés à des niveaux de description,
+%du niveau psychophysique (ou macroscopique), au niveau architectural (mésoscopique) et au niveau 
+%microscopique (neuronal).
+
+%Du point de vue architectural, l'étude d'organismes relativement primitifs permet 
+%d'identifier les tâches élémentaires, celles qui sont présentes à
+%tous les niveaux du règne animal et qui structurent l'organisation du système nerveux central.
+%On distingue ainsi chez la lamproie trois grandes catégories d'activités motrices, à savoir l'orientation 
+%(déplacement les organes des sens vers les stimuli), la locomotion (déplacement du corps) 
+%et l'emploi (activité alimentaire).
+
+Le point de vue computationnel est souvent assimilé au niveau macroscopique (ou psychophysique). 
+L'étude des temps de réponse, des courbes d'apprentissage et des
+taux d'erreur permet d'explorer les caractéristiques limites d'un comportement et d'exprimer
+des contraintes sur le système qui l'implémente physiquement.
+L'élaboration d'un modèle descriptif à large échelle permet alors d'émettre des hypothèeses 
+sur les raisons pour lesquelles le comportement présente les caractéristiques observées. 
+
+De même, le point de vue algorithmique est souvent assimilé au mésoscopique (ou architectural). 
+%les opérations réalisées par le cerveau
+%ne peuvent se réduire à de simples traitements de données issues des organes sensoriels. 
+Nous avons vu dans les parties précédentes des modèles constitués de quelques 
+centaines de neurones développant une activité autonome, s'organisent sous la pression d'un signal externe et 
+se transforment sous l'effet de la plasticité synaptique.
+La connectivité entre le cortex et les structures sous-corticales (striatum, ganglions de la base, thalamus,
+amygdale, hippocampe, cervelet, ...) met en évidence de nombreuses boucles réentrantes suggérent une 
+prépondérance de l'activité interne sur les entrées sensorielles. Comprendre le rôle de ces boucles
+réentrantes est un des grands enjeux actuels.
+La simulation de circuits corticaux et sous-corticaux 
+plus fidèles aux observations anatomiques permet de tester la validité de certaines hypothèses en assignant
+des fonctions spécifiques aux différentes structures participant au circuit et en étudiant les conditions permettant
+au circuit de produire une activité répondant aux contraintes fonctionnelles. 
+
+A travers deux projets ANR, j'ai pu aborder ces aspects de modélisation selon ces différents niveaux 
+autour de l'étude des comportements d'orientation. Dans le cadre du projet MAPS déjà présenté, j'ai participé à une étude portant 
+sur l'orientation visuelle à partir des données anatomiques et électrophysiologiques du tectum et des neurones prémoteurs du tronc cérébral,
+en collaboration avec Alain Guillaume, travaillant à l'Institut des Sciences du Mouvement, et Anthony Mouraud, qui a effectué un séjour
+post-doctoral en 2010 sous notre supervision. 
+Dans le cadre du projet ANR NOAT, en collaboration avec Jennifer Coull (LNC, Marseille) et 
+Daniele Schön (INCM, Marseille), j'ai également travaillé sur des modèles génératifs du comportement d'orientation temporelle,
+en colaboration avec Gaurav Malhotra qui a effectué un séjour postdoctoral en 2010-2011 sur cette question.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     4.1      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -3264,13 +3308,18 @@ l'étude du système saccadique. Ce système, situé dans le tectum (partie sup�
 du colliculus supérieur, développe une activité topographiqement organisée responsable de la commande
 des mouvements rapides des globes oculaires, certains aspects de la commande (déplacement relatif) semblant directement
 liés à la position du foyer d'activité à la surface du colliculus, et d'autres aspects (comme la vitesse de déplacement)
-semblant liés à la fréquence de écharge des neurones.
+semblant liés à la fréquence de décharge des neurones.
+
+Notre travail de modélisation a principalement porté sur le problème de la transformation visuo-motrice (ou visuo-spatiale), c'est à dire expliquer comment une
+activité focale, telle qu'elle se développe sur le colliculus supérieur, se traduit sous la forme d'un déplacement moteur oculaire initialement défini par la position
+(le barycentre) de la bulle sur la carte. 
 
 
+{\color{Violet}
 {\bf 2010}
 
 - A. Mouraud : mecanisme integrateur. Dual drive. 
-
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     4.2      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
