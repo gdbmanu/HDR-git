@@ -3292,11 +3292,11 @@ taux d'erreur permet d'explorer les caractéristiques limites d'un comportement 
 les contraintes posées par système qui l'implémente physiquement.
 Ce peuvent être des contraintes physiques (limites d'extension, de course, ...) mais
 également des limites provenant des caractéristiques physiques du système neuronal sous-jacent.
-L'élaboration d'un modèle descriptif prenant en compte plusieurs échelles permet alors d'émettre des hypothèeses 
+L'élaboration d'un modèle descriptif prenant en compte plusieurs échelles permet alors d'émettre des hypothèses 
 sur les sources (physiques ou logiques) des limitations comportementales observées. 
 Nous avons vu dans les parties précédentes des modèles constitués de quelques 
-centaines de neurones développant une activité autonome, s'organisent sous la pression d'un signal externe et 
-se transforment sous l'effet de la plasticité synaptique.
+centaines de neurones développant une activité autonome, s'organisant sous la pression d'un signal externe et 
+se transformant sous l'effet de la plasticité synaptique.
 %La connectivité entre le cortex et les structures sous-corticales (striatum, ganglions de la base, thalamus,
 %amygdale, hippocampe, cervelet, ...) met en évidence de nombreuses boucles réentrantes suggérent une 
 %prépondérance de l'activité interne sur les entrées sensorielles. Comprendre le rôle de ces boucles
@@ -3323,13 +3323,14 @@ En particulier, un circuit parmi les plus primitifs est celui
 de la sélection de l'action organisé autour des structures sous-corticales (ganglions de la base) 
 fonctionnant par désinhibition  
 sélective de choix d'actions concurrents, comme mis en évidence par 
-\cite{Grillner2008}. D'autres circuits plus récents, comme ceux de l'hippocampe, 
+\cite{Grillner2008}. 
+La dérivation de la commande motrice à travers le cervelet conduit par ailleurs
+à des ajustements posturaux associés à un contrôle fin et adaptatif des commandes motrices \cite{Wolpert1998,Zeeuw1998}.
+D'autres circuits plus récents, comme ceux de l'hippocampe, 
 sont impliqués dans la navigation spatiale, et la mémorisation \cite{McClelland1995},  
 exprimant en particulier la situation de l'animal dans un environnement connu mémorisé (son territoire) 
 d'un point de vue extérieur, implémentant un mécanisme d'orientation dans un
 référentiel extéro-centré \cite{OKe78}. 
-La dérivation de la commande motrice à travers le cervelet conduit 
-à des ajustements posturaux associés à un contrôle fin et adaptatif des commandes motrices \cite{Wolpert1998,Zeeuw1998}.
 Les boucles entre le cortex, le striatum et le cervelet semblent également associées 
 chez certains mammifères à la simulation motrice
 précédent le déclenchement de l'action \cite{Jeannerod2001}, etc.
@@ -3345,7 +3346,7 @@ post-doctoral en 2010 sous notre supervision.
 Dans le cadre du projet ANR NOAT, en collaboration avec Jennifer Coull (LNC, Marseille) et 
 Daniele Schön (INCM, Marseille), j'ai également travaillé sur des modèles génératifs du comportement 
 d'orientation temporelle,
-en colaboration avec Gaurav Malhotra qui a effectué un séjour postdoctoral en 2010-2011 sur cette question.
+en collaboration avec Gaurav Malhotra qui a effectué un séjour postdoctoral en 2010-2011 sur cette question.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -3354,39 +3355,107 @@ en colaboration avec Gaurav Malhotra qui a effectué un séjour postdoctoral en 
 
 \subsection{Modèles de l'orientation spatiale}
 
-Le comportement d'orientation, par opposition aux comportements locomoteurs
-ou alimentaires, est constitué de mouvements brefs (discrets).
-Ce type de comportement pris en charge par la partie supérieure du tectum
-appeleée le colliculus.
-
 Un des buts du projet ANR MAPS était de proposer une modélisation du comportement d'orientation visuelle,  à travers
 l'étude du système saccadique. Ce système, situé dans le tectum (partie supérieure du tronc cérébral) 
 au niveau des couches profondes
 du colliculus supérieur, développe une activité topographiqement organisée responsable de la commande
-des mouvements rapides des globes oculaires, certains aspects de la commande (déplacement relatif) semblant directement
-liés à la position du foyer d'activité à la surface du colliculus, et d'autres aspects (comme la vitesse de déplacement)
-semblant liés à la fréquence de décharge des neurones.
+des mouvements rapides des globes oculaires.
+%, certains aspects de la commande (déplacement relatif) semblant directement
+%liés à la position du foyer d'activité à la surface du colliculus, et d'autres aspects (comme la vitesse de déplacement)
+%semblant liés à la fréquence de décharge des neurones.
 
-La saccade oculaire est un mouvement considéré comme élémentaire, consistant à 
+La saccade oculaire est un mouvement présent chez l'ensemble des vertébrés consistant à orienter 
+la partie centrale de la rétine (la fovea) vers un point d'intérêt de l'espace visuel.
+Le comportement d'orientation saccadique, par opposition aux comportements locomoteurs
+ou alimentaires, est constitué de mouvements brefs (discrets), permettant 
+d'explorer la scène visuelle. La saccade oculaire est le prototype des mouvements 
+dits ``balistiques'', partant d'une posture initiale et s'achevant sur une posture finale
+(par opposition a des mouvements d'ajustement ou de contrôle guidé par 
+un feedback comme la poursuite oculaire par exemple).
 
-Le référentiel rétinien (qui n'est pas le référentiel tête). Nécessité d'une intégration.
+Etant donnée une cible visuelle présente en périphérie de la rétine, la tâche consiste à positionner 
+le corps (tronc, tête et globe oculaire) de telle sorte que cette cible soit placée au centre de la rétine.
+Le mouvement consiste donc, étant donnée la posture corps-tête-oeil initiale, à produire
+un déplacement corps-tête-oeil conduisant à la posture cible finale. La séquence qui, à partir des données
+sensorielles et proprioceptives, génère une activité phasique (une bouffée d'activité) des motoneurones 
+conduisant au déplacement désiré est appelée la transformation visuo-motrice (dite
+transformation ``spatio-temporelle'' \cite{MOSCHO98}). 
+Elle implique la traduction d'une activité exprimant des coordonnées spatiales   
+vers une activité temporellement bornée exprimant une vélocité motrice transitoire.
+Une version simplifiée de la tâche est la saccade à tête fixe consistant orienter le globe
+oculaire seul.
 
-Mouvement interrompu. 
+Même si on se limite aux saccades à tête fixe, le circuit de la commande saccadique demeure assez complexe
+et non totalement élucidé. Si l'on exclut les étapes de traitement visuel conduisant à l'identification
+d'un point d'intérêt en périphérie de la rétine, la structure au carrefour de la transformation 
+visuo-motrice est
+une carte rétinotopique située sur la partie supérieure du tectum,
+appelée le colliculus supérieur. 
+Le déclenchement de la saccade implique 
+de nombreuses catégories de neurones du tronc cérébral, incluant des inhibiteurs toniques,
+des neurones prémoteurs excitateurs et inhibiteurs variés appartenant à la formation réticulée, 
+une dérivation via le cervelet et enfin des motoneurones oculaires. 
 
+Le colliculus est une carte topographique bilatérale (champ visuel droit, champ visuel gauche) 
+dont la stimulation électrique permet de déclencher des saccades.
+L'amplitude des saccades dépend de la position de la stimulation sur la carte, et non de la fréquence 
+ou de l'intensité de la stimulation. 
+La commande motrice étant ballistique (sans feedback visuel ou proprioceptif),
+les premiers travaux de modélisation \cite{Rob75} suggèrent l'existence d'un intégrateur
+dans le circuit de la commande déterminant la durée de la saccade en fonction de la  
+distance déjà parcourue (intégration de la commande de vitesse au cours du temps).
+%La commande est alors proportionnelle à l'erreur motrice (la distance restant à parcourir).
+Pour tenir compte de certaines observations (en particulier la résistance à
+des variations de fréquences conduisant à des saccades plus lentes mais toujours précises),
+l'hypothèse d'un chemin double contrôlant à la fois la vitesse et la durée 
+de la saccade a été émis par \cite{Groh2001}.
 
+Le travail réalisé en collaboration avec Alain Guillaume et Anthony Mouraud a consisté à étudier 
+et implémenter sur un simulateur de réseaux de neurones réaliste cette hypothèse de chemin double
+vers les neurones prémoteurs. 
+Le logiciel utilisé est le simulateur de neurones impulsionnels ``DAMNED'' 
+développé par Anthony Mouraud et Didier Puzenat \cite{Mouraud2009}. 
+Notre modèle étudie la transformation sensori-motrices à l'aide d'une architecture réaliste
+impliquant plusieurs milliers de neurones. La carte colliculaire est organisée de manière topographique
+selon un principe de champ neuronal (connexions excitatrices à courte distance, connexions
+inhibitrices à longue distance). Les projections directes des neurones colliculaires vers les neurones pré-moteurs
+obéissent à un gradient exponentiel, l'amplitude de la saccade augmentant non linéairement
+avec l'excentricité. 
 
-mais constitue un excellent
-sujet d'étude à la fois en ce qui concerne 
+Notre modèle repose sur l'hypothèse d'un contrôle effectué selon trois modalités:
+contrôle du déclenchement, contrôle de la vélocité et contrôle de la durée.
+Si la vélocité repose bien sur les projection directe du coliculus vers les neurones pré-moteurs,
+nous faison l'hypothèse que le contrôle du déclenchement et le contrôle de la durée reposent 
+sur une structure de la formation réticulée appelée cMRF (centro-medial reticular formation)
+dont le rôle dans le contrôle de la saccade est connu \cite{Waitzman1996}.  
 
-présente à la fois du point de vue
+Un premier modèle, présenté à l'édition 2011 de la conférence CNS \cite{Dauce2011}, attribue un rôle double
+aux cellules du CMRF. Les cellules contralatérales règlent le déclenchement de la saccade tandis que les cellules 
+ipsilatérales participent à sa terminaison via une intégration sous-liminaire du signal émis par les 
+neurones pré-moteurs. Ce modèle utilise des neurones dont la constante de membrane lente 
+permet de faire l'économie d'un mécanisme d'intégration plus élaboré. La brève bouffée 
+émise par les neurones ipsilatéraux lorsque le potentiel atteint le seuil interrompt 
+simultanément l'activité des neurones prémoteurs et celle du colliculus, mettant fin à 
+la saccade.
 
+Ce premier modèle, de fonctionnement relativement simple, ne prend pas en compte certaine observations qui 
+reportent une prise en compte par le système saccadique de l'activité effective des neurones pré-moteurs \cite{Barton2003}.
+Un second modèle, incluant un lien de feedback des neurone prémoteurs vers les neurones du cMRF
+a été implémenté. Ce modèle, qui permettait de prendre en compte l'interruption temporaire de l'activité
+des neurones prémoteurs présentait néanmoins des tracés de saccades moins précis, et n'a pas fait l'objet de publication.
 
-
-
-Notre travail de modélisation a principalement porté sur le problème de la transformation visuo-motrice (ou visuo-spatiale), c'est à dire expliquer comment une
-activité focale, telle qu'elle se développe sur le colliculus supérieur, se traduit sous la forme d'un déplacement moteur oculaire initialement défini par la position
-(le barycentre) de la bulle sur la carte. 
-
+Cette étude, en implémentant de façon très détaillée les populations de neurones en jeu, a permis de 
+souligner l'importance sans doute sous-évaluée des neurones du cMRF dans le contrôle de la saccade. Néanmoins, 
+le nombre et la complexité des paramétres en jeu (types de neurones, constantes d'intégration, types et amplitude
+des projection, nombre de populations, existence ou absence de certains faisceaux d'axones, ...) 
+rend difficiles à distinguer les facteurs contribuant à la réussite ou à l'échec du modèle
+(défaut de conception, défaut de réalisme, défaut de paramétrage, défaut d'implémentation).
+La prise en compte de conditions plus générales (saccades libres, saccades adaptatives, cibles en 
+mouvement) nécessiterait la mise en oeuvre de modèles de populations plus simples, basés sur des masses neuronales plutôt
+que des neurones détaillés. Certains des principes 
+computationnels évoqués plus haut, comme l'idée d'un contrôle basé sur des
+points fixe de l'espace de postures, pourraient être développés dans ce cadre. 
+Cet aspect sera présenté plus précisément dans la partie projet de ce mémoire. 
 
 {\color{Violet}
 {\bf 2010}
@@ -3443,6 +3512,7 @@ Projet :
 
 - ACTIVITE INTRINSEQUE ET ``FREE WILL''
 
+- CHANGEMENT DE REFERENTIEL
 
 {\bf 1999}
 
