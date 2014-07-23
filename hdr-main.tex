@@ -1409,7 +1409,7 @@ population à des stimuli spatio-temporels suit une séquence reproductible (mai
 peut être amplifiée par la plasticité.
 La sensibilité acquise à des patrons spatio-temporels spécifiques, telles qu'existant également dans les modèles fréquentiels (voir \ref{sec:FPos}), 
 peut donc etre observée à l'échelle de quelques millisecondes, mettant en jeu un faible nombre de spikes par neurone.
-La clé semble donc être la mise en évience de mécanismes similaires à différentes échelles, les opérations
+La clé semble donc être la mise en évidence de mécanismes similaires à différentes échelles, les opérations
 à échelle temporelle courte étant elles-même ``portées'' (ou embarquées) dans des opérations à échelle temporelle plus larges.
 
 
@@ -1528,7 +1528,7 @@ est le processus de changement comportemental,
 en relation avec ce mécanisme de plasticité. 
 L'apprentissage est au sens large
 l'ensemble des processus épigénétiques (historiques) inscrivant dans l'animal ou l'individu 
-les éléments d'expérience qui contribuent à accroitre l'adaptation de ses réponses à son
+les éléments d'expérience qui contribuent à accroître l'adaptation de ses réponses à son
 milieu.  
 
 La capacité à inscrire des événements ou des faits particuliers en vue de les exploiter dans le futur est une des
@@ -3502,7 +3502,195 @@ $\Rightarrow$ prior $\simeq$ ``\% up to now'' (subjective time)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+D'un point de vue général, les opérations du système nerveux se caractérisent par un compromis entre des opérations 
+essentiellement produites par l'activité interne, et des opérations guidées par les stimulations sensorielles. 
+L'analyse de la communication nerveuse implique la prise en compte du cadre macroscopique des interactions entre 
+le système nervveux, l'appareil sensori-moteur et son milieu.
+La correspondance entre l'activité macroscopique et l'activité nerveuse reste à ce jour non élucidé.
+
+L'analyse que nous avons développée à partir de l'étude des réseaux de neurones aléatoires suggère un mode de fonctionnement
+intermédiaire entre le pattern matching et les systèmes dynamiques. Plus précisément, nous avonc utilisé l'exemple (ou l'analogie)
+d'un système dynamique distribué contraint par un signal extérieur. 
+
+Les différentes études présentées permettentde soulever de nombreuses questions sur les principes computationnels 
+à l'oeuvre au sein de l'activité nerveuse,
+listées ci-desous.
+
+\paragraph{Nature du feedback} 
+Un des schémas proposés ici pour la communication nerveuse 
+est celui du feedback positif, autrement
+dit la résonance entre l'activité macroscopique et l'activité nerveuse, caractérisée par la présence d'un attracteur comportemental 
+(posture ou patron d'interaction dynamique). L'hypothèse est que le substrat nerveux est un réservoir de patrons sensori-moteurs, 
+et l'apparition de précurseurs sensoriels ou moteurs au sein de l'activité nerveuse suscite la convergence de la dynamique vers l'attracteur correspondant, 
+favorisant une activité macroscopique (un attracteur comportemental) qui lui-même favorise l'attracteur neuronal par boucle de rétroaction positive.
+Des mécanismes internes de fatigue et/ou l'irruption de composants sensoriels ou moteurs dissonants favorise la recomposition de l'activité nerveuse
+et la convergence vers un nouvel attracteur.
+
+Ce schéma computationnel (fonctionnement par ``sauts'' d'un attracteur à un autre, alternance entre destabilisation et 
+stabilité) n'est pas exclusif du schéma traditionnel du guidage de l'activité motrice par l'activité sensorielle (schéma
+à feedback négatif).  Autrement dit, rien ne permet d'exclure que l'activité nerveuse, 
+caractérisée microscopiquement par des patrons de connexion 
+excitateurs et inhibiteurs, puisse susciter à la fois des schémas comportementaux basés 
+sur le feedback positif (persévération, résistance au changement
+et changements brusques) et le feedback négatif (réponse graduelle à l'erreur perceptive, poursuite lente, ...).
+
+Question ouverte : quelles sont les contributions respectives de ces deux approches à l'activité neuronale? Quelles prédictions?
+
+{\color{Violet}}
+Les schémas de guidage par correction d'erreur sont très présents au niveau des structures sensori-motrices profondes
+(comme le contrôle vestibulaire).
+
+l'approche par feedback négatif repose principalement sur le calcul d'une erreur de prédiction. 
+On suppose donc l'existence d'un modèle interne qui 
+anticipe la conséquence sensorielle de l'action [WOLPERT], et corrige éventuellement
+le modèle si cette 
+
+Une des prédictions, pour distinguer l'un de l'autre, serait d'identifier une activité liée à l'erreur perceptive. 
+vs une activité liée au matching perceptif (correspondance)
+
+}
+
+\paragraph{Espace métrique et espace logique}
+
+Les déplacements produits par le corps en mouvement sont tous quantifiables par la position (et les variations de position) 
+des éléments mobiles qui le composent.
+Les sources de l'activité induite sur les organes sensoriels sont également localisables dans un espace métrique
+tridimensionnel constituant l'environnement immédiat du sujet.
+Il est pourtant relativement difficile d'identifier au sein du cerveau des activités (ou des variations d'activité) en lien 
+avec cet espace métrique. 
+Par exemple, il est possible d'établir des corrélations entre l'activité mesurée sur les neurones du cortex moteurs et le
+mouvement effectif, mais corrélations ne permettent pas (ou permettent difficilement) de reconstruire une 
+trajectoire métrique précise.
+
+Le caractère extrêmement distribué de l'activité nerveuse suggère la distribution de ces quantités sur de nombreux neurones.
+En particulier, il apparaît probable qu'une même quantité n'active pas les même neurones selon sa position
+dans un certain intervalle de valeurs. 
+Cette distribution de l'activité rend néanmoins difficile la réalisation d'opérations simples comme l'addition ou la différence
+de deux quantités, comme celà est pourtant nécessaire lorsque les déplacements doivent prendre en compte des sources sensorielles 
+multiples (proprioception de la position de la tête et excentricité d'une cible sur la rétine par exemple).
+Si l'espace métrique environnant est décomposé en composants élémentaires (intervalles ou ``pixels'' d'environnement), activant
+ou désactivant différentes populations de neurones, alors les opérations élémentaires de translation, rotation, co-extension, 
+etc. doivent être apprises ``par coeur'' et ne peuvent résulter de la combinaison d'activités unitaires.
+
+Si le contrôle de l'appareil moteur, ou plus généralement l'activité d'orientation, repose sur ces principes, 
+l'apprentissage de la combinaison des facteurs reste un problème ouvert. En effet, s'il est facile d'exprimer une erreur 
+(une distance) dans un espace métrique, il est plus difficile d'exprimer cette même distance, et donc la correction
+nécessaire dans un espace ``qualitatif'' distribué. 
+
+IDEE : apprentissage des corrections motrices : pour un certain canal (activité distribuée) mapping entre proprioception
+et perçue et désirée. activité du cervelet?
+
+
+%La traduction de l'espace qualitatif neuronal vers l'espace quantitatif 
+%métrique passe des essais/erreurs, récompensé lorsque la commande atteint le but par hasard, et donc un apprentissage lent. 
+%Le caractère rapide des corrections opérées par le système sensori-moteur suggère donc que la  
+
+
+la multitude des combinaisons motrices et sensorielles rend difficile (impossible) l'attribution
+d'une seule quantité aux différents neurones : si une quantité peut être exprimée par de nombreux neurones, un même neurone
+doit lui-même être l'expression de nombreuses quantités, changeant de rôle selon le contexte.  
+
+La question de l'expressivité des substrats nous permet de soulever la question du caractère métrique ou non métrique 
+(quantitatif ou qualitatif) des patrons d'activité produits par l'activité nerveuse.
+
+Le contrôle moteur par correction de l'erreur perceptive repose sur le traitement de signaux quantitatifs (la
+force de la commande de correction étant proportionnelle à l'erreur perçue): temps et espace continus.
+A l'inverse, le calcul automatique repose sur des opérations séquentielles et discrètes.
+
+Existe-t-il au sein de l'activité du substrat une quantité traduisant la distance entre deux configurations d'activité?
+
+D'un côté, l'information métrique peut être extraite de l'activité de neurones du cortex moteur (reconstuction des trajectoires
+à partir de l'activité de différents neurones) [GEORGOPOULOS]. Cette information est néanmoins peu fiable...
+
+@article{wessberg2000real,
+  title={Real-time prediction of hand trajectory by ensembles of cortical neurons in primates},
+  author={Wessberg, Johan and Stambaugh, Christopher R and Kralik, Jerald D and Beck, Pamela D and Laubach, Mark and Chapin, John K and Kim, Jung and Biggs, S James and Srinivasan, Mandayam A and Nicolelis, Miguel AL},
+  journal={Nature},
+  volume={408},
+  number={6810},
+  pages={361--365},
+  year={2000},
+  publisher={Nature Publishing Group}
+}
+
+
+Approche pattern matching : une succession de correspondances
+
+
+Une des différences principales concerne le caractère non métrique de cette approche, basée sur la correspondance de forme (pattern matching),
+et non sur la différence de forme (erreur entre prédiction et observation).
+
+une activité basée sur la 
+
+\paragraph{Référentiels}
+
+Espace métrique interne. 
+Les senseurs sont fortement non-linéaires. 
+
+\paragraph{Réservoir}
+L'approche par feedback positif repose sur la prise en compte de la dynamique intrinsèque. Ce sont les caractéristiques
+spontanées de cette dynamique qui conditionnent la nature des opérations réalisées, et le type d'interactions possibles entre
+le substrat nerveux et son environnement.
+
+
+\paragraph{Entraînement}
+Nous avons cherché à illustrer le caractère parallèle et complémentaire de l'activité nerveuse et de l'activité macroscopique.
+Ces deux activités sont largement séparées à la fois par l'échelle spatiale et l'échelle temporelle. 
+Seuls l'entrainement de populations nerveuses (interactions longue-distance, synchronisation, résonance) permettent d'expliquer 
+l'existence de moments au cours desquels les deux échelles de description se rejoignent pour former un seul et même
+système.
+
+
+L'approche par feedback positif suggère une activité corrélée avec les déplacements moteurs. L'approche par feedback 
+
+Apprentissage par coeur vs. modèle interne
+
+Prédiction d'une activité contingente aux grandeurs physiques (et non à l'erreur perceptive).
+
+
+
+Rôle du bruit. Bruit créateur. Formation de patrons d'interaction.
+
+
+Le caractère distribué des (représentation d'une grandeur physique par l'activité d'une population)
+
+en montrant que certains phénomènes comme la criticalité, 
+la résonance, la multistabilité 
+
+
+
+
+
+Contrairement à l'approche 
+
+
+et des contraintes
+
+
+différentes extensivités
+
+La décision 
+
+
+les théories de la simulatio interne \cite{Jeannerod2001}, ou de l'espace de travail ... \cite{}, stipulent   
+
+
+\section{Questions ouvertes}
+
+
+\section{Projets en cours}
+
+
+
+\section{Projets à long terme}
+
 Projet :
+
+- MODELE SOUS-CORTICAL POUR TVB
+
+- DIFFERENTS PAPIERS A TERMINER : CRITICALITE, BRUIT TEXTURE ET APPRENTISSAGE, SYNCHRO INDUITE A TRAVERS LES MODELES, ...
+
+- VIBRATIONS
 
 - FRISTON - APPRENTISSAGE - REDUCTION D'INCERTITUDE (DIFFERENT DE REWARD-BASED) - SUBSTRAT -BABBLING - SMC
 
