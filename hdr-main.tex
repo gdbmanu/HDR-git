@@ -3516,7 +3516,7 @@ Les différentes études présentées permettentde soulever de nombreuses questi
 à l'oeuvre au sein de l'activité nerveuse,
 listées ci-desous.
 
-\paragraph{Nature du feedback} 
+\paragraph{Feedback positif ou feedback négatif?} 
 Un des schémas proposés ici pour la communication nerveuse 
 est celui du feedback positif, autrement
 dit la résonance entre l'activité macroscopique et l'activité nerveuse, caractérisée par la présence d'un attracteur comportemental 
@@ -3536,7 +3536,9 @@ et changements brusques) et le feedback négatif (réponse graduelle à l'erreur
 
 Question ouverte : quelles sont les contributions respectives de ces deux approches à l'activité neuronale? Quelles prédictions?
 
-{\color{Violet}}
+Application :
+
+{\color{Violet}
 Les schémas de guidage par correction d'erreur sont très présents au niveau des structures sensori-motrices profondes
 (comme le contrôle vestibulaire).
 
@@ -3550,7 +3552,7 @@ vs une activité liée au matching perceptif (correspondance)
 
 }
 
-\paragraph{Espace métrique et espace logique}
+\paragraph{Espace métrique ou espace logique?}
 
 Les déplacements produits par le corps en mouvement sont tous quantifiables par la position (et les variations de position) 
 des éléments mobiles qui le composent.
@@ -3577,8 +3579,8 @@ l'apprentissage de la combinaison des facteurs reste un problème ouvert. En eff
 (une distance) dans un espace métrique, il est plus difficile d'exprimer cette même distance, et donc la correction
 nécessaire dans un espace ``qualitatif'' distribué. 
 
-IDEE : apprentissage des corrections motrices : pour un certain canal (activité distribuée) mapping entre proprioception
-et perçue et désirée. activité du cervelet?
+%IDEE : apprentissage des corrections motrices : pour un certain canal (activité distribuée) mapping entre proprioception
+%et perçue et désirée. activité du cervelet?
 
 
 %La traduction de l'espace qualitatif neuronal vers l'espace quantitatif 
@@ -3586,10 +3588,15 @@ et perçue et désirée. activité du cervelet?
 %Le caractère rapide des corrections opérées par le système sensori-moteur suggère donc que la  
 
 
-la multitude des combinaisons motrices et sensorielles rend difficile (impossible) l'attribution
-d'une seule quantité aux différents neurones : si une quantité peut être exprimée par de nombreux neurones, un même neurone
-doit lui-même être l'expression de nombreuses quantités, changeant de rôle selon le contexte.  
+%la multitude des combinaisons motrices et sensorielles rend difficile (impossible) l'attribution
+%d'une seule quantité aux différents neurones : si une quantité peut être exprimée par de nombreux neurones, un même neurone
+%doit lui-même être l'expression de nombreuses quantités, changeant de rôle selon le contexte.  
 
+Application : interfaces cerveau machine
+
+Lien avec ML : approche Kernel
+
+{\color{Violet}
 La question de l'expressivité des substrats nous permet de soulever la question du caractère métrique ou non métrique 
 (quantitatif ou qualitatif) des patrons d'activité produits par l'activité nerveuse.
 
@@ -3602,20 +3609,55 @@ Existe-t-il au sein de l'activité du substrat une quantité traduisant la dista
 D'un côté, l'information métrique peut être extraite de l'activité de neurones du cortex moteur (reconstuction des trajectoires
 à partir de l'activité de différents neurones) [GEORGOPOULOS]. Cette information est néanmoins peu fiable...
 
-@article{wessberg2000real,
-  title={Real-time prediction of hand trajectory by ensembles of cortical neurons in primates},
-  author={Wessberg, Johan and Stambaugh, Christopher R and Kralik, Jerald D and Beck, Pamela D and Laubach, Mark and Chapin, John K and Kim, Jung and Biggs, S James and Srinivasan, Mandayam A and Nicolelis, Miguel AL},
-  journal={Nature},
-  volume={408},
-  number={6810},
-  pages={361--365},
-  year={2000},
-  publisher={Nature Publishing Group}
+%@article{wessberg2000real,
+%  title={Real-time prediction of hand trajectory by ensembles of cortical neurons in primates},
+%  author={Wessberg, Johan and Stambaugh, Christopher R and Kralik, Jerald D and Beck, Pamela D and Laubach, Mark and Chapin, John K and Kim, Jung and Biggs, S James and Srinivasan, Mandayam A and Nicolelis, Miguel AL},
+%  journal={Nature},
+%  volume={408},
+%  number={6810},
+%  pages={361--365},
+%  year={2000},
+%  publisher={Nature Publishing Group}
+%}
 }
 
+\paragraph{Pattern matching ou transformations isométriques?}
 
-Approche pattern matching : une succession de correspondances
+Le ``pattern matching'' (correspondance de forme) est l'opération consistant 
+à mettre en correspondance un modèle (patron) avec une forme (signal), dans le cas le plus simple
+via un produit scalaire. Cette approche se traduit en modélisation neuronale par le terme de
+``champ récepteur'', avec une réponse maximale de la cellule lorsque le signal correspond à la forme 
+fixée. 
+Cette approche donne naissance à la reconnaissance par dictionnaire de formes, très utilisée 
+à la fois en traitement d'images et pour les modèles de la perception visuelle.
+L'apprentissage des patrons est au coeur des théories de l'apprentissage automatique, où
+les patrons caractéristiques sont déduits des données présentées.
+Par exemple : apprentissage d'une base de filtres via des algos de type EM.
 
+L'opération algorithmique réalisée par le pattern matching est graduelle : degré d'appartenance
+(ou de correspondance) à un patron donné. L'opération répétée sur de multiples patrons produit de 
+nombreux degrés d'appartenance, cet ensemble de degrés d'appartenance pouvant lui-même être interprété 
+comme une nouvelle forme pour un traitement ultérieur (sur le principe du ``deep learning'' par exemple),
+constituant un principe de calcul distribué efficace.
+
+Le pattern matching est néanmoins transformation non-linéaire  qui rend difficile la définition
+d'une distance entre deux signaux. 
+Les distances au sein de l'espace initial n'ont pas de traduction au sein de
+l'espace de redescription.
+L'approche par pattern matching ne garantit donc pas la proportionnalité des traitements entre signaux proches 
+et signaux éloignés, comme le font les transformations linéaires traditionnelles.
+
+La traduction inverse d'un patron d'activité vers un espace métrique, et la prise en compte
+des erreurs sensorielles nécessite que la notion de distance ne soit pas perdue au cours des transformations.
+La manière dont les distances entre signaux se maintiennent au sein de l'activité neuronale reste une
+question ouverte~: une hypothèse plausible est que les liens latéraux et récurrents y jouent un rôle important.
+
+\paragraph{Bruit créateur ou bruit destructeur?}
+
+\paragraph{Commande de point fixe ou vélocité}
+
+
+: une succession de correspondances
 
 Une des différences principales concerne le caractère non métrique de cette approche, basée sur la correspondance de forme (pattern matching),
 et non sur la différence de forme (erreur entre prédiction et observation).
@@ -3626,6 +3668,13 @@ une activité basée sur la
 
 Espace métrique interne. 
 Les senseurs sont fortement non-linéaires. 
+
+sensation métrique
+permanence de l'environnement
+
+scanning. 
+
+permanence de l'objet à travers les transformations.
 
 \paragraph{Réservoir}
 L'approche par feedback positif repose sur la prise en compte de la dynamique intrinsèque. Ce sont les caractéristiques
