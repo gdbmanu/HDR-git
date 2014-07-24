@@ -3494,7 +3494,7 @@ $\Rightarrow$ prior $\simeq$ ``\% up to now'' (subjective time)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Projet scientifique}
+\chapter{Questions ouvertes et perspectives}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -3502,10 +3502,11 @@ $\Rightarrow$ prior $\simeq$ ``\% up to now'' (subjective time)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
 D'un point de vue général, les opérations du système nerveux se caractérisent par un compromis entre des opérations 
 essentiellement produites par l'activité interne, et des opérations guidées par les stimulations sensorielles. 
 L'analyse de la communication nerveuse implique la prise en compte du cadre macroscopique des interactions entre 
-le système nervveux, l'appareil sensori-moteur et son milieu.
+le système nerveux, l'appareil sensori-moteur et son milieu.
 La correspondance entre l'activité macroscopique et l'activité nerveuse reste à ce jour non élucidé.
 
 L'analyse que nous avons développée à partir de l'étude des réseaux de neurones aléatoires suggère un mode de fonctionnement
@@ -3514,7 +3515,7 @@ d'un système dynamique distribué contraint par un signal extérieur.
 
 Les différentes études présentées permettentde soulever de nombreuses questions sur les principes computationnels 
 à l'oeuvre au sein de l'activité nerveuse,
-listées ci-desous.
+listées ci-dessous.
 
 \paragraph{Feedback positif ou feedback négatif?} 
 Un des schémas proposés ici pour la communication nerveuse 
@@ -3560,7 +3561,7 @@ Les sources de l'activité induite sur les organes sensoriels sont également lo
 tridimensionnel constituant l'environnement immédiat du sujet.
 Il est pourtant relativement difficile d'identifier au sein du cerveau des activités (ou des variations d'activité) en lien 
 avec cet espace métrique. 
-Par exemple, il est possible d'établir des corrélations entre l'activité mesurée sur les neurones du cortex moteurs et le
+Par exemple, il est possible d'établir des corrélations entre l'activité mesurée sur les neurones du cortex moteur et le
 mouvement effectif, mais corrélations ne permettent pas (ou permettent difficilement) de reconstruire une 
 trajectoire métrique précise.
 
@@ -3635,7 +3636,7 @@ les patrons caractéristiques sont déduits des données présentées.
 Par exemple : apprentissage d'une base de filtres via des algos de type EM.
 
 L'opération algorithmique réalisée par le pattern matching est graduelle : degré d'appartenance
-(ou de correspondance) à un patron donné. L'opération répétée sur de multiples patrons produit de 
+(ou de correspondance) à un patron donné, sur un intervalle borné. L'opération répétée sur de multiples patrons produit de 
 nombreux degrés d'appartenance, cet ensemble de degrés d'appartenance pouvant lui-même être interprété 
 comme une nouvelle forme pour un traitement ultérieur (sur le principe du ``deep learning'' par exemple),
 constituant un principe de calcul distribué efficace.
@@ -3653,6 +3654,81 @@ La manière dont les distances entre signaux se maintiennent au sein de l'activi
 question ouverte~: une hypothèse plausible est que les liens latéraux et récurrents y jouent un rôle important.
 
 \paragraph{Bruit créateur ou bruit destructeur?}
+
+L'opposition entre bruit créateur, producteur de formes, et bruit destructeur, c'est à dire perturbateur
+a été proposée par Henri Atlan dans son livre ``Entre le cristal et la fumée''.
+
+Le bruit est classiquement considéré comme un élément perturbateur en traitement du signal ou
+dans le cadre des mécanismes de contrôle en boucle fermée. Il correspond souvent aux facteurs non modélisés 
+produisant des variations inattendues (des ``innovations'') qui doivent être filtrées pour 
+mieux estimer l'état d'un processus caché. 
+
+Dans le domaine de la décision, le bruit peut également être vu comme une des composantes de l'autonomie logicielle.
+La théorie de la décision suggère, en cas de choix multiples équitables, de faire reposer la 
+décision sur un tirage aléatoire \cite{Auer1995}.
+Dans le cas des ambiguïtés perceptives
+(comme les cubes de Necker), l'alternance entre les deux interprétations a les caractéristiques
+d'un processus aléatoire \cite{VEe2005}. 
+Dans le cas d'un contrôle par feedback positif, le bruit est également un des facteurs qui 
+permet la destabilisation d'un attracteur comportemental pour éviter les phénomènes de 
+persévération. Le bruit, en tant que facteur destabilisant, permet ici d'explorer un 
+plus grand répertoire de comportements. 
+La nature offre enfin de nombreux exemples de comportements moteurs ayant des caractéristiques de 
+déplacements aléatoires (vol de la mouche, comportements de fuite en général) qui constituent des
+stratégies d'évitement efficaces.
+
+Le bruit est également une composante importante des processus d'apprentissage. 
+En plus de susciter une
+exploration exhaustive de l'espace des réponses, il peut, de manière plus subtile, jouer un rôle 
+actif (génératif) dans le façonnage des comportements. 
+L'apprentissage sur des variétés non convexes ou sur des problèmes
+d'optimisation mal posés (à solutions multiples) produit ainsi des solutions dépendantes
+de l'historique des choix aléatoires effectués à diverses étapes du processus d'apprentissage.
+La forme particulière du patron d'interaction final 
+est donc façonnée (en partie) par le hasard.
+
+Au niveau le plus élémentaire, l'apprentissage des couplages entre les mouvements et les conséquences 
+sensorielles des mouvements semble reposer sur des productions de mouvements spontanés, 
+tels qu'on peut les observer dans les balbutiements moteurs chez les jeunes enfants. 
+La théorie de l'apprentissage par renforcement repose également sur un principe
+d'exploration aléatoire des couplages entre le corps et l'environnement. 
+%Dans le cas le plus général, l'espace sensoriel et l'espace des actions sont continus.
+L'exploration de l'espace des réponses motrices nécessite que des réponses
+motrices soient tentées ``au hasard'', c'est à dire que des tirages aléatoires issus de l'activité
+intrinsèque se combinent avec l'activité induite par les sensations pour former 
+la réponse motrice.
+De même, l'apprentissage des bases de filtres repose souvent
+sur des tirages aléatoires ainsi que sur des méthodes de gradient ``stochastique'', conduisant à 
+des dictionnaires variés pour différentes initialisations du processus d'apprentissage.
+C'est le principe du bruit créateur qui peut faire surgir des formes ``inattendues'' en fonction 
+d'un historique particulier.
+
+Une hypothèse pour la formation des actions et 'autonomie logicielle 
+serait donc l'existence d'un système autonome 
+produisant une activité indépendamment des entrées sensorielles. 
+Le principe de Monte Carlo stipule que l'exploration, pour être efficace, doit reposer sur
+un tirage aléatoire qui explore de façon uniforme l'espace des réponses.
+Une stratégie efficace pour l'apprentissage moteur (ou l'apprentissage en général) 
+serait donc la capacité à produire du hasard 
+à l'aide de générateurs aléatoires intrinsèques. 
+
+L'activité spontanée observée sur des  neurones individuels a l'apparence d'un signal aléatoire.
+Les modèles de réseaux récurrents aléatoires que nous avons vu produisent une activité 
+chaotique intrinsèque, qui dans certains cas s'apparente fortement à du bruit. 
+Il existe également des mesures indiquant un comportement stochastique au niveau synaptique.
+Cette activité aléatoire microscopique ne présente cependant pas les caractéristiques nécessaires
+à la production de comportements moteurs aléatoires macroscopiques, du fait de la loi des 
+grands nombres
+(la variance de l'activité de champ moyen décroit linéairement avec le nombre de neurones).
+
+Une des  études présentées dans la partie précedente utilisait un bruit ``lent'' pour son processus 
+d'exploration. Ce bruit reposait sur un générateur aléatoire et non sur une activité intrinsèque.
+Une question ouverte est donc l'existence d'un mécanisme de population susceptible de produire 
+des réponses motrices ayant macroscopiquement les caractéristiques d'une exploration aléatoire de 
+l'espace des tâches, c'est à dire activant ou désactivant sélectivement des populations entières
+de neurones sur une échelle de temps lente. De manière plus générale, l'étude des caractéristiques 
+``optimales'' du bruit dans le cadre de l'exploration motrice reste à faire.
+
 
 \paragraph{Commande de point fixe ou vélocité}
 
@@ -3681,6 +3757,14 @@ L'approche par feedback positif repose sur la prise en compte de la dynamique in
 spontanées de cette dynamique qui conditionnent la nature des opérations réalisées, et le type d'interactions possibles entre
 le substrat nerveux et son environnement.
 
+\paragraph{Binding problem}
+
+
+\paragraph{Neurones impulsionnels et champ moyen}
+
+Multi-scale
+
+Hétérogénéité
 
 \paragraph{Entraînement}
 Nous avons cherché à illustrer le caractère parallèle et complémentaire de l'activité nerveuse et de l'activité macroscopique.
