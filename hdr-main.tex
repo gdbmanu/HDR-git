@@ -3469,6 +3469,8 @@ Cet aspect sera présenté plus précisément dans la partie projet de ce mémoi
 
 \subsection{Modèles de l'orientation temporelle}
 
+
+
 {\bf 2010}
 
 - Gaurav : attention temporelle. Modele EM. 
@@ -3502,6 +3504,7 @@ $\Rightarrow$ prior $\simeq$ ``\% up to now'' (subjective time)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Questions ouvertes}
 
 D'un point de vue général, les opérations du système nerveux se caractérisent par un compromis entre des opérations 
 essentiellement produites par l'activité interne, et des opérations guidées par les stimulations sensorielles. 
@@ -3703,7 +3706,7 @@ des dictionnaires variés pour différentes initialisations du processus d'appre
 C'est le principe du bruit créateur qui peut faire surgir des formes ``inattendues'' en fonction 
 d'un historique particulier.
 
-Une hypothèse pour la formation des actions et 'autonomie logicielle 
+Une hypothèse pour la formation des actions et l'autonomie logicielle 
 serait donc l'existence d'un système autonome 
 produisant une activité indépendamment des entrées sensorielles. 
 Le principe de Monte Carlo stipule que l'exploration, pour être efficace, doit reposer sur
@@ -3729,18 +3732,97 @@ l'espace des tâches, c'est à dire activant ou désactivant sélectivement des 
 de neurones sur une échelle de temps lente. De manière plus générale, l'étude des caractéristiques 
 ``optimales'' du bruit dans le cadre de l'exploration motrice reste à faire.
 
+PROJET : approche multiscale : conditions d'émergence d'un bruit lent.
+Champ moyen.
+Mise en correspondance avec la notion d'instabilité de l'activité de repos. 
 
-\paragraph{Commande de point fixe ou vélocité}
+
+\paragraph{Commande de vélocité ou commande de point fixe?}
+
+L'étude du système saccadique montre une activité motrice fortement corrélée avec 
+la vitesse de déplacement de l'oeil dans l'orbite. 
+A une fréquence de décharge plus élevée correspond une vitesse de déplacement plus importante. 
+Le déclenchement de l'activité colliculaire précède le déclenchement de la saccade. 
+La terminaison de la saccade se traduit également par l'extinction du foyer d'activité colliculaire 
+correspondant.
+La coextensivité temporelle de l'activation d'un foyer et du déplacement moteur,
+qui semble une caractéristique du système moteur en général, suggère 
+une projection directe de l'activité du foyer vers les
+effecteurs, c'est à dire une commande de vélocité sur les différents degrés de liberté possibles.
+
+De nombreuses observations entrent cependant en contradiction avec ce schéma.
+Des stimulations directes du cortex moteur,  sur des échelles de temps
+comparables à la durée d'un déplacement, semblent susciter des mouvements 
+convergeant toujours vers la même posture finale, quelle que soit la position 
+de départ \cite{Graziano2002}. Il s'agit dans ce cas d'une commmande motrice 
+codant pour la position finale, selon un principe de ``point fixe''. 
+Sachant que seule la commande de variation de contraction est communiquée à l'appareil musculaire,
+le modèle proposé par \cite{Mussa2004,Flash2005}} suggère une activation différenciée de différentes primitives motrices
+se comportant comme des champs de force, des variations d'intensité conduisant 
+naturellement l'appareil moteur vers le même point d'équilibre (point d'équilibre de forces
+opposantes). 
+
+L'approche de la commande motrice par sommation de champs de force 
+et point fixe postural est séduisante par son caractère additif: la combinaison de deux commandes  
+devrait produire un résultat intermédiaire entre deux postures. La sommation peut également s'effectuer sur des groupes 
+d'effecteurs différents (muscles du cou, muscles de l'orbite oculaire), conduisant à des synergies oeil-tête.
+Cette approche pose néanmoins une difficulté pour ce qui concerne l'ajustement moteur.
+L'ajustement d'une commande en fonction de facteurs variés (cibles en mouvement, forces contraires, ...)
+suggère des déplacements additionnels qui ne soient pas spécifiques à chaque posture.
+Autrement dit, rien n'exclut que le mouvement final soit le résultat de la combinaison
+de commandes posturales et de commandes de vélocité.
+
+PROJET : 
+
+\paragraph{Délais et prédiction dans le présent}
 
 
-: une succession de correspondances
-
-Une des différences principales concerne le caractère non métrique de cette approche, basée sur la correspondance de forme (pattern matching),
-et non sur la différence de forme (erreur entre prédiction et observation).
-
-une activité basée sur la 
 
 \paragraph{Référentiels}
+
+Construction d'une scène extérieure (lieu de la permanence des objets).
+Cette scène n'est jamais perçue en tant que telle mais déduite de nos interactions.
+``Pixels d'environnement'' avec déplacements 
+
+La distance entre deux points d'intérêts est caractérisée par le déplacement nécessaire pour
+aller de l'un à l'autre.
+
+A un déplacement moteur est associé un ``déplacement sensoriel''. Si on considère un point
+d'intérêt particulier de la scène sensorielle, ce mouvement inverse
+est un déplacement d'une position initiale à une position finale sur le récepteur sensoriel.
+L'action, en tant que déplacement moteur, est perçue en tant que déplacement sensoriel
+(changement proprioceptif couplé à un changement de la scène extéroceptive).
+L'apprentissage des associations entre le changement proprioceptif et déplacement sensoriel correspondant
+est à la base du sentiment de permanence de l'environnement [Projet eSMC].
+Chaque déplacement produit une nouvelle version des scènes proprioceptives et extéroceptives.
+Dans le cas de la rétine, ce ne sont pas les mêmes neurones qui traitent l'ancienne position sensorielle et
+la nouvelle position sensorielle.
+La sensation ancienne et la sensation nouvelle du même point d'intérêt ne sont liées que par le fait que le 
+même déplacement a déjà eu pour effet de déplacer des objets depuis cette même position sensorielle initiale 
+vers cette même position sensorielle finale.
+Autrement dit, en partant d'une hypothèse (ou d'un a priori) de la permanence des objets et du déplacement
+du corps, le mouvement apparent de la scène ne traduit pas le mouvement des objets. Il existe donc une
+identité entre les éléments de l'ancienne scène et ceux de la nouvelle.
+Le couplage est donc le processus qui identifie la conséquence sensorielle de l'action au déplacement
+d'un \emph{même} objet d'une position sensorielel initiale vers une position sensorielle finale.
+Entre la scène sensorielle initiale et la scène sensorielle finale, la commande motrice est l'élément 
+qui donne la clé d'interprétation (fournit la cause) des changements intervenus.
+
+
+Déplacement d'activité, codage par populatino?
+séquence?
+
+
+Dans le cas de la saccade, un lien peut être établi entre posture passée et position périphérique
+du point d'intérêt précédent.
+Espace des postures oculaires 
+
+Question : suite au déplacement de l'oeil d'un carré rouge vers un triangle bleu, 
+l'objet devenu périphérique (carré rouge) persiste et se conserve en tant que 
+
+par opposition : sentiment d'instabilité, nausée lorsque le déplacement sensoriel n'est pas le résultat 
+d'un mouvement produit par le sujet.
+
 
 Espace métrique interne. 
 Les senseurs sont fortement non-linéaires. 
@@ -3750,14 +3832,28 @@ permanence de l'environnement
 
 scanning. 
 
-permanence de l'objet à travers les transformations.
+permanence de l'objet à travers les transformations. Espace opérationnel. 
+
+L'objet, bien que bougeant dans l'espace rétino-centré,
+reste fixe dans l'espace le plus général (extéro-centré).
+L'espace où les objets sont permanents est l'espace extérocentré (le seul espace 
+invariant par rapport aux déplacements du corps).
+Tout mouvement du corps produit une mise à jour du déplacement conduisant à
+l'utilisation de l'objet d'intérêt.
+
+Les 
+
+Le même point fixe est codé 
+
 
 \paragraph{Réservoir}
 L'approche par feedback positif repose sur la prise en compte de la dynamique intrinsèque. Ce sont les caractéristiques
 spontanées de cette dynamique qui conditionnent la nature des opérations réalisées, et le type d'interactions possibles entre
 le substrat nerveux et son environnement.
 
-\paragraph{Binding problem}
+\paragraph{Binding et permanence de l'objet}
+
+
 
 
 \paragraph{Neurones impulsionnels et champ moyen}
@@ -3808,14 +3904,9 @@ La décision
 les théories de la simulatio interne \cite{Jeannerod2001}, ou de l'espace de travail ... \cite{}, stipulent   
 
 
-\section{Questions ouvertes}
 
 
 \section{Projets en cours}
-
-
-
-\section{Projets à long terme}
 
 Projet :
 
@@ -3834,6 +3925,20 @@ Projet :
 - ACTIVITE INTRINSEQUE ET ``FREE WILL''
 
 - CHANGEMENT DE REFERENTIEL
+
+\section{Projets à long terme}
+
+STRATEGIE DE RECHERCHE
+
+MOYENS 
+
+INFRASTRUCTURES
+
+METHODE
+
+ENCADREMENT
+
+
 
 {\bf 1999}
 
