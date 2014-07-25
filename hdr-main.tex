@@ -3756,7 +3756,7 @@ comparables à la durée d'un déplacement, semblent susciter des mouvements
 convergeant toujours vers la même posture finale, quelle que soit la position 
 de départ \cite{Graziano2002}. Il s'agit dans ce cas d'une commmande motrice 
 codant pour la position finale, selon un principe de ``point fixe''. 
-Sachant que seule la commande de variation de contraction est communiquée à l'appareil musculaire,
+Sachant que seule la commande de variation de contraction est communiquée à l'appareil neuro-musculaire,
 le modèle proposé par \cite{Mussa2004,Flash2005}} suggère une activation différenciée de différentes primitives motrices
 se comportant comme des champs de force, des variations d'intensité conduisant 
 naturellement l'appareil moteur vers le même point d'équilibre (point d'équilibre de forces
@@ -3773,8 +3773,6 @@ Autrement dit, rien n'exclut que le mouvement final soit le résultat de la comb
 de commandes posturales et de commandes de vélocité.
 
 PROJET : 
-
-\paragraph{Délais et prédiction dans le présent}
 
 
 
@@ -3807,6 +3805,81 @@ Le couplage sensori-moteur est donc le processus qui identifie la conséquence s
 d'un \emph{même} objet d'une position sensorielle initiale vers une position sensorielle finale.
 Entre la scène sensorielle initiale et la scène sensorielle finale, la commande motrice est l'événement
 qui donne la clé d'interprétation (fournit la cause) des changements intervenus.
+
+Le lien d'identité entre les points d'intérêt de l'ancienne scène et ceux de la nouvelle ne peut se déduire des contenus sensoriels
+seuls. Le changement de posture produit 
+par la commande motrice modifie le \emph{point de vue} sur une scène extérocentrée permanente. 
+C'est donc le rapport entre ces agencements corporels et la scène invariante qui modifie causalement
+la manière dont les points d'intérêt de la scène impactent les organes sensoriels.
+Dans le cadre de l'hypothèse des primitives motrices, il existe une bijection entre 
+la commande motrice et l'agencement postural final, qui implique donc un lien causal
+entre la commande motrice et le point de vue sur les éléments invariants de la scène extérocentrée. 
+Selon cette hypothèse, et d'un point de vue algorithmique, il doit exister 
+une quantité invariante aux transformations posturales
+qui permet de réaliser cette projection du couple (scène extérocentrée, posture) vers 
+la scène sensorielle (qui est donc la clé d'interprétation de la scène sensorielle).
+
+L'activité intrinsèque apparait comme le support naturel de cette quantité, découplée 
+des couches motrices et des couches sensorielles primaires. Bien sûr, 
+la réalisation algorithmique du processus de construction de ces invariants extérocentrés
+est loin de couler de source.
+
+Si l'on prend l'exemple de la scène visuelle explorée par des saccades sucessives, 
+l'a priori d'invariance stipule que les changements posturaux (position de l'oeil dans l'orbite)
+et les changements intervenant dans la scène sensorielle sont sous-tendus par les déplacements des récepteurs 
+visuels dans un milieu stable. 
+Une même scène est donc ``flashée'' selon différents points de vue. Les points de vue sont 
+chacun positionnés dans un référentiel tête ou un référentiel tronc comme une série de 
+photos reconstituant un panorama.
+Une série de saccades peut être vue come une série de couples (posture, scène visuelle).
+Pour que cet ensemble soit vu comme un tout, il est nécessaire qu'une activité persistente
+spécifique se maintienne en tant que support de persistence à la variabilité des points de vue. 
+
+SOUCI de binding : nécessite une représentation vectorielle, autrement dit une 
+activité multidimensionnelle. 
+
+
+
+
+De même, pour que des portions de scène (ou des points d'intérêt) soient identifiés
+à travers les 
+
+L'association simple entre posture et scène visuelle ne peut aboutir ...
+
+Activité liée à la scène entière, qui identifie l'ensemble des  comme une seule et même
+scène 
+
+Le jeu complet de postures et de scènes visuelles ne peut être simplement déplacé en memoire 
+(ou il représenterait un coût très élevé). La manière la plus parcimonieuse est de prendre
+en compte un substrat capable de traduire dans son activité les différentes postures
+
+L'invariance 
+
+invarinats métriques : une série de déplacements correpondent à une même translation
+
+relations métriques 
+entre les points de vue sont définies par 
+Identifier ce qui persiste du milieu des déplacements incessants
+revient à identifier des transformations
+
+problème des éléments ocnstitutifs de la scène
+
+
+Les éléments métriques peuvent 
+
+PROJET : quelle réalisation algorithmique?
+
+
+Cette activité doit traduire suffisamment de composantes spatiales et sensorielles  
+pour 
+
+
+
+La transformation est opérée par deux liens causaux successifs : un premier lien causal 
+associe la 
+Par transitivité, 
+
+problème à l'envers : le lien causal de l'action vers la scène extérocentrée. Lien causal de la scène éextérocentrée vers les sensations.
 
 Question : de quelle manière ce lien est-il réalisé (algorithmiquement).
 Séquence?
@@ -3846,6 +3919,14 @@ l'utilisation de l'objet d'intérêt.
 Les 
 
 Le même point fixe est codé 
+
+\paragraph{Attracteur ou séquence?}
+
+Le principe d'un fonctionnement par feedback positif et stabilisation d'attracteurs 
+
+
+\paragraph{Délais et prédiction dans le présent}
+
 
 
 \paragraph{Réservoir}
