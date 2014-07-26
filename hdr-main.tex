@@ -3775,37 +3775,17 @@ de commandes posturales et de commandes de vélocité.
 PROJET : 
 
 
-
 \paragraph{Référentiels}
+
+\paragraph{Scène extérieure}
 
 Construction d'une scène extérieure (lieu de la permanence des objets).
 Cette scène n'est jamais perçue en tant que telle mais déduite de nos interactions.
 ``Pixels d'environnement'' avec déplacements. 
 
-La distance entre deux points d'intérêts est caractérisée par le déplacement nécessaire pour
-aller de l'un à l'autre.
-
-A un déplacement moteur est associé un ``déplacement sensoriel''. Si on considère un point
-d'intérêt particulier de la scène sensorielle, ce mouvement inverse
-est un déplacement d'une position initiale à une position finale sur le récepteur sensoriel.
-L'action, en tant que déplacement moteur, est perçue en tant que déplacement sensoriel
-(changement proprioceptif couplé à un changement de la scène extéroceptive).
-L'apprentissage des associations entre le changement proprioceptif et déplacement sensoriel correspondant
-est à la base du sentiment de permanence de l'environnement [Projet eSMC].
 Chaque déplacement produit une nouvelle version des scènes proprioceptives et extéroceptives.
 Dans le cas de la rétine, ce ne sont pas les mêmes neurones qui traitent l'ancienne position sensorielle et
 la nouvelle position sensorielle.
-La sensation ancienne et la sensation nouvelle du même point d'intérêt ne sont liées que par le fait que le 
-même déplacement a déjà eu pour effet de déplacer des objets depuis cette même position sensorielle initiale 
-vers cette même position sensorielle finale.
-Autrement dit, en partant d'une hypothèse (ou d'un a priori) de la permanence des objets et du déplacement
-du corps, le mouvement apparent de la scène ne traduit pas le mouvement des objets. Il existe donc une
-identité de positon (ou de lieu) entre les éléments de l'ancienne scène et ceux de la nouvelle.
-Le couplage sensori-moteur est donc le processus qui identifie la conséquence sensorielle de l'action au déplacement
-d'un \emph{même} objet d'une position sensorielle initiale vers une position sensorielle finale.
-Entre la scène sensorielle initiale et la scène sensorielle finale, la commande motrice est l'événement
-qui donne la clé d'interprétation (fournit la cause) des changements intervenus.
-
 Le lien d'identité entre les points d'intérêt de l'ancienne scène et ceux de la nouvelle ne peut se déduire des contenus sensoriels
 seuls. Le changement de posture produit 
 par la commande motrice modifie le \emph{point de vue} sur une scène extérocentrée permanente. 
@@ -3818,6 +3798,35 @@ Selon cette hypothèse, et d'un point de vue algorithmique, il doit exister
 une quantité invariante aux transformations posturales
 qui permet de réaliser cette projection du couple (scène extérocentrée, posture) vers 
 la scène sensorielle (qui est donc la clé d'interprétation de la scène sensorielle).
+
+
+La distance entre deux points d'intérêts est caractérisée par le déplacement nécessaire pour
+aller de l'un à l'autre.
+
+A un déplacement moteur est associé un ``déplacement sensoriel''. Si on considère un point
+d'intérêt particulier de la scène sensorielle, ce mouvement inverse
+est un déplacement d'une position initiale à une position finale sur le récepteur sensoriel.
+L'action, en tant que déplacement moteur, est perçue en tant que déplacement sensoriel
+(changement proprioceptif couplé à un changement de la scène extéroceptive).
+
+
+L'apprentissage des associations entre le changement proprioceptif et le déplacement sensoriel correspondant
+est à la base du sentiment de permanence de l'environnement [Projet eSMC].
+
+
+
+La sensation ancienne et la sensation nouvelle du même point d'intérêt (vis à vis de la scène externe) 
+ne sont liées que par le fait que le 
+même déplacement a déjà eu pour effet de déplacer des objets depuis cette même position sensorielle initiale 
+vers cette même position sensorielle finale.
+Autrement dit, en partant d'une hypothèse (ou d'un a priori) de la permanence des objets et du déplacement
+du corps, le mouvement apparent de la scène ne traduit pas le mouvement des objets. Il existe donc une
+identité de positon (ou de lieu) entre les éléments de l'ancienne scène et ceux de la nouvelle.
+Le couplage sensori-moteur est donc le processus qui identifie la conséquence sensorielle de l'action au déplacement
+d'un \emph{même} objet d'une position sensorielle initiale vers une position sensorielle finale.
+Entre la scène sensorielle initiale et la scène sensorielle finale, la commande motrice est l'événement
+qui donne la clé d'interprétation (fournit la cause) des changements intervenus.
+
 
 L'activité intrinsèque apparait comme le support naturel de cette quantité, découplée 
 des couches motrices et des couches sensorielles primaires. Bien sûr, 
@@ -3835,6 +3844,68 @@ Une série de saccades peut être vue come une série de couples (posture, scèn
 Pour que cet ensemble soit vu comme un tout, il est nécessaire qu'une activité persistente
 spécifique se maintienne en tant que support de persistence à la variabilité des points de vue. 
 
+%Identité entre point focal et point d'intérêt?
+%scanning de l'env: les 
+
+Comment se forme la vue d'ensemble, le panorama à partir des différents composants?
+Comment les points se placent sur la scène?
+
+Une revue de la littérature permet d'identifier 
+
+approche 1: invariants perceptifs, utilisabilité (affordance) des objets de l'environnement; approche séquentielle.
+
+approche 2 : intégrative
+
+approche 3 : Friston : identification de sources + action comme augmentation de plausibilité
+
+Ce problème a longtemps été formulé sous la forme du ``binding problem'' (problème de la liaison): 
+Tout objet (ou région focalisée) de la scène sensorielle induit une activité distribuée 
+sur différentes régions corticales, chaque activité traduisant une des caractéristiques
+de l'objet (comme sa forme, sa couleur, son contexte proprioceptif etc...). 
+L'activité de cette population de neurones, distribuée sur de nombreuses aires,
+maitiendrait le ``souvenir'' d'un objet une fois que l'attention s'est déplacée sur un autre point.
+La scène complète (scène extérocentrée) étant peuplée de multiples objets, le
+maintien en mémoire des différents objets qui la composent nécessiterait donc le maintien 
+en activité de nombreuses populations elles-mêmes distribuées sur de nombreuses aires.
+Le problème se formule de la manière suivante : comment le cerveau s'y prend-il pour séparer, au sein de
+cette activation globale, les caractéristiques qui relèvent d'un objet et celles qui relèvent d'un autre?
+%Qu'est-ce qui permet de séparer, au sein d'une activité globale
+%constitué de multiples patrons d'activité, ce qui relève d'un objet de la scène et ce qui relève d'un autre?
+
+La nature de l'activité servant de support n'est pas connue à l'heure actuelle.
+On peut imaginer par exemple des activités ``template'' correspondant à des dispositions (agencements) caractéristiques 
+d'éléments (constituants et agencement caractéristique des éléments d'un visage par exemple).
+Il faut imaginer des patrons d'exploration visuelle caractéristiques, des ``plans de visite'',
+constituant le socle de cette unification (ou plus généralement des plans d'utilisation)
+[APPROCHE SEQUENTIELLE].
+
+
+
+comment le cerveau, 
+
+qui décompose chaque caractéristique, parvient-il à 
+maintenir ensemble les groupes de caractéristiques propres à chaque objet de la scène?
+Si de multiples populations sont actives simultanément, comment la cerveau ``sait''-il
+que 
+
+
+fait que notre cerveau identifie séparément les caractéristiques 
+nécessairement distribuées d'un certain
+point d'intérêt 
+
+
+
+) se distingue .
+
+Si on prend l'exemple des visages,
+
+L'information
+non présente dans l'ensemble de couples (posture, scène) est l'information relationnelle, c'est à dire
+les 
+Il faut supposer qu'elle
+suffit à traduire des liens de distance (ou de proximité) entre les différents points d'intérêt de
+la scène. 
+
 SOUCI de binding : nécessite une représentation vectorielle, autrement dit une 
 activité multidimensionnelle. 
 
@@ -3848,7 +3919,7 @@ L'association simple entre posture et scène visuelle ne peut aboutir ...
 
 Activité liée à la scène entière, qui identifie l'ensemble des  comme une seule et même
 scène 
-
+ 
 Le jeu complet de postures et de scènes visuelles ne peut être simplement déplacé en memoire 
 (ou il représenterait un coût très élevé). La manière la plus parcimonieuse est de prendre
 en compte un substrat capable de traduire dans son activité les différentes postures
