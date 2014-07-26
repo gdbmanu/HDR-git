@@ -3757,7 +3757,7 @@ convergeant toujours vers la même posture finale, quelle que soit la position
 de départ \cite{Graziano2002}. Il s'agit dans ce cas d'une commmande motrice 
 codant pour la position finale, selon un principe de ``point fixe''. 
 Sachant que seule la commande de variation de contraction est communiquée à l'appareil neuro-musculaire,
-le modèle proposé par \cite{Mussa2004,Flash2005}} suggère une activation différenciée de différentes primitives motrices
+le modèle proposé par \cite{Mussa2004,Flash2005} suggère une activation différenciée de différentes primitives motrices
 se comportant comme des champs de force, des variations d'intensité conduisant 
 naturellement l'appareil moteur vers le même point d'équilibre (point d'équilibre de forces
 opposantes). 
@@ -3779,25 +3779,164 @@ PROJET :
 
 \paragraph{Scène extérieure}
 
-Construction d'une scène extérieure (lieu de la permanence des objets).
-Cette scène n'est jamais perçue en tant que telle mais déduite de nos interactions.
-``Pixels d'environnement'' avec déplacements. 
+%Construction d'une scène extérieure (lieu de la permanence des objets).
+%Cette scène n'est jamais perçue en tant que telle mais déduite de nos interactions.
+%``Pixels d'environnement'' avec déplacements. 
 
-Chaque déplacement produit une nouvelle version des scènes proprioceptives et extéroceptives.
-Dans le cas de la rétine, ce ne sont pas les mêmes neurones qui traitent l'ancienne position sensorielle et
-la nouvelle position sensorielle.
-Le lien d'identité entre les points d'intérêt de l'ancienne scène et ceux de la nouvelle ne peut se déduire des contenus sensoriels
-seuls. Le changement de posture produit 
-par la commande motrice modifie le \emph{point de vue} sur une scène extérocentrée permanente. 
-C'est donc le rapport entre ces agencements corporels et la scène invariante qui modifie causalement
-la manière dont les points d'intérêt de la scène impactent les organes sensoriels.
+On considère ici les conditions qui suscitent l'émergence d'une scène extérocentrée, c'est à dire un 
+ensemble d'objets disposés dans l'espace avec lesquels l'agent est en relation et ne variant
+pas lorsque l'agent déplace son corps. La scène extérocentrée s'oppose aux scènes subjectives sensorielle et
+ proprioceptive qui varient lorsque l'agent effectue des mouvements.
+
 Dans le cadre de l'hypothèse des primitives motrices, il existe une bijection entre 
-la commande motrice et l'agencement postural final, qui implique donc un lien causal
-entre la commande motrice et le point de vue sur les éléments invariants de la scène extérocentrée. 
-Selon cette hypothèse, et d'un point de vue algorithmique, il doit exister 
-une quantité invariante aux transformations posturales
-qui permet de réaliser cette projection du couple (scène extérocentrée, posture) vers 
-la scène sensorielle (qui est donc la clé d'interprétation de la scène sensorielle).
+la commande motrice et l'agencement postural final. Toute 
+posture impliquant un 
+point de vue sur la scène extérocentrée, 
+chaque déplacement (on se limite ici aux mouvements ballistiques) 
+produit donc une nouvelle scène proprioceptive et extéroceptive.
+Le lien d'identité entre %les points d'intérêt de 
+l'ancienne scène et  la nouvelle ne peut se déduire des contenus sensoriels
+seuls.
+Dans le cas de la rétine, ce ne sont pas nécessairement les mêmes neurones 
+qui s'activent entre l'ancienne scène sensorielle (avant saccade) et
+la nouvelle scène sensorielle (après saccade).
+
+La scène extérieure doit donc se construire en tant qu'explication
+des contenus perceptifs, étant donné un a priori d'invariance. 
+
+Si l'on prend l'exemple de la scène visuelle explorée par des saccades sucessives, 
+l'a priori d'invariance stipule que les changements posturaux (position de l'oeil dans l'orbite)
+et les changements intervenant dans la scène sensorielle sont sous-tendus par les déplacements des récepteurs 
+visuels dans un milieu stable. 
+C'est donc la même scène qui est ``flashée'' selon différents points de vue. Les points de vue sont 
+chacun positionnés dans un référentiel tête (ou un référentiel tête-tronc) comme une série de 
+photos punaisées sur un mur et reconstituant un panorama.
+Une scène peut donc être vue comme une série de couples (posture, scène visuelle).
+
+L'évidence apparente de cette remarque cache de nombreuses difficultés.
+En particulier, les points de vue sont expérimentés en séquence, et ne sont jamais 
+vus simultanément. 
+%La prise en compte du cadre invariant implique une mémorisation 
+%au moins partielle des différents points de vue éprouvés.
+Il doit donc exister, d'un point de vue algorithmique,
+%une quantité invariante aux transformations posturales
+%qui permet de réaliser cette projection du couple (scène extérocentrée, posture) vers 
+%la scène subjective .
+une activité persistante spécifique.
+Cette activité doit en particulier résister aux changements posturaux et sensoriels
+incessants, c'est à dire être la seule à être congruente à tous ces changements posturaux et sensoriels
+(la seule clé d'interprétation possible).
+On peut voir cette activité congruente comme un ensemble d'objets placés sur une scène sombre,
+dont un projecteur qui se déplace confirme ou infirme l'existence. Au fur et à 
+mesure de ces déplacements du projecteur, une seule et unique interprétation demeure (la seule à
+etre congruente à toutes les observations).
+
+Si l'image est parlante, la manière dont l'invariant (la scène entière) se constitue 
+reste un problème non élucidé.
+La nature de l'activité servant de support n'est pas connue à l'heure actuelle.
+On peut néanmoins distinguer dans la littérature 
+trois grands types d'approches pour aborder ce problème.
+
+La recherche d'invariants perceptifs appartient à la grande tradition 
+de l'approche écologique impulsée par Gibson [REF]. L'existence de 
+motifs invariants dans la relation de l'agent à son environnement (comme le point de fuite)
+sert de support à la manipulation de cet environnement.
+Le lien instrumental avec les objets (le mode d'utilisation des objets)
+institue une forme d'invariance  qui est reproduite à travers le temps à chaque rencontre
+avec le même type d'objets.
+L'approche Gibsonienne met donc au premier plan l'activité motrice en tant que soubassement
+de la constitution d'invariants dans le rapport au monde.
+D'un point de vue algorithmique, on peut imaginer par exemple des activités ``template'' 
+correspondant à des successions caractéristiques d'actions (actions stéréotypées).
+Dans le cadre de l'exploration visuelle, on peut imaginer des séquences caractéristiques
+de saccades selon le type de scène visuelle à explorer,
+%(le patron d'exploration
+%constituants le lien entre les points d'attention focale).
+%Il faut imaginer des patrons d'exploration visuelle caractéristiques, 
+ce ``plan de visite''
+%pour les différents types de scène,
+constituant le socle d'interprétation des éléments de la scène.
+%Cette approche procédurale, en faisant reposer l'invariance sur des ``dictionnaires'' de schémas 
+%sensori-moteurs, accorde peu de rôle à l'activité intrinsèque, laissant
+%donc peu de place aux processus de décision et à la mémoire.
+La mise en relation entre les éléments se réduit ici à un schéma d'exploration (ou d'utilisation) 
+caractéristique de ces différents éléments, constitutif d'une unité d'action. 
+
+, ignore néanmoins certains aspects de l'expérience 
+
+(ou plus généralement des plans d'utilisation)
+[APPROCHE SEQUENTIELLE].
+
+
+
+Un des problèmes sous-jacents bien connus est le ``binding problem'' (problème de la liaison): 
+Tout objet (ou région focalisée) de la scène sensorielle induit une activité distribuée 
+sur différentes régions corticales, chaque activité traduisant une des caractéristiques
+de l'objet (comme sa forme, sa couleur, son contexte proprioceptif etc...). 
+%L'activité de cette population de neurones, distribuée sur de nombreuses aires,
+%maitiendrait le ``souvenir'' d'un objet une fois que l'attention s'est déplacée sur un autre point.
+La scène complète (scène extérocentrée) étant peuplée de multiples objets, le
+maintien en mémoire des différents objets qui la composent nécessiterait donc le maintien 
+en activité de nombreuses populations elles-mêmes distribuées sur de nombreuses aires.
+Le problème se formule de la manière suivante : comment le cerveau s'y prend-il pour séparer, au sein de
+cette activation globale, les caractéristiques qui relèvent d'un objet et celles qui relèvent d'un autre?
+%Qu'est-ce qui permet de séparer, au sein d'une activité globale
+%constitué de multiples patrons d'activité, ce qui relève d'un objet de la scène et ce qui relève d'un autre?
+
+
+dont l'activité se maintient tant qu'aucun  et que 
+
+
+
+Si on connait le traitement 
+de la fixation visuelle courante passe par une extraction de contours
+et un traitement
+distribué des attributs caractéristiques (forme, couleur, mouvement,...), on
+connait beaucoup moins le mécanisme computationnel qui agence
+les différents constituants de la scène lorsque celle-ci est parcourue du regard.
+
+
+Quand bien même une telle activité congruente aux différents points de vue existerait, 
+
+
+Ce problème a longtemps été formulé sous la forme 
+
+Premièrement, 
+
+
+
+
+
+
+Troisièmement, 
+
+
+établir la nature de ce lien en l'absence de toute connaissance (excepté qu'il existe des 
+causes invariantes) reste algorithmiquement difficile. 
+
+
+(les causes qui conduisent à leur disposition relative)
+
+Deuxièmement, lsmême si l'on considère chaque point de vue comme un point dans un espace vectoriel 
+de caractéristiques,  
+
+La permanence n'est pas une évidence, elle doit être construite.
+
+Si on s'en tient 
+aux hypothèses majoritairement admises, les activités neuronales induites par un point de vue
+sensoriel sont fortement distribuées. 
+
+une difficulté algorithmique liée à la non-localité
+
+Pour que cet ensemble soit vu comme un tout, il est nécessaire qu'une activité persistente
+spécifique se maintienne en tant que support de persistence à la variabilité des points de vue. 
+
+
+La posture courante définit donc le \emph{point de vue} sur une scène extérocentrée permanente. 
+C'est ce rapport entre ces agencements corporels et la scène invariante qui conditionne
+la manière dont les points d'intérêt de la scène impactent les organes sensoriels.
+
+
 
 
 La distance entre deux points d'intérêts est caractérisée par le déplacement nécessaire pour
@@ -3833,16 +3972,7 @@ des couches motrices et des couches sensorielles primaires. Bien sûr,
 la réalisation algorithmique du processus de construction de ces invariants extérocentrés
 est loin de couler de source.
 
-Si l'on prend l'exemple de la scène visuelle explorée par des saccades sucessives, 
-l'a priori d'invariance stipule que les changements posturaux (position de l'oeil dans l'orbite)
-et les changements intervenant dans la scène sensorielle sont sous-tendus par les déplacements des récepteurs 
-visuels dans un milieu stable. 
-Une même scène est donc ``flashée'' selon différents points de vue. Les points de vue sont 
-chacun positionnés dans un référentiel tête ou un référentiel tronc comme une série de 
-photos reconstituant un panorama.
-Une série de saccades peut être vue come une série de couples (posture, scène visuelle).
-Pour que cet ensemble soit vu comme un tout, il est nécessaire qu'une activité persistente
-spécifique se maintienne en tant que support de persistence à la variabilité des points de vue. 
+
 
 %Identité entre point focal et point d'intérêt?
 %scanning de l'env: les 
@@ -3858,26 +3988,8 @@ approche 2 : intégrative
 
 approche 3 : Friston : identification de sources + action comme augmentation de plausibilité
 
-Ce problème a longtemps été formulé sous la forme du ``binding problem'' (problème de la liaison): 
-Tout objet (ou région focalisée) de la scène sensorielle induit une activité distribuée 
-sur différentes régions corticales, chaque activité traduisant une des caractéristiques
-de l'objet (comme sa forme, sa couleur, son contexte proprioceptif etc...). 
-L'activité de cette population de neurones, distribuée sur de nombreuses aires,
-maitiendrait le ``souvenir'' d'un objet une fois que l'attention s'est déplacée sur un autre point.
-La scène complète (scène extérocentrée) étant peuplée de multiples objets, le
-maintien en mémoire des différents objets qui la composent nécessiterait donc le maintien 
-en activité de nombreuses populations elles-mêmes distribuées sur de nombreuses aires.
-Le problème se formule de la manière suivante : comment le cerveau s'y prend-il pour séparer, au sein de
-cette activation globale, les caractéristiques qui relèvent d'un objet et celles qui relèvent d'un autre?
-%Qu'est-ce qui permet de séparer, au sein d'une activité globale
-%constitué de multiples patrons d'activité, ce qui relève d'un objet de la scène et ce qui relève d'un autre?
 
-La nature de l'activité servant de support n'est pas connue à l'heure actuelle.
-On peut imaginer par exemple des activités ``template'' correspondant à des dispositions (agencements) caractéristiques 
-d'éléments (constituants et agencement caractéristique des éléments d'un visage par exemple).
-Il faut imaginer des patrons d'exploration visuelle caractéristiques, des ``plans de visite'',
-constituant le socle de cette unification (ou plus généralement des plans d'utilisation)
-[APPROCHE SEQUENTIELLE].
+
 
 
 
