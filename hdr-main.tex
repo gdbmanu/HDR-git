@@ -3775,7 +3775,6 @@ de commandes posturales et de commandes de vélocité.
 PROJET : 
 
 
-\paragraph{Référentiels}
 
 \paragraph{Scène extérieure}
 
@@ -3787,37 +3786,52 @@ On considère ici les conditions qui suscitent l'émergence d'une scène extéro
 ensemble d'objets disposés dans l'espace avec lesquels l'agent est en relation et ne variant
 pas lorsque l'agent déplace son corps. La scène extérocentrée s'oppose aux scènes subjectives sensorielle et
  proprioceptive qui varient lorsque l'agent effectue des mouvements.
-
-Dans le cadre de l'hypothèse des primitives motrices, il existe une bijection entre 
-la commande motrice et l'agencement postural final. Toute 
-posture impliquant un 
+La posture courante définit donc le \emph{point de vue} sur une scène extérocentrée permanente. 
+C'est ce rapport entre ces agencements corporels et la scène invariante qui conditionne
+la manière dont les points d'intérêt de la scène impactent les organes sensoriels. 
+ 
+%Dans le cadre de l'hypothèse des primitives motrices, il existe une bijection entre 
+%la commande motrice et l'agencement postural final. 
+Toute posture impliquant un 
 point de vue sur la scène extérocentrée, 
 chaque déplacement (on se limite ici aux mouvements ballistiques) 
 produit donc une nouvelle scène proprioceptive et extéroceptive.
 Le lien d'identité entre %les points d'intérêt de 
 l'ancienne scène et  la nouvelle ne peut se déduire des contenus sensoriels
 seuls.
-Dans le cas de la rétine, ce ne sont pas nécessairement les mêmes neurones 
+Par exemple, dans le cas de la rétine, ce ne sont pas nécessairement les mêmes neurones 
 qui s'activent entre l'ancienne scène subjective (avant saccade) et
 la nouvelle scène subjective (après saccade).
 
-La scène extérieure ``absolue'' doit donc se construire en tant qu'explication
+%Si l'on prend l'exemple de la scène visuelle explorée par des saccades sucessives, 
+%Les changements posturaux (position de l'oeil dans l'orbite)
+%et les changements intervenant dans la scène sensorielle sont sous-tendus par les déplacements des récepteurs 
+%visuels dans un milieu stable. 
+%C'est donc la même scène qui est ``flashée'' selon différents points de vue. Les points de vue sont 
+%chacun positionnés dans un référentiel tête (ou un référentiel tête-tronc) comme une série de 
+%photos punaisées sur un mur et reconstituant un panorama.
+
+La scène extérieure ``absolue'' n'est pas donnée.
+Elle doit se construire à partir
 des contenus perceptifs subjectifs, étant donné un a priori d'invariance. 
-
-Si l'on prend l'exemple de la scène visuelle explorée par des saccades sucessives, 
-l'a priori d'invariance stipule que les changements posturaux (position de l'oeil dans l'orbite)
-et les changements intervenant dans la scène sensorielle sont sous-tendus par les déplacements des récepteurs 
-visuels dans un milieu stable. 
-C'est donc la même scène qui est ``flashée'' selon différents points de vue. Les points de vue sont 
-chacun positionnés dans un référentiel tête (ou un référentiel tête-tronc) comme une série de 
-photos punaisées sur un mur et reconstituant un panorama.
-
-L'évidence apparente de cette remarque cache de nombreuses difficultés.
-En particulier, les points de vue sont expérimentés en séquence, et ne sont jamais 
+%Cette quantité, en tant que clé d'interprétation, n'est pas donnée d'emblée mais doit
+%être construite. 
+Dans le cadre de l'expérience visuelle, les points de vue sont expérimentés en séquence, et ne sont jamais 
 vus simultanément. 
+Supposons un ensemble d'objets placés sur une scène sombre,
+et un projecteur capable d'éclairer une petite zone de la scène uniquement.
+Chaque mouvement du projecteur dévoile un nouvel objet de la scène.
+Toutes les options sont ouvertes au départ.
+Au fur et à mesure de ces déplacements du projecteur, 
+une seule et unique interprétation demeure.
+%(la seule à
+%etre congruente à toutes les observations).
+
+%L'évidence apparente de cette remarque cache de nombreuses difficultés.
+
 %La prise en compte du cadre invariant implique une mémorisation 
 %au moins partielle des différents points de vue éprouvés.
-Si une scène est explorée sous la forme d'une séquence de couples (posture, scène visuelle),
+Si une scène est explorée sous la forme d'une séquence de couples (posture, scène visuelle subjective),
 il doit donc exister, d'un point de vue algorithmique,
 %une quantité invariante aux transformations posturales
 %qui permet de réaliser cette projection du couple (scène extérocentrée, posture) vers 
@@ -3826,48 +3840,49 @@ une quantité qui persiste à travers ces variations, support de l'invariance de
 Cette quantité doit en particulier résister aux changements posturaux et sensoriels
 incessants, c'est à dire être \emph{congruente} à tous ces changements posturaux et sensoriels
 (la seule clé d'interprétation possible).
-
-Cette quantité, en tant que clé d'interprétation, n'est pas donnée d'emblée mais doit
-être construite. 
-Supposons un ensemble d'objets placés sur une scène sombre,
-et un projecteur capable d'éclairer une petite zone de la scène uniquement.
-Chaque mouvement du projecteur dévoile un nouvel objet de la scène.
-Toutes les options sont ouvertes au départ.
-Au fur et à mesure de ces déplacements du projecteur, 
-une seule et unique interprétation demeure (la seule à
-etre congruente à toutes les observations).
 %Si l'image est parlante, la manière dont l'invariant (la scène entière) se constitue 
 %reste un problème non élucidé.
 La nature de l'activité (ou quantité) qui lie 
-les différents éléments en tant que support n'est pas connue à l'heure actuelle.
+les différents éléments en tant que support ne fait pas consensus à l'heure actuelle.
 
 Ce problème cache de nombreux sous-problèmes, souvent abordés séparément
 dans la littérature. Le premier problème est celui de la liaison (le ``binding problem''),
 qui questionne la façon dont la multiplicité des constituants d'une scène forment un tout
 (nature du couplage causal entre les éléments). Le deuxième est celui de la construction 
 des invariants : comment se stabilisent des formes invariantes effectives à travers 
-un historique d'interactions (des formes qui reviennent souvent et qui vont être ``reconnues'').
+un historique d'interactions (des formes qui reviennent souvent et qui vont être ``reconnues'')?
 Le troisième est celui de la concurrence des interprétations d'une même
 scène extérieure: comment se construit l'interprétation courante par élimination
 progressive des interprétations erronnées?
 
 
+\paragraph{Le binding problem}
+Le ``binding problem'' est le problème de la réalisation
+du lien causal entre les différents constituants d'une scène.
+Trouver une forme algorithmique qui sert de support au lien de causalité.
 
-Selon le point de vue que l'on adopte, 
+Une forme algorithmique simple est celle de la projection inverse, c'est à 
+dire une zone d'activité (ou un neurone) instancie un objet complet, répondant 
+de manière sélective à une combinaison spécifique des différents constituants.
+Cette approche est celle dite du ``neurone grand-mère''. 
+S'il apparaît peu probable qu'un seul neurone soit le support de la liaison,
+rien n'exclut qu'une population de neurones puisse répondre de façon sélective
+à toutes les configurations d'interaction avec un objet particulier (par exemple
+notre grand-mère).
 
-Si diff
+L'approche ``distribuée'', également appelée approche ``dynamique'', stipule
+le caractère non exclusif des activités des population : il n'existe pas de
+neurone ou de population de neurones répondant exclusivement à un invariant 
+de haut niveau. Le lien doit reposer sur des
+canaux de communication transitoires, ou encore des résonances, s'établissant à travers le
+substrat entre différentes activités constituants partiels de la scène.
+L'invariance est ici la susceptibilité à ``résoner ensemble'' (la persistance de la résonance à 
+travers les changements; l'existence de canaux le permettant)
+qui distingue ce qui est possible de ce qui ne l'est pas (les associations de constituants
+plausibles et celles qui ne le sont pas).
 
-est abordé de différentes façons dans la littérature,
-rarement cependant sous cette forme 
-trois grands types d'approches pour aborder ce problème.
-
-TODO : APPROCHE REACTIVE (ITTI-KOCH) VS APPROCHE SEQUENTIELLE
-
-IL FAUT associer un point non focalisé (excentré) et un déplacement (ou une posture) 
-
-
-
-La recherche d'invariants perceptifs appartient à la grande tradition 
+Une troisième approche, celle de la ``mémoire extérieure'' [NOE-OREGAN]
+reprend la tradition 
 de l'approche écologique impulsée par Gibson [REF]. L'existence de 
 motifs invariants dans la relation de l'agent à son environnement (comme le point de fuite)
 sert de support à la manipulation de cet environnement.
@@ -3891,6 +3906,45 @@ constituant le socle d'interprétation des éléments de la scène.
 %donc peu de place aux processus de décision et à la mémoire.
 La mise en relation entre les éléments se réduit ici à un schéma d'exploration (ou d'utilisation) 
 caractéristique de ces différents éléments, constitutif d'une unité d'action. 
+
+{\color{Violet}
+
+des activités constituantes échangeant 
+entre elles des signaux à travers des des canaux de communication.  
+
+transmission (des canaux) aboutissant
+à la stabilisation d'une forme sur un fond. 
+
+Le lien n'est pas porté 
+par une population particuliére, mais par un patron d'activité 
+
+
+
+les mêmes populations étant actives pour de
+nombreux 
+
+
+Toutes les populations participent à 
+différents 
+
+Cette approche a été 
+
+
+
+Selon le point de vue que l'on adopte, 
+
+Si diff
+
+est abordé de différentes façons dans la littérature,
+rarement cependant sous cette forme 
+trois grands types d'approches pour aborder ce problème.
+
+TODO : APPROCHE REACTIVE (ITTI-KOCH) VS APPROCHE SEQUENTIELLE
+
+IL FAUT associer un point non focalisé (excentré) et un déplacement (ou une posture) 
+
+
+
 
 
 Une approche différente consiste à mettre en avant le ``binding problem'' (problème de la liaison): 
@@ -3956,10 +4010,6 @@ une difficulté algorithmique liée à la non-localité
 Pour que cet ensemble soit vu comme un tout, il est nécessaire qu'une activité persistente
 spécifique se maintienne en tant que support de persistence à la variabilité des points de vue. 
 
-
-La posture courante définit donc le \emph{point de vue} sur une scène extérocentrée permanente. 
-C'est ce rapport entre ces agencements corporels et la scène invariante qui conditionne
-la manière dont les points d'intérêt de la scène impactent les organes sensoriels.
 
 
 
@@ -4127,6 +4177,9 @@ l'utilisation de l'objet d'intérêt.
 Les 
 
 Le même point fixe est codé 
+
+}
+
 
 \paragraph{Attracteur ou séquence?}
 
