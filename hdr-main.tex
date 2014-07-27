@@ -3798,11 +3798,11 @@ Le lien d'identité entre %les points d'intérêt de
 l'ancienne scène et  la nouvelle ne peut se déduire des contenus sensoriels
 seuls.
 Dans le cas de la rétine, ce ne sont pas nécessairement les mêmes neurones 
-qui s'activent entre l'ancienne scène sensorielle (avant saccade) et
-la nouvelle scène sensorielle (après saccade).
+qui s'activent entre l'ancienne scène subjective (avant saccade) et
+la nouvelle scène subjective (après saccade).
 
-La scène extérieure doit donc se construire en tant qu'explication
-des contenus perceptifs, étant donné un a priori d'invariance. 
+La scène extérieure ``absolue'' doit donc se construire en tant qu'explication
+des contenus perceptifs subjectifs, étant donné un a priori d'invariance. 
 
 Si l'on prend l'exemple de la scène visuelle explorée par des saccades sucessives, 
 l'a priori d'invariance stipule que les changements posturaux (position de l'oeil dans l'orbite)
@@ -3811,31 +3811,61 @@ visuels dans un milieu stable.
 C'est donc la même scène qui est ``flashée'' selon différents points de vue. Les points de vue sont 
 chacun positionnés dans un référentiel tête (ou un référentiel tête-tronc) comme une série de 
 photos punaisées sur un mur et reconstituant un panorama.
-Une scène peut donc être vue comme une série de couples (posture, scène visuelle).
 
 L'évidence apparente de cette remarque cache de nombreuses difficultés.
 En particulier, les points de vue sont expérimentés en séquence, et ne sont jamais 
 vus simultanément. 
 %La prise en compte du cadre invariant implique une mémorisation 
 %au moins partielle des différents points de vue éprouvés.
-Il doit donc exister, d'un point de vue algorithmique,
+Si une scène est explorée sous la forme d'une séquence de couples (posture, scène visuelle),
+il doit donc exister, d'un point de vue algorithmique,
 %une quantité invariante aux transformations posturales
 %qui permet de réaliser cette projection du couple (scène extérocentrée, posture) vers 
 %la scène subjective .
-une activité persistante spécifique.
-Cette activité doit en particulier résister aux changements posturaux et sensoriels
-incessants, c'est à dire être la seule à être congruente à tous ces changements posturaux et sensoriels
+une quantité qui persiste à travers ces variations, support de l'invariance de l'environnement.
+Cette quantité doit en particulier résister aux changements posturaux et sensoriels
+incessants, c'est à dire être \emph{congruente} à tous ces changements posturaux et sensoriels
 (la seule clé d'interprétation possible).
-On peut voir cette activité congruente comme un ensemble d'objets placés sur une scène sombre,
-dont un projecteur qui se déplace confirme ou infirme l'existence. Au fur et à 
-mesure de ces déplacements du projecteur, une seule et unique interprétation demeure (la seule à
-etre congruente à toutes les observations).
 
-Si l'image est parlante, la manière dont l'invariant (la scène entière) se constitue 
-reste un problème non élucidé.
-La nature de l'activité servant de support n'est pas connue à l'heure actuelle.
-On peut néanmoins distinguer dans la littérature 
+Cette quantité, en tant que clé d'interprétation, n'est pas donnée d'emblée mais doit
+être construite. 
+Supposons un ensemble d'objets placés sur une scène sombre,
+et un projecteur capable d'éclairer une petite zone de la scène uniquement.
+Chaque mouvement du projecteur dévoile un nouvel objet de la scène.
+Toutes les options sont ouvertes au départ.
+Au fur et à mesure de ces déplacements du projecteur, 
+une seule et unique interprétation demeure (la seule à
+etre congruente à toutes les observations).
+%Si l'image est parlante, la manière dont l'invariant (la scène entière) se constitue 
+%reste un problème non élucidé.
+La nature de l'activité (ou quantité) qui lie 
+les différents éléments en tant que support n'est pas connue à l'heure actuelle.
+
+Ce problème cache de nombreux sous-problèmes, souvent abordés séparément
+dans la littérature. Le premier problème est celui de la liaison (le ``binding problem''),
+qui questionne la façon dont la multiplicité des constituants d'une scène forment un tout
+(nature du couplage causal entre les éléments). Le deuxième est celui de la construction 
+des invariants : comment se stabilisent des formes invariantes effectives à travers 
+un historique d'interactions (des formes qui reviennent souvent et qui vont être ``reconnues'').
+Le troisième est celui de la concurrence des interprétations d'une même
+scène extérieure: comment se construit l'interprétation courante par élimination
+progressive des interprétations erronnées?
+
+
+
+Selon le point de vue que l'on adopte, 
+
+Si diff
+
+est abordé de différentes façons dans la littérature,
+rarement cependant sous cette forme 
 trois grands types d'approches pour aborder ce problème.
+
+TODO : APPROCHE REACTIVE (ITTI-KOCH) VS APPROCHE SEQUENTIELLE
+
+IL FAUT associer un point non focalisé (excentré) et un déplacement (ou une posture) 
+
+
 
 La recherche d'invariants perceptifs appartient à la grande tradition 
 de l'approche écologique impulsée par Gibson [REF]. L'existence de 
@@ -3862,24 +3892,19 @@ constituant le socle d'interprétation des éléments de la scène.
 La mise en relation entre les éléments se réduit ici à un schéma d'exploration (ou d'utilisation) 
 caractéristique de ces différents éléments, constitutif d'une unité d'action. 
 
-, ignore néanmoins certains aspects de l'expérience 
 
-(ou plus généralement des plans d'utilisation)
-[APPROCHE SEQUENTIELLE].
-
-
-
-Un des problèmes sous-jacents bien connus est le ``binding problem'' (problème de la liaison): 
+Une approche différente consiste à mettre en avant le ``binding problem'' (problème de la liaison): 
 Tout objet (ou région focalisée) de la scène sensorielle induit une activité distribuée 
-sur différentes régions corticales, chaque activité traduisant une des caractéristiques
-de l'objet (comme sa forme, sa couleur, son contexte proprioceptif etc...). 
+sur différentes régions corticales.%
+%chaque activité traduisant une des caractéristiques
+%de l'objet (comme sa forme, sa couleur, son contexte proprioceptif etc...). 
 %L'activité de cette population de neurones, distribuée sur de nombreuses aires,
 %maitiendrait le ``souvenir'' d'un objet une fois que l'attention s'est déplacée sur un autre point.
 La scène complète (scène extérocentrée) étant peuplée de multiples objets, le
 maintien en mémoire des différents objets qui la composent nécessiterait donc le maintien 
 en activité de nombreuses populations elles-mêmes distribuées sur de nombreuses aires.
 Le problème se formule de la manière suivante : comment le cerveau s'y prend-il pour séparer, au sein de
-cette activation globale, les caractéristiques qui relèvent d'un objet et celles qui relèvent d'un autre?
+cette activité globale, les caractéristiques qui relèvent d'un objet et celles qui relèvent d'un autre?
 %Qu'est-ce qui permet de séparer, au sein d'une activité globale
 %constitué de multiples patrons d'activité, ce qui relève d'un objet de la scène et ce qui relève d'un autre?
 
