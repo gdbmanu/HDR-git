@@ -3546,11 +3546,6 @@ Le but est également de soulever certaines des nombreuses questions sur les pri
 
 \subsection{Pattern matching ou transformations géométriques?}
 
-Les déplacements produits par le corps en mouvement sont tous quantifiables par la position (et les variations de position) 
-des éléments mobiles qui le composent.
-Les sources de l'activité induite sur les organes sensoriels sont également localisables dans un espace métrique
-tridimensionnel constituant l'environnement immédiat du sujet.
-
 Le ``pattern matching'' (correspondance de forme) est l'opération consistant 
 à mettre en correspondance un modèle (patron) avec une forme (signal), dans le cas le plus simple
 via un produit scalaire. Cette approche se traduit en modélisation neuronale par le terme de
@@ -3575,18 +3570,52 @@ l'espace de redescription.
 L'approche par pattern matching ne garantit donc pas la proportionnalité des traitements entre signaux proches 
 et signaux éloignés, comme le font les transformations linéaires (ou géométriques) traditionnelles.
 
-En fait, celà ne pose pas de problème lorsqu'il s'agit d'associer (de manière univoque) un
-patron d'activité (un attracteur) et une commande motrice. Une activité de population est parfaitement capable de définir
-un déplacement moteur dans l'espace métrique, sur le mode de la carte colliculaire vue précédemment.
-Le problème se pose lorsqu'il s'agit de \emph{mettre en relation} différents patrons d'activité pour établir
-une réponse motrice relative (par exemple relative à la distance entre deux objets de l'espace métrique).
-Il faut pour cela regarder d'un peu plus près la nature de la commande motrice.
+Si nous reprenpons l'analogie nerveuse, le corps (les articulations du corps) décrit 
+un espace métrique constitué par la position (et les variations de position) 
+des éléments mobiles qui le composent.
+Les sources de l'activité induite sur les organes sensoriels sont également localisables dans un espace métrique
+tridimensionnel constituant l'environnement immédiat du sujet.
+On parle d'un espace de description quantitatif pour décrire ce référentiel extérieur
+par opposition à un espace de description qualitatif pour décrire le domaine des patrons d'activité induits
+par les sens.
+Le caractère extrêmement distribué de l'activité nerveuse suggère la distribution de ces quantités sur de nombreux neurones.
+En particulier, il apparaît probable qu'une même quantité n'active pas les même neurones selon sa position
+dans un certain intervalle de valeurs. 
+Cette distribution de l'activité rend néanmoins difficile la réalisation d'opérations simples comme l'addition ou la différence
+de deux quantités, comme celà est pourtant nécessaire lorsque les déplacements doivent prendre en compte des sources sensorielles 
+multiples (proprioception de la position de la tête et excentricité d'une cible sur la rétine par exemple).
+Si l'espace métrique environnant est décomposé en composants élémentaires (intervalles ou ``pixels'' d'environnement), activant
+ou désactivant différentes populations de neurones, alors les opérations élémentaires de translation, rotation, co-variation, 
+etc. doivent être apprises ``par coeur'' et ne peuvent résulter de la combinaison d'activités unitaires.
+
+Un problème se pose lorsqu'il s'agit par exemple de contrôler les déplacements du corps à partir des patrons d'activités
+distribués induits par les récepteurs sensoriels.
+En fait, le passage par un domaine de description qualitatif
+ne pose pas de problème lorsqu'il s'agit d'associer (de manière univoque) un
+patron d'activité (un attracteur) et une commande motrice, comme dans le
+cas de la carte colliculaire vue précédemment. Le problème se pose lorsqu'il faut
+moduler une réponse à partir d'un écart à une valeur de référence par exemple, c'est à
+dire plus généralement lorsqu'il s'agit d'estimer, au sein de l'espace de description
+qualitatif, des quantités relatives à différents
+points de l'espace métrique ou de l'espace sensoriel. 
+
+%Une activité de population est parfaitement capable de définir
+%un déplacement moteur dans l'espace métrique, .
+%Le problème se pose lorsqu'il s'agit de combiner différents patrons d'activité pour établir
+%une réponse motrice relative (relative à différents objets ou à différentes propriétés d'un même objet).
+%Il faut pour cela regarder d'un peu plus près la nature de la commande motrice.
+
+L'approche de la cognition par correspondance de forme apporte donc un support efficace à la plasticité,
+mais pose en revanche quelques problèmes lorsqu'il s'agit d'utiliser ce mode de codage pour contrôler un 
+appareil moteur, c'est à dire schématiquement effectuer la transformation inverse du symbolique vers 
+le quantitatif.
+
+[ICI]
 
 Le problème est qu'il ne semble pas exister à l'heure actuelle de consensus sur la nature de cette commande!
 On peut distinguer deux hypothèses : une hypothèse de commande absolue (la commande désigne un point de l'espace extérieur),
 et une hypothèse de commande relative (la commande produit un déplacement relatif).
 
-[ICI]
 
 Le pattern matching ne pose pas de problème lorsqu'il
 s'agit de 
@@ -3605,15 +3634,7 @@ pour rendre possible cette traduction inverse.
 
 
 
-Le caractère extrêmement distribué de l'activité nerveuse suggère la distribution de ces quantités sur de nombreux neurones.
-En particulier, il apparaît probable qu'une même quantité n'active pas les même neurones selon sa position
-dans un certain intervalle de valeurs. 
-Cette distribution de l'activité rend néanmoins difficile la réalisation d'opérations simples comme l'addition ou la différence
-de deux quantités, comme celà est pourtant nécessaire lorsque les déplacements doivent prendre en compte des sources sensorielles 
-multiples (proprioception de la position de la tête et excentricité d'une cible sur la rétine par exemple).
-Si l'espace métrique environnant est décomposé en composants élémentaires (intervalles ou ``pixels'' d'environnement), activant
-ou désactivant différentes populations de neurones, alors les opérations élémentaires de translation, rotation, co-variation, 
-etc. doivent être apprises ``par coeur'' et ne peuvent résulter de la combinaison d'activités unitaires.
+
 
 Si le contrôle de l'appareil moteur, ou plus généralement l'activité d'orientation, repose sur ces principes, 
 l'apprentissage de la combinaison des facteurs reste un problème ouvert. En effet, s'il est facile d'exprimer une erreur 
