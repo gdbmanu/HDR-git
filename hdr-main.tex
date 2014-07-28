@@ -3534,7 +3534,7 @@ les principales pistes permettant d'y remédier, ce qui nous amène à formuler 
 à fonder une méthode de développement d'architectures cognitives sur la base de quelques principes simples.
 
 
-\section{Questions ouvertes et problèmes}
+\section{Questions ouvertes}
 
 L'analyse que nous avons développée à partir de l'étude des réseaux de neurones aléatoires suggère un mode de fonctionnement
 intermédiaire entre le pattern matching et les systèmes dynamiques. 
@@ -3570,28 +3570,36 @@ l'espace de redescription.
 L'approche par pattern matching ne garantit donc pas la proportionnalité des traitements entre signaux proches 
 et signaux éloignés, comme le font les transformations linéaires (ou géométriques) traditionnelles.
 
-Si nous reprenpons l'analogie nerveuse, le corps (les articulations du corps) décrit 
+Si nous reprenons l'analogie nerveuse, le corps (les articulations du corps) décrit 
 un espace métrique constitué par la position (et les variations de position) 
 des éléments mobiles qui le composent.
-Les sources de l'activité induite sur les organes sensoriels sont également localisables dans un espace métrique
+Les objets extérieurs impactant les organes sensoriels sont également localisables dans un espace métrique
 tridimensionnel constituant l'environnement immédiat du sujet.
 On parle d'un espace de description quantitatif pour décrire ce référentiel extérieur
 par opposition à un espace de description qualitatif pour décrire le domaine des patrons d'activité induits
 par les sens.
-Le caractère extrêmement distribué de l'activité nerveuse suggère la distribution de ces quantités sur de nombreux neurones.
-En particulier, il apparaît probable qu'une même quantité n'active pas les même neurones selon sa position
-dans un certain intervalle de valeurs. 
+
+Le caractère distribué de l'activité nerveuse suggère d'une part la distribution d'une même composante sensorielle 
+sur de nombreux neurones, chaque neurone étant sensible à une manifestation particulière
+de cette composante.
+%En particulier, il apparaît probable qu'une même composante n'active pas les même neurones selon sa position
+%dans un certain intervalle de valeurs. 
 Cette distribution de l'activité rend néanmoins difficile la réalisation d'opérations simples comme l'addition ou la différence
 de deux quantités, comme celà est pourtant nécessaire lorsque les déplacements doivent prendre en compte des sources sensorielles 
-multiples (proprioception de la position de la tête et excentricité d'une cible sur la rétine par exemple).
-Si l'espace métrique environnant est décomposé en composants élémentaires (intervalles ou ``pixels'' d'environnement), activant
-ou désactivant différentes populations de neurones, alors les opérations élémentaires de translation, rotation, co-variation, 
-etc. doivent être apprises ``par coeur'' et ne peuvent résulter de la combinaison d'activités unitaires.
+multiples issues de référentiels variés (proprioception de la position du corps et coordonnées rétiniennes pour attraper
+une cible par exemple).
+Si chaque composante sensorielle de l'espace métrique environnant 
+est décomposé en constituants élémentaires (intervalles ou ``pixels'' d'environnement), activant
+ou désactivant différentes populations de neurones primaires, 
+alors les transformations aussi simples que les translations, rotations, ainsi
+que les co-variations, 
+etc. doivent être apprises ``par coeur'' et ne peuvent résulter de la combinaison d'activités unitaires,
+c'est à dire d'un calcul.
 
-Un problème se pose lorsqu'il s'agit par exemple de contrôler les déplacements du corps à partir des patrons d'activités
-distribués induits par les récepteurs sensoriels.
+Ceci pose un problème en particulier lorsqu'il s'agit de contrôler les déplacements du corps à partir de l'activité
+distribuée induite par les récepteurs sensoriels.
 En fait, le passage par un domaine de description qualitatif
-ne pose pas de problème lorsqu'il s'agit d'associer (de manière univoque) un
+ne pose pas de problème tant qu'il s'agit d'associer (de manière univoque) un
 patron d'activité (un attracteur) et une commande motrice, comme dans le
 cas de la carte colliculaire vue précédemment. Le problème se pose lorsqu'il faut
 moduler une réponse à partir d'un écart à une valeur de référence par exemple, c'est à
@@ -3605,79 +3613,51 @@ points de l'espace métrique ou de l'espace sensoriel.
 %une réponse motrice relative (relative à différents objets ou à différentes propriétés d'un même objet).
 %Il faut pour cela regarder d'un peu plus près la nature de la commande motrice.
 
-L'approche de la cognition par correspondance de forme apporte donc un support efficace à la plasticité,
+L'approche de la cognition par correspondance de forme offre donc un support efficace à la plasticité,
 mais pose en revanche quelques problèmes lorsqu'il s'agit d'utiliser ce mode de codage pour contrôler un 
 appareil moteur, c'est à dire schématiquement effectuer la transformation inverse du symbolique vers 
 le quantitatif.
 
-[ICI]
-
-Le problème est qu'il ne semble pas exister à l'heure actuelle de consensus sur la nature de cette commande!
-On peut distinguer deux hypothèses : une hypothèse de commande absolue (la commande désigne un point de l'espace extérieur),
-et une hypothèse de commande relative (la commande produit un déplacement relatif).
-
-
-Le pattern matching ne pose pas de problème lorsqu'il
-s'agit de 
-
-Il est pourtant relativement facile d'identifier au sein du cerveau des activités (ou des variations d'activité) en lien 
-avec cet espace métrique. 
-Par exemple, il est possible d'établir des corrélations entre l'activité mesurée sur les neurones du cortex moteur et le
-mouvement effectif, mais corrélations ne permettent pas (ou permettent difficilement) de reconstruire une 
-trajectoire métrique précise \cite{Georgopoulos1986,Wessberg2000}.
-
-Le pattern matching pose un problème lorsqu'il s'agit d'effectuer la traduction inverse 
-d'un patron d'activité vers un espace métrique, par exemple lorsqu'il s'agit de prendre en compte
-des erreurs sensorielles pour effectuer une correction motrice.
+%Le pattern matching pose un problème lorsqu'il s'agit d'effectuer la traduction inverse 
+%d'un patron d'activité vers un espace métrique, par exemple lorsqu'il s'agit de prendre en compte
+%des erreurs sensorielles pour effectuer une correction motrice.
 Il est nécessaire que la notion de distance ne soit pas perdue au cours des transformations,
-pour rendre possible cette traduction inverse.
+pour rendre possible cette traduction inverse. Une possibilité serait
+la conservation de l'information de distance via des liens latéraux, sur le principe 
+des cartes de Kohonen. 
+%Avant d'envisager comment cette information peut se maintenir, nous essayons par la suite d'éclaircir 
+%la nature de ce rapport du métrique au symbolique (du quantitatif au qualitatif) au sein du
+%système nerveux.
 
+\subsection{Feedback positif ou feedback négatif?} 
+L'approche par feedback positif développée précedemment
+n'est pas exclusive du schéma traditionnel du guidage de l'activité motrice par l'activité sensorielle (schéma
+à feedback négatif).  Autrement dit, rien ne permet d'exclure que l'activité nerveuse, 
+caractérisée microscopiquement par des patrons de connexion 
+excitateurs et inhibiteurs, puisse susciter à la fois des schémas comportementaux basés 
+sur le feedback positif (persévération, résistance au changement
+et changements brusques) et le feedback négatif (réponse graduelle à l'erreur perceptive, poursuite lente, ...).
 
+Question ouverte : quelles sont les contributions respectives de ces deux approches à l'activité neuronale? Quelles prédictions?
 
-
-
-Si le contrôle de l'appareil moteur, ou plus généralement l'activité d'orientation, repose sur ces principes, 
-l'apprentissage de la combinaison des facteurs reste un problème ouvert. En effet, s'il est facile d'exprimer une erreur 
-(une distance) dans un espace métrique, il est plus difficile d'exprimer cette même distance, et donc la correction
-nécessaire dans un espace ``qualitatif'' distribué. 
-
-%IDEE : apprentissage des corrections motrices : pour un certain canal (activité distribuée) mapping entre proprioception
-%et perçue et désirée. activité du cervelet?
-
-
-%La traduction de l'espace qualitatif neuronal vers l'espace quantitatif 
-%métrique passe des essais/erreurs, récompensé lorsque la commande atteint le but par hasard, et donc un apprentissage lent. 
-%Le caractère rapide des corrections opérées par le système sensori-moteur suggère donc que la  
-
-
-%la multitude des combinaisons motrices et sensorielles rend difficile (impossible) l'attribution
-%d'une seule quantité aux différents neurones : si une quantité peut être exprimée par de nombreux neurones, un même neurone
-%doit lui-même être l'expression de nombreuses quantités, changeant de rôle selon le contexte.  
-
-Application : interfaces cerveau machine
-
-Lien avec ML : approche Kernel
+Application :
 
 {\color{Violet}
-La question de l'expressivité des substrats nous permet de soulever la question du caractère métrique ou non métrique 
-(quantitatif ou qualitatif) des patrons d'activité produits par l'activité nerveuse.
+Les schémas de guidage par correction d'erreur sont très présents au niveau des structures sensori-motrices profondes
+(comme le contrôle vestibulaire).
 
-Le contrôle moteur par correction de l'erreur perceptive repose sur le traitement de signaux quantitatifs (la
-force de la commande de correction étant proportionnelle à l'erreur perçue): temps et espace continus.
-A l'inverse, le calcul automatique repose sur des opérations séquentielles et discrètes.
+l'approche par feedback négatif repose principalement sur le calcul d'une erreur de prédiction. 
+On suppose donc l'existence d'un modèle interne qui 
+anticipe la conséquence sensorielle de l'action [WOLPERT], et corrige éventuellement
+le modèle si cette 
 
-Existe-t-il au sein de l'activité du substrat une quantité traduisant la distance entre deux configurations d'activité?
-
-D'un côté, l'information métrique peut être extraite de l'activité de neurones du cortex moteur (reconstuction des trajectoires
-à partir de l'activité de différents neurones) [GEORGOPOULOS]. Cette information est néanmoins peu fiable...
-
+Une des prédictions, pour distinguer l'un de l'autre, serait d'identifier une activité liée à l'erreur perceptive. 
+vs une activité liée au matching perceptif (correspondance)
 
 }
 
-%La manière dont les distances entre signaux se maintiennent au sein de l'activité neuronale reste une
-%question ouverte~: une hypothèse plausible est que les liens latéraux et récurrents y jouent un rôle important.
 
-\paragraph{Bruit créateur ou bruit destructeur?}\footnote{L'opposition entre bruit créateur, producteur de formes, et bruit destructeur, c'est à dire perturbateur
+\subsection{Bruit créateur ou bruit destructeur?}\footnote{L'opposition entre bruit créateur, producteur de formes, et bruit destructeur, c'est à dire perturbateur
 a été proposée par Henri Atlan dans son livre ``Entre le cristal et la fumée''.}
 
 Le bruit est classiquement considéré comme un élément perturbateur en traitement du signal ou
@@ -3743,6 +3723,9 @@ Cette activité aléatoire microscopique ne présente cependant pas les caracté
 grands nombres
 (la variance de l'activité de champ moyen décroit linéairement avec le nombre de neurones).
 
+
+[PERSPECTIVE]
+
 Une des  études présentées dans la partie précedente utilisait un bruit ``lent'' pour son processus 
 d'exploration. Ce bruit reposait sur un générateur aléatoire et non sur une activité intrinsèque.
 Une question ouverte est donc l'existence d'un mécanisme de population susceptible de produire 
@@ -3755,41 +3738,13 @@ PROJET : approche multiscale : conditions d'émergence d'un bruit lent.
 Champ moyen.
 Mise en correspondance avec la notion d'instabilité de l'activité de repos. 
 
-\paragraph{Feedback positif ou feedback négatif?} 
- n'est pas exclusif du schéma traditionnel du guidage de l'activité motrice par l'activité sensorielle (schéma
-à feedback négatif).  Autrement dit, rien ne permet d'exclure que l'activité nerveuse, 
-caractérisée microscopiquement par des patrons de connexion 
-excitateurs et inhibiteurs, puisse susciter à la fois des schémas comportementaux basés 
-sur le feedback positif (persévération, résistance au changement
-et changements brusques) et le feedback négatif (réponse graduelle à l'erreur perceptive, poursuite lente, ...).
+\subsection{Nature de la commande motrice}
 
-Question ouverte : quelles sont les contributions respectives de ces deux approches à l'activité neuronale? Quelles prédictions?
-
-Application :
-
-{\color{Violet}
-Les schémas de guidage par correction d'erreur sont très présents au niveau des structures sensori-motrices profondes
-(comme le contrôle vestibulaire).
-
-l'approche par feedback négatif repose principalement sur le calcul d'une erreur de prédiction. 
-On suppose donc l'existence d'un modèle interne qui 
-anticipe la conséquence sensorielle de l'action [WOLPERT], et corrige éventuellement
-le modèle si cette 
-
-Une des prédictions, pour distinguer l'un de l'autre, serait d'identifier une activité liée à l'erreur perceptive. 
-vs une activité liée au matching perceptif (correspondance)
-
-}
-
-\paragraph{Espace métrique ou espace logique?}
-
-
-
-
-
-
-
-\paragraph{Commande de vélocité ou commande de point fixe?}
+L'approche bio-inspirée de la cognition nous pousse à considérer de manière privilégiée
+la réponse motrice en tant que support fondamental de notre relation à l'environnement.
+Il ne semble pas exister à l'heure actuelle de consensus concernant la nature de la commande motrice.
+On peut distinguer deux hypothèses : une hypothèse de commande relative (la commande produit un déplacement relatif)
+et une hypothèse de commande absolue (la commande désigne un point de l'espace extérieur).
 
 L'étude du système saccadique montre une activité motrice fortement corrélée avec 
 la vitesse de déplacement de l'oeil dans l'orbite. 
@@ -3801,6 +3756,11 @@ La coextensivité temporelle de l'activation d'un foyer et du déplacement moteu
 qui semble une caractéristique du système moteur en général, suggère 
 une projection directe de l'activité du foyer vers les
 effecteurs, c'est à dire une commande de vélocité sur les différents degrés de liberté possibles.
+%Il est pourtant relativement facile d'identifier au sein du cerveau des activités (ou des variations d'activité) en lien 
+%avec cet espace métrique. 
+Certaines études montrent également des corrélations entre l'activité mesurée sur les neurones du cortex moteur et le
+mouvement effectif, mais corrélations ne permettent pas (ou permettent difficilement) de reconstruire une 
+trajectoire métrique précise \cite{Georgopoulos1986,Wessberg2000}.
 
 De nombreuses observations entrent cependant en contradiction avec ce schéma.
 Des stimulations directes du cortex moteur,  sur des échelles de temps
@@ -3822,9 +3782,142 @@ Cette approche pose néanmoins une difficulté pour ce qui concerne l'ajustement
 L'ajustement d'une commande en fonction de facteurs variés (cibles en mouvement, forces contraires, ...)
 suggère des déplacements additionnels qui ne soient pas spécifiques à chaque posture.
 Autrement dit, rien n'exclut que le mouvement final soit le résultat de la combinaison
-de commandes posturales et de commandes de vélocité.
+de commandes posturales (absolues) et de commandes de vélocité (relatives).
 
-PROJET : 
+PROJET : BCI?
+
+\subsection{Construction d'un espace métrique externe}
+
+Si on considère l'activité provenent des récepteurs sensoriels seuls, 
+l'existence d'un monde extérieur stable, constitué d'objets 
+persistants, ne coule pas de source.
+Si on se limite à une exploration de l'environnement à 
+travers des mouvements discrets, formant une suite de
+scènes subjectives (constituée d'activités proprioceptives et extéroceptives),
+le lien d'identité entre %les points d'intérêt de 
+les différentes scènes ne peut se déduire des contenus sensoriels
+seuls.
+
+Par exemple, si on se limite au cas de l'exploration visuelle via des saccades, 
+ce ne sont pas nécessairement les mêmes neurones 
+qui s'activent entre l'ancienne scène subjective (avant saccade) et
+la nouvelle scène subjective (après saccade).
+
+Le concept psychologique de permanence de l'objet [PIAGET] suppose la construction
+progressive 
+d'un monde extérieur stable par expérimentation sensori-motrice.
+
+%La prise en compte du cadre invariant implique une mémorisation 
+%au moins partielle des différents points de vue éprouvés.
+Si une scène est explorée sous la forme d'une séquence de couples (posture, scène visuelle subjective),
+il doit donc exister, d'un point de vue algorithmique,
+%une quantité invariante aux transformations posturales
+%qui permet de réaliser cette projection du couple (scène extérocentrée, posture) vers 
+%la scène subjective .
+une quantité qui persiste à travers ces variations, support de l'invariance de l'environnement.
+Cette quantité doit en particulier résister aux changements posturaux et sensoriels
+incessants, c'est à dire être \emph{congruente} à tous ces changements posturaux et sensoriels
+(la seule clé d'interprétation possible).
+%Si l'image est parlante, la manière dont l'invariant (la scène entière) se constitue 
+%reste un problème non élucidé.
+La nature de l'activité (ou quantité) qui lie 
+les différents éléments en tant que support ne fait pas consensus à l'heure actuelle.
+
+L'idée de congruence est bien illustrée par la notion de ``variété invariante'' (invariant manifold
+en anglais). 
+Le même point final est
+atteint pour différentes configurations motrices. Ces configurations, qui sont congruentes au point final,
+forment une variété dans l'espace des configurations motrices [SCHÖNER].
+Par extension, si on considère l'attention portée à un objet particuler de la scène visuelle, différentes configurations
+sensori-motrices sont congruentes à cet objet via un déplacement : un ensemble de couples (sensation subjective,
+proprioception) est relié de manière congruente à l'objet via un déplacement moteur  spécifique,
+conduisant à cet objet - identité du point final.
+Si on reprend le formalisme discret de l'apprentissage par renforcement,
+un même objet (ou point d'intérêt) de la scène invariante 
+serait par exemple défini par l'ensemble des paires (état, action)
+conduisant à cet objet.
+
+[PERSPECTIVES]
+
+De manière intéressante, le cas primitives motrices (commandes motrices absolues) offre le cadre le plus
+simple pour la mise en oeuvre de cette idée. 
+Dans le cas d'une commande absolue, il y a en effet identité entre l'action potentielle et l'objet,
+sous la forme d'un point fixe de l'espace moteur. 
+Dans le cas d'une scène complexe, constituée de multiples objets,
+se dessine l'idée d'un répertoire d'actions potentielles, où les points d'intérêt de la scène  sont des activateurs 
+de ces actions.
+A travers une scène fovéale visuelle, une multitudes d'actions (saccades potentielles) sont activables.
+Il y aurait donc identification de differents points de la scène à des 
+commandes posturales potentielles. Les mêmes commandes posturales potentielles se retrouvant
+à travers différentes scènes, un lien d'invariance (sous forme d'un tableau de commandes) peut donc être
+établi entre les scènes.
+%Une association (posture courante, excentricité $\rightarrow$ nouvelle posture).
+
+L'idée des primitives motrices offre donc un mécanisme computationnel plausible au sentiment d'invariance
+de l'environnement. 
+
+%à l'idée ancienne.
+%L'invariance est construite à travers le résultat de l'action. Des configuratins sensorielles variées 
+%et des actions variées suivies du
+%même résultat identifient le même invariant.
+
+
+
+{\color{Violet}
+
+Le problème est qu'
+
+
+
+
+
+
+
+
+
+Si le contrôle de l'appareil moteur, ou plus généralement l'activité d'orientation, repose sur ces principes, 
+l'apprentissage de la combinaison des facteurs reste un problème ouvert. En effet, s'il est facile d'exprimer une erreur 
+(une distance) dans un espace métrique, il est plus difficile d'exprimer cette même distance, et donc la correction
+nécessaire dans un espace ``qualitatif'' distribué. 
+
+%IDEE : apprentissage des corrections motrices : pour un certain canal (activité distribuée) mapping entre proprioception
+%et perçue et désirée. activité du cervelet?
+
+
+%La traduction de l'espace qualitatif neuronal vers l'espace quantitatif 
+%métrique passe des essais/erreurs, récompensé lorsque la commande atteint le but par hasard, et donc un apprentissage lent. 
+%Le caractère rapide des corrections opérées par le système sensori-moteur suggère donc que la  
+
+
+%la multitude des combinaisons motrices et sensorielles rend difficile (impossible) l'attribution
+%d'une seule quantité aux différents neurones : si une quantité peut être exprimée par de nombreux neurones, un même neurone
+%doit lui-même être l'expression de nombreuses quantités, changeant de rôle selon le contexte.  
+
+Application : interfaces cerveau machine
+
+Lien avec ML : approche Kernel
+}
+
+{\color{Violet}
+La question de l'expressivité des substrats nous permet de soulever la question du caractère métrique ou non métrique 
+(quantitatif ou qualitatif) des patrons d'activité produits par l'activité nerveuse.
+
+Le contrôle moteur par correction de l'erreur perceptive repose sur le traitement de signaux quantitatifs (la
+force de la commande de correction étant proportionnelle à l'erreur perçue): temps et espace continus.
+A l'inverse, le calcul automatique repose sur des opérations séquentielles et discrètes.
+
+Existe-t-il au sein de l'activité du substrat une quantité traduisant la distance entre deux configurations d'activité?
+
+D'un côté, l'information métrique peut être extraite de l'activité de neurones du cortex moteur (reconstuction des trajectoires
+à partir de l'activité de différents neurones) [GEORGOPOULOS]. Cette information est néanmoins peu fiable...
+
+
+}
+
+%La manière dont les distances entre signaux se maintiennent au sein de l'activité neuronale reste une
+%question ouverte~: une hypothèse plausible est que les liens latéraux et récurrents y jouent un rôle important.
+
+
 
 
 
@@ -3845,14 +3938,7 @@ la manière dont les points d'intérêt de la scène impactent les organes senso
 
 Toute posture impliquant un 
 point de vue sur la scène extérocentrée, 
-chaque déplacement (on se limite ici aux mouvements ballistiques) 
-produit donc une nouvelle scène proprioceptive et extéroceptive.
-Le lien d'identité entre %les points d'intérêt de 
-l'ancienne scène et  la nouvelle ne peut se déduire des contenus sensoriels
-seuls.
-Par exemple, dans le cas de la rétine, ce ne sont pas nécessairement les mêmes neurones 
-qui s'activent entre l'ancienne scène subjective (avant saccade) et
-la nouvelle scène subjective (après saccade).
+
 
 %Si l'on prend l'exemple de la scène visuelle explorée par des saccades sucessives, 
 %Les changements posturaux (position de l'oeil dans l'orbite)
@@ -3880,21 +3966,7 @@ une seule et unique interprétation demeure.
 
 %L'évidence apparente de cette remarque cache de nombreuses difficultés.
 
-%La prise en compte du cadre invariant implique une mémorisation 
-%au moins partielle des différents points de vue éprouvés.
-Si une scène est explorée sous la forme d'une séquence de couples (posture, scène visuelle subjective),
-il doit donc exister, d'un point de vue algorithmique,
-%une quantité invariante aux transformations posturales
-%qui permet de réaliser cette projection du couple (scène extérocentrée, posture) vers 
-%la scène subjective .
-une quantité qui persiste à travers ces variations, support de l'invariance de l'environnement.
-Cette quantité doit en particulier résister aux changements posturaux et sensoriels
-incessants, c'est à dire être \emph{congruente} à tous ces changements posturaux et sensoriels
-(la seule clé d'interprétation possible).
-%Si l'image est parlante, la manière dont l'invariant (la scène entière) se constitue 
-%reste un problème non élucidé.
-La nature de l'activité (ou quantité) qui lie 
-les différents éléments en tant que support ne fait pas consensus à l'heure actuelle.
+
 
 Ce problème cache de nombreux sous-problèmes, souvent abordés séparément
 dans la littérature. Le premier problème est celui de la liaison (le ``binding problem''),
@@ -4087,26 +4159,7 @@ etre codé qu'en déplacement relatif.
 
 L'ESPACE METRIQUE EST CENTRAL POUR L'INTERPRETATION DE LA SCENE EXTERIEURE
 
-L'idée de CONGRUENCE est bien illustrée par la notion de variété invariante (``invariant manifold''
-en anglais). 
-Le même point final est
-atteint pour différentes configurations motrices. Ces configurations sont congruentes au point final.
-Si on considère l'attention portée à un objet particuler de la scène visuelle, différentes configurations
-sensori-motrices sont congruentes à cet objet via un déplacement : un ensemble de couples (sensation subjective,
-proprioception) est relié de manière congruente à l'objet via un déplacement moteur via une action potentielle spécifique
-(conduisant au même résultat - identité du point final).
-(Un même objet est alors défini par un ensemble de paires (état, action))
 
-Attention, dans le cas primitives motrices, il y a identité entre l'action potentielle et l'objet (point fixe). 
-dans ce cas se dessine l'idée d'un répertoire d'actions potentielles, où les sensations sont des activateurs 
-de ces actions.
-A travers une scène fovéale visuelle, une multitudes d'actions (saccades potentielles) sont activables.
-Il y a donc une carte qui associe differents points de la scène (relatifs à la position courante) à des postures
-absolues. Une association (posture courante, excentricité $\rightarrow$ nouvelle posture).
-
-L'invariance est construite à travers le résultat de l'action. Des configuratins sensorielles variées 
-et des actions variées suivies du
-même résultat identifient le même invariant.
 
 D'un point de vue computationnel, la congruence est la capacité à se stabiliser sur différents points d'attraction,
 comme le muscle se stabilise par réflexe (la perception de la contraction produit une commande d'identité), et comme
