@@ -3504,69 +3504,106 @@ $\Rightarrow$ prior $\simeq$ ``\% up to now'' (subjective time)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Questions ouvertes}
 
-D'un point de vue général, les opérations du système nerveux se caractérisent par un compromis entre des opérations 
-essentiellement produites par l'activité interne, et des opérations guidées par les stimulations sensorielles. 
-L'analyse de la communication nerveuse implique la prise en compte du cadre macroscopique des interactions entre 
-le système nerveux, l'appareil sensori-moteur et son milieu.
-La correspondance entre l'activité macroscopique et l'activité nerveuse reste à ce jour non élucidé.
+Dans la plupart des études que nous avons présentées, le fonctionnement du système nerveux nous a servi de guide pour
+développer des architectures cognitives susceptibles de développer une certaine ``subjectivité''.
+La subjectivité, au sens le plus général, est un point de vue original sur une réalité extérieure, constitué
+par la relation d'un corps sensible à son environnement, mais également une manière
+de répondre aux sollicitations de l'environnement qui laisse de la marge à un certain libre-arbitre.
 
-L'analyse que nous avons développée à partir de l'étude des réseaux de neurones aléatoires suggère un mode de fonctionnement
-intermédiaire entre le pattern matching et les systèmes dynamiques. Plus précisément, nous avonc utilisé l'exemple (ou l'analogie)
+Plus précisément, nous avonc utilisé l'exemple (ou l'analogie)
 d'un système dynamique distribué contraint par un signal extérieur. 
-
-Les différentes études présentées permettentde soulever de nombreuses questions sur les principes computationnels 
-à l'oeuvre au sein de l'activité nerveuse,
-listées ci-dessous.
-
-\paragraph{Feedback positif ou feedback négatif?} 
-Un des schémas proposés ici pour la communication nerveuse 
-est celui du feedback positif, autrement
-dit la résonance entre l'activité macroscopique et l'activité nerveuse, caractérisée par la présence d'un attracteur comportemental 
+La contrepartie logicielle de cette subjectivité est un substrat (un système dynamique) 
+inspirés de l'étude du système nerveux, capables de développer 
+une activité intrinsèque, capables de traiter une influence extérieure et capables de plasticité.
+L'idée générale est celle d'un compromis entre des opérations 
+essentiellement produites par l'activité interne, et des opérations guidées par les stimulations sensorielles. 
+%Le mode de fonctionnement qui nous a guidé est celui de 
+Les schémas computationnel proposé est celui du feedback positif, autrement
+dit de la résonance entre l'activité nerveuse et l'activité macroscopique, caractérisée par la présence d'un attracteur comportemental 
 (posture ou patron d'interaction dynamique). L'hypothèse est que le substrat nerveux est un réservoir de patrons sensori-moteurs, 
 et l'apparition de précurseurs sensoriels ou moteurs au sein de l'activité nerveuse suscite la convergence de la dynamique vers l'attracteur correspondant, 
 favorisant une activité macroscopique (un attracteur comportemental) qui lui-même favorise l'attracteur neuronal par boucle de rétroaction positive.
 Des mécanismes internes de fatigue et/ou l'irruption de composants sensoriels ou moteurs dissonants favorise la recomposition de l'activité nerveuse
 et la convergence vers un nouvel attracteur.
+Le résultat de ce schéma computationnel est un fonctionnement par ``sauts'' d'un attracteur à un autre, 
+et une alternance entre destabilisation et stabilité.
 
-Ce schéma computationnel (fonctionnement par ``sauts'' d'un attracteur à un autre, alternance entre destabilisation et 
-stabilité) n'est pas exclusif du schéma traditionnel du guidage de l'activité motrice par l'activité sensorielle (schéma
-à feedback négatif).  Autrement dit, rien ne permet d'exclure que l'activité nerveuse, 
-caractérisée microscopiquement par des patrons de connexion 
-excitateurs et inhibiteurs, puisse susciter à la fois des schémas comportementaux basés 
-sur le feedback positif (persévération, résistance au changement
-et changements brusques) et le feedback négatif (réponse graduelle à l'erreur perceptive, poursuite lente, ...).
+Nous allons maintenant essayer de voir quels sont les avantages et également les problèmes posés par cette approche, et quels sont
+les principales pistes permettant d'y remédier, ce qui nous amène à formuler un projet de recherche visant 
+à fonder une méthode de développement d'architectures cognitives sur la base de quelques principes simples.
 
-Question ouverte : quelles sont les contributions respectives de ces deux approches à l'activité neuronale? Quelles prédictions?
 
-Application :
+\section{Questions ouvertes et problèmes}
 
-{\color{Violet}
-Les schémas de guidage par correction d'erreur sont très présents au niveau des structures sensori-motrices profondes
-(comme le contrôle vestibulaire).
+L'analyse que nous avons développée à partir de l'étude des réseaux de neurones aléatoires suggère un mode de fonctionnement
+intermédiaire entre le pattern matching et les systèmes dynamiques. 
+Nous faisons ci-dessous une liste des résultats qui confirment ou contredisent cette approche 
+à partir de l'analyse du système nerveux et plus généralement de la problématique posée par le
+fait de contrôler un corps dans un environnement.
+Le but est également de soulever certaines des nombreuses questions sur les principes computationnels 
+à l'oeuvre au sein de l'activité nerveuse.
 
-l'approche par feedback négatif repose principalement sur le calcul d'une erreur de prédiction. 
-On suppose donc l'existence d'un modèle interne qui 
-anticipe la conséquence sensorielle de l'action [WOLPERT], et corrige éventuellement
-le modèle si cette 
-
-Une des prédictions, pour distinguer l'un de l'autre, serait d'identifier une activité liée à l'erreur perceptive. 
-vs une activité liée au matching perceptif (correspondance)
-
-}
-
-\paragraph{Espace métrique ou espace logique?}
+\subsection{Pattern matching ou transformations géométriques?}
 
 Les déplacements produits par le corps en mouvement sont tous quantifiables par la position (et les variations de position) 
 des éléments mobiles qui le composent.
 Les sources de l'activité induite sur les organes sensoriels sont également localisables dans un espace métrique
 tridimensionnel constituant l'environnement immédiat du sujet.
-Il est pourtant relativement difficile d'identifier au sein du cerveau des activités (ou des variations d'activité) en lien 
+
+Le ``pattern matching'' (correspondance de forme) est l'opération consistant 
+à mettre en correspondance un modèle (patron) avec une forme (signal), dans le cas le plus simple
+via un produit scalaire. Cette approche se traduit en modélisation neuronale par le terme de
+``champ récepteur'', avec une réponse maximale de la cellule lorsque le signal correspond à la forme 
+fixée. 
+Cette approche donne naissance à la reconnaissance par dictionnaire de formes, très utilisée 
+à la fois en traitement d'images et pour les modèles de la perception visuelle.
+L'apprentissage des patrons est au coeur des théories de l'apprentissage automatique, où
+les patrons caractéristiques sont déduits des données présentées.
+Par exemple : apprentissage d'une base de filtres via des algos de type EM.
+
+L'opération algorithmique réalisée par le pattern matching est graduelle : degré d'appartenance
+(ou de correspondance) à un patron donné, sur un intervalle borné. L'opération répétée sur de multiples patrons produit de 
+nombreux degrés d'appartenance, cet ensemble de degrés d'appartenance pouvant lui-même être interprété 
+comme une nouvelle forme pour un traitement ultérieur (sur le principe du ``deep learning'' par exemple),
+constituant un principe de calcul distribué efficace.
+
+Le pattern matching est néanmoins transformation non-linéaire  qui rend difficile la définition
+d'une distance entre deux signaux. 
+Les distances au sein de l'espace initial n'ont pas de traduction au sein de
+l'espace de redescription.
+L'approche par pattern matching ne garantit donc pas la proportionnalité des traitements entre signaux proches 
+et signaux éloignés, comme le font les transformations linéaires (ou géométriques) traditionnelles.
+
+En fait, celà ne pose pas de problème lorsqu'il s'agit d'associer (de manière univoque) un
+patron d'activité (un attracteur) et une commande motrice. Une activité de population est parfaitement capable de définir
+un déplacement moteur dans l'espace métrique, sur le mode de la carte colliculaire vue précédemment.
+Le problème se pose lorsqu'il s'agit de \emph{mettre en relation} différents patrons d'activité pour établir
+une réponse motrice relative (par exemple relative à la distance entre deux objets de l'espace métrique).
+Il faut pour cela regarder d'un peu plus près la nature de la commande motrice.
+
+Le problème est qu'il ne semble pas exister à l'heure actuelle de consensus sur la nature de cette commande!
+On peut distinguer deux hypothèses : une hypothèse de commande absolue (la commande désigne un point de l'espace extérieur),
+et une hypothèse de commande relative (la commande produit un déplacement relatif).
+
+[ICI]
+
+Le pattern matching ne pose pas de problème lorsqu'il
+s'agit de 
+
+Il est pourtant relativement facile d'identifier au sein du cerveau des activités (ou des variations d'activité) en lien 
 avec cet espace métrique. 
 Par exemple, il est possible d'établir des corrélations entre l'activité mesurée sur les neurones du cortex moteur et le
 mouvement effectif, mais corrélations ne permettent pas (ou permettent difficilement) de reconstruire une 
-trajectoire métrique précise.
+trajectoire métrique précise \cite{Georgopoulos1986,Wessberg2000}.
+
+Le pattern matching pose un problème lorsqu'il s'agit d'effectuer la traduction inverse 
+d'un patron d'activité vers un espace métrique, par exemple lorsqu'il s'agit de prendre en compte
+des erreurs sensorielles pour effectuer une correction motrice.
+Il est nécessaire que la notion de distance ne soit pas perdue au cours des transformations,
+pour rendre possible cette traduction inverse.
+
+
 
 Le caractère extrêmement distribué de l'activité nerveuse suggère la distribution de ces quantités sur de nombreux neurones.
 En particulier, il apparaît probable qu'une même quantité n'active pas les même neurones selon sa position
@@ -3575,7 +3612,7 @@ Cette distribution de l'activité rend néanmoins difficile la réalisation d'op
 de deux quantités, comme celà est pourtant nécessaire lorsque les déplacements doivent prendre en compte des sources sensorielles 
 multiples (proprioception de la position de la tête et excentricité d'une cible sur la rétine par exemple).
 Si l'espace métrique environnant est décomposé en composants élémentaires (intervalles ou ``pixels'' d'environnement), activant
-ou désactivant différentes populations de neurones, alors les opérations élémentaires de translation, rotation, co-extension, 
+ou désactivant différentes populations de neurones, alors les opérations élémentaires de translation, rotation, co-variation, 
 etc. doivent être apprises ``par coeur'' et ne peuvent résulter de la combinaison d'activités unitaires.
 
 Si le contrôle de l'appareil moteur, ou plus généralement l'activité d'orientation, repose sur ces principes, 
@@ -3613,53 +3650,14 @@ Existe-t-il au sein de l'activité du substrat une quantité traduisant la dista
 D'un côté, l'information métrique peut être extraite de l'activité de neurones du cortex moteur (reconstuction des trajectoires
 à partir de l'activité de différents neurones) [GEORGOPOULOS]. Cette information est néanmoins peu fiable...
 
-%@article{wessberg2000real,
-%  title={Real-time prediction of hand trajectory by ensembles of cortical neurons in primates},
-%  author={Wessberg, Johan and Stambaugh, Christopher R and Kralik, Jerald D and Beck, Pamela D and Laubach, Mark and Chapin, John K and Kim, Jung and Biggs, S James and Srinivasan, Mandayam A and Nicolelis, Miguel AL},
-%  journal={Nature},
-%  volume={408},
-%  number={6810},
-%  pages={361--365},
-%  year={2000},
-%  publisher={Nature Publishing Group}
-%}
+
 }
 
-\paragraph{Pattern matching ou transformations isométriques?}
+%La manière dont les distances entre signaux se maintiennent au sein de l'activité neuronale reste une
+%question ouverte~: une hypothèse plausible est que les liens latéraux et récurrents y jouent un rôle important.
 
-Le ``pattern matching'' (correspondance de forme) est l'opération consistant 
-à mettre en correspondance un modèle (patron) avec une forme (signal), dans le cas le plus simple
-via un produit scalaire. Cette approche se traduit en modélisation neuronale par le terme de
-``champ récepteur'', avec une réponse maximale de la cellule lorsque le signal correspond à la forme 
-fixée. 
-Cette approche donne naissance à la reconnaissance par dictionnaire de formes, très utilisée 
-à la fois en traitement d'images et pour les modèles de la perception visuelle.
-L'apprentissage des patrons est au coeur des théories de l'apprentissage automatique, où
-les patrons caractéristiques sont déduits des données présentées.
-Par exemple : apprentissage d'une base de filtres via des algos de type EM.
-
-L'opération algorithmique réalisée par le pattern matching est graduelle : degré d'appartenance
-(ou de correspondance) à un patron donné, sur un intervalle borné. L'opération répétée sur de multiples patrons produit de 
-nombreux degrés d'appartenance, cet ensemble de degrés d'appartenance pouvant lui-même être interprété 
-comme une nouvelle forme pour un traitement ultérieur (sur le principe du ``deep learning'' par exemple),
-constituant un principe de calcul distribué efficace.
-
-Le pattern matching est néanmoins transformation non-linéaire  qui rend difficile la définition
-d'une distance entre deux signaux. 
-Les distances au sein de l'espace initial n'ont pas de traduction au sein de
-l'espace de redescription.
-L'approche par pattern matching ne garantit donc pas la proportionnalité des traitements entre signaux proches 
-et signaux éloignés, comme le font les transformations linéaires traditionnelles.
-
-La traduction inverse d'un patron d'activité vers un espace métrique, et la prise en compte
-des erreurs sensorielles nécessite que la notion de distance ne soit pas perdue au cours des transformations.
-La manière dont les distances entre signaux se maintiennent au sein de l'activité neuronale reste une
-question ouverte~: une hypothèse plausible est que les liens latéraux et récurrents y jouent un rôle important.
-
-\paragraph{Bruit créateur ou bruit destructeur?}
-
-L'opposition entre bruit créateur, producteur de formes, et bruit destructeur, c'est à dire perturbateur
-a été proposée par Henri Atlan dans son livre ``Entre le cristal et la fumée''.
+\paragraph{Bruit créateur ou bruit destructeur?}\footnote{L'opposition entre bruit créateur, producteur de formes, et bruit destructeur, c'est à dire perturbateur
+a été proposée par Henri Atlan dans son livre ``Entre le cristal et la fumée''.}
 
 Le bruit est classiquement considéré comme un élément perturbateur en traitement du signal ou
 dans le cadre des mécanismes de contrôle en boucle fermée. Il correspond souvent aux facteurs non modélisés 
@@ -3736,6 +3734,39 @@ PROJET : approche multiscale : conditions d'émergence d'un bruit lent.
 Champ moyen.
 Mise en correspondance avec la notion d'instabilité de l'activité de repos. 
 
+\paragraph{Feedback positif ou feedback négatif?} 
+ n'est pas exclusif du schéma traditionnel du guidage de l'activité motrice par l'activité sensorielle (schéma
+à feedback négatif).  Autrement dit, rien ne permet d'exclure que l'activité nerveuse, 
+caractérisée microscopiquement par des patrons de connexion 
+excitateurs et inhibiteurs, puisse susciter à la fois des schémas comportementaux basés 
+sur le feedback positif (persévération, résistance au changement
+et changements brusques) et le feedback négatif (réponse graduelle à l'erreur perceptive, poursuite lente, ...).
+
+Question ouverte : quelles sont les contributions respectives de ces deux approches à l'activité neuronale? Quelles prédictions?
+
+Application :
+
+{\color{Violet}
+Les schémas de guidage par correction d'erreur sont très présents au niveau des structures sensori-motrices profondes
+(comme le contrôle vestibulaire).
+
+l'approche par feedback négatif repose principalement sur le calcul d'une erreur de prédiction. 
+On suppose donc l'existence d'un modèle interne qui 
+anticipe la conséquence sensorielle de l'action [WOLPERT], et corrige éventuellement
+le modèle si cette 
+
+Une des prédictions, pour distinguer l'un de l'autre, serait d'identifier une activité liée à l'erreur perceptive. 
+vs une activité liée au matching perceptif (correspondance)
+
+}
+
+\paragraph{Espace métrique ou espace logique?}
+
+
+
+
+
+
 
 \paragraph{Commande de vélocité ou commande de point fixe?}
 
@@ -3790,8 +3821,7 @@ La posture courante définit donc le \emph{point de vue} sur une scène extéroc
 C'est ce rapport entre ces agencements corporels et la scène invariante qui conditionne
 la manière dont les points d'intérêt de la scène impactent les organes sensoriels. 
  
-%Dans le cadre de l'hypothèse des primitives motrices, il existe une bijection entre 
-%la commande motrice et l'agencement postural final. 
+
 Toute posture impliquant un 
 point de vue sur la scène extérocentrée, 
 chaque déplacement (on se limite ici aux mouvements ballistiques) 
@@ -3857,18 +3887,18 @@ progressive des interprétations erronnées?
 
 
 \paragraph{Le binding problem}
-Le ``binding problem'' est le problème de la réalisation
+Le ``binding problem'' est le problème de la réalisation matérielle
 du lien causal entre les différents constituants d'une scène.
-Trouver une forme algorithmique qui sert de support au lien de causalité.
+Identifier la structure algorithmique qui sert de support au lien de causalité.
 
-Une forme algorithmique simple est celle de la projection inverse, c'est à 
+Une structure algorithmique simple est celle de la projection inverse, c'est à 
 dire une zone d'activité (ou un neurone) instancie un objet complet, répondant 
-de manière sélective à une combinaison spécifique des différents constituants.
+de manière sélective à une combinaison spécifique de ses différents constituants.
 Cette approche est celle dite du ``neurone grand-mère''. 
 S'il apparaît peu probable qu'un seul neurone soit le support de la liaison,
 rien n'exclut qu'une population de neurones puisse répondre de façon sélective
 à toutes les configurations d'interaction avec un objet particulier (par exemple
-notre grand-mère).
+notre grand-mère).[JENNIFER ANISTON NEURON]
 
 L'approche ``distribuée'', également appelée approche ``dynamique'', stipule
 le caractère non exclusif des activités des population : il n'existe pas de
@@ -4012,7 +4042,9 @@ spécifique se maintienne en tant que support de persistence à la variabilité 
 
 
 
+}
 
+\paragraph{Sensation du déplacement (étape 1 de 2)}
 
 La distance entre deux points d'intérêts est caractérisée par le déplacement nécessaire pour
 aller de l'un à l'autre.
@@ -4023,6 +4055,65 @@ est un déplacement d'une position initiale à une position finale sur le récep
 L'action, en tant que déplacement moteur, est perçue en tant que déplacement sensoriel
 (changement proprioceptif couplé à un changement de la scène extéroceptive).
 
+L'hypothèse de stabilité ambiante suggère que le changement sensoriel observé n'a pas pour corollaire 
+de changement dans le monde ambiant. Les deux scènes subjectives
+consécutives sont constitutives du même monde extérieur.
+Le monde extérieur est organisé autour des opérations motrices nécessaires pour aller d'un point à 
+un autre.
+
+DEPLACEMENT RELATIF VS DEPLACEMENT ABSOLU. Tout ce qui relève de la correction ne peut 
+etre codé qu'en déplacement relatif.
+
+L'ESPACE METRIQUE EST CENTRAL POUR L'INTERPRETATION DE LA SCENE EXTERIEURE
+
+L'idée de CONGRUENCE est bien illustrée par la notion de variété invariante (``invariant manifold''
+en anglais). 
+Le même point final est
+atteint pour différentes configurations motrices. Ces configurations sont congruentes au point final.
+Si on considère l'attention portée à un objet particuler de la scène visuelle, différentes configurations
+sensori-motrices sont congruentes à cet objet via un déplacement : un ensemble de couples (sensation subjective,
+proprioception) est relié de manière congruente à l'objet via un déplacement moteur via une action potentielle spécifique
+(conduisant au même résultat - identité du point final).
+(Un même objet est alors défini par un ensemble de paires (état, action))
+
+Attention, dans le cas primitives motrices, il y a identité entre l'action potentielle et l'objet (point fixe). 
+dans ce cas se dessine l'idée d'un répertoire d'actions potentielles, où les sensations sont des activateurs 
+de ces actions.
+A travers une scène fovéale visuelle, une multitudes d'actions (saccades potentielles) sont activables.
+Il y a donc une carte qui associe differents points de la scène (relatifs à la position courante) à des postures
+absolues. Une association (posture courante, excentricité $\rightarrow$ nouvelle posture).
+
+L'invariance est construite à travers le résultat de l'action. Des configuratins sensorielles variées 
+et des actions variées suivies du
+même résultat identifient le même invariant.
+
+D'un point de vue computationnel, la congruence est la capacité à se stabiliser sur différents points d'attraction,
+comme le muscle se stabilise par réflexe (la perception de la contraction produit une commande d'identité), et comme
+le champ neuronal se stabilise par inhibition latérale.
+Dans le cas d'un neurone ayant plusieurs champs récepteurs, l'inhibition permet de sélectionner un champ récepteur
+particulier au détriment des autres.
+
+L'hypothèse du champ futur (future field) = neurone qui construit la perception subjective future à partir de la
+perception subjective présente. La perception présente s'efface au profit de la nouvelle. Le choix de l'action (la décision)
+influe sur le champ récepteur (la sensibilité) des neurones sensoriels.
+Si un neurone de ``haut niveau'' a une multitude de champs récepteurs distribués sur l'ensemble de la région visuelle, 
+Ces champs sont inhibés par effet de la commande motrice en préparation à l'exception de la région cible.
+Il y a dans ce cas une invariance construite par l'action elle-même, le neurone ayant la même réponse avant et après la saccade.
+C'est bien un nouvel attracteur qui se construit par effacement de (proprioception, exteroception)
+
+
+L'opération motrice est : ancienne scène subjective, déplacement $\rightarrow$ nouvelle scène subjective
+
+si déplacement = opération motrice = ancienne position (proprio), nouvelle position (motor)
+
+on a : ancienne scène subjective, ancienne position (proprio), nouvelle position (motor) $\rightarrow$ nouvelle scène subjective
+
+
+
+
+sont la
+conséquence de la commande motrice dans un monde stable. La distance entre deux points de la scène est 
+donc établie par la distance entre 
 
 L'apprentissage des associations entre le changement proprioceptif et le déplacement sensoriel correspondant
 est à la base du sentiment de permanence de l'environnement [Projet eSMC].
@@ -4064,9 +4155,14 @@ approche 2 : intégrative
 approche 3 : Friston : identification de sources + action comme augmentation de plausibilité
 
 
+\paragraph{Correction cinétique (étape 2 de 2)}
 
+Dans le cadre de l'hypothèse des primitives motrices, il existe une bijection entre 
+la commande motrice et l'agencement postural final.
+Dans le cadre de l'hypothèse d'une commande de déplacement, il existe un ebijection entre la
+commande motrice et le changement des rapports métriques entre le sujet et son environnement. 
 
-
+Derrière l'h
 
 comment le cerveau, 
 
@@ -4178,7 +4274,7 @@ Les
 
 Le même point fixe est codé 
 
-}
+
 
 
 \paragraph{Attracteur ou séquence?}
