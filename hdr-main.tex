@@ -3525,12 +3525,12 @@ dit de la résonance entre l'activité nerveuse et l'activité macroscopique, ca
 Une des hypothèses que nous avons mise en avant est que cette activité de population (résonance) 
 permet le ``passage d'échelle'', c'est à dire rend sensible à une échelle supérieure (macroscopique) 
 l'activité répartie d'une population d'unités: passage d'activités unitaires à une activité de population, passage
-d'une activité de populaton à un déplacement moteur.
-L'hypothèse est que le substrat nerveux est un réservoir de patrons sensori-moteurs, 
+d'une activité de population à un déplacement moteur.
+Une autre hypothèse est que le substrat nerveux est un réservoir de patrons sensori-moteurs, 
 et l'apparition de précurseurs sensoriels ou moteurs au sein de l'activité nerveuse suscite la convergence de la dynamique vers l'attracteur correspondant, 
 favorisant une activité macroscopique (un attracteur comportemental) qui lui-même favorise l'attracteur neuronal par boucle de rétroaction positive.
-Ce mécanisme de passage d'échelle est logiquement suivi d'un retour à
-l'échelle inférieure, soit une désynchronisation, lorsque les conditions de la synchronisation ne sont plus remplies.
+Le mécanisme de résonance est logiquement suivi d'un retour à
+l'état de base, soit une désynchronisation, lorsque les conditions de la synchronisation ne sont plus remplies.
 Des mécanismes internes de fatigue et/ou l'irruption de composants sensoriels ou moteurs dissonants favorise la 
 désaggrégation, puis éventuellement la recomposition de l'activité nerveuse
 et la convergence vers un nouvel attracteur.
@@ -3592,11 +3592,30 @@ Le choix de la nouvelle réponse est-il purement réactif, explicable par les co
 de l'environnement, ou est-il le résultat d'une délibération, d'une déduction 
 induite par des facteurs liés à l'activité interne antérieure?
 Cette question rejoint la question de l'autonomie comportementale évoquée plus haut.
-Nous allons maintenant essayer de voir quels sont les difficultés posées par cette approche, et quels sont
+Nous allons maintenant essayer de voir quels sont les difficultés posées par cette question, et quels sont
 les principales pistes permettant de l'aborder, ce qui nous amène à formuler un projet de recherche visant 
 à fonder une méthode de développement d'architectures non versatiles.
 
-\section{Pattern matching et systèmes dynamiques}
+Nous abordons dans la section \ref{sec:pat} la question du support de communication, relativement au fait
+que la nature du support détermine le type d'information qui peut transiter par le support, ainsi que le
+type de manipulations réalisables. 
+La section \ref{} aborde la question de l'invariance de l'environnement externe. En
+effet, la continuité de l'action est une conséquence de la continuité du monde,
+c'est à dire de la persistence d'un monde extérieur stable malgré des variations incessantes de point de vue.
+Nous développons en particulier la notion de congruence instrumentale, 
+et regardons quelques pistes d'implémentation de ce principe de congruence 
+à travers une revue de la littérature neurologique.
+La section \ref{} aborde la question des architectures séquentielles, de l'alternance
+entre la prescription motrice et prescription sensorielle.
+Nous décrivons alors des opérations caractéristiques qui devraient
+être réalisées par le support pour autoriser l'implémentation des mécanismes 
+séquentiels envisagés.
+Enfin, nous étudions le rôle du bruit dans un tel dispositif.
+La dernière section présente enfin une série de projets plus concrets développés dans le cadre 
+de collaborations avec des chercheurs de l'INS et du LIF à Marseille.
+
+
+\section{Pattern matching et systèmes dynamiques}\label{sec:pat}
 
 La plupart des étude sur les réseaux de neurones suggèrent un mode de fonctionnement
 intermédiaire entre le pattern matching et les systèmes dynamiques. 
@@ -3774,6 +3793,12 @@ le contrôle, et d'autre part sur la multitude des récepteurs supports de l'inf
 %positif, et un monde métrique et continu, propice au feedback négatif, 
 Cette dichotomie implique un mode de fonctionnement composite, basé d'une part sur des rapports entre intensités (monde physique), 
 et d'autre part sur des rapports entre formes (monde digital). 
+
+{\color{Violet}
+Substrat et expressivité. en particulier une expressivité autorisant le binding, l'activation de ``canaux'' différents.
+Les canaux sont eux-mêmes congruents à de nombreuses configurations sensorielles (nombreuses expressions d'une même
+quantité)
+}
 
 \section{Bottom-up}
 
