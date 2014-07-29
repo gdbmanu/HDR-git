@@ -3519,32 +3519,130 @@ une activité intrinsèque, capables de traiter une influence extérieure et cap
 L'idée générale est celle d'un compromis entre des opérations 
 essentiellement produites par l'activité interne, et des opérations guidées par les stimulations sensorielles. 
 %Le mode de fonctionnement qui nous a guidé est celui de 
-Les schémas computationnel proposé est celui du feedback positif, autrement
+Le schéma computationnel proposé est celui du feedback positif, autrement
 dit de la résonance entre l'activité nerveuse et l'activité macroscopique, caractérisée par la présence d'un attracteur comportemental 
-(posture ou patron d'interaction dynamique). L'hypothèse est que le substrat nerveux est un réservoir de patrons sensori-moteurs, 
+(posture ou patron d'interaction dynamique). 
+Une des hypothèses que nous avons mise en avant est que cette activité de population (résonance) 
+permet le ``passage d'échelle'', c'est à dire rend sensible à une échelle supérieure (macroscopique) 
+l'activité répartie d'une population d'unités: passage d'activités unitaires à une activité de population, passage
+d'une activité de populaton à un déplacement moteur.
+L'hypothèse est que le substrat nerveux est un réservoir de patrons sensori-moteurs, 
 et l'apparition de précurseurs sensoriels ou moteurs au sein de l'activité nerveuse suscite la convergence de la dynamique vers l'attracteur correspondant, 
 favorisant une activité macroscopique (un attracteur comportemental) qui lui-même favorise l'attracteur neuronal par boucle de rétroaction positive.
-Des mécanismes internes de fatigue et/ou l'irruption de composants sensoriels ou moteurs dissonants favorise la recomposition de l'activité nerveuse
+Ce mécanisme de passage d'échelle est logiquement suivi d'un retour à
+l'échelle inférieure, soit une désynchronisation, lorsque les conditions de la synchronisation ne sont plus remplies.
+Des mécanismes internes de fatigue et/ou l'irruption de composants sensoriels ou moteurs dissonants favorise la 
+désaggrégation, puis éventuellement la recomposition de l'activité nerveuse
 et la convergence vers un nouvel attracteur.
 Le résultat de ce schéma computationnel est un fonctionnement par ``sauts'' d'un attracteur à un autre, 
 et une alternance entre destabilisation et stabilité.
 
-Nous allons maintenant essayer de voir quels sont les avantages et également les problèmes posés par cette approche, et quels sont
-les principales pistes permettant d'y remédier, ce qui nous amène à formuler un projet de recherche visant 
-à fonder une méthode de développement d'architectures cognitives sur la base de quelques principes simples.
+Ce mécanisme computationnel, fondé sur des séquences de stabilisations et de destabilisations,
+implique au niveau comportemental la définition d'un mouvement (un déplacement du corps) comme 
+exprimant la transition d'une posture inadaptée vers une
+posture plus adaptée aux contraintes exprimées par l'environnement. Le ``calcul'' est essentiellement
+le mouvement (la trajectoire) qui conduit de l'ancienne configuration sensori-motrice stable
+à la nouvelle configuration sensori-motrice. %, c'est à dire un mouvement simultané de contestation 
+%(de l'ancienne évidence) et d'adhésion (à la nouvelle évidence).
+%Chaque attracteur (statique ou périodique) définit des relations causale entre les éléments qui le composent
+%(entre les noeuds du réseau, entre les variables d'état du système dynamique).
+La question est de savoir si le mécanisme de déstabilisation/restabilisation définit (ou non) un lien causal
+entre l'ancienne configuration et la nouvelle configuration.
+L'ancienne configuration est-elle oubliée pour laisser place à la nouvelle, ou existe-t-il une
+relation de similarité ou de proximité qui favorise la passage de l'une à l'autre?
+Le fonctionnement par feedback positif décrit-il une activité
+versatile, constituée de ``tableaux comportementaux'' successifs détachés les uns des autres,
+ou une activité séquentielle, dans laquelle le nouveau tableau est ``déduit'' de l'ancien
+(où l'ancien tableau forme un contexte favorable à l'apparition du nouveau)?
+
+L'essentiel des modèles à feedback positif que nous avons étudiés jusqu'à présent
+répondent à la première catégorie. Le schéma conceptuel initialement proposé par Freeman \cite{Ska87}
+est celui d'une activité de base irrégulière à partir de laquelle se forment des réponses plus régulières
+et plus spécifiques en présence de marqueurs environnementaux particuliers. Le passage d'une réponse régulière
+à une autre nécessite un passage par l'activité de base (chaotique). C'est le même mécanisme de désaggrégation/recomposition qui
+est mis en oeuvre dans le modèle perceptif à feedback positif que nous avons présenté \cite{Dau02}.
+On peut également assimiler ce mécanisme au passage d'un état ``bas'' (non spécifique) à un état ``haut''
+(spécifique), puis au retour vers un état ``bas'', un peu comme dans le modèle de \cite{Brunel2000persistent}.
+Les modèles de neurones impulsionnels présentés dans \cite{Hen08B,Dau14a} montrent, à une échelle temporelle plus fine, une capacité
+à produire une bouffée d'activité de population (sur une soixantaine de millisecondes), suivie par un retour
+à l'état de base. Le retour à l'état de base efface toute trace du patron d'activité précédemment formé.
 
 
-\section{Questions ouvertes}
+{\color{Violet}
 
-L'analyse que nous avons développée à partir de l'étude des réseaux de neurones aléatoires suggère un mode de fonctionnement
+[A DEPLACER]
+
+L'autonomie comportementale est la capacité à produire des réponses 
+indépendamment du contexte immédiat, ou de faire des choix parmi différentes réponses possibles
+lorsque le contexte le permet.
+La première forme d'autonomie comportementale que nous avons vue reposait sur la génération
+d'une activité irrégulière (chaotique) autonome, qui, connectée à des effecteurs, permet de
+produire une réponse ne dépendant pas entièrement de la contrainte sensorielle, mais également 
+des caractéristiques non-prédictible propres à cette activité spontanée. Cette autonomie est analogue
+à celle qui est mise en oeuvre dans le cadre de l'exploration motrice des algorithmes d'apprentissage
+par renforcement.
+L'autre forme d'autonomie que nous avons vue repose sur le principe de résistance au changement,
+c'est à dire sur le fait qu'une certaine réponse comportementale se maintient à travers le temps malgré des perturbations 
+extérieures, comme la perte de certaines entrées sensorielles, permettant d'interpréter la scène sensorielle courante
+à l'aide d'informatins collectées dans le passé. 
+
+}
+
+Le choix de la nouvelle réponse est-il purement réactif, explicable par les contraintes 
+de l'environnement, ou est-il le résultat d'une délibération, d'une déduction 
+induite par des facteurs liés à l'activité interne antérieure?
+Cette question rejoint la question de l'autonomie comportementale évoquée plus haut.
+Nous allons maintenant essayer de voir quels sont les difficultés posées par cette approche, et quels sont
+les principales pistes permettant de l'aborder, ce qui nous amène à formuler un projet de recherche visant 
+à fonder une méthode de développement d'architectures non versatiles.
+
+\section{Pattern matching et systèmes dynamiques}
+
+La plupart des étude sur les réseaux de neurones suggèrent un mode de fonctionnement
 intermédiaire entre le pattern matching et les systèmes dynamiques. 
-Nous faisons ci-dessous une liste des résultats qui confirment ou contredisent cette approche 
-à partir de l'analyse du système nerveux et plus généralement de la problématique posée par le
-fait de contrôler un corps dans un environnement.
-Le but est également de soulever certaines des nombreuses questions sur les principes computationnels 
-à l'oeuvre au sein de l'activité nerveuse.
+Le mariage des deux mondes n'est pourtant pas évident d'un point de vue computationnel.
+C'est l'évidence d'un comportement massivement distribué et non strictement digital,
+tel qu'observé dans le cerveau, qui a poussé au développement de tels modèles.
+La démarche du pattern matching est efficace pour expliquer les mécanismes 
+de plasticité et d'apprentissage, mais se révèle peu propice à la construction de schémas de 
+contrôle moteur.
+La démarche des systèmes dynamiques explique bien les mécanismes de formation des mouvements et  
+du contrôle, mais n'offre pas de cadre propice à la plasticité. 
+Malgré de nombreuses tentatives, il manque encore, semble-t-il, un principe d'unification des
+deux approches. D'une certaine façon, la plupart des modèles en neurosciences computationnelles 
+reposent sur un compromis, sur un ``bricolage'' entre les deux approches, ne prenant pas 
+toujours en compte le caractère apparemment incompatible des deux modes de fonctionnement.
 
-\subsection{Pattern matching ou transformations géométriques?}
+Les premiers modèles mariant les deux approches remontent historiquement aux années 60-70.
+L'idée de la sélectin d'un canal de réponse par résonance avec les signaux de l'environnement de trouve dans \cite{Greene1962}.
+Les premiers modèles sur la formation des patrons de réponse visuelle \cite{HUBELWIESEL62} remontent également à cette époque \cite{Grossberg1970}. 
+L'idée d'un système dynamique de garnde dimension  
+Ces modèles ont connu un développement important dans les années 80, aboutissant aux modèles classiques
+\cite{Hop82,Koh82,Car87}.
+
+Nous faisons ci-dessous une liste des résultats qui montrent le caractère problématique du pattern matching
+lorsqu'il s'agit de contrôler un corps dans un environnement, et le caractère problématique 
+de l'approche systèmes dynamiques lorsqu'il s'agit de construire des espaces sensoriels complexes.
+La question qui se pose est donc de savoir si la combinaison de ces deux approches est \emph{nécessaire}
+ou simplement contingente à l'évolution de la vie. 
+Peut-on contrôler efficacement un corps sans faire appel à la notion d'attracteur? Peut-on 
+s'adapter à un environnement autrement qu'en extrayant des ``dictionnaires'' d'invariants
+perceptifs et moteurs de l'environnement?
+
+
+\subsection{Pattern matching}
+
+La démarche du pattern matching appartient au monde de 
+l'apprentissage automatique et du traitement du signal. Elle prend historiquement ses racines dans la décomposition
+de Fourier, et s'est développée d'une part sous la forme de la compression de signal, 
+comme par exemple la décomposition en des ondelettes, ou plus généralement sur des bases de filtres orthogonaux
+ou pas, incomplets, complets ou ``surcomplets''. Le pattern matching est également le principe 
+à la base des algorithmes d'apprentisage automatique, où des dictionnaires se construisent par 
+extraction d'invariants morphologiques (ou vecteurs caractéristiques) à partir des données présentées. 
+
+
+
+
 
 Le ``pattern matching'' (correspondance de forme) est l'opération consistant 
 à mettre en correspondance un modèle (patron) avec une forme (signal), dans le cas le plus simple
@@ -3569,6 +3667,8 @@ Les distances au sein de l'espace initial n'ont pas de traduction au sein de
 l'espace de redescription.
 L'approche par pattern matching ne garantit donc pas la proportionnalité des traitements entre signaux proches 
 et signaux éloignés, comme le font les transformations linéaires (ou géométriques) traditionnelles.
+
+[ON/OFF] entre 0 (rien) et 1 (tout). Caractère binaire (digital) du pattern patching.
 
 Si nous reprenons l'analogie nerveuse, le corps (les articulations du corps) décrit 
 un espace métrique constitué par la position (et les variations de position) 
@@ -3622,14 +3722,22 @@ le quantitatif.
 %d'un patron d'activité vers un espace métrique, par exemple lorsqu'il s'agit de prendre en compte
 %des erreurs sensorielles pour effectuer une correction motrice.
 Il est nécessaire que la notion de distance ne soit pas perdue au cours des transformations,
-pour rendre possible cette traduction inverse. Une possibilité serait
-la conservation de l'information de distance via des liens latéraux, sur le principe 
-des cartes de Kohonen. 
+pour rendre possible cette traduction inverse. 
+%Une possibilité serait
+%la conservation de l'information de distance via des liens latéraux, sur le principe 
+%des cartes de Kohonen. 
 %Avant d'envisager comment cette information peut se maintenir, nous essayons par la suite d'éclaircir 
 %la nature de ce rapport du métrique au symbolique (du quantitatif au qualitatif) au sein du
 %système nerveux.
 
 \subsection{Feedback positif ou feedback négatif?} 
+
+
+
+La démarche des systèmes dynamiques repose à la base sur l'étude des comportements mécaniques
+des solides, et traite de quantités continues auxquelles sont appliqués des opérateurs ou des tenseurs,
+qui conditionnent l'évolution de ces quantités sur des échelle de temps également continues.
+
 L'approche par feedback positif développée précedemment
 n'est pas exclusive du schéma traditionnel du guidage de l'activité motrice par l'activité sensorielle (schéma
 à feedback négatif).  Autrement dit, rien ne permet d'exclure que l'activité nerveuse, 
@@ -3656,6 +3764,18 @@ vs une activité liée au matching perceptif (correspondance)
 
 }
 
+
+\subsection{Le mariage de deux mondes}
+
+La dichotomie entre d'une part l'approche systèmes dynamiques, d'autre part la reconnaissance de formes 
+semble reposer sur le caractère disparate, d'une part de l'environnement métrique sur lequel s'applique
+le contrôle, et d'autre part sur la multitude des récepteurs supports de l'information sensorielle.
+%L'interaction entre un monde distribué et digital, propice au feedback
+%positif, et un monde métrique et continu, propice au feedback négatif, 
+Cette dichotomie implique un mode de fonctionnement composite, basé d'une part sur des rapports entre intensités (monde physique), 
+et d'autre part sur des rapports entre formes (monde digital). 
+
+\section{Bottom-up}
 
 \subsection{Bruit créateur ou bruit destructeur?}\footnote{L'opposition entre bruit créateur, producteur de formes, et bruit destructeur, c'est à dire perturbateur
 a été proposée par Henri Atlan dans son livre ``Entre le cristal et la fumée''.}
@@ -3737,6 +3857,9 @@ de neurones sur une échelle de temps lente. De manière plus générale, l'étu
 PROJET : approche multiscale : conditions d'émergence d'un bruit lent.
 Champ moyen.
 Mise en correspondance avec la notion d'instabilité de l'activité de repos. 
+
+
+\section{Top-down}
 
 \subsection{Nature de la commande motrice}
 
