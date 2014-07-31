@@ -861,8 +861,10 @@ temporelle, c'est à dire la capacité du sujet à concentrer ses ressources att
 
 \subsection{Introduction}
 
-Un substrat est un domaine matériel extensif, défini par des caractéristiques physiques homogènes, sujet à des flux de matière ou d'énergie,
-et support d'une activité se traduisant par des changements d'état.
+Un substrat est un domaine matériel extensif, défini par des caractéristiques physiques homogènes, 
+pouvant servir de support à la communication, c'est à dire (1) capable de faire transiter des signaux 
+sous forme de flux de matière ou d'énergie,
+et  (2) support d'une activité intinsèque, assimilable à un ``calcul'', se traduisant par des changements d'état.
 Derrière le terme substrat, nous entendrons ici principalement un domaine physique bien délimité, naturel (corps) ou artificiel (machine, circuit imprimé), 
 capable de communication, c'est à dire capable de traiter des inputs (sensoriels) et de produire des outputs (déplacements, signaux).
 Un modèle de substrat est un ensemble de variables d'état et une fonction de transition d'état censé traduire ces changement de la matière.
@@ -3161,7 +3163,7 @@ entre autres à l'INRIA, et a fait l'objet de plusieurs publications dans des co
 Si les principes de fonctionnement élémentaires du système nerveux central (neurones, synapses) 
 commencent à être bien connus, 
 le fonctionnement intégré du système dans son ensemble reste l'objet de nombreuses conjectures.
-L'utilisation de modèles mathématiques et de simulations informatiques permet de proposer des hypothèses 
+Les modèles mathématiques et les simulations informatiques permettent de proposer des hypothèses 
 de fonctionnement et/ou 
 de valider certaines hypothèses issues de l'observation. 
 Les neurosciences computationnelles sont ainsi la branche de l'informatique qui, d'une part, élabore des modèles de calcul 
@@ -3199,7 +3201,7 @@ d'une tâche. L'étude des temps de réponse, des courbes d'apprentissage et des
 taux d'erreur permet d'explorer les caractéristiques limites d'un comportement et de mieux appréhender
 les contraintes posées par système qui l'implémente physiquement.
 Ce peuvent être des contraintes physiques (limites d'extension, de course, ...) mais
-également des limites provenant des caractéristiques physiques du système neuronal sous-jacent.
+également des limites provenant des caractéristiques physiques du substrat neuronal sous-jacent.
 L'élaboration d'un modèle descriptif prenant en compte plusieurs échelles permet alors d'émettre des hypothèses 
 sur les sources (physiques ou logiques) des limitations comportementales observées. 
 Nous avons vu dans les parties précédentes des modèles constitués de quelques 
@@ -3290,7 +3292,7 @@ conduisant au déplacement désiré est appelée la transformation visuo-motrice
 transformation ``spatio-temporelle'' \shortcite{MOSCHO98}). 
 Elle implique la traduction d'une activité exprimant des coordonnées spatiales   
 vers une activité temporellement bornée exprimant une vélocité motrice transitoire.
-Une version simplifiée de la tâche est la saccade à tête fixe consistant orienter le globe
+Une version simplifiée de la tâche est la saccade à tête fixe consistant à orienter le globe
 oculaire seul.
 
 Même si on se limite aux saccades à tête fixe, le circuit de la commande saccadique demeure assez complexe
@@ -3332,13 +3334,13 @@ avec l'excentricité.
 
 Notre modèle repose sur l'hypothèse d'un contrôle effectué selon trois modalités:
 contrôle du déclenchement, contrôle de la vélocité et contrôle de la durée.
-Si la vélocité repose bien sur les projection directe du coliculus vers les neurones pré-moteurs,
+Si la vélocité repose bien sur les projection directe du colliculus vers les neurones pré-moteurs,
 nous faison l'hypothèse que le contrôle du déclenchement et le contrôle de la durée reposent 
 sur une structure de la formation réticulée appelée cMRF (centro-medial reticular formation)
 dont le rôle dans le contrôle de la saccade est connu \shortcite{Waitzman1996}.  
 
 Un premier modèle, présenté à l'édition 2011 de la conférence CNS \shortcite{Dauce2011}, attribue un rôle double
-aux cellules du CMRF. Les cellules contralatérales règlent le déclenchement de la saccade tandis que les cellules 
+aux cellules du cMRF. Les cellules contralatérales règlent le déclenchement de la saccade tandis que les cellules 
 ipsilatérales participent à sa terminaison via une intégration sous-liminaire du signal émis par les 
 neurones pré-moteurs. Ce modèle utilise des neurones dont la constante de membrane lente 
 permet de faire l'économie d'un mécanisme d'intégration plus élaboré. La brève bouffée 
@@ -3378,17 +3380,72 @@ Cet aspect sera présenté plus précisément dans la partie projet de ce mémoi
 \subsection{Modèles de l'orientation temporelle}
 
 
+J'ai participé au projet NOAT ("L'attention temporelle: modélisation neurale et substrats neuroanatomiques des processus attentionnels implicites et explicites") 
+qui a été financé entre 2007 et 2010 dans le cadre d'un appel d'offre ANR ``Neuro'' datant de 2007 (ANR-07-NEURO-033-03). 
+Ce projet collaboratif portait sur des mécanismes attentionnels liés à un contexte temporellement structuré.
+La problématique est celle des mécanismes neuronaux supports de l'orientation de l'attention vers des instants
+précis, ``situés'' sur un axe temporel.
+L'objectif général de ce projet était de comparer deux formes distinctes d'orientation de l'attention temporelle : 
+l'attention implicite (stimulus inclus dans un contexte temporellement structuré) 
+et attention explicite (indices endogènes donnant une information de durée), 
+et de proposer de les caractériser fonctionnellement et neuralement.
+Dans le cadre des études en psychologie
+expérimentale, la focalisation de l'attention peut être mesurée en comparant des temps de réponse
+entre les essais sur lesquels les cibles apparaissent au moment escompté  et ceux sur lesquels elles apparaissent plus tôt ou plus tard.
+Les études d'imagerie identifient quant à elles
+le réseau de l'orientation temporelle 
+dans les cortex latéralisés gauches prémoteur inférieur et pariétal. 
 
-{\bf 2010}
+Du côté de la modélisation, les modèles de l'attention temporelle offrent un défi 
+intéressant dans la mesure où la trame temporelle, telle qu'elle est utilisée en physique
+newtonienne, n'a aucune contrepartie sensorielle. 
+Seule existe dans notre environnement sensible la succession entre les événements, 
+et éventuellement le caractère causal de ces successions. 
+La difficulté des tâches d'orientation temporelle (estimation de l'instant de survenue d'un événement) 
+se traduit par des écarts de jugement temporel importants d'un essai à l'autre,  
+augmentant linéairement avec la durée demandée
+(ce qui suggère une difficulté proportionnelle à la durée), 
+cette propriété étant observable à la fois chez
+l'homme et chez l'animal \cite{Gibbon1977}.
 
-- Gaurav : attention temporelle. Modele EM. 
+D'un point de vue computationnel, la trame temporelle se présente comme une variable
+explicative cachée, que le sujet doit reconstruire pour interpréter son environnement. 
+Les modèles computationnels 
+proposés dans la littérature supposent l'existence d'une activité intrinsèque, agissant comme
+le tic-tac d'une horloge, cette activité étant ensuite intégrée pour former une
+estimation interne du temps passé \cite{Gold01,Simen2011}.
 
+Le modèle que nous avons proposé, en collaboration avec Gaurav Malhotra, qui a été recruté
+en contrat post-doctoral entre 2010 et 2011, utilise l'hypothèse d'une représentation probabiliste de 
+l'environnement, autrement dit une reconstruction à partir des données du modèle génératif 
+de ces données, et une prédiction (sous la forme d'une vraisemblance) de l'instant probable d'un événement.
+L'idée est donc que la réactivité au stimulus (readiness) est proportionnelle à cette probabilité 
+estimée d'apparition.
 
-{\bf 2011}
+Nous avons regardé en particulier le cas de la probabilité variable (``variable foreperiod''), c'est 
+que les stimuli apparaissant à des intervalles variant d'un essai à l'autre.
+Dans ce cas, les temps de réponse
+indiquent une meilleure réactivité pour les intervalles
+les plus longs. Ainsi les ressources attentionnelles ne sont pas équitablement
+réparties.
+Conformément à l'hypothèse de vraisemblance, le passage du temps permet en effet d'éliminer les hypothèses
+portant sur les intervalles courts, donnant plus de poids aux hypothèses les plus tardives. 
 
-- scalar property
+Le processus implémenté utilise un principe d'accumulation d'évidence concurrente. 
+Les différentes hypothèses ont initialement le même a-priori (chaque hypothèse
+étant assignée à un intervalle temporel distinct). Le déroulement temporel (l'intégration du signal 
+endogène) permet de mettre à jour le modèle génératif au fur et à mesure que certaines hypothèses
+perdent en plausibilité. Il y a donc une mise à jour dynamique du modèle correspondant à un changement
+de modèle génératif (une ``révision des croyances''~: 4 hypothèses, puis 3 hypothèses, puis 2...).
+De manière intéressante, la meilleure correspondance avec les données psychométriques ne correspond
+pas au modèle exact des données. Nous avons été obligés de biaiser les priors (``responsibilities'') en donnant un poids
+plus important à la source la plus proche de l'estimation temporelle courante,
+sur le principe d'un biais ``optimiste''. Une autre hypothése serait que 
+le poids accordé à l'instant courant serait proportionnel au sentiment d'achèvement, 
+c'est à dire à la proportion d'intervalle temporel subjectif parcouru.
 
-$\Rightarrow$ prior $\simeq$ ``\% up to now'' (subjective time)
+Par ailleurs, la similarité formelle de ce modèle avec l'approche probabiliste du contrôle moteur \cite{Haruno2001}
+suggère un lien possible entre l'estimation temporelle et la simulation motrice \cite{Jeannerod2001}. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -3532,8 +3589,8 @@ tel qu'observé dans le cerveau, qui a poussé au développement de tels modèle
 La démarche du pattern matching est efficace pour expliquer les mécanismes 
 de plasticité et d'apprentissage, mais se révèle peu propice à la construction de schémas de 
 contrôle moteur.
-La démarche des systèmes dynamiques explique bien les mécanismes de formation des mouvements et  
-du contrôle, mais n'offre pas de cadre propice à la plasticité. 
+La démarche des systèmes dynamiques explique bien les mécanismes de formation 
+et de contrôle des mouvements, mais offre un cadre moins propice à la plasticité. 
 Malgré de nombreuses tentatives, il manque encore, semble-t-il, un principe d'unification des
 deux approches. D'une certaine façon, la plupart des modèles en neurosciences computationnelles 
 reposent sur un compromis, sur un ``bricolage'' entre les deux approches, ne prenant pas 
@@ -3541,10 +3598,12 @@ toujours en compte le caractère apparemment incompatible des deux modes de fonc
 
 Nous faisons ci-dessous une liste des résultats qui montrent le caractère problématique du pattern matching
 lorsqu'il s'agit de contrôler un corps dans un environnement, et le caractère problématique 
-de l'approche systèmes dynamiques lorsqu'il s'agit de construire des espaces sensoriels complexes.
-La question qui se pose est donc de savoir si la combinaison de ces deux approches est \emph{nécessaire}
-ou simplement contingente à l'évolution de la vie. 
-Peut-on contrôler efficacement un corps sans faire appel à la notion d'attracteur? Peut-on 
+de l'approche systèmes dynamiques lorsqu'il s'agit de projeter un
+feedback moteur sur des espaces sensoriels complexes.
+%La question qui se pose est donc de savoir si la combinaison de ces deux approches est \emph{nécessaire}
+%ou simplement contingente à l'évolution de la vie. 
+Peut-on contrôler efficacement un corps sans faire appel à la notion d'attracteur et de feedback
+négatif? Peut-on 
 s'adapter à un environnement autrement qu'en extrayant des ``dictionnaires'' d'invariants
 perceptifs et moteurs de l'environnement?
 
@@ -3822,7 +3881,67 @@ free energy (that is, minimize prediction error) and
 serve to bound surprising exchanges with the world.}'' (Friston, 2010)
 }
 
-\subsection{Référentiels et composition}
+\subsection{Mouvement relatif et mouvement absolu}
+
+COMMANDE RELATIVE = FEEDBACK NEGATIF
+
+COMMANDE ABSOLUE = FEEDBACK POSITIF = ``PAR COEUR''
+
+L'approche bio-inspirée de la cognition nous pousse à considérer de manière privilégiée
+la réponse motrice en tant que support fondamental de notre relation à l'environnement.
+Il ne semble pas exister à l'heure actuelle de consensus concernant la nature de la commande motrice.
+On peut distinguer deux hypothèses : une hypothèse de commande relative (la commande produit un déplacement relatif)
+et une hypothèse de commande absolue (la commande désigne un point de l'espace extérieur).
+
+L'étude du système saccadique montre une correspondance entre la localisation 
+des foyers d'activité sur la carte colliculaire et le déplacement moteur associé,
+suggérant une commande motrice liée au déplacement du regard (et non à la
+direction absolue du regard). Il s'agit donc d'une commande relative, la
+direction finale du regard dépendant de la direction initiale (On
+notera cependant que cette comande peut également etre vue comme une comande
+absolue dans le référentiel rétinien).
+Par ailleurs eten même temps, la fréquence d'activité sur la carte colliculaire est fortement corrélée avec
+la vitesse de déplacement de l'oeil dans l'orbite.
+A une fréquence de décharge plus élevée correspond une vitesse de déplacement plus importante.
+Le déclenchement de l'activité colliculaire précède le déclenchement de la saccade.
+La terminaison de la saccade se traduit également par l'extinction du foyer d'activité colliculaire
+correspondant.
+La coextensivité temporelle de l'activation d'un foyer et du déplacement moteur,
+qui semble une caractéristique du système moteur en général, suggère
+une projection directe de l'activité du foyer vers les
+effecteurs, c'est à dire une commande de vélocité sur les différents degrés de liberté possibles.
+%Il est pourtant relativement facile d'identifier au sein du cerveau des activités (ou des variations d'activité) en lien
+%avec cet espace métrique.
+Des études portant cetet fois sur le cortex moteur montrent également des corrélations entre l'activité mesurée sur les neurones du cortex moteur et le
+mouvement effectif, en particulier leur coextensivité temporelle (l'activité s'arrête torsque le mouvement s'arrête). 
+Une composante de direction liée à la localisation de l'activité peut également être mise en évidence, 
+aboutissant à des possibilités de reconstruction de la
+trajectoire métrique à partir de l'activité de différents neurones \cite{Georgopoulos1986,Wessberg2000}.
+
+De nombreuses observations entrent cependant en contradiction avec ce schéma.
+Des stimulations directes du cortex moteur, sur des échelles de temps
+comparables à la durée d'un déplacement, semblent susciter des mouvements
+convergeant toujours vers la même posture finale, quelle que soit la position
+de départ \cite{Graziano2002}. Il s'agit dans ce cas d'une commmande motrice
+codant pour la position finale, selon un principe de ``point fixe''.
+Sachant que seule la commande de variation de contraction est communiquée à l'appareil neuro-musculaire,
+le modèle proposé par \cite{Mussa2004,Flash2005} suggère une activation différenciée de différentes primitives motrices
+se comportant comme des champs de force, des variations d'intensité conduisant
+naturellement l'appareil moteur vers le même point d'équilibre (point d'équilibre de forces
+opposantes).
+
+L'approche de la commande motrice par sommation de champs de force
+et point fixe postural est séduisante par son caractère additif: la combinaison de deux commandes
+devrait produire un résultat intermédiaire entre deux postures. La sommation peut également s'effectuer sur des groupes
+d'effecteurs différents (muscles du cou, muscles de l'orbite oculaire), conduisant à des synergies oeil-tête.
+Cette approche pose néanmoins une difficulté pour ce qui concerne l'ajustement moteur.
+L'ajustement d'une commande en fonction de facteurs variés (cibles en mouvement, forces contraires, ...)
+suggère des déplacements additionnels qui ne soient pas spécifiques à chaque posture.
+Autrement dit, rien n'exclut que le mouvement final soit le résultat de la combinaison
+de commandes posturales (absolues) et de commandes de vélocité (relatives).
+
+PROJET : BCI?
+
 
 
 \subsection{Construction d'un espace métrique externe}
@@ -3900,7 +4019,7 @@ de l'environnement.
 %et des actions variées suivies du
 %même résultat identifient le même invariant.
 
-\subsection{Scène extérieure}
+\subsection{Conséquence sensorielle de l'action}
 
 {\color{Violet}
 
@@ -3961,7 +4080,140 @@ progressive des interprétations erronnées?
 
 }
 
-\section{Bottom-up}\label{sec:bottom}
+
+
+
+\subsection{Référentiels et composition}
+
+L'activité humaine est fortement guidée par la composante visuelle.
+Si on regarde de plus près l'interrelation entre l'exploration visuelle et
+l'action simple consistant à manipuler des objets situés à portée de bras,
+deux grands domaines attentionnels peuvent être définis. D'une part 
+le domaine visuel, organisé autour de la direction du regard; d'autre part,
+l'espace de travail, organisé autour des opérations sur des objets
+attrapables ou maniplables. 
+Si on se place selon la perspective de l'invariance du monde environnant, il est intéressant de
+constater que ces deux types d'activité (exploration visuelle, utilisation) sont rarement
+simultanées. De manière un peu schématique, l'espace de travail reste invariant pendant
+l'exploration visuelle, et, réciproquement, le regard reste statique (focalisé) durant
+l'activité de manipulation.
+En particulier, le déplacement du corps dans l'environnement se fait généralement
+dans un environnement visuel stable grâce au réflexe vestibulo-oculaire qui maintient le regard
+en direction d'un même objet pendant le déplacement.
+
+Cette stabilité sélective d'une partie des composantes de l'environnement apparaît comme un 
+élément important de l'apprentissage du référentiel extérieur. 
+
+C'est également un bon modèle pour questionner les opérations nécessaires à la projection de
+l'espace pré-moteur vers l'espace visuel et vice-versa. Si on fait appel aux notion piagetiennes
+de permanence de l'objet \cite{Piaget1973}, les différentes objets de la scène varient dans l'espace pré-moteur 
+et restent statiques dans l'espace visuel lorsque le corps bouge, et inversement varient dans l'espace visuel et 
+restent statiques dans l'espace pré-moteur lorsque le regard bouge. Etant supposée par exemple la permanence
+des objets dans l'espace de pré-moteur, il est possible de predire leur position dans le champ visuel étant
+donnée la direction du regard. Inversement, étant donnée la permanence des objets dans l'espace visuel, il est possible
+de prédire leur position dans l'espace pré-moteur étant donné le déplacement du corps
+(il est difficile de bouger à la fois le corps et le regard)
+
+La nature de cette prédiction fondamentalement celle d'opérations géométriques (isométriques), soit des translations et
+des rotations. Par exemple, les objets visibles sont translatés vers la gauche du champ visuel lorsque le regard  tourne
+vers la droite. Nous avons donc un référentiel (celui de la direction du regard) qui est translaté, redéfinissant
+les coordonnées des différents objets qui composent la scène visuelle. Le référentiel visuel est lui-même défini par rapport au
+tronc (le support stable des mouvements de la tête), et l'axe de la direction du regard se définit par rapport à un autre référentiel qui 
+est le référentiel du tronc. Les objets de la même scène sont également définis (en tant que point final des mouvements) dans
+ce même référentiel du tronc. Il existe donc une application qui à partir de la position des objets dans un premier 
+référentiel définit la position des mêmes objets dans un autre référentiel. La bijection entre les deux espaces offre
+un bon support à l'invariance ainsi qu'à la prédictin sensorielle (``predictive coding''). 
+
+Le problème est, comme nous l'avons vu, le caractère distribué de l'activité neuronale 
+qui rend difficile les opérations de ce type. Une transformation qui, étant donnés des objets sur un espace de manipulations et 
+un changement de référentiel, prédit la disposition de ces mêmes objets sur la scène visuelle.
+Par exemple, un simple ``parren matching'' nécessiterait un apprentissage par coeur de la conséquence visuelle 
+de toutes les combinaisons de dispositions d'objets et de tous les changements de référentiel tronc-tête, ce qui parait 
+compuationellement très coûteux. Il est nécessaire néanmoins que le ``lien'' praxo-visuel entre les différents objets de la scène ne soit pas perdu
+au cours des déplacement moteurs. 
+(Un raisonnement symétrique peut être appliqué pour le cas des déplacements du corps dans un environnement visuel stable)
+
+Il existe trois grandes catégories d'approche pour traiter de cette question, plus
+généralement appelée ``question
+de l'assemblage'' (``binding problem'')~: (1) l'activité tierce, (2) l'assemblage
+dynamique et (3) la mémoire extérieure.
+Par ailleurs, la manière dont les liens entre les deux espaces (pratique et visuel) se construisent est également une question
+à part entière, dont la mise en oeuvre pratique dépend largement du choix computationnel (1, 2 ou 3) effectué.
+
+
+\subsection{Le binding problem}
+Le ``binding problem'' est le problème de la réalisation matérielle
+du lien causal entre les différents constituants d'une scène.
+Identifier la structure algorithmique qui sert de support au lien de causalité.
+
+
+La structure algorithmique la plus simple est celle de l'activité tierce (ou  projection inverse), 
+c'est à 
+dire une zone d'activité (ou un neurone) instancie un objet complet, répondant 
+de manière sélective à une combinaison spécifique de ses différents constituants.
+Cette approche est celle dite du ``neurone grand-mère''. 
+S'il apparaît peu probable qu'un seul neurone soit le support de la liaison,
+rien n'exclut qu'une population de neurones puisse répondre de façon sélective
+à toutes les configurations d'interaction avec un objet particulier (par exemple
+notre grand-mère). [JENNIFER ANISTON NEURON]
+Un tel objest est donc la continuation à travers
+toutes ses transformations (déplacement du corps, mouvement des yeux) 
+d'un même objet de l'environnement,
+autrement dit une ``présence de l'objet''.
+Dans sa forme la plus élaborée, l'activité tierce est 
+un modèle de l'environnement, constituée des principales quantités 
+relatives aux objets d'intérêt, dans un espace extérocentré. 
+Cette reconstruction de la structure externe de l'environnement 
+par modèle inverse suppose implicitement des transformations géométriques au sein
+du substrat permettant de projeter l'objet invariant sur la scène prémotrice ou visuelle,
+la réalisation computationnelle de telles projections dans un substrat distribué n'étant pas garantie
+(à l'heure actuelle).
+
+L'approche ``distribuée'', également appelée approche ``dynamique'', stipule
+le caractère non exclusif des activités des population : il n'existe pas de
+neurone ou de population de neurones répondant exclusivement à un invariant 
+de haut niveau. Le lien doit reposer sur des
+canaux de communication transitoires, ou encore des résonances, s'établissant à travers le
+substrat entre différentes activités constituants partiels de la scène.
+L'invariance est ici la susceptibilité à ``résoner ensemble'' (la persistance de la résonance à 
+travers les changements; l'existence de canaux le permettant)
+qui distingue ce qui est possible de ce qui ne l'est pas (les associations de constituants
+plausibles et celles qui ne le sont pas).
+
+[ASSEMBLAGE DE CIRCONSTANCE - STRUCTUE PLASTIQUE VERSATILE - LIGANDS ENTRE DIFFERENTS PATRONS]
+
+[ANALOGIE LIENS LATERAUX - COLINEARITE DES CHAMPS]
+
+CONSTITUTION D'UN META-PATRON
+
+Une troisième approche, celle de la ``mémoire extérieure'' [NOE-O'REGAN]
+reprend la tradition 
+de l'approche écologique impulsée par Gibson [REF]. L'existence de 
+motifs invariants dans la relation de l'agent à son environnement (comme le point de fuite)
+sert de support à la manipulation de cet environnement.
+Le lien instrumental avec les objets (le mode d'utilisation des objets)
+institue une forme d'invariance  qui est reproduite à travers le temps à chaque rencontre
+avec le même type d'objets.
+L'approche Gibsonienne met donc au premier plan l'activité motrice en tant que soubassement
+de la constitution d'invariants dans le rapport au monde.
+D'un point de vue algorithmique, on peut imaginer par exemple des activités ``template'' 
+correspondant à des successions caractéristiques d'actions (actions stéréotypées).
+Dans le cadre de l'exploration visuelle, on peut imaginer des séquences caractéristiques
+de saccades selon le type de scène visuelle à explorer,
+%(le patron d'exploration
+%constituants le lien entre les points d'attention focale).
+%Il faut imaginer des patrons d'exploration visuelle caractéristiques, 
+ce ``plan de visite''
+%pour les différents types de scène,
+constituant le socle d'interprétation des éléments de la scène.
+%Cette approche procédurale, en faisant reposer l'invariance sur des ``dictionnaires'' de schémas 
+%sensori-moteurs, accorde peu de rôle à l'activité intrinsèque, laissant
+%donc peu de place aux processus de décision et à la mémoire.
+La mise en relation entre les éléments se réduit ici à un schéma d'exploration (ou d'utilisation) 
+caractéristique de ces différents éléments, constitutif d'une unité d'action. 
+
+
+\section{Mécanismes constructifs}\label{sec:bottom}
 
 {\color{Violet}
 
@@ -3981,14 +4233,15 @@ extérieures, comme la perte de certaines entrées sensorielles, permettant d'in
 à l'aide d'informatins collectées dans le passé. 
 }
 
-L'approche bottom-up, c'est : le support de lapersistence provient de la multitude de reponses possibles à travers l'espace et à travers le temps.
+L'approche bottom-up, c'est : le support de la persistence provient de la multitude de reponses possibles à travers l'espace et à travers le temps.
 Il existe toujours une activité constante traduisant la persistance. L'apprentissage consiste à capturer cette persistence 
 spontanée au sein d'un comportement intégré.
 
 $\rightarrow$ question de la ``durée'' du bruit.
 
-\subsection{Bruit créateur ou bruit destructeur?}\footnote{L'opposition entre bruit créateur, producteur de formes, et bruit destructeur, c'est à dire perturbateur
-a été proposée par Henri Atlan dans son livre ``Entre le cristal et la fumée''.}
+\subsection{Le bruit comme support de la persistance?}
+%\footnote{L'opposition entre bruit créateur, producteur de formes, et bruit destructeur, c'est à dire perturbateur
+%a été proposée par Henri Atlan dans son livre ``Entre le cristal et la fumée''.}
 
 Le bruit est classiquement considéré comme un élément perturbateur en traitement du signal ou
 dans le cadre des mécanismes de contrôle en boucle fermée. Il correspond souvent aux facteurs non modélisés 
@@ -4071,63 +4324,7 @@ Mise en correspondance avec la notion d'instabilité de l'activité de repos.
 
 \section{Top-down}\label{sec:top}
 
-\subsection{Le binding problem}
-Le ``binding problem'' est le problème de la réalisation matérielle
-du lien causal entre les différents constituants d'une scène.
-Identifier la structure algorithmique qui sert de support au lien de causalité.
 
-
-Une structure algorithmique simple est celle de la projection inverse, c'est à 
-dire une zone d'activité (ou un neurone) instancie un objet complet, répondant 
-de manière sélective à une combinaison spécifique de ses différents constituants.
-Cette approche est celle dite du ``neurone grand-mère''. 
-S'il apparaît peu probable qu'un seul neurone soit le support de la liaison,
-rien n'exclut qu'une population de neurones puisse répondre de façon sélective
-à toutes les configurations d'interaction avec un objet particulier (par exemple
-notre grand-mère). [JENNIFER ANISTON NEURON]
-
-L'approche ``distribuée'', également appelée approche ``dynamique'', stipule
-le caractère non exclusif des activités des population : il n'existe pas de
-neurone ou de population de neurones répondant exclusivement à un invariant 
-de haut niveau. Le lien doit reposer sur des
-canaux de communication transitoires, ou encore des résonances, s'établissant à travers le
-substrat entre différentes activités constituants partiels de la scène.
-L'invariance est ici la susceptibilité à ``résoner ensemble'' (la persistance de la résonance à 
-travers les changements; l'existence de canaux le permettant)
-qui distingue ce qui est possible de ce qui ne l'est pas (les associations de constituants
-plausibles et celles qui ne le sont pas).
-
-[ASSEMBLAGE DE CIRCONSTANCE - STRUCTUE PLASTIQUE VERSATILE - LIGANDS ENTRE DIFFERENTS PATRONS]
-
-[ANALOGIE LIENS LATERAUX - COLINEARITE DES CHAMPS]
-
-CONSTITUTION D'UN META-PATRON
-
-Une troisième approche, celle de la ``mémoire extérieure'' [NOE-OREGAN]
-reprend la tradition 
-de l'approche écologique impulsée par Gibson [REF]. L'existence de 
-motifs invariants dans la relation de l'agent à son environnement (comme le point de fuite)
-sert de support à la manipulation de cet environnement.
-Le lien instrumental avec les objets (le mode d'utilisation des objets)
-institue une forme d'invariance  qui est reproduite à travers le temps à chaque rencontre
-avec le même type d'objets.
-L'approche Gibsonienne met donc au premier plan l'activité motrice en tant que soubassement
-de la constitution d'invariants dans le rapport au monde.
-D'un point de vue algorithmique, on peut imaginer par exemple des activités ``template'' 
-correspondant à des successions caractéristiques d'actions (actions stéréotypées).
-Dans le cadre de l'exploration visuelle, on peut imaginer des séquences caractéristiques
-de saccades selon le type de scène visuelle à explorer,
-%(le patron d'exploration
-%constituants le lien entre les points d'attention focale).
-%Il faut imaginer des patrons d'exploration visuelle caractéristiques, 
-ce ``plan de visite''
-%pour les différents types de scène,
-constituant le socle d'interprétation des éléments de la scène.
-%Cette approche procédurale, en faisant reposer l'invariance sur des ``dictionnaires'' de schémas 
-%sensori-moteurs, accorde peu de rôle à l'activité intrinsèque, laissant
-%donc peu de place aux processus de décision et à la mémoire.
-La mise en relation entre les éléments se réduit ici à un schéma d'exploration (ou d'utilisation) 
-caractéristique de ces différents éléments, constitutif d'une unité d'action. 
 
 {\color{Violet}
 
@@ -4652,6 +4849,12 @@ $\Rightarrow$ Le substrat est le support de plusieurs processus indépendants. P
 \end{itemize}
 
 \chapter{Conclusion}
+
+
+système ``à la fois'' feedback positif et feedback negatif, à la fois commande relative et commande
+absolue. Assemblage hétéroclite qui résiste à l'analyse?
+Une possibilité : il n'y aurait pas de meilleure description du système nerveux que le système nerveux lui-même. C'est un peu 
+le sens de la démarche du HBP Flagship. 
 
 Les fondateurs des sciences cognitives ont placé très tôt la question de l'apprentissage  au coeur de leur problématique 
 (qu'est-ce qu'une machine intelligente - cf. Turing)
