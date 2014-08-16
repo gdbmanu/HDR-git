@@ -3495,7 +3495,7 @@ Une autre hypothèse est que le substrat nerveux est un réservoir de patrons se
 et l'apparition de précurseurs sensoriels ou moteurs au sein de l'activité nerveuse suscite la convergence de la dynamique vers l'attracteur correspondant, 
 favorisant une activité macroscopique (un attracteur comportemental) qui lui-même favorise l'attracteur neuronal par boucle de rétroaction positive.
 Le mécanisme de résonance est logiquement suivi d'un retour à
-l'état de base, soit une désynchronisation, lorsque les conditions de la synchronisation ne sont plus remplies.
+l'état de base,  lorsque les conditions de la synchronisation ne sont plus remplies.
 Des mécanismes internes de fatigue et/ou l'irruption de composants sensoriels ou moteurs dissonants favorise la 
 désaggrégation, puis éventuellement la recomposition de l'activité nerveuse
 et la convergence vers un nouvel attracteur.
@@ -3515,7 +3515,7 @@ Plus généralement, les mécanismes de feedback positif introduisent une dose d
 rendant la réponse du réseau dépendante du contexte. Cet effet de réponse contextuelle (ou de mémoire) offre bien sûr une plus
 grande panoplie de comportements, mais augmente la difficulté d'analyse du controleur (cadre non-Makovien),
 et donc de la connaissance des risques de dysfonctionnement. Cette difficulté est encore augmentée lorsqu'on introduit
-un mécanisme de plasticité, ce que nous verrons dans la prochaine partie \ref{sec:FPos}.
+un mécanisme de plasticité, ce que nous avons vu dans la partie \ref{sec:FPos}.
 
 Ce mécanisme computationnel, fondé sur des séquences de stabilisations et de destabilisations,
 implique au niveau comportemental la définition d'un mouvement (un déplacement du corps) comme 
@@ -3533,7 +3533,9 @@ relation de similarité ou de proximité qui favorise la passage de l'une à l'a
 Le fonctionnement par feedback positif décrit-il une activité
 versatile, constituée de ``tableaux comportementaux'' successifs détachés les uns des autres,
 ou une activité séquentielle, dans laquelle le nouveau tableau est ``déduit'' de l'ancien
-(où l'ancien tableau forme un contexte favorable à l'apparition du nouveau)?
+(où l'ancien tableau forme un contexte favorable à l'apparition du nouveau;
+où l'ancien tableau
+persiste dans le nouveau)?
 
 L'essentiel des modèles à feedback positif que nous avons étudiés jusqu'à présent
 répondent à la première catégorie. Le schéma conceptuel initialement proposé par Freeman \shortcite{Ska87}
@@ -3554,13 +3556,14 @@ Le choix de la nouvelle réponse est-il purement réactif, explicable par les co
 de l'environnement, ou est-il le résultat d'une délibération, d'une déduction 
 induite par des facteurs liés à l'activité interne antérieure?
 Cette question rejoint la question de l'autonomie comportementale évoquée plus haut.
-Nous allons maintenant essayer de voir quels sont les difficultés posées par cette question, et quels sont
-les principales pistes permettant de l'aborder, ce qui nous amène à formuler un projet de recherche visant 
-à fonder une méthode de développement d'architectures non versatiles.
+Nous allons maintenant essayer de voir quelles sont les difficultés posées par cette question, et quelles sont
+les principales pistes permettant de l'aborder, {\color{red} ce qui nous amène à formuler un projet de recherche visant 
+à fonder une méthode de développement d'architectures non versatiles.}
 
-Nous abordons dans la section \ref{sec:pat} la question du support de communication, relativement au fait
+Nous abordons dans la section \ref{sec:pat} la question du support de communication, {\color{red} relativement au fait
 que la nature du support détermine le type d'information qui peut transiter par le support, ainsi que le
-type de manipulations réalisables. 
+type de manipulations qu'il peut réaliser}. 
+[NATURE DE LA COMMANDE MOTRICE]
 La section \ref{sec:invariant} aborde la question de l'invariance de l'environnement externe. En
 effet, la continuité de l'action est une conséquence de la continuité du monde,
 c'est à dire de la persistence d'un monde extérieur stable malgré des variations incessantes de point de vue.
@@ -3607,7 +3610,7 @@ négatif? Peut-on
 s'adapter à un environnement autrement qu'en extrayant des ``dictionnaires'' d'invariants
 perceptifs et moteurs de l'environnement?
 
-\subsection{Feedback positif ou feedback négatif?} 
+\subsection{Contrôle en boucle fermée et feedback négatif} 
 
 Les systèmes de contrôle en boucle fermée appartiennent à la tradition cybernétique, initialement 
 formée autour de la commande à feedback négatif \shortcite{Wiener1965}. 
@@ -3635,19 +3638,39 @@ Cet ensemble constitue un système dynamique, soumis à des influences extérieu
 %des solides, et traite de quantités continues auxquelles sont appliqués des opérateurs ou des tenseurs,
 %qui conditionnent l'évolution de ces quantités sur des échelle de temps également continues.
 
-Il existe de nombreux modèles de l'activité de contrôle utilisant ces principes de contrôle pour modéliser
-l'activité nerveuse. On citera parmi les plus connus \shortcite{Rob75,Wolpert1998}  
+Il existe de nombreux modèles utilisant ces principes de contrôle pour modéliser
+l'activité nerveuse. On citera parmi les plus connus \shortcite{Rob75,Wolpert1998}. 
 
-L'approche par feedback positif développée précédemment
-n'est pas exclusive du schéma traditionnel du guidage de l'activité motrice par l'activité sensorielle (schéma
-à feedback négatif).  
-Autrement dit, rien ne permet d'exclure que l'activité nerveuse, 
+L'approche par feedback positif présentée précédemment
+n'est pas exclusive du schéma traditionnel du guidage de l'activité motrice par l'activité sensorielle.
+On retrouve dans les deux cas la notion d'attracteur, établissant un lien d'asservissement mutuel
+du corps et de l'environnement.
+La différence tient dans le fait que, contrairement au feedback négatif, 
+le feedback positif ne fonctionne pas selon un principe de guidage.
+Le feedback positif correspond à un mode de contrôle prescriptif (la perception prescrit la réponse motrice, la réponse motrice
+prescrit la perception) dans lequel l'écart est une perturbation (et non un signal), face auquel le système
+résiste jusqu'au point de rupture.
+La communication est dans ce cas basée sur 
+la recherche de correspondance à une référence (et non la différence).
+Le feedback positif ne reflète pas une activité de contrôle, mais une 
+association (un assemblage sensori-moteur) transitoire.
+La décision est basée dans un cas sur la contre-action, dans l'autre sur l'accumulation 
+d'évidence (émergence).
+
+Rien ne permet d'exclure que l'activité nerveuse, 
 caractérisée microscopiquement par des patrons de connexion 
 excitateurs et inhibiteurs, puisse susciter à la fois des schémas comportementaux basés 
 sur le feedback positif (persévération, résistance au changement
 et changements brusques) et le feedback négatif (réponse graduelle à l'erreur perceptive, poursuite lente, ...).
+Le feedback positif porte les propriétés d'associativité, d'appariement, d'intégration sensorielle, le feedback
+négatif favorisant quant à lui la persistance de l'état courant au cours du temps.
+
 
 Question ouverte : quelles sont les contributions respectives de ces deux approches à l'activité neuronale? Quelles prédictions?
+Le feedback négatif favorise la persistance de l'attracteur. La persistance en feedback moins repose sur
+le signal, la persistance en feedback plus repose sur les forces contractantes
+du SD, pas sur le signal. Le feedback plus favorise la dissolution, c'est à dire l'alternance (par exemple 
+prescription sensorielle / prescription motrice)
 
 Extension de ce dilemne : invariance de l'objet /  invariance de la commande.
 
@@ -3698,15 +3721,15 @@ nombreux degrés d'appartenance, cet ensemble de degrés d'appartenance pouvant 
 comme une nouvelle forme pour un traitement ultérieur (sur le principe du ``deep learning'' par exemple),
 constituant un principe de calcul distribué efficace.
 Cette transformation non-linéaire, imposée par la condition d'universalité (capacité à séparer des données 
-non-linéairement séparables par exemple) a pour contrepartie le fait difficile la définition
+non-linéairement séparables par exemple) a pour contrepartie de rendre difficile la définition
 d'une distance entre deux signaux. 
 Les distances au sein de l'espace initial n'ont pas de traduction au sein de
 l'espace de redescription.
 L'approche par pattern matching ne garantit donc pas la proportionnalité des traitements entre signaux proches 
 et signaux éloignés, comme le font les transformations linéaires (ou géométriques) traditionnelles.
 Autrement dit la distance définie au sein de l'espace de redescription (l'espace contenant les caractéristiques du signal)
-ne respecte pas nécessairement les distances de l'espace initial.
-On parlera de manière générale de l'espace ``qualitatif'' pour décrire cet espace de redescription, ou encore d'espace
+ne respecte pas nécessairement les distances ou la topologie de l'espace initial.
+On parlera de manière générale d'espace ``qualitatif'' pour décrire cet espace de redescription, ou encore d'espace
 ``digital'' pour décrire un ensemble (non nécessairement relié) de caractéristiques.
 
 %[ON/OFF] entre 0 (rien) et 1 (tout). Caractère binaire (digital) du pattern patching.
@@ -3719,20 +3742,24 @@ Si nous reprenons l'analogie nerveuse, le corps (les articulations du corps) dé
 un espace métrique constitué par la position (et les variations de position) 
 des éléments mobiles qui le composent.
 Les objets extérieurs impactant les organes sensoriels sont également localisables dans un espace métrique
-tridimensionnel constituant l'environnement immédiat du sujet.
+tridimensionnel constituant l'environnement immédiat du sujet {\color{red}[Mais la scène sensorielle est qualitative et non quantitative]}.
 On parle d'un espace de description quantitatif pour décrire ce référentiel extérieur
 par opposition à un espace de description qualitatif pour décrire le domaine des patrons d'activité induits
 par les sens.
+
+{\color{red} De manière schématique : espaces extensif/quantitatif = moteur - espace intensif/quantitatif = sensoriel}
 
 Le caractère distribué de l'activité nerveuse suggère d'une part la distribution d'une même composante sensorielle 
 sur de nombreux neurones, chaque neurone étant sensible à une manifestation particulière
 de cette composante.
 %En particulier, il apparaît probable qu'une même composante n'active pas les même neurones selon sa position
 %dans un certain intervalle de valeurs. 
+{\color{red}[Transition pas évidente. Déveloper lien entre opération / Notion de distance / similarité entre patrons / formes.
+Les opérations arithmétiques simples n'ont pas d'équivalent au sein de l'espace de redescription]}
 Cette distribution de l'activité rend néanmoins difficile la réalisation d'opérations simples comme l'addition ou la différence
 de deux quantités, comme celà est pourtant nécessaire lorsque les déplacements doivent prendre en compte des sources sensorielles 
 multiples issues de référentiels variés (proprioception de la position du corps et coordonnées rétiniennes pour attraper
-une cible par exemple).
+une cible par exemple). 
 Si chaque composante sensorielle de l'espace métrique environnant 
 est décomposé en constituants élémentaires (intervalles ou ``pixels'' d'environnement), activant
 ou désactivant différentes populations de neurones primaires, 
@@ -3745,7 +3772,7 @@ Ceci pose un problème en particulier lorsqu'il s'agit de contrôler les déplac
 distribuée induite par les récepteurs sensoriels.
 En fait, le passage par un domaine de description qualitatif
 ne pose pas de problème tant qu'il s'agit d'associer (de manière univoque) un
-patron d'activité (un attracteur) et une commande motrice, comme dans le
+patron d'activité (un attracteur {\color{red}[ATTENTION NOTION D'ATTRACTEUR = MIXTE]}) et une commande motrice, comme dans le
 cas de la carte colliculaire vue précédemment. Le problème se pose lorsqu'il faut
 moduler une réponse à partir d'un écart à une valeur de référence par exemple, c'est à
 dire plus généralement lorsqu'il s'agit d'estimer, au sein de l'espace de description
@@ -3761,7 +3788,8 @@ points de l'espace métrique ou de l'espace sensoriel.
 L'approche de la cognition par correspondance de forme offre donc un support efficace à la plasticité,
 mais pose en revanche quelques problèmes lorsqu'il s'agit d'utiliser ce mode de codage pour contrôler un 
 appareil moteur, c'est à dire schématiquement effectuer la transformation inverse du symbolique vers 
-le quantitatif.
+le quantitatif. [A REVOIR LA TRANSFORMATION INVERSE NE POSE PAS DE PB - PROBLEME AVEC LES OPERATIONS 
+ENTRE PLUSIEURS QUANTITES]
 
 %Le pattern matching pose un problème lorsqu'il s'agit d'effectuer la traduction inverse 
 %d'un patron d'activité vers un espace métrique, par exemple lorsqu'il s'agit de prendre en compte
@@ -3786,12 +3814,15 @@ Cette dichotomie implique un mode de fonctionnement composite, basé d'une part 
 et d'autre part sur des rapports entre formes (monde digital). 
 
 Les premiers modèles mariant les deux approches remontent historiquement aux années 60-70.
-L'idée de la sélectin d'un canal de réponse par résonance avec les signaux de l'environnement de trouve dans \shortcite{Greene1962}.
+L'idée de la sélection d'un canal de réponse par résonance avec les signaux de l'environnement de trouve dans \shortcite{Greene1962}.
 Les premiers modèles sur la formation des patrons de réponse visuelle \shortcite{HUBELWIESEL62} remontent également à cette époque \shortcite{Grossberg1970}. 
-L'idée d'un système dynamique de garnde dimension  
+L'idée d'un système dynamique de grande dimension  
 Ces modèles ont connu un développement important dans les années 80, aboutissant aux modèles classiques
 \shortcite{Hop82,Koh82,Car87}.
 
+[NEURONE = ACTIVITE QUANTITATIVE ET QUALITATIVE (INTENSIVE ET EXTENSIVE)]
+
+[APPROCHE MIXTE => SUBSTRAT]
 
 Dans l'approche computationnelle traditionnelle, les opérations entre les patrons d'activité (chaînes de bits) passent par 
 une unité centrale qui réalise les opérations nécessaires aux algorithmes de calcul, reposant sur un
@@ -3898,9 +3929,11 @@ des foyers d'activité sur la carte colliculaire et le déplacement moteur assoc
 suggérant une commande motrice liée au déplacement du regard (et non à la
 direction absolue du regard). Il s'agit donc d'une commande relative, la
 direction finale du regard dépendant de la direction initiale (On
-notera cependant que cette comande peut également etre vue comme une comande
+notera cependant que cette commande peut également etre vue comme une commande
 absolue dans le référentiel rétinien).
-Par ailleurs eten même temps, la fréquence d'activité sur la carte colliculaire est fortement corrélée avec
+
+[LA COEXTENSIVITE TEMPORELLE EST VALABLE POUR LES 2 APPROCHES DE LA COMMANDE MOTRICE]
+Par ailleurs et en même temps, la fréquence d'activité sur la carte colliculaire est fortement corrélée avec
 la vitesse de déplacement de l'oeil dans l'orbite.
 A une fréquence de décharge plus élevée correspond une vitesse de déplacement plus importante.
 Le déclenchement de l'activité colliculaire précède le déclenchement de la saccade.
@@ -3912,7 +3945,7 @@ une projection directe de l'activité du foyer vers les
 effecteurs, c'est à dire une commande de vélocité sur les différents degrés de liberté possibles.
 %Il est pourtant relativement facile d'identifier au sein du cerveau des activités (ou des variations d'activité) en lien
 %avec cet espace métrique.
-Des études portant cetet fois sur le cortex moteur montrent également des corrélations entre l'activité mesurée sur les neurones du cortex moteur et le
+Des études portant cette fois sur le cortex moteur montrent également des corrélations entre l'activité mesurée sur les neurones du cortex moteur et le
 mouvement effectif, en particulier leur coextensivité temporelle (l'activité s'arrête torsque le mouvement s'arrête). 
 Une composante de direction liée à la localisation de l'activité peut également être mise en évidence, 
 aboutissant à des possibilités de reconstruction de la
@@ -4122,14 +4155,14 @@ tronc (le support stable des mouvements de la tête), et l'axe de la direction d
 est le référentiel du tronc. Les objets de la même scène sont également définis (en tant que point final des mouvements) dans
 ce même référentiel du tronc. Il existe donc une application qui à partir de la position des objets dans un premier 
 référentiel définit la position des mêmes objets dans un autre référentiel. La bijection entre les deux espaces offre
-un bon support à l'invariance ainsi qu'à la prédictin sensorielle (``predictive coding''). 
+un bon support à l'invariance ainsi qu'à la prédiction sensorielle (``predictive coding''). 
 
 Le problème est, comme nous l'avons vu, le caractère distribué de l'activité neuronale 
 qui rend difficile les opérations de ce type. Une transformation qui, étant donnés des objets sur un espace de manipulations et 
 un changement de référentiel, prédit la disposition de ces mêmes objets sur la scène visuelle.
-Par exemple, un simple ``parren matching'' nécessiterait un apprentissage par coeur de la conséquence visuelle 
+Par exemple, un simple ``pattern matching'' nécessiterait un apprentissage par coeur de la conséquence visuelle 
 de toutes les combinaisons de dispositions d'objets et de tous les changements de référentiel tronc-tête, ce qui parait 
-compuationellement très coûteux. Il est nécessaire néanmoins que le ``lien'' praxo-visuel entre les différents objets de la scène ne soit pas perdu
+computationellement très coûteux. Il est nécessaire néanmoins que le ``lien'' praxo-visuel entre les différents objets de la scène ne soit pas perdu
 au cours des déplacement moteurs. 
 (Un raisonnement symétrique peut être appliqué pour le cas des déplacements du corps dans un environnement visuel stable)
 
@@ -4156,7 +4189,7 @@ S'il apparaît peu probable qu'un seul neurone soit le support de la liaison,
 rien n'exclut qu'une population de neurones puisse répondre de façon sélective
 à toutes les configurations d'interaction avec un objet particulier (par exemple
 notre grand-mère). [JENNIFER ANISTON NEURON]
-Un tel objest est donc la continuation à travers
+Un tel {\color{red} objet [activité???]} est donc la continuation à travers
 toutes ses transformations (déplacement du corps, mouvement des yeux) 
 d'un même objet de l'environnement,
 autrement dit une ``présence de l'objet''.
@@ -4180,7 +4213,13 @@ travers les changements; l'existence de canaux le permettant)
 qui distingue ce qui est possible de ce qui ne l'est pas (les associations de constituants
 plausibles et celles qui ne le sont pas).
 
-[ASSEMBLAGE DE CIRCONSTANCE - STRUCTUE PLASTIQUE VERSATILE - LIGANDS ENTRE DIFFERENTS PATRONS]
+[ASSEMBLAGE DE CIRCONSTANCE - STRUCTURE PLASTIQUE VERSATILE - LIGANDS ENTRE DIFFERENTS PATRONS]
+
+[COMPOSITIONNALITE] Assemblage toujours renouvelé de composantes. La compositionnalité concerne 
+plus le coté sensoriel que le coté moteur. Au niveau moteur, on a plutot un principe d'instrumentalité
+liée à des patrons fixes (figés)
+(meme utilisation pour de nombreux assemblages sensoriels) (un assemblage est aussi lié au principe
+d'accumulation d'évidence - une composition est aussi une ``accumulation de preuves'' --- un faisceau d'indices concordants)
 
 [ANALOGIE LIENS LATERAUX - COLINEARITE DES CHAMPS]
 
@@ -4239,14 +4278,20 @@ spontanée au sein d'un comportement intégré.
 
 $\rightarrow$ question de la ``durée'' du bruit.
 
-\subsection{Le bruit comme support de la persistance?}
+\subsection{Bruit et persistence}
 %\footnote{L'opposition entre bruit créateur, producteur de formes, et bruit destructeur, c'est à dire perturbateur
 %a été proposée par Henri Atlan dans son livre ``Entre le cristal et la fumée''.}
+
+[INFORMATION MUTUELLE ET COUPLAGE] Le principe de Hebb est celui de la consolidation des activités congruentes
+(qui s'allument et s'éteignent en même temps).  (1 congrue à 5 modulo 4, 2 congrue à 6 modulo 4 $\rightarrow$ 1 et 5 sont simultanés, 
+2 et 6 sont simultanés, etc. congruence = co-occurrence ; stabilité du monde = prédictibilité = conformité à la règle de co-occurrence)
 
 Le bruit est classiquement considéré comme un élément perturbateur en traitement du signal ou
 dans le cadre des mécanismes de contrôle en boucle fermée. Il correspond souvent aux facteurs non modélisés 
 produisant des variations inattendues (des ``innovations'') qui doivent être filtrées pour 
-mieux estimer l'état d'un processus caché. 
+mieux estimer l'état d'un processus caché.
+
+[LE BRUIT CREATEUR S'OPPOSE A LA THEORIE DE L'INFORMATION]
 
 Dans le domaine de la décision, le bruit peut également être vu comme une des composantes de l'autonomie logicielle.
 La théorie de la décision suggère, en cas de choix multiples équitables, de faire reposer la 
@@ -4773,9 +4818,15 @@ La décision
 les théories de la simulatio interne \shortcite{Jeannerod2001}, ou de l'espace de travail ... \shortcite{}, stipulent   
 
 
-
-
 \section{Projets en cours}
+
+
+Faire un paquet : coextensivité temporelle du deplacement moteur et de l'activité motrice, simultanéité des
+activités interne et externe (en tenant compte des delais), BCI basé sur la réponse motrice, 
+approche par primitives comportementales (epilepsie prefrontale), Georgopoulos,
+
+Deuxième paquet : decision motrice, reseau des ganglions de la base, identité entre objet et action (instrumentalité de l'objet), 
+primitives motrices, accumulation d'évidence, TVB et modèle forward, Michel Audette.
 
 Projet :
 
