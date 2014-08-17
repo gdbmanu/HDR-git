@@ -273,15 +273,21 @@ dans le cadre des problématiques des neurosciences computationnelles.
 Pour les figures, formules et illustrations, il faudra se reporter au document annexe contenant  une sélection
 de papiers et de contributions à des conférences scientifiques.
 
-Ces travaux se situent à l'interface de la branche ``pattern matching'' (correspondance de forme) de l’IA  et des 
-neurosciences. 
-Le premier chapître, qui sert d'introduction aux thématiques développées dans ce rapport, présente ces deux approches,
-montre leurs forces et leurs faiblesses, 
-ainsi que l'approche ``mixte'' consistant à tenter d'utiliser le meilleur des deux mondes pour
- développer des architectures logicielles ``universelles'',
-propres à capturer les régularités de leur environnement, et 
-visant à expliquer certaines propriétés du substrat neuronal %(plasticité) 
-et de la communication nerveuse. 
+
+Nous abordons dans le premier chapître la question du support de communication,  relativement au fait
+que la nature du support détermine le type d'information qui peut transiter par le support, ainsi que le
+type de manipulations qu'il peut réaliser. 
+%[NATURE DE LA COMMANDE MOTRICE]
+% ``pattern matching'' (correspondance de forme) de l’IA  et des 
+%neurosciences. 
+%Le premier chapître, qui sert d'introduction aux thématiques développées dans ce rapport, 
+%présente ces deux approches,
+%montre leurs forces et leurs faiblesses, 
+%ainsi que l'approche ``mixte'' consistant à tenter d'utiliser le meilleur des deux mondes pour
+% développer des architectures logicielles ``universelles'',
+%propres à capturer les régularités de leur environnement, et 
+%visant à expliquer certaines propriétés du substrat neuronal %(plasticité) 
+%et de la communication nerveuse. 
 %{\color{Violet} Le fil rouge : réseaux aléatoires. La fluctuation. Le bruit créateur. ET Le feedback positif.
 %Un cadre unique pour l'apprentissage et la plasticité. 
 %Essayer de construire un cadre conceptuel (ou de réexaminer des cadres conceptuels existants mais non explicités). }
@@ -289,7 +295,7 @@ et de la communication nerveuse.
 %{\color{red} La difficulté consiste à éclairer les méthodes de machine learning à partir de concepts issus des sciences cognitives. }
 
 
-Dans la seconde section, nous abordons la question de substrat, en tant que  support de la communication (le hardware). 
+Dans le second chapître, nous abordons la question de substrat, en tant que  support de la communication (le hardware). 
 En suivant l'analogie neuromimétique, nous étudions les conditions qui vont permettre à une population de calculateurs (les neurones) 
 de s'organiser dynamiquement en activant ou désactivant sélectivement certains circuits.
 Selon les caractéristiques des calculateurs élémentaires et les caractéristiques du patron de connectivité, 
@@ -299,7 +305,7 @@ et le principe de la capacité limitée (limitation du nombre de ``symboles'' ou
 Nous terminons ce tour d'horizon avec une étude plus appliquée consistant à analyser le nombre et l'étendue de patrons spatio-temporels au
 sein d'un réseau construit à partir d'une matrice de connectivité structurelle obtenue par une technique de tractographie chez l'humain.
 
-La troisième série de résultats est regroupée sous le thème de la ``subjectivité perceptive''. Les modèles présentés
+Le troisième chapître présente une série de résultats est regroupée sous le thème de la ``subjectivité perceptive''. Les modèles présentés
 explorent l'idée d'une autonomie partielle de la réponse logicielle à la commande. Vu sous l'angle neuromimétique, la 
 subjectivité perceptive consiste d'une part à ignorer certaines entrées sensorielles, du fait de leur non-pertinence ou de leur 
 non-conformité, et d'autre part à compléter certaines entrées sensorielles manquantes à l'aide de connaissances issues de l'expérience passée. 
@@ -309,7 +315,7 @@ cette résonance étant le support des interpolations perceptives futures. Nous 
 se distinguent du modèle classique du ``predictive coding'' organisé autour du principe du feedback négatif, et en particulier comment les premières
 implémentent le comportement de  ``résistance au changement'' (ou persévération). 
 
-La quatrième section aborde la question plus globale de la formation des comportements moteurs. 
+Le quatrième chapître aborde la question plus globale de la formation des comportements moteurs. 
 Nous commençons par rappeler certains principes et problèmes d'ordre général, comme la différence d'extensivité et d'expressivité du contrôleur et de son environnement.
 Nous présentons ensuite un certain nombre de résultats ayant en commun le principe du contrôle en ``boucle fermée''.
 Nous abordons ainsi successivement la question de la stabilisation et de la destabilisation des patrons d'interaction
@@ -318,14 +324,14 @@ des mécanismes d'exploration dans le cadre de l'apprentissage par renforcement,
 De manière plus appliquée, nous détaillons les principes d'une architecture de contrôle destinée à supplémenter des déficiences
 motrices à partir de l'analyse de l'EEG de surface (interfaces cerveau-machines non-invasives).
 
-La cinquième présente une série de résultats relatifs à des projets plus directement orientés vers la modélisation des mécanismes perceptifs et moteurs
+Le cinquième chapître présente une série de résultats relatifs à des projets plus directement orientés vers la modélisation des mécanismes perceptifs et moteurs
 tels qu'ils apparaissent dans les études neurophysiologiques et comportementales. 
 L'orientation est une des modalités fondamentales de l'activité motrice, consistant à déplacer les organes récepteurs dans une direction qui optimise
 leur exposition à des signaux d'intérêt. Nous étudions deux modalités de ce comportement d'orientation : d'une part l'orientation 
 visuelle, et plus particulièrement la saccade oculaire, en tant que modèle de boucle sensori-motrice élémentaire, et de l'autre l'orientation 
 temporelle, c'est à dire la capacité du sujet à concentrer ses ressources attentionnelles à un instant choisi dans le temps.
 
-
+Le sixième chapitre [TODO...]
 
 %{\color{Violet}
 
@@ -344,7 +350,7 @@ temporelle, c'est à dire la capacité du sujet à concentrer ses ressources att
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\chapter{Systèmes dynamiques, reconnaissance de formes et substrat neuronal}\label{sec:pat}
+\chapter{Systèmes dynamiques, correspondance de formes et substrat neuronal}\label{sec:pat}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -386,7 +392,7 @@ négatif? Peut-on
 s'adapter à un environnement autrement qu'en extrayant des ``dictionnaires'' d'invariants
 perceptifs et moteurs de l'environnement?
 
-\section{Contrôle en boucle fermée et feedback négatif} 
+\section{Contrôle en boucle fermée et systèmes dynamiques} 
 
 Les systèmes de contrôle en boucle fermée appartiennent à la tradition cybernétique, initialement 
 formée autour de la commande à feedback négatif \shortcite{Wiener1965}. 
@@ -407,6 +413,8 @@ logiciel, les mécanismes de transduction et l'effet des commandes motrices sur 
 signal sensoriel (le ``modèle du monde'' ou ``modèle forward'') \cite{Wolpert2000}. 
 Cet ensemble constitue un système dynamique, soumis à des influences extérieures 
 (les facteurs non modélisés) face auxquels le système produit des réponses.
+Ces modèles reposent implicitement sur le traitement de grandeurs extensives (positions, vitesses)
+mesurées dans l'environnement.
 
 %La définition des systèmes dynamiques remonte à la découverte du calcul différentiel, au dix-huitième
 %siècle.
@@ -414,47 +422,27 @@ Cet ensemble constitue un système dynamique, soumis à des influences extérieu
 %des solides, et traite de quantités continues auxquelles sont appliqués des opérateurs ou des tenseurs,
 %qui conditionnent l'évolution de ces quantités sur des échelle de temps également continues.
 
-Il existe de nombreux modèles utilisant ces principes de contrôle pour modéliser
-l'activité nerveuse. On citera parmi les plus connus \shortcite{Rob75,Wolpert1998}. 
+Il existe de nombreux modèles utilisant ces principes de contrôle adaptatif pour modéliser
+l'activité nerveuse. On citera parmi les plus connus \shortcite{Rob75,Wolpert1998}.
+Les schémas de guidage par correction d'erreur sont par ailleurs 
+présents au niveau des structures sensori-motrices profondes,
+comme dans le cadre du contrôle vestibulaire \cite{Ito1982}.
 
-L'approche par feedback positif présentée précédemment
-n'est pas exclusive du schéma traditionnel du guidage de l'activité motrice par l'activité sensorielle.
-On retrouve dans les deux cas la notion d'attracteur, établissant un lien d'asservissement mutuel
-du corps et de l'environnement.
-La différence tient dans le fait que, contrairement au feedback négatif, 
-le feedback positif ne fonctionne pas selon un principe de guidage.
-Le feedback positif correspond à un mode de contrôle prescriptif (la perception prescrit la réponse motrice, la réponse motrice
-prescrit la perception) dans lequel l'écart est une perturbation (et non un signal), face auquel le système
-résiste jusqu'au point de rupture.
-La communication est dans ce cas basée sur 
-la recherche de correspondance à une référence (et non la différence).
-Le feedback positif ne reflète pas une activité de contrôle, mais une 
-association (un assemblage sensori-moteur) transitoire.
-La décision est basée dans un cas sur la contre-action, dans l'autre sur l'accumulation 
-d'évidence (émergence).
+Par contraste avec le feedback négatif, certaines activités motrices (périodiques en particulier) 
+semblent reposer sur un mécanisme de feedback positif,
+dans lesquels le milieu physique et la commande motrice forment un couple qui s'auto-renforce, 
+comme dans le cas de la locomotion. Cette activité rythmique spontanée peut être modulée par divers facteurs
+(contacts avec le sol ou avec des obstacles, orientation visuelle, ...).
 
-Rien ne permet d'exclure que l'activité nerveuse, 
-caractérisée microscopiquement par des patrons de connexion 
-excitateurs et inhibiteurs, puisse susciter à la fois des schémas comportementaux basés 
-sur le feedback positif (persévération, résistance au changement
-et changements brusques) et le feedback négatif (réponse graduelle à l'erreur perceptive, poursuite lente, ...).
-Le feedback positif porte les propriétés d'associativité, d'appariement, d'intégration sensorielle, le feedback
-négatif favorisant quant à lui la persistance de l'état courant au cours du temps.
+Tout comme les mécanismes de feedback négatifs, les oscillateurs comportementaux font l'objet
+d'une littérature abondante.
+[TODO Haken - Kelso - Schöner]
+Les mécanismes neuronaux à la base des oscillateurs comportementaux, présents au niveau de la moëlle épinière,
+commencent également à être bien connus [GRILLNER].
 
-
-Question ouverte : quelles sont les contributions respectives de ces deux approches à l'activité neuronale? Quelles prédictions?
-Le feedback négatif favorise la persistance de l'attracteur. La persistance en feedback moins repose sur
-le signal, la persistance en feedback plus repose sur les forces contractantes
-du SD, pas sur le signal. Le feedback plus favorise la dissolution, c'est à dire l'alternance (par exemple 
-prescription sensorielle / prescription motrice)
-
-Extension de ce dilemne : invariance de l'objet /  invariance de la commande.
-
-Application :
 
 {\color{Violet}
-Les schémas de guidage par correction d'erreur sont très présents au niveau des structures sensori-motrices profondes
-(comme le contrôle vestibulaire).
+
 
 l'approche par feedback négatif repose principalement sur le calcul d'une erreur de prédiction. 
 On suppose donc l'existence d'un modèle interne qui 
@@ -3918,6 +3906,43 @@ Les modèles de neurones impulsionnels présentés dans \shortcite{Hen08B,Dau14a
 à produire une bouffée d'activité de population (sur une soixantaine de millisecondes), suivie par un retour
 à l'état de base. Le retour à l'état de base efface toute trace du patron d'activité précédemment formé.
 
+L'approche par feedback positif présentée précédemment
+n'est pas exclusive du schéma traditionnel du guidage de l'activité motrice par l'activité sensorielle.
+On retrouve dans les deux cas la notion d'attracteur, établissant un lien d'asservissement mutuel
+du corps et de l'environnement.
+La différence tient dans le fait que, contrairement au feedback négatif, 
+le feedback positif ne fonctionne pas selon un principe de guidage.
+Le feedback positif correspond à un mode de contrôle prescriptif (la perception prescrit la réponse motrice, la réponse motrice
+prescrit la perception) dans lequel l'écart est une perturbation (et non un signal), face auquel le système
+résiste jusqu'au point de rupture.
+La communication est dans ce cas basée sur 
+la recherche de correspondance à une référence (et non la différence).
+Le feedback positif ne reflète pas une activité de contrôle, mais une 
+association (un assemblage sensori-moteur) transitoire.
+La décision est basée dans un cas sur la contre-action, dans l'autre sur l'accumulation 
+d'évidence (émergence).
+
+Rien ne permet d'exclure que l'activité nerveuse, 
+caractérisée microscopiquement par des patrons de connexion 
+excitateurs et inhibiteurs, puisse susciter à la fois des schémas comportementaux basés 
+sur le feedback positif (persévération, résistance au changement
+et changements brusques) et le feedback négatif (réponse graduelle à l'erreur perceptive, poursuite lente, ...).
+Le feedback positif porte les propriétés d'associativité, d'appariement, d'intégration sensorielle, le feedback
+négatif favorisant quant à lui la persistance de l'état courant au cours du temps.
+
+
+Question ouverte : quelles sont les contributions respectives de ces deux approches à l'activité neuronale? Quelles prédictions?
+Le feedback négatif favorise la persistance de l'attracteur. La persistance en feedback moins repose sur
+le signal, la persistance en feedback plus repose sur les forces contractantes
+du SD, pas sur le signal. Le feedback plus favorise la dissolution, c'est à dire l'alternance (par exemple 
+prescription sensorielle / prescription motrice)
+
+Extension de ce dilemne : invariance de l'objet /  invariance de la commande.
+
+Application :
+
+
+
 Le choix de la nouvelle réponse est-il purement réactif, explicable par les contraintes 
 de l'environnement, ou est-il le résultat d'une délibération, d'une déduction 
 induite par des facteurs liés à l'activité interne antérieure?
@@ -3926,10 +3951,7 @@ Nous allons maintenant essayer de voir quelles sont les difficultés posées par
 les principales pistes permettant de l'aborder, {\color{red} ce qui nous amène à formuler un projet de recherche visant 
 à fonder une méthode de développement d'architectures non versatiles.}
 
-Nous abordons dans la section \ref{sec:pat} la question du support de communication, {\color{red} relativement au fait
-que la nature du support détermine le type d'information qui peut transiter par le support, ainsi que le
-type de manipulations qu'il peut réaliser}. 
-[NATURE DE LA COMMANDE MOTRICE]
+
 La section \ref{sec:invariant} aborde la question de l'invariance de l'environnement externe. En
 effet, la continuité de l'action est une conséquence de la continuité du monde,
 c'est à dire de la persistence d'un monde extérieur stable malgré des variations incessantes de point de vue.
