@@ -2670,14 +2670,14 @@ se traduit par des écarts de jugement temporel importants d'un essai à l'autre
 augmentant linéairement avec la durée demandée
 (ce qui suggère une difficulté proportionnelle à la durée), 
 cette propriété étant observable à la fois chez
-l'homme et chez l'animal \cite{Gibbon1977}.
+l'homme et chez l'animal \shortcite{Gibbon1977}.
 
 D'un point de vue computationnel, la trame temporelle se présente comme une variable
 explicative cachée, que le sujet doit reconstruire pour interpréter son environnement. 
 Les modèles computationnels 
 proposés dans la littérature supposent l'existence d'une activité intrinsèque, agissant comme
 le tic-tac d'une horloge, cette activité étant ensuite intégrée pour former une
-estimation interne du temps passé \cite{Gold01,Simen2011}.
+estimation interne du temps passé \shortcite{Gold01,Simen2011}.
 
 Le modèle que nous avons proposé, en collaboration avec Gaurav Malhotra, qui a été recruté
 en contrat post-doctoral entre 2010 et 2011, utilise l'hypothèse d'une représentation probabiliste de 
@@ -2740,13 +2740,133 @@ La subjectivité, au sens le plus général, est un point de vue original sur un
 par la relation d'un corps sensible à son environnement, mais également une manière
 de répondre aux sollicitations de l'environnement qui laisse de la marge à un certain libre-arbitre.
 
-Plus précisément, nous avonc utilisé l'exemple (ou l'analogie)
-d'un système dynamique distribué contraint par un signal extérieur. 
-La contrepartie logicielle de cette subjectivité est un substrat (un système dynamique) 
-inspirés de l'étude du système nerveux, capables de développer 
-une activité intrinsèque, capables de traiter une influence extérieure et capables de plasticité.
-L'idée générale est celle d'un compromis entre des opérations 
-essentiellement produites par l'activité interne, et des opérations guidées par les stimulations sensorielles. 
+Essayons de résumer les différents résultats mis en évidence par les recherches présentées. 
+Nous sommes partis de la question du rôle computationnel de l'activité intrinsèque 
+des réseau de neurones récurrents. A quoi peut servir une activité se développement
+spontanément, sans lien avec un milieu extérieur?
+
+Les différentes architectures neuronales étudiées ont tout d'abord
+permis d'identifier des comportements caractéristiques, décrits sous la forme de différents régimes dyamiques. 
+Nous avons cherché à caractériser l'expressivité de ces substrats (voir également l'annexe 2), c'est à dire leur capacité à produire
+des patrons d'activité pouvant servir de support à des opérations cognitives. Nous avons, en particulier,
+abordé le principe de la reconnaissance par résonance qui, sous sa forme la plus simple, s'exprime comme une transition
+entre une activité non-spécifique (chaos) et une activité plus simple (cycle limite) en présence d'un stimulus 
+familier \shortcite{Dau98A,Hen08B}.
+Nous avons, dans le cadre de réseaux équilibrés (constitués d'une population excitatrice et d'une population inhibitrice),
+mis en évidence l'existence de deux paramètres d'ordre caractéristiques (l'amplification et l'homogénéité d'un fasceau 
+d'axones) jouant sur la nature des régimes développés (extinction, activité chotique non spécifique et oscillations 
+synchronisées) \shortcite{dauce01a}. La perturbation d'un réseau récurrent par un signal externe à variations lentes produit 
+des transitions brusques, caractéristiques d'un comportement critique, support potentiel d'une catégorisation (discrète)
+de l'environnement \shortcite{Beslon2002}. La combinaison de patrons de connexion en chapeau mexicain et d'un activité périodique
+intrinsèque permet d'implémenter des mécanismes de mémoire à court terme sur des neurones impulsionnels,
+sans faire appel à des mécanismes de cellulaires spécifiques \shortcite{Dau04}. 
+Enfin, l'étude de la dynamique de réseaux large échelle basées sur des patrons de connectivité réalistes 
+mettent en évidence des régions de forte multistabilité, permettant à la fois d'analyser les affinités fonctionelles
+entre les différentes régions anatomiques, et de simuler certains aspects de la dynamique 
+large échelle (en particulier l'alternance entre différents patrons d'activité) \shortcite{Golos2014}.
+
+Une des hypothèses que nous avons mise en avant est que cette activité de population (résonance) 
+permet le ``passage d'échelle'', c'est à dire rend sensible à une échelle supérieure (macroscopique) 
+l'activité répartie d'une population d'unités: passage d'activités unitaires à une activité de population, passage
+d'une activité de population à un déplacement moteur.
+Une autre hypothèse est que le substrat nerveux est un réservoir de patrons sensori-moteurs, 
+et l'apparition de précurseurs sensoriels ou moteurs au sein de l'activité nerveuse suscite 
+la convergence de la dynamique vers l'attracteur correspondant, 
+favorisant une activité macroscopique (un attracteur comportemental) qui lui-même favorise 
+l'attracteur neuronal par boucle de rétroaction positive \shortcite{Dau02,Dau02c1}.
+Le mécanisme de résonance est logiquement suivi d'un retour à
+l'état de base,  lorsque les conditions de la synchronisation ne sont plus remplies.
+Des mécanismes internes de fatigue et/ou l'irruption de composants sensoriels ou moteurs dissonants favorise la 
+désaggrégation, puis éventuellement la recomposition de l'activité nerveuse
+et la convergence vers un nouvel attracteur.
+On peut également assimiler ce mécanisme au passage d'un état ``bas'' (non spécifique) à un état ``haut''
+(spécifique), puis au retour vers un état ``bas'', un peu comme dans le modèle de \shortcite{Brunel2000persistent}.
+Les modèles de neurones impulsionnels présentés dans \shortcite{Hen08B,Dau14a} montrent, à une échelle temporelle plus fine, une capacité
+à produire une bouffée d'activité de population (sur une soixantaine de millisecondes), suivie par un retour
+à l'état de base. 
+Le résultat de ce schéma computationnel est un fonctionnement par ``\mbox{sauts}'' d'un attracteur à un autre, 
+et une alternance entre destabilisation et stabilité.
+Bien que possiblement implémenté par des équations aux dérivées partielles, la logique
+de ce schéma est donc essentiellement celle d'un fonctionnement discret, la résonance perceptive étant
+analogue fonctionnellement aux schémas
+basés sur l'accumulation d'évidence (ou vraisemblance Bayésienne) \shortcite{Haruno2001,Friston2010}.
+
+L'étude d'architectures de contrôle en boucle fermée nous a permis d'insister sur la différence de nature
+(ou l'hétérogénéité) entre d'une part le milieu extérieur, caractérisé par des grandeurs extensives (des masses et
+des articulations en déplacement, des changements continus) 
+et le milieu intérieur (milieu logiciel) caractérisé par des activité bornées, discrètes,
+changeant rapidement et de manière abrupte.
+L'hypothèse du passage d'échelle suggère des moments transitoires où l'activité microscopique rejoint 
+l'activité macroscopique lors des épisodes de synchronisation, conduisant à une réduction de 
+complexité selon un principe déjà suggéré par la synergétique \cite{Haken1983}.
+
+L'apprentissage par renforcement offre le cadre le plus propice à la stabilisaton de trajectoires dans
+le milieu physique par modification des couplage synaptiques au sein du milieu logiciel, par un 
+mécanisme d'essais/erreur.
+L'hypothèse que nous avons étudiée dans ce cadre est celle d'une activité intrinsèque servant de
+support de l'exploration motrice (c'est à dire jouant le rôle traditionellement dévolu au bruit
+dans le processus d'exploration).  
+%La structure du substrat logiciel joue dans ce cas un rôle important.
+La règle d'apprentissage distingue 
+les différents faisceaux d'axones arrivant sur le neurones, autrement dit identifie les différentes
+sources de l'activité arrivant sur le neurone, conduisant à favoriser, selon les cas, 
+les signaux externes, ou, au contraire, les signaux générées en interne \cite{Dau04b}.
+Le modèle proposé dans \cite{Dau07} ajoute un principe d'alternance entre l'activité perceptive
+et l'activité motrice.
+Les modèles proposés dans \cite{Dau09} et \cite{Dauce2010}, utilisent les mêmes principes
+en systématisent l'usage du codage topographique
+sur les couches sensorielles et proprioceptives,
+et mettent l'accent sur la formation de champs récepteurs. Dans ces modèles, la dynamique intrinsèque 
+est remplacée par un bruit ``lent'' 
+ayant la même constante de temps caractéristique que l'erreur motrice.
+
+Contrairement aux modèles de la perception basés sur la résonance perceptive, les modèles mis
+en place dans le cadre de tâche de contrôle en boucle fermée fonctionnent de manière ``classique'', 
+c'est à dire de manière continue selon un principe de feedback négatif (le signal transitant
+principalement sous la forme de corrections à apporter à la trajectoire courante).
+
+A l'issue de ces recherches, nous avons donc identifié un rôle possible
+de l'activité spontanée dans la consolidation de patrons d'activité
+spécifiques à des configurations ``connues'' de l'environnement.
+%(dans un substrat à expressivité limitée -- c'est à dire ne traduisant
+%pas parfaitement les caractéristiques physiques, mécaniques ou chimiques de l'environnement).
+Nous avons également émis des hypothèses sur le rôle de cette activité intrinsèque pour produire 
+des basculements d'activité faisant évoluer la relation entre le système et l'environnement 
+(changement de mode de couplage avec l'environnement, déplacements moteurs).
+Enfin, nous avons montré que cette activité intrinsèque peut servir de support à l'innovation
+dans les rapports à l'environnement, c'est à dire principalement de proposer de nouvelles
+réponses comportementales, éventuellement stabilisées dans le cas où elles apportent 
+une amélioration (soit dans la capacité de prédiction, soit dans la réception de signaux
+de récompense plus intenses).
+
+Les modèles développés dans un cadre de modélisation biologique apportent quelques éclairages supplémentaires
+sur certains aspects du calcul neuronal.
+L'étude des mécanismes neuronaux d'orientation visuelle en particulier
+mettent en évidence deux caractéristiques : 
+- commande motrice simultanée avec le déplacement (co-extensivité)
+
+
+Néanmoins, [TODO] -- Liste des problèmes
+
+- mélange entre activité discrète et activité continue (feed+ et feed -?) - pas franchement identifié dans la littérature
+
+- problème de la simultanéité (déplacement et activité motrice) - point fondamental : la pensée est le mouvement.
+
+- problème de la permanence - hypothèse de la scène prémotrice
+
+- problème du bruit créateur / bruit lent / bruit comme déformation / bruit sous forme de résonance incidente 
+
+- problème du modèle forward (et/ou des opérations, translations, distances) dans un milieu digital
+
+- architectures séquentielles
+
+
+
+%Plus précisément, nous avonc utilisé l'exemple (ou l'analogie)
+%d'un système dynamique distribué contraint par un signal extérieur. 
+%La contrepartie logicielle de cette subjectivité est 
+%L'idée générale est celle d'un compromis entre des opérations 
+%essentiellement produites par l'activité interne, et des opérations guidées par les stimulations sensorielles. 
 %Le mode de fonctionnement qui nous a guidé est celui de 
 
 Le schéma computationnel proposé est celui du feedback positif, autrement
@@ -2759,37 +2879,16 @@ est celui d'une activité de base irrégulière à partir de laquelle se forment
 et plus spécifiques en présence de marqueurs environnementaux particuliers. Le passage d'une réponse régulière
 à une autre nécessite un passage par l'activité de base (chaotique). C'est le même mécanisme de désaggrégation/recomposition qui
 est mis en oeuvre dans le modèle perceptif à feedback positif que nous avons présenté \shortcite{Dau02}.
-On peut également assimiler ce mécanisme au passage d'un état ``bas'' (non spécifique) à un état ``haut''
-(spécifique), puis au retour vers un état ``bas'', un peu comme dans le modèle de \shortcite{Brunel2000persistent}.
-Les modèles de neurones impulsionnels présentés dans \shortcite{Hen08B,Dau14a} montrent, à une échelle temporelle plus fine, une capacité
-à produire une bouffée d'activité de population (sur une soixantaine de millisecondes), suivie par un retour
-à l'état de base. Le retour à l'état de base efface toute trace du patron d'activité précédemment formé.
+Le retour à l'état de base efface toute trace du patron d'activité précédemment formé.
 
-Une des hypothèses que nous avons mise en avant est que cette activité de population (résonance) 
-permet le ``passage d'échelle'', c'est à dire rend sensible à une échelle supérieure (macroscopique) 
-l'activité répartie d'une population d'unités: passage d'activités unitaires à une activité de population, passage
-d'une activité de population à un déplacement moteur.
-Une autre hypothèse est que le substrat nerveux est un réservoir de patrons sensori-moteurs, 
-et l'apparition de précurseurs sensoriels ou moteurs au sein de l'activité nerveuse suscite la convergence de la dynamique vers l'attracteur correspondant, 
-favorisant une activité macroscopique (un attracteur comportemental) qui lui-même favorise l'attracteur neuronal par boucle de rétroaction positive.
-Le mécanisme de résonance est logiquement suivi d'un retour à
-l'état de base,  lorsque les conditions de la synchronisation ne sont plus remplies.
-Des mécanismes internes de fatigue et/ou l'irruption de composants sensoriels ou moteurs dissonants favorise la 
-désaggrégation, puis éventuellement la recomposition de l'activité nerveuse
-et la convergence vers un nouvel attracteur.
-Le résultat de ce schéma computationnel est un fonctionnement par ``\mbox{sauts}'' d'un attracteur à un autre, 
-et une alternance entre destabilisation et stabilité.
-Bien que possiblement implémenté par des équations aux dérivées partielles, la logique
-de ce schéma est essentiellement celle d'un fonctionnement discret, la résonance perceptive étant
-analogue fonctionnellement aux schémas
-basés sur l'accumulation d'évidence (ou vraisemblance Bayésienne) \shortcite{Haruno2001}, 
-l'analogie ayant principalement été notée par \shortcite{Friston2010}.
+
+
 %dans le cadre conceptuel de la vraisemblance Bayesienne,
 %où la perception est vue comme un précurseur moteur (et vice versa).
  
 
 
-L'approche par feedback positif présentée précédemment
+L'approche par feedback positif 
 n'est cependant pas exclusive du schéma traditionnel du guidage de l'activité motrice par l'activité sensorielle.
 On retrouve dans les deux cas la notion d'attracteur, établissant un lien d'asservissement mutuel
 du corps et de l'environnement.
@@ -4049,7 +4148,7 @@ s'est révélé le plus apte à traiter la question --> le perceptron.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter*{Annexe : systèmes dynamiques, correspondance de formes et approches mixtes}\label{sec:pat}
+\chapter*{Annexe 1 : systèmes dynamiques, correspondance de formes et approches mixtes}\label{sec:pat}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -4118,7 +4217,7 @@ Il existe de nombreux modèles utilisant ces principes de contrôle adaptatif po
 l'activité nerveuse. On citera parmi les plus connus \shortcite{Rob75,Wolpert1998}.
 Les schémas de guidage par correction d'erreur sont par ailleurs 
 présents au niveau des structures sensori-motrices profondes,
-comme dans le cadre du contrôle vestibulaire \cite{Ito1982}.
+comme dans le cadre du contrôle vestibulaire \shortcite{Ito1982}.
 
 Par contraste avec le feedback négatif, certaines activités motrices (périodiques en particulier) 
 semblent reposer sur un mécanisme de feedback positif,
@@ -4126,7 +4225,7 @@ dans lesquels le milieu physique et la commande motrice forment un couple qui s'
 comme dans le cas de la locomotion. Cette activité rythmique spontanée peut être modulée par divers facteurs
 (contacts avec le sol ou avec des obstacles, orientation visuelle, ...).
 Les mécanismes de contrôle par feedback positif ont jusqu'à présent principalement été étudiés 
-sous la forme d'oscillateurs simples ou couplés \shortcite{Haken1985,Strogatz2001}, servant de support à schémas moteurs périodiques.
+sous la forme d'oscillateurs simples ou couplés \shortcite{Haken1985,Sternad2008}, servant de support à schémas moteurs périodiques.
 comme celui de la locomotion. 
 L'idée de la sélection d'un canal de réponse par résonance avec les signaux de l'environnement de trouve 
 néanmoins déjà dans des articles plus anciens \shortcite{Greene1962}.
@@ -4374,7 +4473,7 @@ quantité)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\chapter*{Expressivité des substrats neuronaux}
+\chapter*{Annexe 2 : Expressivité des substrats neuronaux}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
