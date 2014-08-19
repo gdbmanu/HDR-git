@@ -3056,7 +3056,8 @@ un bon support à l'invariance ainsi qu'à la prédiction sensorielle (``forward
 %[NE PAS OUBLIER L'ACTIVITE VESTIBULAIRE]
 
 Le problème est, comme nous l'avons vu, le caractère distribué de l'activité neuronale 
-qui rend difficile les opérations de ce type. Une transformation qui, étant donnés des objets sur un espace de manipulations et 
+qui rend difficile les opérations de ce type. Une transformation qui, étant donnés des 
+objets sur un espace de manipulations et 
 un changement de référentiel, prédit la disposition de ces mêmes objets sur la scène visuelle.
 Par exemple, un simple ``pattern matching'' nécessiterait un apprentissage par coeur de la conséquence visuelle 
 de toutes les combinaisons de dispositions d'objets et de tous les changements de référentiel tronc-tête, ce qui parait 
@@ -3109,7 +3110,8 @@ L'hypothèse de l'assemblage dynamique est celle qui, à l'heure actuelle, sembl
 d'implémenter le lien praxo-visuel, sans faire appel à une activité centrale spécifique ou
 à un modèle interne. Elle évite en particulier le coût combinatoire des changements de
 référentiels. Le mécanisme le plus populaire est celui qui a été proposé initialement
-par \cite{Konig91a} basé sur les résonances entre oscillateurs. Il reste néanmoins
+par \shortcite{Konig91a} (voir également \shortcite{Rod99,Wang2010,Dehaene2011}) 
+basé sur les résonances entre oscillateurs. Il reste néanmoins
 de nombreuses questions relatives à l'implémentaton concrète (ou opérationnelle) de ces mécanismes,
 ainsi que sur leur caractère (ou non) prédictif. 
 
@@ -3158,7 +3160,7 @@ caractéristique de ces différents éléments, constitutif d'une unité d'actio
 
 \section{Projets concrets}
 
-\subsection{Modèles large échelle}
+\subsection{Vers une approche computationnelle de l'activité à large échelle}
 
 Le milieu Marseillais offre des possibilités de collaboration nombreuses dans le domaine
 de la modélisation biologiquement inspirée. Nous avons sur le campus de la Timone (faculté de Médecine)
@@ -3245,6 +3247,7 @@ Un projet en cours à l'INS se propose d'ailleurs de caractériser certaines cri
 du lobe frontal, se manifestant par des activités motrices complexes, à l'aide de 
 tels capteurs accélérométriques dans le but de mieux quantifier et classifier ces crises.
 
+
 Modéliser une telle activité implique par ailleurs
 des mécanismes computationnels à implémenter, par exemple sous
 la forme de programmes moteurs, tels qu'observés
@@ -3254,35 +3257,47 @@ en jeu les circuits sous-corticaux (ganglions de la base, thalamus et peut-être
 qui ne sont pas encore
 implémentés sur l'outil de simulation TVB.
 
+En plus de ces mécanismes computationnels, l'analyse de l'activité
+spontanée du cerveau à l'état de repos, comme nous l'avons déjà évoqué, montre
+des alternances marquées entre différents patrons d'activité distribués, mettant en jeu des
+régions similaires d'un sujet à l'autre. Selon l'outil de mesure
+utilisé, ces alternances peuvent prendre place sur des échelles de quelques centaines de 
+millisecondes \shortcite{van2010} (analyse EEG) ou quelques dizaines de secondes \shortcite{Fox2005} (analyse fMRI).
+L'alternance rapide de l'activité semble être le support de  traitements cognitifs
+élémentaires. Le caractère rapide de ces alternances laisse supposer un mécanisme actif d'assemblage
+et de désassemblage des assemblées neuronales successivement actives, comme proposé dans \shortcite{Rod99}. 
+Une interprétation possibles est celle d'une alternance active, au sein du cerveau, entre une activité 
+principalement perceptive, préparatrice de l'action, et une activité principalement motrice, préparatrice
+de la perception. Cette alternance rapide entre préparation motrice et préparation 
+perceptive est un cadre possible à la réalisation du \emph{predictive coding}, comme stipulé par 
+\shortcite{Rao1999} (voir aussi \shortcite{Wurtz2008,Rolfs2011}). Les alternances à plus longue constante
+temporelle pourraient quant à elles reposer sur l'alternance déjà évoquée entre les activité d'exploration
+sensorielle au sens large et les activités liées à la manipulation et à l'utilisation des objets
+de l'environnement (sous la forme éventuelle de la simulation motrice), qui peuvent s'apparenter dans
+une certaine mesures aux processus internes et externes stipulés dans \shortcite{Fox2005}.
+L'analyse des patrons d'activité développés à large échelle nécessite plus généralement une analyse
+fonctionnelle et non simplement structurelle. Il s'agirait ici de sortir des approches quantitatives
+pour poser les bases d'une interprétation plus computationnelle 
+des activités large-échelle observées, ouvrant la voie à
+des modèles informatiques plus précis.
 
+Le domaine des interfaces cerveau-machine est également une voie prometteuse pour cette approche.
+L'activité décelée dans le cadre des interfaces non-invasives (de type EEG) ne permet pas de reconstruction
+précise des activités internes à l'origine du signal de surface. La plupart des interfaces proposées
+se basent sur une démarche de classification automatique, ne permettant pas une interprétation
+de l'évolution spatio-temporelle de l'EEG. 
+L'introduction d'une démarche computationnelle, utilisant éventuellement des connaissances
+acquises lors de mesures invasives, devrait en principe permettre de traiter, sous une forme peut-être élémentaire,
+ces changements d'état rapide, ce qui devrait, en principe,  améliorer l'interprétation 
+du signal et donc la fiabilité de l'interface.
 
-La première piste, qui est l'objet de la thèse de Mathieu Golos, s'oriente sur
-l'analyse structurelle  - modes de fonctionnement - grandes structures fonctionnelles...
+\subsection{Maths-Info}
 
-Deusième piste : modelisaton sous-corticale dans le cadre de TVB
+Le LIF et le LATP.
 
+Le bruit comme signal
 
-Troisième piste : analyse de l'alternance - Britz
-simultanéité. 
-
-epilepsie et fonctions exécutives - catégorisation?
-
-
-
-
-Dans le cadre de la modélisation du sujet épileptique, différents aspects peuvent 
-
-
-
-Dans le domaine des neurosciences dites cognitives, de nombreux projets tournent autour de
-la 
-
-
-Les projets actuellement développés au sein de l'Institut
-de neurosceinces de Systèmes 
-
-
-
+Substrat et bruit 
 
 derrière cette idée générale se cache néanmoins plusieurs difficultés
 - problématique de l'action --> fonctionnement discret, feedback +
