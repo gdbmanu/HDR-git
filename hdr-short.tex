@@ -258,7 +258,7 @@ Bernard Doyon, chercheur à l'INSERM (CHU Purpan), de 1995 à 2001. J'ai ensuite
 conférence à l'Ecole Supérieure de Mécanique de Marseille, fusionnée ensuite avec deux autres écoles d'ingénieurs
 pour rejoindre le groupe des Ecoles Centrales. En plus de l'activité d'enseignement, ma recherche s'est déroulée  
 dans le laboratoire ``Mouvement et Perception'' (unité CNRS dépendant de la faculté de sciences du sport), 
-dans l'équipe de Reonoud Bootsma, puis au sein
+dans l'équipe de Reinoud Bootsma, puis au sein
 de l'Institut de Neurosciences des systèmes (unité INSERM de la faculté de médecine de Marseille),
 dans l'équipe de Viktor Jirsa. 
 Cette activité de recherche s'est donc toujours déroulée dans un contexte impliquant des collaborations avec des
@@ -329,7 +329,11 @@ leur exposition à des signaux d'intérêt. Nous étudions deux modalités de ce
 visuelle, et plus particulièrement la saccade oculaire, en tant que modèle de boucle sensori-motrice élémentaire, et de l'autre l'orientation 
 temporelle, c'est à dire la capacité du sujet à concentrer ses ressources attentionnelles à un instant choisi dans le temps.
 
-Le cinquième chapitre [TODO...]
+Le cinquième chapitre présente enfin un certain nombre de questions laissées ouvertes par ces travaux, et présente
+un cadre conceptuel général pour des développements possibles en neurosciences computationnelles. Deux projets
+de recherche plus concrets sont également proposés, d'une part dans le cadre de la simulation large échelle des fonctions
+cérébrales, et d'autre part dans le cadre des interfaces cerveau-machine.
+ 
 
 %{\color{Violet}
 
@@ -3080,14 +3084,14 @@ Cette approche est celle dite du ``neurone grand-mère''.
 S'il apparaît peu probable qu'un seul neurone soit le support de la liaison,
 rien n'exclut qu'une population de neurones puisse répondre de façon sélective
 à toutes les configurations d'interaction avec un objet particulier (par exemple
-notre grand-mère) \shortcite{Quiroga2005}
+notre grand-mère) \shortcite{Quiroga2005}, voir aussi \shortcite{Dehaene2011}.
 Une telle activité est donc la continuation à travers
 toutes ses transformations (déplacement du corps, mouvement des yeux) 
 d'un même objet de l'environnement,
 autrement dit une ``présence de l'objet''.
 Dans sa forme la plus élaborée, l'activité tierce est 
 un modèle de l'environnement, constituée des principales quantités 
-relatives aux objets d'intérêt, dans un espace extérocentré. 
+relatives aux objets d'intérêt, dans un espace extérocentré . 
 Cette reconstruction de la structure externe de l'environnement 
 par modèle inverse suppose implicitement des transformations géométriques au sein
 du substrat permettant de projeter l'objet invariant sur la scène prémotrice ou visuelle,
@@ -3110,7 +3114,7 @@ L'hypothèse de l'assemblage dynamique est celle qui, à l'heure actuelle, sembl
 d'implémenter le lien praxo-visuel, sans faire appel à une activité centrale spécifique ou
 à un modèle interne. Elle évite en particulier le coût combinatoire des changements de
 référentiels. Le mécanisme le plus populaire est celui qui a été proposé initialement
-par \shortcite{Konig91a} (voir également \shortcite{Rod99,Wang2010,Dehaene2011}) 
+par \shortcite{Konig91a} (voir également \shortcite{Rod99,Wang2010}) 
 basé sur les résonances entre oscillateurs. Il reste néanmoins
 de nombreuses questions relatives à l'implémentaton concrète (ou opérationnelle) de ces mécanismes,
 ainsi que sur leur caractère (ou non) prédictif. 
@@ -3169,7 +3173,11 @@ deux laboratoires de neurosciences directement intéresés par les problématiqu
 du système moteur ainsi que sur l'analyse des données d'imagerie optique, et l'INS (Institut de Neurosciences
 des Systèmes), laboratoire INSERM en pointe sur l'analyse et la modélisation de l'épilepsie ainsi que sur la 
 modélisation dite à large échelle de l'activité nerveuse, à travers le projet TVB (The Virtual Brain) porté
-par Viktor Jirsa et Randy McIntosh.
+par Viktor Jirsa et Randy McIntosh (Université de Toronto). 
+Le laboratoire (INS) héberge également un centre de calcul principalement dédié à 
+la mise en oeuvre des calculs coûteux liés à la simulation détaillée des processus de 
+diffusion à la surface d'une reconstruction 3D du cortex, dans le cadre de 
+l'interface de simulation TVB.
 
 Cet environnement donne accès à des données d'observation sur l'animal, mais également chez l'humain dans le cadre
 des chirurgies pré-opératoires consistant à implémenter des électrodes stéréotaxiques profondes chez les
@@ -3281,17 +3289,86 @@ pour poser les bases d'une interprétation plus computationnelle
 des activités large-échelle observées, ouvrant la voie à
 des modèles informatiques plus précis.
 
-Le domaine des interfaces cerveau-machine est également une voie prometteuse pour cette approche.
+\subsection{Interface informatiques inspirées par la biologie}
+
+Nous avons également à Marseille une forte tradition en informatique théorique, portée
+historiquement par le LIF (Laboratoire d'Informatique Fondamentale), avec une expertise poussée 
+dans le domaine des langages fonctionnels, mais qui développe également une
+recherche de pointe en apprentissage automatique (Machine Learning).
+Le LATP (Laboratoire d'Analyse Topologie Probabilité) est également impliqué sur des
+thématiques proches du machine learning, en particulier dans le cadre du développement de
+modèles probabilistes en traitement du signal.
+Le centre INRIA de Sophia-Antipolis est également impliqués dans des 
+collaborations régulières avec les laboratoires de neurosciences
+Marseillais, sur des thématiques en lien avec le traitement du signal et la 
+construction de modèles inverses en imagerie.
+
+Cet environnement facilite le développement de projets mixtes, à l'interface du
+traitement du signal et de la modélisation biologique dans le cadre de l'étude des
+processus décisionnels classiques. 
+
+Les interfaces cerveau-machine, déjà abordées, offrent
+un cadre applicatif intéressant et potentiellement utile principalement pour
+les déficiences motrices et la réhabilitation motrice.
+%Le domaine des interfaces cerveau-machine est également une voie prometteuse pour cette approche.
 L'activité décelée dans le cadre des interfaces non-invasives (de type EEG) ne permet pas de reconstruction
 précise des activités internes à l'origine du signal de surface. La plupart des interfaces proposées
 se basent sur une démarche de classification automatique, ne permettant pas une interprétation
 de l'évolution spatio-temporelle de l'EEG. 
-L'introduction d'une démarche computationnelle, utilisant éventuellement des connaissances
+
+L'idée générale d'un projet applicatif de ce type serait de construire une interface
+dont les principes de fonctionnement devraient être aussi proche que possible, étant données
+les connaissance actuelles, du fonctionnement du système nerveux.
+Il s'agit, d'un côté, de bien comprendre l'activité large-échelle pour mieux
+interpréter les données issues des capteurs non invasifs (EEG, voire MEG).
+De l'autre, il s'agit de s'inspirer des modes de fonctionnement du cerveau
+pour élaborer l'interface qui traite le signal. L'interface est en effet conceptuellement
+dans une situation similaire à celle d'un sujet humain~: elle fait face à un signal peu fiable,
+incomplet, bruité et doit apprendre à interpréter parfois compléter des données manquantes,
+pour produire des réponses (possiblement des déplacements moteurs dans le cas d'une interface de
+contrôle). Une avancée importante dans le domaine des interfaces cerveau-machine
+pourrait donc être la mise en place dans un cadre conceptuel bien contrôlé d'une véritable
+boucle de rétroaction entre l'interface et le sujet, en traitant le signal en temps réel 
+sur un principe d'anticipation et de prediction pour pallier autant que possible aux délais
+de traitement. 
+
+L'introduction de cette démarche ``en boucle fermée'', utilisant éventuellement des connaissances
 acquises lors de mesures invasives, devrait en principe permettre de traiter, sous une forme peut-être élémentaire,
-ces changements d'état rapide, ce qui devrait, en principe,  améliorer l'interprétation 
+ces changements d'état rapide, et  améliorer ainsi l'interprétation 
 du signal et donc la fiabilité de l'interface.
 
-\subsection{Maths-Info}
+Une partie centrale du projet devrait être la prise en compte des mécanismes adaptatifs,
+en particulier dans le cadre d'une interface impliquant des stimuli visuels, pour ``caler''
+autant que possible les instants d'apparition des stimuli avec les rythmes et les féquences intrinsèques
+au cerveau, en respectant en particulier, s'ils peuvent être identifiés, les alternances
+entre les moments de préparation motrice et les moments de préparation perceptive. 
+D'autre part, le modèle devrait prendre en compte autant que faire se peut les caractéristiques
+à la fois structurelles et dynamiques du cerveau du sujet, en identifiant la localisation des
+circuits large échelle ainsi que les rythmes ou résonances propres de son activité cérébrale.
+
+En dernier lieu, il faut envisager des mécanismes adaptatifs agissant en direct pendant 
+l'interaction avec le sujet. On parle dans ce cas d'algorithmes d'apprentissage ``en ligne''. 
+Il s'agit d'une part d'en apprendre chaque jour un peu plus sur le sujet au travers des interactions répétées,
+pour affiner le modèle utilisé par l'interface. 
+D'autre part, il s'agit d'adapter ``en direct'' le modèle en fonction d'événements imprévus (comme
+des électrodes qui se déplacent ou se décollent) 
+ou de variations lentes de l'état du sujet (suite à la fatigue, à des baisses d'attention etc.)
+Dans ce cadre, le développement d'algorithmes adaptatifs spécifiques serait à
+envisager. 
+
+Plus généralement, les connaisances en plein essor sur le fonctionnement
+du cerveau à large échelle nous permettent d'envisager de nouvelles méthodologies 
+dans le développement d'objets interagissant de manière ``naturelle'' avec leur utilisateur.
+C'est à travers une connaissance plus approfondie de la logique et des mécanismes
+computationnels à l'oeuvre dans le cerveau (en particulier à large
+échelle)
+qu'on pourra peut-être repenser la manière de concevoir des objets mobiles (robots mobiles
+mais également interfaces vocales, jeux, etc.) à travers des modes de communication
+plus proches de ceux qu'un sujet expérimente quotidiennement avec son entourage.
+
+
+
+\iffalse
 
 Le LIF et le LATP.
 
@@ -5528,6 +5605,8 @@ Théorie bayesienne
 
 
 \paragraph{Friston}
+
+\fi
 
 \bibliographystyle{mslapa}%{apalike}%{apacite}
 \bibliography{biblio}
