@@ -299,7 +299,7 @@ de papiers et de contributions à des conférences scientifiques.
 %{\color{red} La difficulté consiste à éclairer les méthodes de machine learning à partir de concepts issus des sciences cognitives. }
 
 
-Dans le premier chapître, nous abordons la question de substrat, en tant que  support de la communication (le hardware). 
+Dans le chapître 2, nous abordons la question de substrat, en tant que  support de la communication (le hardware). 
 En suivant l'analogie neuromimétique, nous étudions les conditions qui vont permettre à une population de calculateurs (les neurones) 
 de s'organiser dynamiquement en activant ou désactivant sélectivement certains circuits.
 Selon les caractéristiques des calculateurs élémentaires et les caractéristiques du patron de connectivité, 
@@ -309,7 +309,7 @@ et le principe de la capacité limitée (limitation du nombre de ``symboles'' ou
 Nous terminons ce tour d'horizon avec une étude plus appliquée consistant à analyser le nombre et l'étendue de patrons spatio-temporels au
 sein d'un réseau construit à partir d'une matrice de connectivité structurelle obtenue par une technique de tractographie chez l'humain.
 
-Le second chapître présente une série de résultats regroupés sous le thème de la ``subjectivité perceptive''. Les modèles présentés
+Le troisième chapître présente une série de résultats regroupés sous le thème de la ``subjectivité perceptive''. Les modèles présentés
 explorent l'idée d'une autonomie partielle de la réponse logicielle à la commande. Vu sous l'angle neuromimétique, la 
 subjectivité perceptive consiste d'une part à ignorer certaines entrées sensorielles, du fait de leur non-pertinence ou de leur 
 non-conformité, et d'autre part à compléter certaines entrées sensorielles manquantes à l'aide de connaissances issues de l'expérience passée. 
@@ -319,7 +319,7 @@ cette résonance étant le support des interpolations perceptives futures. Nous 
 se distinguent du modèle classique du ``predictive coding'' organisé autour du principe du feedback négatif, et en particulier comment les premières
 implémentent le comportement de  ``résistance au changement'' (ou persévération). 
 
-Le troisième chapître aborde la question plus globale de la formation des comportements moteurs. 
+Le quatrième chapître aborde la question plus globale de la formation des comportements moteurs. 
 Nous commençons par rappeler certains principes et problèmes d'ordre général, comme la différence d'extensivité et d'expressivité du contrôleur et de son environnement.
 Nous présentons ensuite un certain nombre de résultats ayant en commun le principe du contrôle en ``boucle fermée''.
 Nous abordons ainsi successivement la question de la stabilisation et de la destabilisation des patrons d'interaction
@@ -328,14 +328,14 @@ des mécanismes d'exploration dans le cadre de l'apprentissage par renforcement,
 De manière plus appliquée, nous détaillons les principes d'une architecture de contrôle destinée à supplémenter des déficiences
 motrices à partir de l'analyse de l'EEG de surface (interfaces cerveau-machines non-invasives).
 
-Le quatrième chapître présente une série de résultats relatifs à des projets plus directement orientés vers la modélisation des mécanismes perceptifs et moteurs
+Le cinquième chapître présente une série de résultats relatifs à des projets plus directement orientés vers la modélisation des mécanismes perceptifs et moteurs
 tels qu'ils apparaissent dans les études neurophysiologiques et comportementales. 
 L'orientation est une des modalités fondamentales de l'activité motrice, consistant à déplacer les organes récepteurs dans une direction qui optimise
 leur exposition à des signaux d'intérêt. Nous étudions deux modalités de ce comportement d'orientation : d'une part l'orientation 
 visuelle, et plus particulièrement la saccade oculaire, en tant que modèle de boucle sensori-motrice élémentaire, et de l'autre l'orientation 
 temporelle, c'est à dire la capacité du sujet à concentrer ses ressources attentionnelles à un instant choisi dans le temps.
 
-Le cinquième chapitre présente enfin un certain nombre de questions laissées ouvertes par ces travaux, et présente
+Le sixième chapitre présente enfin un certain nombre de questions laissées ouvertes par ces travaux, et présente
 un cadre conceptuel général pour des développements possibles en neurosciences computationnelles. Deux projets
 de recherche plus concrets sont également proposés, d'une part dans le cadre de la simulation large échelle des fonctions
 cérébrales, et d'autre part dans le cadre des interfaces cerveau-machine.
@@ -2762,7 +2762,7 @@ des réseau de neurones récurrents. A quoi peut servir une activité se dévelo
 spontanément, sans lien avec un milieu extérieur?
 
 Les différentes architectures neuronales étudiées ont tout d'abord
-permis d'identifier des comportements caractéristiques, décrits sous la forme de différents régimes dyamiques. 
+permis d'identifier des comportements caractéristiques, décrits sous la forme de différents régimes dynamiques. 
 Nous avons cherché à caractériser l'expressivité de ces substrats, c'est à dire leur capacité à produire
 des patrons d'activité pouvant servir de support à des opérations cognitives. Nous avons, en particulier,
 abordé le principe de la reconnaissance par résonance qui, sous sa forme la plus simple, s'exprime comme une transition
@@ -2892,7 +2892,7 @@ de récompense plus intenses).
 
 Le projet de recherche que cherche à défendre vise à approfondir la compréhension de certains des problèmes
 calculatoires rencontrés dans le cadre de ces efforts de modélisation biologiquement inspirée.
-Si on se restreint à un cadre computationnel pur, la plasticité 
+Si on se restreint à un cadre computationnel, la plasticité 
 des réseaux de neurones récurrents met en jeu des interactions complexes entre un substrat caractérisé
 par un circuit de connexions plus ou moins récurrent, structuré ou hiérarchisé, un signal extérieur plus ou moins prédictible, 
 éventuellement sous influence des commandes produites par le réseau, et enfin une règle de plasticité 
@@ -2948,10 +2948,10 @@ le mécanisme computationnel sous-jacent est celui de la comparaison entre deux 
 sensorielles, à savoir la scène effective et la scène prédite.
 Il existe dans les deux cas une activité de prédiction active, via un modèle ``forward''.
 
-L'idée est de prendre appui sur cette approche relativement nouvelle (Bien que les modèles computationnels pour
+L'idée est de prendre appui sur cette approche relativement nouvelle\footnote{Bien que les modèles computationnels pour
 le ``predictive coding'' datent
 des années 2000 \cite{Rao1999}, la définition proposée par Friston dans un cadre du contrôle
-moteur n'est pas encore (à ma connaissance) implémentée).
+moteur n'est pas encore (à ma connaissance) implémentée.}.
 Nous allons essayer d'identifier les difficultés se cachant derrière ces définitions, 
 et tenter d'établir des pistes de recherche visant à aborder la problématique du contrôle 
 à l'intérieur des contraintes posées par un milieu logiciel distribué, de type ``réseau de neurones''
@@ -2977,7 +2977,7 @@ deux grands domaines attentionnels peuvent être définis. D'une part
 le domaine visuel, organisé autour de la direction du regard; d'autre part,
 l'espace de travail, organisé autour des opérations sur des objets
 attrapables ou maniplables. 
-Si on se place selon la perspective de l'invariance du monde environnant, il est intéressant de
+Si on se place selon la perspective de l'invariance du monde environnant \cite{Gib79}, il est intéressant de
 constater que ces deux types d'activité (exploration visuelle, utilisation) sont rarement
 simultanées. De manière un peu schématique, l'espace de travail reste invariant pendant
 l'exploration visuelle, et, réciproquement, le regard reste statique (focalisé) durant
