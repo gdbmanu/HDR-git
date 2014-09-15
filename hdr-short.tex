@@ -274,7 +274,7 @@ le signal (modèles du signal nerveux, mais également traitement des signaux et
 techniques), le contrôle (commandes produites par le cerveau, mais également commande produite
 par un dispositif logiciel), et les systèmes dynamiques.
 
-Ce rapport évite volontairement les détails mathématiques, et insiste sur la mise en perspectives des travaux présentés
+Ce rapport évite les détails mathématiques, et insiste sur la mise en perspectives des travaux présentés
 dans le cadre des problématiques des neurosciences computationnelles. 
 Pour les figures, formules et illustrations, il faudra se reporter au document annexe contenant  une sélection
 de papiers et de contributions à des conférences scientifiques.
@@ -409,6 +409,128 @@ cérébrales, et d'autre part dans le cadre des interfaces cerveau-machine.
 % DEA :
 % - conditions de la destabilisation : etude des effets de petite taille. 
 
+\section{Substrats computationnels et expressivité}
+
+Un substrat computationnel est un domaine matériel borné, défini par des caractéristiques physiques homogènes, 
+pouvant servir de support à la communication, c'est à dire 
+%(1) capable de faire transiter des signaux 
+%sous forme de flux de matière ou d'énergie,
+%et (2) développant une activité intinsèque, assimilable à un ``calcul'', se traduisant par des changements d'état.
+%Derrière le terme substrat, nous entendrons ici principalement un domaine physique bien délimité, 
+%naturel (corps) ou artificiel (machine, circuit imprimé), 
+capable %de communication, c'est à dire capable 
+de traiter des inputs (sensoriels) 
+et de produire des outputs (déplacements, signaux).
+Un modèle de substrat est un ensemble de variables d'état et une fonction de transition 
+d'état traduisant ces changement de la matière.
+%L'universalité implique la mise en oeuvre de ressources indépendamment de la tâche (task-independent device). 
+Un substrat, du fait de son caractère limité, doit au mieux exploiter ses ressources. 
+%Autrement dit, un programme à compétence universelle sera avant tout un programme qui devra gérer ses ressources de traitement pour les répartir au
+%mieux en fonction du nombre et de la complexité des tâches qui se présentent.
+La notion d'\emph{expressivité} d'un substrat tourne autour de cette notion de limitation.
+Nous considérons un certain nombre de
+substrats (à mémoire limitée, à apports
+d'énergie limités, à capacités de traitement limitées, soumis à du bruit, etc...) 
+et cherchons à estimer le nombre et le type d'opérations qu'ils sont capables de produire. 
+
+%Nous nous intéressons ici à des substrats ``actifs'', qui dépassent par leurs propriétés de simples 
+%canaux de communication (la simple amplification)~: 
+%activité endogène, sélection des signaux, mémoire, plasticité...
+%Outre l'architecture de Von Neumann bien connue, 
+Les réseaux de neurones naturels nous offrent un bon exemple pour caractériser des mécanismes 
+computationnels différents de ceux qui sont à l'oeuvre dans les architectures computationnelles standard, 
+de type Von Neumann. 
+%dans la mesure où, à 
+%travers l'ensemble des espèces animales, le même substrat (un réseau de neurones communiquant via des synapses) traite  
+%des signaux sensoriels variés et produit des réponses adaptées tout aussi variées. 
+%{\color{Violet}
+%A rappeler également : les niveaux de Marr : du substrat au modèle... et Turing bien sûr}
+%Par analogie avec les substrats matériels, on considèrera un certain nombre de substrats \emph{logiciels} 
+%définis dans le cadre de l'apprentissage automatique. 
+Les modèles issus de l'approche neuromimétique (encore dite approche ``distribuée''), 
+tels qu'il se sont définis depuis le perceptron \shortcite{Rosen58}, reposent sur
+une notion implicite de ressource limitée, qui se traduit en particulier par un ``choix'' effectué par le
+concepteur sur le nombre de neurones à mettre dans la couche cachée.
+Une définition quantitative populaire de l'expressivité d'un tel substrat est la 
+dimension de Vapnik-Chervonenkis \shortcite{Vap95}, qui représente le caractère 
+plus ou moins complexe d'un classifieur, en terme de nombre de pivots utilisé pour
+séparer les données. 
+
+%Un des problèmes posé par la construction d'architectures cognitives 
+%est celle de la non-exhaustivité: sur un hardware donné,
+%seul un nombre limité de faits peut être pris en compte, et un nombre limité de réponses produites.
+
+L'encodage est le processus par lequel une classe a priori non bornée de signaux 
+d'entrée sera traduit sous la forme d'un ensemble borné de patrons d'activité,
+chaque patron étant le reflet, au sein du substrat, d'une classe de signaux. 
+L'illustration la plus caractéristique d'un tel processus d'encodage est celle des réseaux de 
+Kohonen \shortcite{KOHONEN} pour lesquels un nombre fixé de centres mobiles 
+vont servir à encoder la distribution des entrées. Le substrat ``codant'' est 
+caractérisé par un réseau de noeuds liés 
+par des relations de voisinage. L'encodage permet ainsi de regrouper/traduire la similarité des données d'entrée
+par le degré de voisinage des noeuds dont elles suscitent l'activation.  
+On trouve dans cette même famille de réseaux constitué d'une couche de lecture et d'une couche d'encodage
+le modèle ART de Grossberg \shortcite{ART98} qui ajoute à son modèle la possibilité de recrutement de
+nouveaux noeuds (apportant à son substrat une expressivité non-bornée mais limitée par la dimension 
+de la couche d'entrée).
+
+Néanmoins, l'expressivité d'un substrat ne se limite pas au nombre de symboles. 
+Elle repose également sur la nature (la ``qualité'')
+des opérations (et des transformations) qui peuvent prendre place dans le substrat. 
+Par exemple, l'existence d'un processus de ``pattern matching'' avec seuil conditionne 
+la perception du monde sous forme de 
+transitions brusques et de relaxations vers des attracteurs.
+L'existence d'un modèle linéaire conditionne la perception du monde sous la forme de 
+reponse linéaire (asservissement) à l'erreur de prédiction.
+L'existence de delais conditionne la perception des causalités temporelles etc. 
+
+L'exemple des réseaux de Hopfield \shortcite{Hop82} offre ainsi un éclairage différent 
+sur l'expressivité d'un substrat en mettant en 
+avant le caractère distribué (non-local) de l'activité. 
+Contrairement à l'idée classique d'un noeud comme unité d'expression 
+(par exemple unité de séparation dans le cas des classifieurs, 
+unité de description dans le cas des cartes auto-organisées etc.), 
+la capacité du substrat est vue sous l'angle du nombre
+de patrons distribués (patterns) pouvant être obtenus en tant qu'état final (attracteur) atteint par le système
+dynamique décrit par les poids (arêtes) du réseau.
+La capacité s'exprime ici en nombre de \emph{modes} (configurations atteignables) 
+et non en nombre de noeuds/vecteurs supports etc.
+Si la capacité se trouve en principe augmentée
+d'un facteur exponentiel ($2^N$ configurations distribuées possibles), 
+la capacité effective est en pratique beaucoup plus réduite, 
+se limitant à un nombre de modes (attracteurs) distincts en $O(N)$, 
+c'est à dire de l'ordre du nombre de noeuds \shortcite{Amit1987,Tso88}.
+La nature des opérations réalisables par le substrat est également différent puisqu'il s'agit principalement ici d'une
+dynamique de relaxation adaptée à des opération de complétion et d'interpolation de données manquantes, implémentant un
+mécanisme de mémoire dite ``auto-associative''. 
+ 
+Le champ des possibilités d'expression varie fortement d'un modèle à l'autre. Ainsi, la théorie du 
+``Champ neuronal dynamique'' \shortcite{Ama77B} décrit un substrat à support  
+continu (un champ et non plus un réseau de noeuds discrets), dont la dynamique spatio-temporelle est décrite par un jeu
+d'équation aux dérivées partielles. Ce modèle propose une description explicitement spatialisée
+du substrat, et porte en lui une capacité de description (ou de reproduction) 
+des caractéristiques spatiales et temporelles d'un environnement physique continu. 
+Le nombre de modes possibles est ici infini,
+le substrat ayant la puissance du continu, mais demeure borné par l'intervalle sur lequel il 
+se développe.
+
+%{\color{Violet} L'approche ``Multi-scale''}
+
+L'approche ``Multi-échelle'' \shortcite{WILSON89,Varela2001} consiste à considérer 
+un substrat dont les variables d'état évoluent (ou peuvent être décrites) 
+selon différentes échelles spatiales et temporelles, chaque échelle de description 
+étant explicative du comportement observé à l'échelle
+supérieure (par des variables dites ``macroscopiques''). L'idée est ici encore 
+d'établir des passerelles entre un substrat constitué d'éléments 
+microscopique caractérisés par des processus rapides localisés et un environnement
+physique caractérisé par des processus macroscopiques lents et spatialement étendus.
+
+L'exemple des réseaux de neurones artificiels nous offre ainsi un équivalent logiciel de l'idée de substrat matériel
+(tout réseau de neurone étant néanmoins en principe implémentable sous forme de hardware). J'utilise cet éclairage
+pour passer en revue les  substrats neuro-inspirés étudiés dans le cadre de ma thèse et après,
+sous l'angle donc de leurs capacités de traitement et d'expression.
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     1      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -417,21 +539,23 @@ cérébrales, et d'autre part dans le cadre des interfaces cerveau-machine.
 
 
 
-Le fil rouge de notre approche est celui des réseaux de neurones à connectivité aléatoire, permettant de traiter de manière formelle et de quantifier 
-le caractère extrêmement inhomogène des réseaux de neurones naturels~: variété des types cellulaires, variété des délais de
+Le fil rouge de notre approche est celui des réseaux de neurones à connectivité aléatoire, 
+permettant de traiter de manière formelle et de quantifier 
+le caractère extrêmement inhomogène des réseaux de neurones naturels~: variété des types cellulaires, 
+variété des délais de
 transmission, variété de la forme et du nombre d'arborisations synaptiques, etc.
 A travers l'analyse de la distribution des patrons de connexions, de la distribution leur intensité, de la distribution des délais associés,
 nous posons la question du rôle de ces distributions dans la formation de patrons d'activité (ou modes) variés, supports potentiels
 d'opérations cognitives. 
 
 Cette étude a été entamée au milieu des années 90 au sein d'un petit groupe animé par Manuel Samuelidès, professeur à Supaéro, et Bernard Doyon, chercheur
-à l'INSERM. Les premiers réssultats portaient sur l'étude de réseaux aléatoires très simples, dont le patron de connexion
+à l'INSERM. Les premiers résultats portaient sur l'étude de réseaux aléatoires très simples, dont le patron de connexion
 était issu d'un tirage gaussien centré. L'étude du système dynamique issu de ce patron de connexion met en évidence
 un comportement de route vers le chaos par quasi-périodicité \shortcite{Doyon1993,CESSAC94}, dont le comportement à large échelle (limite
 ``thermodynamique'') s'apparente à un processus aléatoire gaussien \shortcite{Ces95}.
 C'est au sein de cette équipe que j'ai effectué mon stage de DEA \shortcite{Dau95} ainsi que ma thèse \shortcite{Dau00}.
 
-L'approche que je mets en avant dans cette section 
+L'approche que je mets en avant dans ce chapître
 est donc l'analyse des capacités d'un réseau de neurones en tant que support potentiel d'opérations cognitives. 
 Dans ces différentes études, nous n'abordons pas la question de la plasticité, ne regardons pas les questions de communication ou de mémoire
 comme l'encodage ou le traitement effectif des signaux. 
@@ -910,6 +1034,113 @@ grâce au contrôle du niveau d'activité  qui empêche d'atteindre les régimes
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Plasticité et apprentissage}
+
+La plasticité est un processus physique qui impacte le comportement d'un substrat,
+en modifiant son activité, sa réactivité à certaines entrées, ou le type de
+réponse qu'il produit. 
+La plasticité est la propriété qui donne au substrat une mémoire physique (par opposition
+la mémoire dynamique), qui provoque un changement
+d'état durable.
+La plasticité permet d'inscrire sur
+le support la trace de faits passés en vue d'une utilisation future.
+
+Selon une perpective biologique et développementale, l'apprentissage
+est le processus de changement comportemental, 
+en relation avec ce mécanisme de plasticité. 
+L'apprentissage est au sens large
+l'ensemble des processus épigénétiques (historiques) inscrivant dans l'animal ou l'individu 
+les éléments d'expérience qui contribuent à accroître l'adaptation de ses réponses à son
+milieu.  
+
+La capacité à inscrire des événements ou des faits particuliers en vue de les exploiter dans le futur est une des
+propriétés essentielle du système nerveux des être vivants, assez difficile
+à reproduire en tant que telle sur un support artificiel.
+Plaçons-nous par exemple dans une perspective computationnelle autonome, 
+dans laquelle un programme doit pouvoir se passer d'utilisateur. 
+La consigne doit provenir d'un programme interne (un ``méta programme'') qui 
+agit sur le programme courant pour l'``améliorer'' en fonction des événements se présentent.
+Même si la notion de méta-programme ne pose pas de difficulté conceptuelle, elle est
+en pratique difficile à mettre en oeuvre dans les architectures informatiques traditionnelles. 
+La difficulté réside dans 
+le choix des événements à considérer parmi l'ensemble des événements qui se présentent, et surtout 
+dans la manière dont les événements pris en compte influencent le comportement logiciel futur.
+
+L'apprentissage automatique (le ``Machine learning'') étudie les mécanismes de plasticité
+sous l'aspect de processus d'optimisation dans des espaces vectoriels de grande dimension. 
+Le but de l'apprentissage est d'extraire des données d'entrée des régularités, des facteurs explicatifs,
+permettant de mieux prédire et classifier les données nouvelles. 
+On parle d'apprentissage en ligne lorsque les données sont présentées séquentiellement.
+L'apprentissage consiste à appliquer de petits ajustements à chaque nouvelle donnée dans un 
+sens qui augmente localement la justesse du comportement, en espérant que chacun de ces ajustements locaux 
+augmente la justesse globale,
+selon le principe de la descente de gradient ``stochastique''.
+
+Selon l'approche ``discriminative'' \shortcite{Vap95}, le calcul repose essentiellement sur des produits 
+scalaire entre ces données et 
+une ou plusieurs variétés séparatrices (ou caractéristiques). 
+Les variétés qui émergent de ces processus tirent leurs caractéristiques des données qui ont été présentées. 
+Le ``programme'' final (classifieur, régresseur, ...) est constitué d'un ensemble de vecteurs
+caractéristiques qui sont les meilleurs ``représentants'' des données qui ont été présentées (au sens de la 
+discrimination, de la régression, de l'interpolation, ...). 
+
+Selon l'approche statistique  \shortcite{Bishop2006}, le bruit (le ``hasard'') est une des composantes 
+principales de l'algorithme. 
+Les algorithmes d'apprentissage statistiques reposent sur le principe 
+des modèles inverses. Un processus caché produit un flux de données (des observations).
+La théorie de l'apprentissage 
+statistique repose sur l'hypothèse
+que les données sont des échantillons d'une même distribution génératrice cachée,
+qui peut être sujette à des bruits d'état, et à des bruits de mesure. 
+L'apprentissage est dans ce cas un processus qui va tendre à séparer des données d'entrée les composantes
+non-prédictibes (bruit) des composantes prédictibles (signal), c'est à dire  identifier l'un et l'autre 
+pour estimer au mieux le degré de certitude (le posterior).
+Les facteurs explicatifs sont ici les différentes distributions représentatives des états du modèle
+génératif caché. 
+%L'apprentissage repose sur des 
+%estimateurs de l'erreur, ou de la récompense, basés sur ces échantillons.  
+Le choix de la réponse peut lui aussi reposer sur la prise en compte de l'incertitude sur 
+la réponse à proposer (ambiguité perceptive), sous la forme d'une réponse ``je ne sais pas'', ou 
+encore sous la forme d'une réponse issue d'un tirage pondéré entre différentes réponses plausibles.
+
+%{\color{Violet} Les nombreux développements de l'apprentissage automatique permettent
+%BLA BLA BLA... prédicteur / classifieur. interpolation. 
+%Néanmoins, des pbs restent :
+
+%prise en compte des dépendances temporelles dans les données. persévérance
+
+%apprentissage "en ligne"
+
+%interpolation. auto-association. feedback positif
+
+%perception. connaissance et non-sens.}
+
+Les approches descriptives extraients des représentants caractéristiques des données (vecteurs supports). 
+Les approches explicatives 
+identifient la source cachée des observations. La troisième famille d'approches est celle des réseaux de neurones, 
+qui définit un substrat dont les caractéristiques propres (nombre de neurones, nombre de couches cachées, architecture
+et patron de connexions) définissent la manière dont les données vont être traitées et interprétées.
+
+Par analogie avec la biologie et le système nerveux, %le principe de méta-programme 
+%a principalement été implémenté dans 
+%un cadre logiciel qui est celui des réseaux de neurones artificiels.
+%On parle d'apprentissage automatique (``machine learning'').
+l'apprentissage est alors le processus qui modifie graduellement la
+valeur des liaisons synaptiques entre les différents noeuds du réseau, dans 
+le but d'augmenter la pertinence des réponses et des comportements produits.
+Selon une perspective \emph{supervisée}, il s'agit d'inscrire dans la mémoire la trace de faits 
+passés, dans le but de faciliter leur réapparition ou au contraire d'éviter qu'ils
+ne se reproduisent.
+Selon une perspective \emph{non supervisée}, il s'agit plutôt de réduire l'incertitude sur les faits nouveaux
+grâce à la prise en compte des faits passés.
+
+Le choix du modèle (du substrat artificiel) conditionne le type d'opérations, la nature des réponses
+produites ainsi que la nature des changements autorisés.
+%L'ensemble de ces règles qui conditionnement l'évolution du substrat sous l'influence
+%des signaux à traiter constituent le méta-programme. 
+Selon le cadre choisi, la convergence du modèle vers un comportement cible
+adapté pourra être garanti sous certaines conditions (par exemple,
+sous une condition de séparabilité linéaire dans le cadre du perceptron  \shortcite{Rosen58}).
 
 La plupart des résultats présentés dans cette section portent sur l'application 
 de la plasticité synaptique dans des réseaux de neurones récurrents aléatoires 
@@ -1170,12 +1401,15 @@ de la scène sensorielle. Le cas limite correspond au réseau qui ignore totalem
 persévérant indéfiniment sur un illusion perceptive produite par l'activité interne (``hallucination'').
 Le feedback négatif apporte une parcimonie (perception de la différence d'activité), qui permet d'implémenter 
 un principe de ``matching pursuit'' pour un traitement rapide du flux visuel \shortcite{Perrinet2010}.
-Il présente cependant une sensibilité au bruit de mesure (fluctuations aléatoire), et nécessite la mise en place d'un reset 
+Il présente cependant une sensibilité au bruit de mesure (fluctuations aléatoire), 
+et nécessite dans certains cas la mise en place d'un reset 
 périodique, qui peut être réalisé par une alternance entre mesure de l'erreur (perception) et correction 
 d'erreur (déplacement moteur). Il nécessite également le maintien d'une activité prédictive interne
-résultat de l'intégration des erreurs perceptives, rarement implémentée
-dans le cas de signaux spatio-temporels\footnote{Sauf si, évidemment, le modèle forward est fourni,
-auquel cas le principe de l'observateur peut être appliqué \cite{Kalman1960,Wolpert2000}}.
+résultat de l'intégration des erreurs perceptives, 
+généralement implémenté sous grâce à un modèle ``forward'' permettant d'appliquer le principe de l'``observateur''
+\cite{Kalman1960,Wolpert2000}.
+%dans le cas de signaux spatio-temporels\footnote{Sauf si, évidemment, le modèle forward est fourni,
+%auquel cas .
 
 L'architecture proposée dans \shortcite{Dau02} implémente un principe de traitement
 sélectif de la scène sensorielle, en séparant l'espace des sensations entre ce qui est connu (ce qui produit 
@@ -2643,7 +2877,7 @@ mouvement) nécessiterait la mise en oeuvre de modèles de populations plus simp
 que des neurones détaillés. Certains des principes 
 computationnels évoqués plus haut, comme l'idée d'un contrôle basé sur des
 points fixe de l'espace de postures, pourraient être développés dans ce cadre. 
-Cet aspect sera présenté plus précisément dans la partie projet de ce mémoire. 
+%Cet aspect sera présenté plus précisément dans la partie projet de ce mémoire. 
 
 %{\color{Violet}
 %{\bf 2010}
@@ -2700,7 +2934,7 @@ de ces données, et une prédiction (sous la forme d'une vraisemblance) de l'ins
 L'idée est donc que la réactivité au stimulus (readiness) est proportionnelle à cette probabilité 
 estimée d'apparition.
 
-Nous avons regardé en particulier le cas de la probabilité variable (``variable foreperiod''), c'est 
+Nous avons regardé en particulier le cas de la période préparatrice variable (``variable foreperiod''), c'est 
 que les stimuli apparaissant à des intervalles variant d'un essai à l'autre.
 Dans ce cas, les temps de réponse
 indiquent une meilleure réactivité pour les intervalles
