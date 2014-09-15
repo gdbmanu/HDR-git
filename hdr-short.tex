@@ -409,7 +409,33 @@ cérébrales, et d'autre part dans le cadre des interfaces cerveau-machine.
 % DEA :
 % - conditions de la destabilisation : etude des effets de petite taille. 
 
-\section{Substrats computationnels et expressivité}
+Le fil rouge de notre approche est celui des réseaux de neurones à connectivité aléatoire, 
+permettant de traiter de manière formelle et de quantifier 
+le caractère extrêmement inhomogène des réseaux de neurones naturels~: variété des types cellulaires, 
+variété des délais de
+transmission, variété de la forme et du nombre d'arborisations synaptiques, etc.
+A travers l'analyse de la distribution des patrons de connexions, de la distribution leur intensité, de la distribution des délais associés,
+nous posons la question du rôle de ces distributions dans la formation de patrons d'activité (ou modes) variés, supports potentiels
+d'opérations cognitives. 
+
+Cette étude a été entamée au milieu des années 90 au sein d'un petit groupe animé par Manuel Samuelidès, professeur à Supaéro, et Bernard Doyon, chercheur
+à l'INSERM. Les premiers résultats portaient sur l'étude de réseaux aléatoires très simples, dont le patron de connexion
+était issu d'un tirage gaussien centré. L'étude du système dynamique issu de ce patron de connexion met en évidence
+un comportement de route vers le chaos par quasi-périodicité \shortcite{Doyon1993,CESSAC94}, dont le comportement à large échelle (limite
+``thermodynamique'') s'apparente à un processus aléatoire gaussien \shortcite{Ces95}.
+C'est au sein de cette équipe que j'ai effectué mon stage de DEA \shortcite{Dau95} ainsi que ma thèse \shortcite{Dau00}.
+
+L'approche que je mets en avant dans ce chapître
+est donc l'analyse des capacités d'un réseau de neurones en tant que support potentiel d'opérations cognitives. 
+Dans ces différentes études, nous n'abordons pas la question de la plasticité, ne regardons pas les questions de communication ou de mémoire
+comme l'encodage ou le traitement effectif des signaux. 
+Notre approche se concentre sur la notion de régime dynamique et d'\emph{attracteurs}. L'idée principale est que notre substrat
+neuronal doit être capable d'exprimer différents ``modes'' de fonctionnement. Ces modes se traduisent soit par des régimes dynamiques
+variés (synchrone/asynchrone, point fixe/périodique/chaos), soit par des répartitions spatiales différenciées, appelés ``patrons d'activité''.
+Nous étudions ainsi le nombre et la variété de ces patrons d'activité, leur stabilité, leur répartition et leur résistance aux perturbations.
+
+
+\section{Introduction~: substrats computationnels et expressivité}
 
 Un substrat computationnel est un domaine matériel borné, défini par des caractéristiques physiques homogènes, 
 pouvant servir de support à la communication, c'est à dire 
@@ -437,8 +463,8 @@ et cherchons à estimer le nombre et le type d'opérations qu'ils sont capables 
 %canaux de communication (la simple amplification)~: 
 %activité endogène, sélection des signaux, mémoire, plasticité...
 %Outre l'architecture de Von Neumann bien connue, 
-Les réseaux de neurones naturels nous offrent un bon exemple pour caractériser des mécanismes 
-computationnels différents de ceux qui sont à l'oeuvre dans les architectures computationnelles standard, 
+Les réseaux de neurones naturels nous offrent un bon exemple pour tenter d'identifier des mécanismes 
+computationnels différents de ceux qui sont à l'oeuvre dans les architectures centrales traditionnelles, 
 de type Von Neumann. 
 %dans la mesure où, à 
 %travers l'ensemble des espèces animales, le même substrat (un réseau de neurones communiquant via des synapses) traite  
@@ -474,17 +500,17 @@ le modèle ART de Grossberg \shortcite{ART98} qui ajoute à son modèle la possi
 nouveaux noeuds (apportant à son substrat une expressivité non-bornée mais limitée par la dimension 
 de la couche d'entrée).
 
-Néanmoins, l'expressivité d'un substrat ne se limite pas au nombre de symboles. 
-Elle repose également sur la nature (la ``qualité'')
-des opérations (et des transformations) qui peuvent prendre place dans le substrat. 
-Par exemple, l'existence d'un processus de ``pattern matching'' avec seuil conditionne 
-la perception du monde sous forme de 
-transitions brusques et de relaxations vers des attracteurs.
-L'existence d'un modèle linéaire conditionne la perception du monde sous la forme de 
-reponse linéaire (asservissement) à l'erreur de prédiction.
-L'existence de delais conditionne la perception des causalités temporelles etc. 
+%Néanmoins, l'expressivité d'un substrat ne se limite pas au nombre de symboles. 
+%Elle repose également sur la nature (la ``qualité'')
+%des opérations (et des transformations) qui peuvent prendre place dans le substrat. 
+%Par exemple, l'existence d'un processus de ``pattern matching'' avec seuil conditionne 
+%la perception du monde sous forme de 
+%transitions brusques et de relaxations vers des attracteurs.
+%L'existence d'un modèle linéaire conditionne la perception du monde sous la forme de 
+%reponse linéaire (asservissement) à l'erreur de prédiction.
+%L'existence de delais conditionne la perception des causalités temporelles etc. 
 
-L'exemple des réseaux de Hopfield \shortcite{Hop82} offre ainsi un éclairage différent 
+L'exemple des réseaux de Hopfield \shortcite{Hop82} offre  un éclairage différent 
 sur l'expressivité d'un substrat en mettant en 
 avant le caractère distribué (non-local) de l'activité. 
 Contrairement à l'idée classique d'un noeud comme unité d'expression 
@@ -525,8 +551,9 @@ d'établir des passerelles entre un substrat constitué d'éléments
 microscopique caractérisés par des processus rapides localisés et un environnement
 physique caractérisé par des processus macroscopiques lents et spatialement étendus.
 
-L'exemple des réseaux de neurones artificiels nous offre ainsi un équivalent logiciel de l'idée de substrat matériel
-(tout réseau de neurone étant néanmoins en principe implémentable sous forme de hardware). J'utilise cet éclairage
+L'exemple des réseaux de neurones artificiels nous offre ainsi un modèle logiciel de l'idée 
+de substrat matériel  limité
+(tout réseau de neurone étant en principe implémentable sous forme de hardware). J'utilise cet éclairage
 pour passer en revue les  substrats neuro-inspirés étudiés dans le cadre de ma thèse et après,
 sous l'angle donc de leurs capacités de traitement et d'expression.
 
@@ -539,30 +566,6 @@ sous l'angle donc de leurs capacités de traitement et d'expression.
 
 
 
-Le fil rouge de notre approche est celui des réseaux de neurones à connectivité aléatoire, 
-permettant de traiter de manière formelle et de quantifier 
-le caractère extrêmement inhomogène des réseaux de neurones naturels~: variété des types cellulaires, 
-variété des délais de
-transmission, variété de la forme et du nombre d'arborisations synaptiques, etc.
-A travers l'analyse de la distribution des patrons de connexions, de la distribution leur intensité, de la distribution des délais associés,
-nous posons la question du rôle de ces distributions dans la formation de patrons d'activité (ou modes) variés, supports potentiels
-d'opérations cognitives. 
-
-Cette étude a été entamée au milieu des années 90 au sein d'un petit groupe animé par Manuel Samuelidès, professeur à Supaéro, et Bernard Doyon, chercheur
-à l'INSERM. Les premiers résultats portaient sur l'étude de réseaux aléatoires très simples, dont le patron de connexion
-était issu d'un tirage gaussien centré. L'étude du système dynamique issu de ce patron de connexion met en évidence
-un comportement de route vers le chaos par quasi-périodicité \shortcite{Doyon1993,CESSAC94}, dont le comportement à large échelle (limite
-``thermodynamique'') s'apparente à un processus aléatoire gaussien \shortcite{Ces95}.
-C'est au sein de cette équipe que j'ai effectué mon stage de DEA \shortcite{Dau95} ainsi que ma thèse \shortcite{Dau00}.
-
-L'approche que je mets en avant dans ce chapître
-est donc l'analyse des capacités d'un réseau de neurones en tant que support potentiel d'opérations cognitives. 
-Dans ces différentes études, nous n'abordons pas la question de la plasticité, ne regardons pas les questions de communication ou de mémoire
-comme l'encodage ou le traitement effectif des signaux. 
-Notre approche se concentre sur la notion de régime dynamique et d'\emph{attracteurs}. L'idée principale est que notre substrat
-neuronal doit être capable d'exprimer différents ``modes'' de fonctionnement. Ces modes se traduisent soit par des régimes dynamiques
-variés (synchrone/asynchrone, point fixe/périodique/chaos), soit par des répartitions spatiales différenciées, appelés ``patrons d'activité''.
-Nous étudions ainsi le nombre et la variété de ces patrons d'activité, leur stabilité, leur répartition et leur résistance aux perturbations.
 
 %{\color{Violet}
 
@@ -1034,7 +1037,39 @@ grâce au contrôle du niveau d'activité  qui empêche d'atteindre les régimes
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Plasticité et apprentissage}
+La plupart des résultats présentés dans cette section portent sur l'application 
+de la plasticité synaptique dans des réseaux de neurones récurrents aléatoires 
+dans le but de modifier leur comportement à long terme. 
+Comme nous l'avons vu, les réseaux récurrents aléatoires sont des substrats 
+actifs capables de manifester des formes d'organisation spontanée~: comportement critique, 
+transitions entre différentes configurations d'activité, activité persistante et mémoire 
+à court terme (rémanence) etc.
+L'ajout d'un mécanisme de plasticité a pour objectif d'exploiter la richesse intrinsèque 
+de la dynamique pour que le réseau puisse acquérir des connaissances et des compétences nouvelles.
+
+Nous partons en général d'une ``tabula rasa'', autrement dit un réseau ne possédant initialement
+aucune compétence. L'idée est d'exploiter et d'amplifier par la plasticité certaines régularités internes (des 
+activités reproductibles) pour les associer à des signaux extérieurs. Le but est
+d'obtenir par apprentissage des réactions différenciées du réseau face à des signaux de même nature, 
+mais de formes différente. 
+La réduction de la complexité qui accompagne la présentation de certains de ces signaux 
+est alors le signe d'une réactivité acquise à ces formes, liées à leurs caractéristiques 
+spatiales et temporelles particulières.
+
+Ce mécanisme de reconnaissance que nous étudions est assez éloigné d'un mécanisme 
+calculatoire puisqu'il s'agit principalement 
+d'une réaction accrue à certains signaux. Il permet néanmoins de tracer une frontière entre le ``connu'' et l'``inconnu'',
+et peut donc servir de base à des modèles de la perception, puis d'interpolation sur le principe de la 
+complétion perceptive \shortcite{Hop82}.
+Les formes produisant une réponse accrue sont ``vues'', les autres sont ignorées et demeurent ``non-perçues''. 
+Le mécanisme permettant de passer de l'ignorance à la perception repose sur la répétition (les signaux apparaissant le 
+plus souvent sont appris, ceux qui apparaissent rarement sont ignorés) 
+et sur leur faculté à produire des réponses différenciées dans le substrat (c'est le substrat qui fixe le
+caractère différent ou similaire de deux formes).
+
+
+
+\section{Introduction : plasticité et apprentissage}
 
 La plasticité est un processus physique qui impacte le comportement d'un substrat,
 en modifiant son activité, sa réactivité à certaines entrées, ou le type de
@@ -1139,38 +1174,8 @@ produites ainsi que la nature des changements autorisés.
 %L'ensemble de ces règles qui conditionnement l'évolution du substrat sous l'influence
 %des signaux à traiter constituent le méta-programme. 
 Selon le cadre choisi, la convergence du modèle vers un comportement cible
-adapté pourra être garanti sous certaines conditions (par exemple,
+adapté pourra être garantie sous certaines conditions (par exemple,
 sous une condition de séparabilité linéaire dans le cadre du perceptron  \shortcite{Rosen58}).
-
-La plupart des résultats présentés dans cette section portent sur l'application 
-de la plasticité synaptique dans des réseaux de neurones récurrents aléatoires 
-dans le but de modifier leur comportement à long terme. 
-Comme nous l'avons vu, les réseaux récurrents aléatoires sont des substrats 
-actifs capables de manifester des formes d'organisation spontanée~: comportement critique, 
-transitions entre différentes configurations d'activité, activité persistante et mémoire 
-à court terme (rémanence) etc.
-L'ajout d'un mécanisme de plasticité a pour objectif d'exploiter la richesse intrinsèque 
-de la dynamique pour que le réseau puisse acquérir des connaissances et des compétences nouvelles.
-
-Nous partons en général d'un principe de tabula rasa, où le réseau ne possède initialement
-aucune compétence. L'idée est d'exploiter et d'amplifier par la plasticité certaines régularités internes (des 
-activités reproductibles) pour les associer à des signaux extérieurs. Le but est
-d'obtenir par apprentissage des réactions différenciées du réseau face à des signaux de même nature, 
-mais de formes différente. 
-La réduction de la complexité qui accompagne la présentation de certains de ces signaux 
-est alors le signe d'une réactivité acquise à ces formes, liées à leurs caractéristiques 
-spatiales et temporelles particulières.
-
-Ce mécanisme de reconnaissance est assez peu calculatoire puisqu'il s'agit principalement 
-d'une réaction accrue à certains signaux. Il permet néanmoins de tracer une frontière entre le ``connu'' et l'``inconnu'',
-et peut donc servir de base à des modèles de la perception, puis d'interpolation sur le principe de la 
-complétion perceptive \shortcite{Hop82}.
-Les formes produisant une réponse accrue sont ``vues'', les autres sont ignorées et demeurent ``non-perçues''. 
-Le mécanisme permettant de passer de l'ignorance à la perception repose sur la répétition (les signaux apparaissant le 
-plus souvent sont appris, ceux qui apparaissent rarement sont ignorés) 
-et sur leur faculté à produire des réponses différenciées dans le substrat (c'est le substrat qui fixe le
-caractère différent ou similaire de deux formes).
-
 
 
 %L'aléa des patrons de connexion et le caractère non-linéaire des opérateurs 
@@ -2934,14 +2939,17 @@ de ces données, et une prédiction (sous la forme d'une vraisemblance) de l'ins
 L'idée est donc que la réactivité au stimulus (readiness) est proportionnelle à cette probabilité 
 estimée d'apparition.
 
-Nous avons regardé en particulier le cas de la période préparatrice variable (``variable foreperiod''), c'est 
-que les stimuli apparaissant à des intervalles variant d'un essai à l'autre.
+Nous avons regardé en particulier le cas de la période préparatrice variable (``variable foreperiod''), 
+où les stimuli apparaissant à des intervalles variant d'un essai à l'autre.
 Dans ce cas, les temps de réponse
 indiquent une meilleure réactivité pour les intervalles
 les plus longs. Ainsi les ressources attentionnelles ne sont pas équitablement
 réparties.
-Conformément à l'hypothèse de vraisemblance, le passage du temps permet en effet d'éliminer les hypothèses
-portant sur les intervalles courts, donnant plus de poids aux hypothèses les plus tardives. 
+Conformément à un principe de révision des croyances, 
+le passage du temps permet en effet d'éliminer les hypothèses
+portant sur les intervalles courts, donnant plus de vraisemblance 
+(et donc des temps de réactin plus courts) 
+aux hypothèses les plus tardives. 
 
 Le processus implémenté \shortcite{Malhotra2011} utilise un principe d'accumulation d'évidence concurrente. 
 Les différentes hypothèses ont initialement le même a-priori (chaque hypothèse
@@ -3306,16 +3314,16 @@ doivent être apprises ``par coeur'' \cite{Pouget1997} et ne peuvent résulter d
 
 %[NE PAS OUBLIER L'ACTIVITE VESTIBULAIRE]
 
-%Le problème est, comme nous l'avons vu, le caractère distribué de l'activité neuronale 
-%qui rend difficile les opérations de ce type. 
-Une transformation qui, étant donnés des 
+Le problème est, comme nous l'avons vu, le caractère distribué de l'activité neuronale 
+qui rend difficile les opérations de type ``forward'', c'est-à-dire 
+une transformation qui, étant donnés des 
 objets sur un espace de manipulations et 
 un changement de référentiel, prédit la disposition de ces mêmes objets sur la scène visuelle.
 Par exemple, un simple ``pattern matching'' nécessiterait un apprentissage par coeur de la conséquence visuelle 
 de toutes les combinaisons de dispositions d'objets et de tous les changements de référentiel tronc-tête, ce qui parait 
 computationellement très coûteux. Il est nécessaire néanmoins que le ``lien'' praxo-visuel entre les différents 
 objets de la scène ne soit pas perdu
-au cours des déplacement moteurs. 
+au cours des déplacement du regard. 
 (Un raisonnement symétrique peut être appliqué pour le cas des déplacements du corps dans un environnement visuel stable)
 
 Il existe trois grandes catégories d'approche pour traiter de cette question, plus
