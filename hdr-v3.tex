@@ -209,6 +209,13 @@ Le terme computationnel fait référence à la notion de calcul. Les neuroscienc
 visent donc à identifier ce qui, dans l'activité des neurones, s'apparente à un calcul; à identifier 
 le type et la nature des opérations réalisées par le système nerveux. 
 
+Ce rapport évite les détails mathématiques, et insiste sur la mise en perspectives des travaux présentés
+dans le cadre des problématiques des neurosciences computationnelles. 
+Pour les figures, formules et illustrations, il faudra se reporter au document annexe contenant  une sélection
+de papiers et de contributions à des conférences scientifiques.
+
+\chapter{Problématique}
+
 L'étude du système nerveux, sous l'angle computationnel, a deux objectifs. Le premier et le plus ancien est
 de s'inspirer du fonctionnement du système nerveux pour découvrir de nouveaux principes pour le calcul artificiel,
 ou de nouvelles architectures, pour résoudre des problèmes qui résistent encore aux calculateurs actuels.
@@ -229,19 +236,161 @@ Cette approche a environ une soixantaine d'années d'existence, et se confond pa
 les neurosciences fonctionnelles (étude des rôles des différentes structures anatomiques), 
 et l'apprentissage automatique (programmes s'adaptant aux données).
 
-L'activité de recherche que j'ai menée a pour cadre l'étude des réseaux de neurones artificiels. 
-Inspirés par le fonctionnement du cerveau, les réseaux de neurones sont des modèles de calculateurs universels
-un peu particuliers, dans lesquels le ``programme'' (la fonction de réponse) prend la forme d'un réseau,
-c'est à dire d'un ensemble d'arêtes pondérés et orientée définissant l'intensité du signal
-transitant entre les unités de calcul.
-La programmation d'un réseau de neurones repose sur des algorithmes dits d'apprentissage.
-Lorsque le réseau est soumis à des signaux, ou des données, l'algorithme d'apprentissage modifie 
-les poids du réseau dans un sens qui améliore (en principe) le comportement du programme.
 Dans le cadre des neurosciences computationnelles, la question n'est pas nécessairement de
 produire le meilleur algorithme, ou de résoudre une nouvelle tâche, mais de produire des
 modèles permettant de mieux comprendre les opérations réalisées par le cerveau, ou de prendre
 exemple sur des architectures ou des circuits neuronaux réels pour valider ou invalider des hypothèses
 liées aux types d'opérations produites par le système nerveux.
+
+\section{Notions générales}
+
+\subsection{Neurosciences computationnelles}
+
+\subsection{Réseaux de neurones}
+
+Inspirés par le fonctionnement du cerveau, les réseaux de neurones sont des modèles de calculateurs universels
+ dans lesquels le ``programme'' (la fonction de réponse) prend la forme d'un réseau,
+c'est à dire d'un ensemble d'arêtes pondérés et orientée définissant l'intensité du signal
+transitant entre les unités de calcul.
+La programmation d'un réseau de neurones repose sur des algorithmes dits d'apprentissage.
+Lorsque le réseau est soumis à des signaux, ou des données, l'algorithme d'apprentissage modifie 
+les poids du réseau dans un sens qui améliore (en principe) le comportement du programme.
+
+%Nous nous intéressons ici à des substrats ``actifs'', qui dépassent par leurs propriétés de simples 
+%canaux de communication (la simple amplification)~: 
+%activité endogène, sélection des signaux, mémoire, plasticité...
+%Outre l'architecture de Von Neumann bien connue, 
+Les réseaux de neurones naturels visent à identifier des mécanismes 
+computationnels différents de ceux qui sont à l'oeuvre dans les architectures centrales traditionnelles, 
+de type Von Neumann. 
+%dans la mesure où, à 
+%travers l'ensemble des espèces animales, le même substrat (un réseau de neurones communiquant via des synapses) traite  
+%des signaux sensoriels variés et produit des réponses adaptées tout aussi variées. 
+%{\color{Violet}
+%A rappeler également : les niveaux de Marr : du substrat au modèle... et Turing bien sûr}
+%Par analogie avec les substrats matériels, on considèrera un certain nombre de substrats \emph{logiciels} 
+%définis dans le cadre de l'apprentissage automatique. 
+Les modèles issus de l'approche neuromimétique (encore dite approche ``distribuée''), 
+tels qu'il se sont définis depuis le perceptron \shortcite{Rosen58}, reposent sur
+une notion implicite de ressource limitée, qui se traduit en particulier par un ``choix'' effectué par le
+concepteur sur le nombre de neurones à mettre dans la couche cachée.
+Une définition quantitative populaire de l'expressivité d'un tel substrat est la 
+dimension de Vapnik-Chervonenkis \shortcite{Vap95}, qui représente le caractère 
+plus ou moins complexe d'un classifieur, en terme de nombre de pivots utilisé pour
+séparer les données. 
+
+%Un des problèmes posé par la construction d'architectures cognitives 
+%est celle de la non-exhaustivité: sur un hardware donné,
+%seul un nombre limité de faits peut être pris en compte, et un nombre limité de réponses produites.
+
+L'encodage est le processus par lequel une classe a priori non bornée de signaux 
+d'entrée sera traduit sous la forme d'un ensemble borné de patrons d'activité,
+chaque patron étant le reflet, au sein du substrat, d'une classe de signaux. 
+L'illustration la plus caractéristique d'un tel processus d'encodage est celle des réseaux de 
+Kohonen \shortcite{KOHONEN} pour lesquels un nombre fixé de centres mobiles 
+vont servir à encoder la distribution des entrées. Le substrat ``codant'' est 
+caractérisé par un réseau de noeuds liés 
+par des relations de voisinage. L'encodage permet ainsi de regrouper/traduire la similarité des données d'entrée
+par le degré de voisinage des noeuds dont elles suscitent l'activation.  
+On trouve dans cette même famille de réseaux constitué d'une couche de lecture et d'une couche d'encodage
+le modèle ART de Grossberg \shortcite{ART98} qui ajoute à son modèle la possibilité de recrutement de
+nouveaux noeuds (apportant à son substrat une expressivité non-bornée mais limitée par la dimension 
+de la couche d'entrée).
+
+%Néanmoins, l'expressivité d'un substrat ne se limite pas au nombre de symboles. 
+%Elle repose également sur la nature (la ``qualité'')
+%des opérations (et des transformations) qui peuvent prendre place dans le substrat. 
+%Par exemple, l'existence d'un processus de ``pattern matching'' avec seuil conditionne 
+%la perception du monde sous forme de 
+%transitions brusques et de relaxations vers des attracteurs.
+%L'existence d'un modèle linéaire conditionne la perception du monde sous la forme de 
+%reponse linéaire (asservissement) à l'erreur de prédiction.
+%L'existence de delais conditionne la perception des causalités temporelles etc. 
+
+L'exemple des réseaux de Hopfield \shortcite{Hop82} offre  un éclairage différent 
+sur l'expressivité d'un substrat en mettant en 
+avant le caractère distribué (non-local) de l'activité. 
+Contrairement à l'idée classique d'un noeud comme unité d'expression 
+(par exemple unité de séparation dans le cas des classifieurs, 
+unité de description dans le cas des cartes auto-organisées etc.), 
+la capacité du substrat est vue sous l'angle du nombre
+de patrons distribués (patterns) pouvant être obtenus en tant qu'état final (attracteur) atteint par le système
+dynamique décrit par les poids (arêtes) du réseau.
+La capacité s'exprime ici en nombre de \emph{modes} (configurations atteignables) 
+et non en nombre de noeuds/vecteurs supports etc.
+Si la capacité se trouve en principe augmentée
+d'un facteur exponentiel ($2^N$ configurations distribuées possibles), 
+la capacité effective est en pratique beaucoup plus réduite, 
+se limitant à un nombre de modes (attracteurs) distincts en $O(N)$, 
+c'est à dire de l'ordre du nombre de noeuds \shortcite{Amit1987,Tso88}.
+La nature des opérations réalisables par le substrat est également différent puisqu'il s'agit principalement ici d'une
+dynamique de relaxation adaptée à des opération de complétion et d'interpolation de données manquantes, implémentant un
+mécanisme de mémoire dite ``auto-associative''. 
+ 
+Le champ des possibilités d'expression varie fortement d'un modèle à l'autre. Ainsi, la théorie du 
+``Champ neuronal dynamique'' \shortcite{Ama77B} décrit un substrat à support  
+continu (un champ et non plus un réseau de noeuds discrets), dont la dynamique spatio-temporelle est décrite par un jeu
+d'équation aux dérivées partielles. Ce modèle propose une description explicitement spatialisée
+du substrat, et porte en lui une capacité de description (ou de reproduction) 
+des caractéristiques spatiales et temporelles d'un environnement physique continu. 
+Le nombre de modes possibles est ici infini,
+le substrat ayant la puissance du continu, mais demeure borné par l'intervalle sur lequel il 
+se développe.
+
+%{\color{Violet} L'approche ``Multi-scale''}
+
+L'approche ``Multi-échelle'' \shortcite{WILSON89,Varela2001} consiste à considérer 
+un substrat dont les variables d'état évoluent (ou peuvent être décrites) 
+selon différentes échelles spatiales et temporelles, chaque échelle de description 
+étant explicative du comportement observé à l'échelle
+supérieure (par des variables dites ``macroscopiques''). L'idée est ici encore 
+d'établir des passerelles entre un substrat constitué d'éléments 
+microscopique caractérisés par des processus rapides localisés et un environnement
+physique caractérisé par des processus macroscopiques lents et spatialement étendus.
+
+
+\section{Notions spécifiques}
+
+%%  ICI LES DEFINITIONS QUI NE SONT PAS DANS LES NOTEBOOKS 
+
+\subsection{Substrats computationnels et expressivité}
+
+Un substrat computationnel est un domaine matériel borné, défini par des caractéristiques physiques homogènes, 
+pouvant servir de support à la communication, c'est à dire 
+%(1) capable de faire transiter des signaux 
+%sous forme de flux de matière ou d'énergie,
+%et (2) développant une activité intinsèque, assimilable à un ``calcul'', se traduisant par des changements d'état.
+%Derrière le terme substrat, nous entendrons ici principalement un domaine physique bien délimité, 
+%naturel (corps) ou artificiel (machine, circuit imprimé), 
+capable %de communication, c'est à dire capable 
+de traiter des inputs (sensoriels) 
+et de produire des outputs (déplacements, signaux).
+Un modèle de substrat est un ensemble de variables d'état et une fonction de transition 
+d'état traduisant ces changement de la matière.
+%L'universalité implique la mise en oeuvre de ressources indépendamment de la tâche (task-independent device). 
+Un substrat, du fait de son caractère limité, doit au mieux exploiter ses ressources. 
+%Autrement dit, un programme à compétence universelle sera avant tout un programme qui devra gérer ses ressources de traitement pour les répartir au
+%mieux en fonction du nombre et de la complexité des tâches qui se présentent.
+La notion d'\emph{expressivité} d'un substrat tourne autour de cette notion de limitation.
+
+
+
+Les réseaux de neurones artificiels nous offre ainsi un modèle 
+de substrat matériel  limité
+(tout réseau de neurone étant en principe implémentable sous forme de hardware). J'utiliserai cet éclairage
+pour passer en revue les  substrats neuro-inspirés étudiés dans le cadre de ma thèse et après,
+sous l'angle de leurs capacités de traitement et d'expression.
+
+
+
+\chapter{Travaux effectués}
+
+L'activité de recherche que j'ai menée a pour cadre l'étude des réseaux de neurones artificiels. 
+Nous considérons un certain nombre de
+substrats (à mémoire limitée, à apports
+d'énergie limités, à capacités de traitement limitées, soumis à du bruit, etc...) 
+et cherchons à estimer le nombre et le type d'opérations qu'ils sont capables de produire. 
+
 
 Les recherches que j'ai menées balayent un grand nombre de modèles, des plus détaillés (neurones à 
 impulsion, neurones à conductance) aux plus grossiers (activités de masses neuronales à l'échelle
@@ -274,10 +423,21 @@ le signal (modèles du signal nerveux, mais également traitement des signaux et
 techniques), le contrôle (commandes produites par le cerveau, mais également commande produite
 par un dispositif logiciel), et les systèmes dynamiques.
 
-Ce rapport évite les détails mathématiques, et insiste sur la mise en perspectives des travaux présentés
-dans le cadre des problématiques des neurosciences computationnelles. 
-Pour les figures, formules et illustrations, il faudra se reporter au document annexe contenant  une sélection
-de papiers et de contributions à des conférences scientifiques.
+Le fil rouge de notre approche est celui des réseaux de neurones à connectivité aléatoire, 
+permettant de traiter de manière formelle et de quantifier 
+le caractère extrêmement inhomogène des réseaux de neurones naturels~: variété des types cellulaires, 
+variété des délais de
+transmission, variété de la forme et du nombre d'arborisations synaptiques, etc.
+A travers l'analyse de la distribution des patrons de connexions, de la distribution leur intensité, de la distribution des délais associés,
+nous posons la question du rôle de ces distributions dans la formation de patrons d'activité (ou modes) variés, supports potentiels
+d'opérations cognitives. 
+
+Cette étude a été entamée au milieu des années 90 au sein d'un petit groupe animé par Manuel Samuelidès, professeur à Supaéro, et Bernard Doyon, chercheur
+à l'INSERM. Les premiers résultats portaient sur l'étude de réseaux aléatoires très simples, dont le patron de connexion
+était issu d'un tirage gaussien centré. L'étude du système dynamique issu de ce patron de connexion met en évidence
+un comportement de route vers le chaos par quasi-périodicité \shortcite{Doyon1993,CESSAC94}, dont le comportement à large échelle (limite
+``thermodynamique'') s'apparente à un processus aléatoire gaussien \shortcite{Ces95}.
+C'est au sein de cette équipe que j'ai effectué mon stage de DEA \shortcite{Dau95} ainsi que ma thèse \shortcite{Dau00}.
 
 
 
@@ -409,21 +569,7 @@ cérébrales, et d'autre part dans le cadre des interfaces cerveau-machine.
 % DEA :
 % - conditions de la destabilisation : etude des effets de petite taille. 
 
-Le fil rouge de notre approche est celui des réseaux de neurones à connectivité aléatoire, 
-permettant de traiter de manière formelle et de quantifier 
-le caractère extrêmement inhomogène des réseaux de neurones naturels~: variété des types cellulaires, 
-variété des délais de
-transmission, variété de la forme et du nombre d'arborisations synaptiques, etc.
-A travers l'analyse de la distribution des patrons de connexions, de la distribution leur intensité, de la distribution des délais associés,
-nous posons la question du rôle de ces distributions dans la formation de patrons d'activité (ou modes) variés, supports potentiels
-d'opérations cognitives. 
 
-Cette étude a été entamée au milieu des années 90 au sein d'un petit groupe animé par Manuel Samuelidès, professeur à Supaéro, et Bernard Doyon, chercheur
-à l'INSERM. Les premiers résultats portaient sur l'étude de réseaux aléatoires très simples, dont le patron de connexion
-était issu d'un tirage gaussien centré. L'étude du système dynamique issu de ce patron de connexion met en évidence
-un comportement de route vers le chaos par quasi-périodicité \shortcite{Doyon1993,CESSAC94}, dont le comportement à large échelle (limite
-``thermodynamique'') s'apparente à un processus aléatoire gaussien \shortcite{Ces95}.
-C'est au sein de cette équipe que j'ai effectué mon stage de DEA \shortcite{Dau95} ainsi que ma thèse \shortcite{Dau00}.
 
 L'approche que je mets en avant dans ce chapître
 est donc l'analyse des capacités d'un réseau de neurones en tant que support potentiel d'opérations cognitives. 
@@ -435,127 +581,6 @@ variés (synchrone/asynchrone, point fixe/périodique/chaos), soit par des répa
 Nous étudions ainsi le nombre et la variété de ces patrons d'activité, leur stabilité, leur répartition et leur résistance aux perturbations.
 
 
-\section{Introduction~: substrats computationnels et expressivité}
-
-Un substrat computationnel est un domaine matériel borné, défini par des caractéristiques physiques homogènes, 
-pouvant servir de support à la communication, c'est à dire 
-%(1) capable de faire transiter des signaux 
-%sous forme de flux de matière ou d'énergie,
-%et (2) développant une activité intinsèque, assimilable à un ``calcul'', se traduisant par des changements d'état.
-%Derrière le terme substrat, nous entendrons ici principalement un domaine physique bien délimité, 
-%naturel (corps) ou artificiel (machine, circuit imprimé), 
-capable %de communication, c'est à dire capable 
-de traiter des inputs (sensoriels) 
-et de produire des outputs (déplacements, signaux).
-Un modèle de substrat est un ensemble de variables d'état et une fonction de transition 
-d'état traduisant ces changement de la matière.
-%L'universalité implique la mise en oeuvre de ressources indépendamment de la tâche (task-independent device). 
-Un substrat, du fait de son caractère limité, doit au mieux exploiter ses ressources. 
-%Autrement dit, un programme à compétence universelle sera avant tout un programme qui devra gérer ses ressources de traitement pour les répartir au
-%mieux en fonction du nombre et de la complexité des tâches qui se présentent.
-La notion d'\emph{expressivité} d'un substrat tourne autour de cette notion de limitation.
-Nous considérons un certain nombre de
-substrats (à mémoire limitée, à apports
-d'énergie limités, à capacités de traitement limitées, soumis à du bruit, etc...) 
-et cherchons à estimer le nombre et le type d'opérations qu'ils sont capables de produire. 
-
-%Nous nous intéressons ici à des substrats ``actifs'', qui dépassent par leurs propriétés de simples 
-%canaux de communication (la simple amplification)~: 
-%activité endogène, sélection des signaux, mémoire, plasticité...
-%Outre l'architecture de Von Neumann bien connue, 
-Les réseaux de neurones naturels nous offrent un bon exemple pour tenter d'identifier des mécanismes 
-computationnels différents de ceux qui sont à l'oeuvre dans les architectures centrales traditionnelles, 
-de type Von Neumann. 
-%dans la mesure où, à 
-%travers l'ensemble des espèces animales, le même substrat (un réseau de neurones communiquant via des synapses) traite  
-%des signaux sensoriels variés et produit des réponses adaptées tout aussi variées. 
-%{\color{Violet}
-%A rappeler également : les niveaux de Marr : du substrat au modèle... et Turing bien sûr}
-%Par analogie avec les substrats matériels, on considèrera un certain nombre de substrats \emph{logiciels} 
-%définis dans le cadre de l'apprentissage automatique. 
-Les modèles issus de l'approche neuromimétique (encore dite approche ``distribuée''), 
-tels qu'il se sont définis depuis le perceptron \shortcite{Rosen58}, reposent sur
-une notion implicite de ressource limitée, qui se traduit en particulier par un ``choix'' effectué par le
-concepteur sur le nombre de neurones à mettre dans la couche cachée.
-Une définition quantitative populaire de l'expressivité d'un tel substrat est la 
-dimension de Vapnik-Chervonenkis \shortcite{Vap95}, qui représente le caractère 
-plus ou moins complexe d'un classifieur, en terme de nombre de pivots utilisé pour
-séparer les données. 
-
-%Un des problèmes posé par la construction d'architectures cognitives 
-%est celle de la non-exhaustivité: sur un hardware donné,
-%seul un nombre limité de faits peut être pris en compte, et un nombre limité de réponses produites.
-
-L'encodage est le processus par lequel une classe a priori non bornée de signaux 
-d'entrée sera traduit sous la forme d'un ensemble borné de patrons d'activité,
-chaque patron étant le reflet, au sein du substrat, d'une classe de signaux. 
-L'illustration la plus caractéristique d'un tel processus d'encodage est celle des réseaux de 
-Kohonen \shortcite{KOHONEN} pour lesquels un nombre fixé de centres mobiles 
-vont servir à encoder la distribution des entrées. Le substrat ``codant'' est 
-caractérisé par un réseau de noeuds liés 
-par des relations de voisinage. L'encodage permet ainsi de regrouper/traduire la similarité des données d'entrée
-par le degré de voisinage des noeuds dont elles suscitent l'activation.  
-On trouve dans cette même famille de réseaux constitué d'une couche de lecture et d'une couche d'encodage
-le modèle ART de Grossberg \shortcite{ART98} qui ajoute à son modèle la possibilité de recrutement de
-nouveaux noeuds (apportant à son substrat une expressivité non-bornée mais limitée par la dimension 
-de la couche d'entrée).
-
-%Néanmoins, l'expressivité d'un substrat ne se limite pas au nombre de symboles. 
-%Elle repose également sur la nature (la ``qualité'')
-%des opérations (et des transformations) qui peuvent prendre place dans le substrat. 
-%Par exemple, l'existence d'un processus de ``pattern matching'' avec seuil conditionne 
-%la perception du monde sous forme de 
-%transitions brusques et de relaxations vers des attracteurs.
-%L'existence d'un modèle linéaire conditionne la perception du monde sous la forme de 
-%reponse linéaire (asservissement) à l'erreur de prédiction.
-%L'existence de delais conditionne la perception des causalités temporelles etc. 
-
-L'exemple des réseaux de Hopfield \shortcite{Hop82} offre  un éclairage différent 
-sur l'expressivité d'un substrat en mettant en 
-avant le caractère distribué (non-local) de l'activité. 
-Contrairement à l'idée classique d'un noeud comme unité d'expression 
-(par exemple unité de séparation dans le cas des classifieurs, 
-unité de description dans le cas des cartes auto-organisées etc.), 
-la capacité du substrat est vue sous l'angle du nombre
-de patrons distribués (patterns) pouvant être obtenus en tant qu'état final (attracteur) atteint par le système
-dynamique décrit par les poids (arêtes) du réseau.
-La capacité s'exprime ici en nombre de \emph{modes} (configurations atteignables) 
-et non en nombre de noeuds/vecteurs supports etc.
-Si la capacité se trouve en principe augmentée
-d'un facteur exponentiel ($2^N$ configurations distribuées possibles), 
-la capacité effective est en pratique beaucoup plus réduite, 
-se limitant à un nombre de modes (attracteurs) distincts en $O(N)$, 
-c'est à dire de l'ordre du nombre de noeuds \shortcite{Amit1987,Tso88}.
-La nature des opérations réalisables par le substrat est également différent puisqu'il s'agit principalement ici d'une
-dynamique de relaxation adaptée à des opération de complétion et d'interpolation de données manquantes, implémentant un
-mécanisme de mémoire dite ``auto-associative''. 
- 
-Le champ des possibilités d'expression varie fortement d'un modèle à l'autre. Ainsi, la théorie du 
-``Champ neuronal dynamique'' \shortcite{Ama77B} décrit un substrat à support  
-continu (un champ et non plus un réseau de noeuds discrets), dont la dynamique spatio-temporelle est décrite par un jeu
-d'équation aux dérivées partielles. Ce modèle propose une description explicitement spatialisée
-du substrat, et porte en lui une capacité de description (ou de reproduction) 
-des caractéristiques spatiales et temporelles d'un environnement physique continu. 
-Le nombre de modes possibles est ici infini,
-le substrat ayant la puissance du continu, mais demeure borné par l'intervalle sur lequel il 
-se développe.
-
-%{\color{Violet} L'approche ``Multi-scale''}
-
-L'approche ``Multi-échelle'' \shortcite{WILSON89,Varela2001} consiste à considérer 
-un substrat dont les variables d'état évoluent (ou peuvent être décrites) 
-selon différentes échelles spatiales et temporelles, chaque échelle de description 
-étant explicative du comportement observé à l'échelle
-supérieure (par des variables dites ``macroscopiques''). L'idée est ici encore 
-d'établir des passerelles entre un substrat constitué d'éléments 
-microscopique caractérisés par des processus rapides localisés et un environnement
-physique caractérisé par des processus macroscopiques lents et spatialement étendus.
-
-L'exemple des réseaux de neurones artificiels nous offre ainsi un modèle logiciel de l'idée 
-de substrat matériel  limité
-(tout réseau de neurone étant en principe implémentable sous forme de hardware). J'utilise cet éclairage
-pour passer en revue les  substrats neuro-inspirés étudiés dans le cadre de ma thèse et après,
-sous l'angle donc de leurs capacités de traitement et d'expression.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -5867,7 +5892,7 @@ Théorie bayesienne
 
 % \fbox{
 %\begin{minipage}
-\includepdf[pages=1-10]{pdf/epj-st-2007.pdf}
+%\includepdf[pages=1-10]{pdf/epj-st-2007.pdf}
 %\end{minipage}
 % }
 
