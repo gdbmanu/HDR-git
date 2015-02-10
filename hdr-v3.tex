@@ -34,7 +34,7 @@
 %\usepackage{apacite}
 %\usepackage[longnamesfirst,nonamebreak]{natbib}
 
-\usepackage[usenames,dvipsnames]{color}
+%\usepackage[usenames,dvipsnames]{color}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -167,9 +167,16 @@
 %%%%%%%%%%%%%%%%
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%11
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                                            ##                                                               %%% 
+%%%                                          ####                                                               %%%  
+%%%                                            ##                                                               %%% 
+%%%                                            ##                                                               %%% 
+%%%                                            ##                                                               %%%    
+%%%                                            ##                                                               %%% 
+%%%                                          ######                                                             %%% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -214,7 +221,35 @@ dans le cadre des problématiques des neurosciences computationnelles.
 Pour les figures, formules et illustrations, il faudra se reporter au document annexe contenant  une sélection
 de papiers et de contributions à des conférences scientifiques.
 
+%%%%%%%%%%%%%%%%
+% NEW CHAPTER! %
+%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%22
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                                                 #######                                                     %%%
+%%%                                                ##     ##                                                    %%%    
+%%%                                                       ##                                                    %%%     
+%%%                                                 #######                                                     %%%   
+%%%                                                ##                                                           %%%
+%%%                                                ##                                                           %%% 
+%%%                                                #########                                                    %%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \chapter{Problématique}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 L'étude du système nerveux, sous l'angle computationnel, a deux objectifs. Le premier et le plus ancien est
 de s'inspirer du fonctionnement du système nerveux pour découvrir de nouveaux principes pour le calcul artificiel,
@@ -231,7 +266,8 @@ utilise des principes et méthodes différents). L'objectif est, à partir des o
 identifier les rôles et les interactions à l'intérieur du système nerveux, et potentiellement
 de mieux soigner les désordres et maladies neurologiques. 
 
-Cette approche a environ une soixantaine d'années d'existence, et se confond parfois avec les sciences cognitives
+Cette approche a environ une soixantaine d'années d'existence, {\bf !!!FLOU!!!et se confond parfois avec} 
+les sciences cognitives
 (étude des opérations de haut niveau réalisées par le cerveau), 
 les neurosciences fonctionnelles (étude des rôles des différentes structures anatomiques), 
 et l'apprentissage automatique (programmes s'adaptant aux données).
@@ -242,12 +278,115 @@ modèles permettant de mieux comprendre les opérations réalisées par le cerve
 exemple sur des architectures ou des circuits neuronaux réels pour valider ou invalider des hypothèses
 liées aux types d'opérations produites par le système nerveux.
 
+Les recherches que j'ai menées balayent un grand nombre de modèles, des plus détaillés ({\bf !!REF!! neurones à 
+impulsion} \cite{gerstner02}, {\bf !!REF!! neurones à conductance}) \cite{HH52} 
+aux plus grossiers (activités de {\bf !!REF!! masses neuronales} à l'échelle
+macroscopique \cite{Wilson1972}, modèles basés sur des mesures psychophysiques). 
+Différentes architectures et méthodes d'apprentissage sont proposées, reposant sur différents 
+paradigmes ({\bf !!supervisé} \cite{Rosen58}, {\bf !!REF!! non supervisé} \cite{Koh82}, 
+{\bf !!REF!! par renforcement} \cite{SUTTON98}), 
+sur des tâches de contrôle en boucle ouverte ou
+en boucle fermée, et s'inspirant à des degrés divers de l'architecture du système nerveux.
+
+Le fil conducteur de ces différents travaux est la recherche d'un rôle pour l'activité 
+intrinsèque, c'est dire le signal qui est produit spontanément dans le cadre
+de schémas de connexion récurrents (où, par exemple, la sortie du réseau reboucle sur l'entrée).
+La présence dans le cerveau à la fois de connexions récurrentes massives et d'une activité soutenue en l'absence de toute
+stimulation sensorielle suggère un rôle central pour cette activité interne. Il n'existe pourtant à l'heure
+actuelle pas de véritable consensus sur le rôle en question. Nous verrons dans les travaux qui 
+suivent quelques hypothèses, modèles et réalisation d'algorithmes d'apprentissage mettant en jeu
+cette activité intrinsèque.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Notions préliminaires}
+%%  ICI LES DEFINITIONS QUI NE SONT PAS DANS LES NOTEBOOKS
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\emph{Les notions et éléments de vocabulaire présentés ci-dessous présentent un point de vue personnel (non nécessairement
+validé par des publications) développé dans le cadre de la rédaction de ce rapport. 
+Ils doivent donc être considérées comme des tentatives pour produire un point de vue unifié ("computationnel")
+sur des notions généralement cantonnées au domaine des neurosciences.  }
+
+\emph{Cette tentative n'est ni la première, ni totalement originale. 
+Il s'agit principalement d'établir des passerelles entre des notions issues de la biologie et des notions issues
+des sciences de l'information.  }
+
+\emph{En particulier, chaque élément de vocabulaire qui n'appartient pas au domaine des sciences de l'information est introduit 
+dans une perspective plus générale permettant de faire le lien, autant que possible, avec celui-ci. Il s'agit
+principalement d'un travail de reformulation de certaines notions issues des neurosciences selon la dichotomie 
+matériel ("hardware") / logiciel ("software").}
+
+\subsection{Substrats computationnels et expressivité}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% substrat = MATERIEL  (!= LOGICIEL) 
+%% RN = modèle logiciel de substrat 
+
+%Cette section présente un certain nombre de concepts utiles pour la compréhension de mes travaux. 
+%On y trouve des questions relatives aux supports de communication et à leur expressivité, c'est à 
+%dire aux types d'opérations qu'ils peuvent réaliser et au type d'information qu'ils peuvent transporter.
+
+%[Mettre l'intro sur les substrat : feedback moins / pattern matching; puis introduire l'activité
+%intrinsèque (approche mixte)]
+
+%[RETOUR SUR LA NOTION DE SUBSTRAT - SUPPORT DE COMMUNICATION ET DE CALCUL]
+
+Un substrat computationnel est un domaine matériel borné, défini par des caractéristiques physiques homogènes, 
+pouvant servir de support à la communication, c'est à dire 
+%(1) capable de faire transiter des signaux 
+%sous forme de flux de matière ou d'énergie,
+%et (2) développant une activité intinsèque, assimilable à un ``calcul'', se traduisant par des changements d'état.
+%Derrière le terme substrat, nous entendrons ici principalement un domaine physique bien délimité, 
+%naturel (corps) ou artificiel (machine, circuit imprimé), 
+capable %de communication, c'est à dire capable 
+de traiter des inputs (sensoriels) 
+et de produire des outputs (déplacements, signaux).
+Un modèle de substrat est un ensemble de variables d'état et une fonction de transition 
+traduisant ces changement de la matière.
+%L'universalité implique la mise en oeuvre de ressources indépendamment de la tâche (task-independent device). 
+Un substrat, du fait de son caractère limité, doit au mieux exploiter ses ressources. 
+%Autrement dit, un programme à compétence universelle sera avant tout un programme qui devra gérer ses ressources de traitement pour les répartir au
+%mieux en fonction du nombre et de la complexité des tâches qui se présentent.
+La notion d'\emph{expressivité} d'un substrat {\bf !!!FLOU!!! tourne autour de} cette notion de limitation.
+
+Les réseaux de neurones artificiels nous offrent ainsi un modèle 
+de substrat matériel  limité
+(tout réseau de neurone étant en principe implémentable sous forme de hardware). J'utiliserai cet éclairage
+pour passer en revue les  substrats neuro-inspirés étudiés dans le cadre de ma thèse et après,
+sous l'angle de leurs capacités de traitement et d'expression.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Notions générales}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Sciences cognitives}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsection{Neurosciences computationnelles}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Réseaux de neurones}
+\subsection{Apprentissage automatique et réseaux de neurones}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\subsubsection{Apprentissage}
+
+\paragraph{Apprentissage supervisé}
+
+\paragraph{Apprentissage non-supervisé}
+
+\paragraph{Apprentissage par renforcement}
+
+\subsubsection{Typologie des réseaux de neurones}
 Inspirés par le fonctionnement du cerveau, les réseaux de neurones sont des modèles de calculateurs universels
  dans lesquels le ``programme'' (la fonction de réponse) prend la forme d'un réseau,
 c'est à dire d'un ensemble d'arêtes pondérés et orientée définissant l'intensité du signal
@@ -260,8 +399,8 @@ les poids du réseau dans un sens qui améliore (en principe) le comportement du
 %canaux de communication (la simple amplification)~: 
 %activité endogène, sélection des signaux, mémoire, plasticité...
 %Outre l'architecture de Von Neumann bien connue, 
-Les réseaux de neurones naturels visent à identifier des mécanismes 
-computationnels différents de ceux qui sont à l'oeuvre dans les architectures centrales traditionnelles, 
+L'étude des réseaux de neurones artificiels vise à identifier des mécanismes 
+computationnels différents de ceux qui sont à l’œuvre dans les architectures centrales traditionnelles, 
 de type Von Neumann. 
 %dans la mesure où, à 
 %travers l'ensemble des espèces animales, le même substrat (un réseau de neurones communiquant via des synapses) traite  
@@ -289,12 +428,12 @@ chaque patron étant le reflet, au sein du substrat, d'une classe de signaux.
 L'illustration la plus caractéristique d'un tel processus d'encodage est celle des réseaux de 
 Kohonen \shortcite{KOHONEN} pour lesquels un nombre fixé de centres mobiles 
 vont servir à encoder la distribution des entrées. Le substrat ``codant'' est 
-caractérisé par un réseau de noeuds liés 
+caractérisé par un réseau de nœuds liés 
 par des relations de voisinage. L'encodage permet ainsi de regrouper/traduire la similarité des données d'entrée
 par le degré de voisinage des noeuds dont elles suscitent l'activation.  
 On trouve dans cette même famille de réseaux constitué d'une couche de lecture et d'une couche d'encodage
 le modèle ART de Grossberg \shortcite{ART98} qui ajoute à son modèle la possibilité de recrutement de
-nouveaux noeuds (apportant à son substrat une expressivité non-bornée mais limitée par la dimension 
+nouveaux nœuds (apportant à son substrat une expressivité non-bornée mais limitée par la dimension 
 de la couche d'entrée).
 
 %Néanmoins, l'expressivité d'un substrat ne se limite pas au nombre de symboles. 
@@ -310,26 +449,26 @@ de la couche d'entrée).
 L'exemple des réseaux de Hopfield \shortcite{Hop82} offre  un éclairage différent 
 sur l'expressivité d'un substrat en mettant en 
 avant le caractère distribué (non-local) de l'activité. 
-Contrairement à l'idée classique d'un noeud comme unité d'expression 
+Contrairement à l'idée classique d'un nœud comme unité d'expression 
 (par exemple unité de séparation dans le cas des classifieurs, 
 unité de description dans le cas des cartes auto-organisées etc.), 
 la capacité du substrat est vue sous l'angle du nombre
 de patrons distribués (patterns) pouvant être obtenus en tant qu'état final (attracteur) atteint par le système
 dynamique décrit par les poids (arêtes) du réseau.
 La capacité s'exprime ici en nombre de \emph{modes} (configurations atteignables) 
-et non en nombre de noeuds/vecteurs supports etc.
+et non en nombre de nœuds/vecteurs supports etc.
 Si la capacité se trouve en principe augmentée
 d'un facteur exponentiel ($2^N$ configurations distribuées possibles), 
 la capacité effective est en pratique beaucoup plus réduite, 
 se limitant à un nombre de modes (attracteurs) distincts en $O(N)$, 
-c'est à dire de l'ordre du nombre de noeuds \shortcite{Amit1987,Tso88}.
+c'est à dire de l'ordre du nombre de nœuds \shortcite{Amit1987,Tso88}.
 La nature des opérations réalisables par le substrat est également différent puisqu'il s'agit principalement ici d'une
 dynamique de relaxation adaptée à des opération de complétion et d'interpolation de données manquantes, implémentant un
 mécanisme de mémoire dite ``auto-associative''. 
  
 Le champ des possibilités d'expression varie fortement d'un modèle à l'autre. Ainsi, la théorie du 
 ``Champ neuronal dynamique'' \shortcite{Ama77B} décrit un substrat à support  
-continu (un champ et non plus un réseau de noeuds discrets), dont la dynamique spatio-temporelle est décrite par un jeu
+continu (un champ et non plus un réseau de nœuds discrets), dont la dynamique spatio-temporelle est décrite par un jeu
 d'équation aux dérivées partielles. Ce modèle propose une description explicitement spatialisée
 du substrat, et porte en lui une capacité de description (ou de reproduction) 
 des caractéristiques spatiales et temporelles d'un environnement physique continu. 
@@ -348,64 +487,154 @@ d'établir des passerelles entre un substrat constitué d'éléments
 microscopique caractérisés par des processus rapides localisés et un environnement
 physique caractérisé par des processus macroscopiques lents et spatialement étendus.
 
+\subsection{Robotique et contrôle moteur}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Notions spécifiques}
 
-%%  ICI LES DEFINITIONS QUI NE SONT PAS DANS LES NOTEBOOKS 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Substrats computationnels et expressivité}
+\subsection{Réseaux de neurones aléatoires}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Un substrat computationnel est un domaine matériel borné, défini par des caractéristiques physiques homogènes, 
-pouvant servir de support à la communication, c'est à dire 
-%(1) capable de faire transiter des signaux 
-%sous forme de flux de matière ou d'énergie,
-%et (2) développant une activité intinsèque, assimilable à un ``calcul'', se traduisant par des changements d'état.
-%Derrière le terme substrat, nous entendrons ici principalement un domaine physique bien délimité, 
-%naturel (corps) ou artificiel (machine, circuit imprimé), 
-capable %de communication, c'est à dire capable 
-de traiter des inputs (sensoriels) 
-et de produire des outputs (déplacements, signaux).
-Un modèle de substrat est un ensemble de variables d'état et une fonction de transition 
-d'état traduisant ces changement de la matière.
-%L'universalité implique la mise en oeuvre de ressources indépendamment de la tâche (task-independent device). 
-Un substrat, du fait de son caractère limité, doit au mieux exploiter ses ressources. 
-%Autrement dit, un programme à compétence universelle sera avant tout un programme qui devra gérer ses ressources de traitement pour les répartir au
-%mieux en fonction du nombre et de la complexité des tâches qui se présentent.
-La notion d'\emph{expressivité} d'un substrat tourne autour de cette notion de limitation.
+Le fil rouge de notre approche est celui des réseaux de neurones à connectivité aléatoire, 
+permettant de traiter de manière formelle et de quantifier 
+le caractère extrêmement inhomogène des réseaux de neurones naturels~: variété des types cellulaires, 
+variété des délais de
+transmission, variété de la forme et du nombre d'arborisations synaptiques, etc.
+A travers l'analyse de la distribution des patrons de connexions, de la distribution leur intensité, de la distribution des délais associés,
+nous posons la question du rôle de ces distributions dans la formation de patrons d'activité (ou modes) variés, supports potentiels
+d'opérations cognitives. 
 
+Les premières études auxquelles j'ai participé portaient sur l'étude des transitions de phase dans les réseaux de neurones
+aléatoires. 
+La notion d'aléa ne porte pas sur la dynamique d'état mais sur le patron de connexions du réseau. 
+On parle de bruit ``figé'' dans les connexions (``quenched disorder'').
+Il s'agit d'un système dynamique déterministe, constitué de $N$ neurones, défini par la matrice des 
+couplages $J = \{J_{i,j}\}_{i \in 1..N,j \in 1..N}$ où chaque lien $J_{ij}$ est donc issu d'un tirage aléatoire indépendant.
 
+L'indépendance entre les différents liens est une caractéristique importante, qui permet d'analyser le comportement du modèle 
+à la limite des grandes tailles, c'est à dire en faisant tendre la taille $N$ vers l'infini. Avec un \emph{scaling} des poids approprié 
+(espérance, variance de la loi de tirage initial en $O(\frac{1}{N}$)), on peut montrer que la dynamique (déterministe) tend à la limite thermodynamique 
+vers un processus aléatoire, la corrélation entre les noeuds tendant vers 0. 
 
-Les réseaux de neurones artificiels nous offre ainsi un modèle 
-de substrat matériel  limité
-(tout réseau de neurone étant en principe implémentable sous forme de hardware). J'utiliserai cet éclairage
-pour passer en revue les  substrats neuro-inspirés étudiés dans le cadre de ma thèse et après,
-sous l'angle de leurs capacités de traitement et d'expression.
+%{\color{Violet} activité intrinsèque}
 
+Les premières études sur ce  type de modèle avaient été faites par Sompolinsky \shortcite{Som88} sur un système dynamique continu. 
+L'analyse d'une variante à temps
+discret avait été proposée par Cessac et Samuelidès \shortcite{Ces94}. La démonstration de cette propriété (dite de ``chaos local'') a été  
+formellement achevée, dans le cas discret, par Moynot et Samuelides \shortcite{Moy00a} en 2000.
+
+Le comportement d'une classe de réseaux (l'ensemble des réseaux définis par la même loi de tirage initial) peut être décrit à la limite thermodynamique par 
+des équations dites de ``champ moyen''. Ces équations définissent le processus aléatoire limite, autrement dit la dynamique temporelle de grandeurs caractéristiques comme l'activité moyenne, 
+le moments d'ordre 2 et la covariance dans le temps \shortcite{Ces95}. 
+Les équations de champ moyen offrent ainsi une description ``macroscopiques'' de l'activité d'un réseau,
+représentative de l'activité qu'on peut attendre dans un réseau de taille finie issu d'un tirage particulier, et 
+constituent de fait un cadre d'analyse adapté à une approche ``multi-échelles''.
+
+Il est intéressant de constater que le processus stochastique limite, tel que décrit par les équations de champ moyen, 
+a une traduction à taille finie
+sous la forme d'une activité de type chaos déterministe. L'existence d'un 
+paramètre de contrôle (le gain de la fonction de transfert des neurones) permet de reproduire, dans ces réseaux aléatoires, 
+un  comportement générique de déstabilisation, appelé route vers le chaos par ``quasi-périodicité'' \shortcite{Berger1988,Doyon1993}.
+L'existence d'une telle frontière entre l'ordre et le chaos est également prouvée à la limite thermodynamique, mais dans ce
+cas la transition se fait brutalement, avec un passage discret d'un processus de type point fixe à un processus stochastique \shortcite{Ces95}.
+Cette frontière entre ordre et chaos est par principe intéressante puisqu'elle indique le lieu
+où la variabilité de la dynamique, et donc potentiellement l'expressivité du réseau est la plus importante. 
+
+\subsection{Réservoir computing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Codage topographique}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Neurones impulsionnels}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Le signal produit par les neurones biologiques n'est pas une grandeur continue. Les neurones
+ont un comportement fortement non-linéaire, caractérisé par le franchissement d'un seuil d'activation.
+La cellule neuronale intègre les multiples potentiels post-synaptiques issus de ses synapses afférentes
+et émet un bref potentiel d'action lorsque le potentiel total atteint le seuil d'activation (on
+dit que la membrane se dépolarise).
+Après une brève période de repos (``remise à zéro''), le neurone recommence à intégrer les signaux entrants etc.
+Le système nerveux est donc caractérisé par l'émission et la réception de signaux discrets, qui présentent 
+à première vue une certaine analogie avec les signaux numériques, 
+à ceci près qu'il n'existe pas d'horloge centrale pour cadencer les opérations\footnote{
+	Cette question reste néanmoins débattue. Elle a été récemment relancée par \shortcite{Koubeissi2014}.}.
+C'est ce caractère discret des opérations neuronales qui avait inspiré les premiers modèles de neurones,
+au sein desquels les unités neuronales se comportaient comme des portes logiques \shortcite{MCu43}, par analogie avec 
+les circuits logiques des architectures informatiques.
+
+Les neurones biologiques sont également caractérisés par le type de neurotransmetteurs qu'ils émettent
+au niveau des synapses de leur arborisation terminale. On distingue les neurones inhibiteurs produisant des
+synapses GABAergiques et les neurones excitateurs produisant des synapses excitatrices variées 
+(glutamate, acétylcholine, dopamine, ...). 
+L'action synaptique inhibitrice est une ``contre-action'' qui vient s'opposer
+à l'effet des synapses excitatrices.
+L'action et la contre-action, c'est à dire l'équilibre dynamique entre
+deux forces opposées, est au coeur des opérations réalisées par le système nerveux. 
+
+Les neurones à potentiel d'action disposent en principe d'une expressivité 
+supérieure à celle des neurones à fréquence de décharge \shortcite{Izh06}.
+Ils offrent des possibilités d'opérations (tels le codage par rang, la polychronisation,...)
+ainsi qu'un support pour un traitement parallèle distribué (``multiplexage'') par décalage de phase
+ou par bande de fréquences \shortcite{Skaggs1996,wang96gamma,Wang2010}. % [CITATIONS].
+Un des enjeux connus est la possibilité d'émuler un mécanisme de synchronisation/coordination 
+longue distance supposé à l'oeuvre dans le cerveau pour l'integration multimodale \shortcite{Rod99}.
+
+\subsection{Modèles "multi-échelles"}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+L'approche "multi-échelles" en neurosciences
+
+% % A ne pas confondre avec les approches ondelettes
+
+\section{problématiques spécifiques}
+
+\subsection{Pattern matching vs. contrôle}
+
+\subsection{Feedback + vs. feedback -}
+
+%%%%%%%%%%%%%%%%
+% NEW CHAPTER! %
+%%%%%%%%%%%%%%%%
+
+\part{Vue d'ensemble des résultats}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%33
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                                                 #######                                                     %%%
+%%%                                                ##     ##                                                    %%%    
+%%%                                                       ##                                                    %%%     
+%%%                                                 #######                                                     %%%   
+%%%                                                       ##                                                    %%%
+%%%                                                ##     ##                                                    %%% 
+%%%                                                 #######                                                     %%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \chapter{Travaux effectués}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 L'activité de recherche que j'ai menée a pour cadre l'étude des réseaux de neurones artificiels. 
 Nous considérons un certain nombre de
 substrats (à mémoire limitée, à apports
 d'énergie limités, à capacités de traitement limitées, soumis à du bruit, etc...) 
 et cherchons à estimer le nombre et le type d'opérations qu'ils sont capables de produire. 
-
-
-Les recherches que j'ai menées balayent un grand nombre de modèles, des plus détaillés (neurones à 
-impulsion, neurones à conductance) aux plus grossiers (activités de masses neuronales à l'échelle
-macroscopique, modèles basés sur des mesures psychophysiques). 
-Différentes architectures et méthodes d'apprentissage sont proposées, reposant sur différents 
-paradigmes (supervisé, non supervisé, par renforcement), sur des tâches de contrôle en boucle ouverte ou
-en boucle fermée, et s'inspirant à des degrés divers de l'architecture du système nerveux.
-Le fil conducteur de ces différents travaux est la recherche d'un rôle pour l'activité 
-intrinsèque, c'est dire le signal qui est produit spontanément dans le cadre
-de schémas de connexion récurrents (où, par exemple, la sortie du réseau reboucle sur l'entrée).
-La présence à la fois de connexions récurrentes massives et d'une activité soutenue en l'absence de toute
-stimulation sensorielle suggère un rôle central pour cette activité interne. Il n'existe pourtant à l'heure
-actuelle pas de véritable consensus sur le rôle en question. Nous verrons dans les travaux qui 
-suivent quelques hypothèses, modèles et réalisation d'algorithmes d'apprentissage mettant en jeu
-cette activité intrinsèque.
 
 Cette recherche s'est tout d'abord déroulée à Toulouse, au sein du laboratoire informatique de l'ONERA, 
 dans l'équipe dirigée par Manuel Samuelidès, ensignant de mathématiques à Sup'aéro, et sous la supervision de 
@@ -423,28 +652,68 @@ le signal (modèles du signal nerveux, mais également traitement des signaux et
 techniques), le contrôle (commandes produites par le cerveau, mais également commande produite
 par un dispositif logiciel), et les systèmes dynamiques.
 
-Le fil rouge de notre approche est celui des réseaux de neurones à connectivité aléatoire, 
-permettant de traiter de manière formelle et de quantifier 
-le caractère extrêmement inhomogène des réseaux de neurones naturels~: variété des types cellulaires, 
-variété des délais de
-transmission, variété de la forme et du nombre d'arborisations synaptiques, etc.
-A travers l'analyse de la distribution des patrons de connexions, de la distribution leur intensité, de la distribution des délais associés,
-nous posons la question du rôle de ces distributions dans la formation de patrons d'activité (ou modes) variés, supports potentiels
-d'opérations cognitives. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Cette étude a été entamée au milieu des années 90 au sein d'un petit groupe animé par Manuel Samuelidès, professeur à Supaéro, et Bernard Doyon, chercheur
-à l'INSERM. Les premiers résultats portaient sur l'étude de réseaux aléatoires très simples, dont le patron de connexion
+\section{Chronologie}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% 1998
+Une étude sur les réseaux de neurones à connectivité aléatoire 
+a été entamée au milieu des années 90 au sein d'un petit groupe animé par Manuel Samuelidès, professeur à Supaéro, et Bernard Doyon, chercheur
+à l'INSERM. Les premiers résultats portaient sur des réseaux simples, dont le patron de connexion
 était issu d'un tirage gaussien centré. L'étude du système dynamique issu de ce patron de connexion met en évidence
 un comportement de route vers le chaos par quasi-périodicité \shortcite{Doyon1993,CESSAC94}, dont le comportement à large échelle (limite
 ``thermodynamique'') s'apparente à un processus aléatoire gaussien \shortcite{Ces95}.
 C'est au sein de cette équipe que j'ai effectué mon stage de DEA \shortcite{Dau95} ainsi que ma thèse \shortcite{Dau00}.
+
+% 1998 - Doyaon - Quoy - NN
+
+
+
+% 1999 - Moynot - Pinaud - Samuelides
+
+En collaboration avec Olivier Moynot, Manuel Samuelides et Olivier Pinaud \shortcite{Dau99A,dauce01a}, j'ai également 
+travaillé sur la définition et 
+l'étude du comportement à taille finie d'un modèle de réseau de neurones aléatoire (RNA) multi-populations (voir section \ref{sec:balanced}).
+
+Le point de départ consistait à modéliser et reproduire certains comportements observés dans les 
+réseaux de neurones naturels composés d'une population de neurones excitateurs et d'une population de neurones inhibiteurs.
+Cette classe de réseaux de neurones (constitués d'une population de noeuds inhibiteurs et d'une population de noeuds excitateurs)
+est appelé réseau de neurones ``équilibré'' (balanced neural networks), l'équilibre se référant à l'idée d'équilibre
+dynamique entre deux forces opposantes. La dynamique du réseau est amenée à converger vers un point d'équilibre
+traduisant localement (et globalement) le ``poids'' des deux influences. Une configuration des poids se traduisant
+par une activité endogène soutenue 
+traduit une domination de l'influence excitatrice. 
+A l'inverse, une configuration où l'activité intrinsèque disparait après un certain temps 
+traduit une domination de l'activité inhibitrice.
+Comme dans le cas des réseaux aléatoires simples, il existe un paramètre de contrôle correspondant au rapport entre l'influence 
+excitatrice et l'influence inhibitrice. De manière intéressante, une grande variété de comportements dynamiques peuvent être observés
+à la frontière, et entre l'extinction et l'activité soutenue, comme les oscillations synchronisées \shortcite{brunel00} et/ou le chaos \shortcite{Van98}. 
+
+% 2002-2007 - ACI 'DYNN'
+
+Le travail sur les neurones à impulsion a été initié dans le cadre du programme de collaboration de l'ACI en neurosciences
+intégratives et computationnelles ``temps et cerveau'', projet ``DYNN'' 
+(Dynamique des réseaux de neurones artificiels
+biologiquement plausibles) \shortcite{Sam07}.
+Une des questions au coeur de ce projet était la possibilité d'étendre l'analyse de champ moyen 
+des réseaux  récurrents aléatoires au cas des neurones impulsionnels, ainsi bien sûr que d'exploiter les
+possibilités dynamiques de ces modèles pour l'apprentissage et le contrôle.
+Les changements principaux sont donc : sortie discrète (spikes), mise à jour par equation différentielle 
+(et non plus équation aux différences finies), prise en compte explicite des délais et des constantes temporelles,
+spécialisation des neurones (excitation/inhibition).
+Ce projet collaboratif a abouti à la publication d'un numéro spécial dans la revue ``European Physical Journal \---
+Special Topics'' \shortcite{ces07b}.
 
 
 
 %[NATURE DE LA COMMANDE MOTRICE]
 % ``pattern matching'' (correspondance de forme) de l’IA  et des 
 %neurosciences. 
-%Le premier chapître, qui sert d'introduction aux thématiques développées dans ce rapport, 
+%Le premier chapitre, qui sert d'introduction aux thématiques développées dans ce rapport, 
 %présente ces deux approches,
 %montre leurs forces et leurs faiblesses, 
 %ainsi que l'approche ``mixte'' consistant à tenter d'utiliser le meilleur des deux mondes pour
@@ -458,48 +727,167 @@ C'est au sein de cette équipe que j'ai effectué mon stage de DEA \shortcite{Da
 
 %{\color{red} La difficulté consiste à éclairer les méthodes de machine learning à partir de concepts issus des sciences cognitives. }
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Dans le chapître 2, nous abordons la question de substrat, en tant que  support de la communication (le hardware). 
-En suivant l'analogie neuromimétique, nous étudions les conditions qui vont permettre à une population de calculateurs (les neurones) 
-de s'organiser dynamiquement en activant ou désactivant sélectivement certains circuits.
-Selon les caractéristiques des calculateurs élémentaires et les caractéristiques du patron de connectivité, 
-les capacités d'expression (et par conséquent la nature de l'information produite ou transférée) seront différentes.
-Nous considérons en particulier le problème de l'expressivité limitéee (tout substrat ne peut pas tout exprimer) 
-et le principe de la capacité limitée (limitation du nombre de ``symboles'' ou de circuits ``effectifs'').
-Nous terminons ce tour d'horizon avec une étude plus appliquée consistant à analyser le nombre et l'étendue de patrons spatio-temporels au
-sein d'un réseau construit à partir d'une matrice de connectivité structurelle obtenue par une technique de tractographie chez l'humain.
+\section{Résultats principaux}
 
-Le troisième chapître présente une série de résultats regroupés sous le thème de la ``subjectivité perceptive''. Les modèles présentés
-explorent l'idée d'une autonomie partielle de la réponse logicielle à la commande. Vu sous l'angle neuromimétique, la 
-subjectivité perceptive consiste d'une part à ignorer certaines entrées sensorielles, du fait de leur non-pertinence ou de leur 
-non-conformité, et d'autre part à compléter certaines entrées sensorielles manquantes à l'aide de connaissances issues de l'expérience passée. 
-Nous regardons plus particulièrement la question de l'apprentissage, ou comment les règles de plasticité synaptique (le méta-programme) vont permettre à certaines
-stimulations sensorielles (désignées comme intéressantes) de ``creuser'' au sein du substrat un mode de réponse particulier (une ``résonance''),
-cette résonance étant le support des interpolations perceptives futures. Nous regardons également en quoi ces architectures dites ``à feedback positif'' 
-se distinguent du modèle classique du ``predictive coding'' organisé autour du principe du feedback négatif, et en particulier comment les premières
-implémentent le comportement de  ``résistance au changement'' (ou persévération). 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Le quatrième chapître aborde la question plus globale de la formation des comportements moteurs. 
-Nous commençons par rappeler certains principes et problèmes d'ordre général, comme la différence d'extensivité et d'expressivité du contrôleur et de son environnement.
-Nous présentons ensuite un certain nombre de résultats ayant en commun le principe du contrôle en ``boucle fermée''.
-Nous abordons ainsi successivement la question de la stabilisation et de la destabilisation des patrons d'interaction
-vus comme des transitions entre activité autonome et activité commandée, et la question de l'activité autonome (chaos, bruits ``structurés'') pour l'implémentation
-des mécanismes d'exploration dans le cadre de l'apprentissage par renforcement, sur divers substrats neuromimétiques. 
-De manière plus appliquée, nous détaillons les principes d'une architecture de contrôle destinée à supplémenter des déficiences
-motrices à partir de l'analyse de l'EEG de surface (interfaces cerveau-machines non-invasives).
+\emph{Essayons de résumer les différents résultats mis en évidence par les recherches présentées. 
+Nous sommes partis de la question du rôle computationnel de l'activité intrinsèque 
+des réseau de neurones récurrents. A quoi peut servir une activité se développement
+spontanément, sans lien avec un milieu extérieur?}
 
-Le cinquième chapître présente une série de résultats relatifs à des projets plus directement orientés vers la modélisation des mécanismes perceptifs et moteurs
-tels qu'ils apparaissent dans les études neurophysiologiques et comportementales. 
-L'orientation est une des modalités fondamentales de l'activité motrice, consistant à déplacer les organes récepteurs dans une direction qui optimise
-leur exposition à des signaux d'intérêt. Nous étudions deux modalités de ce comportement d'orientation : d'une part l'orientation 
-visuelle, et plus particulièrement la saccade oculaire, en tant que modèle de boucle sensori-motrice élémentaire, et de l'autre l'orientation 
-temporelle, c'est à dire la capacité du sujet à concentrer ses ressources attentionnelles à un instant choisi dans le temps.
+Les différentes architectures neuronales étudiées ont tout d'abord
+permis d'identifier des comportements caractéristiques, décrits sous la forme de différents régimes dynamiques. 
+Nous avons cherché à caractériser l'expressivité de ces substrats, c'est à dire leur capacité à produire
+des patrons d'activité pouvant servir de support à des opérations cognitives. Nous avons, en particulier,
+abordé le principe de la reconnaissance par résonance qui, sous sa forme la plus simple, s'exprime comme une transition
+entre une activité non-spécifique (chaos) et une activité plus simple (cycle limite) en présence d'un stimulus 
+familier \shortcite{Dau98A,Hen08B}.
+Nous avons, dans le cadre de réseaux équilibrés (constitués d'une population excitatrice et d'une population inhibitrice),
+mis en évidence l'existence de deux paramètres d'ordre caractéristiques (l'amplification et l'homogénéité d'un faisceau 
+d'axones) jouant sur la nature des régimes développés (extinction, activité chaotique non spécifique et oscillations 
+synchronisées) \shortcite{dauce01a}. La perturbation d'un réseau récurrent par un signal externe à variations lentes produit 
+des transitions brusques, caractéristiques d'un comportement critique, support potentiel d'une catégorisation (discrète)
+de l'environnement \shortcite{Beslon2002}. La combinaison de patrons de connexion à la fois topographiquement organisés et
+équilibrés (autorisant une activité périodique
+intrinsèque) permettent d'implémenter une mémoire à court terme sur des neurones impulsionnels,
+sans faire appel à des mécanismes de cellulaires spécifiques \shortcite{Dau04}. 
+Enfin, l'étude de la dynamique de réseaux large échelle basées sur des patrons de connectivité réalistes 
+mettent en évidence des régions de forte multistabilité, permettant à la fois d'analyser les affinités fonctionnelles
+entre les différentes régions anatomiques, et de simuler certains aspects de la dynamique 
+large échelle (en particulier l'alternance entre différents patrons d'activité) \shortcite{Golos2014}.
 
-Le sixième chapitre présente enfin un certain nombre de questions laissées ouvertes par ces travaux, et présente
-un cadre conceptuel général pour des développements possibles en neurosciences computationnelles. Deux projets
-de recherche plus concrets sont également proposés, d'une part dans le cadre de la simulation large échelle des fonctions
-cérébrales, et d'autre part dans le cadre des interfaces cerveau-machine.
+Une des hypothèses que nous avons mise en avant est que cette activité de population (résonance) 
+permet le ``passage d'échelle'', c'est à dire rend sensible à une échelle supérieure (macroscopique) 
+l'activité répartie d'une population d'unités: passage d'activités unitaires à une activité de population, passage
+d'une activité de population à un déplacement moteur.
+Une autre hypothèse est que le substrat nerveux est un réservoir de patrons sensori-moteurs, 
+et l'apparition de précurseurs sensoriels ou moteurs au sein de l'activité nerveuse suscite 
+la convergence de la dynamique vers l'attracteur correspondant, 
+favorisant une activité macroscopique (un attracteur comportemental) qui lui-même favorise 
+l'attracteur neuronal par boucle de rétroaction positive \shortcite{Dau02,Dau02c1}.
+Le mécanisme de résonance est logiquement suivi d'un retour à
+l'état de base,  lorsque les conditions de la synchronisation ne sont plus remplies.
+Des mécanismes internes de fatigue et/ou l'irruption de composants sensoriels ou moteurs dissonants favorise la 
+désagrégation, puis éventuellement la recomposition de l'activité nerveuse
+et la convergence vers un nouvel attracteur.
+On peut également assimiler ce mécanisme au passage d'un état ``bas'' (non spécifique) à un état ``haut''
+(spécifique), puis au retour vers un état ``bas'', un peu comme dans le modèle de \shortcite{Brunel2000persistent}.
+Les modèles de neurones impulsionnels présentés dans \shortcite{Hen08B,Dau14a} montrent, à une échelle temporelle plus fine, une capacité
+à produire une bouffée d'activité de population (sur une soixantaine de millisecondes), suivie par un retour
+à l'état de base. 
+Le résultat de ce schéma computationnel est un fonctionnement par ``\mbox{sauts}'' d'un attracteur à un autre, 
+et une alternance entre destabilisation et stabilité.
+Bien que possiblement implémenté par des équations aux dérivées partielles, la logique
+de ce schéma est donc essentiellement celle d'un fonctionnement discret, voire séquentiel.
+
+L'étude d'architectures de contrôle en boucle fermée nous a permis d'insister sur la différence de nature
+(ou l'hétérogénéité) entre d'une part le milieu extérieur, caractérisé par des grandeurs extensives (des masses et
+des articulations en déplacement, des changements continus) 
+et le milieu intérieur (milieu logiciel) caractérisé par des activité bornées, discrètes,
+changeant rapidement et de manière abrupte.
+L'hypothèse du passage d'échelle suggère des moments transitoires où l'activité microscopique rejoint 
+l'activité macroscopique lors des épisodes de synchronisation, conduisant à une réduction de 
+complexité selon un principe déjà suggéré par la synergétique \shortcite{Haken1983}.
+
+L'apprentissage par renforcement offre le cadre le plus propice à la stabilisation de trajectoires dans
+le milieu physique par modification des couplage synaptiques au sein du milieu logiciel, par un 
+mécanisme d'essais/erreur.
+L'hypothèse que nous avons étudiée dans ce cadre est celle d'une activité intrinsèque servant de
+support de l'exploration motrice (c'est à dire jouant le rôle traditionnellement dévolu au bruit
+dans le processus d'exploration).  
+%La structure du substrat logiciel joue dans ce cas un rôle important.
+La règle d'apprentissage distingue 
+les différents faisceaux d'axones arrivant sur le neurones, autrement dit identifie les différentes
+sources de l'activité arrivant sur le neurone, conduisant à favoriser, selon les cas, 
+les signaux externes, ou, au contraire, les signaux générées en interne \cite{Dau04b}.
+Le modèle proposé dans \cite{Dau07} ajoute un principe d'alternance entre l'activité perceptive
+et l'activité motrice.
+Les modèles proposés dans \cite{Dau09} et \cite{Dauce2010}, utilisent les mêmes principes
+en systématisent l'usage du codage topographique
+sur les couches sensorielles et proprioceptives,
+et mettent l'accent sur la formation de champs récepteurs. Dans ces modèles, la dynamique intrinsèque 
+est remplacée par un bruit ``lent'' 
+ayant la même constante de temps caractéristique que l'erreur motrice.
+Contrairement aux modèles de la perception basés sur la résonance perceptive, les modèles mis
+en place dans le cadre de ces tâches de contrôle en boucle fermée fonctionnent de manière ``classique'', 
+c'est à dire de manière continue selon un principe de feedback négatif (le signal transitant
+principalement sous la forme de corrections à apporter à la trajectoire courante).
+Différentes études sur l'algorithme de policy gradient en tant que tel ont par ailleurs
+été proposées, dans un cadre de classification automatique
+basé sur une information de type ``bandit'' \shortcite{Dauce2013b, Dauce2014sub}.
+
+Les modèles développés dans un cadre de modélisation biologique  
+apportent quelques éclairages supplémentaires
+sur certains aspects du calcul neuronal.
+L'étude et la reproduction des mécanismes neuronaux d'orientation visuelle,
+tels que tentés dans \shortcite{Dauce2011},
+montrent l'existence d'une activité autonome contrôlée dans le temps et dans l'espace sur
+la durée de la saccade (100~ms environ), c'est à dire sur un intervalle temporel précis, ``programmé''.
+Les modèles mis en place dans le cadre de l'orientation temporelle \shortcite{Malhotra2011} mettent à
+jour des mécanismes prenant place sur des échelles de l'ordre plusieurs secondes, 
+qui semblent quant à eux liés à la simulation motrice via une possible boucle réentrante. 
+Le principe de boucle réentrante dans lequel des états de l'environnement sont progressivement invalidés 
+s'apparente à un mécanisme d'accroissement d'évidence dans 
+le cadre de la mise en concurrence d'hypothèses variées, analogue fonctionnellement aux schémas
+basés sur l'accumulation d'évidence (ou vraisemblance Bayésienne) \shortcite{Wolpert2000,Haruno2001}.
+Ces mêmes schémas sont par ailleurs mis en oeuvre dans la réalisation d'architectures de contrôle
+très concrètes dans un cadre de traitement du signal pur (interfaces cerveau-machines) \shortcite{Thomas2014}.
+
+A l'issue de ces recherches, nous avons donc identifié un rôle possible
+de l'activité spontanée dans la consolidation de patrons d'activité
+spécifiques à des configurations ``connues'' de l'environnement.
+%(dans un substrat à expressivité limitée -- c'est à dire ne traduisant
+%pas parfaitement les caractéristiques physiques, mécaniques ou chimiques de l'environnement).
+Nous avons émis des hypothèses sur le rôle de cette activité intrinsèque pour produire 
+des basculements d'activité faisant évoluer la relation entre le système et l'environnement 
+(changement de mode de couplage avec l'environnement, déplacements moteurs).
+Un deuxième rôle est celui de la mémoire à court terme, se traduisant parfois sous la
+forme d'une ``résistance au changement'', c'est à dire une persévération de l'activité interne 
+malgré des changements au niveau des signaux sensoriels.
+Un troisième rôle, commun aux architectures ``à réservoir'', 
+est la capacité des dynamiques intrinsèques à capturer certaines dépendances 
+temporelles présentes dans le signal, et de les exploiter pour produire des réponses (ou des
+prédictions) plus précises.
+Enfin, nous avons montré que cette activité intrinsèque peut servir de support à l'innovation
+dans les rapports à l'environnement, c'est à dire principalement de proposer de nouvelles
+réponses comportementales, éventuellement stabilisées dans le cas où elles apportent 
+une amélioration (soit dans la capacité de prédiction, soit dans la réception de signaux
+de récompense plus intenses).
+
+Ces résultats sont détaillés dans les chapitres suivants:
+\begin{itemize}
+
+\item 
+
+\item 
+
+\item 
+
+\item 
+
+\end{itemize}
+
+
+%en lien avec le déplacement
+%Exploration visuelle par scanning
+%de l'environnement. 
+%L'exploration de l'espace visuel implique une métrique qui repose sur les
+%récepteurs vestibulaires.
+%(Les récepteurs vestibulaires sont par ailleurs au coeur du maintien de la position verticale)
  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+\section{Autres résultats}
+% % SIDE RESULTS
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %{\color{Violet}
 
@@ -510,37 +898,23 @@ cérébrales, et d'autre part dans le cadre des interfaces cerveau-machine.
 %}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-%\chapter{Méthodes et principes}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%Cette section présente un certain nombre de concepts utiles pour la compréhension de mes travaux. 
-%On y trouve des questions relatives aux supports de communication et à leur expressivité, c'est à 
-%dire aux types d'opérations qu'ils peuvent réaliser et au type d'information qu'ils peuvent transporter.
-
-%[Mettre l'intro sur les substrat : feedback moins / pattern matching; puis introduire l'activité
-%intrinsèque (approche mixte)]
-
-%[RETOUR SUR LA NOTION DE SUBSTRAT - SUPPORT DE COMMUNICATION ET DE CALCUL]
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%44
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                                                ##                                                           %%%
+%%%                                                ##    ##                                                     %%%    
+%%%                                                ##    ##                                                     %%%     
+%%%                                                ##    ##                                                     %%%   
+%%%                                                #########                                                    %%%
+%%%                                                      ##                                                     %%% 
+%%%                                                      ##                                                     %%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
+\chapter{Questions ouvertes et perspectives}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -549,9 +923,543 @@ cérébrales, et d'autre part dans le cadre des interfaces cerveau-machine.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\emph{Ce chapitre présente enfin un certain nombre de questions laissées ouvertes par ces travaux, et présente
+un cadre conceptuel général pour des développements possibles en neurosciences computationnelles. Deux projets
+de recherche plus concrets sont également proposés, d'une part dans le cadre de la simulation large échelle des fonctions
+cérébrales, et d'autre part dans le cadre des interfaces cerveau-machine.}
+
+\emph{Dans la plupart des études que nous avons présentées, le fonctionnement du système nerveux nous a servi de guide pour
+développer des architectures cognitives susceptibles de développer une certaine ``subjectivité''.
+La subjectivité, au sens le plus général, est un point de vue original sur une réalité extérieure, constitué
+par la relation d'un corps sensible à son environnement, mais également une manière
+de répondre aux sollicitations de l'environnement qui laisse de la marge à un certain libre-arbitre.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Problématique générale}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Le projet de recherche que cherche à défendre vise à approfondir la compréhension de certains des problèmes
+calculatoires rencontrés dans le cadre de ces efforts de modélisation biologiquement inspirée.
+Si on se restreint à un cadre computationnel, la plasticité 
+des réseaux de neurones récurrents met en jeu des interactions complexes entre un substrat caractérisé
+par un circuit de connexions plus ou moins récurrent, structuré ou hiérarchisé, un signal extérieur plus ou moins prédictible, 
+éventuellement sous influence des commandes produites par le réseau, et enfin une règle de plasticité 
+modifiant le circuit sous l'influence des signaux transitant localement par les noeuds du réseau.
+L'enjeu est de définir un cadre conceptuel à ce type de programmation.
+
+Une idée récente \cite{Friston2010}, 
+%reprenant en partie le concept de ``réservoir computing'', 
+est de définir à la fois l'apprentissage et le contrôle 
+comme un problème d'optimisation dans un cadre conceptuel lié à la prédiction 
+des signaux. Il s'agit d'une certaine façon de façonner l'activité interne de
+manière à rendre le signal arrivant à l'instant $t$ le plus prédictible possible, d'être le moins surpris, 
+et d'utiliser l'erreur de prédiction pour améliorer autant que possible les prédictions futures, soit 
+par un mécanisme de plasticité, soit par le déclenchement d'une action visant à réduire l'écart à la prédiction.
+
+Ce cadre est intéressant dans la mesure où il offre 
+une interprétation relativement nouvelle 
+au déclenchement des actions. Contrairement au cadre conceptuel classique, le point d'opération du système
+de contrôle est construit sur une quantité abstraite qui est la distance entre la prédiction et l'observation.
+Aucune référence n'est faite à l'existence d'un milieu physique extérieur dans lequel le contrôleur serait plongé. 
+Il s'agit de produire une
+configuration d'activité réduisant, dans la mesure des moyens d'expression présents dans le milieu logiciel,
+la distance aux données et signaux fournis par les sens. Il s'agit concrètement, à chaque instant, de produire
+une image des données sensorielles (par un modèle ``forward''), de comparer cette image aux observations, 
+et de déduire de la distance entre l'image produite et l'image observée une mise à jour des états internes, 
+du circuit logique, ou des deux. Le déclenchement des actions est dans ce cadre  
+le résultat éventuel des changements de ces états internes, dans l'hypothèse où certains de ces 
+états ont un effet sur l'appareil musculaire (ou, plus généralement, sur une interface extérieure).
+
+Cette définition
+de l'action par rapport à la qualité de la prédiction sensorielle, et non par rapport aux caractéristiques
+des données sensorielles elles-mêmes,
+crée une fracture conceptuelle à l'intérieur du cadre classique du contrôle moteur.
+L'action ne vient pas corriger un écart identifié, ou mesuré, au sein de la scène sensorielle,
+par une ``contre-action'' visant à annuler cet écart. 
+L'action sert à produire une scène sensorielle plus conforme aux attentes exprimées par le modèle forward,
+selon un principe de persévération.
+L'activité interne suggère une scène sensorielle, qu'il s'agit de réaliser (ou de produire) 
+à l'aide du déplacement moteur (ou plus généralement de l'envoi d'un signal sur une interface) approprié.
+Dans le cadre classique, la communication 
+repose sur la transmission de l'écart mesuré \emph{au sein} de la scène sensorielle (reconstruite ou pas).
+Dans le cadre ``Fristonien'', la communication passe par la transmission de l'écart à la prédiction
+sensorielle elle-même, qui ne nécessite pas en principe d'interprétation explicite de cette scène.
+%(l'activité propre, ou ``modèle interne'', n'est pas nécessairment conforme ou similaire
+%quantitativement à l'espace extérieur; elle doit juste être ``efficace'' en terme de prédiction).
+La question n'est plus la capacité à reproduire fidèlement le monde extérieur, mais la capacité à prédire 
+ses manifestations sensorielles. 
+
+Néanmoins, que le modèle de contrôle soit classique (identification et correction d'un écart au sein de la scène
+sensorielle prédite), ou Fristonien (confirmation de la scène
+sensorielle prédite à travers l'action -- ou la communication -- vers le milieu extérieur),
+le mécanisme computationnel sous-jacent est celui de la comparaison entre deux scènes 
+sensorielles, à savoir la scène effective et la scène prédite.
+Il existe dans les deux cas une activité de prédiction active, via un modèle ``forward''.
+
+L'idée est de prendre appui sur cette approche relativement nouvelle\footnote{Bien que les modèles computationnels pour
+	le ``predictive coding'' datent
+	des années 2000 \cite{Rao1999}, la définition proposée par Friston dans un cadre du contrôle
+	moteur n'est pas encore (à ma connaissance) implémentée.}.
+Nous allons essayer d'identifier les difficultés se cachant derrière ces définitions, 
+et tenter d'établir des pistes de recherche visant à aborder la problématique du contrôle 
+à l'intérieur des contraintes posées par un milieu logiciel distribué, de type ``réseau de neurones''
+(activité répartie, les transformations et modification s'effectuant sur la base de 
+l'activité locale).
+Nous allons regarder plus particulièrement la problématique du ``modèle forward'', en essayant de 
+comprendre dans quelle mesure l'activité interne au modèle traduit, ou fait émerger (ou pas) des
+activités caractéristiques des grandeurs physiques extérieures dans l'élaboration de ses réponses motrices
+ou dans son activité de prédiction sensorielle.
+Nous regarderons en particulier comment la notion de \emph{distance} (telle qu'existant dans le milieu
+physique extérieur)
+peut apparaître (ou se manifester) au sein de l'activité
+logicielle.
+
+
+
+Nous partirons de l'activité humaine telle qu'elle se déploie à
+l'échelle macroscopique.
+L'activité humaine est fortement guidée par la composante visuelle.
+Si on regarde de plus près l'interrelation entre l'exploration visuelle et
+l'action simple consistant à manipuler des objets situés à portée de bras,
+deux grands domaines attentionnels peuvent être définis. D'une part 
+le domaine visuel, organisé autour de la direction du regard; d'autre part,
+l'espace de travail, organisé autour des opérations sur des objets
+attrapables ou maniplables. 
+Si on se place selon la perspective de l'invariance du monde environnant \cite{Gib79}, il est intéressant de
+constater que ces deux types d'activité (exploration visuelle, utilisation) sont rarement
+simultanées. De manière un peu schématique, l'espace de travail reste invariant pendant
+l'exploration visuelle, et, réciproquement, le regard reste statique (focalisé) durant
+l'activité de manipulation.
+En particulier, le déplacement du corps dans l'environnement se fait généralement
+vis-à-vis d'une scène visuelle stable grâce au réflexe vestibulo-oculaire qui maintient le regard
+en direction d'un même objet pendant le déplacement.
+
+Cette stabilité sélective d'une partie des composantes de l'environnement apparaît comme un 
+élément important de l'apprentissage du référentiel extérieur. 
+C'est également un bon modèle pour questionner les opérations nécessaires à la projection de
+l'espace pré-moteur vers l'espace visuel et vice-versa. Si on fait appel aux notion piagetiennes
+de permanence de l'objet \cite{Piaget1973}, les différentes objets de la scène varient dans l'espace pré-moteur 
+et restent statiques dans l'espace visuel lorsque le corps bouge, et inversement varient dans l'espace visuel et 
+restent statiques dans l'espace pré-moteur lorsque le regard bouge. Etant supposée par exemple la permanence
+des objets dans l'espace de pré-moteur, il est possible de prédire leur position dans le champ visuel étant
+donnée la direction du regard. Inversement, étant donnée la permanence des objets dans l'espace visuel, il est possible
+de prédire leur position dans l'espace pré-moteur étant donné le déplacement du corps
+(il est difficile de bouger à la fois le corps et le regard)
+
+La nature de cette prédiction est fondamentalement celle d'opérations %géométriques 
+isométriques, soit des translations et
+des rotations. Par exemple, les objets visibles sont translatés vers la gauche du champ visuel lorsque le regard  tourne
+vers la droite. Nous avons donc un référentiel (celui de la direction du regard) qui est translaté, redéfinissant
+les coordonnées des différents objets qui composent la scène visuelle. Le référentiel visuel est lui-même défini par rapport au
+tronc (le support stable des mouvements de la tête), et l'axe de la direction du regard se définit par rapport à un autre référentiel qui 
+est le référentiel du tronc. Les objets de la même scène sont également définis (en tant que point final des mouvements) dans
+ce même référentiel du tronc. Il existe donc une application qui à partir de la position des objets dans un premier 
+référentiel définit la position des mêmes objets dans un autre référentiel. La bijection entre les deux espaces offre
+un bon support à l'invariance ainsi qu'à la prédiction sensorielle (``forward model''). 
+
+%{\color{red} De manière schématique : espaces extensif/quantitatif = moteur - espace intensif/quantitatif = sensoriel}
+
+%Si nous poursuivons l'analogie nerveuse et biomécanique, le corps (les articulations du corps) décrit 
+%un espace métrique constitué par la position (et les variations de position) 
+%des éléments mobiles qui le composent.
+%Les objets extérieurs impactant les organes sensoriels sont également localisables dans un espace métrique
+%tridimensionnel constituant l'environnement immédiat du sujet. %{\color{red}[Mais la scène sensorielle est qualitative et non quantitative]}.
+%On peut parler d'un espace de description quantitatif pour décrire ce référentiel extérieur
+%par opposition à un espace de description qualitatif pour décrire le domaine des patrons d'activité induits
+%par les sens.
+Néanmoins, le caractère distribué de l'activité nerveuse suggère la distribution d'une même composante sensorielle 
+sur de nombreux neurones, chaque neurone étant sensible à une manifestation particulière
+de cette composante. L'exemple le plus extrême est celui de la rétine dont l'activité met en jeu 
+plusieurs millions de neurone sensoriels, chaque neurone étant la manifestation d'une valeur de luminance
+(et de longueur d'onde) en un point précis de la scène visuelle.
+
+
+%{\color{red} Le pattern matching a un problème avec la dynamique, qui apparaît comme une déformation,
+%un changement de forme... L'approche de l'observateur (Kalman) est appliquée aux modèles de la perception
+%visuelle de manière statique (scène visuelle statique). Le modèle forward est alors la projection d'un état discret
+%vers la scène sensorielle. Transitions entre états discrets et algorithme de Viterbi.}
+
+%En particulier, il apparaît probable qu'une même composante n'active pas les même neurones selon sa position
+%dans un certain intervalle de valeurs. 
+
+%{\color{red}[Transition pas évidente. Déveloper lien entre opération / Notion de distance / similarité entre patrons / formes.
+%Les opérations arithmétiques simples n'ont pas d'équivalent au sein de l'espace de redescription]}
+
+
+
+Cette distribution de l'activité (et leur caractère qualitatif) rend ainsi difficile 
+la réalisation d'opérations (quantitatives) simples comme l'addition ou la différence
+de deux quantités, pourtant nécessaires lorsque les réponses motrices doivent prendre en compte des sources sensorielles 
+multiples issues de référentiels variés (proprioception de la position du corps et coordonnées rétiniennes pour attraper
+une cible par exemple). 
+Si chaque composante sensorielle de l'espace métrique environnant 
+est décomposée en constituants élémentaires (intervalles ou ``pixels'' d'environnement), activant
+ou désactivant différentes populations de neurones primaires, 
+alors les transformations aussi simples que les translations, rotations, ou même les simples copies d'activité, 
+doivent être apprises ``par coeur'' \cite{Pouget1997} et ne peuvent résulter de la combinaison 
+(additives ou soustractives) d'activités unitaires.
+%c'est à dire d'un calcul.
+
+%{\color{Violet}
+%Ceci pose un problème en particulier lorsqu'il s'agit de contrôler les déplacements du corps à partir de l'activité
+%distribuée induite par les récepteurs sensoriels.
+%En fait, le passage par un domaine de description qualitatif
+%ne pose pas de problème tant qu'il s'agit d'associer (de manière univoque) un
+%patron d'activité (un attracteur {\color{red}[ATTENTION NOTION D'ATTRACTEUR = MIXTE]}) et une commande motrice%, comme dans le
+%cas de la carte colliculaire vue précédemment. 
+%Le problème se pose lorsqu'il faut
+%réaliser des opérations arithmétiques entre plusieurs grandeurs du monde physique,
+%moduler une réponse à partir d'un écart à une valeur de référence par exemple, 
+%c'est à
+%dire plus généralement lorsqu'il s'agit d'estimer, au sein de l'espace de description
+%qualitatif, des quantités \emph{relatives} à différents
+%points de l'espace métrique ou de l'espace sensoriel (et non des quantités absolues). 
+%}
+
+
+
+%[NE PAS OUBLIER L'ACTIVITE VESTIBULAIRE]
+
+Le problème est, comme nous l'avons vu, le caractère distribué de l'activité neuronale 
+qui rend difficile les opérations de type ``forward'', c'est-à-dire 
+une transformation qui, étant donnés des 
+objets sur un espace de manipulations et 
+un changement de référentiel, prédit la disposition de ces mêmes objets sur la scène visuelle.
+Par exemple, un simple ``pattern matching'' nécessiterait un apprentissage par coeur de la conséquence visuelle 
+de toutes les combinaisons de dispositions d'objets et de tous les changements de référentiel tronc-tête, ce qui parait 
+computationellement très coûteux. Il est nécessaire néanmoins que le ``lien'' praxo-visuel entre les différents 
+objets de la scène ne soit pas perdu
+au cours des déplacement du regard. 
+(Un raisonnement symétrique peut être appliqué pour le cas des déplacements du corps dans un environnement visuel stable)
+
+Il existe trois grandes catégories d'approche pour traiter de cette question, plus
+généralement appelée ``question
+de l'assemblage'' (``binding problem'')~: (1) l'activité tierce, (2) l'assemblage
+dynamique et (3) la mémoire (ou les transformations) extérieure(s).
+Par ailleurs, la manière dont les liens entre les deux espaces (pratique et visuel) se construisent est également une question
+à part entière, dont la mise en oeuvre pratique dépend largement du choix computationnel (1, 2 ou 3) effectué.
+
+La structure algorithmique la plus simple est celle de l'activité tierce (ou  projection inverse), 
+c'est à 
+dire une zone d'activité (ou un neurone) instancie un objet complet, répondant 
+de manière sélective à une combinaison spécifique de ses différents constituants.
+Cette approche est celle dite du ``neurone grand-mère''. 
+S'il apparaît peu probable qu'un seul neurone soit le support de la liaison,
+rien n'exclut qu'une population de neurones puisse répondre de façon sélective
+à toutes les configurations d'interaction avec un objet particulier (par exemple
+notre grand-mère) \shortcite{Quiroga2005}, voir aussi \shortcite{Dehaene2011}.
+Une telle activité est donc la continuation à travers
+toutes ses transformations (déplacement du corps, mouvement des yeux) 
+d'un même objet de l'environnement,
+autrement dit une ``présence de l'objet''.
+Dans sa forme la plus élaborée, l'activité tierce est 
+un modèle de l'environnement, constituée des principales quantités 
+relatives aux objets d'intérêt, dans un espace extérocentré. 
+Cette reconstruction de la structure externe de l'environnement 
+par modèle inverse suppose implicitement des transformations géométriques au sein
+du substrat permettant de projeter l'objet invariant sur la scène prémotrice ou visuelle,
+la réalisation computationnelle de telles projections dans un substrat distribué n'étant pas garantie
+(à l'heure actuelle).
+
+L'approche ``distribuée'', également appelée approche ``dynamique'', stipule
+le caractère non exclusif des activités des population : il n'existe pas de
+neurone ou de population de neurones répondant exclusivement à un invariant 
+de haut niveau. Le lien doit reposer sur des
+canaux de communication transitoires, ou encore des résonances, s'établissant à travers le
+substrat entre différentes activités constituants partiels de la scène.
+L'invariance est ici la susceptibilité à ``résoner ensemble'' (la persistance de la résonance à 
+travers les changements; l'existence de canaux le permettant)
+qui distingue ce qui est possible de ce qui ne l'est pas (les associations de constituants
+plausibles et celles qui ne le sont pas).
+%Cette approche est bien sûr très séduisante, mais pose des difficultés importantes 
+%dès qu'il s'agit de 
+L'hypothèse de l'assemblage dynamique est celle qui, à l'heure actuelle, semble la plus susceptible
+d'implémenter le lien praxo-visuel, sans faire appel à une activité centrale spécifique ou
+à un modèle interne. Elle évite en particulier le coût combinatoire des changements de
+référentiels. Le mécanisme le plus populaire est celui qui a été proposé initialement
+par \shortcite{Konig91a} (voir également \shortcite{Rod99,Wang2010}) 
+basé sur les résonances entre oscillateurs. Il reste néanmoins
+de nombreuses questions relatives à l'implémentaton concrète (ou opérationnelle) de ces mécanismes,
+ainsi que sur leur caractère (ou non) prédictif. 
+
+%[ASSEMBLAGE DE CIRCONSTANCE - STRUCTURE PLASTIQUE VERSATILE - LIGANDS ENTRE DIFFERENTS PATRONS]
+
+%[COMPOSITIONNALITE] Assemblage toujours renouvelé de composantes. La compositionnalité concerne 
+%plus le coté sensoriel que le coté moteur. Au niveau moteur, on a plutot un principe d'instrumentalité
+%liée à des patrons fixes (figés)
+%(meme utilisation pour de nombreux assemblages sensoriels) (un assemblage est aussi lié au principe
+%d'accumulation d'évidence - une composition est aussi une ``accumulation de preuves'' --- un faisceau d'indices concordants)
+
+%[ANALOGIE LIENS LATERAUX - COLINEARITE DES CHAMPS]
+
+%CONSTITUTION D'UN META-PATRON
+
+Une troisième approche, celle de la ``mémoire extérieure'' \cite{ORe01}
+reprend la tradition 
+de l'approche écologique impulsée par Gibson \cite{Gib79}. L'existence de 
+motifs invariants dans la relation de l'agent à son environnement (comme le point de fuite)
+sert de support à la manipulation de cet environnement.
+Le lien instrumental avec les objets (le mode d'utilisation des objets)
+institue une forme d'invariance  qui est reproduite à travers le temps à chaque rencontre
+avec le même type d'objets.
+L'approche Gibsonienne met donc au premier plan l'activité motrice en tant que soubassement
+de la constitution d'invariants dans le rapport au monde.
+D'un point de vue algorithmique, on peut imaginer par exemple des activités ``template'' 
+correspondant à des successions caractéristiques d'actions (actions stéréotypées).
+Dans le cadre de l'exploration visuelle, on peut imaginer des séquences caractéristiques
+de saccades selon le type de scène visuelle à explorer,
+%(le patron d'exploration
+%constituants le lien entre les points d'attention focale).
+%Il faut imaginer des patrons d'exploration visuelle caractéristiques, 
+ce ``plan de visite''
+%pour les différents types de scène,
+constituant le socle d'interprétation des éléments de la scène.
+%Cette approche procédurale, en faisant reposer l'invariance sur des ``dictionnaires'' de schémas 
+%sensori-moteurs, accorde peu de rôle à l'activité intrinsèque, laissant
+%donc peu de place aux processus de décision et à la mémoire.
+La mise en relation entre les éléments se réduit ici à un schéma d'exploration (ou d'utilisation) 
+caractéristique de ces différents éléments, constitutif d'une unité d'action. 
+
+
+%PROJET CONCRET
+
+%EXTENSIONS ET PERSPECTIVES PLUS LONGUES
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Projets spécifiques}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Vers une approche computationnelle de l'activité à large échelle}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Le milieu Marseillais offre des possibilités de collaboration nombreuses dans le domaine
+de la modélisation biologiquement inspirée. Nous avons sur le campus de la Timone (faculté de Médecine)
+deux laboratoires de neurosciences directement intéressés par les problématiques de modélisation : l'INT
+(Institut de Neurosciences de la Timone), laboratoire CNRS en pointe sur la modélisation du système visuel,
+du système moteur ainsi que sur l'analyse des données d'imagerie optique, et l'INS (Institut de Neurosciences
+des Systèmes), laboratoire INSERM en pointe sur l'analyse et la modélisation de l'épilepsie ainsi que sur la 
+modélisation dite à large échelle de l'activité nerveuse, à travers le projet TVB (The Virtual Brain) porté
+par Viktor Jirsa et Randy McIntosh (Université de Toronto). 
+Le laboratoire (INS) héberge également un centre de calcul principalement dédié à 
+la mise en oeuvre des calculs coûteux liés à la simulation détaillée des processus de 
+diffusion à la surface d'une reconstruction 3D du cortex, dans le cadre de 
+l'interface de simulation TVB.
+
+Cet environnement donne accès à des données d'observation sur l'animal, mais également chez l'humain dans le cadre
+des chirurgies pré-opératoires consistant à implémenter des électrodes stéréotaxiques profondes chez les
+patients épileptiques pour identifier les régions épileptogènes à retirer.
+Nous avons donc accès à des données de première main concernant l'activité neuronale telle qu'elle se développe
+chez le sujet épileptique.
+Les signaux obtenus dans le cadre de l'analyse pré-opératoire correspondent à une activité ``large échelle'',
+se développant sur des échelles de temps et d'espace macroscopiques.
+L'objectif clinique (opérer le patient sans produire de lésions incapacitantes) nécessite une compréhension
+fine des grands mécanismes de réseau à l'oeuvre dans le cerveau.
+L'un des objectifs de l'ANR ``Vibrations'', financée à partir de 2014, et à laquelle je participe est de 
+produire des modèles large-échelle personnalisés pour chaque patient en observation. Il s'agit 
+en particulier d'améliorer le diagnostic (identifier la zone épileptogène) 
+ainsi que prédire les conséquences de la chirurgie, pour minimiser les
+séquelles post-opératoires.
+
+Mes apports dans ce type de projet, et plus généralement dans le cadre de la
+modélisation large échelle, concernent principalement l'analyse et la modélisation
+des mécanismes mettant en jeu une activité intrinsèque et des interactions entre grandes
+populations de neurones, dans une des perspectives fonctionnelles évoquées 
+précédemment. Une idée que je cherche en particulier à développer est celle de 
+l'identité (ou de la simultanéité) de l'activité intrinsèque avec certaines 
+grandeurs caractéristiques de l'environnement.
+
+Les études précédentes sur l'orientation visuelle 
+mettent en évidence une caractéristique importante de la commande motrice~:
+la simultanéité entre l'activité des structures motrice ou prémotrice
+et le déplacement moteur correspondant (co-activité sur un intervalle de 
+l'ordre de 100~ms dans le cas de la saccade).
+Les données de la littérature indiquent que 
+l'activité éléctrique motrice est le ``reflet'' d'une activité mécanique prenant place dans l'environnement
+physique externe.
+Des études portant sur le cortex moteur montrent également des corrélations entre l'activité  
+mesurée sur les neurones du cortex moteur et le
+mouvement effectif, confirmant leur coextensivité temporelle (l'activité s'arrête lorsque le mouvement s'arrête). 
+Une composante de direction liée à la localisation de l'activité peut également être mise en évidence, 
+aboutissant à des possibilités de reconstruction de la
+trajectoire métrique à partir de l'activité de différents neurones \shortcite{Georgopoulos1986,Wessberg2000}.
+Des stimulations directes du cortex moteur, sur des échelles de temps
+comparables à la durée d'un déplacement (500~ms), suscitent des mouvements
+complexes convergeant toujours vers la même posture finale, quelle que soit la position
+de départ \shortcite{Graziano2002}. 
+%Il s'agit dans ce cas d'une commmande motrice
+%codant pour la position finale, selon un principe de ``point fixe''.
+%Sachant que seule la commande de variation de contraction est communiquée à l'appareil neuro-musculaire,
+%le modèle proposé par \cite{Mussa2004,Flash2005} suggère une activation différenciée de différentes primitives motrices
+%se comportant comme des champs de force, des variations d'intensité conduisant
+%naturellement l'appareil moteur vers le même point d'équilibre (point d'équilibre de forces
+%opposantes).
+
+Le thème de la commande motrice nous offre ainsi un bon point d'appui pour caractériser certains aspects
+de l'activité se développant \emph{au cours du temps} dans le cerveau. Ce thème peut avoir d'intéressants
+développements, à la fois théoriques et pratiques.
+
+D'un point de vue théorique, l'activité motrice est la forme la plus élémentaire de prédiction
+relative à des grandeurs  de l'environnement physique, plus précisément l'activité motrice
+prédit que l'appareil moteur est en train de bouger.
+Cette correspondance terme à terme entre une activité électrique et un déplacement moteur n'est pas
+une nécessité fonctionnelle, et traduit une relation de fort couplage dont la
+raison d'être reste à établir. Une idée possible est que cette activité sert de point de départ
+pour établir des prédictions plus complexes sur l'espace métrique environnant, selon
+une modalité  qui reste à déterminer. 
+%dans le cadre de mécanismes liés au développement
+%et à l'apprentissage. 
+Une autre idée est que cette activité motrice définit l'échelle temporelle caractéristique 
+sur laquelle se déroulent les opérations réalisées par le cerveau (de 100 à 500 ms, voir aussi \shortcite{Petitot2002}).
+
+Une étude réalisable serait d'identifier chez des patients implantés  
+les activités électriques se développant 
+de manière simultanée avec des déplacements moteurs mesurables par des dispositifs externes (comme une caméra
+ou des dispositifs accélérométriques).
+Les outils (capteurs, caméras) existent à l'INS, de même que les outils de visualisation
+permettant d'identifier les
+régions anatomiques sur lesquelles l'activité se déploie.
+Un projet en cours à l'INS se propose d'ailleurs de caractériser certaines crises 
+du lobe frontal, se manifestant par des activités motrices complexes, à l'aide de 
+tels capteurs accélérométriques dans le but de mieux quantifier et classifier ces crises.
+
+
+Modéliser une telle activité électrique implique par ailleurs
+des mécanismes computationnels à implémenter, par exemple sous
+la forme de programmes moteurs, tels qu'observés
+dans le cadre de la saccade oculaire. 
+De tels programmes mettent probablement
+en jeu les circuits sous-corticaux (ganglions de la base, thalamus et peut-être cervelet) 
+qui ne sont pas encore
+implémentés sur l'outil de simulation TVB.
+
+En plus de ces mécanismes computationnels, l'analyse de l'activité
+spontanée du cerveau à l'état de repos, comme nous l'avons déjà évoqué, montre
+des alternances marquées entre différents patrons d'activité distribués, mettant en jeu des
+régions similaires d'un sujet à l'autre. Selon l'outil de mesure
+utilisé, ces alternances peuvent prendre place sur des échelles de quelques centaines de 
+millisecondes \shortcite{van2010} (analyse EEG) ou quelques dizaines de secondes \shortcite{Fox2005} (analyse fMRI).
+L'alternance rapide de l'activité semble être le support de  traitements cognitifs
+élémentaires. Le caractère rapide de ces alternances laisse supposer un mécanisme actif d'assemblage
+et de désassemblage des assemblées neuronales successivement actives, comme proposé dans \shortcite{Rod99}. 
+Une interprétation possibles est celle d'une alternance active, au sein du cerveau, entre une activité 
+principalement perceptive, préparatrice de l'action, et une activité principalement motrice, préparatrice
+de la perception. Cette alternance rapide entre préparation motrice et préparation 
+perceptive est un cadre possible à la réalisation du \emph{predictive coding}, comme stipulé par 
+\shortcite{Rao1999} (voir aussi \shortcite{Wurtz2008,Rolfs2011}). Les alternances à plus longue constante
+temporelle pourraient quant à elles reposer sur l'alternance déjà évoquée entre les activité d'exploration
+sensorielle au sens large et les activités liées à la manipulation et à l'utilisation des objets
+de l'environnement (sous la forme éventuelle de la simulation motrice), qui peuvent s'apparenter dans
+une certaine mesures aux processus internes et externes stipulés dans \shortcite{Fox2005}.
+L'analyse des patrons d'activité développés à large échelle nécessite plus généralement une analyse
+fonctionnelle et non simplement structurelle. Il s'agirait ici de sortir des approches quantitatives
+pour poser les bases d'une interprétation plus computationnelle 
+des activités large-échelle observées, ouvrant la voie à
+des modèles informatiques plus précis.
+
+\subsection{Interfaces informatiques inspirées par la biologie}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Nous avons également à Marseille une forte tradition en informatique théorique, portée
+historiquement par le LIF (Laboratoire d'Informatique Fondamentale), avec une expertise poussée 
+dans le domaine des langages fonctionnels, mais qui développe également une
+recherche de pointe en apprentissage automatique (Machine Learning).
+Le LATP (Laboratoire d'Analyse Topologie Probabilité) est également impliqué sur des
+thématiques proches du machine learning, en particulier dans le cadre du développement de
+modèles probabilistes en traitement du signal.
+Le centre INRIA de Sophia-Antipolis est également impliqués dans des 
+collaborations régulières avec les laboratoires de neurosciences
+Marseillais, sur des thématiques en lien avec le traitement du signal et la 
+construction de modèles inverses en imagerie.
+
+Cet environnement facilite le développement de projets mixtes, à l'interface du
+traitement du signal et de la modélisation biologique dans le cadre de l'étude des
+processus décisionnels classiques. 
+
+Les interfaces cerveau-machine, déjà abordées, offrent
+un cadre applicatif intéressant et potentiellement utile principalement pour
+les déficiences motrices et la réhabilitation motrice.
+%Le domaine des interfaces cerveau-machine est également une voie prometteuse pour cette approche.
+L'activité décelée dans le cadre des interfaces non-invasives (de type EEG) ne permet pas de reconstruction
+précise des activités internes à l'origine du signal de surface. La plupart des interfaces proposées
+se basent sur une démarche de classification automatique, ne permettant pas une interprétation
+de l'évolution spatio-temporelle de l'EEG. 
+
+L'idée générale d'un projet applicatif de ce type serait de construire une interface
+dont les principes de fonctionnement devraient être aussi proche que possible, étant données
+les connaissance actuelles, du fonctionnement du système nerveux.
+Il s'agit, d'un côté, de bien comprendre l'activité large-échelle pour mieux
+interpréter les données issues des capteurs non invasifs (EEG, voire MEG).
+De l'autre, il s'agit de s'inspirer des modes de fonctionnement du cerveau
+pour élaborer l'interface qui traite le signal. L'interface est en effet conceptuellement
+dans une situation similaire à celle d'un sujet humain~: elle fait face à un signal peu fiable,
+incomplet, bruité et doit apprendre à interpréter parfois compléter des données manquantes,
+pour produire des réponses (possiblement des déplacements moteurs dans le cas d'une interface de
+contrôle). Une avancée importante dans le domaine des interfaces cerveau-machine
+pourrait donc être la mise en place dans un cadre conceptuel bien contrôlé d'une véritable
+boucle de rétroaction entre l'interface et le sujet, en traitant le signal en temps réel 
+sur un principe d'anticipation et de prediction pour pallier autant que possible aux délais
+de traitement. 
+
+L'introduction de cette démarche ``en boucle fermée'', utilisant éventuellement des connaissances
+acquises lors de mesures invasives, devrait en principe permettre de traiter, sous une forme peut-être élémentaire,
+ces changements d'état rapide, et  améliorer ainsi l'interprétation 
+du signal et donc la fiabilité de l'interface.
+
+Une partie centrale du projet devrait être la prise en compte des mécanismes adaptatifs,
+en particulier dans le cadre d'une interface impliquant des stimuli visuels, pour ``caler''
+autant que possible les instants d'apparition des stimuli avec les rythmes et les féquences intrinsèques
+au cerveau, en respectant en particulier, s'ils peuvent être identifiés, les alternances
+entre les moments de préparation motrice et les moments de préparation perceptive. 
+D'autre part, le modèle devrait prendre en compte autant que faire se peut les caractéristiques
+à la fois structurelles et dynamiques du cerveau du sujet, en identifiant la localisation des
+circuits large échelle ainsi que les rythmes ou résonances propres de son activité cérébrale.
+
+En dernier lieu, il faut envisager des mécanismes adaptatifs agissant en direct pendant 
+l'interaction avec le sujet. On parle dans ce cas d'algorithmes d'apprentissage ``en ligne''. 
+Il s'agit d'une part d'en apprendre chaque jour un peu plus sur le sujet au travers des interactions répétées,
+pour affiner le modèle utilisé par l'interface. 
+D'autre part, il s'agit d'adapter ``en direct'' le modèle en fonction d'événements imprévus (comme
+des électrodes qui se déplacent ou se décollent) 
+ou de variations lentes de l'état du sujet (suite à la fatigue, à des baisses d'attention etc.).
+Dans ce cadre, le développement d'algorithmes adaptatifs spécifiques serait à
+envisager. 
+
+Plus généralement, les connaisances en plein essor sur le fonctionnement
+du cerveau à large échelle nous permettent d'envisager de nouvelles méthodologies 
+dans le développement d'objets interagissant de manière ``naturelle'' avec leur utilisateur.
+C'est à travers une connaissance plus approfondie de la logique et des mécanismes
+computationnels à l'oeuvre dans le cerveau (en particulier à large
+échelle)
+qu'on pourra peut-être repenser la manière de concevoir des objets communicants (robots mobiles
+mais également interfaces vocales, jeux, etc.) à travers des modes de communication
+plus proches de ceux qu'un sujet expérimente quotidiennement avec son entourage.
+
+
+\part{Résultats détaillés}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                                                #########                                                    %%%
+%%%                                                ##                                                           %%%    
+%%%                                                ##                                                           %%%     
+%%%                                                ########                                                     %%%   
+%%%                                                       ##                                                    %%%
+%%%                                                ##     ##                                                    %%% 
+%%%                                                 ######                                                      %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Activité intrinsèque : approche descriptive}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -571,16 +1479,24 @@ cérébrales, et d'autre part dans le cadre des interfaces cerveau-machine.
 
 
 
-L'approche que je mets en avant dans ce chapître
-est donc l'analyse des capacités d'un réseau de neurones en tant que support potentiel d'opérations cognitives. 
+\emph{L'approche mise en avant dans ce chapitre
+est l'analyse des capacités d'un réseau de neurones en tant que support potentiel d'opérations cognitives. 
 Dans ces différentes études, nous n'abordons pas la question de la plasticité, ne regardons pas les questions de communication ou de mémoire
 comme l'encodage ou le traitement effectif des signaux. 
 Notre approche se concentre sur la notion de régime dynamique et d'\emph{attracteurs}. L'idée principale est que notre substrat
 neuronal doit être capable d'exprimer différents ``modes'' de fonctionnement. Ces modes se traduisent soit par des régimes dynamiques
 variés (synchrone/asynchrone, point fixe/périodique/chaos), soit par des répartitions spatiales différenciées, appelés ``patrons d'activité''.
-Nous étudions ainsi le nombre et la variété de ces patrons d'activité, leur stabilité, leur répartition et leur résistance aux perturbations.
+Nous étudions ainsi le nombre et la variété de ces patrons d'activité, leur stabilité, leur répartition et leur résistance aux perturbations.}
 
-
+\emph{Nous abordons la question de substrat, en tant que  support de la communication (le hardware). 
+En suivant l'analogie neuromimétique, nous étudions les conditions qui vont permettre à une population de calculateurs (les neurones) 
+de s'organiser dynamiquement en activant ou désactivant sélectivement certains circuits.
+Selon les caractéristiques des calculateurs élémentaires et les caractéristiques du patron de connectivité, 
+les capacités d'expression (et par conséquent la nature de l'information produite ou transférée) seront différentes.
+Nous considérons en particulier le problème de l'expressivité limitéee (tout substrat ne peut pas tout exprimer) 
+et le principe de la capacité limitée (limitation du nombre de ``symboles'' ou de circuits ``effectifs'').
+Nous terminons ce tour d'horizon avec une étude plus appliquée consistant à analyser le nombre et l'étendue de patrons spatio-temporels au
+sein d'un réseau construit à partir d'une matrice de connectivité structurelle obtenue par une technique de tractographie chez l'humain.}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -615,65 +1531,12 @@ Nous étudions ainsi le nombre et la variété de ces patrons d'activité, leur 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     1.1      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\cleardoublepage
 \section{Réseaux aléatoires équilibrés}\label{sec:balanced}
 
-Les premières études auxquelles j'ai participé portaient sur l'étude des transitions de phase dans les réseaux de neurones
-aléatoires. 
-La notion d'aléa ne porte pas sur la dynamique d'état mais sur le patron de connexions du réseau. 
-On parle de bruit ``figé'' dans les connexions (``quenched disorder'').
-Il s'agit d'un système dynamique déterministe, constitué de $N$ neurones, défini par la matrice des 
-couplages $J = \{J_{i,j}\}_{i \in 1..N,j \in 1..N}$ où chaque lien $J_{ij}$ est donc issu d'un tirage aléatoire indépendant.
 
-L'indépendance entre les différents liens est une caractéristique importante, qui permet d'analyser le comportement du modèle 
-à la limite des grandes tailles, c'est à dire en faisant tendre la taille $N$ vers l'infini. Avec un \emph{scaling} des poids approprié 
-(espérance, variance de la loi de tirage initial en $O(\frac{1}{N}$)), on peut montrer que la dynamique (déterministe) tend à la limite thermodynamique 
-vers un processus aléatoire, la corrélation entre les noeuds tendant vers 0. 
 
-%{\color{Violet} activité intrinsèque}
 
-Les premières études sur ce  type de modèle avaient été faites par Sompolinsky \shortcite{Som88} sur un système dynamique continu. 
-L'analyse d'une variante à temps
-discret avait été proposée par Cessac et Samuelidès \shortcite{Ces94}. La démonstration de cette propriété (dite de ``chaos local'') a été  
-formellement achevée, dans le cas discret, par Moynot et Samuelides \shortcite{Moy00a} en 2000.
-
-Le comportement d'une classe de réseaux (l'ensemble des réseaux définis par la même loi de tirage initial) peut être décrit à la limite thermodynamique par 
-des équations dites de ``champ moyen''. Ces équations définissent le processus aléatoire limite, autrement dit la dynamique temporelle de grandeurs caractéristiques comme l'activité moyenne, 
-le moments d'ordre 2 et la covariance dans le temps \shortcite{Ces95}. 
-Les équations de champ moyen offrent ainsi une description ``macroscopiques'' de l'activité d'un réseau,
-représentative de l'activité qu'on peut attendre dans un réseau de taille finie issu d'un tirage particulier, et 
-constituent de fait un cadre d'analyse adapté à une approche ``multi-échelles''.
-
-Il est intéressant de constater que le processus stochastique limite, tel que décrit par les équations de champ moyen, 
-a une traduction à taille finie
-sous la forme d'une activité de type chaos déterministe. L'existence d'un 
-paramètre de contrôle (le gain de la fonction de transfert des neurones) permet de reproduire, dans ces réseaux aléatoires, 
-un  comportement générique de destabilisation, appelé route vers le chaos par ``quasi-périodicité'' \shortcite{Berger1988,Doyon1993}.
-L'existence d'une telle frontière entre l'ordre et le chaos est également prouvée à la limite thermodynamique, mais dans ce
-cas la transition se fait brutalement, avec un passage discret d'un processus de type point fixe à un processus stochastique \shortcite{Ces95}.
-Cette frontière entre ordre et chaos est par principe intéressante puisqu'elle indique le lieu
-où la variabilité de la dynamique, et donc potentiellement l'expressivité du réseau est la plus importante. 
-
-En collaboration avec Moynot, Samuelides et Pinaud \shortcite{Dau99A,dauce01a}, j'ai travaillé sur la définition et 
-l'étude du comportement à taille finie d'un modèle de réseau de neurones aléatoire (RNA) multi-populations.
-
-%{\bf Daucé, E., Moynot, O., Pinaud, O., Samuelides, M. and Doyon, B. (1999) Mean Field Equations reveal synchronisation in a 2-population neural network model, proc. of the 7th European Symposium On Artificial Neural Networks (ESANN'99), Verleysen, M. ed.:7-12, April 21-23, Bruges, Belgium}
-
-%{\bf Daucé, E., Moynot, O., Pinaud, O. and Samuelides, M. (2001) Mean Field Theory and Synchronization in Random Recurrent Neural Networks, Neural Processing Letters 14:115-126}
-
-Le point de départ consistait à modéliser et reproduire certains comportements observés dans les 
-réseaux de neurones naturels composés d'une population de neurones excitateurs et d'une population de neurones inhibiteurs.
-Cette classe de réseaux de neurones (constitués d'une population de noeuds inhibiteurs et d'une population de noeuds excitateurs)
-est appelé réseau de neurones ``équilibré'' (balanced neural networks), l'équilibre se référant à l'idée d'équilibre
-dynamique entre deux forces opposantes. La dynamique du réseau est amenée à converger vers un point d'équilibre
-traduisant localement (et globalement) le ``poids'' des deux influences. Une configuration des poids se traduisant
-par une activité endogène soutenue 
-traduit une domination de l'influence excitatrice. 
-A l'inverse, une configuration où l'activité intrinsèque disparait après un certain temps 
-traduit une domination de l'activité inhibitrice.
-Comme dans le cas des réseaux aléatoires simples, il existe un paramètre de contrôle correspondant au rapport entre l'influence 
-excitatrice et l'influence inhibitrice. De manière intéressante, une grande variété de comportements dynamiques peuvent être observés
-à la frontière, et entre l'extinction et l'activité soutenue, comme les oscillations synchronisées \shortcite{brunel00} et/ou le chaos \shortcite{Van98}. 
 
 L'étude que nous avons présentée \shortcite{Dau99A,dauce01a} étudie le comportement d'un réseau équilibré de ce type. Ce papier 
 étend pour la première fois le modèle de champ moyen pour le cas des réseaux à connectivité aléatoire à populations multiples
@@ -716,12 +1579,14 @@ voir par exemple \shortcite{Faugeras2009,Cabana2013}. %L'accent sur l'équilibre
 
 %La question de l'homogénéité/hétérogénéité est revenue à l'ordre du jour. Plusieurs papiers récents bla bla...}
 
+\includepdf[pages=1-12]{pdf/2001-neural-proc-letters.pdf}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     1.2      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Réservoir}
+\cleardoublepage
+\section{Réservoir computing}
 
 Un des intérêts principaux des réseaux à connectivité aléatoire est leur capacité à générer des dynamiques complexes
 endogènes (donc sans stimulation extérieure). Ces dynamiques, bien que reposant sur des équations déterministes,
@@ -734,7 +1599,7 @@ Une étude proposée dans le 3ème chapitre de l'ouvrage que nous avons co-dirig
 Cette étude porte sur le modèle le plus simple, un réseau récurrent aléatoire comportant une seule population. Le paramètre d'amplification
 choisi place le réseau dans une région chaotique, proche de la transition vers le cycle limite.  
 Le réseau est soumis à une stimulation extérieure quasi stationnaire, évoluant à une vitesse très lente par rapport à la vitesse de 
-mise à jour du réseau. Une succession de régimes dynamiques distincts, séparés par des transitions brusques, est mis en évidence.
+mise à jour du réseau. Une succession de régimes dynamiques distincts, séparés par des transitions brusques, est mise en évidence.
 Chaque régime est caractérisé par un patron d'activité différent, qui se manifeste par la présence de fréquences caractéristiques
 distinctes dans le spectre de Fourier du signal moyen.  
 
@@ -746,7 +1611,7 @@ Enfin, l'analyse de la réponse du réseau à une stimulation périodique indiqu
 de ``capturer'' (et donc d'amplifier) des signaux dont la période varie entre 2 et 10\--12 unités de temps
 (autrement dit à sélectionner un mode dynamique périodique interne compatible avec la période imposée) \shortcite{Dau00b}.
 Le comportements spontané des réseaux récurrents aléatoires est par ailleurs à la base du mécanisme de perception par feedback positif
-présentés dans le chapître \ref{sec:FPos}. 
+présentés dans le chapitre \ref{sec:FPos}. 
 
 L'intérêt du comportement spontané des réseaux récurrents à connectivité aléatoires a été largement confirmé depuis. 
 Une étude plus systématique de la réponse linéaire dans les réseaux récurrents \shortcite{Cessac2007} met en évidence 
@@ -764,11 +1629,15 @@ un tirage aléatoire arbitraire, ils offrent donc un bon support pour le traitem
 Faire reposer le traitement sur un tirage arbitraire rejoint d'ailleurs un certain nombre de techniques de plongement (ou projection) aléatoires
 utilisées en apprentissage automatique, tels le ``compressive sensing'' \shortcite{Baraniuk2007} ou l'architecture ``extreme learning'' \shortcite{Huang2006}.
 
+\includepdf[pages=1, offset=60 -20]{pdf/2000-sab-ann.pdf}
+\includepdf[pages=2, offset=-60 -20]{pdf/2000-sab-ann.pdf}
+\includepdf[pages=3, offset=60 -20]{pdf/2000-sab-ann.pdf}
+\includepdf[pages=4, offset=-60 -20]{pdf/2000-sab-ann.pdf}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     1.3      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\cleardoublepage
 \section{Codage topographique}\label{sec:NField}
 
 La vocation des modèles de champ neuronal \shortcite{Ama77B} est principalement la modélisation d'un substrat neuronal spatialisé vu à ``large échelle'' 
@@ -848,57 +1717,28 @@ en neurosciences computationnelles \shortcite{Voges2012,Lundqvist2012}.
 
 %}
 
-
+%\includepdf[pages=4-19,offset=0 -20]{pdf/2004-natural-computing-ann.pdf}
+\includepdf[pages=4-5,landscape=true,nup=1x2,scale=1.1,offset= 120 -30]{pdf/2004-natural-computing-ann.pdf}
+\includepdf[pages=6-7,landscape=true,nup=1x2,scale=1.1,offset= -120 -30]{pdf/2004-natural-computing-ann.pdf}
+\includepdf[pages=8-9,landscape=true,nup=1x2,scale=1.1,offset= 120 -30]{pdf/2004-natural-computing-ann.pdf}
+\includepdf[pages=10-11,landscape=true,nup=1x2,scale=1.1,offset= -120 -30]{pdf/2004-natural-computing-ann.pdf}
+\includepdf[pages=12-13,landscape=true,nup=1x2,scale=1.1,offset= 120 -30]{pdf/2004-natural-computing-ann.pdf}
+\includepdf[pages=14-15,landscape=true,nup=1x2,scale=1.1,offset= -120 -30]{pdf/2004-natural-computing-ann.pdf}
+\includepdf[pages=16-17,landscape=true,nup=1x2,scale=1.1,offset= 120 -30]{pdf/2004-natural-computing-ann.pdf}
+\includepdf[pages=18-19,landscape=true,nup=1x2,scale=1.1,offset= -120 -30]{pdf/2004-natural-computing-ann.pdf}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     1.4      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\cleardoublepage
 \section{Extension aux populations de neurones impulsionnels}
 
-Le signal produit par les neurones biologiques n'est pas une grandeur continue. Les neurones
-ont un comportement fortement non-linéaire, caractérisé par le franchissement d'un seuil d'activation.
-La cellule neuronale intègre les multiples potentiels post-synaptiques issus de ses synapses afférentes
-et émet un bref potentiel d'action lorsque le potentiel total atteint le seuil d'activation (on
-dit que la membrane se dépolarise).
-Après une brève période de repos (``remise à zéro''), le neurone recommence à intégrer les signaux entrants etc.
-Le système nerveux est donc caractérisé par l'émission et la réception de signaux discrets, qui présentent 
-à première vue une certaine analogie avec les signaux numériques, 
-à ceci près qu'il n'existe pas d'horloge centrale pour cadencer les opérations\footnote{
-Cette question reste néanmoins débattue. Elle a été récemment relancée par \shortcite{Koubeissi2014}.}.
-C'est ce caractère discret des opérations neuronales qui avait inspiré les premiers modèles de neurones,
-au sein desquels les unités neuronales se comportaient comme des portes logiques \shortcite{MCu43}, par analogie avec 
-les circuits logiques des architectures informatiques.
-
-Les neurones biologiques sont également caractérisés par le type de neurotransmetteurs qu'ils émettent
-au niveau des synapses de leur arborisation terminale. On distingue les neurones inhibiteurs produisant des
-synapses GABAergiques et les neurones excitateurs produisant des synapses excitatrices variées 
-(glutamate, acétylcholine, dopamine, ...). 
-L'action synaptique inhibitrice est une ``contre-action'' qui vient s'opposer
-à l'effet des synapses excitatrices.
-L'action et la contre-action, c'est à dire l'équilibre dynamique entre
-deux forces opposées, est au coeur des opérations réalisées par le système nerveux. 
-
-Les neurones à potentiel d'action disposent en principe d'une expressivité 
-supérieure à celle des neurones à fréquence de décharge \shortcite{Izh06}.
-Ils offrent des possibilités d'opérations (tels le codage par rang, la polychronisation,...)
-ainsi qu'un support pour un traitement parallèle distribué (``multiplexage'') par décalage de phase
-ou par bande de fréquences \shortcite{Skaggs1996,wang96gamma,Wang2010}. % [CITATIONS].
-Un des enjeux connus est la possibilité d'émuler un mécanisme de synchronisation/coordination 
-longue distance supposé à l'oeuvre dans le cerveau pour l'integration multimodale \shortcite{Rod99}.
-
-Le travail sur les neurones à impulsion a été initié dans le cadre du programme de collaboration de l'ACI en neurosciences
-intégratives et computationnelles ``temps et cerveau'', projet ``DYNN'' 
-(Dynamique des réseaux de neurones artificiels
-biologiquement plausibles) \shortcite{Sam07}.
-Une des questions au coeur de ce projet était la possibilité d'étendre l'analyse de champ moyen 
-des réseaux  récurrents aléatoires au cas des neurones impulsionnels, ainsi bien sûr que d'exploiter les
-possibilités dynamiques de ces modèles pour l'apprentissage et le contrôle.
-Les changements principaux sont donc : sortie discrète (spikes), mise à jour par equation différentielle 
-(et non plus équation aux différences finies), prise en compte explicite des délais et des constantes temporelles,
-spécialisation des neurones (excitation/inhibition).
-Ce projet collaboratif a abouti à la publication d'un numéro spécial dans la revue ``European Physical Journal \---
-Special Topics'' \shortcite{ces07b}.
+Les architectures multi-populations ont été approfondies à partir de l'approche par ``faisceaux d'axones'' (voir section \ref{sec:balanced}), indépendants
+de la définition spatiale. Les divers paramètres de contrôle en jeu, à savoir le taux d'amplification, le coefficient de variation, 
+le délai moyen participent à définir des architectures de contrôle diversifiées définies principalement par le nombre 
+et la fonction des populations en jeu. %, permettant de tester le comportement de certaines architectures fonctionnelles.  
+D'autres paramètres, comme la densité de connexion, le poids synaptique moyen etc.  apparaissent conditionnés aux  paramètres structurels principaux.
 
 Mes contributions dans ce domaine portent sur l'étude des transferts d'échelle 
 entre neurones fréquentiels et neurones à potentiels d'action, à la définition de 
@@ -913,12 +1753,6 @@ Il en ressort une unification des modèles à travers les échelles temporelles 
 intègre-et-tire représentent une résolution de l'ordre de la milliseconde, les neurones binaires une résolution
 de l'ordre de la dizaine de millisecondes et les neurones à sortie continue une résolution de l'ordre de la centaine
 de millisecondes.
-
-Les architectures multi-populations ont été approfondies à partir de l'approche par ``faisceaux d'axones'', indépendants
-de la définition spatiale. Les divers paramètres de contrôle en jeu, à savoir le taux d'amplification, le coefficient de variation, 
-le délai moyen participent à définir des architectures de contrôle diversifiées définies principalement par le nombre 
-et la fonction des populations en jeu. %, permettant de tester le comportement de certaines architectures fonctionnelles.  
-D'autres paramètres, comme la densité de connexion, le poids synaptique moyen etc.  apparaissent conditionnés aux  paramètres structurels principaux.
 
 Les architectures à populations excitatrices et inhibitrices ``équilibrées'' présentent, 
 dans les mêmes gammes de paramètres que précédemment, 
@@ -966,8 +1800,9 @@ La clé semble donc être la mise en évidence de mécanismes similaires à diff
 %Cette reproductibilité dans le temps et dans l'espace de la réponse du réseau au
 %signal d'entrée offre un cadre d'explication intéressant pour 
 
-
-
+\includepdf[pages={11},offset=20 -20]{pdf/2007-epj-st-ann.pdf}
+\includepdf[pages={12},offset=-20 -20]{pdf/2007-epj-st-ann.pdf}
+\cleardoublepage
 \section{Multistabilité dans les modèles ``large échelle''}
 
 %{\color{Violet} L'organisation à large échelle de l'activité du cerveau nécessite l'emploi de techniques d'imagerie BLA BLA.}
@@ -1052,15 +1887,38 @@ grâce au contrôle du niveau d'activité  qui empêche d'atteindre les régimes
 %connectivité structurelle / fonctionnelle
 %}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%66
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     2      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                                                 #######                                                     %%%
+%%%                                                ##     ##                                                    %%%    
+%%%                                                ##                                                           %%%     
+%%%                                                ########                                                     %%%   
+%%%                                                ##     ##                                                    %%%
+%%%                                                ##     ##                                                    %%% 
+%%%                                                 ######                                                      %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Plasticité et modèles de la perception à feedback positif} \label{sec:FPos}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\emph{Ce chapitre présente une série de résultats regroupés sous le thème de la ``subjectivité perceptive''. Les modèles présentés
+explorent l'idée d'une autonomie partielle de la réponse logicielle à la commande. Vu sous l'angle neuromimétique, la 
+subjectivité perceptive consiste d'une part à ignorer certaines entrées sensorielles, du fait de leur non-pertinence ou de leur 
+non-conformité, et d'autre part à compléter certaines entrées sensorielles manquantes à l'aide de connaissances issues de l'expérience passée. 
+Nous regardons plus particulièrement la question de l'apprentissage, ou comment les règles de plasticité synaptique (le méta-programme) vont permettre à certaines
+stimulations sensorielles (désignées comme intéressantes) de ``creuser'' au sein du substrat un mode de réponse particulier (une ``résonance''),
+cette résonance étant le support des interpolations perceptives futures. Nous regardons également en quoi ces architectures dites ``à feedback positif'' 
+se distinguent du modèle classique du ``predictive coding'' organisé autour du principe du feedback négatif, et en particulier comment les premières
+implémentent le comportement de  ``résistance au changement'' (ou persévération). }
 
 La plupart des résultats présentés dans cette section portent sur l'application 
 de la plasticité synaptique dans des réseaux de neurones récurrents aléatoires 
@@ -1877,7 +2735,7 @@ la différence d'échelle temporelle des séquences à apprendre. La mémoire d'
 sa constante de membrane, soit 10 à 20 ms. Dans le cas d'une activité fortement
 irrégulière (chaos profond), la population de neurones semble garder une 
 mémoire assez faible des faits passés (autocorrélation du même ordre de grandeur). Néanmoins, à la
-lumière des résultats du chapître précédent, la plasticité semble 
+lumière des résultats du chapitre précédent, la plasticité semble 
 capable d'induire suffisamment de régularité dans la dynamique intrinsèque
 pour conserver une mémoire plus importante 
 au sein de la population. La difficulté à discriminer les séquences de 400 ms semble
@@ -1890,7 +2748,7 @@ L'application alternée des plasticités Hebbienne et anti-Hebbienne ouvre par a
 à l'implémentation de mécanismes d'apprentissage par renforcement dans les substrats neuronaux, 
 ainsi qu'à une modélisation plus précise des mécanismes de plasticité liés à la récompense et 
 à la punition dans le cerveau \shortcite{Barto1995,Schultz1997,Gurney2001}. Ces aspects sont analysés 
-plus en détail dans le chapître suivant.
+plus en détail dans le chapitre suivant.
 
 %{\color{Violet}
 %{\bf 2005}
@@ -1922,9 +2780,17 @@ plus en détail dans le chapître suivant.
 %}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%77
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     3      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                                                #########                                                    %%%
+%%%                                                ##     ##                                                    %%%    
+%%%                                                     ##                                                      %%%     
+%%%                                                    ##                                                       %%%   
+%%%                                                   ##                                                        %%%
+%%%                                                   ##                                                        %%% 
+%%%                                                   ##                                                        %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1936,6 +2802,15 @@ plus en détail dans le chapître suivant.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     3.1      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\emph{Ce chapitre aborde la question plus globale de la formation des comportements moteurs. 
+Nous commençons par rappeler certains principes et problèmes d'ordre général, comme la différence d'extensivité et d'expressivité du contrôleur et de son environnement.
+Nous présentons ensuite un certain nombre de résultats ayant en commun le principe du contrôle en ``boucle fermée''.
+Nous abordons ainsi successivement la question de la stabilisation et de la déstabilisation des patrons d'interaction
+vus comme des transitions entre activité autonome et activité commandée, et la question de l'activité autonome (chaos, bruits ``structurés'') pour l'implémentation
+des mécanismes d'exploration dans le cadre de l'apprentissage par renforcement, sur divers substrats neuromimétiques. 
+De manière plus appliquée, nous détaillons les principes d'une architecture de contrôle destinée à supplémenter des déficiences
+motrices à partir de l'analyse de l'EEG de surface (interfaces cerveau-machines non-invasives).}
+
 L'approche dite ``située'' en robotique
 mobile et en intelligence artificielle \shortcite{Bro91,Varela91} prône la prise en compte de cette contrainte du corps
 comme élément structurant du développement de capacités cognitives plus élaborées.
@@ -2685,9 +3560,16 @@ entre autres à l'INRIA, et a fait l'objet de plusieurs publications dans des co
 % Histoires
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%88
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     4      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ %%%                                                 #######                                                    %%%
+ %%%                                                ##     ##                                                   %%%    
+ %%%                                                ##     ##                                                   %%%     
+ %%%                                                 #######                                                    %%%   
+ %%%                                                ##     ##                                                   %%%
+ %%%                                                ##     ##                                                   %%% 
+ %%%                                                 #######                                                    %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -2698,6 +3580,13 @@ entre autres à l'INRIA, et a fait l'objet de plusieurs publications dans des co
 %principe général : 
 %- comportement based
 %- mapping des architectures de contrôle sur le SNC
+
+\emph{Ce chapitre présente une série de résultats relatifs à des projets plus directement orientés vers la modélisation des mécanismes perceptifs et moteurs
+tels qu'ils apparaissent dans les études neurophysiologiques et comportementales. 
+L'orientation est une des modalités fondamentales de l'activité motrice, consistant à déplacer les organes récepteurs dans une direction qui optimise
+leur exposition à des signaux d'intérêt. Nous étudions deux modalités de ce comportement d'orientation : d'une part l'orientation 
+visuelle, et plus particulièrement la saccade oculaire, en tant que modèle de boucle sensori-motrice élémentaire, et de l'autre l'orientation 
+temporelle, c'est à dire la capacité du sujet à concentrer ses ressources attentionnelles à un instant choisi dans le temps.}
 
 Si les principes de fonctionnement élémentaires du système nerveux central (neurones, synapses) 
 commencent à être bien connus, 
@@ -2997,657 +3886,6 @@ suggère un lien possible entre l'estimation temporelle et la simulation motrice
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     4.3      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Questions ouvertes et perspectives}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-Dans la plupart des études que nous avons présentées, le fonctionnement du système nerveux nous a servi de guide pour
-développer des architectures cognitives susceptibles de développer une certaine ``subjectivité''.
-La subjectivité, au sens le plus général, est un point de vue original sur une réalité extérieure, constitué
-par la relation d'un corps sensible à son environnement, mais également une manière
-de répondre aux sollicitations de l'environnement qui laisse de la marge à un certain libre-arbitre.
-
-\section{Bilan}
-
-Essayons de résumer les différents résultats mis en évidence par les recherches présentées. 
-Nous sommes partis de la question du rôle computationnel de l'activité intrinsèque 
-des réseau de neurones récurrents. A quoi peut servir une activité se développement
-spontanément, sans lien avec un milieu extérieur?
-
-Les différentes architectures neuronales étudiées ont tout d'abord
-permis d'identifier des comportements caractéristiques, décrits sous la forme de différents régimes dynamiques. 
-Nous avons cherché à caractériser l'expressivité de ces substrats, c'est à dire leur capacité à produire
-des patrons d'activité pouvant servir de support à des opérations cognitives. Nous avons, en particulier,
-abordé le principe de la reconnaissance par résonance qui, sous sa forme la plus simple, s'exprime comme une transition
-entre une activité non-spécifique (chaos) et une activité plus simple (cycle limite) en présence d'un stimulus 
-familier \shortcite{Dau98A,Hen08B}.
-Nous avons, dans le cadre de réseaux équilibrés (constitués d'une population excitatrice et d'une population inhibitrice),
-mis en évidence l'existence de deux paramètres d'ordre caractéristiques (l'amplification et l'homogénéité d'un faisceau 
-d'axones) jouant sur la nature des régimes développés (extinction, activité chaotique non spécifique et oscillations 
-synchronisées) \shortcite{dauce01a}. La perturbation d'un réseau récurrent par un signal externe à variations lentes produit 
-des transitions brusques, caractéristiques d'un comportement critique, support potentiel d'une catégorisation (discrète)
-de l'environnement \shortcite{Beslon2002}. La combinaison de patrons de connexion à la fois topographiquement organisés et
-équilibrés (autorisant une activité périodique
-intrinsèque) permettent d'implémenter une mémoire à court terme sur des neurones impulsionnels,
-sans faire appel à des mécanismes de cellulaires spécifiques \shortcite{Dau04}. 
-Enfin, l'étude de la dynamique de réseaux large échelle basées sur des patrons de connectivité réalistes 
-mettent en évidence des régions de forte multistabilité, permettant à la fois d'analyser les affinités fonctionnelles
-entre les différentes régions anatomiques, et de simuler certains aspects de la dynamique 
-large échelle (en particulier l'alternance entre différents patrons d'activité) \shortcite{Golos2014}.
-
-Une des hypothèses que nous avons mise en avant est que cette activité de population (résonance) 
-permet le ``passage d'échelle'', c'est à dire rend sensible à une échelle supérieure (macroscopique) 
-l'activité répartie d'une population d'unités: passage d'activités unitaires à une activité de population, passage
-d'une activité de population à un déplacement moteur.
-Une autre hypothèse est que le substrat nerveux est un réservoir de patrons sensori-moteurs, 
-et l'apparition de précurseurs sensoriels ou moteurs au sein de l'activité nerveuse suscite 
-la convergence de la dynamique vers l'attracteur correspondant, 
-favorisant une activité macroscopique (un attracteur comportemental) qui lui-même favorise 
-l'attracteur neuronal par boucle de rétroaction positive \shortcite{Dau02,Dau02c1}.
-Le mécanisme de résonance est logiquement suivi d'un retour à
-l'état de base,  lorsque les conditions de la synchronisation ne sont plus remplies.
-Des mécanismes internes de fatigue et/ou l'irruption de composants sensoriels ou moteurs dissonants favorise la 
-désaggrégation, puis éventuellement la recomposition de l'activité nerveuse
-et la convergence vers un nouvel attracteur.
-On peut également assimiler ce mécanisme au passage d'un état ``bas'' (non spécifique) à un état ``haut''
-(spécifique), puis au retour vers un état ``bas'', un peu comme dans le modèle de \shortcite{Brunel2000persistent}.
-Les modèles de neurones impulsionnels présentés dans \shortcite{Hen08B,Dau14a} montrent, à une échelle temporelle plus fine, une capacité
-à produire une bouffée d'activité de population (sur une soixantaine de millisecondes), suivie par un retour
-à l'état de base. 
-Le résultat de ce schéma computationnel est un fonctionnement par ``\mbox{sauts}'' d'un attracteur à un autre, 
-et une alternance entre destabilisation et stabilité.
-Bien que possiblement implémenté par des équations aux dérivées partielles, la logique
-de ce schéma est donc essentiellement celle d'un fonctionnement discret, voire séquentiel.
-
-L'étude d'architectures de contrôle en boucle fermée nous a permis d'insister sur la différence de nature
-(ou l'hétérogénéité) entre d'une part le milieu extérieur, caractérisé par des grandeurs extensives (des masses et
-des articulations en déplacement, des changements continus) 
-et le milieu intérieur (milieu logiciel) caractérisé par des activité bornées, discrètes,
-changeant rapidement et de manière abrupte.
-L'hypothèse du passage d'échelle suggère des moments transitoires où l'activité microscopique rejoint 
-l'activité macroscopique lors des épisodes de synchronisation, conduisant à une réduction de 
-complexité selon un principe déjà suggéré par la synergétique \shortcite{Haken1983}.
-
-L'apprentissage par renforcement offre le cadre le plus propice à la stabilisaton de trajectoires dans
-le milieu physique par modification des couplage synaptiques au sein du milieu logiciel, par un 
-mécanisme d'essais/erreur.
-L'hypothèse que nous avons étudiée dans ce cadre est celle d'une activité intrinsèque servant de
-support de l'exploration motrice (c'est à dire jouant le rôle traditionellement dévolu au bruit
-dans le processus d'exploration).  
-%La structure du substrat logiciel joue dans ce cas un rôle important.
-La règle d'apprentissage distingue 
-les différents faisceaux d'axones arrivant sur le neurones, autrement dit identifie les différentes
-sources de l'activité arrivant sur le neurone, conduisant à favoriser, selon les cas, 
-les signaux externes, ou, au contraire, les signaux générées en interne \cite{Dau04b}.
-Le modèle proposé dans \cite{Dau07} ajoute un principe d'alternance entre l'activité perceptive
-et l'activité motrice.
-Les modèles proposés dans \cite{Dau09} et \cite{Dauce2010}, utilisent les mêmes principes
-en systématisent l'usage du codage topographique
-sur les couches sensorielles et proprioceptives,
-et mettent l'accent sur la formation de champs récepteurs. Dans ces modèles, la dynamique intrinsèque 
-est remplacée par un bruit ``lent'' 
-ayant la même constante de temps caractéristique que l'erreur motrice.
-Contrairement aux modèles de la perception basés sur la résonance perceptive, les modèles mis
-en place dans le cadre de ces tâches de contrôle en boucle fermée fonctionnent de manière ``classique'', 
-c'est à dire de manière continue selon un principe de feedback négatif (le signal transitant
-principalement sous la forme de corrections à apporter à la trajectoire courante).
-Différentes études sur l'algorithme de policy gradient en tant que tel ont par ailleurs
-été proposées, dans un cadre de classification automatique
-basé sur une information de type ``bandit'' \shortcite{Dauce2013b, Dauce2014sub}.
-
-Les modèles développés dans un cadre de modélisation biologique  
-apportent quelques éclairages supplémentaires
-sur certains aspects du calcul neuronal.
-L'étude et la reproduction des mécanismes neuronaux d'orientation visuelle,
-tels que tentés dans \shortcite{Dauce2011},
-montrent l'existence d'une activité autonome contrôlée dans le temps et dans l'espace sur
-la durée de la saccade (100~ms environ), c'est à dire sur un intervalle temporel précis, ``programmé''.
-Les modèles mis en place dans le cadre de l'orientation temporelle \shortcite{Malhotra2011} mettent à
-jour des mécanismes prenant place sur des échelles de l'ordre plusieurs secondes, 
-qui semblent quant à eux liés à la simulation motrice via une possible boucle réentrante. 
-Le principe de boucle réentrante dans lequel des états de l'environnement sont progressivement invalidés 
-s'apparente à un mécanisme d'accroissement d'évidence dans 
-le cadre de la mise en concurrence d'hypothèses variées, analogue fonctionnellement aux schémas
-basés sur l'accumulation d'évidence (ou vraisemblance Bayésienne) \shortcite{Wolpert2000,Haruno2001}.
-Ces mêmes schémas sont par ailleurs mis en oeuvre dans la réalisation d'architectures de contrôle
-très concrètes dans un cadre de traitement du signal pur (interfaces cerveau-machines) \shortcite{Thomas2014}.
-
-A l'issue de ces recherches, nous avons donc identifié un rôle possible
-de l'activité spontanée dans la consolidation de patrons d'activité
-spécifiques à des configurations ``connues'' de l'environnement.
-%(dans un substrat à expressivité limitée -- c'est à dire ne traduisant
-%pas parfaitement les caractéristiques physiques, mécaniques ou chimiques de l'environnement).
-Nous avons émis des hypothèses sur le rôle de cette activité intrinsèque pour produire 
-des basculements d'activité faisant évoluer la relation entre le système et l'environnement 
-(changement de mode de couplage avec l'environnement, déplacements moteurs).
-Un deuxième rôle est celui de la mémoire à court terme, se traduisant parfois sous la
-forme d'une ``résistance au changement'', c'est à dire une persévération de l'activité interne 
-malgré des changements au niveau des signaux sensoriels.
-Un troisième rôle, commun aux architectures ``à réservoir'', 
-est la capacité des dynamiques intrinsèques à capturer certaines dépendances 
-temporelles présentes dans le signal, et de les exploiter pour produire des réponses (ou des
-prédictions) plus précises.
-Enfin, nous avons montré que cette activité intrinsèque peut servir de support à l'innovation
-dans les rapports à l'environnement, c'est à dire principalement de proposer de nouvelles
-réponses comportementales, éventuellement stabilisées dans le cas où elles apportent 
-une amélioration (soit dans la capacité de prédiction, soit dans la réception de signaux
-de récompense plus intenses).
-
-
-%en lien avec le déplacement
-%Exploration visuelle par scanning
-%de l'environnement. 
-%L'exploration de l'espace visuel implique une métrique qui repose sur les
-%récepteurs vestibulaires.
-%(Les récepteurs vestibulaires sont par ailleurs au coeur du maintien de la position verticale)
-
-\section{Problématique générale}
-
-Le projet de recherche que cherche à défendre vise à approfondir la compréhension de certains des problèmes
-calculatoires rencontrés dans le cadre de ces efforts de modélisation biologiquement inspirée.
-Si on se restreint à un cadre computationnel, la plasticité 
-des réseaux de neurones récurrents met en jeu des interactions complexes entre un substrat caractérisé
-par un circuit de connexions plus ou moins récurrent, structuré ou hiérarchisé, un signal extérieur plus ou moins prédictible, 
-éventuellement sous influence des commandes produites par le réseau, et enfin une règle de plasticité 
-modifiant le circuit sous l'influence des signaux transitant localement par les noeuds du réseau.
-L'enjeu est de définir un cadre conceptuel à ce type de programmation.
-
-Une idée récente \cite{Friston2010}, 
-%reprenant en partie le concept de ``réservoir computing'', 
-est de définir à la fois l'apprentissage et le contrôle 
-comme un problème d'optimisation dans un cadre conceptuel lié à la prédiction 
-des signaux. Il s'agit d'une certaine façon de façonner l'activité interne de
-manière à rendre le signal arrivant à l'instant $t$ le plus prédictible possible, d'être le moins surpris, 
-et d'utiliser l'erreur de prédiction pour améliorer autant que possible les prédictions futures, soit 
-par un mécanisme de plasticité, soit par le déclenchement d'une action visant à réduire l'écart à la prédiction.
-
-Ce cadre est intéressant dans la mesure où il offre 
-une interprétation relativement nouvelle 
-au déclenchement des actions. Contrairement au cadre conceptuel classique, le point d'opération du système
-de contrôle est construit sur une quantité abstraite qui est la distance entre la prédiction et l'observation.
-Aucune référence n'est faite à l'existence d'un milieu physique extérieur dans lequel le contrôleur serait plongé. 
-Il s'agit de produire une
-configuration d'activité réduisant, dans la mesure des moyens d'expression présents dans le milieu logiciel,
-la distance aux données et signaux fournis par les sens. Il s'agit concrètement, à chaque instant, de produire
-une image des données sensorielles (par un modèle ``forward''), de comparer cette image aux observations, 
-et de déduire de la distance entre l'image produite et l'image observée une mise à jour des états internes, 
-du circuit logique, ou des deux. Le déclenchement des actions est dans ce cadre  
-le résultat éventuel des changements de ces états internes, dans l'hypothèse où certains de ces 
-états ont un effet sur l'appareil musculaire (ou, plus généralement, sur une interface extérieure).
-
-Cette définition
-de l'action par rapport à la qualité de la prédiction sensorielle, et non par rapport aux caractéristiques
-des données sensorielles elles-mêmes,
-crée une fracture conceptuelle à l'intérieur du cadre classique du contrôle moteur.
-L'action ne vient pas corriger un écart identifié, ou mesuré, au sein de la scène sensorielle,
-par une ``contre-action'' visant à annuler cet écart. 
-L'action sert à produire une scène sensorielle plus conforme aux attentes exprimées par le modèle forward,
-selon un principe de persévération.
-L'activité interne suggère une scène sensorielle, qu'il s'agit de réaliser (ou de produire) 
-à l'aide du déplacement moteur (ou plus généralement de l'envoi d'un signal sur une interface) approprié.
-Dans le cadre classique, la communication 
-repose sur la transmission de l'écart mesuré \emph{au sein} de la scène sensorielle (reconstruite ou pas).
-Dans le cadre ``Fristonien'', la communication passe par la transmission de l'écart à la prédiction
-sensorielle elle-même, qui ne nécessite pas en principe d'interprétation explicite de cette scène.
-%(l'activité propre, ou ``modèle interne'', n'est pas nécessairment conforme ou similaire
-%quantitativement à l'espace extérieur; elle doit juste être ``efficace'' en terme de prédiction).
-La question n'est plus la capacité à reproduire fidèlement le monde extérieur, mais la capacité à prédire 
-ses manifestations sensorielles. 
-
-Néanmoins, que le modèle de contrôle soit classique (identification et correction d'un écart au sein de la scène
-sensorielle prédite), ou Fristonien (confirmation de la scène
-sensorielle prédite à travers l'action -- ou la communication -- vers le milieu extérieur),
-le mécanisme computationnel sous-jacent est celui de la comparaison entre deux scènes 
-sensorielles, à savoir la scène effective et la scène prédite.
-Il existe dans les deux cas une activité de prédiction active, via un modèle ``forward''.
-
-L'idée est de prendre appui sur cette approche relativement nouvelle\footnote{Bien que les modèles computationnels pour
-le ``predictive coding'' datent
-des années 2000 \cite{Rao1999}, la définition proposée par Friston dans un cadre du contrôle
-moteur n'est pas encore (à ma connaissance) implémentée.}.
-Nous allons essayer d'identifier les difficultés se cachant derrière ces définitions, 
-et tenter d'établir des pistes de recherche visant à aborder la problématique du contrôle 
-à l'intérieur des contraintes posées par un milieu logiciel distribué, de type ``réseau de neurones''
-(activité répartie, les transformations et modification s'effectuant sur la base de 
-l'activité locale).
-Nous allons regarder plus particulièrement la problématique du ``modèle forward'', en essayant de 
-comprendre dans quelle mesure l'activité interne au modèle traduit, ou fait émerger (ou pas) des
-activités caractéristiques des grandeurs physiques extérieures dans l'élaboration de ses réponses motrices
-ou dans son activité de prédiction sensorielle.
-Nous regarderons en particulier comment la notion de \emph{distance} (telle qu'existant dans le milieu
-physique extérieur)
-peut apparaître (ou se manifester) au sein de l'activité
-logicielle.
-
-
-
-Nous partirons de l'activité humaine telle qu'elle se déploie à
-l'échelle macroscopique.
-L'activité humaine est fortement guidée par la composante visuelle.
-Si on regarde de plus près l'interrelation entre l'exploration visuelle et
-l'action simple consistant à manipuler des objets situés à portée de bras,
-deux grands domaines attentionnels peuvent être définis. D'une part 
-le domaine visuel, organisé autour de la direction du regard; d'autre part,
-l'espace de travail, organisé autour des opérations sur des objets
-attrapables ou maniplables. 
-Si on se place selon la perspective de l'invariance du monde environnant \cite{Gib79}, il est intéressant de
-constater que ces deux types d'activité (exploration visuelle, utilisation) sont rarement
-simultanées. De manière un peu schématique, l'espace de travail reste invariant pendant
-l'exploration visuelle, et, réciproquement, le regard reste statique (focalisé) durant
-l'activité de manipulation.
-En particulier, le déplacement du corps dans l'environnement se fait généralement
-vis-à-vis d'une scène visuelle stable grâce au réflexe vestibulo-oculaire qui maintient le regard
-en direction d'un même objet pendant le déplacement.
-
-Cette stabilité sélective d'une partie des composantes de l'environnement apparaît comme un 
-élément important de l'apprentissage du référentiel extérieur. 
-C'est également un bon modèle pour questionner les opérations nécessaires à la projection de
-l'espace pré-moteur vers l'espace visuel et vice-versa. Si on fait appel aux notion piagetiennes
-de permanence de l'objet \cite{Piaget1973}, les différentes objets de la scène varient dans l'espace pré-moteur 
-et restent statiques dans l'espace visuel lorsque le corps bouge, et inversement varient dans l'espace visuel et 
-restent statiques dans l'espace pré-moteur lorsque le regard bouge. Etant supposée par exemple la permanence
-des objets dans l'espace de pré-moteur, il est possible de prédire leur position dans le champ visuel étant
-donnée la direction du regard. Inversement, étant donnée la permanence des objets dans l'espace visuel, il est possible
-de prédire leur position dans l'espace pré-moteur étant donné le déplacement du corps
-(il est difficile de bouger à la fois le corps et le regard)
-
-La nature de cette prédiction est fondamentalement celle d'opérations %géométriques 
-isométriques, soit des translations et
-des rotations. Par exemple, les objets visibles sont translatés vers la gauche du champ visuel lorsque le regard  tourne
-vers la droite. Nous avons donc un référentiel (celui de la direction du regard) qui est translaté, redéfinissant
-les coordonnées des différents objets qui composent la scène visuelle. Le référentiel visuel est lui-même défini par rapport au
-tronc (le support stable des mouvements de la tête), et l'axe de la direction du regard se définit par rapport à un autre référentiel qui 
-est le référentiel du tronc. Les objets de la même scène sont également définis (en tant que point final des mouvements) dans
-ce même référentiel du tronc. Il existe donc une application qui à partir de la position des objets dans un premier 
-référentiel définit la position des mêmes objets dans un autre référentiel. La bijection entre les deux espaces offre
-un bon support à l'invariance ainsi qu'à la prédiction sensorielle (``forward model''). 
-
-%{\color{red} De manière schématique : espaces extensif/quantitatif = moteur - espace intensif/quantitatif = sensoriel}
-
-%Si nous poursuivons l'analogie nerveuse et biomécanique, le corps (les articulations du corps) décrit 
-%un espace métrique constitué par la position (et les variations de position) 
-%des éléments mobiles qui le composent.
-%Les objets extérieurs impactant les organes sensoriels sont également localisables dans un espace métrique
-%tridimensionnel constituant l'environnement immédiat du sujet. %{\color{red}[Mais la scène sensorielle est qualitative et non quantitative]}.
-%On peut parler d'un espace de description quantitatif pour décrire ce référentiel extérieur
-%par opposition à un espace de description qualitatif pour décrire le domaine des patrons d'activité induits
-%par les sens.
-Néanmoins, le caractère distribué de l'activité nerveuse suggère la distribution d'une même composante sensorielle 
-sur de nombreux neurones, chaque neurone étant sensible à une manifestation particulière
-de cette composante. L'exemple le plus extrême est celui de la rétine dont l'activité met en jeu 
-plusieurs millions de neurone sensoriels, chaque neurone étant la manifestation d'une valeur de luminance
-(et de longueur d'onde) en un point précis de la scène visuelle.
-
-
-%{\color{red} Le pattern matching a un problème avec la dynamique, qui apparaît comme une déformation,
-%un changement de forme... L'approche de l'observateur (Kalman) est appliquée aux modèles de la perception
-%visuelle de manière statique (scène visuelle statique). Le modèle forward est alors la projection d'un état discret
-%vers la scène sensorielle. Transitions entre états discrets et algorithme de Viterbi.}
-
-%En particulier, il apparaît probable qu'une même composante n'active pas les même neurones selon sa position
-%dans un certain intervalle de valeurs. 
-
-%{\color{red}[Transition pas évidente. Déveloper lien entre opération / Notion de distance / similarité entre patrons / formes.
-%Les opérations arithmétiques simples n'ont pas d'équivalent au sein de l'espace de redescription]}
-
-
-
-Cette distribution de l'activité (et leur caractère qualitatif) rend ainsi difficile 
-la réalisation d'opérations (quantitatives) simples comme l'addition ou la différence
-de deux quantités, pourtant nécessaires lorsque les réponses motrices doivent prendre en compte des sources sensorielles 
-multiples issues de référentiels variés (proprioception de la position du corps et coordonnées rétiniennes pour attraper
-une cible par exemple). 
-Si chaque composante sensorielle de l'espace métrique environnant 
-est décomposée en constituants élémentaires (intervalles ou ``pixels'' d'environnement), activant
-ou désactivant différentes populations de neurones primaires, 
-alors les transformations aussi simples que les translations, rotations, ou même les simples copies d'activité, 
-doivent être apprises ``par coeur'' \cite{Pouget1997} et ne peuvent résulter de la combinaison 
-(additives ou soustractives) d'activités unitaires.
-%c'est à dire d'un calcul.
-
-%{\color{Violet}
-%Ceci pose un problème en particulier lorsqu'il s'agit de contrôler les déplacements du corps à partir de l'activité
-%distribuée induite par les récepteurs sensoriels.
-%En fait, le passage par un domaine de description qualitatif
-%ne pose pas de problème tant qu'il s'agit d'associer (de manière univoque) un
-%patron d'activité (un attracteur {\color{red}[ATTENTION NOTION D'ATTRACTEUR = MIXTE]}) et une commande motrice%, comme dans le
-%cas de la carte colliculaire vue précédemment. 
-%Le problème se pose lorsqu'il faut
-%réaliser des opérations arithmétiques entre plusieurs grandeurs du monde physique,
-%moduler une réponse à partir d'un écart à une valeur de référence par exemple, 
-%c'est à
-%dire plus généralement lorsqu'il s'agit d'estimer, au sein de l'espace de description
-%qualitatif, des quantités \emph{relatives} à différents
-%points de l'espace métrique ou de l'espace sensoriel (et non des quantités absolues). 
-%}
-
-
-
-%[NE PAS OUBLIER L'ACTIVITE VESTIBULAIRE]
-
-Le problème est, comme nous l'avons vu, le caractère distribué de l'activité neuronale 
-qui rend difficile les opérations de type ``forward'', c'est-à-dire 
-une transformation qui, étant donnés des 
-objets sur un espace de manipulations et 
-un changement de référentiel, prédit la disposition de ces mêmes objets sur la scène visuelle.
-Par exemple, un simple ``pattern matching'' nécessiterait un apprentissage par coeur de la conséquence visuelle 
-de toutes les combinaisons de dispositions d'objets et de tous les changements de référentiel tronc-tête, ce qui parait 
-computationellement très coûteux. Il est nécessaire néanmoins que le ``lien'' praxo-visuel entre les différents 
-objets de la scène ne soit pas perdu
-au cours des déplacement du regard. 
-(Un raisonnement symétrique peut être appliqué pour le cas des déplacements du corps dans un environnement visuel stable)
-
-Il existe trois grandes catégories d'approche pour traiter de cette question, plus
-généralement appelée ``question
-de l'assemblage'' (``binding problem'')~: (1) l'activité tierce, (2) l'assemblage
-dynamique et (3) la mémoire (ou les transformations) extérieure(s).
-Par ailleurs, la manière dont les liens entre les deux espaces (pratique et visuel) se construisent est également une question
-à part entière, dont la mise en oeuvre pratique dépend largement du choix computationnel (1, 2 ou 3) effectué.
-
-La structure algorithmique la plus simple est celle de l'activité tierce (ou  projection inverse), 
-c'est à 
-dire une zone d'activité (ou un neurone) instancie un objet complet, répondant 
-de manière sélective à une combinaison spécifique de ses différents constituants.
-Cette approche est celle dite du ``neurone grand-mère''. 
-S'il apparaît peu probable qu'un seul neurone soit le support de la liaison,
-rien n'exclut qu'une population de neurones puisse répondre de façon sélective
-à toutes les configurations d'interaction avec un objet particulier (par exemple
-notre grand-mère) \shortcite{Quiroga2005}, voir aussi \shortcite{Dehaene2011}.
-Une telle activité est donc la continuation à travers
-toutes ses transformations (déplacement du corps, mouvement des yeux) 
-d'un même objet de l'environnement,
-autrement dit une ``présence de l'objet''.
-Dans sa forme la plus élaborée, l'activité tierce est 
-un modèle de l'environnement, constituée des principales quantités 
-relatives aux objets d'intérêt, dans un espace extérocentré. 
-Cette reconstruction de la structure externe de l'environnement 
-par modèle inverse suppose implicitement des transformations géométriques au sein
-du substrat permettant de projeter l'objet invariant sur la scène prémotrice ou visuelle,
-la réalisation computationnelle de telles projections dans un substrat distribué n'étant pas garantie
-(à l'heure actuelle).
-
-L'approche ``distribuée'', également appelée approche ``dynamique'', stipule
-le caractère non exclusif des activités des population : il n'existe pas de
-neurone ou de population de neurones répondant exclusivement à un invariant 
-de haut niveau. Le lien doit reposer sur des
-canaux de communication transitoires, ou encore des résonances, s'établissant à travers le
-substrat entre différentes activités constituants partiels de la scène.
-L'invariance est ici la susceptibilité à ``résoner ensemble'' (la persistance de la résonance à 
-travers les changements; l'existence de canaux le permettant)
-qui distingue ce qui est possible de ce qui ne l'est pas (les associations de constituants
-plausibles et celles qui ne le sont pas).
-%Cette approche est bien sûr très séduisante, mais pose des difficultés importantes 
-%dès qu'il s'agit de 
-L'hypothèse de l'assemblage dynamique est celle qui, à l'heure actuelle, semble la plus susceptible
-d'implémenter le lien praxo-visuel, sans faire appel à une activité centrale spécifique ou
-à un modèle interne. Elle évite en particulier le coût combinatoire des changements de
-référentiels. Le mécanisme le plus populaire est celui qui a été proposé initialement
-par \shortcite{Konig91a} (voir également \shortcite{Rod99,Wang2010}) 
-basé sur les résonances entre oscillateurs. Il reste néanmoins
-de nombreuses questions relatives à l'implémentaton concrète (ou opérationnelle) de ces mécanismes,
-ainsi que sur leur caractère (ou non) prédictif. 
-
-%[ASSEMBLAGE DE CIRCONSTANCE - STRUCTURE PLASTIQUE VERSATILE - LIGANDS ENTRE DIFFERENTS PATRONS]
-
-%[COMPOSITIONNALITE] Assemblage toujours renouvelé de composantes. La compositionnalité concerne 
-%plus le coté sensoriel que le coté moteur. Au niveau moteur, on a plutot un principe d'instrumentalité
-%liée à des patrons fixes (figés)
-%(meme utilisation pour de nombreux assemblages sensoriels) (un assemblage est aussi lié au principe
-%d'accumulation d'évidence - une composition est aussi une ``accumulation de preuves'' --- un faisceau d'indices concordants)
-
-%[ANALOGIE LIENS LATERAUX - COLINEARITE DES CHAMPS]
-
-%CONSTITUTION D'UN META-PATRON
-
-Une troisième approche, celle de la ``mémoire extérieure'' \cite{ORe01}
-reprend la tradition 
-de l'approche écologique impulsée par Gibson \cite{Gib79}. L'existence de 
-motifs invariants dans la relation de l'agent à son environnement (comme le point de fuite)
-sert de support à la manipulation de cet environnement.
-Le lien instrumental avec les objets (le mode d'utilisation des objets)
-institue une forme d'invariance  qui est reproduite à travers le temps à chaque rencontre
-avec le même type d'objets.
-L'approche Gibsonienne met donc au premier plan l'activité motrice en tant que soubassement
-de la constitution d'invariants dans le rapport au monde.
-D'un point de vue algorithmique, on peut imaginer par exemple des activités ``template'' 
-correspondant à des successions caractéristiques d'actions (actions stéréotypées).
-Dans le cadre de l'exploration visuelle, on peut imaginer des séquences caractéristiques
-de saccades selon le type de scène visuelle à explorer,
-%(le patron d'exploration
-%constituants le lien entre les points d'attention focale).
-%Il faut imaginer des patrons d'exploration visuelle caractéristiques, 
-ce ``plan de visite''
-%pour les différents types de scène,
-constituant le socle d'interprétation des éléments de la scène.
-%Cette approche procédurale, en faisant reposer l'invariance sur des ``dictionnaires'' de schémas 
-%sensori-moteurs, accorde peu de rôle à l'activité intrinsèque, laissant
-%donc peu de place aux processus de décision et à la mémoire.
-La mise en relation entre les éléments se réduit ici à un schéma d'exploration (ou d'utilisation) 
-caractéristique de ces différents éléments, constitutif d'une unité d'action. 
-
-
-%PROJET CONCRET
-
-%EXTENSIONS ET PERSPECTIVES PLUS LONGUES
-
-\section{Projets concrets}
-
-\subsection{Vers une approche computationnelle de l'activité à large échelle}
-
-Le milieu Marseillais offre des possibilités de collaboration nombreuses dans le domaine
-de la modélisation biologiquement inspirée. Nous avons sur le campus de la Timone (faculté de Médecine)
-deux laboratoires de neurosciences directement intéressés par les problématiques de modélisation : l'INT
-(Institut de Neurosciences de la Timone), laboratoire CNRS en pointe sur la modélisation du système visuel,
-du système moteur ainsi que sur l'analyse des données d'imagerie optique, et l'INS (Institut de Neurosciences
-des Systèmes), laboratoire INSERM en pointe sur l'analyse et la modélisation de l'épilepsie ainsi que sur la 
-modélisation dite à large échelle de l'activité nerveuse, à travers le projet TVB (The Virtual Brain) porté
-par Viktor Jirsa et Randy McIntosh (Université de Toronto). 
-Le laboratoire (INS) héberge également un centre de calcul principalement dédié à 
-la mise en oeuvre des calculs coûteux liés à la simulation détaillée des processus de 
-diffusion à la surface d'une reconstruction 3D du cortex, dans le cadre de 
-l'interface de simulation TVB.
-
-Cet environnement donne accès à des données d'observation sur l'animal, mais également chez l'humain dans le cadre
-des chirurgies pré-opératoires consistant à implémenter des électrodes stéréotaxiques profondes chez les
-patients épileptiques pour identifier les régions épileptogènes à retirer.
-Nous avons donc accès à des données de première main concernant l'activité neuronale telle qu'elle se développe
-chez le sujet épileptique.
-Les signaux obtenus dans le cadre de l'analyse pré-opératoire correspondent à une activité ``large échelle'',
-se développant sur des échelles de temps et d'espace macroscopiques.
-L'objectif clinique (opérer le patient sans produire de lésions incapacitantes) nécessite une compréhension
-fine des grands mécanismes de réseau à l'oeuvre dans le cerveau.
-L'un des objectifs de l'ANR ``Vibrations'', financée à partir de 2014, et à laquelle je participe est de 
-produire des modèles large-échelle personnalisés pour chaque patient en observation. Il s'agit 
-en particulier d'améliorer le diagnostic (identifier la zone épileptogène) 
-ainsi que prédire les conséquences de la chirurgie, pour minimiser les
-séquelles post-opératoires.
-
-Mes apports dans ce type de projet, et plus généralement dans le cadre de la
-modélisation large échelle, concernent principalement l'analyse et la modélisation
-des mécanismes mettant en jeu une activité intrinsèque et des interactions entre grandes
-populations de neurones, dans une des perspectives fonctionnelles évoquées 
-précédemment. Une idée que je cherche en particulier à développer est celle de 
-l'identité (ou de la simultanéité) de l'activité intrinsèque avec certaines 
-grandeurs caractéristiques de l'environnement.
-
-Les études précédentes sur l'orientation visuelle 
-mettent en évidence une caractéristique importante de la commande motrice~:
-la simultanéité entre l'activité des structures motrice ou prémotrice
-et le déplacement moteur correspondant (co-activité sur un intervalle de 
-l'ordre de 100~ms dans le cas de la saccade).
-Les données de la littérature indiquent que 
-l'activité éléctrique motrice est le ``reflet'' d'une activité mécanique prenant place dans l'environnement
-physique externe.
-Des études portant sur le cortex moteur montrent également des corrélations entre l'activité  
-mesurée sur les neurones du cortex moteur et le
-mouvement effectif, confirmant leur coextensivité temporelle (l'activité s'arrête lorsque le mouvement s'arrête). 
-Une composante de direction liée à la localisation de l'activité peut également être mise en évidence, 
-aboutissant à des possibilités de reconstruction de la
-trajectoire métrique à partir de l'activité de différents neurones \shortcite{Georgopoulos1986,Wessberg2000}.
-Des stimulations directes du cortex moteur, sur des échelles de temps
-comparables à la durée d'un déplacement (500~ms), suscitent des mouvements
-complexes convergeant toujours vers la même posture finale, quelle que soit la position
-de départ \shortcite{Graziano2002}. 
-%Il s'agit dans ce cas d'une commmande motrice
-%codant pour la position finale, selon un principe de ``point fixe''.
-%Sachant que seule la commande de variation de contraction est communiquée à l'appareil neuro-musculaire,
-%le modèle proposé par \cite{Mussa2004,Flash2005} suggère une activation différenciée de différentes primitives motrices
-%se comportant comme des champs de force, des variations d'intensité conduisant
-%naturellement l'appareil moteur vers le même point d'équilibre (point d'équilibre de forces
-%opposantes).
-
-Le thème de la commande motrice nous offre ainsi un bon point d'appui pour caractériser certains aspects
-de l'activité se développant \emph{au cours du temps} dans le cerveau. Ce thème peut avoir d'intéressants
-développements, à la fois théoriques et pratiques.
-
-D'un point de vue théorique, l'activité motrice est la forme la plus élémentaire de prédiction
-relative à des grandeurs  de l'environnement physique, plus précisément l'activité motrice
-prédit que l'appareil moteur est en train de bouger.
-Cette correspondance terme à terme entre une activité électrique et un déplacement moteur n'est pas
-une nécessité fonctionnelle, et traduit une relation de fort couplage dont la
-raison d'être reste à établir. Une idée possible est que cette activité sert de point de départ
-pour établir des prédictions plus complexes sur l'espace métrique environnant, selon
-une modalité  qui reste à déterminer. 
-%dans le cadre de mécanismes liés au développement
-%et à l'apprentissage. 
-Une autre idée est que cette activité motrice définit l'échelle temporelle caractéristique 
-sur laquelle se déroulent les opérations réalisées par le cerveau (de 100 à 500 ms, voir aussi \shortcite{Petitot2002}).
-
-Une étude réalisable serait d'identifier chez des patients implantés  
-les activités électriques se développant 
-de manière simultanée avec des déplacements moteurs mesurables par des dispositifs externes (comme une caméra
-ou des dispositifs accélérométriques).
-Les outils (capteurs, caméras) existent à l'INS, de même que les outils de visualisation
-permettant d'identifier les
-régions anatomiques sur lesquelles l'activité se déploie.
-Un projet en cours à l'INS se propose d'ailleurs de caractériser certaines crises 
-du lobe frontal, se manifestant par des activités motrices complexes, à l'aide de 
-tels capteurs accélérométriques dans le but de mieux quantifier et classifier ces crises.
-
-
-Modéliser une telle activité électrique implique par ailleurs
-des mécanismes computationnels à implémenter, par exemple sous
-la forme de programmes moteurs, tels qu'observés
-dans le cadre de la saccade oculaire. 
-De tels programmes mettent probablement
-en jeu les circuits sous-corticaux (ganglions de la base, thalamus et peut-être cervelet) 
-qui ne sont pas encore
-implémentés sur l'outil de simulation TVB.
-
-En plus de ces mécanismes computationnels, l'analyse de l'activité
-spontanée du cerveau à l'état de repos, comme nous l'avons déjà évoqué, montre
-des alternances marquées entre différents patrons d'activité distribués, mettant en jeu des
-régions similaires d'un sujet à l'autre. Selon l'outil de mesure
-utilisé, ces alternances peuvent prendre place sur des échelles de quelques centaines de 
-millisecondes \shortcite{van2010} (analyse EEG) ou quelques dizaines de secondes \shortcite{Fox2005} (analyse fMRI).
-L'alternance rapide de l'activité semble être le support de  traitements cognitifs
-élémentaires. Le caractère rapide de ces alternances laisse supposer un mécanisme actif d'assemblage
-et de désassemblage des assemblées neuronales successivement actives, comme proposé dans \shortcite{Rod99}. 
-Une interprétation possibles est celle d'une alternance active, au sein du cerveau, entre une activité 
-principalement perceptive, préparatrice de l'action, et une activité principalement motrice, préparatrice
-de la perception. Cette alternance rapide entre préparation motrice et préparation 
-perceptive est un cadre possible à la réalisation du \emph{predictive coding}, comme stipulé par 
-\shortcite{Rao1999} (voir aussi \shortcite{Wurtz2008,Rolfs2011}). Les alternances à plus longue constante
-temporelle pourraient quant à elles reposer sur l'alternance déjà évoquée entre les activité d'exploration
-sensorielle au sens large et les activités liées à la manipulation et à l'utilisation des objets
-de l'environnement (sous la forme éventuelle de la simulation motrice), qui peuvent s'apparenter dans
-une certaine mesures aux processus internes et externes stipulés dans \shortcite{Fox2005}.
-L'analyse des patrons d'activité développés à large échelle nécessite plus généralement une analyse
-fonctionnelle et non simplement structurelle. Il s'agirait ici de sortir des approches quantitatives
-pour poser les bases d'une interprétation plus computationnelle 
-des activités large-échelle observées, ouvrant la voie à
-des modèles informatiques plus précis.
-
-\subsection{Interfaces informatiques inspirées par la biologie}
-
-Nous avons également à Marseille une forte tradition en informatique théorique, portée
-historiquement par le LIF (Laboratoire d'Informatique Fondamentale), avec une expertise poussée 
-dans le domaine des langages fonctionnels, mais qui développe également une
-recherche de pointe en apprentissage automatique (Machine Learning).
-Le LATP (Laboratoire d'Analyse Topologie Probabilité) est également impliqué sur des
-thématiques proches du machine learning, en particulier dans le cadre du développement de
-modèles probabilistes en traitement du signal.
-Le centre INRIA de Sophia-Antipolis est également impliqués dans des 
-collaborations régulières avec les laboratoires de neurosciences
-Marseillais, sur des thématiques en lien avec le traitement du signal et la 
-construction de modèles inverses en imagerie.
-
-Cet environnement facilite le développement de projets mixtes, à l'interface du
-traitement du signal et de la modélisation biologique dans le cadre de l'étude des
-processus décisionnels classiques. 
-
-Les interfaces cerveau-machine, déjà abordées, offrent
-un cadre applicatif intéressant et potentiellement utile principalement pour
-les déficiences motrices et la réhabilitation motrice.
-%Le domaine des interfaces cerveau-machine est également une voie prometteuse pour cette approche.
-L'activité décelée dans le cadre des interfaces non-invasives (de type EEG) ne permet pas de reconstruction
-précise des activités internes à l'origine du signal de surface. La plupart des interfaces proposées
-se basent sur une démarche de classification automatique, ne permettant pas une interprétation
-de l'évolution spatio-temporelle de l'EEG. 
-
-L'idée générale d'un projet applicatif de ce type serait de construire une interface
-dont les principes de fonctionnement devraient être aussi proche que possible, étant données
-les connaissance actuelles, du fonctionnement du système nerveux.
-Il s'agit, d'un côté, de bien comprendre l'activité large-échelle pour mieux
-interpréter les données issues des capteurs non invasifs (EEG, voire MEG).
-De l'autre, il s'agit de s'inspirer des modes de fonctionnement du cerveau
-pour élaborer l'interface qui traite le signal. L'interface est en effet conceptuellement
-dans une situation similaire à celle d'un sujet humain~: elle fait face à un signal peu fiable,
-incomplet, bruité et doit apprendre à interpréter parfois compléter des données manquantes,
-pour produire des réponses (possiblement des déplacements moteurs dans le cas d'une interface de
-contrôle). Une avancée importante dans le domaine des interfaces cerveau-machine
-pourrait donc être la mise en place dans un cadre conceptuel bien contrôlé d'une véritable
-boucle de rétroaction entre l'interface et le sujet, en traitant le signal en temps réel 
-sur un principe d'anticipation et de prediction pour pallier autant que possible aux délais
-de traitement. 
-
-L'introduction de cette démarche ``en boucle fermée'', utilisant éventuellement des connaissances
-acquises lors de mesures invasives, devrait en principe permettre de traiter, sous une forme peut-être élémentaire,
-ces changements d'état rapide, et  améliorer ainsi l'interprétation 
-du signal et donc la fiabilité de l'interface.
-
-Une partie centrale du projet devrait être la prise en compte des mécanismes adaptatifs,
-en particulier dans le cadre d'une interface impliquant des stimuli visuels, pour ``caler''
-autant que possible les instants d'apparition des stimuli avec les rythmes et les féquences intrinsèques
-au cerveau, en respectant en particulier, s'ils peuvent être identifiés, les alternances
-entre les moments de préparation motrice et les moments de préparation perceptive. 
-D'autre part, le modèle devrait prendre en compte autant que faire se peut les caractéristiques
-à la fois structurelles et dynamiques du cerveau du sujet, en identifiant la localisation des
-circuits large échelle ainsi que les rythmes ou résonances propres de son activité cérébrale.
-
-En dernier lieu, il faut envisager des mécanismes adaptatifs agissant en direct pendant 
-l'interaction avec le sujet. On parle dans ce cas d'algorithmes d'apprentissage ``en ligne''. 
-Il s'agit d'une part d'en apprendre chaque jour un peu plus sur le sujet au travers des interactions répétées,
-pour affiner le modèle utilisé par l'interface. 
-D'autre part, il s'agit d'adapter ``en direct'' le modèle en fonction d'événements imprévus (comme
-des électrodes qui se déplacent ou se décollent) 
-ou de variations lentes de l'état du sujet (suite à la fatigue, à des baisses d'attention etc.).
-Dans ce cadre, le développement d'algorithmes adaptatifs spécifiques serait à
-envisager. 
-
-Plus généralement, les connaisances en plein essor sur le fonctionnement
-du cerveau à large échelle nous permettent d'envisager de nouvelles méthodologies 
-dans le développement d'objets interagissant de manière ``naturelle'' avec leur utilisateur.
-C'est à travers une connaissance plus approfondie de la logique et des mécanismes
-computationnels à l'oeuvre dans le cerveau (en particulier à large
-échelle)
-qu'on pourra peut-être repenser la manière de concevoir des objets communicants (robots mobiles
-mais également interfaces vocales, jeux, etc.) à travers des modes de communication
-plus proches de ceux qu'un sujet expérimente quotidiennement avec son entourage.
 
 
 \iffalse
