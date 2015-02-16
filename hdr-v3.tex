@@ -303,6 +303,7 @@ cette activité intrinsèque.
 \section{Neurosciences et sciences de l'information}
 %%  ICI LES DEFINITIONS QUI NE SONT PAS DANS LES NOTEBOOKS
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -328,10 +329,12 @@ interessant d'un point de vue computationnel? 1. propice à l'apprentissage (rec
 intrinsèques
 }
 
-\subsection{Substrats computationnels et expressivité}
+{\bf Les notions computationnelles et calculatoires dont il est question dans ce document}
+
+\subsection{Support matériel et substrat}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% substrat = MATERIEL  (!= LOGICIEL) 
+%% substrat = SUPPORT MATERIEL  (!= LOGICIEL) 
 %% RN = modèle logiciel de substrat 
 
 %Cette section présente un certain nombre de concepts utiles pour la compréhension de mes travaux. 
@@ -367,7 +370,32 @@ de substrat matériel  limité
 pour passer en revue les  substrats neuro-inspirés étudiés dans le cadre de ma thèse et après,
 sous l'angle de leurs capacités de traitement et d'expression.
 
+\subsection{Expressivité}
 
+Au sens des langages informatiques. Pouvoir expressif d'un langage.
+La question est de savoir quelles fonctions peuvent être implémentées par le circuit / le langage de programmation.
+les opérateurs sont combinables arbitrairement.
+Typiquement, il faut prouver qu'un ensemble d'opérateurs a le même pouvoir d'expression qu'une machine de Turing.
+
+(Wikipedia : langage formel - théorie des langages)
+
+On the computational power of neural nets
+HT Siegelmann, ED Sontag - Journal of computer and system sciences, 1995 - Elsevier
+
+Appliqué au domaine du contrôle : 
+A survey of computational complexity results in systems and control
+VD Blondel, JN Tsitsiklis - Automatica, 2000 - Elsevier
+
+\emph{\footnotesize It turns out that systems of the form (6) have vastly different characteristics from linear systems. A result announced in Siegelmann and Sontag (1991) and completed in Siegelmann and Sontag (1995), shows that saturated linear systems are capable of simulating Turing machines. This is done by suitably encoding the transition rules of the Turing machine in the matrix A, while the tape contents and the machine's internal state are encoded on some of the states of the saturated linear system. Thus, as computational devices, linear saturated systems are as powerful as Turing machines. This abstract result has several system-theoretic implications. We describe a representative one. Recall that the halting problem is undecidable for Turing machines. Therefore, the problem of deciding whether a given initial state of a saturated linear system eventually leads to a state that encodes a halting configuration, is also undecidable. This halting state can be chosen to be the origin (see Sontag, 1995) and it follows that is undecidable for saturated linear systems.}
+
+\subsection{Communication}
+
+au sens traitement du signal, signal sur bruit, information mutuelle, etc...
+
+\subsection{Calcul}
+
+au sens traditionnel des opérations mathématiques. fait reference au lambda-calcul, 
+à la séquence d’opérations permettant de produire un résultat.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -380,13 +408,150 @@ sous l'angle de leurs capacités de traitement et d'expression.
 \subsection{Sciences cognitives}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+Question de la connaissance - Varela - Multidisciplinarité : sciences humaine, sciences de l'information, neurosciences.
+
+3 approches : behavioriste, representationnelle, emergentiste (dynamiciste).
+
+Sciences cognitives = étude (discours sur) la connaissance. Comment le matériel "connaît" son environnement. 
+Une approche qui s'est développée en réaction au behaviorisme. De manière générale, il s'agit de faire appel 
+aux sciences de l'information (modèles mathématiques, informatiques, systèmes dynamiques) pour décrire les 
+mécanismes psychologiques de décision, mémoire, apprentissage, raisonnement, et
+comportement motivé chez l'homme et l'animal.
+
+Les sciences cognitives sont une réaction à l'approche "boite noire": le discours scientifique ne peut porter que 
+sur ce qui est quantifiable: inputs et outputs.  
+
+Selon l'approche traditionnelle, la cognition est vue comme ce qui se passe ``dans le cerveau'', l'activité 
+propre au cerveau, qui interfère 
+avec les mécanismes perceptifs et moteurs dans la production des comportements, qui fait qu'un stimulus ne produit 
+pas toujours la même réponse.
+
+Quelques opérations cognitives~:
+\begin{itemize}
+	\item reconnaissance (\emph{recognition})
+	\item rappel (\emph{recollection})
+	\item
+\end{itemize}
+
+
+
 \subsection{Neurosciences computationnelles}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\subsubsection{Apprentissage et plasticité}
+
+La plasticité est le processus physique qui impacte le comportement d'un substrat,
+en modifiant son activité, sa réactivité à certaines entrées, ou le type de
+réponse qu'il produit. 
+La plasticité est la propriété qui donne au substrat une mémoire physique (par opposition
+la mémoire dynamique), qui provoque un changement
+d'état durable.
+La plasticité permet d'inscrire sur
+le support la trace de faits passés en vue d'une utilisation future.
+
+Selon une perpective biologique et développementale, l'apprentissage
+est le processus de changement comportemental, 
+en relation avec ce mécanisme de plasticité. 
+L'apprentissage est au sens large
+l'ensemble des processus épigénétiques (historiques) inscrivant dans l'animal ou l'individu 
+les éléments d'expérience qui contribuent à accroître l'adaptation de ses réponses à son
+milieu.  
+
+La capacité à inscrire des événements ou des faits particuliers en vue de les exploiter dans le futur est une des
+propriétés essentielle du système nerveux des être vivants, {\bf !!assez difficile !!}
+à reproduire en tant que telle sur un support artificiel.
+{\bf !!Plaçons-nous par exemple dans une perspective computationnelle autonome!!}, 
+dans laquelle un programme doit pouvoir se passer d'utilisateur. 
+La consigne doit provenir d'un programme interne (un ``méta programme'') qui 
+agit sur le programme courant pour l'``améliorer'' en fonction des événements se présentent.
+{\bf !!Même si la notion de méta-programme ne pose pas de difficulté conceptuelle, elle est
+	en pratique difficile à mettre en oeuvre dans les architectures informatiques traditionnelles. 
+	La difficulté réside dans 
+	le choix des événements à considérer parmi l'ensemble des événements qui se présentent, et surtout 
+	dans la manière dont les événements pris en compte influencent le comportement logiciel futur.}
+
+
+
+
 \subsection{Apprentissage automatique et réseaux de neurones}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+L'apprentissage automatique (le ``Machine learning'') étudie les mécanismes de plasticité
+sous l'aspect de processus d'optimisation dans des espaces vectoriels de grande dimension. 
+Le but de l'apprentissage est d'extraire des données d'entrée des régularités, des facteurs explicatifs,
+permettant de mieux prédire et classifier les données nouvelles. 
+On parle d'apprentissage en ligne lorsque les données sont présentées séquentiellement.
+L'apprentissage consiste à appliquer de petits ajustements à chaque nouvelle donnée dans un 
+sens qui augmente localement la justesse du comportement, en espérant que chacun de ces ajustements locaux 
+augmente la justesse globale,
+selon le principe de la descente de gradient ``stochastique''.
 
-\subsubsection{Apprentissage}
+Selon l'approche ``discriminative'' \shortcite{Vap95}, le calcul repose essentiellement sur des produits 
+scalaire entre ces données et 
+une ou plusieurs variétés séparatrices (ou caractéristiques). 
+Les variétés qui émergent de ces processus tirent leurs caractéristiques des données qui ont été présentées. 
+Le ``programme'' final (classifieur, régresseur, ...) est constitué d'un ensemble de vecteurs
+caractéristiques qui sont les meilleurs ``représentants'' des données qui ont été présentées (au sens de la 
+discrimination, de la régression, de l'interpolation, ...). 
+
+Selon l'approche statistique  \shortcite{Bishop2006}, le bruit (le ``hasard'') est une des composantes 
+principales de l'algorithme. 
+Les algorithmes d'apprentissage statistiques reposent sur le principe 
+des modèles inverses. Un processus caché produit un flux de données (des observations).
+La théorie de l'apprentissage 
+statistique repose sur l'hypothèse
+que les données sont des échantillons d'une même distribution génératrice cachée,
+qui peut être sujette à des bruits d'état, et à des bruits de mesure. 
+L'apprentissage est dans ce cas un processus qui va tendre à séparer des données d'entrée les composantes
+non-prédictibes (bruit) des composantes prédictibles (signal), c'est à dire  identifier l'un et l'autre 
+pour estimer au mieux le degré de certitude (le posterior).
+Les facteurs explicatifs sont ici les différentes distributions représentatives des états du modèle
+génératif caché. 
+%L'apprentissage repose sur des 
+%estimateurs de l'erreur, ou de la récompense, basés sur ces échantillons.  
+Le choix de la réponse peut lui aussi reposer sur la prise en compte de l'incertitude sur 
+la réponse à proposer (ambiguité perceptive), sous la forme d'une réponse ``je ne sais pas'', ou 
+encore sous la forme d'une réponse issue d'un tirage pondéré entre différentes réponses plausibles.
+
+
+%{\color{Violet} Les nombreux développements de l'apprentissage automatique permettent
+%BLA BLA BLA... prédicteur / classifieur. interpolation. 
+%Néanmoins, des pbs restent :
+
+%prise en compte des dépendances temporelles dans les données. persévérance
+
+%apprentissage "en ligne"
+
+%interpolation. auto-association. feedback positif
+
+%perception. connaissance et non-sens.}
+
+Les approches descriptives extraients des représentants caractéristiques des données (vecteurs supports). 
+Les approches explicatives 
+identifient la source cachée des observations. La troisième famille d'approches est celle des réseaux de neurones, 
+qui définit un substrat dont les caractéristiques propres (nombre de neurones, nombre de couches cachées, architecture
+et patron de connexions) définissent la manière dont les données vont être traitées et interprétées.
+
+Par analogie avec la biologie et le système nerveux, %le principe de méta-programme 
+%a principalement été implémenté dans 
+%un cadre logiciel qui est celui des réseaux de neurones artificiels.
+%On parle d'apprentissage automatique (``machine learning'').
+l'apprentissage est alors le processus qui modifie graduellement la
+valeur des liaisons synaptiques entre les différents noeuds du réseau, dans 
+le but d'augmenter la pertinence des réponses et des comportements produits.
+Selon une perspective \emph{supervisée}, il s'agit d'inscrire dans la mémoire la trace de faits 
+passés, dans le but de faciliter leur réapparition ou au contraire d'éviter qu'ils
+ne se reproduisent.
+Selon une perspective \emph{non supervisée}, il s'agit plutôt de réduire l'incertitude sur les faits nouveaux
+grâce à la prise en compte des faits passés.
+
+Le choix du modèle (du substrat artificiel) conditionne le type d'opérations, la nature des réponses
+produites ainsi que la nature des changements autorisés.
+%L'ensemble de ces règles qui conditionnement l'évolution du substrat sous l'influence
+%des signaux à traiter constituent le méta-programme. 
+Selon le cadre choisi, la convergence du modèle vers un comportement cible
+adapté pourra être garantie sous certaines conditions (par exemple,
+sous une condition de séparabilité linéaire dans le cadre du perceptron  \shortcite{Rosen58}).
+
 
 \paragraph{Apprentissage supervisé}
 
@@ -529,7 +694,7 @@ couplages $J = \{J_{i,j}\}_{i \in 1..N,j \in 1..N}$ où chaque lien $J_{ij}$ est
 L'indépendance entre les différents liens est une caractéristique importante, qui permet d'analyser le comportement du modèle 
 à la limite des grandes tailles, c'est à dire en faisant tendre la taille $N$ vers l'infini. Avec un \emph{scaling} des poids approprié 
 (espérance, variance de la loi de tirage initial en $O(\frac{1}{N}$)), on peut montrer que la dynamique (déterministe) tend à la limite thermodynamique 
-vers un processus aléatoire, la corrélation entre les noeuds tendant vers 0. 
+vers un processus aléatoire, la corrélation entre les nœuds tendant vers 0. 
 
 %{\color{Violet} activité intrinsèque}
 
@@ -612,7 +777,7 @@ L'approche "multi-échelles" en neurosciences
 % NEW CHAPTER! %
 %%%%%%%%%%%%%%%%
 
-\part{Vue d'ensemble des résultats}
+\part{Vue d'ensemble~: résultats et projets}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%33
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -650,7 +815,7 @@ Bernard Doyon, chercheur à l'INSERM (CHU Purpan), de 1995 à 2001. J'ai ensuite
 conférence à l'Ecole Supérieure de Mécanique de Marseille, fusionnée ensuite avec deux autres écoles d'ingénieurs
 pour rejoindre le groupe des Ecoles Centrales. En plus de l'activité d'enseignement, ma recherche s'est déroulée  
 dans le laboratoire ``Mouvement et Perception'' (unité CNRS dépendant de la faculté de sciences du sport), 
-dans l'équipe de Reinoud Bootsma, puis au sein
+dans l'équipe de Reinoud Bootsma, puis depuis 2011 au sein
 de l'Institut de Neurosciences des systèmes (unité INSERM de la faculté de médecine de Marseille),
 dans l'équipe de Viktor Jirsa. 
 Cette activité de recherche s'est donc toujours déroulée dans un contexte impliquant des collaborations avec des
@@ -677,9 +842,15 @@ un comportement de route vers le chaos par quasi-périodicité \shortcite{Doyon1
 ``thermodynamique'') s'apparente à un processus aléatoire gaussien \shortcite{Ces95}.
 C'est au sein de cette équipe que j'ai effectué mon stage de DEA \shortcite{Dau95} ainsi que ma thèse \shortcite{Dau00}.
 
-% 1998 - Doyaon - Quoy - NN
+% 1998 - Doyon - Quoy - NN
 
-
+L'étude du mécanisme de reconnaissance par ``réduction'' de la dynamique constitue le coeur
+de ma thèse, sous la direction
+de Bernard Doyon, chercheur à L'INSERM au sein de l'équipe dirigée par Manuel Samuelidès à l'ONERA 
+de Toulouse, entre 1996 et 1999. Le papier qui présente ces idées de la manière la plus complète est celui de Neural Networks, 
+datant de 1998 \shortcite{Dau98A} ({\bf !! VOIR... !!}).
+Il porte sur l'étude de la réaction (spontanée ou acquise) d'un réseau de neurones récurrent aléatoire
+à des patrons (stimuli) également aléatoires.
 
 % 1999 - Moynot - Pinaud - Samuelides
 
@@ -687,19 +858,7 @@ En collaboration avec Olivier Moynot, Manuel Samuelides et Olivier Pinaud \short
 travaillé sur la définition et 
 l'étude du comportement à taille finie d'un modèle de réseau de neurones aléatoire (RNA) multi-populations (voir section \ref{sec:balanced}).
 
-Le point de départ consistait à modéliser et reproduire certains comportements observés dans les 
-réseaux de neurones naturels composés d'une population de neurones excitateurs et d'une population de neurones inhibiteurs.
-Cette classe de réseaux de neurones (constitués d'une population de noeuds inhibiteurs et d'une population de noeuds excitateurs)
-est appelé réseau de neurones ``équilibré'' (balanced neural networks), l'équilibre se référant à l'idée d'équilibre
-dynamique entre deux forces opposantes. La dynamique du réseau est amenée à converger vers un point d'équilibre
-traduisant localement (et globalement) le ``poids'' des deux influences. Une configuration des poids se traduisant
-par une activité endogène soutenue 
-traduit une domination de l'influence excitatrice. 
-A l'inverse, une configuration où l'activité intrinsèque disparait après un certain temps 
-traduit une domination de l'activité inhibitrice.
-Comme dans le cas des réseaux aléatoires simples, il existe un paramètre de contrôle correspondant au rapport entre l'influence 
-excitatrice et l'influence inhibitrice. De manière intéressante, une grande variété de comportements dynamiques peuvent être observés
-à la frontière, et entre l'extinction et l'activité soutenue, comme les oscillations synchronisées \shortcite{brunel00} et/ou le chaos \shortcite{Van98}. 
+
 
 % 2002-2007 - ACI 'DYNN'
 
@@ -752,6 +911,37 @@ attracteurs se développant au sein d'un tel réseau.
 
 %{\color{red} La difficulté consiste à éclairer les méthodes de machine learning à partir de concepts issus des sciences cognitives. }
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Méthodologie}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Une partie des résultats présentés porte sur l'application 
+de la plasticité synaptique dans des réseaux de neurones récurrents aléatoires 
+dans le but de modifier leur comportement à long terme. 
+Comme nous l'avons vu, les réseaux récurrents aléatoires sont des substrats 
+actifs capables de manifester des formes d'organisation spontanée~: comportement critique, 
+transitions entre différentes configurations d'activité, activité persistante et mémoire 
+à court terme (rémanence) etc.
+L'ajout d'un mécanisme de plasticité a pour objectif d'exploiter la richesse intrinsèque 
+de la dynamique pour que le réseau puisse acquérir des connaissances et des compétences nouvelles.
+
+Nous partons en général d'une ``tabula rasa'', autrement dit un réseau ne possédant initialement
+aucune compétence. L'idée est d'exploiter et d'amplifier par la plasticité certaines régularités internes (des 
+activités reproductibles) pour les associer à des signaux extérieurs. Le but est
+d'obtenir par apprentissage des réactions différenciées du réseau face à des signaux de même nature, 
+mais de formes différente. 
+La réduction de la complexité qui accompagne la présentation de certains de ces signaux 
+est alors le signe d'une réactivité acquise à ces formes, liées à leurs caractéristiques 
+spatiales et temporelles particulières.
+
+
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -765,17 +955,58 @@ Nous sommes partis de la question du rôle computationnel de l'activité intrins
 des réseau de neurones récurrents. A quoi peut servir une activité se développement
 spontanément, sans lien avec un milieu extérieur?}
 
+{\bf Capacités computationnelles des substrats neuronaux aléatoires récurrents}
+
+A l'issue de ces recherches, nous avons donc identifié un rôle possible
+de l'activité spontanée dans la consolidation de patrons d'activité
+spécifiques à des configurations ``connues'' de l'environnement.
+%(dans un substrat à expressivité limitée -- c'est à dire ne traduisant
+%pas parfaitement les caractéristiques physiques, mécaniques ou chimiques de l'environnement).
+Nous avons émis des hypothèses sur le rôle de cette activité intrinsèque pour produire 
+des basculements d'activité faisant évoluer la relation entre le système et l'environnement 
+(changement de mode de couplage avec l'environnement, déplacements moteurs).
+Un deuxième rôle est celui de la mémoire à court terme, se traduisant parfois sous la
+forme d'une ``résistance au changement'', c'est à dire une persévération de l'activité interne 
+malgré des changements au niveau des signaux sensoriels.
+Un troisième rôle, commun aux architectures ``à réservoir'', 
+est la capacité des dynamiques intrinsèques à capturer certaines dépendances 
+temporelles présentes dans le signal, et de les exploiter pour produire des réponses (ou des
+prédictions) plus précises.
+Enfin, nous avons montré que cette activité intrinsèque peut servir de support à l'innovation
+dans les rapports à l'environnement, c'est à dire principalement de proposer de nouvelles
+réponses comportementales, éventuellement stabilisées dans le cas où elles apportent 
+une amélioration (soit dans la capacité de prédiction, soit dans la réception de signaux
+de récompense plus intenses).
+
+Ces éléments sont présentés plus en détail ci-dessous.
+
+\subsection{Expressivité des grands réseaux aléatoires}
+
 Les différentes architectures neuronales étudiées ont tout d'abord
 permis d'identifier des comportements caractéristiques, décrits sous la forme de différents régimes dynamiques. 
 Nous avons cherché à caractériser l'expressivité de ces substrats, c'est à dire leur capacité à produire
-des patrons d'activité pouvant servir de support à des opérations cognitives. Nous avons, en particulier,
-abordé le principe de la reconnaissance par résonance qui, sous sa forme la plus simple, s'exprime comme une transition
-entre une activité non-spécifique (chaos) et une activité plus simple (cycle limite) en présence d'un stimulus 
-familier \shortcite{Dau98A,Hen08B}.
+des patrons d'activité pouvant servir de support à des opérations cognitives. 
+
 Nous avons, dans le cadre de réseaux équilibrés (constitués d'une population excitatrice et d'une population inhibitrice),
 mis en évidence l'existence de deux paramètres d'ordre caractéristiques (l'amplification et l'homogénéité d'un faisceau 
 d'axones) jouant sur la nature des régimes développés (extinction, activité chaotique non spécifique et oscillations 
-synchronisées) \shortcite{dauce01a}. La perturbation d'un réseau récurrent par un signal externe à variations lentes produit 
+synchronisées) \shortcite{dauce01a}. 
+Le point de départ consistait à modéliser et reproduire certains comportements observés dans les 
+réseaux de neurones naturels composés d'une population de neurones excitateurs et d'une population de neurones inhibiteurs.
+Cette classe de réseaux de neurones (constitués d'une population de noeuds inhibiteurs et d'une population de noeuds excitateurs)
+est appelé réseau de neurones ``équilibré'' (balanced neural networks), l'équilibre se référant à l'idée d'équilibre
+dynamique entre deux forces opposantes. La dynamique du réseau est amenée à converger vers un point d'équilibre
+traduisant localement (et globalement) le ``poids'' des deux influences. Une configuration des poids se traduisant
+par une activité endogène soutenue 
+traduit une domination de l'influence excitatrice. 
+A l'inverse, une configuration où l'activité intrinsèque disparait après un certain temps 
+traduit une domination de l'activité inhibitrice.
+Comme dans le cas des réseaux aléatoires simples, il existe un paramètre de contrôle correspondant au rapport entre l'influence 
+excitatrice et l'influence inhibitrice. De manière intéressante, une grande variété de comportements dynamiques peuvent être observés
+à la frontière, et entre l'extinction et l'activité soutenue, comme les oscillations synchronisées \shortcite{brunel00} et/ou le chaos \shortcite{Van98}. 
+
+
+La perturbation d'un réseau récurrent par un signal externe à variations lentes produit 
 des transitions brusques, caractéristiques d'un comportement critique, support potentiel d'une catégorisation (discrète)
 de l'environnement \shortcite{Beslon2002}. La combinaison de patrons de connexion à la fois topographiquement organisés et
 équilibrés (autorisant une activité périodique
@@ -790,11 +1021,55 @@ Une des hypothèses que nous avons mise en avant est que cette activité de popu
 permet le ``passage d'échelle'', c'est à dire rend sensible à une échelle supérieure (macroscopique) 
 l'activité répartie d'une population d'unités: passage d'activités unitaires à une activité de population, passage
 d'une activité de population à un déplacement moteur.
+
 Une autre hypothèse est que le substrat nerveux est un réservoir de patrons sensori-moteurs, 
 et l'apparition de précurseurs sensoriels ou moteurs au sein de l'activité nerveuse suscite 
 la convergence de la dynamique vers l'attracteur correspondant, 
 favorisant une activité macroscopique (un attracteur comportemental) qui lui-même favorise 
 l'attracteur neuronal par boucle de rétroaction positive \shortcite{Dau02,Dau02c1}.
+
+\subsection{Résonance et apprentissage}
+
+Nous avons abordé le principe de la reconnaissance par résonance qui, sous sa forme la plus simple, s'exprime comme une transition
+entre une activité non-spécifique (chaos) et une activité plus simple (cycle limite) en présence d'un stimulus 
+familier \shortcite{Dau98A,Hen08B}.
+Le mécanisme de reconnaissance que nous étudions est assez éloigné d'un mécanisme 
+calculatoire traditionnel puisqu'il s'agit principalement 
+d'une réaction accrue à certains signaux. Il permet néanmoins de tracer une frontière entre le ``connu'' et l'``inconnu'',
+et peut donc servir de base à des modèles de la perception, puis d'interpolation sur le principe de la 
+complétion perceptive \shortcite{Hop82}.
+Les formes produisant une réponse accrue sont ``vues'', les autres sont ignorées et demeurent ``non-perçues''. 
+Le mécanisme permettant de passer de l'ignorance à la perception repose sur la répétition (les signaux apparaissant le 
+plus souvent sont appris, ceux qui apparaissent rarement sont ignorés) 
+et sur leur faculté à produire des réponses différenciées dans le substrat (c'est le substrat qui fixe le
+caractère différent ou similaire de deux formes).
+
+Du point de vue computationnel, la plasticité synaptique inscrit dans le substrat une séparation de l'espace
+des stimuli entre une région reconnue et une région inconnue. Il s'agit donc en premier lieu d'une opération de 
+discrimination. Deuxièmement, chaque réponse à un motif se traduit par une activité spatio-temporellement distincte,
+l'apprentissage ayant pour effet de capturer (ou plutôt accentuer) un \emph{mode dynamique} particulier.
+Le réseau est vu comme un ``réservoir'' de comportements dynamiques spatio-temporellement différents. Le comportement
+spatio-temporel asocié au motif change sous l'effet de la plasticité, en conservant certaines
+de ses caractéristiques comme la période intrinsèque, qui se manifeste de façon ``pure'' 
+sous la forme d'un cycle limite. Ce comportement temporellement périodique 
+finit par disparaître si l'apprentissage est poussé jusqu'au point fixe. La règle 
+de plasticité Hebbienne, dans sa forme simple étudiée ici, n'est pas convergente et 
+l'apprentissage est stoppé de manière arbitraire à l'apparition du cycle limite
+pour les besoins de l'étude. 
+
+La principale difficulté rencontrée pour ces réseaux est la contamination 
+de la réaction induite à des patrons non appris. Si des motifs voisins du motif initialement appris
+induisent également une réduction de la dynamique, la réitération de l'apprentissage sur plusieurs motifs différents
+conduit invariablement à un effondrement généralisé de la complexité, étendant la réduction de
+dynamique à l'ensemble des motifs. 
+La capacité d'un réseau est définie comme le nombre de motifs pouvant être 
+appris sans provoquer cet effondrement.
+Cette capacité s'avère assez faible en pratique. 
+Dans notre cas, comme dans le cas du réseau de Hopfield, elle semble
+dépendre linéairement de la taille du réseau.
+
+[Résultats sur la reconnaissance de séquences temporelles]
+
 Le mécanisme de résonance est logiquement suivi d'un retour à
 l'état de base,  lorsque les conditions de la synchronisation ne sont plus remplies.
 Des mécanismes internes de fatigue et/ou l'irruption de composants sensoriels ou moteurs dissonants favorise la 
@@ -818,6 +1093,8 @@ changeant rapidement et de manière abrupte.
 L'hypothèse du passage d'échelle suggère des moments transitoires où l'activité microscopique rejoint 
 l'activité macroscopique lors des épisodes de synchronisation, conduisant à une réduction de 
 complexité selon un principe déjà suggéré par la synergétique \shortcite{Haken1983}.
+
+\subsection{Contrôle moteur}
 
 L'apprentissage par renforcement offre le cadre le plus propice à la stabilisation de trajectoires dans
 le milieu physique par modification des couplage synaptiques au sein du milieu logiciel, par un 
@@ -846,6 +1123,8 @@ Différentes études sur l'algorithme de policy gradient en tant que tel ont par
 été proposées, dans un cadre de classification automatique
 basé sur une information de type ``bandit'' \shortcite{Dauce2013b, Dauce2014sub}.
 
+\subsection{Modèles biologiques du contrôle moteur et de l'attention}
+
 Les modèles développés dans un cadre de modélisation biologique  
 apportent quelques éclairages supplémentaires
 sur certains aspects du calcul neuronal.
@@ -863,39 +1142,6 @@ basés sur l'accumulation d'évidence (ou vraisemblance Bayésienne) \shortcite{
 Ces mêmes schémas sont par ailleurs mis en oeuvre dans la réalisation d'architectures de contrôle
 très concrètes dans un cadre de traitement du signal pur (interfaces cerveau-machines) \shortcite{Thomas2014}.
 
-A l'issue de ces recherches, nous avons donc identifié un rôle possible
-de l'activité spontanée dans la consolidation de patrons d'activité
-spécifiques à des configurations ``connues'' de l'environnement.
-%(dans un substrat à expressivité limitée -- c'est à dire ne traduisant
-%pas parfaitement les caractéristiques physiques, mécaniques ou chimiques de l'environnement).
-Nous avons émis des hypothèses sur le rôle de cette activité intrinsèque pour produire 
-des basculements d'activité faisant évoluer la relation entre le système et l'environnement 
-(changement de mode de couplage avec l'environnement, déplacements moteurs).
-Un deuxième rôle est celui de la mémoire à court terme, se traduisant parfois sous la
-forme d'une ``résistance au changement'', c'est à dire une persévération de l'activité interne 
-malgré des changements au niveau des signaux sensoriels.
-Un troisième rôle, commun aux architectures ``à réservoir'', 
-est la capacité des dynamiques intrinsèques à capturer certaines dépendances 
-temporelles présentes dans le signal, et de les exploiter pour produire des réponses (ou des
-prédictions) plus précises.
-Enfin, nous avons montré que cette activité intrinsèque peut servir de support à l'innovation
-dans les rapports à l'environnement, c'est à dire principalement de proposer de nouvelles
-réponses comportementales, éventuellement stabilisées dans le cas où elles apportent 
-une amélioration (soit dans la capacité de prédiction, soit dans la réception de signaux
-de récompense plus intenses).
-
-Ces résultats sont détaillés dans les chapitres suivants:
-\begin{itemize}
-
-\item 
-
-\item 
-
-\item 
-
-\item 
-
-\end{itemize}
 
 
 %en lien avec le déplacement
@@ -910,6 +1156,8 @@ Ces résultats sont détaillés dans les chapitres suivants:
  
 \section{Autres résultats}
 % % SIDE RESULTS
+
+\section{Résultats négatifs}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1505,7 +1753,7 @@ plus proches de ceux qu'un sujet expérimente quotidiennement avec son entourage
 
 
 \emph{L'approche mise en avant dans ce chapitre
-est l'analyse des capacités d'un réseau de neurones en tant que support potentiel d'opérations cognitives. 
+est l'analyse des capacités d'un réseau de neurones en tant que support potentiel d'opérations {\bf !! cognitives!! (de calculs)}. 
 Dans ces différentes études, nous n'abordons pas la question de la plasticité, ne regardons pas les questions de communication ou de mémoire
 comme l'encodage ou le traitement effectif des signaux. 
 Notre approche se concentre sur la notion de régime dynamique et d'\emph{attracteurs}. L'idée principale est que notre substrat
@@ -1752,6 +2000,7 @@ en neurosciences computationnelles \shortcite{Voges2012,Lundqvist2012}.
 %}
 
 %\includepdf[pages=4-19,offset=0 -20]{pdf/2004-natural-computing-ann.pdf}
+
 \includepdf[pages=4-5,landscape=true,nup=1x2,scale=1.1,offset= 120 -30]{pdf/2004-natural-computing-ann.pdf}
 \includepdf[pages=6-7,landscape=true,nup=1x2,scale=1.1,offset= -120 -30]{pdf/2004-natural-computing-ann.pdf}
 \includepdf[pages=8-9,landscape=true,nup=1x2,scale=1.1,offset= 120 -30]{pdf/2004-natural-computing-ann.pdf}
@@ -1908,6 +2157,7 @@ grâce au contrôle du niveau d'activité  qui empêche d'atteindre les régimes
 %connectivité structurelle / fonctionnelle
 %}
 
+
 \includepdf[pages=1,offset=-70 -20]{pdf/2015-PLOS-CB-ann.pdf}
 \includepdf[pages=2,offset=70 -20]{pdf/2015-PLOS-CB-ann.pdf}
 \includepdf[pages=3,offset=-70 -20]{pdf/2015-PLOS-CB-ann.pdf}
@@ -1947,7 +2197,7 @@ grâce au contrôle du niveau d'activité  qui empêche d'atteindre les régimes
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{Feedback positif et plasticité dans les modèles de la perception} \label{sec:FPos}
+\chapter{Réservoir, résonance et apprentissage séquentiel} \label{sec:FPos}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1966,145 +2216,10 @@ cette résonance étant le support des interpolations perceptives futures. Nous 
 se distinguent du modèle classique du ``predictive coding'' organisé autour du principe du feedback négatif, et en particulier comment les premières
 implémentent le comportement de  ``résistance au changement'' (ou persévération). }
 
-La plupart des résultats présentés dans cette section portent sur l'application 
-de la plasticité synaptique dans des réseaux de neurones récurrents aléatoires 
-dans le but de modifier leur comportement à long terme. 
-Comme nous l'avons vu, les réseaux récurrents aléatoires sont des substrats 
-actifs capables de manifester des formes d'organisation spontanée~: comportement critique, 
-transitions entre différentes configurations d'activité, activité persistante et mémoire 
-à court terme (rémanence) etc.
-L'ajout d'un mécanisme de plasticité a pour objectif d'exploiter la richesse intrinsèque 
-de la dynamique pour que le réseau puisse acquérir des connaissances et des compétences nouvelles.
-
-Nous partons en général d'une ``tabula rasa'', autrement dit un réseau ne possédant initialement
-aucune compétence. L'idée est d'exploiter et d'amplifier par la plasticité certaines régularités internes (des 
-activités reproductibles) pour les associer à des signaux extérieurs. Le but est
-d'obtenir par apprentissage des réactions différenciées du réseau face à des signaux de même nature, 
-mais de formes différente. 
-La réduction de la complexité qui accompagne la présentation de certains de ces signaux 
-est alors le signe d'une réactivité acquise à ces formes, liées à leurs caractéristiques 
-spatiales et temporelles particulières.
-
-Ce mécanisme de reconnaissance que nous étudions est assez éloigné d'un mécanisme 
-calculatoire puisqu'il s'agit principalement 
-d'une réaction accrue à certains signaux. Il permet néanmoins de tracer une frontière entre le ``connu'' et l'``inconnu'',
-et peut donc servir de base à des modèles de la perception, puis d'interpolation sur le principe de la 
-complétion perceptive \shortcite{Hop82}.
-Les formes produisant une réponse accrue sont ``vues'', les autres sont ignorées et demeurent ``non-perçues''. 
-Le mécanisme permettant de passer de l'ignorance à la perception repose sur la répétition (les signaux apparaissant le 
-plus souvent sont appris, ceux qui apparaissent rarement sont ignorés) 
-et sur leur faculté à produire des réponses différenciées dans le substrat (c'est le substrat qui fixe le
-caractère différent ou similaire de deux formes).
 
 
+%\section{Introduction : plasticité et apprentissage}
 
-\section{Introduction : plasticité et apprentissage}
-
-La plasticité est un processus physique qui impacte le comportement d'un substrat,
-en modifiant son activité, sa réactivité à certaines entrées, ou le type de
-réponse qu'il produit. 
-La plasticité est la propriété qui donne au substrat une mémoire physique (par opposition
-la mémoire dynamique), qui provoque un changement
-d'état durable.
-La plasticité permet d'inscrire sur
-le support la trace de faits passés en vue d'une utilisation future.
-
-Selon une perpective biologique et développementale, l'apprentissage
-est le processus de changement comportemental, 
-en relation avec ce mécanisme de plasticité. 
-L'apprentissage est au sens large
-l'ensemble des processus épigénétiques (historiques) inscrivant dans l'animal ou l'individu 
-les éléments d'expérience qui contribuent à accroître l'adaptation de ses réponses à son
-milieu.  
-
-La capacité à inscrire des événements ou des faits particuliers en vue de les exploiter dans le futur est une des
-propriétés essentielle du système nerveux des être vivants, assez difficile
-à reproduire en tant que telle sur un support artificiel.
-Plaçons-nous par exemple dans une perspective computationnelle autonome, 
-dans laquelle un programme doit pouvoir se passer d'utilisateur. 
-La consigne doit provenir d'un programme interne (un ``méta programme'') qui 
-agit sur le programme courant pour l'``améliorer'' en fonction des événements se présentent.
-Même si la notion de méta-programme ne pose pas de difficulté conceptuelle, elle est
-en pratique difficile à mettre en oeuvre dans les architectures informatiques traditionnelles. 
-La difficulté réside dans 
-le choix des événements à considérer parmi l'ensemble des événements qui se présentent, et surtout 
-dans la manière dont les événements pris en compte influencent le comportement logiciel futur.
-
-L'apprentissage automatique (le ``Machine learning'') étudie les mécanismes de plasticité
-sous l'aspect de processus d'optimisation dans des espaces vectoriels de grande dimension. 
-Le but de l'apprentissage est d'extraire des données d'entrée des régularités, des facteurs explicatifs,
-permettant de mieux prédire et classifier les données nouvelles. 
-On parle d'apprentissage en ligne lorsque les données sont présentées séquentiellement.
-L'apprentissage consiste à appliquer de petits ajustements à chaque nouvelle donnée dans un 
-sens qui augmente localement la justesse du comportement, en espérant que chacun de ces ajustements locaux 
-augmente la justesse globale,
-selon le principe de la descente de gradient ``stochastique''.
-
-Selon l'approche ``discriminative'' \shortcite{Vap95}, le calcul repose essentiellement sur des produits 
-scalaire entre ces données et 
-une ou plusieurs variétés séparatrices (ou caractéristiques). 
-Les variétés qui émergent de ces processus tirent leurs caractéristiques des données qui ont été présentées. 
-Le ``programme'' final (classifieur, régresseur, ...) est constitué d'un ensemble de vecteurs
-caractéristiques qui sont les meilleurs ``représentants'' des données qui ont été présentées (au sens de la 
-discrimination, de la régression, de l'interpolation, ...). 
-
-Selon l'approche statistique  \shortcite{Bishop2006}, le bruit (le ``hasard'') est une des composantes 
-principales de l'algorithme. 
-Les algorithmes d'apprentissage statistiques reposent sur le principe 
-des modèles inverses. Un processus caché produit un flux de données (des observations).
-La théorie de l'apprentissage 
-statistique repose sur l'hypothèse
-que les données sont des échantillons d'une même distribution génératrice cachée,
-qui peut être sujette à des bruits d'état, et à des bruits de mesure. 
-L'apprentissage est dans ce cas un processus qui va tendre à séparer des données d'entrée les composantes
-non-prédictibes (bruit) des composantes prédictibles (signal), c'est à dire  identifier l'un et l'autre 
-pour estimer au mieux le degré de certitude (le posterior).
-Les facteurs explicatifs sont ici les différentes distributions représentatives des états du modèle
-génératif caché. 
-%L'apprentissage repose sur des 
-%estimateurs de l'erreur, ou de la récompense, basés sur ces échantillons.  
-Le choix de la réponse peut lui aussi reposer sur la prise en compte de l'incertitude sur 
-la réponse à proposer (ambiguité perceptive), sous la forme d'une réponse ``je ne sais pas'', ou 
-encore sous la forme d'une réponse issue d'un tirage pondéré entre différentes réponses plausibles.
-
-%{\color{Violet} Les nombreux développements de l'apprentissage automatique permettent
-%BLA BLA BLA... prédicteur / classifieur. interpolation. 
-%Néanmoins, des pbs restent :
-
-%prise en compte des dépendances temporelles dans les données. persévérance
-
-%apprentissage "en ligne"
-
-%interpolation. auto-association. feedback positif
-
-%perception. connaissance et non-sens.}
-
-Les approches descriptives extraients des représentants caractéristiques des données (vecteurs supports). 
-Les approches explicatives 
-identifient la source cachée des observations. La troisième famille d'approches est celle des réseaux de neurones, 
-qui définit un substrat dont les caractéristiques propres (nombre de neurones, nombre de couches cachées, architecture
-et patron de connexions) définissent la manière dont les données vont être traitées et interprétées.
-
-Par analogie avec la biologie et le système nerveux, %le principe de méta-programme 
-%a principalement été implémenté dans 
-%un cadre logiciel qui est celui des réseaux de neurones artificiels.
-%On parle d'apprentissage automatique (``machine learning'').
-l'apprentissage est alors le processus qui modifie graduellement la
-valeur des liaisons synaptiques entre les différents noeuds du réseau, dans 
-le but d'augmenter la pertinence des réponses et des comportements produits.
-Selon une perspective \emph{supervisée}, il s'agit d'inscrire dans la mémoire la trace de faits 
-passés, dans le but de faciliter leur réapparition ou au contraire d'éviter qu'ils
-ne se reproduisent.
-Selon une perspective \emph{non supervisée}, il s'agit plutôt de réduire l'incertitude sur les faits nouveaux
-grâce à la prise en compte des faits passés.
-
-Le choix du modèle (du substrat artificiel) conditionne le type d'opérations, la nature des réponses
-produites ainsi que la nature des changements autorisés.
-%L'ensemble de ces règles qui conditionnement l'évolution du substrat sous l'influence
-%des signaux à traiter constituent le méta-programme. 
-Selon le cadre choisi, la convergence du modèle vers un comportement cible
-adapté pourra être garantie sous certaines conditions (par exemple,
-sous une condition de séparabilité linéaire dans le cadre du perceptron  \shortcite{Rosen58}).
 
 
 %L'aléa des patrons de connexion et le caractère non-linéaire des opérateurs 
@@ -2125,22 +2240,17 @@ sous une condition de séparabilité linéaire dans le cadre du perceptron  \sho
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     2.1      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\cleardoublepage
 \section{Route inverse}
 
-L'étude du mécanisme de reconnaissance par ``réduction'' de la dynamique constitue le coeur
-de ma thèse, sous la direction
-de Bernard Doyon, chercheur à L'INSERM au sein de l'équipe dirigée par Manuel Samuelidès à l'ONERA 
-de Toulouse, entre 1996 et 1999. 
 Certains travaux réalisés pendant la thèse de Mathias Quoy (1991-1994) \shortcite{Quo94}
 avaient déjà montré l'effet de réduction produit par 
 la plasticité Hebbienne dans les réseaux aléatoire récurrents à 
 dynamique chaotique intrinsèque.
 
-Le papier qui présente ces idées de la manière la plus complète est celui de Neural Networks, 
-datant de 1998 \shortcite{Dau98A}.
-Il porte sur l'étude de la réaction (spontanée ou acquise) d'un réseau de neurones récurrent aléatoire
-à des patrons (stimuli) également aléatoires.
-Il fait la synthèse de plusieurs résultats sur les réseaux récurrents aléatoires, 
+Le papier de Neural Networks, 
+datant de 1998 \shortcite{Dau98A} fait la synthèse de plusieurs résultats sur les réseaux récurrents aléatoires, 
 à la fois sur les comportements de grande taille et 
 sur les effets de taille finie, et présente pour la première fois les effets de la plasticité sur ce type de réseau.
 Il reprend pour ce qui me concerne des travaux réalisés pendant ma première année de thèse. %DAU98B}. 
@@ -2203,29 +2313,7 @@ Ce mécanisme de séparation entre le connu et l'inconnu par le comportement dyn
 rejoint l'hypothèse formulée par Freeman \shortcite{Ska87} à propos de la perception des odeurs~: 
 activité simplifiée pour des odeurs connues, activité de fond chaotique pour les odeurs non familières.
 
-Du point de vue computationnel, la plasticité synaptique inscrit dans le substrat une séparation de l'espace
-des stimuli entre une région reconnue et une région inconnue. Il s'agit donc en premier lieu d'une opération de 
-discrimination. Deuxièmement, chaque réponse à un motif se traduit par une activité spatio-temporellement distincte,
-l'apprentissage ayant pour effet de capturer (ou plutôt accentuer) un \emph{mode dynamique} particulier.
-Le réseau est vu comme un ``réservoir'' de comportements dynamiques spatio-temporellement différents. Le comportement
-spatio-temporel asocié au motif change sous l'effet de la plasticité, en conservant certaines
-de ses caractéristiques comme la période intrinsèque, qui se manifeste de façon ``pure'' 
-sous la forme d'un cycle limite. Ce comportement temporellement périodique 
-finit par disparaître si l'apprentissage est poussé jusqu'au point fixe. La règle 
-de plasticité Hebbienne, dans sa forme simple étudiée ici, n'est pas convergente et 
-l'apprentissage est stoppé de manière arbitraire à l'apparition du cycle limite
-pour les besoins de l'étude. 
 
-La principale difficulté rencontrée pour ces réseaux est la contamination 
-de la réaction induite à des patrons non appris. Si des motifs voisins du motif initialement appris
-induisent également une réduction de la dynamique, la réitération de l'apprentissage sur plusieurs motifs différents
-conduit invariablement à un effondrement généralisé de la complexité, étendant la réduction de
-dynamique à l'ensemble des motifs. 
-La capacité d'un réseau est définie comme le nombre de motifs pouvant être 
-appris sans provoquer cet effondrement.
-Cette capacité s'avère assez faible en pratique. 
-Dans notre cas, comme dans le cas du réseau de Hopfield, elle semble
-dépendre linéairement de la taille du réseau.
 
 Des changements marginaux sur la règle de plasticité, en limitant drastiquement le nombre
 de liens éligibles,
@@ -2259,10 +2347,25 @@ Maas et Markram \cite{MAASS02,Buonomano2009}.
 %- encodage - patrons statiques - route vers le chaos - destabilisation - frontière du chaos
 %}
 
+\includepdf[pages=1,offset=50 0]{pdf/1998-neural-networks.pdf}
+\includepdf[pages=2,offset=-65 0]{pdf/1998-neural-networks.pdf}
+\includepdf[pages=3,offset=50 0]{pdf/1998-neural-networks.pdf}
+\includepdf[pages=4,offset=-65 0]{pdf/1998-neural-networks.pdf}
+\includepdf[pages=5,offset=50 0]{pdf/1998-neural-networks.pdf}
+\includepdf[pages=6,offset=-65 0]{pdf/1998-neural-networks.pdf}
+\includepdf[pages=7,offset=50 0]{pdf/1998-neural-networks.pdf}
+\includepdf[pages=8,offset=-65 0]{pdf/1998-neural-networks.pdf}
+\includepdf[pages=9,offset=50 0]{pdf/1998-neural-networks.pdf}
+\includepdf[pages=10,offset=-65 0]{pdf/1998-neural-networks.pdf}
+\includepdf[pages=11,offset=50 0]{pdf/1998-neural-networks.pdf}
+\includepdf[pages=12,offset=-65 0]{pdf/1998-neural-networks.pdf}
+\includepdf[pages=13,offset=50 0]{pdf/1998-neural-networks.pdf}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     2.2      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Architectures multi-couches}
+\cleardoublepage
+\section{Résonance dans les architectures multi-couches}
 
 La troisième série de résultats de la thèse et des publication associées \shortcite{Dau00,Dau02} porte sur une architecture 
 neuronale  permettant d'implémenter un modèle de la perception des signaux spatio-temporels.
@@ -2840,7 +2943,7 @@ plus en détail dans le chapitre suivant.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{Contrôle et apprentissage en boucle fermée}
+\chapter{Contrôle moteur et apprentissage en boucle fermée}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
