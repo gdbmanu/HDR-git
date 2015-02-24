@@ -992,6 +992,8 @@ se traduit par une réduction de l'exposition au signal aversif.
 
 \subsection{Disparités d'échelle}
 
+{\bf!! TODO milieu physique vs. milieu logiciel}
+
 {\bf!!Une interprétation possible de ces résultats!!} du point de vue de l'approche dynamique de la
 cognition articielle a été proposée dans le livre que j'ai co-édité avec Agnès Guillot en 2002 \shortcite{Gui02}.
 Cette interprétation est liée au
@@ -1165,8 +1167,36 @@ où la variabilité de la dynamique, et donc potentiellement l'expressivité du 
 \subsection{Réservoir computing}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Codage topographique}
+\subsection{Codage topographique et calcul par champ}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+{\bf!! Attention répétitions!!}
+
+Le codage topographique est une des manière d'exprimer des grandeurs
+continues dans un substrat neuronal. 
+Il s'apparente au calcul par champ (``Field computation'' \cite{Maclennan1999})
+consistant à étudier des mécanismes de calcul à partir de 
+modèles d'interaction basés sur la physique des milieux continus. 
+Le débat n'est pas tranché à l'heure actuelle pour savoir si l'activité neuronale, 
+par nature discrète, traduit les grandeur continues de manière \emph{qualitative} 
+(différents neurones étant assignés à différentes valeurs - ou intervalles) 
+ou \emph{quantitative} (chaque neurone
+pouvant exprimer plusieurs valeurs par sa fréquence de décharge).
+Le système visuel primaire, organisé autour de la topographie de la rétine, semble par exemple 
+obéir à une organisation de type qualitatif où les différentes coordonnées
+du champ visuel sont assignées à des populations de neurones distinctes \cite{HUBELWIESEL62}. 
+L'étude des zones motrices primaires plaident plutôt pour un caractère quantitatif de l'activité motrice,
+la contraction des muscles étant proportionnelle au taux de décharge.
+
+Le modèle fondateur du codage topographique est le champ neuronal (``Neural Field'') d'Amari \shortcite{Ama77B},
+déjà mentionné dans la section \ref{sec:NField}. Selon le noyau choisi, le réseau développe un ou plusieurs 
+foyers d'activité métastables  interprétables au choix comme un patron d'activité ou comme un
+ensemble de grandeurs scalaires (en fonction des barycentres des foyers d'activité).
+Le codage topographique est la manière la plus naturelle de représenter les signaux sensoriels 
+dans les architectures neuronales.
+Il correspond également aux observations sur l'organisation des couches sensorielles primaires (à l'exception de l'olfaction).
+
+
+
 La vocation des modèles de champ neuronal \shortcite{Ama77B} est principalement la modélisation d'un substrat neuronal spatialisé vu à ``large échelle'' 
 (continuum d'activité sur la surface corticale).
 Ce modèle partage avec le réseau de Hopfield \cite{Hop82} la capacité à conserver et entretenir 
@@ -1176,6 +1206,37 @@ Un champ neuronal implémente simultanément une ``mémoire de travail'' (capaci
 un mécanisme de traitement (ici résumé à quelques opérations simples : émergence, extinction, fusion, poursuite) \shortcite{Schoner95}. 
 La combinaison de ces deux compétences (mémoire et calcul)
 au sein d'une architecture unique fait en principe du neural field un environnement computationnel complet \shortcite{Siegelmann1999,Maclennan1999,Potthast2013}. 
+
+L'avantage du codage topographique est sa plus grande expressivité. 
+Un foyer d'activité unique sur un substrat 
+bidimensionnel exprime ainsi une grandeur vectorielle (typiquement la position d'une cible sur une rétine).
+Les patrons d'activité plus complexes observés dans les couches primaires \shortcite{Bonhoeffer1991} caractérisent des relations spatiales entre des contours
+difficiles à exprimer à l'aide de simples neurones fréquentiels.
+Les caractéristiques du codage topographique suggèrent par ailleurs des mécanismes
+de contrôle de type ``point fixe'' où la commande motrice est définie comme le point d'équilibre 
+entre différentes postures dans l'espace des tâches \shortcite{Schoner95,Mussa2004,Flash2005}. 
+Cette théorie permet d'expliquer comment les
+variations d'activité, en agissant linéairement sur les différentes forces, ne déplacent pas le point d'équilibre.
+
+Le codage topographique suggère également un apprentissage ``par coeur'' des relations 
+métriques entre les différents 
+référentiels sensoriels (extéroceptifs ou proprioceptifs) \cite{Pouget1997}. 
+Dans ce schéma, la conséquence proprioceptive d'une commande motrice 
+visuelle (excentricité finale de l'oeil dans le globe oculaire suite 
+à une saccade oculaire par exemple) doit être appris par
+essai/erreur. 
+
+Le codage topographique joue par ailleurs un rôle qui s'apparente à celui des fonctions noyau utilisées en 
+apprentissage automatique \shortcite{Scholkopf2002}.
+Le plongement des données d'entrée dans un espace de fonctions à noyau reproductible garantit en effet 
+l'existence d'un hyperplan séparateur permettant la discrimination des données.
+Cette meilleure séparabilité des données est obtenue au prix d'une augmentation de
+la complexité du classifieur (dimension de Vapnik).
+Dans le cas des architectures neuronales, le codage topographique repose sur l'activité 
+de larges populations de neurones, et
+représente donc un coût plus élevé que le codage fréquentiel, 
+en principe implémentable sur un neurone isolé. 
+
 
 
 \subsection{Neurones impulsionnels}
@@ -1214,13 +1275,29 @@ longue distance supposé à l'oeuvre dans le cerveau pour l'integration multimod
 
 \subsection{Règle de Hebb et plasticité}
 
+Le lien entre ces mécanismes d'apprentissage Hebbiens et 
+les méthodes acteur-critique classiques n'est pas direct. Dans les méthodes classiques, le choix de 
+l'action (``actor'') est découplé de l'évaluation des conséquences du choix de l'action (``critic'').
+Chaque situation sensorielle se voit attribuer une valeur en relation avec les bénéfices futurs attendus.
+Dans le cas que nous considérons (réseaux de neurones) la critique n'est pas implémentée. 
+Le réseau se contente d'explorer l'espace des réponses 
+associées à différents contextes. 
+Ce cadre se rapproche formellement d'une version simplifiée de l'apprentissage par renforcement 
+appelée ``Direct policy gradient'' \shortcite{Wil92,Bar99}, où la réponse est construite 
+par ajustement direct des paramètres de la politique (la règle qui détermine le choix
+entre les différentes réponses possibles). L'amélioration de la politique au cours du temps passe par 
+un principe de descente de gradient guidé par les récompenses (c'est à dire qui tend à augmenter l'espérance
+de la récompense au cours du temps).
+La traduction de ces principes sous la forme d'une règle de plasticité conduit à une règle qui s'apparente à 
+la règle de Hebb \shortcite{florian06}. 
+
 \subsection{Modèles "multi-échelles"}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 L'approche "multi-échelles" en neurosciences. Wilso-Cowan etc.
 % % A ne pas confondre avec les approches ondelettes
 
-\subsection{Oscillations en neurosciences}
+\subsection{Oscillations, résonances et }
 
 L'activité nerveuse est caractériséee par la présence fréquente d'oscillations collectives, souvent transitoires, 
 observables à différentes échelles. Le mécanisme par lequel une population de neurones peut se mettre à osciller 
@@ -1256,6 +1333,67 @@ Le cas des réseaux récurrents est plus ambigu: dans certaines implémentations
 l'émergence de séquences d'activation stables \shortcite{izhikevich04,izhikevich06}.
 D'autres modèles, utilisant une implémentation différente, indiquent une absence de 
 structuration de l'activité, avec des synapses instables sur touts la durée de la simulation \shortcite{morrison07}. 
+
+\subsection{Interfaces cerveau-machine~: Apprendre et oublier dans les environnements non-stationnaires}
+
+Une interface cerveau-machine (``Brain Computer Interface'' - BCI) est un dispositif qui mesure l'activité électrique 
+à la surface du cerveau (en général de manière non-invasive) afin de produire une commande.
+Les applications possibles sont en premier lieu la supplétion motrice pour des handicapés moteurs sévères,
+mais également les jeux, le monitoring, la réhabilitation motrice, etc. 
+Les dispositifs BCI sont de bons exemples de systèmes ``embarqués'', avec des possibilité
+d'interaction en boucle fermée entre le logiciel et l'humain~:
+la réponse produite par le logiciel (le feedback) a une conséquence directement mesurable 
+sur l'activité électrique émise par le sujet, et vice versa.
+Dans ce cadre, le sujet humain est la source des signaux (il joue le rôle  de l'``environnement'' du 
+logiciel BCI).
+
+L'interaction entre le logiciel et l'humain produit un historique d'interactions, correspondant
+généralement à des étapes de calibration côté logiciel et à une ``prise en main'' 
+de l'interface par l'humain (l'humain apprend à se servir de l'interface).
+La calibration du logiciel est généralement effectuée sous le contrôle d'un
+assistant. La calibration correspond à des étapes au cours desquelles on 
+impose au sujet une série de commandes, permettant de calculer par des méthodes
+supervisés
+un classifieur spécifique. 
+
+
+Les modèles probabiliste de l'apprentissage utilisent souvent une hypothèse de stationnarité qui 
+suppose que les données d'entrée sont issues d'un processus stochastique dont les caractéristiques
+ne varient pas au cours du temps.
+Seul le programme voit ses caractéristiques évoluer par effet de la plasticité au cours du temps.
+Cette hypothèse n'est pas vérifiée dans le cas du contrôle en boucle fermée, où non seulement le programme 
+mais également l'environnement voient leurs caractéristiques évoluer au cours du temps. 
+Nous avons vu comment un bruit générateur interne est une des composantes 
+qui va permettre de faire des choix en stabilisant certaines réponses 
+dans le cadre de processus d'optimisation non-convexes (plusieurs contrôleurs/solutions possibles),
+conduisant à des solutions différentes (et donc des environnements perceptifs différents) selon le hasard
+des initialisation et des choix aléatoires produits par le modèle.
+Ainsi les régularités observéees durant les premières phases de l'apprentisage ne sont plus nécessairement présentes
+à une étape ultérieure de l'apprentissage~: certaines trajectoires sont ``abandonnées''. Dans une perspective de parcimonie 
+(ou de ressource limitée), il est avantageux d'oublier certains faits passés pour mieux appréhender les faits nouveaux, autrement
+dit oublier pour mieux apprendre.
+
+%[APPRENDRE ET OUBLIER]. Le papier de Kivinen.
+
+Dans un cadre adaptatif, l'interface logicielle doit donc apprendre, pour chaque sujet, 
+à discriminer les différentes activités électriques 
+produites.
+De la part du sujet, la maîtrise de l'interface comprend également une phase d'apprentissage  
+pouvant induire des modifications dans son activité électro-encéphalographique,
+dans le sens d'un signal plus net, mais aussi dans la répartition spatiale et les temps de réponse
+de l'activité électrique.
+Par ailleurs, des dégradations du signal peuvent aussi 
+être observées en cas de lassitude, de distraction, de somnolence...
+
+La non-stationnarité est plus généralement une caractéristique d'environnements eux-mêmes soumis à des transformations,
+soit par l'action du contrôleur, soit par des actions exterieures (sans rapport avec le contrôleur). 
+Cette prise en compte du ``vieillissement'' de l'environnement conduit à accorder plus de crédit à des observations
+récentes qu'à des observations anciennes \shortcite{Kivinen2004}. 
+Le modèle proposé utilisait un terme de régularisation combiné à un paramètre d'apprentissage permettant
+de définir une constante de temps caractéristique correspondant à la durée pendant laquelle les données 
+du passé sont prises en compte avant d'être oubliées. L'ajustement permanent du contrôleur  
+lui permet de suivre les changements environnementaux en mettant à jour son modèle.
+Le lien avec l'apprentissage par renforcement apparait dans ce cadre naturel.
 
 %%%%%%%%%%%%%%%%
 % NEW CHAPTER! %
@@ -1395,7 +1533,7 @@ Ce projet collaboratif a abouti à la publication d'un numéro spécial dans la 
 Special Topics'' \shortcite{ces07b}.
 
 
-%{\color{Violet} (seule différence avec SAB : liens inhib-inhib plus faibles )}
+
 
 \paragraph{Apprentissage dans les réseaux équilibrés \-- Thèse de Frédéric Henry (2005-2008)}
 
@@ -1433,8 +1571,77 @@ L'utilisation d'un patron de connectivité plus réaliste a été proposé dans 
 avec séparation fonctionnelle des neurones excitateurs et inhibiteurs, et utilisation de neurones à 
 conductance \shortcite{Kepler1992}. 
 
+\paragraph{Le projet MAPS (2007-2010)}
+J'ai contribué début 2007 à l'ecriture d'un projet ANR blanc intitulé ``MAPS'' (Mapping, Adaptation, Plasticity and Spatial Computation)
+qui a reçu un financement entre septembre 2007 et septembre 2010. 
+Cette recherche collaborative impliquait entre autres Frédéric Alexandre, chercheur en neurosciences computationnelles au LORIA (Nancy), 
+Hélène Paugam-Moisy, professeur à l'université de Lyon, et Laurent Goffart, chercheur en neurosciences à l'INCM (Marseille).
 
+Ce projet portait sur la notion de codage topographique et de 
+
+%{\color{Violet} (seule différence avec SAB : liens inhib-inhib plus faibles )}
 % 2011-2015 INS - Mathieu - Viktor
+
+\paragraph{Délégation INRIA Lille Nord-Europe(2008-2009)}
+J'ai obtenu une délégation INRIA entre septembre 2008 et aout 2009 au sein de l'équipe
+SequeL (Sequential Learning) dirigée par Rémi Munos au sein du centre INRIA Lille-Nord Europe.
+L'équipe de Rémi Munos travaille sur l'apprentissage statistique et plus particulièrement 
+sur le dilemne exploration/exploitation, exprimé sous sa forme la plus simple 
+comme un problème d'échantillonnage aléatoire de l'espace des choix (problème dit du ``bandit manchot'').
+Chaque tirage apporte une information qu'il convient d'exploiter au mieux, en établissant un compromis
+entre recherche d'information (réduction d'incertitude) et exploitation effective de l'information 
+(pour maximiser le gain).
+Cette forme d'apprentissage séquentiel établit des modèles qui visent à réduire 
+la différence entre les gains obtenus par l'algorithme et les gains
+attendus en toute connaissance de cause.
+L'apprentissage séquentiel statistique est le socle d'une famille de méthodes d'apprentissage 
+fondée sur l'échantillonnage de l'environnement, comme le Q-learning ou le TD-learning dans le
+cadre de l'apprentissage par renforcement classiques. Cette approche a renouvelé le domaine, en proposant 
+par exemple des politiques non-stochastiques (algorithme UCB), ou en étendant le modèle au cas ``adversarial'' 
+(théorie des jeux) \shortcite{Auer2002}. 
+
+Ce séjour a été pour moi l'occasion de m'intéresser à la question de la stationnarité 
+des processus d'apprentissage dans le cadre du contrôle moteur.
+
+
+\paragraph{Projet CO-ADAPT (2009-2014)}
+
+L'idée générale de cette stratégie ``versatile'' été le point de départ de ma participation
+à un travail de collaboration qui s'est concrétisé
+sous la forme d'un projet ANR ``Défis'', portant sur l'application de stratégies adaptatives dans le
+cadre des interfaces cerveau-ordinateur (projet CO-ADAPT - 2010-2014). Ce projet, porté par Maureen Clerc
+de l'INRIA Sophia-Antipolis, impliquait des expérimentateurs et des théoriciens, entre autres
+Rémi Munos, Boris Burle (LNC, Marseille), Jérémie Mattout (CRNL, Lyon) et Bruno Torresani (LATP, Marseille).
+
+Le principe de ce projet était d'approfondir cette adapation mutuelle, 
+en autonomisant l'adaptation du logiciel, afin de permettre une prise en main 
+du logiciel par le patient sans assistance extérieure.
+Le projet CO-ADAPT consistait précisément à étudier des méthodes adaptatives 
+pour faire en sorte que logiciel utilise les réactions du sujet pour améliorer ses
+performances (temps de réponse, potentiels d'erreur, ...).
+
+Une étude portant sur sur l'apprentissage par renforcement dans le cadre du ``P300-speller'' {\bf!!(voir section ...)!!} a été entamée dans le cadre d'un stage de deuxième année de deux étudiants de Centrale Marseille : 
+Timothée Proix et Arnaud Rachez (en 2010).
+Elle a fait l'objet 
+d'une communication dans la conférence TOBI (TOwards Brain-computer Interfaces)
+en décembre 2010 à Rome \shortcite{Rachez2011}. 
+Timothée a continué à travailler sur le sujet dans le cadre de son master recherche en 2011, 
+en collaboration avec Liva Ralaivola du LIF
+(Laboratoire d'Informatique Fondamentale, Marseille),
+en étudiant les caractéristiques du problème 
+dans un cadre plus général des classifieurs à noyaux. Nous avons également 
+regardé comment le choix d'un biais sur la récompense permet de réduire la variance de l'estimateur. 
+Nous avons enfin regardé la tolérance de l'algorithme au bruit, soit en dégradant le signal 
+traité, soit en dégradant le signal de renforcement. 
+Ces travaux ont été publiés dans plusieurs conférences \shortcite{Dauce2012,Dauce2013a,Dauce2013b}. 
+{\bf!!Un article pour IEEE TNNLS a également été soumis\shortcite{Dauce2014sub}}.
+
+Dans une deuxième étude, j'ai travaillé dans le cadre d'une collaboration 
+avec Maureen Clerc, Eoin Thomas, Dieter Devlaminck et Loïc Mahé,
+travaillant à Sophia-Antipolis, 
+sur un modèle de gradient logistique dans la cadre de classifieurs 
+probabilistes calculés sur un groupe de sujets. 
+Ce type de modèle a été proposé dans le cadre du P300 par \shortcite{Kindermans2012}.
 
 \paragraph{Travaux à l'INS (Institut de Neurosciences des Systèmes) \-- 2011-présent}
 
@@ -1514,6 +1721,8 @@ attracteur comportemental.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Non-convergence des règles de Hebb.
 
 \section{Résultats principaux}
 
@@ -2411,10 +2620,6 @@ sein d'un réseau construit à partir d'une matrice de connectivité structurell
 \cleardoublepage
 \section{Réseaux aléatoires équilibrés}\label{sec:balanced}
 
-
-
-
-
 L'étude que nous avons présentée \shortcite{Dau99A,dauce01a} étudie le comportement d'un réseau équilibré de ce type. Ce papier 
 étend pour la première fois le modèle de champ moyen pour le cas des réseaux à connectivité aléatoire à populations multiples
 (auquel cas les tirages aléatoires sont effectués sur des ``faisceaux d'axones'' reliant une population de neurones $p \in 1..K$ à une
@@ -2455,13 +2660,13 @@ voir par exemple \shortcite{Faugeras2009,Cabana2013}. %L'accent sur l'équilibre
 %Tanguy Cabana1 and Jonathan Touboul (2013)
 
 %La question de l'homogénéité/hétérogénéité est revenue à l'ordre du jour. Plusieurs papiers récents bla bla...}
-
-\includepdf[pages=1-2,landscape=true,nup=1x2,scale=1.1,offset= -70 -30]{pdf/2001-neural-proc-letters.pdf}
-\includepdf[pages=3-4,landscape=true,nup=1x2,scale=1.1,offset= 70 -30]{pdf/2001-neural-proc-letters.pdf}
-\includepdf[pages=5-6,landscape=true,nup=1x2,scale=1.1,offset= -70 -30]{pdf/2001-neural-proc-letters.pdf}
-\includepdf[pages=7-8,landscape=true,nup=1x2,scale=1.1,offset= 70 -30]{pdf/2001-neural-proc-letters.pdf}
-\includepdf[pages=9-10,landscape=true,nup=1x2,scale=1.1,offset= -70 -30]{pdf/2001-neural-proc-letters.pdf}
-\includepdf[pages=11-12,landscape=true,nup=1x2,scale=1.1,offset= 70 -30]{pdf/2001-neural-proc-letters.pdf}
+\cleardoublepage
+\includepdf[pages=1-2,landscape=true,nup=1x2,scale=1.1,offset= 70 -30]{pdf/2001-neural-proc-letters.pdf}
+\includepdf[pages=3-4,landscape=true,nup=1x2,scale=1.1,offset= -70 -30]{pdf/2001-neural-proc-letters.pdf}
+\includepdf[pages=5-6,landscape=true,nup=1x2,scale=1.1,offset= 70 -30]{pdf/2001-neural-proc-letters.pdf}
+\includepdf[pages=7-8,landscape=true,nup=1x2,scale=1.1,offset= -70 -30]{pdf/2001-neural-proc-letters.pdf}
+\includepdf[pages=9-10,landscape=true,nup=1x2,scale=1.1,offset= 70 -30]{pdf/2001-neural-proc-letters.pdf}
+\includepdf[pages=11-12,landscape=true,nup=1x2,scale=1.1,offset= -70 -30]{pdf/2001-neural-proc-letters.pdf}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     1.2      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2510,6 +2715,7 @@ un tirage aléatoire arbitraire, ils offrent donc un bon support pour le traitem
 Faire reposer le traitement sur un tirage arbitraire rejoint d'ailleurs un certain nombre de techniques de plongement (ou projection) aléatoires
 utilisées en apprentissage automatique, tels le ``compressive sensing'' \shortcite{Baraniuk2007} ou l'architecture ``extreme learning'' \shortcite{Huang2006}.
 
+\cleardoublepage
 \includepdf[pages=1, offset=70 -20]{pdf/2000-sab-ann.pdf}
 \includepdf[pages=2, offset=-70 -20]{pdf/2000-sab-ann.pdf}
 \includepdf[pages=3, offset=70 -20]{pdf/2000-sab-ann.pdf}
@@ -2596,7 +2802,7 @@ en neurosciences computationnelles \shortcite{Voges2012,Lundqvist2012}.
 %}
 
 %\includepdf[pages=4-19,offset=0 -20]{pdf/2004-natural-computing-ann.pdf}
-
+\cleardoublepage
 \includepdf[pages=4-5,landscape=true,nup=1x2,scale=1.1,offset= 120 -30]{pdf/2004-natural-computing-ann.pdf}
 \includepdf[pages=6-7,landscape=true,nup=1x2,scale=1.1,offset= -120 -30]{pdf/2004-natural-computing-ann.pdf}
 \includepdf[pages=8-9,landscape=true,nup=1x2,scale=1.1,offset= 120 -30]{pdf/2004-natural-computing-ann.pdf}
@@ -2679,7 +2885,7 @@ La clé semble donc être la mise en évidence de mécanismes similaires à diff
 
 %Cette reproductibilité dans le temps et dans l'espace de la réponse du réseau au
 %signal d'entrée offre un cadre d'explication intéressant pour 
-
+\cleardoublepage
 \includepdf[pages={11},offset=80 -70]{pdf/2007-epj-st-ann.pdf}
 \includepdf[pages={12},offset=-80 -70]{pdf/2007-epj-st-ann.pdf}
 
@@ -2753,31 +2959,31 @@ grâce au contrôle du niveau d'activité  qui empêche d'atteindre les régimes
 %connectivité structurelle / fonctionnelle
 %}
 
-
-\includepdf[pages=1,offset=-70 -20]{pdf/2015-PLOS-CB-ann.pdf}
-\includepdf[pages=2,offset=70 -20]{pdf/2015-PLOS-CB-ann.pdf}
-\includepdf[pages=3,offset=-70 -20]{pdf/2015-PLOS-CB-ann.pdf}
-\includepdf[pages=4,offset=70 -20]{pdf/2015-PLOS-CB-ann.pdf}
-\includepdf[pages=5,offset=-70 -20]{pdf/2015-PLOS-CB-ann.pdf}
-\includepdf[pages=6,offset=70 -20]{pdf/2015-PLOS-CB-ann.pdf}
-\includepdf[pages=7,offset=-70 -20]{pdf/2015-PLOS-CB-ann.pdf}
-\includepdf[pages=8,offset=70 -20]{pdf/2015-PLOS-CB-ann.pdf}
-\includepdf[pages=9,offset=-70 -20]{pdf/2015-PLOS-CB-ann.pdf}
-\includepdf[pages=10,offset=70 -20]{pdf/2015-PLOS-CB-ann.pdf}
-\includepdf[pages=11,offset=-70 -20]{pdf/2015-PLOS-CB-ann.pdf}
-\includepdf[pages=12,offset=70 -20]{pdf/2015-PLOS-CB-ann.pdf}
-\includepdf[pages=13,offset=-70 -20]{pdf/2015-PLOS-CB-ann.pdf}
-\includepdf[pages=14,offset=70 -20]{pdf/2015-PLOS-CB-ann.pdf}
-\includepdf[pages=15,offset=-70 -20]{pdf/2015-PLOS-CB-ann.pdf}
-\includepdf[pages=16,offset=70 -20]{pdf/2015-PLOS-CB-ann.pdf}
-\includepdf[pages=17,offset=-70 -20]{pdf/2015-PLOS-CB-ann.pdf}
-\includepdf[pages=18,offset=70 -20]{pdf/2015-PLOS-CB-ann.pdf}
-\includepdf[pages=19,offset=-70 -20]{pdf/2015-PLOS-CB-ann.pdf}
-\includepdf[pages=20,offset=70 -20]{pdf/2015-PLOS-CB-ann.pdf}
-\includepdf[pages=21,offset=-70 -20]{pdf/2015-PLOS-CB-ann.pdf}
-\includepdf[pages=22,offset=70 -20]{pdf/2015-PLOS-CB-ann.pdf}
-\includepdf[pages=23,offset=-70 -20]{pdf/2015-PLOS-CB-ann.pdf}
-\includepdf[pages=24,offset=70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+\cleardoublepage
+\includepdf[pages=1,offset=70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+\includepdf[pages=2,offset=-70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+\includepdf[pages=3,offset=70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+\includepdf[pages=4,offset=-70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+\includepdf[pages=5,offset=70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+\includepdf[pages=6,offset=-70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+\includepdf[pages=7,offset=70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+\includepdf[pages=8,offset=-70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+\includepdf[pages=9,offset=70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+\includepdf[pages=10,offset=-70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+\includepdf[pages=11,offset=70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+\includepdf[pages=12,offset=-70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+\includepdf[pages=13,offset=70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+\includepdf[pages=14,offset=-70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+\includepdf[pages=15,offset=70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+\includepdf[pages=16,offset=-70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+\includepdf[pages=17,offset=70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+\includepdf[pages=18,offset=-70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+\includepdf[pages=19,offset=70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+\includepdf[pages=20,offset=-70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+\includepdf[pages=21,offset=70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+\includepdf[pages=22,offset=-70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+\includepdf[pages=23,offset=70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+\includepdf[pages=24,offset=-70 -20]{pdf/2015-PLOS-CB-ann.pdf}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%66
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2943,6 +3149,7 @@ Maas et Markram \cite{MAASS02,Buonomano2009}.
 %- encodage - patrons statiques - route vers le chaos - destabilisation - frontière du chaos
 %}
 
+\cleardoublepage
 \includepdf[pages=1,offset=50 0]{pdf/1998-neural-networks.pdf}
 \includepdf[pages=2,offset=-65 0]{pdf/1998-neural-networks.pdf}
 \includepdf[pages=3,offset=50 0]{pdf/1998-neural-networks.pdf}
@@ -2995,15 +3202,16 @@ la plasticité des liens de feedback crée une boucle d'amplification positive e
 et la couche sensorielle, qui transforme la corrélation statistique 
 en lien de causalité.
 
-\includepdf[pages=1,offset=-70 -30]{pdf/2002-biological-cyb-ann1.pdf}
-\includepdf[pages=2,offset=70 -30]{pdf/2002-biological-cyb.pdf}
-\includepdf[pages=3,offset=-70 -30]{pdf/2002-biological-cyb.pdf}
-\includepdf[pages=4,offset=70 -30]{pdf/2002-biological-cyb.pdf}
-\includepdf[pages=5,offset=-70 -30]{pdf/2002-biological-cyb.pdf}
-\includepdf[pages=6,offset=70 -30]{pdf/2002-biological-cyb.pdf}
-\includepdf[pages=7,offset=-70 -30]{pdf/2002-biological-cyb.pdf}
-\includepdf[pages=8,offset=70 -30]{pdf/2002-biological-cyb.pdf}
-\includepdf[pages=9,offset=-70 -30]{pdf/2002-biological-cyb.pdf}
+\cleardoublepage
+\includepdf[pages=1,offset=70 -30]{pdf/2002-biological-cyb-ann1.pdf}
+\includepdf[pages=2,offset=-70 -30]{pdf/2002-biological-cyb.pdf}
+\includepdf[pages=3,offset=70 -30]{pdf/2002-biological-cyb.pdf}
+\includepdf[pages=4,offset=-70 -30]{pdf/2002-biological-cyb.pdf}
+\includepdf[pages=5,offset=70 -30]{pdf/2002-biological-cyb.pdf}
+\includepdf[pages=6,offset=-70 -30]{pdf/2002-biological-cyb.pdf}
+\includepdf[pages=7,offset=70 -30]{pdf/2002-biological-cyb.pdf}
+\includepdf[pages=8,offset=-70 -30]{pdf/2002-biological-cyb.pdf}
+\includepdf[pages=9,offset=70 -30]{pdf/2002-biological-cyb.pdf}
 
 
 
@@ -3127,6 +3335,7 @@ l'ordre de 25 Hz (et une fréquence moyenne individuelle de l'ordre de 200 Hz) e
 restant relativement irrégulières et hétérogènes. Une analyse de la plasticité en fonction des délais met en évidence la potentiation des 
 délais longs ($>$ 8 ms) et une dépression des délais intermédiaires (4-8 ms) qui favorise l'entretien du comportement synchronisé (non publié).
 
+\cleardoublepage
 \includepdf[pages=1,offset=70 -30]{pdf/2008-NEUROCOMP-ann.pdf}
 \includepdf[pages=2,offset=-70 -30]{pdf/2008-NEUROCOMP-ann.pdf}
 \includepdf[pages=3,offset=70 -30]{pdf/2008-NEUROCOMP-ann.pdf}
@@ -3154,9 +3363,10 @@ est exactement le double de la période du signal (30 ms). Ce comportement d'acc
 développant une ``action de population'' qui est un analogue global des potentiels
 d'action neuronaux.
 
-\includepdf[pages=1-2,landscape=true,nup=1x2,scale=1.1,offset= -80 -30]{pdf/2014-esann-A-ann.pdf}
-\includepdf[pages=3-4,landscape=true,nup=1x2,scale=1.1,offset= 80 -30]{pdf/2014-esann-A-ann.pdf}
-\includepdf[pages=5-6,landscape=true,nup=1x2,scale=1.1,offset= -80 -30]{pdf/2014-esann-A-ann.pdf}
+\cleardoublepage
+\includepdf[pages=1-2,landscape=true,nup=1x2,scale=1.1,offset= 80 -30]{pdf/2014-esann-A-ann.pdf}
+\includepdf[pages=3-4,landscape=true,nup=1x2,scale=1.1,offset= -80 -30]{pdf/2014-esann-A-ann.pdf}
+\includepdf[pages=5-6,landscape=true,nup=1x2,scale=1.1,offset= 80 -30]{pdf/2014-esann-A-ann.pdf}
 
 %{\color{Violet}
 %Fred Henry : Master en 2005.
@@ -3316,14 +3526,15 @@ au sein de la population. La difficulté à discriminer les séquences de 400 ms
 néanmoins fixer la limite supérieure de cette capacité (100 ms étant en pratique suffisant 
 pour discriminer deux séquences).
 
-\includepdf[pages=1,offset=-70 -30]{pdf/2007-neurocomputing.pdf}
-\includepdf[pages=2,offset=70 -30]{pdf/2007-neurocomputing.pdf}
-\includepdf[pages=3,offset=-70 -30]{pdf/2007-neurocomputing.pdf}
-\includepdf[pages=4,offset=70 -30]{pdf/2007-neurocomputing.pdf}
-\includepdf[pages=5,offset=-70 -30]{pdf/2007-neurocomputing.pdf}
-\includepdf[pages=6,offset=70 -30]{pdf/2007-neurocomputing.pdf}
-\includepdf[pages=7,offset=-70 -30]{pdf/2007-neurocomputing.pdf}
-\includepdf[pages=8,offset=70 -30]{pdf/2007-neurocomputing.pdf}
+\cleardoublepage
+\includepdf[pages=1,offset=70 -30]{pdf/2007-neurocomputing.pdf}
+\includepdf[pages=2,offset=-70 -30]{pdf/2007-neurocomputing.pdf}
+\includepdf[pages=3,offset=70 -30]{pdf/2007-neurocomputing.pdf}
+\includepdf[pages=4,offset=-70 -30]{pdf/2007-neurocomputing.pdf}
+\includepdf[pages=5,offset=70 -30]{pdf/2007-neurocomputing.pdf}
+\includepdf[pages=6,offset=-70 -30]{pdf/2007-neurocomputing.pdf}
+\includepdf[pages=7,offset=70 -30]{pdf/2007-neurocomputing.pdf}
+\includepdf[pages=8,offset=-70 -30]{pdf/2007-neurocomputing.pdf}
 
 %{\color{Violet}
 %{\bf 2005}
@@ -3406,6 +3617,7 @@ la tâche apprise, et un comportement irrégulier sans correspondance avec la t�
 Les rotations irrégulières induisent une succession de signaux visuels qui, par hasard, se mettent à correspondre 
 à la séquence apprise, et font basculer l'ensemble dans le régime périodique où les entrées visuelles redeviennent prévisibles.
 
+\cleardoublepage
 \includepdf[pages=10,offset=-70 -30]{pdf/2002-biological-cyb-ann2.pdf}
 \includepdf[pages=11,offset=70 -30]{pdf/2002-biological-cyb.pdf}
 \includepdf[pages=12,offset=-70 -30]{pdf/2002-biological-cyb.pdf}
@@ -3487,71 +3699,29 @@ pour explorer différents types de réponses et stabiliser celles qui conviennen
 principalement le rôle d'un bruit d'exploration. Les comportements obtenus sont principalement réactifs, il n'y a pas 
 de mise en évidence de résonance et/ou de persévérance entre certains couplages sensori-moteurs et la dynamique interne.
 
-\includepdf[pages=1,offset=-70 -30]{pdf/2004-sab-ann.pdf}
-\includepdf[pages=2,offset=70 -30]{pdf/2004-sab-ann.pdf}
-\includepdf[pages=3,offset=-70 -30]{pdf/2004-sab-ann.pdf}
-\includepdf[pages=4,offset=70 -30]{pdf/2004-sab-ann.pdf}
-\includepdf[pages=5,offset=-70 -30]{pdf/2004-sab-ann.pdf}
-\includepdf[pages=6,offset=70 -30]{pdf/2004-sab-ann.pdf}
-\includepdf[pages=7,offset=-70 -30]{pdf/2004-sab-ann.pdf}
-\includepdf[pages=8,offset=70 -30]{pdf/2004-sab-ann.pdf}
-\includepdf[pages=9,offset=-70 -30]{pdf/2004-sab-ann.pdf}
-\includepdf[pages=10,offset=70 -30]{pdf/2004-sab-ann.pdf}
-
-\includepdf[pages=34,offset=-70 -30]{pdf/2007-epj-st-ann3.pdf}
-\includepdf[pages=35,offset=70 -30]{pdf/2007-epj-st-ann3.pdf}
-\includepdf[pages=36,offset=-70 -30]{pdf/2007-epj-st-ann3.pdf}
-\includepdf[pages=37,offset=70 -30]{pdf/2007-epj-st-ann3.pdf}
+\cleardoublepage
+\includepdf[pages=1,offset=70 -30]{pdf/2004-sab-ann.pdf}
+\includepdf[pages=2,offset=-70 -30]{pdf/2004-sab-ann.pdf}
+\includepdf[pages=3,offset=70 -30]{pdf/2004-sab-ann.pdf}
+\includepdf[pages=4,offset=-70 -30]{pdf/2004-sab-ann.pdf}
+\includepdf[pages=5,offset=70 -30]{pdf/2004-sab-ann.pdf}
+\includepdf[pages=6,offset=-70 -30]{pdf/2004-sab-ann.pdf}
+\includepdf[pages=7,offset=70 -30]{pdf/2004-sab-ann.pdf}
+\includepdf[pages=8,offset=-70 -30]{pdf/2004-sab-ann.pdf}
+\includepdf[pages=9,offset=70 -30]{pdf/2004-sab-ann.pdf}
+\includepdf[pages=10,offset=-70 -30]{pdf/2004-sab-ann.pdf}
 
 \cleardoublepage
+\includepdf[pages=34,offset=70 -30]{pdf/2007-epj-st-ann3.pdf}
+\includepdf[pages=35,offset=-70 -30]{pdf/2007-epj-st-ann3.pdf}
+\includepdf[pages=36,offset=70 -30]{pdf/2007-epj-st-ann3.pdf}
+\includepdf[pages=37,offset=-70 -30]{pdf/2007-epj-st-ann3.pdf}
 
-\section{Extension aux neurones à impulsion}
+%\cleardoublepage
+%\section{Extension aux neurones à impulsion}
 
-Le lien entre ces mécanismes d'apprentissage Hebbiens et 
-les méthodes acteur-critique classiques n'est pas direct. Dans les méthodes classiques, le choix de 
-l'action (``actor'') est découplé de l'évaluation des conséquences du choix de l'action (``critic'').
-Chaque situation sensorielle se voit attribuer une valeur en relation avec les bénéfices futurs attendus.
-Dans le cas que nous considérons (réseaux de neurones) la critique n'est pas implémentée. 
-Le réseau se contente d'explorer l'espace des réponses 
-associées à différents contextes. 
-Ce cadre se rapproche formellement d'une version simplifiée de l'apprentissage par renforcement 
-appelée ``Direct policy gradient'' \shortcite{Wil92,Bar99}, où la réponse est construite 
-par ajustement direct des paramètres de la politique (la règle qui détermine le choix
-entre les différentes réponses possibles). L'amélioration de la politique au cours du temps passe par 
-un principe de descente de gradient guidé par les récompenses (c'est à dire qui tend à augmenter l'espérance
-de la récompense au cours du temps).
-La traduction de ces principes sous la forme d'une règle de plasticité conduit à une règle qui s'apparente à 
-la règle de Hebb \shortcite{florian06}. 
 
-Pour l'implémentation de cette règle, j'ai utilisé un cadre neuronal réaliste (neurones impulsionnels), 
-à partir du modèle SRM (Spike Response Model) de Gerstner \shortcite{gerstner02}. Le modèle SRM possède en particulier un terme 
-appelé le potentiel de membrane ''libre'' (ou encore ``entrée synaptique'') utile pour calculer précisément la probabilité
-de tir du neurone.
-La règle d'apprentissage repose sur le produit entre l'activité
-pré-synaptique et un terme post-synaptique constitué de la différence entre 
-potentiel d'action effectif et probabilité de tir estimée.
-Cet écart entre la prédiction et le patron de tir effectif est utilisé, en positif ou en négatif
-selon la récompense, pour modifier la synapse. 
-Cette règle présente de bonnes propriétés de convergence, et peut donc être appliquée de manière continuelle
-sans risque de faire diverger l'activité du réseau.
 
-L'interprétation de cette règle, dans le cadre des réseaux récurrents aléatoires, consiste à définir des activités
-``concurrentes'', et à leur assigner des rôles différents (bruit ou signal) selon les lieux. 
-Dans le schéma le plus simple (une couche
-primaire et une couche associative récurrente aléatoire), le signal d'origine sensorielle est interprété comme
-un terme de bruit par les synapses des axones récurrents, et, inversement le signal intrinsèque est interprété comme du bruit
-par les synapses des axones afférents.
-La plasticité repose ainsi sur l'écart entre la prédiction d'activité liée à l'influence d'un faisceau d'axones particulier
-et l'activité effective observée.
-Cette règle cherche dans ce cas à atteindre un point d'équilibre entre les influences interne et externe pour établir la réponse motrice. 
-Dans un cadre de robotique simulée (non publié), cette règle a également permis 
-de faire émerger un comportement d'évitement d'obstacles à partir de la perception d'un méta-signal aversif aux collisions.
-
-\includepdf[pages=1-2,landscape=true,nup=1x2,scale=1.1,offset= -70 -30]{pdf/2009-icann-final-ann.pdf}
-\includepdf[pages=3-4,landscape=true,nup=1x2,scale=1.1,offset= 70 -30]{pdf/2009-icann-final-ann.pdf}
-\includepdf[pages=5-6,landscape=true,nup=1x2,scale=1.1,offset= -70 -30]{pdf/2009-icann-final-ann.pdf}
-\includepdf[pages=7-8,landscape=true,nup=1x2,scale=1.1,offset= 70 -30]{pdf/2009-icann-final-ann.pdf}
-\includepdf[pages=9-10,landscape=true,nup=1x2,scale=1.1,offset= -70 -30]{pdf/2009-icann-final-ann.pdf}
 
 %{\color{Violet}
 %{\bf 2007}
@@ -3592,65 +3762,11 @@ de faire émerger un comportement d'évitement d'obstacles à partir de la perce
 
 %}
 
+\cleardoublepage
 \section{Codage topographique et renforcement}
 
-J'ai contribué début 2007 à l'ecriture d'un projet ANR blanc intitulé ``MAPS'' (Mapping, Adaptation, Plasticity and Spatial Computation)
-qui a reçu un financement entre septembre 2007 et septembre 2010. 
-Cette recherche collaborative impliquait entre autres Frédéric Alexandre, chercheur en neurosciences computationnelles au LORIA (Nancy), 
-Hélène Paugam-Moisy, professeur à l'université de Lyon, et Laurent Goffart, chercheur en neurosciences à l'INCM (Marseille).
-
-Ce projet portait sur la notion de codage topographique et de calcul par champ (``Field computation'' \cite{Maclennan1999}). 
-Le codage topographique est une des manière d'exprimer des grandeurs
-continues dans un substrat neuronal. 
-Le débat n'est pas tranché à l'heure actuelle pour savoir l'activité neuronale, 
-par nature discrète, traduit les grandeur continues de manière qualitative 
-(différents neurones étant assignés à différentes valeurs - ou intervalles) 
-ou quantitative (chaque neurone
-pouvant exprimer plusieurs valeurs par sa fréquence de décharge).
-Le système visuel primaire, organisé autour de la topographie de la rétine, semble par exemple 
-obéir à une organisation de type qualitatif où les différentes coordonnées
-du champ visuel sont assignées à des populations de neurones distinctes \cite{HUBELWIESEL62}. 
-L'étude des zones motrices primaires plaident plutôt pour un caractère quantitatif de l'activité motrice,
-la contraction des muscles étant proportionnelle au taux de décharge.
-
-Le modèle fondateur du codage topographique est le champ neuronal (``Neural Field'') d'Amari \shortcite{Ama77B},
-déjà mentionné dans la section \ref{sec:NField}. Selon le noyau choisi, le réseau développe un ou plusieurs 
-foyers d'activité métastables  interprétables au choix comme un patron d'activité ou comme un
-ensemble de grandeurs scalaires (en fonction des barycentres des foyers d'activité).
-Le codage topographique est la manière la plus naturelle de représenter les signaux sensoriels 
-dans les architectures neuronales.
-Il correspond également aux observations sur l'organisation des couches sensorielles primaires (à l'exception de l'olfaction).
-Le codage topographique joue par ailleurs un rôle qui s'apparente à celui des fonctions noyau utilisées en 
-apprentissage automatique \shortcite{Scholkopf2002}.
-Le plongement des données d'entrée dans un espace de fonctions à noyau reproductible garantit en effet 
-l'existence d'un hyperplan séparateur permettant la discrimination des données.
-Cette meilleure séparabilité des données est obtenue au prix d'une augmentation de
-la complexité du classifieur (dimension de Vapnik).
-Dans le cas des architectures neuronales, le codage topographique repose sur l'activité 
-de larges populations de neurones, et
-représente donc un coût plus élevé que le codage fréquentiel, 
-en principe implémentable sur un neurone isolé. 
-
-L'avantage du codage topographique est sa plus grande expressivité. 
-Un foyer d'activité unique sur un substrat 
-bidimensionnel exprime ainsi une grandeur vectorielle (typiquement la position d'une cible sur une rétine).
-Les patrons d'activité plus complexes observés dans les couches primaires \shortcite{Bonhoeffer1991} caractérisent des relations spatiales entre des contours
-difficiles à exprimer à l'aide de simples neurones fréquentiels.
-Les caractéristiques du codage topographique suggèrent par ailleurs des mécanismes
-de contrôle de type ``point fixe'' où la commande motrice est définie comme le point d'équilibre 
-entre différentes postures dans l'espace des tâches \shortcite{Schoner95,Mussa2004,Flash2005}. 
-Cette théorie permet d'expliquer comment les
-variations d'activité, en agissant linéairement sur les différentes forces, ne déplacent pas le point d'équilibre.
-Le codage topographique suggère également un apprentissage ``par coeur'' des relations 
-métriques entre les différents 
-référentiels sensoriels (extéroceptifs ou proprioceptifs) \cite{Pouget1997}. 
-Dans ce schéma, la conséquence proprioceptive d'une commande motrice 
-visuelle (excentricité finale de l'oeil dans le globe oculaire suite 
-à une saccade oculaire par exemple) doit être appris par
-essai/erreur. 
- 
 Deux études portant sur des mécanismes d'apprentissage par renforcement dans des architectures neuronales ont
-été publiées dans ce cadre. 
+été publiées dans le cadre des propriétés codantes codage topographique ({\bf!! Projet MAPS, voir section ...!!}). 
 
 La première étude, publiée dans \shortcite{Dau09}, est une extension des architectures présentées dans la section
 précédente. La tâche est l'apprentissage d'un comportement de poursuite oculaire dans un environnement en
@@ -3665,7 +3781,33 @@ La commande finale est la composition de ces commandes individuelles.
 La principale différence avec le dernier modèle 
 de la section précédente est l'absence d'activité intrinsèque dans la couche secondaire.
 Celle-ci est remplacée par un bruit exploratoire plus conforme à la théorie du Policy gradient \cite{Wil92}.
-La plasticité porte alors sur les liens afférents qui vont progressivement faire émerger des champs récepteurs
+
+La règle de Policy Gradient {\bf!! (voir section ...)!!} a été implémentée dans un cadre neuronal réaliste (neurones impulsionnels), 
+à partir du modèle SRM (Spike Response Model) de Gerstner \shortcite{gerstner02}. Le modèle SRM possède en particulier un terme 
+appelé le potentiel de membrane ''libre'' (ou encore ``entrée synaptique'') utile pour calculer précisément la probabilité
+de tir du neurone.
+La règle d'apprentissage repose sur le produit entre l'activité
+pré-synaptique et un terme post-synaptique constitué de la différence entre 
+potentiel d'action effectif et probabilité de tir estimée.
+Cet écart entre la prédiction et le patron de tir effectif est utilisé, en positif ou en négatif
+selon la récompense, pour modifier la synapse. 
+Cette règle présente de bonnes propriétés de convergence, et peut donc être appliquée de manière continuelle
+sans risque de faire diverger l'activité du réseau.
+
+L'interprétation de cette règle, dans le cadre des réseaux récurrents aléatoires, consiste à définir des activités
+``concurrentes'', et à leur assigner des rôles différents (bruit ou signal) selon les lieux. 
+Dans le schéma le plus simple (une couche
+primaire et une couche associative récurrente aléatoire), le signal d'origine sensorielle est interprété comme
+un terme de bruit par les synapses des axones récurrents, et, inversement le signal intrinsèque est interprété comme du bruit
+par les synapses des axones afférents.
+La plasticité repose ainsi sur l'écart entre la prédiction d'activité liée à l'influence d'un faisceau d'axones particulier
+et l'activité effective observée.
+Cette règle cherche dans ce cas à atteindre un point d'équilibre entre les influences interne et externe pour établir la réponse motrice. 
+Dans un cadre de robotique simulée (non publié), cette règle a également permis 
+de faire émerger un comportement d'évitement d'obstacles à partir de la perception d'un méta-signal aversif aux collisions.
+
+
+La plasticité porte ici sur les liens afférents qui vont progressivement faire émerger des champs récepteurs
 sur les neurones de la couche motrice.
 Les neurones se spécialisent progressivement en devenant plus sensibles aux activités 
 situées dans le champ visuel opposé à leur mouvement,
@@ -3685,11 +3827,22 @@ L'activité intrinsèque des modèles précédents est donc remplacée par un br
 les caractéristiques sont plus faciles à maîtriser, au prix de la perte de certaines caractéristiques 
 comme la réduction de complexité (la réduction du bruit) à l'issue de l'apprentissage.
 
+
+\cleardoublepage
+\includepdf[pages=1-2,landscape=true,nup=1x2,scale=1.1,offset= 70 -30]{pdf/2009-icann-final-ann.pdf}
+\includepdf[pages=3-4,landscape=true,nup=1x2,scale=1.1,offset= -70 -30]{pdf/2009-icann-final-ann.pdf}
+\includepdf[pages=5-6,landscape=true,nup=1x2,scale=1.1,offset= 70 -30]{pdf/2009-icann-final-ann.pdf}
+\includepdf[pages=7-8,landscape=true,nup=1x2,scale=1.1,offset= -70 -30]{pdf/2009-icann-final-ann.pdf}
+\includepdf[pages=9-10,landscape=true,nup=1x2,scale=1.1,offset= 70 -30]{pdf/2009-icann-final-ann.pdf}
+
+%[- voir les transparents RNCM + apprentissage par coeur]
+
+\cleardoublepage
 Le deuxième modèle, présenté dans \shortcite{Dauce2010}, est l'équivalent linéaire de l'architecture 
 précédente. Ce modèle simplifié est appliqué à des tâches de contrôle plus complexes.
 Il fournit également une méthodologie d'apprentissage par renforcement relativement originale, 
 bien adaptée aux environnements continus.
-Le traitement d'etats continus passe, comme déjà proposé par \shortcite{Dya00}, par l'utilisation
+Le traitement d’états continus passe, comme déjà proposé par \shortcite{Dya00}, par l'utilisation
 de fonctions noyau qui réalisent un codage topographique des grandeur extensives perçues~: position 
 (et vitesse) de
 la cible et de l'effecteur final dans l'espace visuel rétinocentré, et données proprioceptives 
@@ -3701,12 +3854,11 @@ La commande motrice est ici sous l'influence de deux couches topographiques prim
 (une couche qui perçoit la position et une couche qui perçoit la vitesse)
 et la commande apprise est la combinaison linéaire de deux commandes (deux champs
 de mouvement) distincts, conformément à l'hypothèse de ``double drive'' proposée
-par \shortcite{Keller1996} dans le cadre de l'étude de la saccade occulaire.
-Le point intéressant est que les différents termes de bruit sur les noeuds de
+par \shortcite{Keller1996} dans le cadre de l'étude de la saccade oculaire.
+Le point intéressant est que les différents termes de bruit sur les nœuds de
 sortie développent une variabilité suffisante pour permettre à
 la règle de plasticité de dissocier les deux composantes de la commande.
 
-%[- voir les transparents RNCM + apprentissage par coeur]
 
 La seconde tâche est l'apprentissage du contrôle
 d'un bras articulé à nombreux degrés de liberté (tâche dite de cynématique inverse).
@@ -3741,15 +3893,21 @@ Une autre façon de voir les choses est de dire que la commande motrice est calc
 
 Cette étude permet d'aborder la question de la prise en compte de différents référentiels
 dans l'élaboration d'une commande motrice. Certaines donnéess sensorielles sont définies dans un certain référentiel
-(référentiel de la rétine pour l'oeil par exemple) tandis que 
+(référentiel de la rétine pour l’œil par exemple) tandis que 
 les commandes opèrent dans un référentiel différent (référentiel du tronc
 dans le cas de la saccade). 
 Cette étude apporte une intuition sur le principe d'un apprentissage 
-``par coeur'' des règles de translation permettant de prendre en compte la
+``par cœur'' des règles de translation permettant de prendre en compte la
 position du corps dans l'élaboration de la commande motrice dans le cadre
 du codage topographique (voir aussi \cite{Pouget1997}).
 
-
+\cleardoublepage
+\includepdf[pages=2,offset=70 -30]{pdf/2010-neurocomp-ann.pdf}
+\includepdf[pages=3,offset=-70 -30]{pdf/2010-neurocomp-ann.pdf}
+\includepdf[pages=4,offset=70 -30]{pdf/2010-neurocomp-ann.pdf}
+\includepdf[pages=5,offset=-70 -30]{pdf/2010-neurocomp-ann.pdf}
+\includepdf[pages=6,offset=70 -30]{pdf/2010-neurocomp-ann.pdf}
+\includepdf[pages=7,offset=-70 -30]{pdf/2010-neurocomp-ann.pdf}
 %{\color{Violet}
 %NB : modèles feed-forward pour saccade - bras - BCI 
 
@@ -3762,100 +3920,10 @@ du codage topographique (voir aussi \cite{Pouget1997}).
 %- RL in continuous time and space (avec Alain D)
 %}
 
-\section{Apprendre et oublier dans les environnements non-stationnaires}
+\section{Apprentissage dans les environnements non-sta\-tion\-naires}
 
-J'ai obtenu une délégation INRIA entre septembre 2008 et aout 2009 au sein de l'équipe
-SequeL (Sequential Learning) dirigée par Rémi Munos au sein du centre INRIA Lille-Nord Europe.
-L'équipe de Rémi Munos travaille sur l'apprentissage statistique et plus particulièrement 
-sur le dilemne exploration/exploitation, exprimé sous sa forme la plus simple 
-comme un problème d'échantillonnage aléatoire de l'espace des choix (problème dit du ``bandit manchot'').
-Chaque tirage apporte une information qu'il convient d'exploiter au mieux, en établissant un compromis
-entre recherche d'information (réduction d'incertitude) et exploitation effective de l'information 
-(pour maximiser le gain).
-Cette forme d'apprentissage séquentiel établit des modèles qui visent à réduire 
-la différence entre les gains obtenus par l'algorithme et les gains
-attendus en toute connaissance de cause.
-L'apprentissage séquentiel statistique est le socle d'une famille de méthodes d'apprentissage 
-fondée sur l'échantillonnage de l'environnement, comme le Q-learning ou le TD-learning dans le
-cadre de l'apprentissage par renforcement classiques. Cette approche a renouvelé le domaine, en proposant 
-par exemple des politiques non-stochastiques (algorithme UCB), ou en étendant le modèle au cas ``adversarial'' 
-(théorie des jeux) \shortcite{Auer2002}. 
-
-Ce séjour a été pour moi l'occasion de m'intéresser à la question de la stationnarité 
-des processus d'apprentissage.
-Les modèles probabiliste de l'apprentissage utilisent souvent une hypothèse de stationnarité qui 
-suppose que les données d'entrée sont issues d'un processus stochastique dont les caractéristiques
-ne varient pas au cours du temps.
-Seul le programme voit ses caractéristiques évoluer par effet de la plasticité au cours du temps.
-Cette hypothèse n'est pas vérifiée dans le cas du contrôle en boucle fermée, où non seulement le programme 
-mais également l'environnement voient leurs caractéristiques évoluer au cours du temps. 
-Nous avons vu comment un bruit générateur interne est une des composantes 
-qui va permettre de faire des choix en stabilisant certaines réponses 
-dans le cadre de processus d'optimisation non-convexes (plusieurs contrôleurs/solutions possibles),
-conduisant à des solutions différentes (et donc des environnements perceptifs différents) selon le hasard
-des initialisation et des choix aléatoires produits par le modèle.
-Ainsi les régularités observéees durant les premières phases de l'apprentisage ne sont plus nécessairement présentes
-à une étape ultérieure de l'apprentissage~: certaines trajectoires sont ``abandonnées''. Dans une perspective de parcimonie 
-(ou de ressource limitée), il est avantageux d'oublier certains faits passés pour mieux appréhender les faits nouveaux, autrement
-dit oublier pour mieux apprendre.
-
-%[APPRENDRE ET OUBLIER]. Le papier de Kivinen.
-
-L'idée générale de cette stratégie ``versatile'' été le point de départ de ma participation
-à un travail de collaboration qui s'est concrétisé
-sous la forme d'un projet ANR ``Défis'', portant sur l'application de stratégies adaptatives dans le
-cadre des interfaces cerveau-ordinateur (projet CO-ADAPT - 2010-2014). Ce projet, porté par Maureen Clerc
-de l'INRIA Sophia-Antipolis, impliquait des expérimentateurs et des théoriciens, entre autres
-Rémi Munos, Boris Burle (LNC, Marseille), Jérémie Mattout (CRNL, Lyon) et Bruno Torresani (LATP, Marseille).
-
-Une interface cerveau-machine (``Brain Computer Interface'' - BCI) est un dispositif qui mesure l'activité électrique 
-à la surface du cerveau (en général de manière non-invasive) afin de produire une commande.
-Les applications possibles sont en premier lieu la supplétion motrice pour des handicapés moteurs sévères,
-mais également les jeux, le monitoring, la réhabilitation motrice, etc. 
-Les dispositifs BCI sont de bons exemples de systèmes ``embarqués'', avec des possibilité
-d'interaction en boucle fermée entre le logiciel et l'humain~:
-la réponse produite par le logiciel (le feedback) a une conséquence directement mesurable 
-sur l'activité électrique émise par le sujet, et vice versa.
-Dans ce cadre, le sujet humain est la source des signaux (il joue le rôle  de l'``environnement'' du 
-logiciel BCI).
-
-L'interaction entre le logiciel et l'humain produit un historique d'interactions, correspondant
-généralement à des étapes de calibration côté logiciel et à une ``prise en main'' 
-de l'interface par l'humain (l'humain apprend à se servir de l'interface).
-La calibration du logiciel est généralement effectuée sous le contrôle d'un
-assistant. La calibration correspond à des étapes au cours desquelles on 
-impose au sujet une série de commandes, permettant de calculer par des méthodes
-supervisés
-un classifieur spécifique. 
-Le principe de ce projet était d'approfondir cette adapation mutuelle, 
-en autonomisant l'adaptation du logiciel, afin de permettre une prise en main 
-du logiciel par le patient sans assistance extérieure.
-Le projet CO-ADAPT consistait précisément à étudier des méthodes adaptatives 
-pour faire en sorte que logiciel utilise les réactions du sujet pour améliorer ses
-performances (temps de réponse, potentiels d'erreur, ...).
-
-Dans un cadre adaptatif, le logiciel doit apprendre, pour chaque sujet, 
-à discriminer les différentes activités électriques 
-produites.
-De la part du sujet, la maîtrise de l'interface comprend également une phase d'apprentissage  
-pouvant induire des modifications dans son activité électro-encéphalographique,
-dans le sens d'un signal plus net, mais aussi dans la répartition spatiale et les temps de réponse
-de l'activité électrique.
-Par ailleurs, des dégradations du signal peuvent aussi 
-être observées en cas de lassitude, de distraction, de somnolence...
-
-La non-stationnarité est plus généralement une caractéristique d'environnements eux-mêmes soumis à des transformations,
-soit par l'action du contrôleur, soit par des actions exterieures (sans rapport avec le contrôleur). 
-Cette prise en compte du ``vieillissement'' de l'environnement conduit à accorder plus de crédit à des observations
-récentes qu'à des observations anciennes \shortcite{Kivinen2004}. 
-Le modèle proposé utilisait un terme de régularisation combiné à un paramètre d'apprentissage permettant
-de définir une constante de temps caractéristique correspondant à la durée pendant laquelle les données 
-du passé sont prises en compte avant d'être oubliées. L'ajustement permanent du contrôleur  
-lui permet de suivre les changements environnementaux en mettant à jour son modèle.
-Le lien avec l'apprentissage par renforcement apparait dans ce cadre naturel.
-
-Ma contribution dans ce projet a principalement porté sur une des interfaces les plus 
-classiques appelée ``P300 speller''.
+Dans le cadre du projet CO-ADAPT {\bf (!! voir section ...!!)}, 
+ma contribution a principalement porté sur une l'interfaces de type clavier virtuel appelée ``P300 speller''.
 L'onde ``P300'' est une activité positive à dominante occipitale qui apparait environ 300 ms après un stimulus 
 ``surprenant'', ou différent des autres, dans une série de stimuli qui lui est préssentée.
 Le P300-speller est constitué d'une grille de symboles. Des groupes de symboles sont illuminés 
@@ -3865,31 +3933,15 @@ En recoupant les groupes de symboles qui ont induit une réponse P300, le symbol
 l'écran et une nouvelle série de flash démarre.
 
 La qualité de la réponse repose sur la justesse du classifieur qui doit discriminer les signaux P300 des signaux non-P300.
-La première étude sur l'apprentissage par renforcement du P300-speller reprenait précisément
-le schéma de Kivinen (prise en compte de l'oubli) lorsqu'il est soumis à des signaux de renforcement
+La première étude sur l'apprentissage par renforcement du P300-speller reprend 
+le schéma de Kivinen (prise en compte de l'oubli) lorsque le classifieur est soumis à des signaux de renforcement
 et non des signaux d'erreur classiques, selon le principe du Policy-gradient (apprentisage direct de la politique). 
-Cette étude a été entamée dans le cadre d'un stage de deuxième année de deux étudiants de Centrale Marseille : 
-Timothée Proix et Arnaud Rachez (en 2010).
-Elle a fait l'objet 
-d'une communication dans la conférence TOBI (TOwards Brain-computer Interfaces)
-en décembre 2010 à Rome \shortcite{Rachez2011}. 
-Timothée a continué à travailler sur le sujet dans le cadre de son master recherche en 2011, 
-en collaboration avec Liva Ralaivola du LIF
-(Laboratoire d'Informatique Fondamentale, Marseille),
-en étudiant les caractéristiques du problème 
-dans un cadre plus général des classifieurs à noyaux. Nous avons également 
-regardé comment le choix d'un biais sur la récompense permet de réduire la variance de l'estimateur. 
-Nous avons enfin regardé la tolérance de l'algorithme au bruit, soit en dégradant le signal 
-traité, soit en dégradant le signal de renforcement. 
-Ces travaux ont été publiés dans plusieurs conférences \shortcite{Dauce2012,Dauce2013a,Dauce2013b}. 
-Un article pour IEEE TNNLS a également été soumis\shortcite{Dauce2014sub}.
 
-Dans une deuxième étude, j'ai travaillé dans le cadre d'une collaboration 
-avec Maureen Clerc, Eoin Thomas, Dieter Devlaminck et Loïc Mahé,
-travaillant à Sophia-Antipolis, 
-sur un modèle de gradient logistique dans la cadre de classifieurs 
-probabilistes calculés sur un groupe de sujets. 
-Ce type de modèle a été proposé dans le cadre du P300 par \shortcite{Kindermans2012}.
+
+
+\cleardoublepage
+{\bf!! Deuxième contribution!!}
+
 Considérons un classifieur 
 probabiliste qui, à chaque illumination d'un nouveau groupe de lettres (toutes les 200 ms),  
 donne un nombre entre 0 et 1, interprété comme la probabilité que ce groupe de lettre aît produit un P300.
@@ -3901,16 +3953,19 @@ Il est possible de construire un classifieur générique
 à l'aide des données issues d'un groupe de sujet et de l'appliquer sans calibration sur un nouveau sujet,
 avec des taux de réussites proches de l'état de l'art des classifieurs spécifiques aux sujets. 
 Le principe d'accumulation permet également d'optimiser le nombre
-de flash.% (le nombre de flash est adaptatif). 
+de flashs. % (le nombre de flash est adaptatif). 
 Enfin, en ajoutant une hypothèse Gaussienne, il est possible de 
 définir un algorithme adaptatif (gradient logistique) qui met à jour en permanence le classifieur afin mieux correspondre aux
 données du sujet et améliorer le taux de réussite et la vitesse de la réponse. 
-La validation du modèle adaptatif Gaussien sur des données P300 a été présenté à la ocnférence ESANN 2014 \shortcite{Dau14b}.
+La validation du modèle adaptatif Gaussien sur des données P300 a été présenté à la conférence ESANN 2014 \shortcite{Dau14b}.
 Le schéma d'accumulation d'évidence fait partie de la mise à jour du logiciel OpenVibes \shortcite{Renard2010} développé
 entre autres à l'INRIA, et a fait l'objet de plusieurs publications dans des conférences \shortcite{Thomas2013,Thomas2014}.
 
 
-
+\cleardoublepage
+\includepdf[pages=1-2,landscape=true,nup=1x2,scale=1.1,offset= 70 -30]{pdf/2014-esann-B-ann.pdf}
+\includepdf[pages=3-4,landscape=true,nup=1x2,scale=1.1,offset= -70 -30]{pdf/2014-esann-B-ann.pdf}
+\includepdf[pages=5-6,landscape=true,nup=1x2,scale=1.1,offset= 70 -30]{pdf/2014-esann-B-ann.pdf}
 
 %{\color{Violet}
 %[Apprentissage statistique - Forme - pater matching -]
