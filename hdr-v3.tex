@@ -216,7 +216,7 @@ Le terme computationnel fait référence à la notion de calcul. Les neuroscienc
 visent donc à identifier ce qui, dans l'activité des neurones, s'apparente à un calcul; à identifier 
 le type et la nature des opérations réalisées par le système nerveux. 
 
-Ce rapport évite les détails mathématiques, et insiste sur la mise en perspectives des travaux présentés
+Ce rapport {\bf!!évite les détails mathématiques!!}, et insiste sur la mise en perspectives des travaux présentés
 dans le cadre des problématiques des neurosciences computationnelles. 
 Pour les figures, formules et illustrations, il faudra se reporter au document annexe contenant  une sélection
 de papiers et de contributions à des conférences scientifiques.
@@ -1571,16 +1571,48 @@ L'utilisation d'un patron de connectivité plus réaliste a été proposé dans 
 avec séparation fonctionnelle des neurones excitateurs et inhibiteurs, et utilisation de neurones à 
 conductance \shortcite{Kepler1992}. 
 
-\paragraph{Le projet MAPS (2007-2010)}
+\paragraph{Les projets MAPS et NOAT (2007-2010)}
+
+
+
+A travers deux projets ANR, j'ai pu aborder ces aspects de modélisation inspirés par des observations
+électrophysiologiques et psycho-physiques 
+autour de l'étude des comportements d'orientation. 
+Dans le cadre du projet MAPS déjà présenté, j'ai participé à une étude portant 
+sur l'orientation visuelle à partir des données anatomiques et électrophysiologiques du tectum 
+et des neurones prémoteurs du tronc cérébral,
+en collaboration avec Alain Guillaume, travaillant à l'Institut des Sciences du Mouvement, 
+et Anthony Mouraud, qui a effectué un séjour
+post-doctoral en 2010 sous notre supervision. 
+Dans le cadre du projet ANR NOAT, en collaboration avec Jennifer Coull (LNC, Marseille) et 
+Daniele Schön (INCM, Marseille), j'ai également travaillé sur des modèles génératifs du comportement 
+d'orientation temporelle,
+en collaboration avec Gaurav Malhotra qui a effectué un séjour postdoctoral en 2010-2011 sur cette question.
+
 J'ai contribué début 2007 à l'ecriture d'un projet ANR blanc intitulé ``MAPS'' (Mapping, Adaptation, Plasticity and Spatial Computation)
 qui a reçu un financement entre septembre 2007 et septembre 2010. 
 Cette recherche collaborative impliquait entre autres Frédéric Alexandre, chercheur en neurosciences computationnelles au LORIA (Nancy), 
 Hélène Paugam-Moisy, professeur à l'université de Lyon, et Laurent Goffart, chercheur en neurosciences à l'INCM (Marseille).
 
-Ce projet portait sur la notion de codage topographique et de 
+Ce projet portait sur la notion de codage topographique dans les modèels de réseaux 
+de neurones biologiquement inspirés. 
+Un des buts du projet ANR MAPS était de proposer une modélisation du comportement d'orientation visuelle,  à travers
+l'étude du système saccadique. 
+%, certains aspects de la commande (déplacement relatif) semblant directement
+%liés à la position du foyer d'activité à la surface du colliculus, et d'autres aspects (comme la vitesse de déplacement)
+%semblant liés à la fréquence de décharge des neurones.
+
+J'ai participé au projet NOAT (``L'attention temporelle: modélisation neurale et substrats neuroanatomiques des processus attentionnels implicites et explicites'') 
+qui a été financé entre 2007 et 2010 dans le cadre d'un appel d'offre ANR ``Neuro'' datant de 2007 (ANR-07-NEURO-033-03). 
+Ce projet collaboratif portait sur des mécanismes attentionnels liés à un contexte temporellement structuré.
 
 %{\color{Violet} (seule différence avec SAB : liens inhib-inhib plus faibles )}
 % 2011-2015 INS - Mathieu - Viktor
+
+Le modèle que nous avons proposé, en collaboration avec Gaurav Malhotra, qui a été recruté
+en contrat post-doctoral entre 2010 et 2011, utilise l'hypothèse d'une représentation probabiliste de 
+l'environnement, autrement dit une reconstruction à partir des données du modèle génératif 
+de ces données, et une prédiction (sous la forme d'une vraisemblance) de l'instant probable d'un événement.
 
 \paragraph{Délégation INRIA Lille Nord-Europe(2008-2009)}
 J'ai obtenu une délégation INRIA entre septembre 2008 et aout 2009 au sein de l'équipe
@@ -1686,6 +1718,8 @@ attracteurs se développant au sein d'un tel réseau.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Approche ascendante (``\emph{bottom-up}'')}
 Une partie des résultats présentés porte sur l'application 
 de la plasticité synaptique dans des réseaux de neurones récurrents aléatoires 
 dans le but de modifier leur comportement à long terme. 
@@ -1717,12 +1751,42 @@ L'erreur (la non-correspondance) ne produit pas une correction mais une transiti
 qui s'apparente à une exploration aléatoire de l'espace des couplages jusqu'à atteindre un nouvel
 attracteur comportemental.
 
+\subsection{Approche descendante (``\emph{top-down}'')}
+
+\paragraph{Modèles biologiquement inspirés} 
+Les modèles étudiés précédemment sont constitués de quelques 
+centaines de neurones développant une activité autonome, s'organisant sous la pression d'un signal externe et 
+se transformant sous l'effet de la plasticité synaptique.
+%La connectivité entre le cortex et les structures sous-corticales (striatum, ganglions de la base, thalamus,
+%amygdale, hippocampe, cervelet, ...) met en évidence de nombreuses boucles réentrantes suggérent une 
+%prépondérance de l'activité interne sur les entrées sensorielles. Comprendre le rôle de ces boucles
+%réentrantes est un des grands enjeux actuels.
+La simulation de circuits corticaux et sous-corticaux 
+plus fidèles aux observations anatomiques permet de tester la validité de certaines hypothèses en assignant
+des fonctions spécifiques aux différentes structures participant au circuit et en étudiant les conditions permettant
+au circuit de produire une activité répondant aux contraintes fonctionnelles. 
+
 \paragraph{Ecueils possibles}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Non-convergence des règles de Hebb.
+
+{\bf!!(modèles neuro-réalistes)}
+Néanmoins, 
+le nombre et la complexité des paramètres en jeu (types de neurones, constantes d'intégration, 
+types et amplitude
+des projection, nombre de populations, existence ou absence de certains faisceaux d'axones, ...) 
+rend difficiles à distinguer les facteurs contribuant à la réussite ou à l'échec du modèle
+(défaut de conception, défaut de réalisme, défaut de paramétrage, défaut d'implémentation).
+La prise en compte de conditions plus générales (saccades libres, saccades adaptatives, cibles en 
+mouvement) nécessiterait la mise en œuvre de modèles de populations plus simples, basés sur 
+des masses neuronales plutôt
+que des neurones détaillés. Certains des principes 
+computationnels évoqués plus haut, comme l'idée d'un contrôle basé sur des
+points fixe de l'espace de postures, pourraient être développés dans ce cadre. 
+%Cet aspect sera présenté plus précisément dans la partie projet de ce mémoire. 
 
 \section{Résultats principaux}
 
@@ -2069,10 +2133,65 @@ basé sur une information de type ``bandit'' \shortcite{Dauce2013b, Dauce2014sub
 Les modèles développés dans un cadre de modélisation biologique  
 apportent quelques éclairages supplémentaires
 sur certains aspects du calcul neuronal.
+
+
+\paragraph{Orientation visuelle}
+L'orientation visuelle est un comportement moteur très spécifique, qui 
+s'apparente plus au monde de la perception qu'au monde de la motricité, reposant sur des circuits de
+contrôle distincts des circuits de commande de l'appareil moteur.
+Ce système, situé dans le tectum (partie supérieure du tronc cérébral) 
+au niveau des couches profondes
+du colliculus supérieur, développe une activité topographiqement organisée responsable de la commande
+des mouvements rapides des globes oculaires.
+
+Même si on se limite aux saccades à tête fixe, le circuit de la commande saccadique demeure assez complexe
+et non totalement élucidé. Si l'on exclut les étapes de traitement visuel conduisant à l'identification
+d'un point d'intérêt en périphérie de la rétine, la structure au carrefour de la transformation 
+visuo-motrice est
+une carte rétinotopique située sur la partie supérieure du tectum,
+appelée le colliculus supérieur. 
+Le déclenchement de la saccade implique 
+de nombreuses catégories de neurones du tronc cérébral, incluant des inhibiteurs toniques,
+des neurones prémoteurs excitateurs et inhibiteurs variés appartenant à la formation réticulée, 
+une dérivation via le cervelet et enfin des motoneurones oculaires. 
+
 L'étude et la reproduction des mécanismes neuronaux d'orientation visuelle,
 tels que tentés dans \shortcite{Dauce2011},
 montrent l'existence d'une activité autonome contrôlée dans le temps et dans l'espace sur
 la durée de la saccade (100~ms environ), c'est à dire sur un intervalle temporel précis, ``programmé''.
+Notre étude, en implémentant de façon très détaillée les populations de neurones en jeu, 
+a permis de 
+souligner l'importance sans doute sous-évaluée des neurones d'une structure 
+de la région réticulaire (centro-medial reticular formation - cMRF) dans le contrôle de la saccade. 
+
+
+
+%en lien avec le déplacement
+%Exploration visuelle par scanning
+%de l'environnement. 
+%L'exploration de l'espace visuel implique une métrique qui repose sur les
+%récepteurs vestibulaires.
+%(Les récepteurs vestibulaires sont par ailleurs au coeur du maintien de la position verticale)
+
+\paragraph{Orientation temporelle}
+
+
+L'idée est donc que la réactivité au stimulus (readiness) est proportionnelle à cette probabilité 
+estimée d'apparition.
+
+Nous avons regardé en particulier le cas de la période préparatrice variable (``variable foreperiod''), 
+où les stimuli apparaissant à des intervalles variant d'un essai à l'autre.
+Dans ce cas, les temps de réponse
+indiquent une meilleure réactivité pour les intervalles
+les plus longs. Ainsi les ressources attentionnelles ne sont pas équitablement
+réparties.
+Conformément à un principe de révision des croyances, 
+le passage du temps permet en effet d'éliminer les hypothèses
+portant sur les intervalles courts, donnant plus de vraisemblance 
+(et donc des temps de réaction plus courts) 
+aux hypothèses les plus tardives. 
+
+
 Les modèles mis en place dans le cadre de l'orientation temporelle \shortcite{Malhotra2011} mettent à
 jour des mécanismes prenant place sur des échelles de l'ordre plusieurs secondes, 
 qui semblent quant à eux liés à la simulation motrice via une possible boucle réentrante. 
@@ -2083,14 +2202,6 @@ basés sur l'accumulation d'évidence (ou vraisemblance Bayésienne) \shortcite{
 Ces mêmes schémas sont par ailleurs mis en oeuvre dans la réalisation d'architectures de contrôle
 très concrètes dans un cadre de traitement du signal pur (interfaces cerveau-machines) \shortcite{Thomas2014}.
 
-
-
-%en lien avec le déplacement
-%Exploration visuelle par scanning
-%de l'environnement. 
-%L'exploration de l'espace visuel implique une métrique qui repose sur les
-%récepteurs vestibulaires.
-%(Les récepteurs vestibulaires sont par ailleurs au coeur du maintien de la position verticale)
  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2672,7 +2783,7 @@ voir par exemple \shortcite{Faugeras2009,Cabana2013}. %L'accent sur l'équilibre
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     1.2      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \cleardoublepage
-\section{Réservoir computing}
+\section{Comportement critique à taille finie}
 
 Un des intérêts principaux des réseaux à connectivité aléatoire est leur capacité à générer des dynamiques complexes
 endogènes (donc sans stimulation extérieure). Ces dynamiques, bien que reposant sur des équations déterministes,
@@ -3618,11 +3729,11 @@ Les rotations irrégulières induisent une succession de signaux visuels qui, pa
 à la séquence apprise, et font basculer l'ensemble dans le régime périodique où les entrées visuelles redeviennent prévisibles.
 
 \cleardoublepage
-\includepdf[pages=10,offset=-70 -30]{pdf/2002-biological-cyb-ann2.pdf}
-\includepdf[pages=11,offset=70 -30]{pdf/2002-biological-cyb.pdf}
-\includepdf[pages=12,offset=-70 -30]{pdf/2002-biological-cyb.pdf}
-\includepdf[pages=13,offset=70 -30]{pdf/2002-biological-cyb.pdf}
-\includepdf[pages=14,offset=-70 -30]{pdf/2002-biological-cyb.pdf}
+\includepdf[pages=10,offset=70 -30]{pdf/2002-biological-cyb-ann2.pdf}
+\includepdf[pages=11,offset=-70 -30]{pdf/2002-biological-cyb.pdf}
+\includepdf[pages=12,offset=70 -30]{pdf/2002-biological-cyb.pdf}
+\includepdf[pages=13,offset=-70 -30]{pdf/2002-biological-cyb.pdf}
+\includepdf[pages=14,offset=70 -30]{pdf/2002-biological-cyb.pdf}
 
 
 %- Comportement d’itinerance au niveau du couple agent/environnement (robot ETIS). “Accrochage” = perte d’autonomie / information mutuelle. Alternance entre synchronisation et désynchronisation (bruit destructeur).
@@ -4034,52 +4145,15 @@ temporelle, c'est à dire la capacité du sujet à concentrer ses ressources att
 
 %On distingue ainsi chez la lamproie trois grandes catégories d'activités motrices, à savoir 
 
-Nous avons vu dans les parties précédentes des modèles constitués de quelques 
-centaines de neurones développant une activité autonome, s'organisant sous la pression d'un signal externe et 
-se transformant sous l'effet de la plasticité synaptique.
-%La connectivité entre le cortex et les structures sous-corticales (striatum, ganglions de la base, thalamus,
-%amygdale, hippocampe, cervelet, ...) met en évidence de nombreuses boucles réentrantes suggérent une 
-%prépondérance de l'activité interne sur les entrées sensorielles. Comprendre le rôle de ces boucles
-%réentrantes est un des grands enjeux actuels.
-La simulation de circuits corticaux et sous-corticaux 
-plus fidèles aux observations anatomiques permet de tester la validité de certaines hypothèses en assignant
-des fonctions spécifiques aux différentes structures participant au circuit et en étudiant les conditions permettant
-au circuit de produire une activité répondant aux contraintes fonctionnelles. 
-
-
-
-
-A travers deux projets ANR, j'ai pu aborder ces aspects de modélisation selon ces différents niveaux 
-autour de l'étude des comportements d'orientation. 
-Dans le cadre du projet MAPS déjà présenté, j'ai participé à une étude portant 
-sur l'orientation visuelle à partir des données anatomiques et électrophysiologiques du tectum 
-et des neurones prémoteurs du tronc cérébral,
-en collaboration avec Alain Guillaume, travaillant à l'Institut des Sciences du Mouvement, 
-et Anthony Mouraud, qui a effectué un séjour
-post-doctoral en 2010 sous notre supervision. 
-Dans le cadre du projet ANR NOAT, en collaboration avec Jennifer Coull (LNC, Marseille) et 
-Daniele Schön (INCM, Marseille), j'ai également travaillé sur des modèles génératifs du comportement 
-d'orientation temporelle,
-en collaboration avec Gaurav Malhotra qui a effectué un séjour postdoctoral en 2010-2011 sur cette question.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     4.1      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\cleardoublepage
 \section{Modèles de l'orientation spatiale}
 
-Un des buts du projet ANR MAPS était de proposer une modélisation du comportement d'orientation visuelle,  à travers
-l'étude du système saccadique. L'orientation visuelle est un comportement moteur très spécifique, qui 
-s'apparente plus au monde de la perception qu'au monde de la motricité, reposant sur des circuits de
-contrôle distincts des circuits de commande de l'appareil moteur.
-Ce système, situé dans le tectum (partie supérieure du tronc cérébral) 
-au niveau des couches profondes
-du colliculus supérieur, développe une activité topographiqement organisée responsable de la commande
-des mouvements rapides des globes oculaires.
-%, certains aspects de la commande (déplacement relatif) semblant directement
-%liés à la position du foyer d'activité à la surface du colliculus, et d'autres aspects (comme la vitesse de déplacement)
-%semblant liés à la fréquence de décharge des neurones.
 
 La saccade oculaire est un mouvement présent chez l'ensemble des vertébrés consistant à orienter 
 la partie centrale de la rétine (la fovea) vers un point d'intérêt de l'espace visuel.
@@ -4101,17 +4175,6 @@ Elle implique la traduction d'une activité exprimant des coordonnées spatiales
 vers une activité temporellement bornée exprimant une vélocité motrice transitoire.
 Une version simplifiée de la tâche est la saccade à tête fixe consistant à orienter le globe
 oculaire seul.
-
-Même si on se limite aux saccades à tête fixe, le circuit de la commande saccadique demeure assez complexe
-et non totalement élucidé. Si l'on exclut les étapes de traitement visuel conduisant à l'identification
-d'un point d'intérêt en périphérie de la rétine, la structure au carrefour de la transformation 
-visuo-motrice est
-une carte rétinotopique située sur la partie supérieure du tectum,
-appelée le colliculus supérieur. 
-Le déclenchement de la saccade implique 
-de nombreuses catégories de neurones du tronc cérébral, incluant des inhibiteurs toniques,
-des neurones prémoteurs excitateurs et inhibiteurs variés appartenant à la formation réticulée, 
-une dérivation via le cervelet et enfin des motoneurones oculaires. 
 
 Le colliculus est une carte topographique bilatérale (champ visuel droit, champ visuel gauche) 
 dont la stimulation électrique permet de déclencher des saccades.
@@ -4161,18 +4224,9 @@ Un second modèle, incluant un lien de feedback des neurone prémoteurs vers les
 a été implémenté. Ce modèle, qui permettait de prendre en compte l'interruption temporaire de l'activité
 des neurones prémoteurs présentait néanmoins des tracés de saccades moins précis, et n'a pas fait l'objet de publication.
 
-Cette étude, en implémentant de façon très détaillée les populations de neurones en jeu, a permis de 
-souligner l'importance sans doute sous-évaluée des neurones du cMRF dans le contrôle de la saccade. Néanmoins, 
-le nombre et la complexité des paramétres en jeu (types de neurones, constantes d'intégration, types et amplitude
-des projection, nombre de populations, existence ou absence de certains faisceaux d'axones, ...) 
-rend difficiles à distinguer les facteurs contribuant à la réussite ou à l'échec du modèle
-(défaut de conception, défaut de réalisme, défaut de paramétrage, défaut d'implémentation).
-La prise en compte de conditions plus générales (saccades libres, saccades adaptatives, cibles en 
-mouvement) nécessiterait la mise en oeuvre de modèles de populations plus simples, basés sur des masses neuronales plutôt
-que des neurones détaillés. Certains des principes 
-computationnels évoqués plus haut, comme l'idée d'un contrôle basé sur des
-points fixe de l'espace de postures, pourraient être développés dans ce cadre. 
-%Cet aspect sera présenté plus précisément dans la partie projet de ce mémoire. 
+\cleardoublepage
+\includepdf[pages=1,offset=70 -30]{pdf/2011-CNS-mouraud.pdf}
+\includepdf[pages=2,offset=-70 -30]{pdf/2011-CNS-mouraud.pdf}
 
 %{\color{Violet}
 %{\bf 2010}
@@ -4187,10 +4241,8 @@ points fixe de l'espace de postures, pourraient être développés dans ce cadre
 \section{Modèles de l'orientation temporelle}
 
 
-J'ai participé au projet NOAT (``L'attention temporelle: modélisation neurale et substrats neuroanatomiques des processus attentionnels implicites et explicites'') 
-qui a été financé entre 2007 et 2010 dans le cadre d'un appel d'offre ANR ``Neuro'' datant de 2007 (ANR-07-NEURO-033-03). 
-Ce projet collaboratif portait sur des mécanismes attentionnels liés à un contexte temporellement structuré.
-La problématique est celle des mécanismes neuronaux supports de l'orientation de l'attention vers des instants
+
+La problématique de l'orientation temporelle est celle des mécanismes neuronaux supports de l'orientation de l'attention vers des instants
 précis, ``situés'' sur un axe temporel.
 L'objectif général de ce projet était de comparer deux formes distinctes d'orientation de l'attention temporelle : 
 l'attention implicite (stimulus inclus dans un contexte temporellement structuré) 
@@ -4222,24 +4274,7 @@ proposés dans la littérature supposent l'existence d'une activité intrinsèqu
 le tic-tac d'une horloge, cette activité étant ensuite intégrée pour former une
 estimation interne du temps passé \shortcite{Gold01,Simen2011}.
 
-Le modèle que nous avons proposé, en collaboration avec Gaurav Malhotra, qui a été recruté
-en contrat post-doctoral entre 2010 et 2011, utilise l'hypothèse d'une représentation probabiliste de 
-l'environnement, autrement dit une reconstruction à partir des données du modèle génératif 
-de ces données, et une prédiction (sous la forme d'une vraisemblance) de l'instant probable d'un événement.
-L'idée est donc que la réactivité au stimulus (readiness) est proportionnelle à cette probabilité 
-estimée d'apparition.
 
-Nous avons regardé en particulier le cas de la période préparatrice variable (``variable foreperiod''), 
-où les stimuli apparaissant à des intervalles variant d'un essai à l'autre.
-Dans ce cas, les temps de réponse
-indiquent une meilleure réactivité pour les intervalles
-les plus longs. Ainsi les ressources attentionnelles ne sont pas équitablement
-réparties.
-Conformément à un principe de révision des croyances, 
-le passage du temps permet en effet d'éliminer les hypothèses
-portant sur les intervalles courts, donnant plus de vraisemblance 
-(et donc des temps de réaction plus courts) 
-aux hypothèses les plus tardives. 
 
 Le processus implémenté \shortcite{Malhotra2011} utilise un principe d'accumulation d'évidence concurrente. 
 Les différentes hypothèses ont initialement le même a-priori (chaque hypothèse
@@ -4257,6 +4292,9 @@ c'est à dire à la proportion d'intervalle temporel subjectif parcouru.
 Par ailleurs, la similarité formelle de ce modèle avec l'approche probabiliste du contrôle moteur \cite{Haruno2001}
 suggère un lien possible entre l'estimation temporelle et la simulation motrice \cite{Jeannerod2001}. 
 
+\cleardoublepage
+\includepdf[pages=1,offset=70 -30]{pdf/2011-CNS-malhotra.pdf}
+\includepdf[pages=2,offset=-70 -30]{pdf/2011-CNS-malhotra.pdf}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     4.3      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
