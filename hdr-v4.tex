@@ -16,6 +16,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage[francais]{babel}
 
+\usepackage[usenames,dvipsnames]{color}
+
 \usepackage{lmodern}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Source: http://en.wikibooks.org/wiki/LaTeX/Hyperlinks %
@@ -38,7 +40,7 @@
 %\usepackage{apacite}
 %\usepackage[longnamesfirst,nonamebreak]{natbib}
 
-\usepackage[usenames,dvipsnames]{color}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -231,8 +233,11 @@ L'organisation du document...
 
 \section{Neurosciences computationnelles}
 
-L'étude du système nerveux, sous l'angle computationnel, a deux objectifs: (1) explorer des mécanismes de calcul alternatifs 
-et (2) comprendre le fonctionnement du cerveau.
+L'étude du système nerveux, sous l'angle computationnel, a deux objectifs:
+\begin{enumerate} 
+\item explorer des mécanismes de calcul alternatifs 
+\item comprendre le fonctionnement du cerveau
+\end{enumerate}
 
 \paragraph{Mécanismes de calcul alternatifs} Le premier objectif est
 de s'inspirer du fonctionnement du système nerveux pour découvrir de nouveaux principes pour le calcul artificiel,
@@ -308,20 +313,23 @@ Neurosciences) et la conférence CoSyNe (Computational and Systems Neuroscience)
 on peut citer la conférence SAB (Simulation of Adaptive Behavior) qui a eu un fort impact au début des années 2000 mais a 
 fini par disparaître faute d'audience suffisante. 
 
+\paragraph{Les neurosciences computationnelles en France}
+%Voir : https://web.archive.org/web/20131020013653/http://neurocomp.fr/
 
 \subsection{Etat de l'art} Le champ de recherche s'organise autour de plusieurs pôles. 
 (1) simulation neuro-réaliste : mieux comprendre le fonctionnement du neurone, et des interacions entre neurones. 
 se cantonne parfois au simple neurone, à la stucture de la cellule. Modèles de plasticité synaptique, de la transmission
 du signal nerveux, des échanges avec le milieu... (2) modèles conceptuels, principes de traitement de l'information,
 codes neuronaux, mécanismes de mémoire et d'apprentissage;
-(3) architectures neuronales, dynamique à large échelle, neurones à spikes, réseaux équilibréss (plutôt physique
+(3) architectures neuronales, dynamique à large échelle, neurones à spikes, réseaux équilibrés (plutôt physique
 théorique)...
 
 Les principales avancées sont:
 \begin{itemize}
  \item le système Visuel, Olshausen, les champs récepteurs, les architecturs profondes
- \item généralisation des modèles physiques à l'analyse de l'imagerie... dynamique stochastique, Fokker-Planck
+ \item généralisation des modèles physiques à l'analyse de l'imagerie... \item dynamique stochastique, Fokker-Planck, etats de heute conductance
  \item STDP
+ \item codage par rang
  \item approche profonde; non-negative matrix factorization
  \item modèles de la décision et circuit de la récompense. Modèles du cervelet.
 \end{itemize}
@@ -384,7 +392,7 @@ Ayant terminé à la deuxième place, j'ai pu bénéficier d'une bourse ministé
 poursuivre en thèse, toujours sous la direction de Bernard Doyon, au sein de l'équipe animée par Manuel 
 Samuelidès au DERI.
 
-Le sujet du DEA, n'ayant pas été épuisé, est donc devenu mon sujet de thèse. 
+Le sujet étudié en DEA, n'ayant pas été épuisé, est donc devenu mon sujet de thèse. 
 Plus précisément, ma thèse portait sur l'étude d'un mécanisme de \textit{réduction} de la dynamique
 par plasticité synaptique au sein de réseaux de neurones récurrents aléatoires.
 Il s'agissait d'un sujet assez vaste, qui s'est progressivement orienté vers 
@@ -474,6 +482,27 @@ Les trois premières parties présentent les résultats
 %%%%%%%%%%%%%%%%
 % NEW CHAPTER! %
 %%%%%%%%%%%%%%%%
+
+
+\chapter{Dynamique des grands réseaux de neurones aléatoires}
+
+\section{Neurone et réseau}
+
+\subsection{Activité et signal}
+
+Chaque unité de calcul (ou neurone) est modélisée comme une fonction de réponse $f$ qui 
+traite un signal d'entrée $\mathbf{s}_\text{in}$.
+La réponse du neurone est un signal $s_\text{out} = f(\mathbb{s}_\text{in})$, dit signal de sortie.
+Les signaux sont indexés sur l'axe temporel, où $s_\text{out}(t)$ représente par exemple l'état du neurone au 
+temps $t$.
+
+Dans le cadre de modèles de neurones biologiquement inspirée, le signal $s_\text{out}$ est construit de telle sorte
+qu'on puisse distinguer un état dit ``actif'' d'un état ``inactif'', où l'état actif signifie que le neurone transmet
+de l'information et l'état inactif qu'il ne transmet pas d'information. 
+Dans le cas le plus simple, la sortie au temps $t$ peut prendre deux valeurs : 0 ou 1. L'état 0 est l'état inactif, l'état
+1 est l'état actif. Autrement dit l'état 0 ne "porte" aucune information. 
+Dans le cas de modèles de neurones à impulsions, l'état actif est l'émission d'un potentiel d'action au temps $t$, l'état
+inactif correspond à l'absence de potentiel d'action au temps $t$. 
 
 
 
