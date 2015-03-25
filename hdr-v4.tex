@@ -491,18 +491,39 @@ Les trois premières parties présentent les résultats
 \subsection{Activité et signal}
 
 Chaque unité de calcul (ou neurone) est modélisée comme une fonction de réponse $f$ qui 
-traite un signal d'entrée $\mathbf{s}_\text{in}$.
-La réponse du neurone est un signal $s_\text{out} = f(\mathbb{s}_\text{in})$, dit signal de sortie.
-Les signaux sont indexés sur l'axe temporel, où $s_\text{out}(t)$ représente par exemple l'état du neurone au 
-temps $t$.
+traite un signal d'entrée multimodal $\mathbf{s}_\text{in}$.
+La réponse du neurone est un signal $s_\text{out} = f(\mathbf{s}_\text{in})$, dit signal de sortie.
+Les signaux sont indexés sur l'axe temporel, où $s(t)$ représente 
+le signal au temps $t$.
+Le signal de sortie $s_\text{out}$ est constitué 
+d'une succession d'états ``hauts'' et d'états ``bas''.
+Un neurone dont la sortie à l'instant $t$ est dans l'état haut est dit \textit{activé}. Un neurone 
+dont la sortie à l'instant $t$ est dans l'état bas est dit \textit{inactif}. 
 
-Dans le cadre de modèles de neurones biologiquement inspirée, le signal $s_\text{out}$ est construit de telle sorte
-qu'on puisse distinguer un état dit ``actif'' d'un état ``inactif'', où l'état actif signifie que le neurone transmet
-de l'information et l'état inactif qu'il ne transmet pas d'information. 
-Dans le cas le plus simple, la sortie au temps $t$ peut prendre deux valeurs : 0 ou 1. L'état 0 est l'état inactif, l'état
-1 est l'état actif. Autrement dit l'état 0 ne "porte" aucune information. 
-Dans le cas de modèles de neurones à impulsions, l'état actif est l'émission d'un potentiel d'action au temps $t$, l'état
-inactif correspond à l'absence de potentiel d'action au temps $t$. 
+Dans le cas le plus simple des neurones binaires, 
+le signal de sortie est une succession de 0 (inactif) ou de 1 (actif). 
+Dans le cas plus complexe de neurones à impulsions, le signal de sortie est un train de potentiels d'action, représenté par une 
+somme de Diracs tels que $s(t) = \sum_{\hat{t} \in \mathcal{T}_\text{out}} \delta(t - \hat{t})$.
+Dans le cas de neurones fréquentiels, le signal est une grandeur continue correspondant à la fréquence instantanée
+du train de potentiels d'action.
+
+Le signal de sortie (la suite d'états hauts et d'états bas) est aussi appelé l'\textit{activité} du neurone.
+
+L'état interne du neurone est donné par son \textit{potentiel de membrane} $V$.
+L'activation d'un neurone repose sur un mécanisme non linéaire de \textit{passage de seuil}.
+Dans le modèle le plus simple, l'état de sortie (0 ou 1) dépend d'un
+seuil d'activation $\theta$ tel que $s=1$ si $V>\theta$ et 0 sinon.
+Dans les modèles plus détaillés, l'émission d'un PA est suivi d'une remise à la valeur 
+de repos $V_0 < \theta$ du potentiel de membrane.  
+
+Les canaux d'entrée du neurone sont les synapses. 
+Chaque synapse fait transiter un train de potentiels d'action $s_i$ provenant d'un autre neurone $i$ du réseau.
+L'intégration de tous ces trains passe par une fonction de mise à jour du potentiel de membrane de la forme:
+$$\dot{V} = g(V, s_1, ..., s_n)$$ 
+où $s_1, ..., s_n$ sont les $n$ trains de PA entrants.
+
+
+
 
 
 
