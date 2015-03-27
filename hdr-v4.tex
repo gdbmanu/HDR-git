@@ -274,13 +274,13 @@ liées aux types d'opérations produites par le système nerveux.}
 
 Les neurosciences computationnelles sont par définition pluridisciplinaires. 
 Elles reposent en premier lieu sur le 
-champ des \emph{neurosciences}, qui ont connu un développement considérables au cours des trente dernières années,
+champ des \textit{neurosciences}, qui ont connu un développement considérables au cours des trente dernières années,
 avec l'apparition de nouvelles techniques de mesure permettant d'observer le cerveau en fonctionnement à
-différentes échelles. Elles reposent en second lieu sur la \emph{modélisation mathématique et informatique}, qui a également
+différentes échelles. Elles reposent en second lieu sur la \textit{modélisation mathématique et informatique}, qui a également
 connu un développement important lié à l'augmentation des capacités de calcul des ordinateurs, ainsi que de la
 capacité à traiter des données massives à travers des techniques dites d'apprentisage automatique (\textit{Machine 
 learning}). 
-Un dernier champ de recherche, celui de la \emph{robotique autonome} et du contrôle moteur, est également impliqué, dans la mesure où le
+Un dernier champ de recherche, celui de la \textit{robotique autonome} et du contrôle moteur, est également impliqué, dans la mesure où le
 développement d'interfaces bioniques nécessite une meilleure connaissance des mécanismes de 
 contrôle à l'oeuvre chez l'homme et l'animal.
 
@@ -488,41 +488,69 @@ Les trois premières parties présentent les résultats
 
 \section{Neurone et réseau}
 
+Il existe de nombreux modèles de neurones et de réseaux de neurones. La modélisation des processus neuronaux
+repose donc sur un choix du modélisateur, qui est fonction du mécanisme qu'il souhaite étudier, de ses possibilités
+d'analyse et de la puissance de calcul disponible. 
+
+Je liste ci-dessous quelques propriétés et élements de vocabulaire communs à la plupart des modèles de réseaux de
+neurones, indépendamment de leur utilisation en modélisation ou en apprentissage automatique. 
+
 \subsection{Activité et signal}
 
 Chaque unité de calcul (ou neurone) est modélisée comme une fonction de réponse $f$ qui 
-traite un signal d'entrée multimodal $\mathbf{s}_\text{in}$.
-La réponse du neurone est un signal $s_\text{out} = f(\mathbf{s}_\text{in})$, dit signal de sortie.
-Les signaux sont indexés sur l'axe temporel, où $s(t)$ représente 
-le signal au temps $t$.
-Le signal de sortie $s_\text{out}$ est constitué 
+traite un jeu de \textit{données d'entrée} multimodal $s^\text{in}_1, ..., s^\text{in}_n$.
+La sortie du neurone est un jeu de données unimodal $$s^\text{out} = f(s^\text{in}_1, ..., s^\text{in}_n)$$ 
+(on parle aussi de \textit{réponse} du neurone).
+Un neurone est donc une unité élémentaire de traitement des données. %Un neurone est implicitement une unité de traitement \textit{non-linéaire}.
+
+On peut supposer sans perte de généralité que les données sont indexés sur l'axe temporel.
+On parle alors de \textit{signal} où $s$ représente un jeu de données indexé sur une trame temporelle et 
+$s(t)$ représente le signal au temps $t$.
+
+Le canal de sortie du neurone est l'axone, qui transmet un signal $s_\text{out}$ constitué 
 d'une succession d'états ``hauts'' et d'états ``bas''.
 Un neurone dont la sortie à l'instant $t$ est dans l'état haut est dit \textit{activé}. Un neurone 
 dont la sortie à l'instant $t$ est dans l'état bas est dit \textit{inactif}. 
-
 Dans le cas le plus simple des neurones binaires, 
 le signal de sortie est une succession de 0 (inactif) ou de 1 (actif). 
-Dans le cas plus complexe de neurones à impulsions, le signal de sortie est un train de potentiels d'action, représenté par une 
-somme de Diracs tels que $s(t) = \sum_{\hat{t} \in \mathcal{T}_\text{out}} \delta(t - \hat{t})$.
-Dans le cas de neurones fréquentiels, le signal est une grandeur continue correspondant à la fréquence instantanée
-du train de potentiels d'action.
-
+Dans le cas plus complexe de neurones à impulsions, le signal de sortie est un train de potentiels d'action (PA), représenté par une 
+somme de Diracs tels que $s(t) = \sum_{\hat{t} \in \mathcal{T}_\text{out}} \delta(t - \hat{t})$, où $\mathcal{T}_\text{out}$ est un ensemble
+contenant les instants de décharge.
+Dans le cas de neurones fréquentiels, le signal contient des grandeurs continues correspondant à la fréquence de décharge instantanée
+de la sortie.
 Le signal de sortie (la suite d'états hauts et d'états bas) est aussi appelé l'\textit{activité} du neurone.
 
-L'état interne du neurone est donné par son \textit{potentiel de membrane} $V$.
-L'activation d'un neurone repose sur un mécanisme non linéaire de \textit{passage de seuil}.
-Dans le modèle le plus simple, l'état de sortie (0 ou 1) dépend d'un
-seuil d'activation $\theta$ tel que $s=1$ si $V>\theta$ et 0 sinon.
-Dans les modèles plus détaillés, l'émission d'un PA est suivi d'une remise à la valeur 
-de repos $V_0 < \theta$ du potentiel de membrane.  
-
 Les canaux d'entrée du neurone sont les synapses. 
-Chaque synapse fait transiter un train de potentiels d'action $s_i$ provenant d'un autre neurone $i$ du réseau.
-L'intégration de tous ces trains passe par une fonction de mise à jour du potentiel de membrane de la forme:
-$$\dot{V} = g(V, s_1, ..., s_n)$$ 
-où $s_1, ..., s_n$ sont les $n$ trains de PA entrants.
+Chaque synapse traite un signal $s_i$ émis par un autre neurone pré-synaptique $i$ du réseau et produit une \textit{entrée synaptique}.
+L'état \textit{interne} du neurone post-synaptique est donné par son \textit{potentiel de membrane} $V$.
+La somme des entrées synaptiques agit sur la valeur de ce potentiel de membrane. 
+L'intégration de la totalité des entrées peut être exprimée par une fonction de mise à jour du potentiel de membrane de la forme:
+$$V = g(s_1^\text{in}, ..., s_n^\text{in})$$ 
+où $s_1^\text{in}, ..., s_n^\text{in}$ sont les $n$ signaux entrants.
+Dans le cas le plus simple, $g$ est une combinaison linéaire de ces entrées. Les modèles plus détaillés prennent en compte 
+la fonction de transfert des synapses ainsi que les interactions non-linéaires entre les influences excitatrices et les influences inhibitrices.
+
+L'activation d'un neurone repose ensuite sur un mécanisme non linéaire de \textit{passage de seuil}.
+Dans le modèle le plus simple, l'état de sortie (0 ou 1) dépend d'un
+seuil d'activation $\theta$ tel que $s=1$ (état haut) si $V>\theta$ et $s=0$ (état bas) sinon.
+Dans les modèles plus détaillés, le passage à l'état haut est un mécanisme actif de réinitialisation qui ramène
+le potentiel de membrane vers sa valeur de repos $V_0 < \theta$.  Ce mécanisme de réinitialisation, qui interdit
+le maintien de la sortie dans l'état haut, rend l'état haut  
+plus rare (et donc plus porteur d'information) que l'état bas. Il a également pour effet d'effacer 
+la mémoire des données d'entrée antérieures au dernier PA.
+
+Un des modèles les plus étudiés en modélisation est le modèle de l'\textit{intégrateur à fuite}. 
+La valeur du potentiel dépend de l'historique des signaux d'entrée depuis le dernier PA jusqu'à l'instant $t$. 
+{\bf !! TODO  mécanisme de déision basé sur l'accumulation + figure!!}.
 
 
+
+\subsection{Réseau de neurones}
+
+Les signaux transitant de neurone à neurone via les axones du réseau sont dont une succession d'états hauts et
+d'états bas qui présentent une ressemblance frappante avec les signaux digitaux produits par les calculateurs 
+numériques. Cette analogie de forme masque une différence profonde dans les principes de traitement et
+de transformation de ces signaux. 
 
 
 
