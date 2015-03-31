@@ -301,8 +301,8 @@ Au niveau des revues scientifiques, les neurosciences computationnelles ne bén�
 couverture académique que les disciplines plus anciennement implantées. 
 Les revues qui ont historiquement participé à son développement sont les revues traitant des 
 réseaux de neurones artificiels apparues à la fin des années 80 (Neural Networks, Neural 
-Computation, Neural Computing Letters, etc.).
-Certaine revues plutôt dédiées au traitement du signal, colmme NeuroImage, acceptent également des papiers du domaine.
+Computation, Neural Computing Letters, Biogical Cybernetics, etc.).
+Certaine revues plutôt dédiées au traitement du signal, comme NeuroImage, acceptent également des papiers du domaine.
 Enfin, les revues de physique (Physica-D) hébergent également des papiers traitant des neurosciences computationnelles.  
 Suite au développement du champ de recherche et de sa couverture relativement lacunaire par les revues scientifiques, 
 sont apparues des revues en ``Open Acces'' spécialement dédiées au domaine. 
@@ -326,12 +326,11 @@ théorique)...
 
 Les principales avancées sont:
 \begin{itemize}
- \item le système Visuel, Olshausen, les champs récepteurs, les architecturs profondes
- \item généralisation des modèles physiques à l'analyse de l'imagerie... \item dynamique stochastique, Fokker-Planck, etats de heute conductance
- \item STDP
- \item codage par rang
- \item approche profonde; non-negative matrix factorization
- \item modèles de la décision et circuit de la récompense. Modèles du cervelet.
+ \item le système Visuel, Olshausen, les champs récepteurs, les architectures profondes, approche profonde; non-negative matrix factorization.
+ \item dynamique stochastique, Fokker-Planck, etats de haute conductance, réseaux équilibrés
+ \item généralisation des modèles physiques à l'analyse de l'imagerie... Modèles inverses. Friston
+ \item STDP et codage par rang
+ \item modèles de la décision et circuit de la récompense. Modèles du cervelet. Kalman.
 \end{itemize}
 
 
@@ -439,11 +438,6 @@ L'étude du mécanisme de reconnaissance par ``réduction'' de la dynamique cons
 de ma thèse,
 }
 
-
-
-
-
-
   
 
 
@@ -486,6 +480,8 @@ Les trois premières parties présentent les résultats
 
 \chapter{Dynamique des grands réseaux de neurones aléatoires}
 
+Ce chapître est consacré à l'analyse des capacités d'expression des grands réseaux de neurones. 
+
 \section{Neurone et réseau}
 
 Il existe de nombreux modèles de neurones et de réseaux de neurones. La modélisation des processus neuronaux
@@ -516,8 +512,8 @@ le signal de sortie est une succession de 0 (inactif) ou de 1 (actif).
 Dans le cas plus complexe de neurones à impulsions, le signal de sortie est un train de potentiels d'action (PA), représenté par une 
 somme de Diracs tels que $s(t) = \sum_{\hat{t} \in \mathcal{T}_\text{out}} \delta(t - \hat{t})$, où $\mathcal{T}_\text{out}$ est un ensemble
 contenant les instants de décharge.
-Dans le cas de neurones fréquentiels, le signal contient des grandeurs continues correspondant à la fréquence de décharge instantanée
-de la sortie.
+%Dans le cas de neurones fréquentiels, le signal contient des grandeurs continues correspondant à la fréquence de décharge instantanée
+%de la sortie.
 Le signal de sortie (la suite d'états hauts et d'états bas) est aussi appelé l'\textit{activité} du neurone.
 
 Les canaux d'entrée du neurone sont les synapses. 
@@ -539,9 +535,13 @@ le maintien de la sortie dans l'état haut, rend l'état haut
 plus rare (et donc plus porteur d'information) que l'état bas. Il a également pour effet d'effacer 
 la mémoire des données d'entrée antérieures au dernier PA.
 
-Un des modèles les plus étudiés en modélisation est le modèle de l'\textit{intégrateur à fuite}. 
-La valeur du potentiel dépend de l'historique des signaux d'entrée depuis le dernier PA jusqu'à l'instant $t$. 
-{\bf !! TODO  mécanisme de déision basé sur l'accumulation + figure!!}.
+%% A mettre dans la partie sur la plasticité
+%Un des modèles les plus étudiés en modélisation est le modèle de l'\textit{intégrateur à fuite}. 
+%La valeur du potentiel dépend de l'historique des signaux d'entrée depuis le dernier PA jusqu'à l'instant $t$. 
+%{\bf !! TODO  mécanisme de déision basé sur l'accumulation + figure!!}.
+% La partie suivante doit commencer avec les modèles de la décision : décision bayésienne, intégrateur à seuil, décision de Hopfield,
+% décision du champ neuronal, avec pour finir le modèle de Pouget (compromis dynamique)
+% Préciser ensuite le mécanisme de sélection/intégration
 
 
 
@@ -552,7 +552,15 @@ d'états bas qui présentent une ressemblance frappante avec les signaux digitau
 numériques. Cette analogie de forme masque une différence profonde dans les principes de traitement et
 de transformation de ces signaux. 
 
+\subsection{Champ moyen}
 
+% neurone fréquentiel (champ moyen sur la trame temporelle
+
+% modèle de wilson-cowan
+
+% neural field
+
+% réseaux aléatoires (Sompolinsky Cessac)
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%22
