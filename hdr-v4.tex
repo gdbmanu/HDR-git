@@ -701,14 +701,28 @@ La fonction d'entrée/sortie (fonction de transfert) du réseau de neurones est 
 $$\boldsymbol{u} = h(f(\boldsymbol{s}^*,\boldsymbol{I}))$$
 (il peut y avoir plusieurs sorties possibles si la solution n'est pas unique)
 
-D'un point de vue calculatoire, $\boldsymbol{u}$ est le résultat d'un calcul effectué par 
-le réseau à partir des données d'entrée. Dans la mesure où ce calcul est le résultat de 
+La sortie $\boldsymbol{u}$ peut être vue comme le résultat d'un calcul réalisé à partir des données d'entrée. 
+Dans la mesure où ce calcul est le produit de 
 l'activité conjointe (décentralisée) des neurones du réseau, on parle de \emph{calcul distribué}, par opposition au calcul
 séquentiel réalisé par les ordinateurs traditionnels.
 
-\subsection{Système dynamiques}
+\subsection{Systèmes dynamiques}
 
+Le formalisme des systèmes dynamiques est couramment utilisé pour décrire l'activité 
+des réseaux de neurones. Ce formalisme s'appuie sur une trame temporelle $\mathcal{T}$ décrite par une variable $t \in \mathcal{T}$,
+un espace d'état $\mathcal{X}$ de dimension finie ou infinie, décrit par la variable d'état $\boldsymbol{x}(t) \in \mathcal{X}$ 
+indexée sur la trame temporelle et un flot $\Phi(x,t)$ tel que $\forall \boldsymbol{x},t$:
+$$ \frac{d\boldsymbol{x}}{dt} = \Phi(\boldsymbol{x},t)$$
+L'état du système sur une plage temporelle $[t_0,t_f]$ est entièrement défini par les conditions initiales $\boldsymbol{x}(t_0)$ 
+et le flot. Le signal $\{\boldsymbol{x}(t)\}_{t \in [t_0,t_f], \boldsymbol{x}(t_0)= \boldsymbol{x}_0}$ est la trajectoire 
+du système issue de $\boldsymbol{x}_0$.
 
+Ce formalisme est utilisé par exemple 
+
+Les modèle qui servent de fondement aux neurosciences computationnelles 
+sont les modèles de neurones à conductance [REF DESTEXHE] dont le plus connu est le modèle de Hudgkin-Huxley. 
+
+qui établit 
 
 Lorsque le réseau est récurrent 
 
