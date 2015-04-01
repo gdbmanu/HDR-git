@@ -570,7 +570,7 @@ Les trois premières parties présentent les résultats
 
 \chapter{Dynamique des grands réseaux de neurones aléatoires}
 
-Ce chapitre est consacré à l'analyse des capacités d'expression des grands réseaux de neurones. 
+Ce chapitre est consacré à l'analyse des capacités d'expression des grands réseaux de neurones. [REPRENDRE CHAPEAU]
 
 \section{Neurone et réseau}
 
@@ -662,60 +662,105 @@ L'activité de réseau $\boldsymbol{s}$ (ou activité de population ou encore \t
 constituée de l'ensemble des signaux émis et transmis de neurone à neurone.
 La fonction de réponse du réseau $\boldsymbol{f}_T$ est une fonction paramétrique 
 décrite par le tableau de paramètres $T$, telle que l'activité $\boldsymbol{s}^*$ est solution de~:
-$$ \boldsymbol{s} = \boldsymbol{f}_T(\boldsymbol{s})$$
+\begin{align}\label{eq:optim}
+  \boldsymbol{s} = \boldsymbol{f}_T(\boldsymbol{s})
+\end{align}
 avec :
 $$\boldsymbol{s} = \{\boldsymbol{s}(t)\}_{t = t_0,..., t_f}$$
 où $\boldsymbol{s}(t)$ est le vecteur d'état du réseau à l'instant $t$, 
 $t_0$ est l'instant initial (début de l'observation) et $t_f$ l'instant final 
 (fin de l'observation).
 
-\subsection{Calcul distribué}
+\subsection{Modes et expressivité}
 
 Les signaux transitant de neurone à neurone via les axones du réseau contiennent une succession d'états hauts et
 d'états bas qui présentent une ressemblance frappante avec les signaux digitaux produits par les calculateurs 
 numériques. Cette analogie de forme n'implique cependant pas que les principes de traitement et
 de transformation de ces signaux soient les mêmes.
 
-Certains neurones du réseau peuvent être soumis à des données exterieures 
-(non produites par l'activité des cellules neuronales).
+Un calcul est classiquement décrit comme une séquence d'opérations élémentaires réalisées dans un certain ordre
+à partir de données d'entrée. Ces opérations élémentaires peuvent être réalisées par les portes logiques
+d'un circuit électronique, ou par tout mécanisme automatique capable de ségréger ses entrées sous la forme d'au moins 
+deux états de sortie distincts. 
+%La généralisation 
+%aux calculateurs universels se fait à travers la présence de mémoires, c'est à dire d'unités capables de
+%conserver un état (haut ou bas) pour une durée indéterminée. 
+
+Dans la cas des réseaux de neurones, la mise en oeuvre d'un calcul repose sur la présence
+de neurones d'\textit{entrée} soumis à des données exterieures, qui sont donc les opérandes du calcul.
 C'est le cas chez l'animal des cellules \textit{sensorielles}. 
-On parle alors de neurones d'\textit{entrée} du réseau. 
 On note $\boldsymbol{I} = \{\boldsymbol{I}(t)\}_{t = t_0,..., t_f}$ ce signal extérieur. 
-Si le neurone $i$ est un neurone d'entrée, on a $I_i \neq 0$,  et $I_i = 0$ dans le
-cas contraire.
+Si le neurone $i$ est un neurone d'entrée, on a $I_i \neq 0$. Si le neurone $i$ n'est pas un neurone d'entrée,  
+on a $I_i = 0$.
 Le signal extérieur est généralement considéré comme indépendant de l'activité du réseau de neurones.
 
-En étendant la fonction de réponse aux entrées extérieure, l'activité du réseau $\boldsymbol{s}^*$ est une solution de~:
-$$ \boldsymbol{s} = \boldsymbol{f}_T(\boldsymbol{s}, \boldsymbol{I})$$
-
-On parle dans ce cas d'une activité \textit{induite} par le signal d'entrée. On dit également 
+La \textit{réponse} du réseau de neurones au signal d'entrée (la solution du calcul) est le patron d'activité induit
+ par ce signal d'entrée.
+En étendant la fonction de réponse aux entrées extérieures, cette activité $\boldsymbol{s}^*$ est la solution de~:
+\begin{align}\label{eq:optim_input}
+\boldsymbol{s} = \boldsymbol{f}_T(\boldsymbol{s}, \boldsymbol{I})
+\end{align}
+On dit également 
 que le réseau de neurones \textit{transforme} le signal d'entrée.
 
-La \textit{réponse} du réseau de neurones au signal d'entrée est le patron d'activité induit.
-Il est possible de définir une fonction de sortie qui \textit{décode} ce patron d'activité. 
-La \textit{sortie} du réseau est alors 
-$$\boldsymbol{u} = h(\boldsymbol{s})$$
-avec $h$ fonction de décodage (ou ``\textit{read-out}'').
+Il est possible de définir une \textit{fonction de sortie} qui \textit{décode} ce patron d'activité. 
+La sortie du réseau est alors 
+$$\boldsymbol{u} = h(\boldsymbol{s}^*)$$
+avec $h$ fonction de décodage (ou de ``\textit{read-out}'').
 
-La fonction d'entrée/sortie (fonction de transfert) du réseau de neurones est alors~:
-$$\boldsymbol{u} = h(f(\boldsymbol{s}^*,\boldsymbol{I}))$$
-(il peut y avoir plusieurs sorties possibles si la solution n'est pas unique)
+Plus globalement, la fonction d'entrée/sortie (fonction de transfert) du réseau de neurones est~:
+\begin{align}\label{eq:E/S}
+ \boldsymbol{u} = h(f(\boldsymbol{s}^*,\boldsymbol{I}))
+\end{align}
 
-La sortie $\boldsymbol{u}$ peut être vue comme le résultat d'un calcul réalisé à partir des données d'entrée. 
-Dans la mesure où ce calcul est le produit de 
-l'activité conjointe (décentralisée) des neurones du réseau, on parle de \emph{calcul distribué}, par opposition au calcul
+La sortie $\boldsymbol{u}$ peut ainsi être interprétée comme le résultat du calcul réalisé à partir des données d'entrée $\boldsymbol{I}$. 
+Dans la mesure où ce résultat est le produit de 
+l'activité conjointe (et parallèle) des neurones du réseau, on se situe dans un contexte de \textit{calcul distribué}, par opposition au calcul
 séquentiel réalisé par les ordinateurs traditionnels.
 
-\subsection{Systèmes dynamiques}
+%Le calcul distribué consiste à traiter en parallèle des données de grande taille. 
+
+Un des buts de la modélisation biologique est d'étudier des mécanismes de calcul alternatifs au traitement
+séquentiel standard. Le but n'est pas a priori deproduire de meilleurs algorithmes de calcul, mais plutôt de comprendre 
+certains des principes à l'oeuvre dans le cerveau. 
+
+Une des voies d'étude que nous regarderons dans le cadre de ce mémoire est 
+l'idée de \textit{circuit reconfigurable}. Les équations (\ref{eq:optim_input}) et (\ref{eq:E/S}) permettent,
+sans précision supplémentaire, de multiples solutions. 
+L'existence ou non de ces solutions multiples repose sur
+le détail des modèles de neurones utilisés, ainsi que du caractère récurrent du graphe de connexions.
+L'existence de solutions multiples suggère, pour un même circuit, de multiples
+manières de traiter le même signal. On parlera des différents \textit{modes} du réseau de neurones.
+
+Un exemple minimaliste est un réseau de neurones récurrent à deux neurones mutuellement connectés. 
+Un tel réseau pourrait présenter deux modes : un mode ``bas'' global dans lequel les deux neurones
+sont dans l'état ``bas'', et un mode ``haut'' global dans lequel une activité ``haute'' locale est transmise
+indéfiniment d'un neurone à l'autre. Chacun de ces deux patrons d'activité est une solution possible
+du graphe de contraintes. 
+
+On parlera dans la suite d'\textit{expressivité} pour qualifier le nombre et la nature des modes produits par un réseau de neurones,
+en présence ou en l'absence de signal extérieur. Le nombre et la nature de ces modes
+nous permettra de décrire son ``vocabulaire'', et d'estimer le type d'opérations
+dont il peut être le support. Nous regardons en particulier le cas des réseaux de neurones 
+récurrents aléatoires [A CONNECTER AU RESTE].
+
+{\color{Gray} \subsection{Systèmes dynamiques}
 
 Le formalisme des systèmes dynamiques est couramment utilisé pour décrire l'activité 
-des réseaux de neurones. Ce formalisme s'appuie sur une trame temporelle $\mathcal{T}$ décrite par une variable $t \in \mathcal{T}$,
-un espace d'état $\mathcal{X}$ de dimension finie ou infinie, décrit par la variable d'état $\boldsymbol{x}(t) \in \mathcal{X}$ 
-indexée sur la trame temporelle et un flot $\Phi(x,t)$ tel que $\forall \boldsymbol{x},t$:
+des réseaux de neurones biologiquement inspirés. Il apporte un niveau de détail supplémentaire, en 
+détaillant de manière précise les dépendances temporelles entre les variables d'état 
+du réseau de neurones.
+
+Ce formalisme s'appuie sur une trame temporelle $\mathcal{T}$, décrite par une variable $t \in \mathcal{T}$,
+un espace d'état $\mathcal{X}$ de dimension finie ou infinie, décrit par la variable d'état $\boldsymbol{x}(t) \in \mathcal{X}$, 
+indexée sur la trame temporelle, et un flot $\Phi(x,t)$ tel que $\forall \boldsymbol{x},t$:
 $$ \frac{d\boldsymbol{x}}{dt} = \Phi(\boldsymbol{x},t)$$
-L'état du système sur une plage temporelle $[t_0,t_f]$ est entièrement défini par les conditions initiales $\boldsymbol{x}(t_0)$ 
-et le flot. Le signal $\{\boldsymbol{x}(t)\}_{t \in [t_0,t_f], \boldsymbol{x}(t_0)= \boldsymbol{x}_0}$ est la trajectoire 
+L'état du système sur la plage temporelle $[t_0,t_f]$ est défini par l'intégration sur le flot de la condition initiale $\boldsymbol{x}_0$. 
+Le signal $\{\boldsymbol{x}(t)\}_{t \in [t_0,t_f], \boldsymbol{x}(t_0)= \boldsymbol{x}_0}$ est la \textit{trajectoire} 
 du système issue de $\boldsymbol{x}_0$.
+
+
+OBJECTIF : 
 
 Ce formalisme est utilisé par exemple 
 
@@ -740,7 +785,7 @@ axe temporel, système dynamique et conditions initiales.
 ... circuit de traitement des données ...
 mes. 
 
-
+}
 
 \subsection{Champ moyen}
 
