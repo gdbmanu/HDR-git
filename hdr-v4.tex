@@ -742,15 +742,21 @@ dont il peut être le support.
 
 \subsection{Apprentissage automatique}
 
-Les réseaux de neurones sont principalement utilisés, en apprentissage automatique, pour
+La programmation des réseaux de neurones est un des piliers de la recherche 
+en apprentissage automatique (ou ``\textit{Machine learning}'').
+Le but d'un algorithme d'apprentissage est de modifier 
+les paramètres du réseau dans un sens qui améliore la réponse, en fonction 
+d'un jeu de données d'entrée ainsi que des sorties attendues [REFERENCES : PMC, Vapnik, LeCun, ].
+Les réseaux de neurones sont principalement utilisés, dans ce cadre, pour
 ségréger et catégoriser leurs données d'entrée. 
 
-Les modèles de traitement séquentiel (``\textit{feed forward}''), % (encore dite approche ``distribuée''), 
-tels qu'il se sont définis depuis le perceptron \shortcite{Rosen58}, reposent sur
-une notion implicite de ressource limitée.
-L'\textit{encodage} est le processus par lequel une classe a priori non bornée de signaux 
-d'entrée sera traduit sous la forme d'un ensemble borné de patrons d'activité,
-chaque patron étant le reflet, au sein du réseau, d'une classe de signaux. 
+Les modèles de réseaux de neurones, % (encore dite approche ``distribuée''), 
+tels qu'il se sont développés depuis le perceptron \shortcite{Rosen58}, reposent sur
+un principe de traitement séquentiel (``\textit{feed forward}'').
+%une notion implicite de ressource limitée.
+L'\textit{encodage} est le processus par lequel un jeu a priori non borné de signaux 
+d'entrée se traduira sous la forme d'un nombre fini de modes.
+Chaque mode est alors le reflet, au sein du réseau, d'une \textit{classe} de signaux. 
 
 \begin{itemize}
  \item Le modèle de perceptron le plus simple, possédant une cellule de sortie unique, sépare son espace d'entrée en deux régions.
@@ -759,30 +765,44 @@ au mode ``actif''. Les données provenant
 de la seconde région produisent une une activité de sortie ``basse'', qui s'apparente au mode ``inactif''.
  \item Dans le cas du perceptron multi-couches [CITATION],
 chaque neurone de la couche cachée est un séparateur permettant de distinguer deux régions de son espace d'entrée. 
-Le nombre de régions séparables augmente exponentiellement avec le nombre de neurones dans la couche  
+Le nombre de régions séparables (le nombre maximal de modes) augmente exponentiellement avec le nombre de neurones dans la couche  
 couche cachée.
-Le concepteur fixe à l'avance le nombre de neurones à mettre dans cette couche cachée,
+Le concepteur fixe à l'avance le nombre de neurones à mettre dans la couche cachée,
 et donc la complexité des opérations de ségrégation produites par le réseau.
 \item Enfin, le modèle des séparateurs à vaste marge (SVM) \shortcite{Vap95}
-propose une définition quantitative de l'expressivité (ou complexité) d'un classifieur~: la
+propose une définition quantitative de la complexité d'un classifieur~: la
 dimension de Vapnik-Chervonenkis, qui correspond au nombre de pivots utilisé pour
-séparer l	es données d'entrée. 
+séparer les données d'entrée. 
 \end{itemize}
 
-La programmation du réseau de neurones est un des piliers du champ de recherche 
-dit de l'apprentissage automatique (ou ``\textit{Machine learning}'').
-Le but d'un algorithme d'apprentissage est de modifier 
-les paramètres du réseau dans un sens qui améliore le comportement du programme, selon les caractéristiques
-d'un jeu de données d'entrée ainsi que des sorties attendues [REFERENCES : PMC, Vapnik, LeCun, ].
 
 \subsection{Modélisation biologique}
 
-Dans le cadre de la modélisation biologique, une des voies de recherche est l'étude de mécanismes de calcul alternatifs au traitement
-séquentiel standard. Le but n'est pas ici d'améliorer la performance des algorithmes de calcul, mais plutôt de comprendre 
-certains des principes à l'{\oe}uvre dans le cerveau. 
-Une des voies d'étude que nous regarderons dans le cadre de ce mémoire est 
-l'idée de \textit{circuit reconfigurable}, basé sur l'existence d'une \textit{activité endogène} produite par un réseau de 
+L'inspiration biologique conduit à étudier des modèles alternatifs à ce traitement
+séquentiel standard. 
+Dans le cadre de ce mémoire, nous regarderons en particulier 
+l'idée de \textit{circuit reconfigurable}, basée sur l'existence d'une \textit{activité endogène} produite par un réseau de 
 neurones \textit{récurrent}.  
+Il ne s'agit pas en premier lieu d'étudier la performance de ces algorithmes de calcul, mais plutôt 
+d'identifier des points communs avec  
+les mécanismes à l'{\oe}uvre dans le cerveau. 
+
+Les réseaux de neurones récurrents sont définis par le fait que leur graphe contient des cycles.
+Ces cycles induisent des dépendances réciproques entre les unités du réseau. 
+Le formalisme des systèmes dynamiques permet de décrire ces interactions croisées et leur effet sur les patrons
+d'activité produits par le réseau.
+
+Un systèmes dynamiques s'appuie sur une trame temporelle $\mathcal{T}$, décrite par une variable $t \in \mathcal{T}$,
+un espace d'état $\mathcal{X}$ de dimension finie ou infinie, décrit par la variable d'état $\boldsymbol{x}(t) \in \mathcal{X}$, 
+indexée sur la trame temporelle, et un flot $\Phi(x,t)$ tel que $\forall \boldsymbol{x},t$:
+$$ \frac{d\boldsymbol{x}}{dt} = \Phi(\boldsymbol{x},t)$$
+L'état du système sur la plage temporelle $[t_0,t_f]$ est défini par l'intégration sur le flot de la condition initiale $\boldsymbol{x}_0$. 
+Le signal $\{\boldsymbol{x}(t)\}_{t \in [t_0,t_f], \boldsymbol{x}(t_0)= \boldsymbol{x}_0}$ est la \textit{trajectoire} 
+du système issue de $\boldsymbol{x}_0$.
+
+Lorsque le système est dissipatifs, le flot définit un ensemble ... 
+
+Notion d'attrateur 
 
 Exemples~:
 \begin{itemize}
@@ -793,7 +813,7 @@ indéfiniment d'un neurone à l'autre. Chacun de ces deux patrons d'activité es
 du graphe de contraintes. 
 %\item 
 
-\item {\color{Orange}L'exemple des réseaux de Hopfield \shortcite{Hop82} illustre bien la notion de modes multiples. 
+\item {\color{Orange} L'exemple des réseaux de Hopfield \shortcite{Hop82} illustre bien la notion de modes multiples. 
 %offre  un éclairage différent. 
 %sur l'expressivité d'un substrat en mettant en 
 %avant le caractère distribué (non-local) de l'activité. 
@@ -817,30 +837,12 @@ mécanisme de mémoire dite ``auto-associative''. }
 
 \end{itemize}
 
-
-
-
 Nous regardons en particulier le cas des réseaux de neurones 
 récurrents aléatoires [A CONNECTER AU RESTE].
 
 \section{Grands réseaux aléatoires}
 
 {\color{Gray} \subsection{Systèmes dynamiques}
-
-Le formalisme des systèmes dynamiques est couramment utilisé pour décrire l'activité 
-des réseaux de neurones biologiquement inspirés. Il est principalement utilisé pour décrire les comportements
-de réseaux de neurones 
-
-détaillant de manière précise les dépendances temporelles entre les variables d'état 
-du réseau de neurones.
-
-Ce formalisme s'appuie sur une trame temporelle $\mathcal{T}$, décrite par une variable $t \in \mathcal{T}$,
-un espace d'état $\mathcal{X}$ de dimension finie ou infinie, décrit par la variable d'état $\boldsymbol{x}(t) \in \mathcal{X}$, 
-indexée sur la trame temporelle, et un flot $\Phi(x,t)$ tel que $\forall \boldsymbol{x},t$:
-$$ \frac{d\boldsymbol{x}}{dt} = \Phi(\boldsymbol{x},t)$$
-L'état du système sur la plage temporelle $[t_0,t_f]$ est défini par l'intégration sur le flot de la condition initiale $\boldsymbol{x}_0$. 
-Le signal $\{\boldsymbol{x}(t)\}_{t \in [t_0,t_f], \boldsymbol{x}(t_0)= \boldsymbol{x}_0}$ est la \textit{trajectoire} 
-du système issue de $\boldsymbol{x}_0$.
 
 
 OBJECTIF : 
