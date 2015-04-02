@@ -572,11 +572,17 @@ Les trois premières parties présentent les résultats
 
 Ce chapitre est consacré à l'analyse des capacités d'expression des grands réseaux de neurones. [REPRENDRE CHAPEAU]
 
-\section{Neurone et réseau}
+\section{Neurones et réseau}
+
+Inspirés par le fonctionnement du cerveau, les réseaux de neurones sont des modèles de calculateurs universels
+ dans lesquels le ``programme'' (la fonction de réponse) est décrite par un réseau.
+Ce réseau est constitué d'un ensemble de noeuds, qui forment les unités de calcul, et un ensemble d'arêtes,  
+pondérées et orientées, %définissant l'intensité du signal
+qui transportent le signal entre les différentes unités de calcul.
 
 Il existe de nombreux modèles de neurones et de réseaux de neurones. La modélisation des processus neuronaux
-repose donc sur un choix du modélisateur, qui est fonction du mécanisme qu'il souhaite étudier, de ses possibilités
-d'analyse et de la puissance de calcul disponible. 
+repose donc sur un choix du modélisateur, qui est fonction du mécanisme qu'il souhaite étudier, des outils
+d'analyse et/ou de la puissance de calcul disponible(s). 
 
 Je liste ci-dessous quelques propriétés et élements de vocabulaire communs à la plupart des modèles de réseaux de
 neurones, indépendamment de leur utilisation en modélisation ou en apprentissage automatique. 
@@ -660,10 +666,10 @@ Si $n$ est le nombre de neurones, le nombre de paramètres du réseau est en $O(
 Les activités des différents neurones sont interdépendantes du fait des couplages. 
 L'activité de réseau $\boldsymbol{s}$ (ou activité de population ou encore \textit{patron d'activité}) est 
 constituée de l'ensemble des signaux émis et transmis de neurone à neurone.
-La fonction de réponse du réseau $\boldsymbol{f}_T$ est une fonction paramétrique 
+La fonction de réponse du réseau $f_T$ est une fonction paramétrique 
 décrite par le tableau de paramètres $T$, telle que l'activité $\boldsymbol{s}^*$ est solution de~:
 \begin{align}\label{eq:optim}
-  \boldsymbol{s} = \boldsymbol{f}_T(\boldsymbol{s})
+  \boldsymbol{s} = f_T(\boldsymbol{s})
 \end{align}
 avec :
 $$\boldsymbol{s} = \{\boldsymbol{s}(t)\}_{t = t_0,..., t_f}$$
@@ -671,10 +677,10 @@ où $\boldsymbol{s}(t)$ est le vecteur d'état du réseau à l'instant $t$,
 $t_0$ est l'instant initial (début de l'observation) et $t_f$ l'instant final 
 (fin de l'observation).
 
-\subsection{Modes et expressivité}
+\subsection{Calcul distribué}
 
 Les signaux transitant de neurone à neurone via les axones du réseau contiennent une succession d'états hauts et
-d'états bas qui présentent une ressemblance frappante avec les signaux digitaux produits par les calculateurs 
+d'états bas qui présentent une ressemblance  avec les signaux digitaux produits par les calculateurs 
 numériques. Cette analogie de forme n'implique cependant pas que les principes de traitement et
 de transformation de ces signaux soient les mêmes.
 
@@ -698,7 +704,7 @@ La \textit{réponse} du réseau de neurones au signal d'entrée (la solution du 
  par ce signal d'entrée.
 En étendant la fonction de réponse aux entrées extérieures, cette activité $\boldsymbol{s}^*$ est la solution de~:
 \begin{align}\label{eq:optim_input}
-\boldsymbol{s} = \boldsymbol{f}_T(\boldsymbol{s}, \boldsymbol{I})
+\boldsymbol{s} = f_T(\boldsymbol{s}, \boldsymbol{I})
 \end{align}
 On dit également 
 que le réseau de neurones \textit{transforme} le signal d'entrée.
@@ -710,44 +716,121 @@ avec $h$ fonction de décodage (ou de ``\textit{read-out}'').
 
 Plus globalement, la fonction d'entrée/sortie (fonction de transfert) du réseau de neurones est~:
 \begin{align}\label{eq:E/S}
- \boldsymbol{u} = h(f(\boldsymbol{s}^*,\boldsymbol{I}))
+ \boldsymbol{u} = h(f_T(\boldsymbol{s}^*,\boldsymbol{I}))
 \end{align}
 
 La sortie $\boldsymbol{u}$ peut ainsi être interprétée comme le résultat du calcul réalisé à partir des données d'entrée $\boldsymbol{I}$. 
 Dans la mesure où ce résultat est le produit de 
 l'activité conjointe (et parallèle) des neurones du réseau, on se situe dans un contexte de \textit{calcul distribué}, par opposition au calcul
-séquentiel réalisé par les ordinateurs traditionnels.
+séquentiel centralisé réalisé par les ordinateurs traditionnels.
 
-%Le calcul distribué consiste à traiter en parallèle des données de grande taille. 
-
-Un des buts de la modélisation biologique est d'étudier des mécanismes de calcul alternatifs au traitement
-séquentiel standard. Le but n'est pas a priori deproduire de meilleurs algorithmes de calcul, mais plutôt de comprendre 
-certains des principes à l'oeuvre dans le cerveau. 
-
-Une des voies d'étude que nous regarderons dans le cadre de ce mémoire est 
-l'idée de \textit{circuit reconfigurable}. Les équations (\ref{eq:optim_input}) et (\ref{eq:E/S}) permettent,
+Les équations (\ref{eq:optim_input}) et (\ref{eq:E/S}) permettent,
 sans précision supplémentaire, de multiples solutions. 
 L'existence ou non de ces solutions multiples repose sur
 le détail des modèles de neurones utilisés, ainsi que du caractère récurrent du graphe de connexions.
-L'existence de solutions multiples suggère, pour un même circuit, de multiples
-manières de traiter le même signal. On parlera des différents \textit{modes} du réseau de neurones.
+L'existence de solutions multiples suggère de plus, pour un même circuit, de multiples
+manières de traiter le même signal. 
+%Le calcul distribué consiste à traiter en parallèle des données de grande taille. 
 
-Un exemple minimaliste est un réseau de neurones récurrent à deux neurones mutuellement connectés. 
-Un tel réseau pourrait présenter deux modes : un mode ``bas'' global dans lequel les deux neurones
-sont dans l'état ``bas'', et un mode ``haut'' global dans lequel une activité ``haute'' locale est transmise
-indéfiniment d'un neurone à l'autre. Chacun de ces deux patrons d'activité est une solution possible
-du graphe de contraintes. 
-
+Il est souvent possible de regrouper ces solutions selon des caractéristiques communes
+se traduisant par une valeur unique au niveau de la fonction de sortie $h$. 
+On parlera des différents \textit{modes} du réseau de neurones.
 On parlera dans la suite d'\textit{expressivité} pour qualifier le nombre et la nature des modes produits par un réseau de neurones,
 en présence ou en l'absence de signal extérieur. Le nombre et la nature de ces modes
 nous permettra de décrire son ``vocabulaire'', et d'estimer le type d'opérations
-dont il peut être le support. Nous regardons en particulier le cas des réseaux de neurones 
+dont il peut être le support. 
+
+\subsection{Apprentissage automatique}
+
+Les réseaux de neurones sont principalement utilisés, en apprentissage automatique, pour
+ségréger et catégoriser leurs données d'entrée. 
+
+Les modèles de traitement séquentiel (``\textit{feed forward}''), % (encore dite approche ``distribuée''), 
+tels qu'il se sont définis depuis le perceptron \shortcite{Rosen58}, reposent sur
+une notion implicite de ressource limitée.
+L'\textit{encodage} est le processus par lequel une classe a priori non bornée de signaux 
+d'entrée sera traduit sous la forme d'un ensemble borné de patrons d'activité,
+chaque patron étant le reflet, au sein du réseau, d'une classe de signaux. 
+
+\begin{itemize}
+ \item Le modèle de perceptron le plus simple, possédant une cellule de sortie unique, sépare son espace d'entrée en deux régions.
+Les données provenant de la première région produisent une activité de sortie ``haute'', qui s'apparente
+au mode ``actif''. Les données provenant 
+de la seconde région produisent une une activité de sortie ``basse'', qui s'apparente au mode ``inactif''.
+ \item Dans le cas du perceptron multi-couches [CITATION],
+chaque neurone de la couche cachée est un séparateur permettant de distinguer deux régions de son espace d'entrée. 
+Le nombre de régions séparables augmente exponentiellement avec le nombre de neurones dans la couche  
+couche cachée.
+Le concepteur fixe à l'avance le nombre de neurones à mettre dans cette couche cachée,
+et donc la complexité des opérations de ségrégation produites par le réseau.
+\item Enfin, le modèle des séparateurs à vaste marge (SVM) \shortcite{Vap95}
+propose une définition quantitative de l'expressivité (ou complexité) d'un classifieur~: la
+dimension de Vapnik-Chervonenkis, qui correspond au nombre de pivots utilisé pour
+séparer l	es données d'entrée. 
+\end{itemize}
+
+La programmation du réseau de neurones est un des piliers du champ de recherche 
+dit de l'apprentissage automatique (ou ``\textit{Machine learning}'').
+Le but d'un algorithme d'apprentissage est de modifier 
+les paramètres du réseau dans un sens qui améliore le comportement du programme, selon les caractéristiques
+d'un jeu de données d'entrée ainsi que des sorties attendues [REFERENCES : PMC, Vapnik, LeCun, ].
+
+\subsection{Modélisation biologique}
+
+Dans le cadre de la modélisation biologique, une des voies de recherche est l'étude de mécanismes de calcul alternatifs au traitement
+séquentiel standard. Le but n'est pas ici d'améliorer la performance des algorithmes de calcul, mais plutôt de comprendre 
+certains des principes à l'{\oe}uvre dans le cerveau. 
+Une des voies d'étude que nous regarderons dans le cadre de ce mémoire est 
+l'idée de \textit{circuit reconfigurable}, basé sur l'existence d'une \textit{activité endogène} produite par un réseau de 
+neurones \textit{récurrent}.  
+
+Exemples~:
+\begin{itemize}
+\item Un exemple minimaliste est un réseau de neurones récurrent à deux neurones mutuellement connectés. 
+Un tel réseau pourrait présenter deux modes : un mode ``inactif'' dans lequel les deux neurones
+sont dans l'état ``bas'', et un mode ``actif'' dans lequel une activité ``haute'' locale est transmise
+indéfiniment d'un neurone à l'autre. Chacun de ces deux patrons d'activité est une solution 
+du graphe de contraintes. 
+%\item 
+
+\item {\color{Orange}L'exemple des réseaux de Hopfield \shortcite{Hop82} illustre bien la notion de modes multiples. 
+%offre  un éclairage différent. 
+%sur l'expressivité d'un substrat en mettant en 
+%avant le caractère distribué (non-local) de l'activité. 
+%Contrairement à l'idée classique d'un nœud de sortie comme unité d'expression, 
+%(par exemple unité de séparation dans le cas des classifieurs, 
+%unité de description dans le cas des cartes auto-organisées etc.), 
+L'expressivité du réseau est vue sous l'angle du nombre
+de patrons distribués (patterns) pouvant être obtenus en tant qu'état final (attracteur) atteint par le système
+dynamique décrit par les poids (arêtes) du réseau.
+La capacité s'exprime ici en nombre de \emph{modes} (configurations atteignables) 
+et non en nombre de nœuds/vecteurs supports etc.
+Si la capacité se trouve en principe augmentée
+d'un facteur exponentiel ($2^N$ configurations distribuées possibles), 
+la capacité effective est en pratique beaucoup plus réduite, 
+se limitant à un nombre de modes (attracteurs) distincts en $O(N)$, 
+c'est à dire de l'ordre du nombre de nœuds \shortcite{Amit1987,Tso88}.
+La nature des opérations réalisables par le substrat est également différent puisqu'il s'agit principalement ici d'une
+dynamique de relaxation adaptée à des opération de complétion et d'interpolation de données manquantes, implémentant un
+mécanisme de mémoire dite ``auto-associative''. }
+\item 
+
+\end{itemize}
+
+
+
+
+Nous regardons en particulier le cas des réseaux de neurones 
 récurrents aléatoires [A CONNECTER AU RESTE].
+
+\section{Grands réseaux aléatoires}
 
 {\color{Gray} \subsection{Systèmes dynamiques}
 
 Le formalisme des systèmes dynamiques est couramment utilisé pour décrire l'activité 
-des réseaux de neurones biologiquement inspirés. Il apporte un niveau de détail supplémentaire, en 
+des réseaux de neurones biologiquement inspirés. Il est principalement utilisé pour décrire les comportements
+de réseaux de neurones 
+
 détaillant de manière précise les dépendances temporelles entre les variables d'état 
 du réseau de neurones.
 
