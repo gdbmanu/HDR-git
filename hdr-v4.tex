@@ -735,20 +735,23 @@ manières de traiter le même signal.
 Il est souvent possible de regrouper ces solutions selon des caractéristiques communes
 se traduisant par une valeur unique au niveau de la fonction de sortie $h$. 
 On parlera des différents \textit{modes} du réseau de neurones.
-On parlera dans la suite d'\textit{expressivité} pour qualifier le nombre et la nature des modes produits par un réseau de neurones,
+On utilise dans la suite le terme ``\textit{expressivité}'' pour désigner le nombre et la nature des modes produits par un réseau de neurones,
 en présence ou en l'absence de signal extérieur. Le nombre et la nature de ces modes
 nous permettra de décrire son ``vocabulaire'', et d'estimer le type d'opérations
 dont il peut être le support. 
 
-\subsection{Apprentissage automatique}
+\subsection{Réseaux de neurones et apprentissage automatique}
 
 La programmation des réseaux de neurones est un des piliers de la recherche 
-en apprentissage automatique (ou ``\textit{Machine learning}'').
+en apprentissage automatique (ou ``\textit{Machine learning}''). 
 Le but d'un algorithme d'apprentissage est de modifier 
 les paramètres du réseau dans un sens qui améliore la réponse, en fonction 
 d'un jeu de données d'entrée ainsi que des sorties attendues [REFERENCES : PMC, Vapnik, LeCun, ].
 Les réseaux de neurones sont principalement utilisés, dans ce cadre, pour
 ségréger et catégoriser leurs données d'entrée. 
+
+% programme = paramètres
+% algorithme = meta programme
 
 Les modèles de réseaux de neurones, % (encore dite approche ``distribuée''), 
 tels qu'il se sont développés depuis le perceptron \shortcite{Rosen58}, reposent sur
@@ -776,33 +779,44 @@ séparer les données d'entrée.
 \end{itemize}
 
 
-\subsection{Modélisation biologique}
+\subsection{Réseaux de neurones et modélisation biologique}
 
 L'inspiration biologique conduit à étudier des modèles alternatifs à ce traitement
 séquentiel standard. 
 Dans le cadre de ce mémoire, nous regarderons en particulier 
 l'idée de \textit{circuit reconfigurable}, basée sur l'existence d'une \textit{activité endogène} produite par un réseau de 
 neurones \textit{récurrent}.  
-Il ne s'agit pas en premier lieu d'étudier la performance de ces algorithmes de calcul, mais plutôt 
-d'identifier des points communs avec  
-les mécanismes à l'{\oe}uvre dans le cerveau. 
+Le but est de caractériser ces mécanismes, et 
+d'identifier les points communs avec  
+des mécanismes similaires à l'{\oe}uvre dans le cerveau. 
 
 Les réseaux de neurones récurrents sont définis par le fait que leur graphe contient des cycles.
-Ces cycles induisent des dépendances réciproques entre les unités du réseau. 
+Ces cycles conduisent à des dépendances réciproques entre les unités du réseau. 
 Le formalisme des systèmes dynamiques permet de décrire ces interactions croisées et leur effet sur les patrons
 d'activité produits par le réseau.
 
-Un systèmes dynamiques s'appuie sur une trame temporelle $\mathcal{T}$, décrite par une variable $t \in \mathcal{T}$,
-un espace d'état $\mathcal{X}$ de dimension finie ou infinie, décrit par la variable d'état $\boldsymbol{x}(t) \in \mathcal{X}$, 
-indexée sur la trame temporelle, et un flot $\Phi(x,t)$ tel que $\forall \boldsymbol{x},t$:
-$$ \frac{d\boldsymbol{x}}{dt} = \Phi(\boldsymbol{x},t)$$
-L'état du système sur la plage temporelle $[t_0,t_f]$ est défini par l'intégration sur le flot de la condition initiale $\boldsymbol{x}_0$. 
-Le signal $\{\boldsymbol{x}(t)\}_{t \in [t_0,t_f], \boldsymbol{x}(t_0)= \boldsymbol{x}_0}$ est la \textit{trajectoire} 
-du système issue de $\boldsymbol{x}_0$.
+L'activité du réseau au temps $t$ est le résultat de l'intégration des
+potentiels d'action émis aux instants précédant $t$, en tenant compte des délais de transmission, et de la valeur courante du signal externe.
+Il est possible, en tenant compte des temps de transport du signal sur les axones, 
+de définir le patron d'activité au temps $t$ comme un flot~:
+\begin{align}\label{eq:dif}
+ \boldsymbol{s}(t) = f_T(\{\boldsymbol{s}(t')\}_{t' < t},\boldsymbol{I}(t))
+\end{align}
+qui définit un \textit{système dynamique} dont l'état est constitué de l'ensemble des PA
+transitant sur les axones. 
+La trajectoire du système $\{\boldsymbol{s}(t)\}_{t \in [t_0,t_f], \boldsymbol{s}(t_0)= \boldsymbol{s}_0}$ 
+sur la plage temporelle $[t_0,t_f]$ est alors définie par l'intégration sur le flot de la condition initiale $\boldsymbol{s}_0$.
+En pratique, l'équation (\ref{eq:dif}) est  une équation intégro-différentielle qui se résout
+par des méthodes numériques. 
 
-Lorsque le système est dissipatifs, le flot définit un ensemble ... 
+%Dans un cadre continu, l'équation d'évolution est la suivante~:
+%$$ \frac{d\boldsymbol{x}}{dt} = \Phi(\boldsymbol{x},t)$$
+%Dans un cadre discret, l'équation d'évolution est~:
+%$$ \boldsymbol{x}(t+1) = \Phi(\boldsymbol{x}(t),t)$$
 
-Notion d'attrateur 
+%où $\Phi(\boldsymbol{x},t)$, où $t \in \mathcal{T}$ décrit un instant
+%situé sur la trame temporelle et la variable d'état $\boldsymbol{x} \in \mathcal{X}$ décrit
+%l'état du système.
 
 Exemples~:
 \begin{itemize}
@@ -836,6 +850,14 @@ mécanisme de mémoire dite ``auto-associative''. }
 \item 
 
 \end{itemize}
+
+
+Lorsque le système est dissipatif, le flot définit un ensemble ... 
+
+Notion d'attrateur 
+
+Dans le cadre des études inspirées par la bioologe, il est fréquent d'utiliser des modèles plus simples
+appelés modèles de \textit{champ moyen}.
 
 Nous regardons en particulier le cas des réseaux de neurones 
 récurrents aléatoires [A CONNECTER AU RESTE].
