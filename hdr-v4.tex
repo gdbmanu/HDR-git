@@ -843,30 +843,57 @@ Ces cycles conduisent à des dépendances réciproques entre les unités du rés
 Le formalisme des systèmes dynamiques permet de décrire ces interactions croisées et leur effet sur les patrons
 d'activité produits par le réseau.
 
+\paragraph{Quelques notions de la théorie des systèmes dynamiques}
 L'activité du réseau au temps $t$ est le résultat de l'intégration des
-potentiels d'action émis aux instants précédant $t$, en tenant compte des délais de transmission, et de la valeur courante du signal externe.
-Il est possible, en tenant compte des temps de transport du signal sur les axones, 
-de définir le patron d'activité au temps $t$ comme un flot~:
-\begin{align}\label{eq:dif}
- \boldsymbol{s}(t) = f_T(\{\boldsymbol{s}(t')\}_{t' < t},\boldsymbol{I}(t))
+potentiels d'action émis aux instants précédant $t$, en tenant compte des délais de transmission, et de la valeur courante du signal externe
+(voir eq. (\ref{eq:optim_input})).
+
+La théorie des \textit{systèmes dynamiques} repose sur un espace d'état $\mathcal{X}$, une trame temporelle 
+$\mathcal{T}$ et un
+flot $\phi$ qui est une application de $\mathcal{X} \times \mathcal{T}$ dans $\mathcal{X}$
+définissant pour tout couple $(x,t)$ la valeur de l'état suivant:
+\begin{align}\label{eq:SD}
+x' = \phi(x,t)
 \end{align}
-qui définit un \textit{système dynamique} dont l'état est constitué de l'ensemble des PA
-transitant sur les axones. 
-La trajectoire du système $\{\boldsymbol{s}(t)\}_{t \in [t_0,t_f], \boldsymbol{s}(t_0)= \boldsymbol{s}_0}$ 
-sur la plage temporelle $[t_0,t_f]$ est alors définie par l'intégration sur le flot de la condition initiale $\boldsymbol{s}_0$.
-En pratique, l'équation (\ref{eq:dif}) est  une équation intégro-différentielle qui se résout
+La plupart des réseaux de neurones peuvent se modéliser sous cette forme, à partir du moment où 
+l'état du réseau à l'instant $t$ est entièrement spécifié, en tenant compte en particulier
+du potentiel de membrane et 
+des différents temps de transport sur les axones. 
+
+La \textit{trajectoire} du système sur la plage temporelle $[t_0,t_f]$ est alors définie 
+par l'intégration sur le flot de la condition initiale $\boldsymbol{x}_0$.
+
+\begin{itemize}
+\item Dans le cas d'un système dit ``autonome'', on a $\phi(x,t) = \phi(x)$ et
+la trajectoire du système $\{x(t)\}_{t \in [t_0,t_f], \boldsymbol{x}(t_0)= \boldsymbol{x}_0}$ 
+est entièrement définie par les conditions initiales. 
+\item Dans le cas d'un système dit ``non-autonome'', la dépendance temporelle
+est souvent modélisée sous la forme d'un signal externe $I(t)$, soit $\phi(x,t) = \phi(x,I(t))$. 
+Ce signal peut être:
+  \begin{itemize}
+  \item une donnée d'entrée dans le cas de modèles de traitement des données
+  \item un bruit externe dans le cas de modèles stochastiques [REF?]
+  \end{itemize}
+\end{itemize}
+
+\paragraph{}
+Dans le cas autonome...
+{\color{Cyan} Notion d'attracteur}
+
+\paragraph{}
+Dans le cas non autonome, la trajectoire dépend à la fois des conditions initiales et du signal exterieur. 
+\begin{itemize}
+\item On parle dans ce cas d'une activité \textit{induite} par le signal d'entrée. 
+\item Du point de vue 
+computationnel, celà signifie que le même signal peut recevoir un traitement différent si les conditions initiales sont différentes. 
+Sans précision des conditions initiales, de multiples opérations sont donc possibles pour un même signal d'entrée. 
+On parlera de différents \textit{modes d'opération}.
+\end{itemize}
+
+
+En pratique, l'équation (\ref{eq:SD}) prend souvent la forme d'une équation différentielle [REFS]
+ou intégro-différentielle [REFS] qui se résout
 par des méthodes numériques. 
-
-{\color{Orange} Les équations (\ref{eq:optim_input}) et (\ref{eq:E/S}) permettent,
-	sans précision des conditions initiales, de multiples solutions. 
-	L'existence ou non de ces solutions multiples repose sur
-	le détail des modèles de neurones utilisés, ainsi que du caractère récurrent du graphe de connexions.
-	L'existence de solutions multiples suggère de plus, pour un même circuit, de multiples
-	manières de traiter le même signal. 
-	%Le calcul distribué consiste à traiter en parallèle des données de grande taille. 
-}
-
-
 
 
 %Dans un cadre continu, l'équation d'évolution est la suivante~:
@@ -878,7 +905,7 @@ par des méthodes numériques.
 %situé sur la trame temporelle et la variable d'état $\boldsymbol{x} \in \mathcal{X}$ décrit
 %l'état du système.
 
-Exemples~:
+\emph{Exemples:}
 \begin{itemize}
 \item Un exemple minimaliste est un réseau de neurones récurrent à deux neurones mutuellement connectés. 
 Un tel réseau pourrait présenter deux modes : un mode ``inactif'' dans lequel les deux neurones
