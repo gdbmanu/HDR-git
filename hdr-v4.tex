@@ -263,7 +263,7 @@ en terme de fonctionnement, des humains avec lesquels elles interagissent.
 à utiliser les connaissance informatiques et mathématiques actuelles pour mieux comprendre le système nerveux.
 Il s'agit d'une certaine façon d'identifier ce qui dans l'activité nerveuse s'apparente aux algorithmes
 utilisés dans des tâches computationnelles variées, comme le contrôle, l'apprentissage, le traitement des images et des données;
-voir si les solutions mises au point dans des contextes d’ingénierie proches de celui face auquel se trouve
+voir si les solutions mises au point dans des contextes d'ingénierie proches de celui face auquel se trouve
 le système nerveux ont des équivalents au sein de l'activité nerveuse (ou si, au contraire, la nature 
 utilise des principes et méthodes différents). L'objectif est, à partir des observations, de mieux 
 identifier les rôles et les interactions à l'intérieur du système nerveux, et potentiellement
@@ -574,7 +574,7 @@ Ce chapitre est consacré à l'analyse des capacités d'expression des grands r�
 
 \section{Neurones et réseau}
 
-Inspirés par le fonctionnement du cerveau, les réseaux de neurones sont des modèles de calculateurs universels
+Inspirés par le fonctionnement du cerveau, les réseaux de neurones sont des modèles de calculateurs 
  dans lesquels le ``programme'' (la fonction de réponse) est décrite par un réseau.
 Ce réseau est constitué d'un ensemble de noeuds, qui forment les unités de calcul, et un ensemble d'arêtes,  
 pondérées et orientées, %définissant l'intensité du signal
@@ -591,45 +591,68 @@ neurones, indépendamment de leur utilisation en modélisation ou en apprentissa
 
 Chaque unité de calcul (ou neurone) est modélisée comme une fonction de réponse $f$ qui 
 traite un jeu de \textit{données d'entrée} multimodal $s^\text{in}_1, ..., s^\text{in}_n$.
-La sortie du neurone est un jeu de données unimodal $$s^\text{out} = f(s^\text{in}_1, ..., s^\text{in}_n)$$ 
-(on parle aussi de \textit{réponse} du neurone).
-Un neurone est donc une unité élémentaire de traitement des données. %Un neurone est implicitement une unité de traitement \textit{non-linéaire}.
+On peut supposer sans perte de généralité que les données d'entrée sont indexées sur l'axe temporel.
+On parle alors de \textit{signal d'entrée} où $s^\text{in}_i = \{s^\text{in}_i(t)\}_{t \in \{t_0,... t_f\}}$ 
+représente un jeu de données indexé sur une trame temporelle et 
+$s^\text{in}_i(t)$ représente le $i^\text{ème}$ signal au temps $t$.
 
-On peut supposer sans perte de généralité que les données sont indexés sur l'axe temporel.
-On parle alors de \textit{signal} où $s$ représente un jeu de données indexé sur une trame temporelle et 
-$s(t)$ représente le signal au temps $t$.
+La sortie du neurone au temps $t_f$ est un scalaire: 
+\begin{align}\label{eq:neurone_s_out}
+s^\text{out}(t_f) = f(s^\text{in}_1, ..., s^\text{in}_n)
+\end{align}
+(on parle aussi de \textit{réponse} du neurone aux signaux d'entrée).
+Un neurone est donc une unité élémentaire de traitement des données. %Un neurone est implicitement une unitÃ© de traitement \textit{non-linÃ©aire}.
 
-Le canal de sortie du neurone est l'axone, qui transmet un signal $s_\text{out}$ constitué 
+Le signal de sortie du neurone $s^\text{out} = \{s^\text{out}(t)\}_{t \in \{t_0,... t_f\}}$ est constituée 
 d'une succession d'états ``hauts'' et d'états ``bas''.
 Un neurone dont la sortie à l'instant $t$ est dans l'état haut est dit \textit{activé}. Un neurone 
 dont la sortie à l'instant $t$ est dans l'état bas est dit \textit{inactif}. 
-Dans le cas le plus simple des neurones binaires, 
-le signal de sortie est une succession de 0 (inactif) ou de 1 (actif). 
-Dans le cas plus complexe de neurones à impulsions, le signal de sortie est un train de potentiels d'action (PA), représenté par une 
+
+\emph{Exemples:}
+\begin{itemize}
+\item Dans le cas le plus simple des neurones binaires, 
+le signal de sortie est une succession de 0 (inactif) ou de 1 (actif) \shortcite{MCu43}. 
+\item Dans le cas plus complexe de neurones à impulsions, le signal de sortie est un train de potentiels d'action (PA), représenté par une 
 somme de Diracs tels que $s(t) = \sum_{\hat{t} \in \mathcal{T}_\text{out}} \delta(t - \hat{t})$, où $\mathcal{T}_\text{out}$ est un ensemble
-contenant les instants de décharge.
+contenant les instants de décharge (voir par exemple \shortcite{gerstner02}).
 %Dans le cas de neurones fréquentiels, le signal contient des grandeurs continues correspondant à la fréquence de décharge instantanée
 %de la sortie.
-Le signal de sortie (la suite d'états hauts et d'états bas) est aussi appelé l'\textit{activité} du neurone.
+\end{itemize}
 
-Les canaux d'entrée du neurone sont les synapses. 
-Chaque synapse traite un signal $s_i$ émis par un autre neurone pré-synaptique $i$ du réseau et produit une \textit{entrée synaptique}.
+Le signal de sortie (la suite d'états hauts et d'états bas) est aussi appelé l'\textit{activité} du neurone. Ce signal est transporté sur un axone, qui se
+sépare à son extrémité en plusieurs branches se terminant par une (ou plusieurs) synapse(s). 
+
+Les synapses sont les canaux d'entrée des neurones. 
+Chaque synapse traite un signal $s_i^\text{in}$ émis par un autre neurone pré-synaptique $i$ du réseau et produit une \textit{entrée synaptique} $e(s_i^\text{in}$).
 L'état \textit{interne} du neurone post-synaptique est donné par son \textit{potentiel de membrane} $V$.
 La somme des entrées synaptiques agit sur la valeur de ce potentiel de membrane. 
 L'intégration de la totalité des entrées peut être exprimée par une fonction de mise à jour du potentiel de membrane de la forme:
-$$V = g(s_1^\text{in}, ..., s_n^\text{in})$$ 
+\begin{align}\label{eq:neurone_V}
+V = g(s_1^\text{in}, ..., s_n^\text{in})
+\end{align}
 où $s_1^\text{in}, ..., s_n^\text{in}$ sont les $n$ signaux entrants.
-Dans le cas le plus simple, $g$ est une combinaison linéaire de ces entrées. Les modèles plus détaillés prennent en compte 
-la fonction de transfert des synapses ainsi que les interactions non-linéaires entre les influences excitatrices et les influences inhibitrices.
+
+\emph{Exemples:}
+\begin{itemize}
+\item Dans le cas le plus simple, $g$ est une combinaison linéaire des entrées synaptiques \shortcite{MCu43,Rosen58}.
+\item Les modèles plus détaillés prennent en compte 
+la fonction de transfert des synapses ainsi que les interactions non-linéaires entre les influences excitatrices et les influences inhibitrices \shortcite{DESTEXHE97}.
+\end{itemize}
 
 L'activation d'un neurone repose ensuite sur un mécanisme non linéaire de \textit{passage de seuil}.
-Dans le modèle le plus simple, l'état de sortie (0 ou 1) dépend d'un
+
+\emph{Exemples:}
+\begin{itemize}
+\item Dans le modèle le plus simple \shortcite{MCu43}, l'état de sortie (0 ou 1) dépend d'un
 seuil d'activation $\theta$ tel que $s=1$ (état haut) si $V>\theta$ et $s=0$ (état bas) sinon.
-Dans les modèles plus détaillés, le passage à l'état haut déclenche un mécanisme actif de réinitialisation qui ramène
+\item
+Dans les modèles plus détaillés \shortcite{Lapicque1907,HH52}, le passage à l'état haut déclenche un mécanisme actif de réinitialisation qui ramène
 le potentiel de membrane vers sa valeur de repos $V_0 < \theta$.  Ce mécanisme de réinitialisation, qui interdit
 le maintien de la sortie dans l'état haut, rend l'état haut  
 plus rare (et donc plus porteur d'information) que l'état bas. Il a également pour effet d'effacer 
-la mémoire des données d'entrée antérieures au dernier PA.
+la mémoire des données d'entrée antérieures au dernier potentiel d'action.
+\end{itemize}
+
 
 %% A mettre dans la partie sur la plasticité
 %Un des modèles les plus étudiés en modélisation est le modèle de l'\textit{intégrateur à fuite}. 
@@ -646,6 +669,39 @@ un \textit{réseau de neurones}. Le schéma de connexion, sous la forme d'un gra
 caractérise l'\textit{organisation structurelle} du réseau. 
 %Selon que le graphe est acyclique, ou au contraire récurrent, .
 
+La description du réseau est donné par une \textit{fonction de couplage},
+définie le plus souvent par un tableau à double entrée $T$. Chaque neurone
+se voit attribuer un indice $i \in 1,...,n$ où $n$ est le nombre de neurones dans le réseau. Le tableau
+$T[i,j]$ contient alors les caractéristiques du lien du neurone $i$ vers le neurone $j$.
+Un exemple de paramétrisation est le temps de propagation $\tau_{ij}$ et poids synaptique $J_{ij}$. 
+Lorsque le poids synaptique est non-nul, on dit que les neurones $i$ et $j$ sont couplés. 
+Si $n$ est le nombre de neurones, le nombre de paramètres du réseau est en $O(n^2)$, correspondant à un principe de transmission du signal \textit{de plusieurs à plusieurs} (un neurone envoie son signal de sortie vers plusieurs destinataires, un neurone reçoit des signaux de plusieurs émetteurs).
+
+\emph{Notations:}
+\begin{itemize} 
+\item Le \textit{vecteur d'activité} $\boldsymbol{s}(t)$ (ou activité de population) est un vecteur de taille $n$ contenant l'ensemble des 
+sorties à l'instant $t$~: 
+$$\boldsymbol{s}(t) = (s_1^\text{out}(t), ..., s_n^\text{out}(t))$$
+\item Le \textit{patron d'activité} est constituée de l'ensemble des signaux émis entre l'instant initial $t_0$  et l'instant d'observation $t$, soit: $$\boldsymbol{S}(t)=\{\boldsymbol{s}(t')\}_{t' \in [t_0, t[}$$
+\end{itemize}
+
+Les activités des différents neurones sont donc \textit{inter}dépendantes du fait des couplages. 
+La \textit{fonction de réponse} du réseau $f_T$ est une fonction paramétrique 
+décrite par le tableau de paramètres $T$, telle que l'activité $\boldsymbol{s}(t)$ est solution de~:
+\begin{align}\label{eq:optim}
+\boldsymbol{s}(t) = f_T(\boldsymbol{S}(t))
+\end{align}
+Il faut ici préciser, dans la mesure où les temps de transports sont supposés strictement positifs, que l'activité du réseau au temps $t$ est
+dépendante de l'historique des activités précédent strictement 
+l'instant $t$. L'activité d'un neurone post-synaptique $i$ au temps $t$ est dépendante des signaux pré-synaptiques
+produits aux instants $t' < t$, en tenant compte du \textit{temps de transport} de ces signaux sur les axones. Plus précisément, si $j$ est le 
+neurone pré-synaptique et $i$ le neurone post-synaptique, on a:
+\begin{align}\label{eq:transport}
+s^\text{in}_{ij}(t) = s^\text{out}_{j}(t - \tau_{ij})
+\end{align}
+
+\subsection{Architecture de réseau}
+
 On parle d'\textit{architecture de réseau} pour décrire les propriétés générales du graphe.
 L'architecture définit généralement le nombre de couches, le type de connexions de couche à couche, 
 et éventuellement le nombre de neurones par couche.
@@ -653,29 +709,9 @@ Un exemple typique d'architecture est l'organisation séquentielle des réseaux 
 ``à couche cachée'',
 qu'on trouve dans les perceptrons multi-couches, les réseaux profonds, etc. [CITATIONS] 
 Un autre exemple d'architecture est celle des mémoires associatives, constituées d'une ou plusieurs couches de 
-neurones connectés sous la forme dun circuit récurrent (ou réentrant) [CITATION].
+neurones connectés sous la forme d'un circuit récurrent (ou réentrant) [CITATION].
 
-La description du réseau est donné par une \textit{fonction de couplage},
-définie le plus souvent par un tableau à double entrée $T$. Chaque neurone
-se voit attribuer un indice $i \in 1,...,n$ où $n$ est le nombre de neurones dans le réseau. Le tableau
-$T[i,j]$ contient alors les caractéristiques du lien du neurone $i$ vers le neurone $j$.
-Un exemple de paramétrisation est le temps de propagation $\tau_{ij}$ et poids synaptique $J_{ij}$. 
-Lorsque le poids synaptique est non-nul, on dit que les neurones $i$ et $j$ sont couplés. 
-Si $n$ est le nombre de neurones, le nombre de paramètres du réseau est en $O(n^2)$.
-
-Les activités des différents neurones sont interdépendantes du fait des couplages. 
-L'activité de réseau $\boldsymbol{s}$ (ou activité de population ou encore \textit{patron d'activité}) est 
-constituée de l'ensemble des signaux émis et transmis de neurone à neurone.
-La fonction de réponse du réseau $f_T$ est une fonction paramétrique 
-décrite par le tableau de paramètres $T$, telle que l'activité $\boldsymbol{s}^*$ est solution de~:
-\begin{align}\label{eq:optim}
-  \boldsymbol{s} = f_T(\boldsymbol{s})
-\end{align}
-avec :
-$$\boldsymbol{s} = \{\boldsymbol{s}(t)\}_{t = t_0,..., t_f}$$
-où $\boldsymbol{s}(t)$ est le vecteur d'état du réseau à l'instant $t$, 
-$t_0$ est l'instant initial (début de l'observation) et $t_f$ l'instant final 
-(fin de l'observation).
+{\color{Cyan} Notion de faisceau d'axones. Construction de réseaux.}
 
 \subsection{Calcul distribué}
 
@@ -693,30 +729,30 @@ deux états de sortie distincts.
 %conserver un état (haut ou bas) pour une durée indéterminée. 
 
 Dans la cas des réseaux de neurones, la mise en oeuvre d'un calcul repose sur la présence
-de neurones d'\textit{entrée} soumis à des données exterieures, qui sont donc les opérandes du calcul.
+de neurones d'\textit{entrée} soumis à des données extérieures, qui sont donc les opérandes du calcul.
 C'est le cas chez l'animal des cellules \textit{sensorielles}. 
-On note $\boldsymbol{I} = \{\boldsymbol{I}(t)\}_{t = t_0,..., t_f}$ ce signal extérieur. 
+On note $\boldsymbol{I}(t) = \{\boldsymbol{I}(t')\}_{t' \in [t_0, t[}$ ce signal extérieur. 
 Si le neurone $i$ est un neurone d'entrée, on a $I_i \neq 0$. Si le neurone $i$ n'est pas un neurone d'entrée,  
 on a $I_i = 0$.
 Le signal extérieur est généralement considéré comme indépendant de l'activité du réseau de neurones.
 
 La \textit{réponse} du réseau de neurones au signal d'entrée (la solution du calcul) est le patron d'activité induit
  par ce signal d'entrée.
-En étendant la fonction de réponse aux entrées extérieures, cette activité $\boldsymbol{s}^*$ est la solution de~:
+En étendant la fonction de réponse aux entrées extérieures, l'activité $\boldsymbol{s}(t)$ est la solution de~:
 \begin{align}\label{eq:optim_input}
-\boldsymbol{s} = f_T(\boldsymbol{s}, \boldsymbol{I})
+\boldsymbol{s}(t) = f_T(\boldsymbol{S}(t), \boldsymbol{I}(t))
 \end{align}
 On dit également 
 que le réseau de neurones \textit{transforme} le signal d'entrée.
 
 Il est possible de définir une \textit{fonction de sortie} qui \textit{décode} ce patron d'activité. 
 La sortie du réseau est alors 
-$$\boldsymbol{u} = h(\boldsymbol{s}^*)$$
+$$\boldsymbol{u} = h(\boldsymbol{s})$$
 avec $h$ fonction de décodage (ou de ``\textit{read-out}'').
 
 Plus globalement, la fonction d'entrée/sortie (fonction de transfert) du réseau de neurones est~:
 \begin{align}\label{eq:E/S}
- \boldsymbol{u} = h(f_T(\boldsymbol{s}^*,\boldsymbol{I}))
+ \boldsymbol{u} = h(f_T(\boldsymbol{S},\boldsymbol{I}))
 \end{align}
 
 La sortie $\boldsymbol{u}$ peut ainsi être interprétée comme le résultat du calcul réalisé à partir des données d'entrée $\boldsymbol{I}$. 
@@ -724,42 +760,54 @@ Dans la mesure où ce résultat est le produit de
 l'activité conjointe (et parallèle) des neurones du réseau, on se situe dans un contexte de \textit{calcul distribué}, par opposition au calcul
 séquentiel centralisé réalisé par les ordinateurs traditionnels.
 
-Les équations (\ref{eq:optim_input}) et (\ref{eq:E/S}) permettent,
-sans précision supplémentaire, de multiples solutions. 
-L'existence ou non de ces solutions multiples repose sur
-le détail des modèles de neurones utilisés, ainsi que du caractère récurrent du graphe de connexions.
-L'existence de solutions multiples suggère de plus, pour un même circuit, de multiples
-manières de traiter le même signal. 
-%Le calcul distribué consiste à traiter en parallèle des données de grande taille. 
-
-Il est souvent possible de regrouper ces solutions selon des caractéristiques communes
+Il est souvent possible de regrouper différents patrons d'activité selon des caractéristiques communes
 se traduisant par une valeur unique au niveau de la fonction de sortie $h$. 
-On parlera des différents \textit{modes} du réseau de neurones.
-On utilise dans la suite le terme ``\textit{expressivité}'' pour désigner le nombre et la nature des modes produits par un réseau de neurones,
-en présence ou en l'absence de signal extérieur. Le nombre et la nature de ces modes
-nous permettra de décrire son ``vocabulaire'', et d'estimer le type d'opérations
-dont il peut être le support. 
+\begin{itemize}
+\item On parlera des différents \textit{modes de sortie} du réseau de neurones.
+\item L'\textit{encodage} est le processus par lequel un jeu a priori non borné de signaux 
+d'entrée se traduira sous la forme d'un nombre fini de modes de sortie.
+Chaque mode est alors le reflet, au sein du réseau, d'une \textit{classe} de signaux. 
+\item On parlera d'\textit{expressivité} pour désigner le nombre et la nature des modes de sortie produits par un réseau de neurones,
+en présence ou en l'absence de signal extérieur. 
+Le nombre et la nature de ces modes
+nous permettra de décrire son ``vocabulaire'', ainsi que le type d'opérations dont il peut être le support. 
+\end{itemize}
 
 \subsection{Réseaux de neurones et apprentissage automatique}
 
 La programmation des réseaux de neurones est un des piliers de la recherche 
 en apprentissage automatique (ou ``\textit{Machine learning}''). 
-Le but d'un algorithme d'apprentissage est de modifier 
-les paramètres du réseau dans un sens qui améliore la réponse, en fonction 
-d'un jeu de données d'entrée ainsi que des sorties attendues [REFERENCES : PMC, Vapnik, LeCun, ].
-Les réseaux de neurones sont principalement utilisés, dans ce cadre, pour
-ségréger et catégoriser leurs données d'entrée. 
+Le but d'un algorithme d'apprentissage est de définir 
+le jeu de paramètres $T$ de manière à produire une sortie 
+conforme au calcul souhaité. 
+Le jeu de paramètres est assimilables à un \textit{programme} et
+le choix de ces paramètres correspond à la programmation du réseau. 
+
+Le principe de l'apprentissage automatique est de confier cette tâche 
+de programmation à un algorithme, dit algorithme d'apprentissage. 
+En d'autres termes, il faut écrire un programme capable de programmer le réseau de neurones. 
+Ce \textit{méta-programme} s'appuie sur des méta-données qui sont 
+des données servant à produire le programme.
+Cette conception de la programmation basée sur l'optimisation
+d'un tableau de paramètres via un ensemble de contraintes
+remonte historiquement au principes de la programmation dynamique \shortcite{Bellman1956}.
+
+Dans le cadre de l'apprentissage automatique, 
+les réseaux de neurones sont principalement utilisés pour
+des tâches de catégorisation de leurs données d'entrée.
+Les méta-données sont alors constituées 
+d'un jeu de données d'entrée ainsi que des sorties attendues,
+appelé \textit{base d'apprentissage}.
 
 % programme = paramètres
 % algorithme = meta programme
 
 Les modèles de réseaux de neurones, % (encore dite approche ``distribuée''), 
-tels qu'il se sont développés depuis le perceptron \shortcite{Rosen58}, reposent sur
-un principe de traitement séquentiel (``\textit{feed forward}'').
+tels qu'il se sont développés depuis le perceptron \shortcite{Rosen58}, reposent majoritairement sur
+un principe de traitement séquentiel (``\textit{feed forward}'')
+[REFERENCES : PMC, Vapnik, LeCun, ].
 %une notion implicite de ressource limitée.
-L'\textit{encodage} est le processus par lequel un jeu a priori non borné de signaux 
-d'entrée se traduira sous la forme d'un nombre fini de modes.
-Chaque mode est alors le reflet, au sein du réseau, d'une \textit{classe} de signaux. 
+
 
 \begin{itemize}
  \item Le modèle de perceptron le plus simple, possédant une cellule de sortie unique, sépare son espace d'entrée en deux régions.
@@ -768,7 +816,7 @@ au mode ``actif''. Les données provenant
 de la seconde région produisent une une activité de sortie ``basse'', qui s'apparente au mode ``inactif''.
  \item Dans le cas du perceptron multi-couches [CITATION],
 chaque neurone de la couche cachée est un séparateur permettant de distinguer deux régions de son espace d'entrée. 
-Le nombre de régions séparables (le nombre maximal de modes) augmente exponentiellement avec le nombre de neurones dans la couche  
+Le nombre de régions séparables (le nombre maximal de modes de sortie) augmente exponentiellement avec le nombre de neurones dans la couche  
 couche cachée.
 Le concepteur fixe à l'avance le nombre de neurones à mettre dans la couche cachée,
 et donc la complexité des opérations de ségrégation produites par le réseau.
@@ -809,6 +857,18 @@ sur la plage temporelle $[t_0,t_f]$ est alors définie par l'intégration sur le
 En pratique, l'équation (\ref{eq:dif}) est  une équation intégro-différentielle qui se résout
 par des méthodes numériques. 
 
+{\color{Orange} Les équations (\ref{eq:optim_input}) et (\ref{eq:E/S}) permettent,
+	sans précision des conditions initiales, de multiples solutions. 
+	L'existence ou non de ces solutions multiples repose sur
+	le détail des modèles de neurones utilisés, ainsi que du caractère récurrent du graphe de connexions.
+	L'existence de solutions multiples suggère de plus, pour un même circuit, de multiples
+	manières de traiter le même signal. 
+	%Le calcul distribué consiste à traiter en parallèle des données de grande taille. 
+}
+
+
+
+
 %Dans un cadre continu, l'équation d'évolution est la suivante~:
 %$$ \frac{d\boldsymbol{x}}{dt} = \Phi(\boldsymbol{x},t)$$
 %Dans un cadre discret, l'équation d'évolution est~:
@@ -831,19 +891,19 @@ du graphe de contraintes.
 %offre  un éclairage différent. 
 %sur l'expressivité d'un substrat en mettant en 
 %avant le caractère distribué (non-local) de l'activité. 
-%Contrairement à l'idée classique d'un nœud de sortie comme unité d'expression, 
+%Contrairement à l'idée classique d'un noeud de sortie comme unité d'expression, 
 %(par exemple unité de séparation dans le cas des classifieurs, 
 %unité de description dans le cas des cartes auto-organisées etc.), 
 L'expressivité du réseau est vue sous l'angle du nombre
 de patrons distribués (patterns) pouvant être obtenus en tant qu'état final (attracteur) atteint par le système
 dynamique décrit par les poids (arêtes) du réseau.
 La capacité s'exprime ici en nombre de \emph{modes} (configurations atteignables) 
-et non en nombre de nœuds/vecteurs supports etc.
+et non en nombre de noeuds/vecteurs supports etc.
 Si la capacité se trouve en principe augmentée
 d'un facteur exponentiel ($2^N$ configurations distribuées possibles), 
 la capacité effective est en pratique beaucoup plus réduite, 
 se limitant à un nombre de modes (attracteurs) distincts en $O(N)$, 
-c'est à dire de l'ordre du nombre de nœuds \shortcite{Amit1987,Tso88}.
+c'est à dire de l'ordre du nombre de noeuds \shortcite{Amit1987,Tso88}.
 La nature des opérations réalisables par le substrat est également différent puisqu'il s'agit principalement ici d'une
 dynamique de relaxation adaptée à des opération de complétion et d'interpolation de données manquantes, implémentant un
 mécanisme de mémoire dite ``auto-associative''. }
@@ -901,7 +961,7 @@ un caractère irrégulier où les temps d'émission des PA semblent obéir à un
 Un tel processus est caractérisé par sa fréquence instantanée $\nu$, qui donne le nombre de PA émis par seconde.
 La grandeur $\nu$ peut être mesurée 
 à travers l'observation d'un train de PA produit par un neurone particulier (nombre de PA émis divisé par
-l'intervalle d’observation).
+l'intervalle d'observation).
 
 De nombreux modèles stochastiques de neurones ont été proposés qui prennent en compte le caractère aléatoire de la 
 réponse des neurones biologiques. 
