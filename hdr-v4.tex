@@ -4,7 +4,7 @@
 %% License: ISC license                          %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %!TEX TS-program = pdfLaTeX
-%!TEX encoding = IsoLatin
+%!TEX encoding = utf-8
 %!TEX spellcheck = fr-FR
 
 \documentclass[12pt,twoside,openright]{book}
@@ -332,7 +332,7 @@ constituant un niveau de description relativement indépendant des deux autres.}
 %XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 \paragraph{Approche ascendante (ou ``bottom-up'')}
 La méthodologie ``bottom-up'' consiste à étudier les
-conditions d'émergence de fonctions de haut niveau à partir 
+\emph{conditions d'émergence} de fonctions de haut niveau à partir 
 des caractéristiques d'un réseau de neurones plongé dans un
 environnement contraignant.
 Les réseaux de neurones sont en effet capables de manifester des formes d'organisation spontanée~: comportement critique, 
@@ -349,7 +349,7 @@ l'activité des neurones comme syntaxe de base.
 }
 
 \paragraph{Approche descendance (ou ``top-down'')}
-La méthodologie ``top-down'' consiste à étudier les conditions de réalisation
+La méthodologie ``top-down'' consiste à étudier les \emph{conditions de réalisation}
 d'une certaine tâche par étapes descendantes, de la contrainte générale du corps engagé dans la tâche
 à la réalisation matérielle du circuit qui la résout.
 L'approche descendante consiste souvent à identifier les aspects non-triviaux
@@ -381,7 +381,7 @@ couverture académique que les disciplines plus anciennement implantées.
 Les revues qui ont historiquement participé à son développement sont les revues traitant des 
 réseaux de neurones artificiels apparues à la fin des années 80 (Neural Networks, Neural 
 Computation, Neural Computing Letters, Biogical Cybernetics, etc.).
-Certaine revues plutôt dédiées au traitement du signal, comme NeuroImage, acceptent également des papiers du domaine.
+Certaine revues plutôt dédiées au traitement du signal, comme Neuroimage, acceptent également des papiers du domaine.
 Enfin, les revues de physique (Physica-D) hébergent également des papiers traitant des neurosciences computationnelles.  
 Suite au développement du champ de recherche et de sa couverture relativement lacunaire par les revues scientifiques, 
 sont apparues des revues en ``Open Acces'' spécialement dédiées au domaine. 
@@ -499,7 +499,7 @@ Il porte sur l'étude de la réaction (spontanée ou acquise) d'un réseau de ne
 Une partie du travail, portant sur des architectures
 multi-couches, a été réalisé en collaboration avec Olivier Moynot, étudiant diplômé de l'ENS Cachan, qui a entamé 
 sa thèse sous la direction de Manuel Samuelidès un an après moi, et Olivier Pinaud, étudiant en de DEA 
-de physique théorique, qui a effectué son stage à l'OBNERA au printemps 1998. 
+de physique théorique, qui a effectué son stage à l'ONERA au printemps 1998. 
 
 {\color{Orange} En collaboration avec Olivier Moynot, Manuel Samuelides et Olivier Pinaud \shortcite{Dau99A,dauce01a}, j'ai également 
 travaillé sur la définition et 
@@ -568,33 +568,41 @@ Les trois premières parties présentent les résultats
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\chapter{Dynamique des grands réseaux de neurones aléatoires}
+\chapter{Dynamique des grands réseaux de neurones aléatoires}\label{chap:dyn}
 
-Ce chapitre est consacré à l'analyse des capacités d'expression des grands réseaux de neurones. [REPRENDRE CHAPEAU]
+Ce chapitre est consacré à l'analyse des capacités d'expression des grands réseaux de neurones. Je présente dans une première section quelques notions essentielles concernant la modélisation des neurones et des réseaux de neurones. La deuxième section présente quelques notions plus spécifiques à l'étude des grands réseaux de neurones ainsi que des propositions propres à ce mémoire. Enfin, la troisième section présente quelques résultats issus des travaux auxquels j'ai participé dans ce cadre.  [REPRENDRE CHAPEAU]
 
-\section{Neurones et réseau}
+\section{Notions générales}
+
+Cette section présente un formalisme et des définitions visant à établir un cadre commun aux
+études portant sur les ``réseaux de neurones''. 
+La plupart des définitions sont donc extrêmement générales, avec un niveau de détail faible.
+Les références et exemples indiqués permettent au lecteur d'approfondir les notions
+présentées s'il le souhaite.
+
+\subsection{Neurones et réseaux}
 
 Inspirés par le fonctionnement du cerveau, les réseaux de neurones sont des modèles de calculateurs 
  dans lesquels le ``programme'' (la fonction de réponse) est décrite par un réseau.
-Ce réseau est constitué d'un ensemble de noeuds, qui forment les unités de calcul, et un ensemble d'arêtes,  
+Ce réseau est constitué d'un ensemble de nœuds, qui sont les unités de calcul, et un ensemble d'arêtes,  
 pondérées et orientées, %définissant l'intensité du signal
 qui transportent le signal entre les différentes unités de calcul.
 
-Il existe de nombreux modèles de neurones et de réseaux de neurones. La modélisation des processus neuronaux
+Il existe de nombreux modèles de neurones et de nombreux modèles de réseaux de neurones. La modélisation des processus neuronaux
 repose donc sur un choix du modélisateur, qui est fonction du mécanisme qu'il souhaite étudier, des outils
-d'analyse et/ou de la puissance de calcul disponible(s). 
+d'analyse et/ou de la puissance de calcul dont il dispose. 
 
-Je liste ci-dessous quelques propriétés et élements de vocabulaire communs à la plupart des modèles de réseaux de
+Je liste ci-dessous quelques propriétés et éléments de vocabulaire communs à la plupart des modèles de réseaux de
 neurones, indépendamment de leur utilisation en modélisation ou en apprentissage automatique. 
 
-\subsection{Activité et signal}
+\subsubsection{Activité et signal}
 
 Chaque unité de calcul (ou neurone) est modélisée comme une fonction de réponse $f$ qui 
 traite un jeu de \textit{données d'entrée} multimodal $s^\text{in}_1, ..., s^\text{in}_n$.
 On peut supposer sans perte de généralité que les données d'entrée sont indexées sur l'axe temporel.
 On parle alors de \textit{signal d'entrée} où $s^\text{in}_i = \{s^\text{in}_i(t)\}_{t \in \{t_0,... t_f\}}$ 
 représente un jeu de données indexé sur une trame temporelle et 
-$s^\text{in}_i(t)$ représente le $i^\text{ème}$ signal au temps $t$.
+$s^\text{in}_i(t)$ représente un point de mesure du $i^\text{ème}$ signal à l'instant $t$.
 
 La sortie du neurone au temps $t_f$ est un scalaire: 
 \begin{align}\label{eq:neurone_s_out}
@@ -662,7 +670,7 @@ la mémoire des données d'entrée antérieures au dernier potentiel d'action.
 % décision du champ neuronal, avec pour finir le modèle de Pouget (compromis dynamique)
 % Préciser ensuite le mécanisme de sélection/intégration
 
-\subsection{Réseau de neurones}
+\subsubsection{Réseau de neurones}
 
 Plusieurs neurones connectés entre eux via des axones constituent 
 un \textit{réseau de neurones}. Le schéma de connexion, sous la forme d'un graphe orienté, 
@@ -689,7 +697,7 @@ Les activités des différents neurones sont donc \textit{inter}dépendantes du 
 La \textit{fonction de réponse} du réseau $f_T$ est une fonction paramétrique 
 décrite par le tableau de paramètres $T$, telle que l'activité $\boldsymbol{s}(t)$ est solution de~:
 \begin{align}\label{eq:optim}
-\boldsymbol{s}(t) = f_T(\boldsymbol{S}(t))
+\boldsymbol{s}(t) = f(\boldsymbol{S}(t);T)
 \end{align}
 Il faut ici préciser, dans la mesure où les temps de transports sont supposés strictement positifs, que l'activité du réseau au temps $t$ est
 dépendante de l'historique des activités précédent strictement 
@@ -700,7 +708,7 @@ neurone pré-synaptique et $i$ le neurone post-synaptique, on a:
 s^\text{in}_{ij}(t) = s^\text{out}_{j}(t - \tau_{ij})
 \end{align}
 
-\subsection{Architecture de réseau}
+\subsubsection{Architecture de réseau}
 
 On parle d'\textit{architecture de réseau} pour décrire les propriétés générales du graphe.
 L'architecture définit généralement le nombre de couches, le type de connexions de couche à couche, 
@@ -713,14 +721,14 @@ neurones connectés sous la forme d'un circuit récurrent (ou réentrant) [CITAT
 
 {\color{Cyan} Notion de faisceau d'axones. Construction de réseaux.}
 
-\subsection{Calcul distribué}
+\subsubsection{Calcul distribué}
 
 Les signaux transitant de neurone à neurone via les axones du réseau contiennent une succession d'états hauts et
 d'états bas qui présentent une ressemblance  avec les signaux digitaux produits par les calculateurs 
 numériques. Cette analogie de forme n'implique cependant pas que les principes de traitement et
 de transformation de ces signaux soient les mêmes.
 
-Un calcul est classiquement décrit comme une séquence d'opérations élémentaires réalisées dans un certain ordre
+Du point de vue des calculateurs numériques, un calcul est décrit comme une séquence d'opérations élémentaires réalisées dans un certain ordre
 à partir de données d'entrée. Ces opérations élémentaires peuvent être réalisées par les portes logiques
 d'un circuit électronique, ou par tout mécanisme automatique capable de ségréger ses entrées sous la forme d'au moins 
 deux états de sortie distincts. 
@@ -740,7 +748,7 @@ La \textit{réponse} du réseau de neurones au signal d'entrée (la solution du 
  par ce signal d'entrée.
 En étendant la fonction de réponse aux entrées extérieures, l'activité $\boldsymbol{s}(t)$ est la solution de~:
 \begin{align}\label{eq:optim_input}
-\boldsymbol{s}(t) = f_T(\boldsymbol{S}(t), \boldsymbol{I}(t))
+\boldsymbol{s}(t) = f(\boldsymbol{S}(t), \boldsymbol{I}(t);T)
 \end{align}
 On dit également 
 que le réseau de neurones \textit{transforme} le signal d'entrée.
@@ -752,7 +760,7 @@ avec $h$ fonction de décodage (ou de ``\textit{read-out}'').
 
 Plus globalement, la fonction d'entrée/sortie (fonction de transfert) du réseau de neurones est~:
 \begin{align}\label{eq:E/S}
- \boldsymbol{u} = h(f_T(\boldsymbol{S},\boldsymbol{I}))
+ \boldsymbol{u} = h(f(\boldsymbol{S},\boldsymbol{I};T))
 \end{align}
 
 La sortie $\boldsymbol{u}$ peut ainsi être interprétée comme le résultat du calcul réalisé à partir des données d'entrée $\boldsymbol{I}$. 
@@ -760,76 +768,11 @@ Dans la mesure où ce résultat est le produit de
 l'activité conjointe (et parallèle) des neurones du réseau, on se situe dans un contexte de \textit{calcul distribué}, par opposition au calcul
 séquentiel centralisé réalisé par les ordinateurs traditionnels.
 
-Il est souvent possible de regrouper différents patrons d'activité selon des caractéristiques communes
-se traduisant par une valeur unique au niveau de la fonction de sortie $h$. 
-\begin{itemize}
-\item On parlera des différents \textit{modes de sortie} du réseau de neurones.
-\item L'\textit{encodage} est le processus par lequel un jeu a priori non borné de signaux 
-d'entrée se traduira sous la forme d'un nombre fini de modes de sortie.
-Chaque mode est alors le reflet, au sein du réseau, d'une \textit{classe} de signaux. 
-\item On parlera d'\textit{expressivité} pour désigner le nombre et la nature des modes de sortie produits par un réseau de neurones,
-en présence ou en l'absence de signal extérieur. 
-Le nombre et la nature de ces modes
-nous permettra de décrire son ``vocabulaire'', ainsi que le type d'opérations dont il peut être le support. 
-\end{itemize}
-
-\subsection{Réseaux de neurones et apprentissage automatique}
-
-La programmation des réseaux de neurones est un des piliers de la recherche 
-en apprentissage automatique (ou ``\textit{Machine learning}''). 
-Le but d'un algorithme d'apprentissage est de définir 
-le jeu de paramètres $T$ de manière à produire une sortie 
-conforme au calcul souhaité. 
-Le jeu de paramètres est assimilables à un \textit{programme} et
-le choix de ces paramètres correspond à la programmation du réseau. 
-
-Le principe de l'apprentissage automatique est de confier cette tâche 
-de programmation à un algorithme, dit algorithme d'apprentissage. 
-En d'autres termes, il faut écrire un programme capable de programmer le réseau de neurones. 
-Ce \textit{méta-programme} s'appuie sur des méta-données qui sont 
-des données servant à produire le programme.
-Cette conception de la programmation basée sur l'optimisation
-d'un tableau de paramètres via un ensemble de contraintes
-remonte historiquement au principes de la programmation dynamique \shortcite{Bellman1956}.
-
-Dans le cadre de l'apprentissage automatique, 
-les réseaux de neurones sont principalement utilisés pour
-des tâches de catégorisation de leurs données d'entrée.
-Les méta-données sont alors constituées 
-d'un jeu de données d'entrée ainsi que des sorties attendues,
-appelé \textit{base d'apprentissage}.
-
-% programme = paramètres
-% algorithme = meta programme
-
-Les modèles de réseaux de neurones, % (encore dite approche ``distribuée''), 
-tels qu'il se sont développés depuis le perceptron \shortcite{Rosen58}, reposent majoritairement sur
-un principe de traitement séquentiel (``\textit{feed forward}'')
-[REFERENCES : PMC, Vapnik, LeCun, ].
-%une notion implicite de ressource limitée.
-
-
-\begin{itemize}
- \item Le modèle de perceptron le plus simple, possédant une cellule de sortie unique, sépare son espace d'entrée en deux régions.
-Les données provenant de la première région produisent une activité de sortie ``haute'', qui s'apparente
-au mode ``actif''. Les données provenant 
-de la seconde région produisent une une activité de sortie ``basse'', qui s'apparente au mode ``inactif''.
- \item Dans le cas du perceptron multi-couches [CITATION],
-chaque neurone de la couche cachée est un séparateur permettant de distinguer deux régions de son espace d'entrée. 
-Le nombre de régions séparables (le nombre maximal de modes de sortie) augmente exponentiellement avec le nombre de neurones dans la couche  
-couche cachée.
-Le concepteur fixe à l'avance le nombre de neurones à mettre dans la couche cachée,
-et donc la complexité des opérations de ségrégation produites par le réseau.
-\item Enfin, le modèle des séparateurs à vaste marge (SVM) \shortcite{Vap95}
-propose une définition quantitative de la complexité d'un classifieur~: la
-dimension de Vapnik-Chervonenkis, qui correspond au nombre de pivots utilisé pour
-séparer les données d'entrée. 
-\end{itemize}
 
 
 \subsection{Réseaux de neurones et modélisation biologique}
 
-L'inspiration biologique conduit à étudier des modèles alternatifs à ce traitement
+L'inspiration biologique conduit à étudier des modèles alternatifs au traitement
 séquentiel standard. 
 Dans le cadre de ce mémoire, nous regarderons en particulier 
 l'idée de \textit{circuit reconfigurable}, basée sur l'existence d'une \textit{activité endogène} produite par un réseau de 
@@ -843,7 +786,7 @@ Ces cycles conduisent à des dépendances réciproques entre les unités du rés
 Le formalisme des systèmes dynamiques permet de décrire ces interactions croisées et leur effet sur les patrons
 d'activité produits par le réseau.
 
-\paragraph{Quelques notions de la théorie des systèmes dynamiques}
+\subsubsection{Quelques notions de la théorie des systèmes dynamiques}
 L'activité du réseau au temps $t$ est le résultat de l'intégration des
 potentiels d'action émis aux instants précédant $t$, en tenant compte des délais de transmission, et de la valeur courante du signal externe
 (voir eq. (\ref{eq:optim_input})).
@@ -876,18 +819,19 @@ Ce signal peut être:
   \end{itemize}
 \end{itemize}
 
-\paragraph{}
+\paragraph{Systèmes dynamiques autonomes}
 Dans le cas autonome...
 {\color{Cyan} Notion d'attracteur}
 
-\paragraph{}
-Dans le cas non autonome, la trajectoire dépend à la fois des conditions initiales et du signal exterieur. 
+\paragraph{Systèmes dynamiques non-autonomes}
+
+Dans le cas non autonome, la trajectoire dépend à la fois des conditions initiales et du signal extérieur. 
 \begin{itemize}
 \item On parle dans ce cas d'une activité \textit{induite} par le signal d'entrée. 
 \item Du point de vue 
 computationnel, celà signifie que le même signal peut recevoir un traitement différent si les conditions initiales sont différentes. 
 Sans précision des conditions initiales, de multiples opérations sont donc possibles pour un même signal d'entrée. 
-On parlera de différents \textit{modes d'opération}.
+{\color{Orange} On parlera de différents \textit{modes d'opération}}.
 \end{itemize}
 
 
@@ -941,6 +885,13 @@ mécanisme de mémoire dite ``auto-associative''. }
 
 Lorsque le système est dissipatif, le flot définit un ensemble ... 
 
+notion d'état du réseau, et de patron d'activité
+
+axe temporel, système dynamique et conditions initiales.
+
+équation d'évolution de la dynamique
+
+
 Notions :
 \begin{itemize}
  \item attracteur
@@ -957,39 +908,12 @@ appelés modèles de \textit{champ moyen}.
 Nous regardons en particulier le cas des réseaux de neurones 
 récurrents aléatoires [A CONNECTER AU RESTE].
 
-\section{Grands réseaux aléatoires}
-
-{\color{Gray} \subsection{Systèmes dynamiques}
+\subsubsection{Grands réseaux et champ moyen}
 
 
-OBJECTIF : 
+%Les modèle qui servent de fondement aux neurosciences computationnelles 
+%sont les modèles de neurones à conductance [REF DESTEXHE] dont le plus connu est le modèle de Hudgkin-Huxley. 
 
-Ce formalisme est utilisé par exemple 
-
-Les modèle qui servent de fondement aux neurosciences computationnelles 
-sont les modèles de neurones à conductance [REF DESTEXHE] dont le plus connu est le modèle de Hudgkin-Huxley. 
-
-qui établit 
-
-Lorsque le réseau est récurrent 
-
-
-notion d'état du réseau, et de patron d'activité
-
-axe temporel, système dynamique et conditions initiales.
-
-équation d'évolution de la dynamique
-
-
-
-... neurones de sortie et read-out...
-
-... circuit de traitement des données ...
-mes. 
-
-}
-
-\subsection{Champ moyen}
 
 \paragraph{Taux de décharge instantané} L'activité des neurones telle que mesurée par électrophysiologie présente
 un caractère irrégulier où les temps d'émission des PA semblent obéir à un processus de Poisson [CITATION].
@@ -1006,6 +930,220 @@ réponse des neurones biologiques.
 Le modèle de champ moyen considère l'activité instantanée de populations de neurones $\nu(t)$, qui exprime, à un instant
 donné, le nombre de neurones émettant un PA divisé par la taille de la population.
 Un interprétation commune de l'activité des
+
+\section{Notions spécifiques et propositions}
+Cette section 
+
+\subsection{Grands réseaux de neurones aléatoires}
+
+\subsection{Modes et expressivité}
+
+{\color{Orange}
+	\paragraph{!!Propositions!!}
+	
+	Il est souvent possible de regrouper différents patrons d'activité selon des caractéristiques communes
+	se traduisant par une valeur unique au niveau de la fonction de sortie $h$. 
+	\begin{itemize}
+		\item On parlera des différents \textit{modes de sortie} du réseau de neurones.
+		\item L'\textit{encodage} est le processus par lequel un jeu a priori non borné de signaux 
+		d'entrée se traduira sous la forme d'un nombre fini de modes de sortie.
+		Chaque mode est alors le reflet, au sein du réseau, d'une \textit{classe} de signaux. 
+		\item On parlera d'\textit{expressivité} pour désigner le nombre et la nature des modes de sortie produits par un réseau de neurones,
+		en présence ou en l'absence de signal extérieur. 
+		Le nombre et la nature de ces modes
+		nous permettra de décrire son ``vocabulaire'', ainsi que le type d'opérations dont il peut être le support. 
+	\end{itemize}
+Notion de réponse d'un mode?  
+}
+
+
+
+\section{Contributions personnelles}
+
+\chapter{Plasticité synaptique et apprentissage}
+Ce chapitre est consacré à l'étude des mécanismes d'apprentissage dans les réseaux de neurones récurrents.  
+
+\section{Notions générales}
+
+\subsection{Plasticité synaptique}
+
+La synapse biologique est l'interface permettant la communication entre les neurones.
+Biologiquement parlant, il s'agit de petites interfaces d'échange chimique (``boutons'' synaptiques) situés à l'extrémité de l'arborisation terminale des axones. A l'arrivée d'un potentiel d'action, les synapses libèrent des neurotransmetteurs qui agissent sur les canaux ioniques des dendrites de la cellule post-synaptique (``libèrent'' des ions), ce qui a pour effet de modifier le potentiel de membrane de la cellule post-synaptique.
+
+L'efficacité d'une synapse dépend de plusieurs facteurs, comme la taille du bouton synaptique, la quantité de neurotransmetteurs disponibles,  ainsi que la sensibilité de la cellule post-synaptique. Dans le cadre de ce mémoire,  cet ensemble de facteurs est résumé  sous la forme d'une valeur unique $J_{ij}$ : le ``poids'' de la synapse, où  $j$ est l'index du neurone pré-synaptique et $i$ l'index du neurone post-synaptique.
+
+La plasticité synaptique est un mécanisme biologique qui modifie l'efficacité de la synapse au cours du temps en fonction des échanges entre les cellules pré et post-synaptiques. Le poids $J_{ij}$ est donc une quantité qui évolue au cours du temps sous la forme :
+\begin{align}
+J_{ij}(t) = F(J_{ij}(t_0), S_i(t), S_j(t))
+\end{align}
+avec $t_0$ l'instant initial d'observation, $S_i(t) = \{s_i(t)\}_{t \in [t_0,..,t[}$, $S_j(t) = \{s_j(t)\}_{t \in [t_0,..,t[}$.
+La plasticité est donc essentiellement un mécanisme \textit{local} qui modifie le couplage des cellules $i$ et $j$ en fonction 
+de leurs activités respectives.  
+
+Au niveau du réseau entier, la plasticité impacte le comportement du réseau de neurones,
+en modifiant son activité, sa réactivité à certaines entrées, ou le type de
+réponse qu'il produit. 
+
+
+
+En reprenant les notations proposées au début du chapitre \ref{chap:dyn}, la dynamique d'ensemble devient~:
+\begin{align}\label{eq:plasti-input}
+&J(t) = F(\boldsymbol{S}(t), J(t_0))\nonumber\\
+&T(t) = \{\tau_{ij},J_{ij}(t)\}_{i,j\in[1,...,n]}\\
+&\boldsymbol{s}(t) = f(\boldsymbol{S}(t), \boldsymbol{I}(t);T(t)) \nonumber
+\end{align}
+
+Cette équation illustre l'interdépendance entre le mécanisme d'activation $f$ (qui ``produit'' le patron d'activité $\boldsymbol{S}$ agissant sur les synapses) et le mécanisme de plasticité $F$ (qui ``produit'' le patron d'interaction $J$ qui agit sur la fonction d'activation). 
+
+Il existe, du point de vue biologique, des mécanismes de plasticité synaptique à court terme [REF STD], à moyen terme [] et à long terme [REF LTP]. On parle de potentiation à court terme vs. potentiation à long terme.
+
+Dans le cadre de la modélisation de l'apprentissage, on considérera l'évolution des poids synaptiques comme ``lente'' par rapport à la dynamique d'activation (autrement dit que les poids synaptiques sont quasi-stationnaires sur de petits intervalles de temps).
+{\color{Orange} Le but est d'implémenter via la plasticité une mémoire ``persistante'', qui provoque un changement durable de la fonction de réponse.
+On souhaite inscrire sur
+le graphe de connexions la trace de faits passés en vue d'une utilisation future.}
+
+\subsection{Apprentissage}
+
+Selon une perspective biologique et développementale, l'apprentissage
+est le processus de changement comportemental, 
+en relation avec ce mécanisme de plasticité. 
+L'apprentissage est au sens large
+l'ensemble des processus épigénétiques (historiques) inscrivant dans l'animal ou l'individu 
+les éléments d'expérience qui contribuent à accroître l'adaptation de ses réponses à son
+milieu.  
+
+Cette capacité à inscrire des événements ou des faits particuliers en vue de les exploiter dans le futur est une des
+propriétés essentielle du système nerveux des être vivants. 
+Mieux comprendre les mécanismes biologiques qui sous-tendent cet apprentissage est un des défis majeurs pour les neurosciences computationnelles. Si la plasticité synaptique semble être le principe explicatif majeur de l'apprentissage, il reste encore de nombreuses zones d'ombre 
+\begin{itemize}
+	\item sur les caractéristiques précises de cette plasticité;
+	\item sur les mécanismes de choix qui vont sélectionner certains signaux et certains événements plus significatifs;
+	\item sur les déterminants macroscopiques des changements microscopiques et vice-versa.
+\end{itemize}
+
+
+
+
+Approche empirique: reproduire l'apprentissage via la plasticité sur un support artificiel.
+
+
+
+{\bf !!Plaçons-nous par exemple dans une perspective computationnelle autonome!!}, 
+dans laquelle un programme doit pouvoir se passer d'utilisateur. 
+La consigne doit provenir d'un programme interne (un ``méta programme'') qui 
+agit sur le programme courant pour l'``améliorer'' en fonction des événements se présentent.
+{\bf !!Même si la notion de méta-programme ne pose pas de difficulté conceptuelle, elle est
+	en pratique difficile à mettre en oeuvre dans les architectures informatiques traditionnelles. 
+	La difficulté réside dans 
+	le choix des événements à considérer parmi l'ensemble des événements qui se présentent, et surtout 
+	dans la manière dont les événements pris en compte influencent le comportement logiciel futur.}
+
+\subsection{Réseaux de neurones et apprentissage automatique}
+
+La programmation des réseaux de neurones est un des piliers de la recherche 
+en apprentissage automatique (ou ``\textit{Machine learning}''). 
+Le but d'un algorithme d'apprentissage est de définir 
+le jeu de paramètres $T$ de manière à produire une sortie 
+conforme au calcul souhaité. 
+Le jeu de paramètres est assimilables à un \textit{programme} et
+le choix de ces paramètres correspond à la programmation du réseau. 
+
+Le principe de l'apprentissage automatique est de confier cette tâche 
+de programmation à un algorithme, dit algorithme d'apprentissage. 
+En d'autres termes, il faut écrire un programme capable de programmer le réseau de neurones. 
+Ce \textit{méta-programme} s'appuie sur des méta-données qui sont 
+des données servant à produire le programme.
+Cette conception de la programmation basée sur l'optimisation
+d'un tableau de paramètres via un ensemble de contraintes
+remonte historiquement au principes de la programmation dynamique \shortcite{Bellman1956}.
+
+Dans le cadre de l'apprentissage automatique, 
+les réseaux de neurones sont principalement utilisés pour
+des tâches de catégorisation de leurs données d'entrée.
+Les méta-données sont alors constituées 
+d'un jeu de données d'entrée ainsi que des sorties attendues,
+appelé \textit{base d'apprentissage}.
+
+% programme = paramètres
+% algorithme = meta programme
+
+\subsubsection{Cadre formel de l'apprentissage}
+
+{\color{Cyan} ICI ajouter des maths dans le meme esprit que chap 2.}
+
+D'un point de vue général, 
+
+\subsubsection{Modèles à couches}
+
+Les modèles de réseaux de neurones, % (encore dite approche ``distribuée''), 
+tels qu'il se sont développés depuis le perceptron \shortcite{Rosen58}, reposent majoritairement sur
+un principe de traitement séquentiel (``\textit{feed forward}'')
+[REFERENCES : PMC, Vapnik, LeCun, ].
+%une notion implicite de ressource limitée.
+
+
+\begin{itemize}
+	\item Le modèle de perceptron le plus simple, possédant une cellule de sortie unique, sépare son espace d'entrée en deux régions.
+	Les données provenant de la première région produisent une activité de sortie ``haute'', qui s'apparente
+	au {\color{Orange} mode ``actif''}. Les données provenant 
+	de la seconde région produisent une une activité de sortie ``basse'', qui s'apparente au {\color{Orange} mode ``inactif''}.
+	\item Dans le cas du perceptron multi-couches [CITATION],
+	chaque neurone de la couche cachée est un séparateur permettant de distinguer deux régions de son espace d'entrée. 
+	{\color{Orange} Le nombre de régions séparables (le nombre maximal de modes de sortie) augmente exponentiellement avec le nombre de neurones dans la couche  cachée.}
+	Le concepteur fixe à l'avance le nombre de neurones à mettre dans la couche cachée,
+	et donc la complexité des opérations de ségrégation produites par le réseau.
+	\item Enfin, le modèle des séparateurs à vaste marge (SVM) \shortcite{Vap95}
+	propose une définition quantitative de la complexité d'un classifieur~: la
+	dimension de Vapnik-Chervonenkis, qui correspond au nombre de pivots utilisé pour
+	séparer les données d'entrée. 
+\end{itemize}
+
+
+\subsubsection{Modèles récurrents}
+Cas des RN récurrents. Règle de Hebb et mémoires associatives.
+
+Assemblées neuronales et règle de Hebb. Intégration
+
+\subsection{Reconnaissance de formes et apprentissage}
+
+Reconnaissance de formes. Feedback positif / feedback négatif. Mémoire associative. interpolation. 
+
+Résonance.
+
+
+\section{Notions spécifiques et propositions}
+
+Complexité, chaos et réduction de la complexité.
+
+Calcul collectif - intégration - assemblée
+
+Le mécanisme de sélection/intégration (Freeman)
+
+Mecanisme de choix. Lien entre choix et plasticité. On reconnait ce que l'on connait (Reconnaisance et connaissance). analogie avec spike de population (spike = significatif) 
+
+Passage de seuil. ``Spike'' de population. De la cellule à la population. 
+Réponse de population induite.
+
+
+sélection = Analogie accumulation d'évidence?
+
+
+
+\section{Contributions personnelles}
+
+\chapter{Architectures de contrôle}
+
+\section{Notions générales}
+
+Langage de l'action. 
+
+Espace de la tâche. Passage d'échelle et variable d'ordre.
+
+\section{Notions spécifiques et propositions}
+
+\section{Contributions personnelles}
+
+\chapter{Projet}
 
 \bibliographystyle{mslapa}%{apalike}%{apacite}
 
