@@ -819,10 +819,28 @@ Ce signal peut être:
   \end{itemize}
 \end{itemize}
 
+{\color{Cyan}
+Notions :
+\begin{itemize}
+ 	\item notion de variable d'état définie pour tout $t$.
+\end{itemize}
+}
+
 \paragraph{Systèmes dynamiques autonomes}
 Dans le cas autonome...
-{\color{Cyan} Notion d'attracteur}
+{\color{Cyan} 
 
+Notions :
+\begin{itemize}
+	\item système conservatif / dissipatif
+	\item Notion d'attracteur =sous-ensemble connexe $C C \mathcal{X}$ invariant par le flot : $C = \phi(C)$.  Condition de stabilité différente si discret ou continu.
+	\item relaxation du système (dynamique de relaxation). Différentes CI conduisent à différents attracteurs.
+	\item paramètre de contrôle et bifurcations
+	\item bassins d'attraction et séparatrices
+	\item diagramme de phase
+	\item paramètre d'ordre
+\end{itemize}
+}
 \paragraph{Systèmes dynamiques non-autonomes}
 
 Dans le cas non autonome, la trajectoire dépend à la fois des conditions initiales et du signal extérieur. 
@@ -956,8 +974,6 @@ Cette section
 Notion de réponse d'un mode?  
 }
 
-
-
 \section{Contributions personnelles}
 
 \chapter{Plasticité synaptique et apprentissage}
@@ -972,19 +988,20 @@ Biologiquement parlant, il s'agit de petites interfaces d'échange chimique (``b
 
 L'efficacité d'une synapse dépend de plusieurs facteurs, comme la taille du bouton synaptique, la quantité de neurotransmetteurs disponibles,  ainsi que la sensibilité de la cellule post-synaptique. Dans le cadre de ce mémoire,  cet ensemble de facteurs est résumé  sous la forme d'une valeur unique $J_{ij}$ : le ``poids'' de la synapse, où  $j$ est l'index du neurone pré-synaptique et $i$ l'index du neurone post-synaptique.
 
-La plasticité synaptique est un mécanisme biologique qui modifie l'efficacité de la synapse au cours du temps en fonction des échanges entre les cellules pré et post-synaptiques. Le poids $J_{ij}$ est donc une quantité qui évolue au cours du temps sous la forme :
+La plasticité synaptique est un mécanisme biologique qui modifie l'efficacité de la synapse au cours du temps. 
+Au niveau du réseau entier, la plasticité
+modifie les caractéristiques de la fonction de réponse des neurones. 
+
+\subsubsection{Plasticité de Hebb}
+Dans le cadre 
+proposé par Donald Hebb en 1949 \cite{Heb49}, et confirmé depuis par des observations \cite{Bli73,BIPOO98}, la plasticité est essentiellement un mécanisme local dépendant des échanges entre les cellules pré et post-synaptiques. On parle de potentiation à long terme (Long Term Potentiation - LTP). Le poids $J_{ij}$ est alors une quantité qui évolue au cours du temps sous la forme :
 \begin{align}
-J_{ij}(t) = F(J_{ij}(t_0), S_i(t), S_j(t))
+J_{ij}(t) = F( S_i(t), S_j(t), J_{ij}(t_0))
 \end{align}
-avec $t_0$ l'instant initial d'observation, $S_i(t) = \{s_i(t)\}_{t \in [t_0,..,t[}$, $S_j(t) = \{s_j(t)\}_{t \in [t_0,..,t[}$.
-La plasticité est donc essentiellement un mécanisme \textit{local} qui modifie le couplage des cellules $i$ et $j$ en fonction 
-de leurs activités respectives.  
-
-Au niveau du réseau entier, la plasticité impacte le comportement du réseau de neurones,
-en modifiant son activité, sa réactivité à certaines entrées, ou le type de
-réponse qu'il produit. 
-
-
+avec $t_0$ l'instant initial d'observation, $S_i(t) = \{s_i(t)\}_{t \in [t_0,..,t[}$, $S_j(t) = \{s_j(t)\}_{t \in [t_0,..,t[}$,
+et $F$ la fonction de mise à jour des poids synaptiques.
+%La plasticité est donc essentiellement un mécanisme \textit{local} qui modifie le couplage des cellules $i$ et $j$ en fonction 
+%de leurs activités respectives.  
 
 En reprenant les notations proposées au début du chapitre \ref{chap:dyn}, la dynamique d'ensemble devient~:
 \begin{align}\label{eq:plasti-input}
@@ -994,10 +1011,40 @@ En reprenant les notations proposées au début du chapitre \ref{chap:dyn}, la d
 \end{align}
 
 Cette équation illustre l'interdépendance entre le mécanisme d'activation $f$ (qui ``produit'' le patron d'activité $\boldsymbol{S}$ agissant sur les synapses) et le mécanisme de plasticité $F$ (qui ``produit'' le patron d'interaction $J$ qui agit sur la fonction d'activation). 
+Le mécanisme de plasticité introduit donc une interdépendance complexe entre le graphe, l'activité et le signal d'entrée.
 
 Il existe, du point de vue biologique, des mécanismes de plasticité synaptique à court terme [REF STD], à moyen terme [] et à long terme [REF LTP]. On parle de potentiation à court terme vs. potentiation à long terme.
+Dans le cadre de ce mémoire, on considérera l'évolution des poids synaptiques comme ``lente'' par rapport à la dynamique d'activation (autrement dit que les poids synaptiques sont quasi-stationnaires sur de petits intervalles de temps).
 
-Dans le cadre de la modélisation de l'apprentissage, on considérera l'évolution des poids synaptiques comme ``lente'' par rapport à la dynamique d'activation (autrement dit que les poids synaptiques sont quasi-stationnaires sur de petits intervalles de temps).
+Cette dynamique lente a donc un impact sur le comportement du réseau de neurones sur le long terme. Il s'agit essentiellement, selon l'idée initiale de Hebb, d'un mécanisme 
+de sélection dans lequel des activités corrélées tendent à se connecter, et des activité décorrélées à se déconnecter. 
+La règle de Hebb s'interprète donc généralement comme une règle qui inscrit dans le graphe la structure de covariance présente dans l'activité des neurones. Lorsque l'activité est elle-même induite par le signal d'entrée, le graphe reflète en partie les covariances présentes dans le signal.
+
+Exemples:
+\begin{itemize}
+	\item Co-activité
+	\item Covariance
+	\item STDP
+\end{itemize}
+
+\subsubsection{Plasticité induite}
+
+La plasticité induite est un mécanisme  de plasticité déclenché par un signal extérieur. Il peut s'agir, dans un cadre biologique, d'un neurotransmetteur, ou d'une entrée synaptique, spécifiques. Ce signal extérieur $r(t)$ est, dans le cas le plus simple, un scalaire agissant comme un {\color{Magenta} switch} qui ``ouvre'' ou ``ferme'' le mécanisme de plasticité.
+
+{\color{Orange} L'application alternée des plasticités hebbienne et anti-hebbienne ouvre par ailleurs la voie
+à l'implémentation de mécanismes d'apprentissage par renforcement dans les substrats neuronaux, 
+ainsi qu'à une modélisation plus précise des mécanismes de plasticité liés à la récompense et 
+à la punition dans le cerveau \shortcite{Barto1995,Schultz1997,Gurney2001}. Ces aspects sont analysés 
+plus en détail dans la section suivante.}
+
+
+en modifiant son activité, sa réactivité à certaines entrées, ou le type de
+réponse qu'il produit. 
+
+
+
+
+
 {\color{Orange} Le but est d'implémenter via la plasticité une mémoire ``persistante'', qui provoque un changement durable de la fonction de réponse.
 On souhaite inscrire sur
 le graphe de connexions la trace de faits passés en vue d'une utilisation future.}
@@ -1021,8 +1068,13 @@ Mieux comprendre les mécanismes biologiques qui sous-tendent cet apprentissage 
 	\item sur les déterminants macroscopiques des changements microscopiques et vice-versa.
 \end{itemize}
 
+Il existe deux grandes approches de la plasticité~:
+\begin{itemize}
+	\item Apprentissage sans consigne.
+	\item Apprentissage avec consigne
+\end{itemize}
 
-
+Dans une perspective computationnelle, si la fonction d'activation $f$ définit le programme, la fonction de mise à jour des poids $F$ agit sur le programme implémenté par $f$. La fonction $F$ peut donc être vue comme un mécanisme de programmation du calculateur $f$. 
 
 Approche empirique: reproduire l'apprentissage via la plasticité sur un support artificiel.
 
