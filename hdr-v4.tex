@@ -984,39 +984,47 @@ Ce chapitre est consacré à l'étude des mécanismes d'apprentissage dans les r
 \subsection{Plasticité synaptique}
 
 La synapse biologique est l'interface permettant la communication entre les neurones.
-Biologiquement parlant, il s'agit de petites interfaces d'échange chimique (``boutons'' synaptiques) situés à l'extrémité de l'arborisation terminale des axones. A l'arrivée d'un potentiel d'action, les synapses libèrent des neurotransmetteurs qui agissent sur les canaux ioniques des dendrites de la cellule post-synaptique (``libèrent'' des ions), ce qui a pour effet de modifier le potentiel de membrane de la cellule post-synaptique.
+Il s'agit de petites surfaces d'échange chimique (``boutons'' synaptiques) situés à l'extrémité de l'arborisation terminale des axones. A l'arrivée d'un potentiel d'action, les synapses libèrent des neurotransmetteurs qui agissent sur les canaux ioniques des dendrites de la cellule post-synaptique (``libèrent'' des ions), ce qui a pour effet de modifier le potentiel de membrane de la cellule post-synaptique.
 
 L'efficacité d'une synapse dépend de plusieurs facteurs, comme la taille du bouton synaptique, la quantité de neurotransmetteurs disponibles,  ainsi que la sensibilité de la cellule post-synaptique. Dans le cadre de ce mémoire,  cet ensemble de facteurs est résumé  sous la forme d'une valeur unique $J_{ij}$ : le ``poids'' de la synapse, où  $j$ est l'index du neurone pré-synaptique et $i$ l'index du neurone post-synaptique.
 
-La plasticité synaptique est un mécanisme biologique qui modifie l'efficacité de la synapse au cours du temps. 
-Au niveau du réseau entier, la plasticité
-modifie les caractéristiques de la fonction de réponse des neurones. 
+La plasticité synaptique est un mécanisme biologique qui modifie l'efficacité de la synapse au cours du temps. En reprenant 
+les notations de l'équation (\ref{eq:SD}), 
+\begin{align}
+&x' = \phi(x,J,t) \label{eq:SD-plast-x}\\
+&J' = \psi(x,J,t) \label{eq:SD-plast-J}
+\end{align}
+où $x$ est un vecteur représentant l'état du système dynamique et $J$ une matrice représentant le graphe de connexions.
+La plasticité (eq. \ref{eq:SD-plast-J})
+modifie donc les caractéristiques de la fonction de réponse des neurones (eq. \ref{eq:SD-plast-x}) et vice-versa. 
+Le mécanisme de plasticité introduit une interdépendance complexe entre le graphe, l'activité et le signal d'entrée s'il existe.
 
 \subsubsection{Plasticité de Hebb}
 Dans le cadre 
 proposé par Donald Hebb en 1949 \cite{Heb49}, et confirmé depuis par des observations \cite{Bli73,BIPOO98}, la plasticité est essentiellement un mécanisme local dépendant des échanges entre les cellules pré et post-synaptiques. On parle de potentiation à long terme (Long Term Potentiation - LTP). Le poids $J_{ij}$ est alors une quantité qui évolue au cours du temps sous la forme :
 \begin{align}
-J_{ij}(t) = F( S_i(t), S_j(t), J_{ij}(t_0))
+J_{ij}(t) = F(S_i(t), S_j(t), J_{ij}(t_0))
 \end{align}
-avec $t_0$ l'instant initial d'observation, $S_i(t) = \{s_i(t)\}_{t \in [t_0,..,t[}$, $S_j(t) = \{s_j(t)\}_{t \in [t_0,..,t[}$,
-et $F$ la fonction de mise à jour des poids synaptiques.
+avec $t_0$ l'instant initial d'observation,
+$S_j(t) = \{s_j(t)\}_{t \in [t_0,..,t[}$  l'activité pré-synaptique, $S_i(t) = \{s_i(t)\}_{t \in [t_0,..,t[}$ l'activité post-synaptique,
+et $F$ la fonction de mise à jour des synapses.
 %La plasticité est donc essentiellement un mécanisme \textit{local} qui modifie le couplage des cellules $i$ et $j$ en fonction 
 %de leurs activités respectives.  
 
-En reprenant les notations proposées au début du chapitre \ref{chap:dyn}, la dynamique d'ensemble devient~:
-\begin{align}\label{eq:plasti-input}
-&J(t) = F(\boldsymbol{S}(t), J(t_0))\nonumber\\
-&T(t) = \{\tau_{ij},J_{ij}(t)\}_{i,j\in[1,...,n]}\\
-&\boldsymbol{s}(t) = f(\boldsymbol{S}(t), \boldsymbol{I}(t);T(t)) \nonumber
-\end{align}
+%En reprenant les notations proposées au début du chapitre \ref{chap:dyn}, la dynamique d'ensemble devient~:
+%\begin{align}\label{eq:plasti-input}
+%&J(t) = F(\boldsymbol{S}(t), J(t_0))\nonumber\\
+%&T(t) = \{\tau_{ij},J_{ij}(t)\}_{i,j\in[1,...,n]}\\
+%&\boldsymbol{s}(t) = f(\boldsymbol{S}(t), \boldsymbol{I}(t);T(t)) \nonumber
+%\end{align}
 
-Cette équation illustre l'interdépendance entre le mécanisme d'activation $f$ (qui ``produit'' le patron d'activité $\boldsymbol{S}$ agissant sur les synapses) et le mécanisme de plasticité $F$ (qui ``produit'' le patron d'interaction $J$ qui agit sur la fonction d'activation). 
-Le mécanisme de plasticité introduit donc une interdépendance complexe entre le graphe, l'activité et le signal d'entrée.
+%Ce jeu d'équations illustre l'interdépendance entre le mécanisme d'activation $f$ (qui ``produit'' le patron d'activité $\boldsymbol{S}$ agissant sur les synapses) et le mécanisme de plasticité $F$ (qui ``produit'' le patron d'interaction $J$ qui agit sur la fonction d'activation). 
 
-Il existe, du point de vue biologique, des mécanismes de plasticité synaptique à court terme [REF STD], à moyen terme [] et à long terme [REF LTP]. On parle de potentiation à court terme vs. potentiation à long terme.
+
+{\color{Orange} Il existe, du point de vue biologique, des mécanismes de plasticité synaptique à court terme [REF STD] et à long terme [REF LTP]. On parle de potentiation à court terme vs. potentiation à long terme.}
 Dans le cadre de ce mémoire, on considérera l'évolution des poids synaptiques comme ``lente'' par rapport à la dynamique d'activation (autrement dit que les poids synaptiques sont quasi-stationnaires sur de petits intervalles de temps).
 
-Cette dynamique lente a donc un impact sur le comportement du réseau de neurones sur le long terme. Il s'agit essentiellement, selon l'idée initiale de Hebb, d'un mécanisme 
+Cette dynamique lente a un impact sur le comportement du réseau de neurones sur le long terme. Il s'agit essentiellement, selon l'idée initiale de Hebb, d'un mécanisme 
 de sélection dans lequel des activités corrélées tendent à se connecter, et des activité décorrélées à se déconnecter. 
 La règle de Hebb s'interprète donc généralement comme une règle qui inscrit dans le graphe la structure de covariance présente dans l'activité des neurones. Lorsque l'activité est elle-même induite par le signal d'entrée, le graphe reflète en partie les covariances présentes dans le signal.
 
@@ -1029,28 +1037,29 @@ Exemples:
 
 \subsubsection{Plasticité induite}
 
-La plasticité induite est un mécanisme  de plasticité déclenché par un signal extérieur. Il peut s'agir, dans un cadre biologique, d'un neurotransmetteur, ou d'une entrée synaptique, spécifiques. Ce signal extérieur $r(t)$ est, dans le cas le plus simple, un scalaire agissant comme un {\color{Magenta} switch} qui ``ouvre'' ou ``ferme'' le mécanisme de plasticité.
+La plasticité induite est un mécanisme  de plasticité déclenché par un signal extérieur. 
+Il peut s'agir, dans un cadre biologique, d'un neurotransmetteur ou d'une entrée synaptique spécifique, i.e.~:
+\begin{align}
+J_{ij}(t) = F( S_i(t), S_j(t), y(t), J_{ij}(t_0))
+\end{align}
 
-{\color{Orange} L'application alternée des plasticités hebbienne et anti-hebbienne ouvre par ailleurs la voie
-à l'implémentation de mécanismes d'apprentissage par renforcement dans les substrats neuronaux, 
-ainsi qu'à une modélisation plus précise des mécanismes de plasticité liés à la récompense et 
+Ce signal extérieur $y(t)$ est~: 
+\begin{itemize}
+	\item dans le cas le plus simple, un  déclencheur binaire qui ``ouvre'' ou ``ferme'' le mécanisme de plasticité;
+	\item un facteur réel qui, selon son signe, conduit à une plasticité Hebbiennes ou anti-Hebbienne;
+	\item un signal d'erreur transmis par des synapses spécifiques. Dans ce cas, $y$ a le rôle d'un ``méta-signal'' transmettant une consigne sur la manière dont il faut modifier le graphe de connexions;
+	\item...
+\end{itemize}
+
+\paragraph{Remarque} On notera que l'application alternée d'une plasticité Hebbienne et anti-Hebbienne ouvre la voie
+à l'implémentation de mécanismes d'apprentissage par renforcement, 
+ainsi qu'à la modélisation des mécanismes de plasticité liés à la récompense et 
 à la punition dans le cerveau \shortcite{Barto1995,Schultz1997,Gurney2001}. Ces aspects sont analysés 
-plus en détail dans la section suivante.}
-
-
-en modifiant son activité, sa réactivité à certaines entrées, ou le type de
-réponse qu'il produit. 
-
-
-
-
-
-{\color{Orange} Le but est d'implémenter via la plasticité une mémoire ``persistante'', qui provoque un changement durable de la fonction de réponse.
-On souhaite inscrire sur
-le graphe de connexions la trace de faits passés en vue d'une utilisation future.}
+plus en détail dans le chapitre suivant.
 
 \subsection{Apprentissage}
 
+\subsubsection{Perspective biologique}
 Selon une perspective biologique et développementale, l'apprentissage
 est le processus de changement comportemental, 
 en relation avec ce mécanisme de plasticité. 
@@ -1068,29 +1077,73 @@ Mieux comprendre les mécanismes biologiques qui sous-tendent cet apprentissage 
 	\item sur les déterminants macroscopiques des changements microscopiques et vice-versa.
 \end{itemize}
 
-Il existe deux grandes approches de la plasticité~:
+\subsubsection{Perspective computationnelle}
+
+A l'autre extrémité du spectre,  l'apprentissage automatique
+(le ``Machine learning'')  consiste à confier une tâche 
+de programmation à un algorithme, dit algorithme d'apprentissage. 
+En d'autres termes, il faut écrire un programme \textit{capable de programmer}. 
+%le réseau de neurones. 
+Ce \textit{méta-programme} s'appuie sur des méta-données (ou ``contraintes'') qui sont 
+des données servant à produire le programme.
+Cette conception de la programmation basée sur l'optimisation
+d'un tableau de paramètres via un ensemble de contraintes
+remonte historiquement au principes de la programmation dynamique \shortcite{Bellman1956}.
+
+
+L'apprentissage automatique 
+s'exprime donc principalement
+sous la forme d'un problème d'optimisation dans des espaces vectoriels de grande dimension.  Il s'agit  d'optimiser une fonction de réponse $f_T$, définie selon un tableau de paramètres $T$, selon un critère d'optimalité défini par une fonction de coût $\mathcal{H}$ basée sur un jeu de contraintes $\mathbf{D}$~:
+\begin{equation}
+\min_T \mathcal{H}(T,\mathbf{D})
+\end{equation}
+où $T$ est le ``programme'' et $\mathbf{D}$ les ``méta-données''.
+ 
+Dans le cadre de l'apprentissage automatique, les contraintes $\mathbf{D}$ sont les données d'apprentissage, et prennent la forme d'une base d'exemples  organisée sous forme de couples $\{(x_1,y_1),...,(x_n,y_n)\}$.  L'optimisation consiste à définir une fonction de l'espace des entrées $\mathcal{X}$ vers l'espace des sorties $\mathcal{Y}$ qui minimise la distance aux données. 
+
+
+L'optimisation par énumération est généralement impossible pour les problèmes de grande dimension. On a alors recours à des algorithmes dits d'''optimisation stochastique'', utilisant des hypothèses simplificatrices (comme la séparabilité linéaire des données ou encore le caractère Gaussien de distributions génératrices).  
+
+Exemples:
 \begin{itemize}
-	\item Apprentissage sans consigne.
-	\item Apprentissage avec consigne
+	\item Les approches discriminatives \shortcite{Vap95}
+	extraient des représentants caractéristiques des données (vecteurs supports). 
+	\item Les approches explicatives \shortcite{Bishop2006}
+	identifient la source cachée des observations (les facteurs causaux) selon des modèles probabilistes pré-définis.
+	\item les réseaux de neurones (voir section suivante), 
+	dont les caractéristiques propres (nombre de neurones, nombre de couches cachées, architecture
+	et patron de connexions), déterminent une
+	méthode d'optimisation spécifique.
 \end{itemize}
 
-Dans une perspective computationnelle, si la fonction d'activation $f$ définit le programme, la fonction de mise à jour des poids $F$ agit sur le programme implémenté par $f$. La fonction $F$ peut donc être vue comme un mécanisme de programmation du calculateur $f$. 
+Le but de l'algorithme d'apprentissage est alors d'extraire des données fournies des régularités non apparentes, des facteurs explicatifs,
+permettant de mieux prédire et classifier les données nouvelles. 
 
-Approche empirique: reproduire l'apprentissage via la plasticité sur un support artificiel.
+\paragraph{Appariement} La plupart de ces algorithmes fonctionnent selon un principe d'\textit{appariement} (``pattern matching''), c'est à dire sur la construction, à partir des données, d'un ensemble de vecteurs ``caractéristiques''. Ces vecteurs caractéristiques, vus comme un un dictionnaire de formes, constituent une base de description synthétique des données d'entrée. La projection des données d'entrée sur cet espace de description facilite ensuite le traitement et l'interprétation des données.  L’apprentissage revient donc à la constitution d'un vocabulaire de base qui sert de clé d'interprétation des données d'entrée. 
+
+{\color{Cyan} 
+	Exemples :
+	\begin{itemize}
+		\item Appariement exclusif~: les barycentres des partitions génératrices permettant d'interpréter une donnée d'entrée comme membre d'une classe donnée. Principe de l'argmax.
+		\item Appariement non exclusif : projection des données sur une base de plus petite dimension. 
+	\end{itemize}
+}
+
+%finissent la manière dont les données vont être traitées et interprétées.
 
 
 
-{\bf !!Plaçons-nous par exemple dans une perspective computationnelle autonome!!}, 
-dans laquelle un programme doit pouvoir se passer d'utilisateur. 
-La consigne doit provenir d'un programme interne (un ``méta programme'') qui 
-agit sur le programme courant pour l'``améliorer'' en fonction des événements se présentent.
-{\bf !!Même si la notion de méta-programme ne pose pas de difficulté conceptuelle, elle est
-	en pratique difficile à mettre en oeuvre dans les architectures informatiques traditionnelles. 
-	La difficulté réside dans 
-	le choix des événements à considérer parmi l'ensemble des événements qui se présentent, et surtout 
-	dans la manière dont les événements pris en compte influencent le comportement logiciel futur.}
+\paragraph{Apprentissage en ligne}
+On parle d'apprentissage en ligne lorsque les données sont présentées séquentiellement.
+L'apprentissage consiste à appliquer de petits ajustements à chaque nouvelle donnée dans un 
+sens qui augmente localement la justesse du comportement, en espérant que chacun de ces ajustements locaux 
+augmente la justesse globale,
+selon le principe de la descente de gradient ``stochastique''.
 
-\subsection{Réseaux de neurones et apprentissage automatique}
+\paragraph{Lien avec le biologie}
+
+
+\subsection{Réseaux de neurones et apprentissage}
 
 La programmation des réseaux de neurones est un des piliers de la recherche 
 en apprentissage automatique (ou ``\textit{Machine learning}''). 
@@ -1100,14 +1153,6 @@ conforme au calcul souhaité.
 Le jeu de paramètres est assimilables à un \textit{programme} et
 le choix de ces paramètres correspond à la programmation du réseau. 
 
-Le principe de l'apprentissage automatique est de confier cette tâche 
-de programmation à un algorithme, dit algorithme d'apprentissage. 
-En d'autres termes, il faut écrire un programme capable de programmer le réseau de neurones. 
-Ce \textit{méta-programme} s'appuie sur des méta-données qui sont 
-des données servant à produire le programme.
-Cette conception de la programmation basée sur l'optimisation
-d'un tableau de paramètres via un ensemble de contraintes
-remonte historiquement au principes de la programmation dynamique \shortcite{Bellman1956}.
 
 Dans le cadre de l'apprentissage automatique, 
 les réseaux de neurones sont principalement utilisés pour
@@ -1163,23 +1208,64 @@ Reconnaissance de formes. Feedback positif / feedback négatif. Mémoire associa
 Résonance.
 
 
+\subsection{Perspective computationnelle de la plasticité de Hebb}
+
+Dans une perspective computationnelle, si la fonction d'activation $f$ définit le programme, la fonction de mise à jour des poids $F$ agit sur le programme implémenté par $f$. La fonction $F$ peut donc être vue comme un mécanisme de programmation du calculateur $f$. 
+
+Approche empirique: reproduire l'apprentissage via la plasticité sur un support artificiel.
+
+en modifiant son activité, sa réactivité à certaines entrées, ou le type de
+réponse qu'il produit. 
+
+
+{\color{Orange} Le but est d'implémenter via la plasticité une mémoire ``persistante'', qui provoque un changement durable de la fonction de réponse.
+	On souhaite inscrire sur
+	le graphe de connexions la trace de faits passés en vue d'une utilisation future.}
+
+{\bf !!Plaçons-nous par exemple dans une perspective computationnelle autonome!!}, 
+dans laquelle un programme doit pouvoir se passer d'utilisateur. 
+La consigne doit provenir d'un programme interne (un ``méta programme'') qui 
+agit sur le programme courant pour l'``améliorer'' en fonction des événements se présentent.
+{\bf !!Même si la notion de méta-programme ne pose pas de difficulté conceptuelle, elle est
+	en pratique difficile à mettre en oeuvre dans les architectures informatiques traditionnelles. 
+	La difficulté réside dans 
+	le choix des événements à considérer parmi l'ensemble des événements qui se présentent, et surtout 
+	dans la manière dont les événements pris en compte influencent le comportement logiciel futur.}
+
+Il existe deux grandes approches de la plasticité~:
+\begin{itemize}
+	\item Apprentissage sans consigne.
+	\item Apprentissage avec consigne
+\end{itemize}
+
+
 \section{Notions spécifiques et propositions}
+
+\subsection{Réduction de la dynamique}
 
 Complexité, chaos et réduction de la complexité.
 
-Calcul collectif - intégration - assemblée
 
-Le mécanisme de sélection/intégration (Freeman)
+\subsection{Sélection/intégration}
 
-Mecanisme de choix. Lien entre choix et plasticité. On reconnait ce que l'on connait (Reconnaisance et connaissance). analogie avec spike de population (spike = significatif) 
+Mécanismes de choix qui sélectionne les signaux et les événements plus significatifs;
 
 Passage de seuil. ``Spike'' de population. De la cellule à la population. 
 Réponse de population induite.
 
+(Freeman) et  sélection/intégration  par réduction
+
+Calcul collectif - intégration - assemblée
+
+Mecanisme de choix. Lien entre choix et plasticité. On reconnait ce que l'on connait (Reconnaisance et connaissance). analogie avec spike de population (spike = significatif) 
+
+
 
 sélection = Analogie accumulation d'évidence?
 
+\subsection{Construire les modes de la fonction de réponse}
 
+Une des thèses du mémoire : feed+/feed-.
 
 \section{Contributions personnelles}
 
