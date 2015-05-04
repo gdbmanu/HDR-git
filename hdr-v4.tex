@@ -1099,48 +1099,38 @@ sous la forme d'un problème d'optimisation dans des espaces vectoriels de grand
 \end{equation}
 où $T$ est le ``programme'' et $\mathbf{D}$ les ``méta-données''.
  
-Dans le cadre de l'apprentissage automatique, les contraintes $\mathbf{D}$ sont les données d'apprentissage, et prennent la forme d'une base d'exemples  organisée sous forme de couples $\{(x_1,y_1),...,(x_n,y_n)\}$.  L'optimisation consiste à définir une fonction de l'espace des entrées $\mathcal{X}$ vers l'espace des sorties $\mathcal{Y}$ qui minimise la distance aux données. 
+Dans le cadre de l'apprentissage automatique, les contraintes $\mathbf{D}$ sont les données d'apprentissage, et prennent la forme d'une base d'exemples  organisée sous forme de couples $\{(x_1,y_1),...,(x_n,y_n)\}$.  L'optimisation consiste à trouver une fonction de l'espace des entrées $\mathcal{X}$ vers l'espace des sorties $\mathcal{Y}$ qui minimise la distance aux données. 
 
 
 L'optimisation par énumération est généralement impossible pour les problèmes de grande dimension. On a alors recours à des algorithmes dits d'''optimisation stochastique'', utilisant des hypothèses simplificatrices (comme la séparabilité linéaire des données ou encore le caractère Gaussien de distributions génératrices).  
+ Le but de l'algorithme d'apprentissage est alors d'extraire des données fournies des régularités non apparentes, des facteurs explicatifs,
+	permettant de mieux prédire et classifier les données nouvelles.
 
 Exemples:
 \begin{itemize}
 	\item Les approches discriminatives \shortcite{Vap95}
-	extraient des représentants caractéristiques des données (vecteurs supports). 
+	extraient des représentants caractéristiques des données (vecteurs supports). {\color{Cyan} Vecteurs les plus discriminants.}
 	\item Les approches explicatives \shortcite{Bishop2006}
-	identifient la source cachée des observations (les facteurs causaux) selon des modèles probabilistes pré-définis.
-	\item les réseaux de neurones (voir section suivante), 
+	identifient la source cachée des observations (les facteurs causaux) selon des modèles probabilistes pré-définis. {\color{Cyan} Vecteurs caractéristiques d'une classe.}
+	\item Les réseaux de neurones (voir section suivante), 
 	dont les caractéristiques propres (nombre de neurones, nombre de couches cachées, architecture
 	et patron de connexions), déterminent une
 	méthode d'optimisation spécifique.
 \end{itemize}
 
-Le but de l'algorithme d'apprentissage est alors d'extraire des données fournies des régularités non apparentes, des facteurs explicatifs,
-permettant de mieux prédire et classifier les données nouvelles. 
-
-\paragraph{Appariement} La plupart de ces algorithmes fonctionnent selon un principe d'\textit{appariement} (``pattern matching''), c'est à dire sur la construction, à partir des données, d'un ensemble de vecteurs ``caractéristiques''. Ces vecteurs caractéristiques, vus comme un un dictionnaire de formes, constituent une base de description synthétique des données d'entrée. La projection des données d'entrée sur cet espace de description facilite ensuite le traitement et l'interprétation des données.  L’apprentissage revient donc à la constitution d'un vocabulaire de base qui sert de clé d'interprétation des données d'entrée. 
-
-{\color{Cyan} 
-	Exemples :
-	\begin{itemize}
-		\item Appariement exclusif~: les barycentres des partitions génératrices permettant d'interpréter une donnée d'entrée comme membre d'une classe donnée. Principe de l'argmax.
-		\item Appariement non exclusif : projection des données sur une base de plus petite dimension. 
-	\end{itemize}
-}
-
-%finissent la manière dont les données vont être traitées et interprétées.
-
-
-
 \paragraph{Apprentissage en ligne}
 On parle d'apprentissage en ligne lorsque les données sont présentées séquentiellement.
 L'apprentissage consiste à appliquer de petits ajustements à chaque nouvelle donnée dans un 
-sens qui augmente localement la justesse du comportement, en espérant que chacun de ces ajustements locaux 
+sens qui augmente localement la justesse de la fonction de réponse, en espérant que chacun de ces ajustements locaux 
 augmente la justesse globale,
 selon le principe de la descente de gradient ``stochastique''.
 
-\paragraph{Lien avec le biologie}
+{\color{Cyan}
+\subsubsection{Perspective psychologique}
+Le conditionnement Pavlovien.
+
+L'approche constructiviste (Piaget).
+}
 
 
 \subsection{Réseaux de neurones et apprentissage}
@@ -1241,9 +1231,33 @@ Il existe deux grandes approches de la plasticité~:
 
 \section{Notions spécifiques et propositions}
 
+{\color{Cyan}
+	Le modèle qui est proposé, c'est principalement une alternance entre (i) absence de réponse et (ii) mise en œuvre de programmes moteurs spécifiques.
+	
+	Ce fonctionnement est lié au principe d'assemblée neuronale et à la plasticité de Hebb, à travers la notion  de sélection (au sein d'un réservoir).
+	
+	On peut étendre à l'idée de vocabulaire comportemental/appariement exclusif/''winner takes all''/argmax.}
+
 \subsection{Réduction de la dynamique}
 
 Complexité, chaos et réduction de la complexité.
+
+Principe de sélection. 
+
+
+\subsection{Principe d'appariement exclusif}
+
+La plupart de ces algorithmes fonctionnent selon un principe d'\textit{appariement} (``pattern matching''), c'est à dire sur la construction, à partir des données, d'un ensemble de vecteurs ``caractéristiques''. Ces vecteurs caractéristiques, vus comme un un dictionnaire de formes, constituent une base de description synthétique des données d'entrée. La projection des données d'entrée sur cet espace de description facilite ensuite le traitement et l'interprétation des données.  L’apprentissage revient donc à la constitution d'un vocabulaire de base qui sert de clé d'interprétation des données d'entrée. 
+
+{\color{Cyan} 
+	Exemples :
+	\begin{itemize}
+		\item Appariement exclusif~: les barycentres des partitions génératrices permettant d'interpréter une donnée d'entrée comme membre d'une classe donnée. Principe de l'argmax ou du ``winner takes all''. Non-linéaire. \textit{Enumeration.}
+		\item Appariement non exclusif : les données sont interprétées comme une combinaison de facteurs.  projection des données sur une base de plus petite dimension. Matching pursuit. Dictionnaire. Combinaison linéaire. ACP, SVD, deep learning, ... \textit {Décomposition}.
+	\end{itemize}
+}
+
+%finissent la manière dont les données vont être traitées et interprétées.
 
 
 \subsection{Sélection/intégration}
