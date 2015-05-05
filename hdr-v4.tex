@@ -1090,6 +1090,11 @@ Cette conception de la programmation basée sur l'optimisation
 d'un tableau de paramètres via un ensemble de contraintes
 remonte historiquement au principes de la programmation dynamique \shortcite{Bellman1956}.
 
+Le but d'un algorithme d'apprentissage est de définir 
+le jeu de paramètres $T$ de manière à produire une sortie 
+conforme au calcul souhaité. 
+Le jeu de paramètres est assimilables à un \textit{programme} et
+le choix de ces paramètres correspond à la programmation du réseau. 
 
 L'apprentissage automatique 
 s'exprime donc principalement
@@ -1135,21 +1140,18 @@ L'approche constructiviste (Piaget).
 
 \subsection{Réseaux de neurones et apprentissage}
 
-La programmation des réseaux de neurones est un des piliers de la recherche 
-en apprentissage automatique (ou ``\textit{Machine learning}''). 
-Le but d'un algorithme d'apprentissage est de définir 
-le jeu de paramètres $T$ de manière à produire une sortie 
-conforme au calcul souhaité. 
-Le jeu de paramètres est assimilables à un \textit{programme} et
-le choix de ces paramètres correspond à la programmation du réseau. 
+Il est facile d'établir une correspondance formelle entre l'apprentissage (au sens informatique) et la plasticité, en identifiant les paramètres de la fonction de réponse aux poids synaptiques, et la plasticité à un mécanisme de mise à jour des paramètres guidé par les données.
 
+Ce cadre général est celui des réseaux de neurones, vus dans le chapitre précédent: la fonction de réponse est implémentée sous la forme d'un graphe : les noeuds sont les ``neurones'' et les arêtes sont les ``synapses''. Les réseaux de neurones et leurs méthodes de programmation sont un des piliers de la recherche 
+en apprentissage automatique.    
 
-Dans le cadre de l'apprentissage automatique, 
+Dans ce cadre, 
 les réseaux de neurones sont principalement utilisés pour
 des tâches de catégorisation de leurs données d'entrée.
 Les méta-données sont alors constituées 
 d'un jeu de données d'entrée ainsi que des sorties attendues,
 appelé \textit{base d'apprentissage}.
+La plupart des algorithmes d'apprentissages s'affranchissent le la contrainte de localité définie par Hebb et implémentent des mécanismes de mise à jour basés sur la propagation d'erreur (et non sur la conjonction d'activité).  
 
 % programme = paramètres
 % algorithme = meta programme
