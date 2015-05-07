@@ -1148,9 +1148,9 @@ De nombreux points communs peuvent être établis entre l'apprentissage computat
 
 \paragraph{Reconnaissance de formes et apprentissage}
 
-Ce qui différencie principalement le calcul traditionnel du calcul distribué est la taille et la dimension des opérandes. Le calcul distribué s'adapte bien à la réalisation d'opérations matricielles dans les espaces de grande dimension. 
+Ce qui différencie principalement le calcul traditionnel du calcul distribué est la taille et la dimension des opérandes. Le calcul distribué s'adapte bien à la réalisation d'opérateurs (a priori non linéaires) dans les espaces de grande dimension. 
 
-Le mécanisme fondamental sur lequel s'appuient la plupart des algorithmes d'apprentissage automatique est celui le l'\textit{appariement} entre un \textit{dictionnaires de formes} et un vecteur (ou un ensemble de vecteurs) d'entrée. 
+Le mécanisme fondamental sur lequel s'appuient la plupart des algorithmes d'apprentissage automatique est celui le l'\textit{appariement} (``\textit{pattern matching}'') entre un \textit{dictionnaires de formes} et un vecteur (ou un ensemble de vecteurs) d'entrée. 
 Cet appariement se réalise:
 \begin{itemize}
 	\item à l'aide d'un produit scalaire
@@ -1162,10 +1162,10 @@ Cet appariement se réalise:
 \end{itemize}
 
 La plupart des algorithmes d'apprentissage consistent à construire des dictionnaires de formes qui servent de clé d'interprétation des données d'entrée. 
-Le choix de ces formes caractéristiques est bien sûr dépendant des capacités d'expression du programme sous-jacent, principalement~:
+Le choix de ces formes caractéristiques est bien sûr dépendant des capacités d'expression de la fonction de réponse~:
 \begin{itemize}
 	\item nombre de formes (taille du dictionnaire)
-	\item types de dépendances pouvant être capturées (dépendances entre classes, hiérarchies, dépendances temporelles, etc.)
+	\item types de dépendances pouvant être capturées (dépendances entre classes, dépendances spatiales, hiérarchies, dépendances temporelles, etc.)
 \end{itemize}
 
 {\bf Remarque~:} contrairement aux approches de traitement du signal classique (décomposition du signal sur des bases propices à l'analyse), les dictionnaires de formes sont ici entièrement \textit{construits} à partir des contraintes, c'est à dire principalement le jeu de données fourni.
@@ -1181,7 +1181,6 @@ Résonance.}
 \paragraph{Types de problèmes}
 
 La fonction de réponse $f_T$ est en général une projection sur un espace $\mathcal{Y}$ de dimension plus petite que l'espace d'entrée $\mathcal{X}$.
- 
 La fonction opère donc une \textit{réduction} de son espace d'entrée, c'est à dire qu'elle réduit les données d'entrée à un petit nombre de caractéristiques. C'est donc un transformation non-inversible du signal d'entrée avec perte d'information.
 
 La nature de cet espace de sortie (continu ou discret) définit deux grands types de problèmes d'apprentissage. 
@@ -1192,42 +1191,69 @@ La nature de cet espace de sortie (continu ou discret) définit deux grands type
 	\item Lorsque l'espace de sortie est continu, on parle de problème de régression (ou de prédiction). La réponse est en général le résultat d'une \textit{décomposition} des données d'entrée sur une base de plus petite dimension. On parle dans ce cas d'\textit{appariement non exclusif} puisque les données d'entrée s'apparient à des degrés divers aux différentes formes de la base pour produire la réponse. 
 \end{itemize}
 
+{\color{Cyan} Remarque~: projection dans un espace de pls grande dimension \--- espace de redescription.}
+
 \paragraph{Types de données}
 
-La construction du dictionnaire de formes s'appuie sur les contraintes exprimées par les données d'apprentissage. 
-
-{\color{Cyan}
-
+La construction du dictionnaire de formes s'appuie sur des contraintes exprimées dans les données d'apprentissage. On distingue en général l'apprentissage guidé par l'erreur (supervisé ou semi-supervisé) et l'apprentissage guidé par le modèle.
 \begin{itemize}
-\item Apprentissage supervisé et conditionnement simple
-
-\item Apprentissage par renforcement et conditionnement opérant
-
-\item Apprentissage non-supervisé
-
+	\item L'apprentissage est guidé par l'erreur lorsqu'il existe une fonction d'erreur (ou fontion de ``\textit{feedback}'') $l$  qui ``note'' la réponse produite par la fonction de réponse. Exemples~:
+	\begin{itemize}
+		\item  fonction différence~: $l(y,f_T(x)) = y - f_T(x)$
+		\item fonction distance~:
+		$l(y,f_T(x)) = ||y - f_T(x)||$
+		\item fonction de perte (ou  ``\textit{loss}'')
+		$l(y,f_T(x)) = \mathbf{1}_{y \neq f_T(x)}$
+		\item etc...
+	\end{itemize}
+	Le guidage est plus ou moins contraignant selon le type de fonction d'erreur considéré. 
+	\begin{itemize}
+		\item On parle d'apprentissage \textit{supervisé} (ou à information totale) lorsque la réponse désirée est connue,
+		\item et d'apprentissage \textit{par renforcement} (ou à information partielle) lorsque la fonction d'erreur ne fournit qu'une ``indication'' (de type ``bien/mal) sur la justesse de la réponse.  
+	\end{itemize} 
+	\item L'apprentissage est guidé par le modèle lorsque les capacités d'expression de la fonction de réponse (principalement le nombre et le type de formes \---~ou classes~\--- identifiables) contraignent l'espace des réponses possibles. On parle d'apprentissage \textit{non supervisé}.
 \end{itemize}
-}
+Le principe d'un guidage plus ou moins contraignant se retrouve également dans la littérature de psychologie expérimentale classique, dans laquelle on parle~:
+\begin{itemize}
+	\item de conditionnement pavlovien (lorsque le comportement est guidé par une réponse réflexe à un stimulus) {\color{Cyan}[PAVLOV]}
+	\item et conditionnement opérant (lorsque le comportement est guidé par une récompense) {\color{Cyan}[SKINNER]}. 
+\end{itemize} 
 
-\paragraph{Apprentissage en ligne}
-On parle d'apprentissage en ligne lorsque les données sont présentées séquentiellement.
+\paragraph{Apprendre et oublier}
+
+Une dernière distinction concerne le caractère stationnaire ou non-stationnaire des données d'apprentissage lorsque le jeu de données est indexé sur l'axe temporel. 
+
+On parle d'apprentissage ``en ligne'' lorsque les données sont présentées séquentiellement.
 L'apprentissage consiste à appliquer de petits ajustements à chaque nouvelle donnée dans un 
 sens qui augmente localement la justesse de la fonction de réponse, en espérant que chacun de ces ajustements locaux 
 augmente la justesse globale,
 selon le principe de la descente de gradient ``stochastique''.
 
-\subsubsection{Apprentissage et mémoire}
+Ce mécanisme d'apprentissage en ligne a l'avantage de rester valide lorsque les donnéessont non-stationnaires Ainsi les régularités observéees durant les premières phases de l'apprentisage ne sont plus nécessairement présentes
+à une étape ultérieure de l'apprentissage.
+%~: certaines trajectoires sont ``abandonnées''. 
+Dans une perspective de parcimonie 
+(ou de ressource limitée), il est avantageux d'oublier certains faits passés pour mieux appréhender les faits nouveaux, autrement
+dit oublier pour mieux apprendre.
+Cette prise en compte du ``vieillissement'' de l'environnement conduit à accorder plus de crédit à des observations
+récentes qu'aux observations anciennes \shortcite{Kivinen2004}, et donc \textit{oublier pour mieux apprendre}. 
 
-{\color{Cyan}
-\subsubsection{Perspective psychologique}
-Le conditionnement Pavlovien.
 
-L'approche constructiviste (Piaget).
-}
+%{\color{Cyan}
+%\subsubsection{Perspective psychologique}
+%Le conditionnement Pavlovien.
+
+%L'approche constructiviste (Piaget).
+%}
 
 
 \subsection{Réseaux de neurones et apprentissage}
 
-Il est facile d'établir une correspondance formelle entre l'apprentissage (au sens informatique) et la plasticité, en identifiant les paramètres de la fonction de réponse aux poids synaptiques, et la plasticité à un mécanisme de mise à jour des paramètres guidé par les données.
+Il est facile d'établir une correspondance formelle entre l'apprentissage (au sens informatique) et la plasticité, en identifiant~:
+\begin{itemize}
+	\item les paramètres de la fonction de réponse aux poids synaptiques,
+	\item et la plasticité à un mécanisme de mise à jour des paramètres guidé par les données.
+\end{itemize} 
 Ce cadre général est celui des réseaux de neurones, vus dans le chapitre précédent: la fonction de réponse est implémentée sous la forme d'un graphe : les noeuds sont les ``neurones'' et les arêtes sont les ``synapses''. Les réseaux de neurones et leurs méthodes de programmation sont un des piliers de la recherche 
 en apprentissage automatique.    
 
@@ -1237,7 +1263,7 @@ des tâches de catégorisation de leurs données d'entrée.
 Les méta-données sont alors constituées 
 d'un jeu de données d'entrée ainsi que des sorties attendues,
 appelé \textit{base d'apprentissage}.
-La plupart des algorithmes d'apprentissages s'affranchissent le la contrainte de localité définie par Hebb et implémentent des mécanismes de mise à jour basés sur la propagation d'erreur (et non sur la conjonction d'activité).  
+La plupart des algorithmes d'apprentissages s'affranchissent de la contrainte de localité définie par Hebb et implémentent des mécanismes de mise à jour basés sur la propagation d'erreur (et non sur la conjonction d'activité).  
 
 % programme = paramètres
 % algorithme = meta programme
@@ -1273,13 +1299,21 @@ un principe de traitement séquentiel (``\textit{feed forward}'')
 
 
 \subsubsection{Modèles récurrents}
+{\color{Cyan}
 Cas des RN récurrents. Règle de Hebb et mémoires associatives.
 
 Assemblées neuronales et règle de Hebb. Intégration
 
+Architectures récurrentes et séquences (patrons spatio-temporels)
+
+
+Modèles récurrents et mémoire. En particulier mémoire associative. Les ``faits''. 
+}
 
 
 \subsection{Perspective computationnelle de la plasticité de Hebb}
+
+La plasticité de Hebb est, comme nous l'avons vu, une règle de modification locale du graphe fondée sur les conjonctions d'activité pré- et post-synaptiques. 
 
 Dans une perspective computationnelle, si la fonction d'activation $f$ définit le programme, la fonction de mise à jour des poids $F$ agit sur le programme implémenté par $f$. La fonction $F$ peut donc être vue comme un mécanisme de programmation du calculateur $f$. 
 
@@ -1303,21 +1337,29 @@ agit sur le programme courant pour l'``améliorer'' en fonction des événements
 	le choix des événements à considérer parmi l'ensemble des événements qui se présentent, et surtout 
 	dans la manière dont les événements pris en compte influencent le comportement logiciel futur.}
 
-Il existe deux grandes approches de la plasticité~:
-\begin{itemize}
-	\item Apprentissage sans consigne.
-	\item Apprentissage avec consigne
-\end{itemize}
+%Il existe deux grandes approches de la plasticité~:
+%\begin{itemize}
+%	\item Apprentissage sans consigne.
+%	\item Apprentissage avec consigne
+%\end{itemize}
 
 
 \section{Notions spécifiques et propositions}
 
 {\color{Cyan}
+	Idée de base~: étudier le rôle de l'activité récurrente dans le cadre de l'apprentissage. En particulier: reconnaissance de patrons spatio-temporels.   
+	
 	Le modèle qui est proposé, c'est principalement une alternance entre (i) absence de réponse et (ii) mise en œuvre de programmes moteurs spécifiques.
 	
 	Ce fonctionnement est lié au principe d'assemblée neuronale et à la plasticité de Hebb, à travers la notion  de sélection (au sein d'un réservoir).
 	
-	On peut étendre à l'idée de vocabulaire comportemental/appariement exclusif/''winner takes all''/argmax.}
+	On peut étendre à l'idée de vocabulaire comportemental/appariement exclusif/''winner takes all''/argmax.
+	
+	Modèle de mémoire basé sur l'interprétation suivante ~: les formes mémorisées sont des ``faits''. }
+
+\subsection{La réponse ``je ne sais pas''}
+
+\subsection{Le principe du réservoir}
 
 \subsection{Réduction de la dynamique}
 
