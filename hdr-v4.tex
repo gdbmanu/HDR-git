@@ -1115,7 +1115,7 @@ Exemples:
 \begin{itemize}
 	\item Les approches discriminatives \shortcite{Vap95}
 	extraient des représentants caractéristiques des données (vecteurs supports). {\color{Cyan} Vecteurs les plus discriminants.}
-	\item Les approches explicatives \shortcite{Bishop2006}
+	\item Les approches prédictives \shortcite{Bishop2006}
 	identifient la source cachée des observations (les facteurs causaux) selon des modèles probabilistes pré-définis. {\color{Cyan} Vecteurs caractéristiques d'une classe.}
 	\item Les réseaux de neurones (voir section suivante), 
 	dont les caractéristiques propres (nombre de neurones, nombre de couches cachées, architecture
@@ -1297,6 +1297,8 @@ un principe de traitement séquentiel (``\textit{feed forward}'')
 	séparer les données d'entrée. 
 \end{itemize}
 
+L'organisation d'un réseau à couches correspond à la transformation d'un signal d'entrée par étapes successives pour produire un signal de sortie. Les couches dites ``cachées'' correspondent à des étapes de calcul intermédiaires. 
+La programmation des modèles à couches repose sur un principe de \textit{propagation du signal d'erreur} dans le sens inverse de la propagation des données, de la sortie vers l'entrée [REFERENCE BACKPROP].  
 
 \subsubsection{Modèles récurrents}
 {\color{Cyan}
@@ -1314,30 +1316,11 @@ Modèles récurrents et mémoire. En particulier mémoire associative. Les ``fai
 \subsection{Perspective computationnelle de la plasticité de Hebb}
 
 La plasticité de Hebb est, comme nous l'avons vu, une règle de modification locale du graphe fondée sur les conjonctions d'activité pré- et post-synaptiques. 
-Le principe de programmation par conjonction d'activité est articulé, dans le livre de Hebb \cite{Heb49}, avec le concept d'\textit{assemblée neuronale}. 
+La règle de Hebb est une règle essentiellement additive et s'interprète comme la règle de ``\textit{plus du même}''. 
+En pratique, le mécanisme facilitateur de Hebb est couplé avec un mécanisme stabilisateur (soustractif) qui évite la divergence du processus (via un principe de sélection compétitive).  
 
-Une assemblée neuronale est un sous-ensemble de nœuds du réseau s'activant de manière coordonnée, et de façon réitérée au cours du temps.
-La notion d'assemblée est donc liée à la notion d'activité~: une assemblées est un patron d'activité qui réapparaît fréquemment (l'activité d'un nœud étant identifiée à un état ``haut'').
+Il n'y a pas dans le cadre de la plasticité de Hebb de distinction entre opérateur et opérande. L'activité d'un nœud est, selon le contexte, un opérande (une entrée) ou le résultat d'une opération.
 
-{\color{Gray} La notion d'assemblée se distingue de la notion de population~: 
-\begin{itemize}
-	\item les populations de neurones sont définies par des caractères architecturaux
-	\item les assemblées de neurones sont définies par la dynamique.
-\end{itemize} 
-    
-On identifie fréquemment l'activation d'une assemblée à la réalisation d'une tâche spécifique.}
-
-La règle de Hebb s'interprète dans le cadre des réseaux de neurones récurrents. 
-Nous avons vu que les réseaux de neurones récurrents sont capables de développer une activité propre (activité ``endogène''), pouvant présenter des régularités liée aux régularités du graphe ou liée à une influence extérieure (activité induite). 
-
-La règle de Hebb s'interprète comme le fait de capturer dans la structure du réseau les régularités statistiques (covariances) présentes dans cette activité spontanée. Une assemblées apparaissant fréquemment tend à s'inscrire dans le graphe de connexions, ce qui tend à favoriser sa réapparition dans le futur.
-Une assemblée est donc une forme d'activité caractéristique, sélectionnée (stabilisée) par la règle de plasticité. 
-
-La règle de Hebb s'interprète comme la règle de ``\textit{plus du même}''. 
- 
-D'un point de vue computationnel, cette sélection/stabilisation s'apparente au mécanisme d'\textit{association} (ou couplage) entre les constituants d'une scène. On parle de mécanisme \textit{auto-associatif}, chaque constituant étant, selon le contexte, un opérande ou le résultat de l'opération.
-
-En pratique, le mécanisme facilitateur de Hebb est couplé avec un mécanisme stabilisateur qui évite la divergence du processus (via un principe de sélection compétitive).  
 Les implémentations les plus connues du principe de Hebb sont~:
 \begin{itemize}
 	\item mémoire associative de Hopfield
@@ -1349,27 +1332,27 @@ Les implémentations les plus connues du principe de Hebb sont~:
 
 {\color{Gray}Hebb a été influence par la psychologie expérimentale de son époque et transpose les principes du conditionnement opérant au cadre microscopique.   }
 
-Dans une perspective computationnelle, si la fonction d'activation $f$ définit le programme, la fonction de mise à jour des poids $F$ agit sur le programme implémenté par $f$. La fonction $F$ peut donc être vue comme un mécanisme de programmation du calculateur $f$. 
+%Dans une perspective computationnelle, si la fonction d'activation $f$ définit le programme, la fonction de mise à jour des poids $F$ agit sur le programme implémenté par $f$. La fonction $F$ peut donc être vue comme un mécanisme de programmation du calculateur $f$. 
 
-Approche empirique: reproduire l'apprentissage via la plasticité sur un support artificiel.
+%Approche empirique: reproduire l'apprentissage via la plasticité sur un support artificiel.
 
-en modifiant son activité, sa réactivité à certaines entrées, ou le type de
-réponse qu'il produit. 
+%en modifiant son activité, sa réactivité à certaines entrées, ou le type de
+%réponse qu'il produit. 
 
 
 {\color{Orange} Le but est d'implémenter via la plasticité une mémoire ``persistante'', qui provoque un changement durable de la fonction de réponse.
 	On souhaite inscrire sur
 	le graphe de connexions la trace de faits passés en vue d'une utilisation future.}
 
-{\bf !!Plaçons-nous par exemple dans une perspective computationnelle autonome!!}, 
-dans laquelle un programme doit pouvoir se passer d'utilisateur. 
-La consigne doit provenir d'un programme interne (un ``méta programme'') qui 
-agit sur le programme courant pour l'``améliorer'' en fonction des événements se présentent.
-{\bf !!Même si la notion de méta-programme ne pose pas de difficulté conceptuelle, elle est
-	en pratique difficile à mettre en oeuvre dans les architectures informatiques traditionnelles. 
-	La difficulté réside dans 
-	le choix des événements à considérer parmi l'ensemble des événements qui se présentent, et surtout 
-	dans la manière dont les événements pris en compte influencent le comportement logiciel futur.}
+%{\bf !!Plaçons-nous par exemple dans une perspective computationnelle autonome!!}, 
+%dans laquelle un programme doit pouvoir se passer d'utilisateur. 
+%La consigne doit provenir d'un programme interne (un ``méta programme'') qui 
+%agit sur le programme courant pour l'``améliorer'' en fonction des événements se présentent.
+%{\bf !!Même si la notion de méta-programme ne pose pas de difficulté conceptuelle, elle est
+%	en pratique difficile à mettre en oeuvre dans les architectures informatiques traditionnelles. 
+%	La difficulté réside dans 
+%	le choix des événements à considérer parmi l'ensemble des événements qui se présentent, et surtout 
+%	dans la manière dont les événements pris en compte influencent le comportement logiciel futur.}
 
 %Il existe deux grandes approches de la plasticité~:
 %\begin{itemize}
@@ -1391,7 +1374,32 @@ agit sur le programme courant pour l'``améliorer'' en fonction des événements
 	
 	Modèle de mémoire basé sur l'interprétation suivante ~: les formes mémorisées sont des ``faits''. }
 
+\subsection{Assemblée et intégration}
+Le principe de programmation par conjonction d'activité est articulé, dans le livre de Hebb \cite{Heb49}, avec le concept d'\textit{assemblée neuronale}. 
+Une assemblée neuronale est un sous-ensemble de nœuds du réseau s'activant de manière coordonnée, et de façon réitérée au cours du temps.
+La notion d'assemblée est donc liée à la notion d'activité~: une assemblées est un patron d'activité qui réapparaît fréquemment (l'activité d'un nœud étant identifiée à un état ``haut'').
+
+{\color{Gray} La notion d'assemblée se distingue de la notion de population~: 
+	\begin{itemize}
+		\item les populations de neurones sont définies par des caractères architecturaux
+		\item les assemblées de neurones sont définies par la dynamique.
+	\end{itemize} 
+	
+	On identifie fréquemment l'activation d'une assemblée à la réalisation d'une tâche spécifique.}
+
+La règle de Hebb s'interprète dans le cadre des réseaux de neurones récurrents. 
+Nous avons vu que les réseaux de neurones récurrents sont capables de développer une activité propre (activité ``endogène''), pouvant présenter des régularités liée aux régularités du graphe ou liée à une influence extérieure (activité induite). 
+
+La règle de Hebb s'interprète dans ce cadre comme le fait de capturer dans la structure du réseau les régularités statistiques (covariances) présentes dans l'activité spontanée. Une assemblées apparaissant fréquemment tend à s'inscrire dans le graphe de connexions, ce qui tend à favoriser sa réapparition dans le futur.
+Une assemblée est donc une forme d'activité caractéristique, sélectionnée (stabilisée) par la règle de plasticité. 
+
+D'un point de vue computationnel, cette sélection/stabilisation s'apparente au mécanisme d'\textit{association} (ou couplage) entre les constituants d'une scène.
+ On parle de mécanisme  d'\textit{intégration} (au sens d'un ensemble de constituants formant un ``tout'' intégré).
+
+
 \subsection{La réponse ``je ne sais pas''}
+
+Freeman
 
 \subsection{Le principe du réservoir}
 
