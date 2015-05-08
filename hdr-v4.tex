@@ -1317,7 +1317,7 @@ Modèles récurrents et mémoire. En particulier mémoire associative. Les ``fai
 
 La plasticité de Hebb est, comme nous l'avons vu, une règle de modification locale du graphe fondée sur les conjonctions d'activité pré- et post-synaptiques. 
 La règle de Hebb est une règle essentiellement additive et s'interprète comme la règle de ``\textit{plus du même}''. 
-En pratique, le mécanisme facilitateur de Hebb est couplé avec un mécanisme stabilisateur (soustractif) qui évite la divergence du processus (via un principe de sélection compétitive).  
+En pratique, le mécanisme facilitateur de Hebb est couplé avec un mécanisme stabilisateur (soustractif) qui évite la divergence du processus (via un principe de sélection compétitive) \cite{abbott00}.  
 
 Il n'y a pas dans le cadre de la plasticité de Hebb de distinction entre opérateur et opérande. L'activité d'un nœud est, selon le contexte, un opérande (une entrée) ou le résultat d'une opération.
 
@@ -1370,12 +1370,12 @@ Les implémentations les plus connues du principe de Hebb sont~:
 	
 	Ce fonctionnement est lié au principe d'assemblée neuronale et à la plasticité de Hebb, à travers la notion  de sélection (au sein d'un réservoir).
 	
-	On peut étendre à l'idée de vocabulaire comportemental/appariement exclusif/''winner takes all''/argmax.
+	On peut étendre à l'idée de vocabulaire comportemental/appariement sélectif/''winner takes all''/argmax.
 	
 	Modèle de mémoire basé sur l'interprétation suivante ~: les formes mémorisées sont des ``faits''. }
 
 \subsection{Assemblée et intégration}
-Le principe de programmation par conjonction d'activité est articulé, dans le livre de Hebb \cite{Heb49}, avec le concept d'\textit{assemblée neuronale}. 
+Le principe de plasticité par conjonction d'activité est articulé, dans le livre de Hebb, avec le concept d'\textit{assemblée neuronale} \cite{Heb49}. 
 Une assemblée neuronale est un sous-ensemble de nœuds du réseau s'activant de manière coordonnée, et de façon réitérée au cours du temps.
 La notion d'assemblée est donc liée à la notion d'activité~: une assemblées est un patron d'activité qui réapparaît fréquemment (l'activité d'un nœud étant identifiée à un état ``haut'').
 
@@ -1387,14 +1387,24 @@ La notion d'assemblée est donc liée à la notion d'activité~: une assemblées
 	
 	On identifie fréquemment l'activation d'une assemblée à la réalisation d'une tâche spécifique.}
 
+
+
+Une assemblée est donc, selon l'idée origiale de Hebb, un patron d'activité caractéristique, sélectionné (stabilisée) par la règle de plasticité. 
+D'un point de vue computationnel, cette
+assemblée de neurones actifs est une forme (un vecteur caractéristique)  ``stockée'' dans le réseau, qui a la possibilité de s'''activer'' en fonction du contexte.
+
+{\color{Gray}
 La règle de Hebb s'interprète dans le cadre des réseaux de neurones récurrents. 
 Nous avons vu que les réseaux de neurones récurrents sont capables de développer une activité propre (activité ``endogène''), pouvant présenter des régularités liée aux régularités du graphe ou liée à une influence extérieure (activité induite). 
+%La règle de Hebb s'interprète dans ce cadre comme le fait de capturer dans la structure du réseau les régularités statistiques (covariances) présentes dans l'activité spontanée. 
+Une assemblées apparaissant fréquemment tend à s'inscrire dans le graphe de connexions, ce qui tend à favoriser sa réapparition dans le futur.
+}
 
-La règle de Hebb s'interprète dans ce cadre comme le fait de capturer dans la structure du réseau les régularités statistiques (covariances) présentes dans l'activité spontanée. Une assemblées apparaissant fréquemment tend à s'inscrire dans le graphe de connexions, ce qui tend à favoriser sa réapparition dans le futur.
-Une assemblée est donc une forme d'activité caractéristique, sélectionnée (stabilisée) par la règle de plasticité. 
+Le modèle mathématique qui implémente ce principe de la manière la plus simple est le modèle de Hopfield \cite{Hop82}. Ce modèle est un réseau de neurones récurrent à unités binaires développant une dynamique de point fixe multistable. Le réseau de Hopfield implémente un principe de \textit {mémoire associative}. Il apprend ``par coeur'' un certain nombre de scènes (ou images). Il est ensuite capable, lorsque certains constituants d'une scène apprise sont présentés, de compléter la scène avec les éléments manquants, de rectifier les valeurs erronées etc. 
 
-D'un point de vue computationnel, cette sélection/stabilisation s'apparente au mécanisme d'\textit{association} (ou couplage) entre les constituants d'une scène.
- On parle de mécanisme  d'\textit{intégration} (au sens d'un ensemble de constituants formant un ``tout'' intégré).
+On trouve donc dans le modèle de Hopfield, ainsi que dans l'idée d'assemblée de Hebb, un principe d'activation sélective (ou appariement)
+ propre à de nombreux modèles de réseaux de neurones. La différence principale est le mécanisme de convergence vers la réponse fondé sur une dynamique de relaxation (et non sur une transformation séquentielle du signal d'entrée). 
+ On parle dans ce cas de processus  d'\textit{intégration} de la réponse (au sens d'un ensemble de constituants qui s'associent progressivement pour former un ``tout'' intégré).
 
 
 \subsection{La réponse ``je ne sais pas''}
@@ -1410,15 +1420,15 @@ Complexité, chaos et réduction de la complexité.
 Principe de sélection. La réponse ``je ne sais pas''.
 
 
-\subsection{Principe d'appariement exclusif}
+\subsection{Principe d'appariement sélectif}
 
 La plupart de ces algorithmes fonctionnent selon un principe d'\textit{appariement} (``pattern matching''), c'est à dire sur la construction, à partir des données, d'un ensemble de vecteurs ``caractéristiques''. Ces vecteurs caractéristiques, vus comme un un dictionnaire de formes, constituent une base de description synthétique des données d'entrée. La projection des données d'entrée sur cet espace de description facilite ensuite le traitement et l'interprétation des données.  L’apprentissage revient donc à la constitution d'un vocabulaire de base qui sert de clé d'interprétation des données d'entrée. 
 
 {\color{Cyan} 
 	Exemples :
 	\begin{itemize}
-		\item Appariement exclusif~: les barycentres des partitions génératrices permettant d'interpréter une donnée d'entrée comme membre d'une classe donnée. Principe de l'argmax ou du ``winner takes all''. Non-linéaire. \textit{Enumeration.}
-		\item Appariement non exclusif : les données sont interprétées comme une combinaison de facteurs.  projection des données sur une base de plus petite dimension. Matching pursuit. Dictionnaire. Combinaison linéaire. ACP, SVD, deep learning, ... \textit {Décomposition}.
+		\item Appariement sélectif~: les barycentres des partitions génératrices permettant d'interpréter une donnée d'entrée comme membre d'une classe donnée. Principe de l'argmax ou du ``winner takes all''. Non-linéaire. \textit{Enumeration.}
+		\item Appariement non sélectif : les données sont interprétées comme une combinaison de facteurs.  projection des données sur une base de plus petite dimension. Matching pursuit. Dictionnaire. Combinaison linéaire. ACP, SVD, deep learning, ... \textit {Décomposition}.
 	\end{itemize}
 }
 
