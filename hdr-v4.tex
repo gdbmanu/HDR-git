@@ -1028,12 +1028,14 @@ Cette dynamique lente a un impact sur le comportement du réseau de neurones sur
 de sélection dans lequel des activités corrélées tendent à se connecter, et des activité décorrélées à se déconnecter. 
 La règle de Hebb s'interprète donc généralement comme une règle qui inscrit dans le graphe la structure de covariance présente dans l'activité des neurones. Lorsque l'activité est elle-même induite par le signal d'entrée, le graphe reflète en partie les covariances présentes dans le signal.
 
-Exemples:
+{\color{Cyan}
+Exemples (avec maths):
 \begin{itemize}
 	\item Co-activité
 	\item Covariance
 	\item STDP
 \end{itemize}
+}
 
 \subsubsection{Plasticité induite}
 
@@ -1079,7 +1081,7 @@ Mieux comprendre les mécanismes biologiques qui sous-tendent cet apprentissage 
 
 \subsubsection{Perspective computationnelle}
 
-A l'autre extrémité du spectre,  l'apprentissage automatique
+Du point de vue computationnel, l'apprentissage automatique
 (le ``Machine learning'')  consiste à confier une tâche 
 de programmation à un algorithme, dit algorithme d'apprentissage. 
 En d'autres termes, il faut écrire un programme \textit{capable de programmer}. 
@@ -1229,7 +1231,7 @@ sens qui augmente localement la justesse de la fonction de réponse, en espéran
 augmente la justesse globale,
 selon le principe de la descente de gradient ``stochastique''.
 
-Ce mécanisme d'apprentissage en ligne a l'avantage de rester valide lorsque les donnéessont non-stationnaires Ainsi les régularités observéees durant les premières phases de l'apprentisage ne sont plus nécessairement présentes
+Ce mécanisme d'apprentissage en ligne a l'avantage de rester valide lorsque les données sont non-stationnaires Ainsi les régularités observées durant les premières phases de l’apprentissage ne sont plus nécessairement présentes
 à une étape ultérieure de l'apprentissage.
 %~: certaines trajectoires sont ``abandonnées''. 
 Dans une perspective de parcimonie 
@@ -1319,7 +1321,7 @@ La plasticité de Hebb est, comme nous l'avons vu, une règle de modification lo
 La règle de Hebb est une règle essentiellement additive et s'interprète comme la règle de ``\textit{plus du même}''. 
 En pratique, le mécanisme facilitateur de Hebb est couplé avec un mécanisme stabilisateur (soustractif) qui évite la divergence du processus (via un principe de sélection compétitive) \cite{abbott00}.  
 
-Il n'y a pas dans le cadre de la plasticité de Hebb de distinction entre opérateur et opérande. L'activité d'un nœud est, selon le contexte, un opérande (une entrée) ou le résultat d'une opération.
+
 
 Les implémentations les plus connues du principe de Hebb sont~:
 \begin{itemize}
@@ -1364,7 +1366,9 @@ Les implémentations les plus connues du principe de Hebb sont~:
 \section{Notions spécifiques et propositions}
 
 {\color{Cyan}
-	Idée de base~: étudier le rôle de l'activité récurrente dans le cadre de l'apprentissage. En particulier: reconnaissance de patrons spatio-temporels.   
+	Idée de base~: étudier le rôle de l'activité récurrente (persistante) dans le cadre de l'apprentissage. En particulier: reconnaissance de patrons spatio-temporels. 
+	
+	Mécanisme d'appariement distribué: l'opérateur est l'opérande et subit les transformations.   
 	
 	Le modèle qui est proposé, c'est principalement une alternance entre (i) absence de réponse et (ii) mise en œuvre de programmes moteurs spécifiques.
 	
@@ -1374,10 +1378,10 @@ Les implémentations les plus connues du principe de Hebb sont~:
 	
 	Modèle de mémoire basé sur l'interprétation suivante ~: les formes mémorisées sont des ``faits''. }
 
-\subsection{Assemblée et intégration}
+\subsection{Assemblée neuronale}
 Le principe de plasticité par conjonction d'activité est articulé, dans le livre de Hebb, avec le concept d'\textit{assemblée neuronale} \cite{Heb49}. 
 Une assemblée neuronale est un sous-ensemble de nœuds du réseau s'activant de manière coordonnée, et de façon réitérée au cours du temps.
-La notion d'assemblée est donc liée à la notion d'activité~: une assemblées est un patron d'activité qui réapparaît fréquemment (l'activité d'un nœud étant identifiée à un état ``haut'').
+La notion d'assemblée est donc liée à la notion d'activité~: une assemblée est un patron d'activité qui réapparaît fréquemment (l'activité d'un nœud étant identifiée à un état ``haut'').
 
 {\color{Gray} La notion d'assemblée se distingue de la notion de population~: 
 	\begin{itemize}
@@ -1387,24 +1391,64 @@ La notion d'assemblée est donc liée à la notion d'activité~: une assemblées
 	
 	On identifie fréquemment l'activation d'une assemblée à la réalisation d'une tâche spécifique.}
 
+Une assemblée est donc, selon l'idée originale de Hebb, un patron d'activité caractéristique, sélectionné (stabilisée) par la règle de plasticité. 
+{\color{Gray} D'un point de vue computationnel, cette
+assemblée de neurones actifs est une forme (un vecteur caractéristique)  ``stockée'' dans le réseau, qui a la possibilité de s'''activer'' en fonction du contexte.}
+On parlera dans la suite, pour désigner cette activité coordonnée, d'une activité \textit{macroscopique} (par opposition à l'activité microscopique du neurone seul). 
+
+Une assemblée de neurones peut être vue comme une unité de description de l'activité du réseau.
+A un instant donné, une assemblée se trouve soit dans l'état inactif, soit dans l'état ``activé''. L'état du réseau est alors décrit, de manière macroscopique, par la (ou les) assemblée(s) particulière(s) qui est (sont) active(s) à cet instant.
+
+\subsubsection{Activité récurente}
 
 
-Une assemblée est donc, selon l'idée origiale de Hebb, un patron d'activité caractéristique, sélectionné (stabilisée) par la règle de plasticité. 
-D'un point de vue computationnel, cette
-assemblée de neurones actifs est une forme (un vecteur caractéristique)  ``stockée'' dans le réseau, qui a la possibilité de s'''activer'' en fonction du contexte.
-
-{\color{Gray}
-La règle de Hebb s'interprète dans le cadre des réseaux de neurones récurrents. 
-Nous avons vu que les réseaux de neurones récurrents sont capables de développer une activité propre (activité ``endogène''), pouvant présenter des régularités liée aux régularités du graphe ou liée à une influence extérieure (activité induite). 
-%La règle de Hebb s'interprète dans ce cadre comme le fait de capturer dans la structure du réseau les régularités statistiques (covariances) présentes dans l'activité spontanée. 
-Une assemblées apparaissant fréquemment tend à s'inscrire dans le graphe de connexions, ce qui tend à favoriser sa réapparition dans le futur.
+	Le principe d'assemblée neuronale s'interprète principalement dans le cadre des réseaux de neurones récurrents. 
+	Nous avons vu que les réseaux de neurones récurrents sont capables de développer une activité propre (activité ``endogène''), c'est à dire que les neurones peuvent demeurer dans un état ``actif'' en absence de stimulation extérieure. Cette activité interne repose sur la transmission ``en boucle'' de l'activité des neurones sur le graphe. 
+	
+	Dans ce cadre, une assemblée peut être vue comme une séquence d'activation interne stable au cours du temps. On parle parfois de ``chaîne d'activation'' \--- \textit{synfire chain} \shortcite{Abe93}. Un certain nombre de modèles artificiels implémentent ce principe, comme le modèle des  ``groupes polychrones'' 
+	postulé par \shortcite{Izh06}.
+	
+{\color{Gray}	
+	pouvant présenter des régularités liée aux régularités du graphe ou liée à une influence extérieure (activité induite). 
+	%La règle de Hebb s'interprète dans ce cadre comme le fait de capturer dans la structure du réseau les régularités statistiques (covariances) présentes dans l'activité spontanée. 
+	Une assemblées apparaissant fréquemment tend à s'inscrire dans le graphe de connexions, ce qui tend à favoriser sa réapparition dans le futur.
 }
 
-Le modèle mathématique qui implémente ce principe de la manière la plus simple est le modèle de Hopfield \cite{Hop82}. Ce modèle est un réseau de neurones récurrent à unités binaires développant une dynamique de point fixe multistable. Le réseau de Hopfield implémente un principe de \textit {mémoire associative}. Il apprend ``par coeur'' un certain nombre de scènes (ou images). Il est ensuite capable, lorsque certains constituants d'une scène apprise sont présentés, de compléter la scène avec les éléments manquants, de rectifier les valeurs erronées etc. 
+Le modèle mathématique qui implémente le principe d'assemblée de la manière la plus simple est le modèle de Hopfield \shortcite{Hop82}. Ce modèle est un réseau de neurones récurrent à unités binaires développant une dynamique de point fixe multistable. Le réseau de Hopfield implémente un principe de \textit {mémoire associative}. Il apprend ``par cœur'' un certain nombre de scènes (ou images). Il est ensuite capable, lorsque certains constituants d'une scène apprise sont présentés, de compléter la scène avec les éléments manquants, de rectifier les valeurs erronées etc. 
+L'espace d'états est organisé en un nombre fini de \textit{bassins d'attraction} définissant des patrons d'activité spécifiques et mutuellement exclusifs. L'activité du réseau finit par converger vers un de ces patrons en fonction des conditions initiales. Chacun des attracteurs s'interprète ici comme une assemblée distincte, c'est à dire comme un circuit de renforcement mutuel aboutissant à la stabilisation d'un patron d'activité macroscopique. 
 
-On trouve donc dans le modèle de Hopfield, ainsi que dans l'idée d'assemblée de Hebb, un principe d'activation sélective (ou appariement)
- propre à de nombreux modèles de réseaux de neurones. La différence principale est le mécanisme de convergence vers la réponse fondé sur une dynamique de relaxation (et non sur une transformation séquentielle du signal d'entrée). 
- On parle dans ce cas de processus  d'\textit{intégration} de la réponse (au sens d'un ensemble de constituants qui s'associent progressivement pour former un ``tout'' intégré).
+
+\subsection{Appariement distribué et intégration}
+
+D'un point de vue computationnel, le modèle de Hopfield 
+implémente un mécanisme d'appariement entre un signal d'entrée, 
+fourni sous forme de condition initiale, et un des patrons stockés dans le graphe.
+Contrairement aux modèles classiques dans lesquels l'appariement 
+repose sur un produit scalaire, l’appariement s'effectue ici via  mécanisme de relaxation vers un attracteur. Le calcul de la réponse (le patron d'activité final) repose sur la stabilisation progressive d'un circuit d'activation particulier. On parle dans ce cas de processus  d'\textit{intégration} de la réponse (au sens de l'intégration progressive au cours du temps de caractéristiques d'activation conduisant au patron final).
+
+Ce mécanisme d'intégration est spécifique aux réseaux de neurones récurrents, dans lequel des valeurs d'activation calculées aux temps précédents sont réutilisées pour aboutir au patron final.  
+Il n'y a donc pas, dans ce cadre, de distinction entre opérateur et opérande. L'information ne circulant pas dans un sens défini (de l'entrée vers la sortie), l'activité d'un nœud est, selon l'avancement du processus d'intégration, un opérande (une entrée) ou le résultat d'une opération.
+
+Le résultat macroscopique de ce processus est un mécanisme d'accroissement d'évidence, inscrit dans le temps, conduisant 
+au ``choix'' d'une des formes préalablement stockées dans le réseau. 
+
+Malgré des limitations bien connues en terme de capacité de stockage \shortcite{Amit1985}, le réseau de Hopfield présente l'avantage de fonctionner avec des principes compatibles avec les idées de Hebb (caractère local de la règle de plasticité, analogie possible entre attracteur et assemblée), et donc de constituer un modèle plus ``biologiquement plausible'' que les réseaux de neurones traditionnels.
+
+
+\subsection{Réduction de la dynamique}
+
+Comme nous l'avons vu, la plupart des algorithmes d'apprentissage fonctionnent selon un principe d'\textit{appariement} (``pattern matching''), c'est à dire sur la construction, à partir des données, d'un ensemble de vecteurs ``caractéristiques''. Ces vecteurs caractéristiques, vus comme un dictionnaire de formes, constituent une base de description synthétique des données d'entrée. La projection des données d'entrée sur cet espace de description facilite ensuite leur traitement et leur interprétation.  L’apprentissage revient donc à la constitution d'un vocabulaire de base qui sert de clé d'interprétation des données d'entrée. 
+
+La transformation des données d'entrée sous la forme d'un (ou plusieurs) vecteur(s) caractéristique(s) correspond à une   \textit{simplification} de ces données.
+Cette simplification se traduit par exemple, dans le cas des réseaux de neurones à couches, par une dimension de la couche de sortie plus faible que celle de la couche d'entrée.
+Dans le cas des réseaux récurrents, cette simplification se traduit par une \textit{réduction du nombre de degrés de liberté} sur lesquels évolue la dynamique des neurones. L'activité du réseau accepte alors une description sur un espace de plus petite dimension.
+    
+Cette idée de réduction de la dynamique a été conceptualisée par les travaux de Haken XXX, qui reprend la notion de variable d'ordre issue de la thermodynamique dans le cadre de la description des systèmes biologiques. Selon l'interpétation de Haken, 
+
+
+Complexité, chaos et réduction de la complexité.
+
+Principe de sélection. La réponse ``je ne sais pas''.
 
 
 \subsection{La réponse ``je ne sais pas''}
@@ -1413,16 +1457,11 @@ Freeman
 
 \subsection{Le principe du réservoir}
 
-\subsection{Réduction de la dynamique}
-
-Complexité, chaos et réduction de la complexité.
-
-Principe de sélection. La réponse ``je ne sais pas''.
 
 
 \subsection{Principe d'appariement sélectif}
 
-La plupart de ces algorithmes fonctionnent selon un principe d'\textit{appariement} (``pattern matching''), c'est à dire sur la construction, à partir des données, d'un ensemble de vecteurs ``caractéristiques''. Ces vecteurs caractéristiques, vus comme un un dictionnaire de formes, constituent une base de description synthétique des données d'entrée. La projection des données d'entrée sur cet espace de description facilite ensuite le traitement et l'interprétation des données.  L’apprentissage revient donc à la constitution d'un vocabulaire de base qui sert de clé d'interprétation des données d'entrée. 
+
 
 {\color{Cyan} 
 	Exemples :
@@ -1473,6 +1512,75 @@ Scène sensorielle et scène motrice
 \section{Contributions personnelles}
 
 \chapter{Projet}
+
+{\color{Cyan} Le cerveau n'est pas une machine de traitement de l'information mais une machine de production de sens.}
+
+
+%@article{held1974development,
+%	title={Development of sensorially-guided reaching in infant monkeys},
+%	author={Held, Richard and Bauer Jr, Joseph A},
+%	journal={Brain research},
+%	volume={71},
+%	number={2},
+%	pages={265--271},
+%	year={1974},
+%	publisher={Elsevier}
+%}
+%
+%
+%
+%@article{jeannerod1995grasping,
+%	title={Grasping objects: the cortical mechanisms of visuomotor
+%		transformation},
+%	author={Jeannerod, Marc and Arbib, Michael A and Rizzolatti, Giacomo
+%		and Sakata, H},
+%	journal={Trends in neurosciences},
+%	volume={18},
+%	number={7},
+%	pages={314--320},
+%	year={1995},
+%	publisher={Elsevier}
+%}
+%
+%
+%
+%@article{kerzel2003neuronal,
+%	title={Neuronal processing delays are compensated in the
+%		sensorimotor branch of the visual system},
+%	author={Kerzel, Dirk and Gegenfurtner, Karl R},
+%	journal={Current Biology},
+%	volume={13},
+%	number={22},
+%	pages={1975--1978},
+%	year={2003},
+%	publisher={Elsevier}
+%}
+%
+%@article{glover2004separate,
+%	title={Separate visual representations in the planning and control of action},
+%	author={Glover, Scott},
+%	journal={Behavioral and Brain Sciences},
+%	volume={27},
+%	number={01},
+%	pages={3--24},
+%	year={2004},
+%	publisher={Cambridge Univ Press}
+%}
+%
+%
+%
+%@article{nijhawan2004compensation,
+%	title={Compensation of neural delays in visual-motor behaviour: No
+%		evidence for shorter afferent delays for visual motion},
+%	author={Nijhawan, Romi and Watanabe, Katsumi and Khurana, Beena and
+%		Shimojo, Shinsuke},
+%	journal={Visual Cognition},
+%	volume={11},
+%	number={2-3},
+%	pages={275--298},
+%	year={2004},
+%	publisher={Taylor \& Francis}
+%}
 
 \bibliographystyle{mslapa}%{apalike}%{apacite}
 
