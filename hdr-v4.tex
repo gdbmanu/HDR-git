@@ -1365,6 +1365,11 @@ Les implémentations les plus connues du principe de Hebb sont~:
 
 \section{Notions spécifiques et propositions}
 
+Cette section présente quelques notions plus spécialisées utiles à la compréhension de mes travaux. 
+Ce sont principalement des notions spécifiques à l'étude des réseaux de neurones récurrents. 
+
+
+
 {\color{Cyan}
 	Idée de base~: étudier le rôle de l'activité récurrente (persistante) dans le cadre de l'apprentissage. En particulier: reconnaissance de patrons spatio-temporels. 
 	
@@ -1378,10 +1383,13 @@ Les implémentations les plus connues du principe de Hebb sont~:
 	
 	Modèle de mémoire basé sur l'interprétation suivante ~: les formes mémorisées sont des ``faits''. }
 
-\subsection{Assemblée neuronale}
+\subsection{Assemblées neuronales}
+
+
 Le principe de plasticité par conjonction d'activité est articulé, dans le livre de Hebb, avec le concept d'\textit{assemblée neuronale} \cite{Heb49}. 
 Une assemblée neuronale est un sous-ensemble de nœuds du réseau s'activant de manière coordonnée, et de façon réitérée au cours du temps.
-La notion d'assemblée est donc liée à la notion d'activité~: une assemblée est un patron d'activité qui réapparaît fréquemment (l'activité d'un nœud étant identifiée à un état ``haut'').
+La notion d'assemblée est donc liée à la notion d'activité~: une assemblée est un patron d'activité qui réapparaît fréquemment.
+% (l'activité d'un nœud étant identifiée à un état ``haut'').
 
 {\color{Gray} La notion d'assemblée se distingue de la notion de population~: 
 	\begin{itemize}
@@ -1418,7 +1426,7 @@ Le modèle mathématique qui implémente le principe d'assemblée de la manière
 L'espace d'états est organisé en un nombre fini de \textit{bassins d'attraction} définissant des patrons d'activité spécifiques et mutuellement exclusifs. L'activité du réseau finit par converger vers un de ces patrons en fonction des conditions initiales. Chacun des attracteurs s'interprète ici comme une assemblée distincte, c'est à dire comme un circuit de renforcement mutuel aboutissant à la stabilisation d'un patron d'activité macroscopique. 
 
 
-\subsection{Appariement distribué et intégration}
+\subsubsection{Appariement distribué et intégration}
 
 D'un point de vue computationnel, le modèle de Hopfield 
 implémente un mécanisme d'appariement entre un signal d'entrée, 
@@ -1435,7 +1443,7 @@ au ``choix'' d'une des formes préalablement stockées dans le réseau.
 Malgré des limitations bien connues en terme de capacité de stockage \shortcite{Amit1985}, le réseau de Hopfield présente l'avantage de fonctionner avec des principes compatibles avec les idées de Hebb (caractère local de la règle de plasticité, analogie possible entre attracteur et assemblée), et donc de constituer un modèle plus ``biologiquement plausible'' que les réseaux de neurones traditionnels.
 
 
-\subsection{Réduction de la dynamique}
+\subsection{Appariement et réduction}
 
 Comme nous l'avons vu, la plupart des algorithmes d'apprentissage fonctionnent selon un principe d'\textit{appariement} (``pattern matching''), c'est à dire sur la construction, à partir des données, d'un ensemble de vecteurs ``caractéristiques''. 
 \begin{itemize}
@@ -1450,32 +1458,62 @@ La transformation des données d'entrée sous la forme d'un (ou plusieurs) vecte
 	\item Dans le cas des réseaux récurrents, cette simplification se traduit par une \textit{réduction du nombre de degrés de liberté} sur lesquels évolue la dynamique des neurones. L'activité du réseau accepte alors une description sur un espace de plus petite dimension.
 \end{itemize}
 
-Nous nous intéressons ici plus particulièrement au traitement des données dans les réseaux de neurones récurrents. L'équation de récurrence:
+\paragraph{La réponse ``je ne sais pas''}
+Contrairement aux classifieurs traditionnels qui apparient \textit{nécessairement} le signal d'entrée avec une des formes stockées dans la structure, certains réseaux de neurones 
+réalisent des appariements conditionnels tels que~:
+\begin{itemize}
+	\item les signaux de forme connue s'apparient avec une des formes stockées dans le réseau;
+	\item les signaux inconnus ne s'apparient avec aucune des formes stockées dans le réseau.  
+\end{itemize}
+Parmi l'ensemble des réponses possibles, le réseau produit la réponse ``je ne sais pas'' lorsque le signal présenté n'est pas suffisamment proche d'une forme connue.
+
+ \begin{itemize}
+	\item Ce rejet des entrées inconnues correspond, dans la littérature statistique, au principe de ``rejet de distance'', lorsqu'un phénomène observé est trop éloigné du modèle et classé comme ``aberrant''.
+	\item une implémentation connue de ce principe dans le cadre des réseaux de neurones est le réseau ART \cite{ART98}, qui implémente un principe de ``vigilance'' correspondant à l'identification d'une entrée non-référencée par le réseau.
+\end{itemize}
+
+\paragraph{Cas des réseaux de neurones récurrents} Nous nous intéressons ici plus particulièrement au traitement des données dans les réseaux de neurones récurrents. L'équation de récurrence:
 $$\dot{\boldsymbol{x}} = \phi(\boldsymbol{x}(t), I(t))$$
 permet de modéliser l'interaction entre une dynamique endogène (décrite par $\boldsymbol{x}$) et un signal extérieur (décrit par $I$).
 L'évolution de la dynamique au cours du temps décrit une trajectoire dans un espace de dimension $N$ (où $N$ est le nombre de nœuds du réseau).  
-	
-   
-Dans le cas des réseaux de neurones récurrents, 
+On note $n \leq N$ le nombre de degrés de liberté sur lesquels évolue  \textit{effectivement} la dynamique. La valeur de $n$ nous indique le degré de réduction opéré par le signal. 
+\begin{itemize}
+	\item dans le cas d'une entrée bruitée, $n$ peut être proche de $N$
+	\item lorsqu'au contraire l'entrée suscite l'activation d'une assemblée neuronale spécifique, la valeur de $n$  tend à être faible (quelques unités) 
+\end{itemize} 
+Cette approche permet plus généralement de distinguer des signaux ``stabilisateurs'', tendant à corréler les neurones, des signaux déstabilisateurs, tendant à décorréler les neurones.
+
+\paragraph{Réponse de population}
+
+L'étude de la dimension effective de l'activité induite permet, entre autres, d'opérer une séparation entre~:
+\begin{itemize}
+	\item les signaux d'entrée qui induisent une réduction de la dynamique
+	\item et ceux qui ne font pas.
+\end{itemize}
+Cette distinction, au sein de l'espace des signaux d'entrée, entre signaux réducteurs et signaux non-réducteurs correspond à un principe de \textit{sélection}.
+
+De manière schématique, 
+\begin{itemize}
+	\item une activité à faible nombre de degrés de liberté correspond à un réseau de neurones ``activé'' (le signal est sélectionné).
+	\item une activité à haut nombre de degrés de liberté correspond à un réseau de neurones ``inactif'' (le signal est rejeté).
+\end{itemize}
+On parlera par la suite de \textit{réponse de population} (ou réponse collective)  lorsque le réseau ``réagit'' à une entrée particulière en réduisant son nombre de degrés de liberté.
+
+Ce principe de sélection par la dynamique d'un réseau récurent a été exprimé dans les travaux de Walter Freeman \shortcite{ska87} dans le cadre d'un modèle de la perception des odeurs.
+On retrouve une idée analogue dans les travaux de Haken \shortcite{Haken1983}, qui a conceptualisé le principe de réponse de population à travers la notion de \textit{paramètre d'ordre}, emprunté à la thermodynamique.
+
+{\color{Gray} Un paramètre d'ordre est, dans le cas de l'étude des transitions de phase, un opérateur permettant de mesurer un type d'organisation spécifique. Il est nul
+si le milieu étudié est dans une phase désordonnée. Il est ``actif'' lorsque le milieu obéit à un organisation spécifique
+(comme un cristal par exemple).}
+
+
+
+
+\subsection{Le principe du réservoir}
 
 
 
 Complexité, chaos et réduction de la complexité.
-
-Principe de sélection. La réponse ``je ne sais pas''.
-
-
-\subsection{La réponse ``je ne sais pas''}
-
-Freeman et Haken
-
-Cette idée de réduction de la dynamique a été conceptualisée par les travaux de Haken \shortcite{Haken1983}, qui emprunte à la thermodynamique la notion de \textit{paramètre d'ordre}.
-Un paramètre d'ordre est, dans le cas de l'étude des transitions de phase, un opérateur permettant de mesurer un type d'organisation spécifique. Il est nul lorsque
-si le milieu étudié est dans une phase ordonnée ou désordonnée. 
-Dans le cadre de la description des systèmes biologiques. Selon l'interpétation de Haken, 
-
-\subsection{Le principe du réservoir}
-
 
 
 \subsection{Principe d'appariement sélectif}
