@@ -1437,13 +1437,27 @@ Malgré des limitations bien connues en terme de capacité de stockage \shortcit
 
 \subsection{Réduction de la dynamique}
 
-Comme nous l'avons vu, la plupart des algorithmes d'apprentissage fonctionnent selon un principe d'\textit{appariement} (``pattern matching''), c'est à dire sur la construction, à partir des données, d'un ensemble de vecteurs ``caractéristiques''. Ces vecteurs caractéristiques, vus comme un dictionnaire de formes, constituent une base de description synthétique des données d'entrée. La projection des données d'entrée sur cet espace de description facilite ensuite leur traitement et leur interprétation.  L’apprentissage revient donc à la constitution d'un vocabulaire de base qui sert de clé d'interprétation des données d'entrée. 
+Comme nous l'avons vu, la plupart des algorithmes d'apprentissage fonctionnent selon un principe d'\textit{appariement} (``pattern matching''), c'est à dire sur la construction, à partir des données, d'un ensemble de vecteurs ``caractéristiques''. 
+\begin{itemize}
+	\item Ces vecteurs caractéristiques, vus comme un dictionnaire de formes, constituent une base de description synthétique des données d'entrée. 
+	\item La projection des données d'entrée sur cet espace de description facilite ensuite leur traitement et leur interprétation. 
+\end{itemize} 
+L’apprentissage revient donc à la constitution d'un vocabulaire de base qui sert de clé d'interprétation des données d'entrée. 
 
 La transformation des données d'entrée sous la forme d'un (ou plusieurs) vecteur(s) caractéristique(s) correspond à une   \textit{simplification} de ces données.
-Cette simplification se traduit par exemple, dans le cas des réseaux de neurones à couches, par une dimension de la couche de sortie plus faible que celle de la couche d'entrée.
-Dans le cas des réseaux récurrents, cette simplification se traduit par une \textit{réduction du nombre de degrés de liberté} sur lesquels évolue la dynamique des neurones. L'activité du réseau accepte alors une description sur un espace de plus petite dimension.
-    
-Cette idée de réduction de la dynamique a été conceptualisée par les travaux de Haken XXX, qui reprend la notion de variable d'ordre issue de la thermodynamique dans le cadre de la description des systèmes biologiques. Selon l'interpétation de Haken, 
+\begin{itemize}
+	\item Dans le cas des réseaux de neurones à couches, cette simplification correspond à une dimension de la couche de sortie plus faible que celle de la couche d'entrée.
+	\item Dans le cas des réseaux récurrents, cette simplification se traduit par une \textit{réduction du nombre de degrés de liberté} sur lesquels évolue la dynamique des neurones. L'activité du réseau accepte alors une description sur un espace de plus petite dimension.
+\end{itemize}
+
+Nous nous intéressons ici plus particulièrement au traitement des données dans les réseaux de neurones récurrents. L'équation de récurrence:
+$$\dot{\boldsymbol{x}} = \phi(\boldsymbol{x}(t), I(t))$$
+permet de modéliser l'interaction entre une dynamique endogène (décrite par $\boldsymbol{x}$) et un signal extérieur (décrit par $I$).
+L'évolution de la dynamique au cours du temps décrit une trajectoire dans un espace de dimension $N$ (où $N$ est le nombre de nœuds du réseau).  
+	
+   
+Dans le cas des réseaux de neurones récurrents, 
+
 
 
 Complexité, chaos et réduction de la complexité.
@@ -1453,7 +1467,12 @@ Principe de sélection. La réponse ``je ne sais pas''.
 
 \subsection{La réponse ``je ne sais pas''}
 
-Freeman
+Freeman et Haken
+
+Cette idée de réduction de la dynamique a été conceptualisée par les travaux de Haken \shortcite{Haken1983}, qui emprunte à la thermodynamique la notion de \textit{paramètre d'ordre}.
+Un paramètre d'ordre est, dans le cas de l'étude des transitions de phase, un opérateur permettant de mesurer un type d'organisation spécifique. Il est nul lorsque
+si le milieu étudié est dans une phase ordonnée ou désordonnée. 
+Dans le cadre de la description des systèmes biologiques. Selon l'interpétation de Haken, 
 
 \subsection{Le principe du réservoir}
 
