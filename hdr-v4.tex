@@ -984,7 +984,7 @@ Ce chapitre est consacré à l'étude des mécanismes d'apprentissage dans les r
 \subsection{Plasticité synaptique}
 
 La synapse biologique est l'interface permettant la communication entre les neurones.
-Il s'agit de petites surfaces d'échange chimique (``boutons'' synaptiques) situés à l'extrémité de l'arborisation terminale des axones. A l'arrivée d'un potentiel d'action, les synapses libèrent des neurotransmetteurs qui agissent sur les canaux ioniques des dendrites de la cellule post-synaptique (``libèrent'' des ions), ce qui a pour effet de modifier le potentiel de membrane de la cellule post-synaptique.
+Il s'agit d'une petite surface d'échange chimique (``bouton'' synaptiques) située à l'extrémité de l'arborisation terminale des axones. A l'arrivée d'un potentiel d'action, les synapses libèrent des neurotransmetteurs qui agissent sur les canaux ioniques des dendrites de la cellule post-synaptique (``libèrent'' des ions), ce qui a pour effet de modifier le potentiel de membrane de la cellule post-synaptique.
 
 L'efficacité d'une synapse dépend de plusieurs facteurs, comme la taille du bouton synaptique, la quantité de neurotransmetteurs disponibles,  ainsi que la sensibilité de la cellule post-synaptique. Dans le cadre de ce mémoire,  cet ensemble de facteurs est résumé  sous la forme d'une valeur unique $J_{ij}$ : le ``poids'' de la synapse, où  $j$ est l'index du neurone pré-synaptique et $i$ l'index du neurone post-synaptique.
 
@@ -1366,7 +1366,7 @@ Les implémentations les plus connues du principe de Hebb sont~:
 \section{Notions spécifiques et propositions}
 
 Cette section présente quelques notions plus spécialisées utiles à la compréhension de mes travaux. 
-Ce sont principalement des notions spécifiques à l'étude des réseaux de neurones récurrents. 
+Ce sont principalement des notions spécifiques à l'étude de la plasticité des réseaux de neurones récurrents. 
 
 
 
@@ -1381,14 +1381,29 @@ Ce sont principalement des notions spécifiques à l'étude des réseaux de neur
 	
 	On peut étendre à l'idée de vocabulaire comportemental/appariement sélectif/''winner takes all''/argmax.
 	
-	Modèle de mémoire basé sur l'interprétation suivante ~: les formes mémorisées sont des ``faits''. }
+	Modèle de mémoire basé sur l'interprétation suivante ~: les formes mémorisées sont des ``faits''. 
+	
+	
+	PROPOSITIONS :
+	
+	Dans les réseaux récurrents capables de maintenir une activité persistante, 
+	\begin{enumerate}
+		\item La plasticité de Hebb facilite l'appariement de cette activité avec le signal présent en entrée du réseau.
+		\item 
+		Cet appariement se manifeste 
+		 par une réduction de complexité de l'activité du réseau
+		correspondant à la relaxation du système dynamique vers un attracteur de dimension faible.
+		\item La convergence vers l'attracteur n'est pas immédiate. Elle correspond à un ``calcul'' réalisé par l'ensemble des neurones via des interactions locales uniquement. On parle de réponse de population.
+	\end{enumerate}
+	
+	}
 
 \subsection{Assemblées neuronales}
 
 
 Le principe de plasticité par conjonction d'activité est articulé, dans le livre de Hebb, avec le concept d'\textit{assemblée neuronale} \cite{Heb49}. 
 Une assemblée neuronale est un sous-ensemble de nœuds du réseau s'activant de manière coordonnée, et de façon réitérée au cours du temps.
-La notion d'assemblée est donc liée à la notion d'activité~: une assemblée est un patron d'activité qui réapparaît fréquemment.
+{\color{Gray} La notion d'assemblée est donc liée à la notion d'activité~: une assemblée est un patron d'activité qui réapparaît fréquemment.}
 % (l'activité d'un nœud étant identifiée à un état ``haut'').
 
 {\color{Gray} La notion d'assemblée se distingue de la notion de population~: 
@@ -1476,7 +1491,7 @@ Parmi l'ensemble des réponses possibles, le réseau produit la réponse ``je ne
 $$\dot{\boldsymbol{x}} = \phi(\boldsymbol{x}(t), I(t))$$
 permet de modéliser l'interaction entre une dynamique endogène (décrite par $\boldsymbol{x}$) et un signal extérieur (décrit par $I$).
 L'évolution de la dynamique au cours du temps décrit une trajectoire dans un espace de dimension $N$ (où $N$ est le nombre de nœuds du réseau).  
-On note $n \leq N$ le nombre de degrés de liberté sur lesquels évolue  \textit{effectivement} la dynamique. La valeur de $n$ nous indique le degré de réduction opéré par le signal. 
+On note $n \leq N$ le nombre de degrés de liberté sur lesquels évolue  \textit{effectivement} la dynamique. La valeur de $n$ s'interprète comme le degré de réduction opéré par le signal sur l'activité du réseau. 
 \begin{itemize}
 	\item dans le cas d'une entrée bruitée, $n$ peut être proche de $N$
 	\item lorsqu'au contraire l'entrée suscite l'activation d'une assemblée neuronale spécifique, la valeur de $n$  tend à être faible (quelques unités) 
@@ -1503,8 +1518,8 @@ Ce principe de sélection par la dynamique d'un réseau récurent a été exprim
 On retrouve une idée analogue dans les travaux de Haken \shortcite{Haken1983}, qui a conceptualisé le principe de réponse de population à travers la notion de \textit{paramètre d'ordre}, emprunté à la thermodynamique.
 
 {\color{Gray} Un paramètre d'ordre est, dans le cas de l'étude des transitions de phase, un opérateur permettant de mesurer un type d'organisation spécifique. Il est nul
-si le milieu étudié est dans une phase désordonnée. Il est ``actif'' lorsque le milieu obéit à un organisation spécifique
-(comme un cristal par exemple).}
+si le milieu étudié est dans une phase différente de la phase décrite par l'opérateur. Il est ``actif'' lorsque le milieu obéit à cette organisation spécifique
+(comme celle d'un cristal par exemple).}
 
 
 
@@ -1565,6 +1580,11 @@ Espace de la tâche. Passage d'échelle et variable d'ordre.
 Scène sensorielle et scène motrice
 
 \section{Notions spécifiques et propositions}
+
+L'activité récurrente produit un signal et crée de la nouveauté. 
+
+L'agent organise l'environnement. 
+
 
 \section{Contributions personnelles}
 
