@@ -1368,7 +1368,22 @@ Les implémentations les plus connues du principe de Hebb sont~:
 Cette section présente quelques notions plus spécialisées utiles à la compréhension de mes travaux. 
 Ce sont principalement des notions spécifiques à l'étude de la plasticité des réseaux de neurones récurrents. 
 
+Je m'intéresse aux réseaux de neurones récurrents en raison principalement de leur plus grande plausibilité biologique. Le but est d'identifier certains principes computationnels à l’œuvre dans ces réseaux.
 
+Le choix de la plausibilité biologique implique de s'intéresser à la règle de plasticité de Hebb, confirmée à de nombreuses reprises par les observations. 
+La plasticité de Hebb inscrit dans la structure du graphe les conjonctions d'activité pré et post-synaptique. 
+
+Ne prenant pas en compte de signal d'erreur, cette règle est classiquement interprétée dans le cadre 
+théorique de l'apprentissage non-supervisé. 
+2 principes d'apprentissage connus semblet liés à la règle de Hebb:
+\begin{itemize}
+	\item l'auto-encodage (au sens Kohonen mais pas au sens deep)
+	\item l'apprentissage associatif (modèle de Hopfield) 
+\end{itemize}
+Ces modèles sont porteurs de limitations (en terme de capacité de stockage ou de preuve de convergence) qui rendent difficiles l'utilisation de la règle de Hebb dans le cadre de problèmes d'apprentissage automatique. 
+
+La thèse principale développée ici est que la règle de Hebb, souvent sous-estimée pour ses moindres performances pratiques, doit être réinterprétée de façon approfondie dans le cadre des réseaux de neurones récurrents.
+Autrement dit pour bien comprendre la plasticité de Hebb, il faut avant tout comprendre la logique à l’œuvre dans des réseaux de neurones récurrents, cette logique étant largement différente de celle des réseaux à couches.
 
 {\color{Cyan}
 	Idée de base~: étudier le rôle de l'activité récurrente (persistante) dans le cadre de l'apprentissage. En particulier: reconnaissance de patrons spatio-temporels. 
@@ -1386,15 +1401,20 @@ Ce sont principalement des notions spécifiques à l'étude de la plasticité de
 	
 	PROPOSITIONS :
 	
-	Dans les réseaux récurrents capables de maintenir une activité persistante, 
-	\begin{enumerate}
-		\item La plasticité de Hebb facilite l'appariement de cette activité avec le signal présent en entrée du réseau.
-		\item 
-		Cet appariement se manifeste 
-		 par une réduction de complexité de l'activité du réseau
+	On considère le cas de réseaux de neurones récurrents capables de maintenir une activité persistante
+	
+	{\bf Le principe d'appariement sélectif (à l’œuvre dans de nombreux algorithmes d'apprentissage) est réinterprété, dans le cas des réseaux de neurones récurrents, comme une réduction sélective de la complexité de la dynamique. 
+	\begin{itemize}
+		\item Cette réduction sélective est réalisée par la plasticité de Hebb en présence de signaux extérieurs contenant ``suffisamment'' de régularités.
+		\item Elle se manifeste par l'activation d'un circuit d'activation spécifique (``assemblée'' de neurones)
+		\item Cette réduction de complexité 
 		correspondant à la relaxation du système dynamique vers un attracteur de dimension faible.
-		\item La convergence vers l'attracteur n'est pas immédiate. Elle correspond à un ``calcul'' réalisé par l'ensemble des neurones via des interactions locales uniquement. On parle de réponse de population.
-	\end{enumerate}
+		\item La convergence vers l'attracteur n'étant pas immédiate, le temps de relaxation correspond à un ``temps de calcul''. Ce calcul est réalisé par l'ensemble des neurones du réseau. On parle de réponse de population (ne dépendant pas d'un neurone seul).
+	\end{itemize}
+	}
+	
+	{\color{Red} IL FAUT CREUSER ET DEVELOPPER CETTE NOTION D'APPARIEMENT}
+
 	
 	}
 
