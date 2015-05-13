@@ -810,7 +810,7 @@ par l'intégration sur le flot de la condition initiale $\boldsymbol{x}_0$.
 \item Dans le cas d'un système dit ``autonome'', on a $\phi(x,t) = \phi(x)$ et
 la trajectoire du système $\{x(t)\}_{t \in [t_0,t_f], \boldsymbol{x}(t_0)= \boldsymbol{x}_0}$ 
 est entièrement définie par les conditions initiales. 
-\item Dans le cas d'un système dit ``non-autonome'', la dépendance temporelle
+\item Dans le cas d'un système dit ``ouvert'' (non-autonome), la dépendance temporelle
 est souvent modélisée sous la forme d'un signal externe $I(t)$, soit $\phi(x,t) = \phi(x,I(t))$. 
 Ce signal peut être:
   \begin{itemize}
@@ -1365,25 +1365,44 @@ Les implémentations les plus connues du principe de Hebb sont~:
 
 \section{Notions spécifiques et propositions}
 
-Cette section présente quelques notions plus spécialisées utiles à la compréhension de mes travaux. 
-Ce sont principalement des notions spécifiques à l'étude de la plasticité des réseaux de neurones récurrents. 
+Cette section présente quelques notions plus spécialisées utiles à la compréhension de mes travaux, dédiées à l'étude de la plasticité des réseaux de neurones récurrents. 
+\begin{itemize}
+\item
+Le choix des réseaux de neurones récurrents se justifie principalement en raison de leur plus grande plausibilité biologique. Comme nous l'avons vu, les réseaux de neurones récurrents sont capables de maintenir une activité persistante en l'absence de stimulation extérieure. 
+\item Le modèle de plasticité synaptique le mieux établi est la \textit{règle de Hebb} \shortcite{Heb49}, confirmée à de nombreuses reprises par les observations \shortcite{Bli73,BIPOO98}. 
+La règle de Hebb inscrit dans la structure du graphe les conjonctions d'activité pré et post-synaptique se produisant de façon répétée au cours du temps. 
+\end{itemize}
 
-Je m'intéresse aux réseaux de neurones récurrents en raison principalement de leur plus grande plausibilité biologique. Le but est d'identifier certains principes computationnels à l’œuvre dans ces réseaux.
+Le but est d'identifier certains principes computationnels à l’œuvre dans des réseaux de neurones récurrents soumis à la règle de Hebb.
 
-Le choix de la plausibilité biologique implique de s'intéresser à la règle de plasticité de Hebb, confirmée à de nombreuses reprises par les observations. 
-La plasticité de Hebb inscrit dans la structure du graphe les conjonctions d'activité pré et post-synaptique. 
 
-Ne prenant pas en compte de signal d'erreur, cette règle est classiquement interprétée dans le cadre 
+
+{\color{Gray} Ne prenant pas en compte de signal d'erreur, cette règle est classiquement interprétée dans le cadre 
 théorique de l'apprentissage non-supervisé. 
 2 principes d'apprentissage connus semblet liés à la règle de Hebb:
 \begin{itemize}
 	\item l'auto-encodage (au sens Kohonen mais pas au sens deep)
 	\item l'apprentissage associatif (modèle de Hopfield) 
 \end{itemize}
-Ces modèles sont porteurs de limitations (en terme de capacité de stockage ou de preuve de convergence) qui rendent difficiles l'utilisation de la règle de Hebb dans le cadre de problèmes d'apprentissage automatique. 
+Ces modèles sont porteurs de limitations (en terme de capacité de stockage ou de preuve de convergence) qui rendent difficiles l'utilisation de la règle de Hebb dans le cadre de problèmes pratiques. }
 
-La thèse principale développée ici est que la règle de Hebb, souvent sous-estimée pour ses moindres performances pratiques, doit être réinterprétée de façon approfondie dans le cadre des réseaux de neurones récurrents.
-Autrement dit pour bien comprendre la plasticité de Hebb, il faut avant tout comprendre la logique à l’œuvre dans des réseaux de neurones récurrents, cette logique étant largement différente de celle des réseaux à couches.
+La thèse principale développée ici est que la règle de Hebb, souvent sous-estimée pour ses plus faibles performances pratiques, doit être réexaminée dans le cadre des réseaux de neurones récurrents.
+Autrement dit la plasticité de Hebb doit être interprétée selon la logique des réseaux de neurones récurrents, cette logique étant largement différente de celle des réseaux à couches.
+\begin{itemize}
+	\item La logique à l’œuvre dans les réseaux de neurones à couches est celle d'un calcul \textit{réparti}. Le calcul est produit par étapes des couches d'entrée jusqu'à la couche de sortie; les couches cachées réalisent les calculs intermédiaires.
+	\item Le calcul implémenté par les réseaux de neurones récurrents est un calcul \textit{distribué}, c'est à dire que l'ensemble du calcul est réparti à parts égales sur les différents nœuds du réseau. Le ``temps de calcul'' correspond au temps de relaxation vers un attracteur. % Ce calcul est réalisé par l'ensemble des neurones du réseau. 
+	On parle aussi de réponse de population (ne dépendant pas d'un neurone seul).
+\end{itemize} 
+
+Le principe d'appariement sélectif (à l’œuvre dans de nombreux algorithmes d'apprentissage) est réinterprété, dans le cas des réseaux de neurones récurrents, comme une réduction sélective de la complexité de la dynamique. 
+En détail, nous faisons les propositions suivantes~:
+\begin{itemize}
+	\item Un réseau récurrent (en régime ``persistant'') se comporte comme un ``réservoir'' de patrons d'activité (ou ``assemblées'' de neurones). Un tel patron d'activité correspond à l'activation d'un circuit spécifique sur le graphe.
+	\item Le calcul repose sur l'appariement entre l'entrée (le signal extérieur) et un des patrons d'activité activables sur le graphe.
+	\item Cet appariement se traduit par une réduction de complexité 
+	 correspondant à la relaxation du système dynamique vers un attracteur de dimension faible.
+	\item Cette réduction sélective de complexité est réalisée par la plasticité de Hebb en présence de signaux contenant ``suffisamment'' de régularités.
+\end{itemize}
 
 {\color{Cyan}
 	Idée de base~: étudier le rôle de l'activité récurrente (persistante) dans le cadre de l'apprentissage. En particulier: reconnaissance de patrons spatio-temporels. 
@@ -1401,15 +1420,18 @@ Autrement dit pour bien comprendre la plasticité de Hebb, il faut avant tout co
 	
 	PROPOSITIONS :
 	
-	On considère le cas de réseaux de neurones récurrents capables de maintenir une activité persistante
 	
-	{\bf Le principe d'appariement sélectif (à l’œuvre dans de nombreux algorithmes d'apprentissage) est réinterprété, dans le cas des réseaux de neurones récurrents, comme une réduction sélective de la complexité de la dynamique. 
+	
+	{\bf 
+		
+		
+		
 	\begin{itemize}
-		\item Cette réduction sélective est réalisée par la plasticité de Hebb en présence de signaux extérieurs contenant ``suffisamment'' de régularités.
-		\item Elle se manifeste par l'activation d'un circuit d'activation spécifique (``assemblée'' de neurones)
-		\item Cette réduction de complexité 
-		correspondant à la relaxation du système dynamique vers un attracteur de dimension faible.
-		\item La convergence vers l'attracteur n'étant pas immédiate, le temps de relaxation correspond à un ``temps de calcul''. Ce calcul est réalisé par l'ensemble des neurones du réseau. On parle de réponse de population (ne dépendant pas d'un neurone seul).
+		\item  
+		\item 
+		\item 
+		
+		\item La convergence vers l'attracteur n'étant pas immédiate, .
 	\end{itemize}
 	}
 	
@@ -1417,6 +1439,73 @@ Autrement dit pour bien comprendre la plasticité de Hebb, il faut avant tout co
 
 	
 	}
+	
+
+
+\subsection{Appariement et réduction}
+
+Comme nous l'avons vu, la plupart des algorithmes d'apprentissage fonctionnent selon un principe d'\textit{appariement} (``pattern matching''), c'est à dire sur la construction, à partir des données, d'un ensemble de vecteurs ``caractéristiques''. 
+\begin{itemize}
+	\item Ces vecteurs caractéristiques, vus comme un dictionnaire de formes, constituent une base de description synthétique des données d'entrée. 
+	\item La projection des données d'entrée sur cet espace de description facilite ensuite leur traitement et leur interprétation. 
+\end{itemize} 
+L’apprentissage revient donc à la constitution d'un vocabulaire de base qui sert de clé d'interprétation des données d'entrée. 
+
+La transformation des données d'entrée sous la forme d'un (ou plusieurs) vecteur(s) caractéristique(s) correspond à une   \textit{simplification} de ces données.
+\begin{itemize}
+	\item Dans le cas des réseaux de neurones à couches, cette simplification correspond à une dimension de la couche de sortie plus faible que celle de la couche d'entrée.
+	\item Dans le cas des réseaux récurrents, cette simplification se traduit par une \textit{réduction du nombre de degrés de liberté} sur lesquels évolue la dynamique des neurones. L'activité du réseau accepte alors une description sur un espace de plus petite dimension.
+\end{itemize}
+
+\paragraph{La réponse ``je ne sais pas''}
+Contrairement aux classifieurs traditionnels qui apparient \textit{nécessairement} le signal d'entrée avec une des formes stockées dans la structure, certains réseaux de neurones 
+réalisent des appariements conditionnels tels que~:
+\begin{itemize}
+	\item les signaux de forme connue s'apparient avec une des formes stockées dans le réseau;
+	\item les signaux inconnus ne s'apparient avec aucune des formes stockées dans le réseau.  
+\end{itemize}
+Parmi l'ensemble des réponses possibles, le réseau produit la réponse ``je ne sais pas'' lorsque le signal présenté n'est pas suffisamment proche d'une forme connue.
+
+\begin{itemize}
+	\item Ce rejet des entrées inconnues correspond, dans la littérature statistique, au principe de ``rejet de distance'', lorsqu'un phénomène observé est trop éloigné du modèle et classé comme ``aberrant''.
+	\item une implémentation connue de ce principe dans le cadre des réseaux de neurones est le réseau ART \cite{ART98}, qui implémente un principe de ``vigilance'' correspondant à l'identification d'une entrée non-référencée par le réseau.
+\end{itemize}
+
+\paragraph{Cas des réseaux de neurones récurrents} Nous nous intéressons ici plus particulièrement au traitement des données dans les réseaux de neurones récurrents. L'équation de récurrence:
+$$\dot{\boldsymbol{x}} = \phi(\boldsymbol{x}(t), I(t))$$
+permet de modéliser l'interaction entre une dynamique endogène (décrite par $\boldsymbol{x}$) et un signal extérieur (décrit par $I$).
+L'évolution de la dynamique au cours du temps décrit une trajectoire dans un espace de dimension $N$ (où $N$ est le nombre de nœuds du réseau).  
+On note $n \leq N$ le nombre de degrés de liberté sur lesquels évolue  \textit{effectivement} la dynamique (la dimension de la variété sur laquelle évolue la trajectoire limite). La valeur de $n$ s'interprète comme le degré de réduction opéré par le signal sur l'activité du réseau. 
+\begin{itemize}
+	\item dans le cas d'une entrée bruitée, $n$ peut être proche de $N$
+	\item lorsqu'au contraire l'entrée suscite l'activation d'une assemblée neuronale spécifique, la valeur de $n$  tend à être faible (quelques unités) 
+\end{itemize} 
+Cette approche permet plus généralement de distinguer des signaux ``stabilisateurs'', tendant à corréler les neurones, des signaux déstabilisateurs, tendant à décorréler les neurones.
+
+\paragraph{Réponse de population}
+
+L'étude de la dimension effective de l'activité induite permet, entre autres, d'opérer une séparation entre~:
+\begin{itemize}
+	\item les signaux d'entrée qui induisent une réduction de la dynamique
+	\item et ceux qui ne font pas.
+\end{itemize}
+Cette distinction, au sein de l'espace des signaux d'entrée, entre signaux réducteurs et signaux non-réducteurs correspond à un principe de \textit{sélection}.
+
+De manière schématique, 
+\begin{itemize}
+	\item une activité à faible nombre de degrés de liberté correspond à un réseau de neurones ``activé'' (le signal est sélectionné).
+	\item une activité à haut nombre de degrés de liberté correspond à un réseau de neurones ``inactif'' (le signal est rejeté).
+\end{itemize}
+cette notion d'activation ``macroscopique'' étant à distinguer de l'activation  ``microscopique'' des neurones.
+On parlera par la suite de \textit{réponse de population} (ou réponse collective)  lorsque le réseau ``réagit'' ainsi à une entrée particulière en réduisant son nombre de degrés de liberté.
+
+Ce principe de sélection par la dynamique d'un réseau récurrent a été exprimé dans les travaux de Walter Freeman \shortcite{ska87} dans le cadre d'un modèle de la perception des odeurs.
+On retrouve une idée analogue dans les travaux de Haken \shortcite{Haken1983}, qui a conceptualisé le principe de réponse par réduction de la dynamique collective à travers la notion de \textit{paramètre d'ordre}, emprunté à la thermodynamique.
+
+{\color{Gray} Un paramètre d'ordre est, dans le cas de l'étude des transitions de phase, un opérateur permettant de mesurer un type d'organisation spécifique. Il est nul
+	si le milieu étudié est dans une phase différente de la phase décrite par l'opérateur. Il est ``actif'' lorsque le milieu obéit à cette organisation spécifique
+	(comme celle d'un cristal par exemple).}
+
 
 \subsection{Assemblées neuronales}
 
@@ -1478,70 +1567,6 @@ au ``choix'' d'une des formes préalablement stockées dans le réseau.
 Malgré des limitations bien connues en terme de capacité de stockage \shortcite{Amit1985}, le réseau de Hopfield présente l'avantage de fonctionner avec des principes compatibles avec les idées de Hebb (caractère local de la règle de plasticité, analogie possible entre attracteur et assemblée), et donc de constituer un modèle plus ``biologiquement plausible'' que les réseaux de neurones traditionnels.
 
 
-\subsection{Appariement et réduction}
-
-Comme nous l'avons vu, la plupart des algorithmes d'apprentissage fonctionnent selon un principe d'\textit{appariement} (``pattern matching''), c'est à dire sur la construction, à partir des données, d'un ensemble de vecteurs ``caractéristiques''. 
-\begin{itemize}
-	\item Ces vecteurs caractéristiques, vus comme un dictionnaire de formes, constituent une base de description synthétique des données d'entrée. 
-	\item La projection des données d'entrée sur cet espace de description facilite ensuite leur traitement et leur interprétation. 
-\end{itemize} 
-L’apprentissage revient donc à la constitution d'un vocabulaire de base qui sert de clé d'interprétation des données d'entrée. 
-
-La transformation des données d'entrée sous la forme d'un (ou plusieurs) vecteur(s) caractéristique(s) correspond à une   \textit{simplification} de ces données.
-\begin{itemize}
-	\item Dans le cas des réseaux de neurones à couches, cette simplification correspond à une dimension de la couche de sortie plus faible que celle de la couche d'entrée.
-	\item Dans le cas des réseaux récurrents, cette simplification se traduit par une \textit{réduction du nombre de degrés de liberté} sur lesquels évolue la dynamique des neurones. L'activité du réseau accepte alors une description sur un espace de plus petite dimension.
-\end{itemize}
-
-\paragraph{La réponse ``je ne sais pas''}
-Contrairement aux classifieurs traditionnels qui apparient \textit{nécessairement} le signal d'entrée avec une des formes stockées dans la structure, certains réseaux de neurones 
-réalisent des appariements conditionnels tels que~:
-\begin{itemize}
-	\item les signaux de forme connue s'apparient avec une des formes stockées dans le réseau;
-	\item les signaux inconnus ne s'apparient avec aucune des formes stockées dans le réseau.  
-\end{itemize}
-Parmi l'ensemble des réponses possibles, le réseau produit la réponse ``je ne sais pas'' lorsque le signal présenté n'est pas suffisamment proche d'une forme connue.
-
- \begin{itemize}
-	\item Ce rejet des entrées inconnues correspond, dans la littérature statistique, au principe de ``rejet de distance'', lorsqu'un phénomène observé est trop éloigné du modèle et classé comme ``aberrant''.
-	\item une implémentation connue de ce principe dans le cadre des réseaux de neurones est le réseau ART \cite{ART98}, qui implémente un principe de ``vigilance'' correspondant à l'identification d'une entrée non-référencée par le réseau.
-\end{itemize}
-
-\paragraph{Cas des réseaux de neurones récurrents} Nous nous intéressons ici plus particulièrement au traitement des données dans les réseaux de neurones récurrents. L'équation de récurrence:
-$$\dot{\boldsymbol{x}} = \phi(\boldsymbol{x}(t), I(t))$$
-permet de modéliser l'interaction entre une dynamique endogène (décrite par $\boldsymbol{x}$) et un signal extérieur (décrit par $I$).
-L'évolution de la dynamique au cours du temps décrit une trajectoire dans un espace de dimension $N$ (où $N$ est le nombre de nœuds du réseau).  
-On note $n \leq N$ le nombre de degrés de liberté sur lesquels évolue  \textit{effectivement} la dynamique. La valeur de $n$ s'interprète comme le degré de réduction opéré par le signal sur l'activité du réseau. 
-\begin{itemize}
-	\item dans le cas d'une entrée bruitée, $n$ peut être proche de $N$
-	\item lorsqu'au contraire l'entrée suscite l'activation d'une assemblée neuronale spécifique, la valeur de $n$  tend à être faible (quelques unités) 
-\end{itemize} 
-Cette approche permet plus généralement de distinguer des signaux ``stabilisateurs'', tendant à corréler les neurones, des signaux déstabilisateurs, tendant à décorréler les neurones.
-
-\paragraph{Réponse de population}
-
-L'étude de la dimension effective de l'activité induite permet, entre autres, d'opérer une séparation entre~:
-\begin{itemize}
-	\item les signaux d'entrée qui induisent une réduction de la dynamique
-	\item et ceux qui ne font pas.
-\end{itemize}
-Cette distinction, au sein de l'espace des signaux d'entrée, entre signaux réducteurs et signaux non-réducteurs correspond à un principe de \textit{sélection}.
-
-De manière schématique, 
-\begin{itemize}
-	\item une activité à faible nombre de degrés de liberté correspond à un réseau de neurones ``activé'' (le signal est sélectionné).
-	\item une activité à haut nombre de degrés de liberté correspond à un réseau de neurones ``inactif'' (le signal est rejeté).
-\end{itemize}
-On parlera par la suite de \textit{réponse de population} (ou réponse collective)  lorsque le réseau ``réagit'' à une entrée particulière en réduisant son nombre de degrés de liberté.
-
-Ce principe de sélection par la dynamique d'un réseau récurent a été exprimé dans les travaux de Walter Freeman \shortcite{ska87} dans le cadre d'un modèle de la perception des odeurs.
-On retrouve une idée analogue dans les travaux de Haken \shortcite{Haken1983}, qui a conceptualisé le principe de réponse de population à travers la notion de \textit{paramètre d'ordre}, emprunté à la thermodynamique.
-
-{\color{Gray} Un paramètre d'ordre est, dans le cas de l'étude des transitions de phase, un opérateur permettant de mesurer un type d'organisation spécifique. Il est nul
-si le milieu étudié est dans une phase différente de la phase décrite par l'opérateur. Il est ``actif'' lorsque le milieu obéit à cette organisation spécifique
-(comme celle d'un cristal par exemple).}
-
-
 
 
 \subsection{Le principe du réservoir}
@@ -1598,6 +1623,8 @@ Langage de l'action.
 Espace de la tâche. Passage d'échelle et variable d'ordre.
 
 Scène sensorielle et scène motrice
+
+Facteurs causaux
 
 \section{Notions spécifiques et propositions}
 
