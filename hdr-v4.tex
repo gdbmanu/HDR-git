@@ -570,7 +570,9 @@ Les trois premières parties présentent les résultats
 
 \chapter{Dynamique des grands réseaux de neurones aléatoires}\label{chap:dyn}
 
-Ce chapitre est consacré à l'analyse des capacités d'expression des grands réseaux de neurones. Je présente dans une première section quelques notions essentielles concernant la modélisation des neurones et des réseaux de neurones. La deuxième section présente quelques notions plus spécifiques à l'étude des grands réseaux de neurones ainsi que des propositions propres à ce mémoire. Enfin, la troisième section présente quelques résultats issus des travaux auxquels j'ai participé dans ce cadre.  [REPRENDRE CHAPEAU]
+{\color{Cyan} Ce chapitre est consacré à l'analyse des capacités d'expression des grands réseaux de neurones. Je présente dans une première section quelques notions essentielles concernant la modélisation des neurones et des réseaux de neurones. La deuxième section présente quelques notions plus spécifiques à l'étude des grands réseaux de neurones ainsi que des propositions propres à ce mémoire. Enfin, la troisième section présente quelques résultats issus des travaux auxquels j'ai participé dans ce cadre.  [REPRENDRE CHAPEAU]}
+
+\cleardoublepage
 
 \section{Notions générales}
 
@@ -841,7 +843,7 @@ Notions :
 	\item paramètre d'ordre
 \end{itemize}
 }
-\paragraph{Systèmes dynamiques non-autonomes}
+\paragraph{Systèmes dynamiques ouverts}
 
 Dans le cas non autonome, la trajectoire dépend à la fois des conditions initiales et du signal extérieur. 
 \begin{itemize}
@@ -949,12 +951,10 @@ Le modèle de champ moyen considère l'activité instantanée de populations de 
 donné, le nombre de neurones émettant un PA divisé par la taille de la population.
 Un interprétation commune de l'activité des
 
+\cleardoublepage
+
 \section{Notions spécifiques et propositions}
 Cette section 
-
-\subsection{Grands réseaux de neurones aléatoires}
-
-\subsection{Modes et expressivité}
 
 {\color{Orange}
 	\paragraph{!!Propositions!!}
@@ -971,15 +971,278 @@ Cette section
 		Le nombre et la nature de ces modes
 		nous permettra de décrire son ``vocabulaire'', ainsi que le type d'opérations dont il peut être le support. 
 	\end{itemize}
-Notion de réponse d'un mode?  
+	Notion de réponse d'un mode?  
 }
 
+{\color{Orange} Le fil rouge de notre approche} est celui des réseaux de neurones à connectivité aléatoire, 
+permettant de traiter de manière formelle et de quantifier 
+le caractère extrêmement inhomogène des réseaux de neurones naturels~: 
+\begin{itemize}
+	\item variété des types cellulaires, 
+	\item variété des délais de
+	transmission,
+	\item variété de la forme et du nombre d'arborisations synaptiques,
+	\item etc.
+\end{itemize}
+
+{\color{Orange} A travers l'analyse de la distribution des poids des connexions synaptiques
+	%, de la distribution   leur intensité (?), 
+	et de la distribution des délais associés,
+	nous posons la question du rôle de ces distributions dans la formation de patrons d'activité (ou modes) variés, supports potentiels
+	d'opérations cognitives. }
+
+
+\subsection{Grands réseaux de neurones aléatoires}
+
+Un réseau de neurones aléatoire est un graphe orienté constitué de $N$ nœuds défini par la matrice des 
+couplages $J = \{J_{i,j}\}_{i \in 1..N,j \in 1..N}$ où chaque lien $J_{ij}$ est issu d'un tirage aléatoire indépendant.
+L'ajout d'une fonction de réponse sur les nœuds définit un système dynamique déterministe, constitué de $N$ neurones.
+
+La notion d'aléa ne porte donc pas sur la dynamique d'état mais sur le patron de connexions du réseau. 
+On parle de bruit ``figé'' dans les connexions (``\textit{quenched disorder}'').
+
+L'indépendance entre les différents liens est une caractéristique importante, qui permet d'analyser le comportement du modèle 
+à la limite des grandes tailles, c'est à dire en faisant tendre la taille $N$ vers l'infini. Avec un \textit{scaling} des poids approprié 
+(espérance, variance de la loi de tirage initial en $O(\frac{1}{N}$)), on peut montrer que la dynamique (déterministe) tend à la limite thermodynamique 
+vers un processus aléatoire, la corrélation entre les nœuds tendant vers 0. 
+
+%{\color{Violet} activité intrinsèque}
+
+Les premières études sur ce  type de modèle avaient été faites par Sompolinsky \shortcite{Som88} sur un système dynamique continu. 
+L'analyse d'une variante à temps
+discret avait été proposée par Cessac et Samuelidès \shortcite{Ces94}. La démonstration de cette propriété (dite de ``chaos local'') a été  
+formellement achevée, dans le cas discret, par Moynot et Samuelides \shortcite{Moy00a} en 2000.
+
+\subsubsection{Limite thermodynamique}
+Le comportement d'une classe de réseaux (l'ensemble des réseaux définis par la même loi de tirage initial) peut être décrit à la limite thermodynamique par 
+des équations dites de ``champ moyen''. Ces équations définissent le processus aléatoire limite, autrement dit la dynamique temporelle de grandeurs caractéristiques comme l'activité moyenne, 
+le moments d'ordre 2 et la covariance dans le temps \shortcite{Ces95}. 
+Les équations de champ moyen offrent ainsi une description ``macroscopiques'' de l'activité d'un réseau,
+représentative de l'activité qu'on peut attendre dans un réseau de taille finie issu d'un tirage particulier, et 
+constituent de fait un cadre d'analyse adapté à une approche ``multi-échelles''.
+
+\subsubsection{Route vers le chaos}
+Il est intéressant de constater que le processus stochastique limite, tel que décrit par les équations de champ moyen, 
+a une traduction à taille finie
+sous la forme d'une activité de type \textit{chaos déterministe}. L'existence d'un 
+paramètre de contrôle (le gain de la fonction de transfert des neurones) permet de reproduire, dans ces réseaux aléatoires, 
+un  comportement générique de déstabilisation, appelé route vers le chaos par ``quasi-périodicité'' \shortcite{Berger1988,Doyon1993}.
+L'existence d'une telle frontière entre l'ordre et le chaos est également prouvée à la limite thermodynamique, mais dans ce
+cas la transition se fait brutalement, avec un passage discret d'un processus de type point fixe à un processus stochastique \shortcite{Ces95}.
+Cette frontière entre ordre et chaos est par principe intéressante puisqu'elle indique le lieu
+où la variabilité de la dynamique, et donc potentiellement {\color{Orange} l'expressivité du réseau est la plus importante. }
+
+\subsection{Réseaux équilibrés} \label{sec:balanced}
+
+L'activité nerveuse est caractérisée par la présence fréquente d'oscillations collectives, souvent transitoires, 
+observables à différentes échelles. {\color{Orange} Le mécanisme par lequel une population de neurones peut se mettre à osciller 
+ont déjà été présentés dans la section \ref{sec:balanced}}. 
+
+Les comportements oscillants ont été analysés de manière approfondie en modélisation à travers l'étude des réseaux de neurones dits ``équilibrés'' (\textit{balanced neural networks}).
+Il s'agit d'une 
+classe de réseaux de neurones constitués d'une population de neurones inhibiteurs et d'une population de neurones excitateurs.
+Le terme ``équilibre'' se réfère ici à l'idée d'équilibre
+dynamique entre deux forces opposantes~: la dynamique du réseau est amenée à converger vers un point d'équilibre
+traduisant localement (et globalement) le ``poids'' des deux influences. 
+\begin{itemize}
+	\item Une configuration des poids se traduisant
+	par une activité endogène soutenue 
+	traduit une domination de l'influence excitatrice.
+	\item A l'inverse, une configuration où l'activité intrinsèque disparaît après un certain temps 
+	traduit une domination de l'influence inhibitrice.
+\end{itemize} 
+
+Comme dans le cas des réseaux aléatoires simples, il existe un paramètre de contrôle correspondant au rapport entre l'influence 
+excitatrice et l'influence inhibitrice. 
+
+
+De manière intéressante, une grande variété de comportements dynamiques peuvent être observés
+à la frontière, et entre l'extinction et l'activité soutenue, comme les oscillations synchronisées \shortcite{brunel00} et/ou le chaos \shortcite{Van98}. 
+
+\subsubsection{Rôle computationnel des oscillations synchronisées}
+Plusieurs hypothèses ont été proposées sur le rôle
+des oscillations synchronisées, 
+\begin{itemize}
+	\item comme mécanisme permettant de {\color{Orange} ``lier'' (assembler) les différentes modalités (constituants) d'un 
+		même phénomène \shortcite{Gra89}}. La cohérence de phase
+	observée à large échelle est vue comme la signature d'une activité coordonnée entre des aires séparées par plusieurs 
+	centimètres \shortcite{Rod99}. 
+	\item comme porteuse permettant une forme de cadençage et de séquençage des stimuli 
+	dans les couches sensorielles primaires \shortcite{MLe96}. 
+	\begin{itemize}
+		\item Différents régimes oscillatoires sont classiquement identifiés, classifiés selon la
+		bande de fréquence qu'ils occupent :  oscillations theta (3-8 Hz), oscillations alpha (10-15 Hz), oscillations beta (15-25 Hz) et
+		oscillations gamma (> 30 Hz) \cite{Wang2010}.
+		\item L'anticipation de phase (phase précession) ou le retard de phase observés au niveau cellulaire dans 
+		un contexte d'oscillations theta \shortcite{Skaggs1996}
+		sont interprétés comme caractéristiques d'une activité au sein de laquelle l'ordre de tir 
+		des potentiels d'action individuels joue un rôle important.
+	\end{itemize}
+
+\end{itemize} 
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Codage topographique}
+
+\subsection{Neurones impulsionnels}
+
+
+
+%\subsection{Applications}
+
+\cleardoublepage
+
 \section{Contributions personnelles}
+
+\subsection{Réseaux aléatoires multi-populations}\label{sec:multi_pop}
+Les premières études auxquelles j'ai participé portaient sur l'étude des transitions de phase dans les réseaux de neurones
+aléatoires. 
+Les différentes architectures neuronales étudiées ont tout d'abord
+permis d'identifier des comportements caractéristiques, décrits sous la forme de différents régimes dynamiques. 
+{\color{Orange} Nous avons cherché à caractériser l'expressivité de ces substrats, c'est à dire leur capacité à produire
+des patrons d'activité pouvant servir de support à des opérations cognitives. }
+
+L'étude que nous avons présentée \shortcite{Dau99A,dauce01a} étudie le comportement d'un réseau dit ``équilibré'' (voir section \ref{sec:balanced}). 
+{\color{Gray} Le point de départ consistait à modéliser et reproduire certains comportements observés dans les 
+réseaux de neurones naturels composés d'une population de neurones excitateurs et d'une population de neurones inhibiteurs (réseaux équilibrés,.}
+Ce papier 
+étend pour la première fois le modèle de champ moyen pour le cas des réseaux à connectivité aléatoire à populations multiples
+(auquel cas les tirages aléatoires sont effectués sur des ``faisceaux d'axones'' reliant une population de neurones $p \in 1..K$ à une
+population de neurones $q \in 1..K$, où $K$ est le nombre de populations).
+Ce modèle renouvelle l'approche large-échelle classique \shortcite{WILSON89} en prenant en compte l'hétérogénéité des faisceaux
+d'axones reliant différentes régions du réseau.  
+Il sert de base à la définition d'architectures neuronales fondées sur des 
+substrats à connectivité aléatoire. 
+
+%{\color{Violet}
+%[Multi-pop = base pour l'approche multi-échelle. Construction / architecture neuronale. Prise en compte de l'hétérogénéité.]
+%Multi-pop = travail de master d'O Pinaud.
+%Demonstration champ moyen = O Moynot (avec généralisation à la connectivité diluée)}
+
+L'étude numérique proposée dans le papier fixe le rapport excitation/inhibition à $\frac{1}{2}$,
+ce qui correspond à un régime de faible activité \shortcite{Amit1989}. 
+Nous étudions le rôle contrasté de deux paramètres de contrôle (voir Figure 2). 
+\begin{itemize}
+	\item Le premier paramètre, $J$, représente l'amplification du signal. L'augmentation
+	continue de ce paramètre tend à produire une bifurcation entre un régime simple (point fixe) et une activité 
+	complexe (de type chaotique) {\color{Orange} comme précédemment.}
+	\item Un second paramètre, nommé $d$, représente l'inverse du \textit{coefficient de variation} des liens, autrement dit le 
+	degré d'homogénéite. Augmenter ce paramètre tend à rendre les poids plus homogènes. 
+\end{itemize}
+De manière intéressante, 
+l'augmentation continue de ce second paramètre (augmentation de l'``ordre'') produit une transition 
+entre un régime stationnaire et un régime non-stationnaire périodique. Nous mettons en évidence une carte
+de bifurcation à 4 régions, comprenant un régime stationnaire de point fixe, un régime stationnaire complexe,
+un régime d'oscillations simple, et un régime d'oscillations complexes analogue à processus stochastique cyclostationnaire,
+ce dernier régime étant à notre connaissance mis en évidence pour la première fois dans ce type de réseaux.
+
+Notre étude a donc ouvert la voie à l'étude multi-population systématique des réseaux de neurones à connectivité aléatoire,
+voir par exemple \shortcite{Faugeras2009,Cabana2013}. %L'accent sur l'équilibre dynamique entre populations escitatrice et inhibitrice
+
+%{\color{Violet}
+%[O. Faugeras, J. Touboul, B. Cessac, “A constructive mean field analysis of multi population neural networks with random synaptic weights and stochastic inputs”, Front. Comput. Neurosci. (2009) 3:1.
+
+%et aussi 
+
+%Large Deviations, Dynamics and Phase Transitions in Large Stochastic and Disordered Neural Networks
+%Tanguy Cabana1 and Jonathan Touboul (2013)
+
+%La question de l'homogénéité/hétérogénéité est revenue à l'ordre du jour. Plusieurs papiers récents bla bla...}
+
+\cleardoublepage
+\includepdf[pages=1-2,landscape=true,nup=1x2,scale=1.1,offset= 70 -30]{pdf/2001-neural-proc-letters.pdf}
+\includepdf[pages=3-4,landscape=true,nup=1x2,scale=1.1,offset= -70 -30]{pdf/2001-neural-proc-letters.pdf}
+\includepdf[pages=5-6,landscape=true,nup=1x2,scale=1.1,offset= 70 -30]{pdf/2001-neural-proc-letters.pdf}
+\includepdf[pages=7-8,landscape=true,nup=1x2,scale=1.1,offset= -70 -30]{pdf/2001-neural-proc-letters.pdf}
+\includepdf[pages=9-10,landscape=true,nup=1x2,scale=1.1,offset= 70 -30]{pdf/2001-neural-proc-letters.pdf}
+\includepdf[pages=11-12,landscape=true,nup=1x2,scale=1.1,offset= -70 -30]{pdf/2001-neural-proc-letters.pdf}
+
+\cleardoublepage
+\subsection{Criticalité des réseaux aléatoires}
+
+Un des intérêts principaux des réseaux à connectivité aléatoire est leur capacité à générer des dynamiques complexes
+endogènes (donc sans stimulation extérieure). Ces dynamiques, bien que reposant sur des équations déterministes,
+se comportent comme des processus stochastique indépendants sur chaque neurone. Ce comportement n'est pourtant pas analogue
+à un simple bruit passif. 
+
+Une manière simple de caractériser le comportement non-linéaire (ou critique) d'une population de neurones consiste à introduire de petites perturbations
+dans la dynamique du réseau. 
+Une étude proposée dans le 3ème chapitre de l'ouvrage que nous avons co-dirigé avec Agnès Guillot \shortcite{Beslon2002} illustre bien le propos.
+Cette étude porte sur le modèle le plus simple, un réseau récurrent aléatoire comportant une seule population. Le paramètre d'amplification
+choisi place le réseau dans une région chaotique, proche de la transition vers le cycle limite.  
+Le réseau est soumis à une stimulation extérieure quasi stationnaire, évoluant à une vitesse très lente par rapport à la vitesse de 
+mise à jour du réseau. Une succession de régimes dynamiques distincts, séparés par des transitions brusques, est mise en évidence.
+Chaque régime est caractérisé par un patron d'activité différent, qui se manifeste par la présence de fréquences caractéristiques
+distinctes dans le spectre de Fourier du signal moyen.  
+
+Une autre étude, présente dans mon manuscrit de thèse \shortcite{Dau00}, développe l'analyse spatio-temporelle des patrons d'activité de type cycle limite
+ou chaos léger.
+L'existence d'une chaîne d'activation spontanée (synfire chain \shortcite{ABELES91}) est mise en évidence par analyse de la matrice de covariance des signaux individuels. 
+Différents modes (patrons d'activation spatio-temporels) se développent spontanément lorsque le réseau est soumis à des entrées statiques différentes \shortcite{Dau00b}.
+Enfin, l'analyse de la réponse du réseau à une stimulation périodique indique une ``bande passante'' de quelques unités temporelles, le réseau étant capable 
+de ``capturer'' (et donc d'amplifier) des signaux dont la période varie entre 2 et 10\--12 unités de temps
+(autrement dit à sélectionner un mode dynamique périodique interne compatible avec la période imposée) \shortcite{Dau00b}.
+Le comportements spontané des réseaux récurrents aléatoires est par ailleurs à la base du mécanisme de perception par feedback positif
+présentés dans le chapitre \ref{sec:FPos}. 
+
+L'intérêt du comportement spontané des réseaux récurrents à connectivité aléatoires a été largement confirmé depuis. 
+Une étude plus systématique de la réponse linéaire dans les réseaux récurrents \shortcite{Cessac2007} met en évidence 
+l'existence de modes et de résonances extrêmement variés lorsque le signal est applique sur un seul noeud du réseau (micro-stimulation). 
+Les modèles de ``réservoir
+computing'' proposés par l'équipe de Wolfgang Maas \shortcite{Maass2002} reposent sur le même principe : un réseau de neurones aléatoire récurrent soumis à un signal
+spatio-temporel est capable de conserver une mémoire de quelques unités de temps utilisables pour produire des classifieurs sensibles
+au contexte temporel.
+
+{\color{Violet} Image du papillon-chenille.}
+
+Ce modèle de réseau à connexions aléatoire offre un exemple de substrat dont la caractéristique principale est la \emph{capture dynamique}, reposant
+sur des transformations morphologiques des patrons d'activités (changements des distributions spatiales et temporelles des activités). Bien que construits sur
+un tirage aléatoire arbitraire, ils offrent donc un bon support pour le traitement (et la transformation) des signaux temporels. 
+Faire reposer le traitement sur un tirage arbitraire rejoint d'ailleurs un certain nombre de techniques de plongement (ou projection) aléatoires
+utilisées en apprentissage automatique, tels le ``compressive sensing'' \shortcite{Baraniuk2007} ou l'architecture ``extreme learning'' \shortcite{Huang2006}.
+
+%\cleardoublepage
+%\includepdf[pages=1, offset=70 -20]{pdf/2000-sab-ann.pdf}
+%\includepdf[pages=2, offset=-70 -20]{pdf/2000-sab-ann.pdf}
+%\includepdf[pages=3, offset=70 -20]{pdf/2000-sab-ann.pdf}
+%\includepdf[pages=4, offset=-70 -20]{pdf/2000-sab-ann.pdf}
+%\includepdf[pages=18, offset=70 -50]{pdf/2007-epj-st-ann2.pdf}
+%\includepdf[pages=19, offset=-70 -50]{pdf/2007-epj-st-ann2.pdf}
+%\includepdf[pages=20, offset=70 -50]{pdf/2007-epj-st-ann2.pdf}
+%\includepdf[pages=21, offset=-70 -50]{pdf/2007-epj-st-ann2.pdf}
+%\includepdf[pages=22, offset=70 -50]{pdf/2007-epj-st-ann2.pdf}
+%\includepdf[pages=23, offset=-70 -50]{pdf/2007-epj-st-ann2.pdf}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     1.3      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     1.2      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Plasticité synaptique et apprentissage}
 Ce chapitre est consacré à l'étude des mécanismes d'apprentissage dans les réseaux de neurones récurrents.  
 
+{\color{Cyan} Il est organisé en trois sections:
+\begin{itemize}
+	\item bla bla
+	\item bla bla	
+	\item bla bla
+\end{itemize}
+}
+
 \section{Notions générales}
+
+\cleardoublepage
 
 \subsection{Plasticité synaptique}
 
@@ -1148,9 +1411,9 @@ De nombreux points communs peuvent être établis entre l'apprentissage computat
 \end{itemize}
 
 
-\paragraph{Reconnaissance de formes et apprentissage}
+%{\color{Gray} Ce qui différencie principalement le calcul traditionnel du calcul distribué est la taille et la dimension des opérandes. Le calcul distribué s'adapte bien à la réalisation d'opérateurs (a priori non linéaires) dans les espaces de grande dimension. }
 
-Ce qui différencie principalement le calcul traditionnel du calcul distribué est la taille et la dimension des opérandes. Le calcul distribué s'adapte bien à la réalisation d'opérateurs (a priori non linéaires) dans les espaces de grande dimension. 
+\paragraph{Reconnaissance de formes et apprentissage}
 
 Le mécanisme fondamental sur lequel s'appuient la plupart des algorithmes d'apprentissage automatique est celui le l'\textit{appariement} (``\textit{pattern matching}'') entre un \textit{dictionnaires de formes} et un vecteur (ou un ensemble de vecteurs) d'entrée. 
 Cet appariement se réalise:
@@ -1189,11 +1452,19 @@ La nature de cet espace de sortie (continu ou discret) définit deux grands type
 
 \begin{itemize}
 	\item Lorsque l'espace de sortie est discret, la réponse est une \textit{catégorie}. On parle de catégorisation ou de classification des données d'entrée. 
-	Dans ce cas, la fonction de réponse repose sur un mécanisme d'\textit{appariement exclusif}, c'est à dire qu'en fin de compte, une forme unique est identifiée comme correspondant aux données d'entrée. Ce mécanisme est mieux connu sous le nom de ``winner takes all'' (le gagnant prend tout), implémenté par la fonction \textit{argmax}.
+	Dans ce cas, la fonction de réponse repose sur un mécanisme d'\textit{appariement sélectif} (ou ``choix''), c'est à dire qu'en fin de compte, une forme unique est identifiée comme correspondant aux données d'entrée. Ce mécanisme est mieux connu sous le nom de ``winner takes all'' (le gagnant prend tout), implémenté par la fonction \textit{argmax}.
 	\item Lorsque l'espace de sortie est continu, on parle de problème de régression (ou de prédiction). La réponse est en général le résultat d'une \textit{décomposition} des données d'entrée sur une base de plus petite dimension. On parle dans ce cas d'\textit{appariement non exclusif} puisque les données d'entrée s'apparient à des degrés divers aux différentes formes de la base pour produire la réponse. 
 \end{itemize}
 
 {\color{Cyan} Remarque~: projection dans un espace de pls grande dimension \--- espace de redescription.}
+
+{\color{Cyan} 
+	Exemples :
+	\begin{itemize}
+		\item Appariement sélectif~: les barycentres des partitions génératrices permettant d'interpréter une donnée d'entrée comme membre d'une classe donnée. Principe de l'argmax ou du ``winner takes all''. Non-linéaire. Mécanisme de \emph{choix}. \textit{Enumeration.}
+		\item Appariement non sélectif : les données sont interprétées comme une combinaison de facteurs.  projection des données sur une base de plus petite dimension. Matching pursuit. Dictionnaire. Combinaison linéaire. ACP, SVD, deep learning, ... \textit {Décomposition}.
+	\end{itemize}
+}
 
 \paragraph{Types de données}
 
@@ -1218,7 +1489,7 @@ La construction du dictionnaire de formes s'appuie sur des contraintes exprimée
 Le principe d'un guidage plus ou moins contraignant se retrouve également dans la littérature de psychologie expérimentale classique, dans laquelle on parle~:
 \begin{itemize}
 	\item de conditionnement pavlovien (lorsque le comportement est guidé par une réponse réflexe à un stimulus) {\color{Cyan}[PAVLOV]}
-	\item et conditionnement opérant (lorsque le comportement est guidé par une récompense) {\color{Cyan}[SKINNER]}. 
+	\item et conditionnement opérant (lorsque le comportement est guidé par une récompense ou une punition) {\color{Cyan}[SKINNER]}. 
 \end{itemize} 
 
 \paragraph{Apprendre et oublier}
@@ -1362,13 +1633,14 @@ Les implémentations les plus connues du principe de Hebb sont~:
 %	\item Apprentissage avec consigne
 %\end{itemize}
 
+\cleardoublepage
 
 \section{Notions spécifiques et propositions}
 
 Cette section présente quelques notions plus spécialisées utiles à la compréhension de mes travaux, dédiées à l'étude de la plasticité des réseaux de neurones récurrents. 
 \begin{itemize}
 \item
-Le choix des réseaux de neurones récurrents se justifie principalement en raison de leur plus grande plausibilité biologique. Comme nous l'avons vu, les réseaux de neurones récurrents sont capables de maintenir une activité persistante en l'absence de stimulation extérieure. 
+Le choix des réseaux de neurones récurrents se justifie principalement en raison de leur plus grande plausibilité biologique \shortcite{Compte2006,Fiser2010}. Comme nous l'avons vu, les réseaux de neurones récurrents sont capables de maintenir une activité persistante en l'absence de stimulation extérieure. 
 \item Le modèle de plasticité synaptique le mieux établi est la \textit{règle de Hebb} \shortcite{Heb49}, confirmée à de nombreuses reprises par les observations \shortcite{Bli73,BIPOO98}. 
 La règle de Hebb inscrit dans la structure du graphe les conjonctions d'activité pré et post-synaptique se produisant de façon répétée au cours du temps. 
 \end{itemize}
@@ -1386,22 +1658,33 @@ théorique de l'apprentissage non-supervisé.
 \end{itemize}
 Ces modèles sont porteurs de limitations (en terme de capacité de stockage ou de preuve de convergence) qui rendent difficiles l'utilisation de la règle de Hebb dans le cadre de problèmes pratiques. }
 
-La thèse principale développée ici est que la règle de Hebb, souvent sous-estimée pour ses plus faibles performances pratiques, doit être réexaminée dans le cadre des réseaux de neurones récurrents.
-Autrement dit la plasticité de Hebb doit être interprétée selon la logique des réseaux de neurones récurrents, cette logique étant largement différente de celle des réseaux à couches.
+La règle de Hebb %, souvent sous-estimée pour ses plus faibles performances pratiques, doit être réexaminée dans le cadre des réseaux de neurones récurrents.
+%Autrement dit la plasticité de Hebb 
+doit être interprétée selon la logique des réseaux de neurones récurrents, cette logique étant largement différente de celle des réseaux à couches.
 \begin{itemize}
 	\item La logique à l’œuvre dans les réseaux de neurones à couches est celle d'un calcul \textit{réparti}. Le calcul est produit par étapes des couches d'entrée jusqu'à la couche de sortie; les couches cachées réalisent les calculs intermédiaires.
 	\item Le calcul implémenté par les réseaux de neurones récurrents est un calcul \textit{distribué}, c'est à dire que l'ensemble du calcul est réparti à parts égales sur les différents nœuds du réseau. Le ``temps de calcul'' correspond au temps de relaxation vers un attracteur. % Ce calcul est réalisé par l'ensemble des neurones du réseau. 
 	On parle aussi de réponse de population (ne dépendant pas d'un neurone seul).
 \end{itemize} 
 
-Le principe d'appariement sélectif (à l’œuvre dans de nombreux algorithmes d'apprentissage) est réinterprété, dans le cas des réseaux de neurones récurrents, comme une réduction sélective de la complexité de la dynamique. 
-En détail, nous faisons les propositions suivantes~:
+\paragraph{} La thèse principale développée ici est que :
 \begin{itemize}
-	\item Un réseau récurrent (en régime ``persistant'') se comporte comme un ``réservoir'' de patrons d'activité (ou ``assemblées'' de neurones). Un tel patron d'activité correspond à l'activation d'un circuit spécifique sur le graphe.
-	\item Le calcul repose sur l'appariement entre l'entrée (le signal extérieur) et un des patrons d'activité activables sur le graphe.
+	\item[]
+	\textit{La plasticité de Hebb construit une fonction d'\textbf{appariement conditionnel} s'appuyant sur les propriétés de l'activité persistante.}
+\end{itemize}
+où:
+\begin{itemize}
+	\item[]
+\textit{Le mécanisme d'appariement est assimilé, dans le cas des réseaux de neurones récurrents, à une \textbf{ réduction sélective de la complexité} de la dynamique.} 
+\end{itemize}
+
+\paragraph{} En détail, nous faisons les propositions suivantes~:
+\begin{itemize}
+	\item Un réseau récurrent (en régime ``persistant'') se comporte comme un ``réservoir'' de patrons d'activité (ou ``assemblées'' de neurones). Chaque patron d'activité correspond à l'activation d'un circuit spécifique sur le graphe.
+	\item Le calcul repose sur l'appariement entre l'entrée (le signal extérieur) et un des patrons d'activité activables sur le graphe. On parle de \textit{reconfiguration} du circuit.
 	\item Cet appariement se traduit par une réduction de complexité 
 	 correspondant à la relaxation du système dynamique vers un attracteur de dimension faible.
-	\item Cette réduction sélective de complexité est réalisée par la plasticité de Hebb en présence de signaux contenant ``suffisamment'' de régularités.
+	\item Cette réduction sélective de complexité repose sur l'action de la plasticité de Hebb sur le graphe en présence de signaux contenant ``suffisamment'' de régularités.
 \end{itemize}
 
 {\color{Cyan}
@@ -1457,14 +1740,14 @@ La transformation des données d'entrée sous la forme d'un (ou plusieurs) vecte
 	\item Dans le cas des réseaux récurrents, cette simplification se traduit par une \textit{réduction du nombre de degrés de liberté} sur lesquels évolue la dynamique des neurones. L'activité du réseau accepte alors une description sur un espace de plus petite dimension.
 \end{itemize}
 
-\paragraph{La réponse ``je ne sais pas''}
-Contrairement aux classifieurs traditionnels qui apparient \textit{nécessairement} le signal d'entrée avec une des formes stockées dans la structure, certains réseaux de neurones 
-réalisent des appariements conditionnels tels que~:
+\paragraph{La réponse ``je ne sais pas'' }
+Contrairement aux classifieurs traditionnels qui apparient \textit{nécessairement} le signal d'entrée avec une des formes stockées dans la structure, il existe des réseaux de neurones 
+réalisant des \emph{appariements \textit{conditionnels}} tels que~:
 \begin{itemize}
 	\item les signaux de forme connue s'apparient avec une des formes stockées dans le réseau;
 	\item les signaux inconnus ne s'apparient avec aucune des formes stockées dans le réseau.  
 \end{itemize}
-Parmi l'ensemble des réponses possibles, le réseau produit la réponse ``je ne sais pas'' lorsque le signal présenté n'est pas suffisamment proche d'une forme connue.
+Autrement dit l'appariement conditionnel autorise le réseau à \textit{ne pas choisir}. Parmi l'ensemble des réponses possibles, le réseau produit la réponse ``je ne sais pas'' lorsque le signal présenté n'est pas suffisamment proche d'une forme connue.
 
 \begin{itemize}
 	\item Ce rejet des entrées inconnues correspond, dans la littérature statistique, au principe de ``rejet de distance'', lorsqu'un phénomène observé est trop éloigné du modèle et classé comme ``aberrant''.
@@ -1473,8 +1756,8 @@ Parmi l'ensemble des réponses possibles, le réseau produit la réponse ``je ne
 
 \paragraph{Cas des réseaux de neurones récurrents} Nous nous intéressons ici plus particulièrement au traitement des données dans les réseaux de neurones récurrents. L'équation de récurrence:
 $$\dot{\boldsymbol{x}} = \phi(\boldsymbol{x}(t), I(t))$$
-permet de modéliser l'interaction entre une dynamique endogène (décrite par $\boldsymbol{x}$) et un signal extérieur (décrit par $I$).
-L'évolution de la dynamique au cours du temps décrit une trajectoire dans un espace de dimension $N$ (où $N$ est le nombre de nœuds du réseau).  
+permet de modéliser l'interaction entre une activité endogène (décrite par $\boldsymbol{x}$) et un signal extérieur (décrit par $I$).
+L'évolution de l'état du système dynamique au cours du temps décrit une trajectoire dans un espace de dimension $N$ (où $N$ est le nombre de nœuds du réseau).  
 On note $n \leq N$ le nombre de degrés de liberté sur lesquels évolue  \textit{effectivement} la dynamique (la dimension de la variété sur laquelle évolue la trajectoire limite). La valeur de $n$ s'interprète comme le degré de réduction opéré par le signal sur l'activité du réseau. 
 \begin{itemize}
 	\item dans le cas d'une entrée bruitée, $n$ peut être proche de $N$
@@ -1500,11 +1783,9 @@ cette notion d'activation ``macroscopique'' étant à distinguer de l'activation
 On parlera par la suite de \textit{réponse de population} (ou réponse collective)  lorsque le réseau ``réagit'' ainsi à une entrée particulière en réduisant son nombre de degrés de liberté.
 
 Ce principe de sélection par la dynamique d'un réseau récurrent a été exprimé dans les travaux de Walter Freeman \shortcite{ska87} dans le cadre d'un modèle de la perception des odeurs.
-On retrouve une idée analogue dans les travaux de Haken \shortcite{Haken1983}, qui a conceptualisé le principe de réponse par réduction de la dynamique collective à travers la notion de \textit{paramètre d'ordre}, emprunté à la thermodynamique.
+On retrouve une idée analogue dans les travaux de Hermann Haken \shortcite{Haken1983}, qui a conceptualisé le principe de réponse par réduction de la dynamique collective à travers la notion de \textit{paramètre d'ordre}, emprunté à la thermodynamique.
 
-{\color{Gray} Un paramètre d'ordre est, dans le cas de l'étude des transitions de phase, un opérateur permettant de mesurer un type d'organisation spécifique. Il est nul
-	si le milieu étudié est dans une phase différente de la phase décrite par l'opérateur. Il est ``actif'' lorsque le milieu obéit à cette organisation spécifique
-	(comme celle d'un cristal par exemple).}
+
 
 
 \subsection{Assemblées neuronales}
@@ -1528,8 +1809,11 @@ Une assemblée est donc, selon l'idée originale de Hebb, un patron d'activité 
 assemblée de neurones actifs est une forme (un vecteur caractéristique)  ``stockée'' dans le réseau, qui a la possibilité de s'''activer'' en fonction du contexte.}
 On parlera dans la suite, pour désigner cette activité coordonnée, d'une activité \textit{macroscopique} (par opposition à l'activité microscopique du neurone seul). 
 
-Une assemblée de neurones peut être vue comme une unité de description de l'activité du réseau.
-A un instant donné, une assemblée se trouve soit dans l'état inactif, soit dans l'état ``activé''. L'état du réseau est alors décrit, de manière macroscopique, par la (ou les) assemblée(s) particulière(s) qui est (sont) active(s) à cet instant.
+Une assemblée de neurones peut être vue comme une \textit{unité de description} de l'activité du réseau.
+A un instant donné, une assemblée se trouve soit dans l'état inactif, soit dans l'état ``activé''. L'état du réseau est alors décrit, de manière macroscopique, par la (ou les) assemblée(s) particulière(s) qui est (sont) active(s) à cet instant \footnote{L'idée d'unité de description se ramène à la notion de \textit{paramètre d'ordre} \shortcite{Haken1983} qui est, dans le cas de l'étude des transitions de phase, un opérateur permettant de mesurer un type d'organisation spécifique. Il est nul
+	si le milieu étudié est dans une phase différente de la phase décrite par l'opérateur. Il est ``actif'' lorsque le milieu obéit à cette organisation spécifique.}.
+
+Enfin, selon cette perspective, le réseau de neurones se comporte comme un \textit{graphe  reconfigurable} au sein duquel des circuits (assemblées) peuvent être activés ou désactivés au cours du temps.
 
 \subsubsection{Activité récurente}
 
@@ -1546,25 +1830,96 @@ A un instant donné, une assemblée se trouve soit dans l'état inactif, soit da
 	Une assemblées apparaissant fréquemment tend à s'inscrire dans le graphe de connexions, ce qui tend à favoriser sa réapparition dans le futur.
 }
 
-Le modèle mathématique qui implémente le principe d'assemblée de la manière la plus simple est le modèle de Hopfield \shortcite{Hop82}. Ce modèle est un réseau de neurones récurrent à unités binaires développant une dynamique de point fixe multistable. Le réseau de Hopfield implémente un principe de \textit {mémoire associative}. Il apprend ``par cœur'' un certain nombre de scènes (ou images). Il est ensuite capable, lorsque certains constituants d'une scène apprise sont présentés, de compléter la scène avec les éléments manquants, de rectifier les valeurs erronées etc. 
+Le modèle mathématique qui implémente le principe d'assemblée de la manière la plus simple est le modèle de Hopfield \shortcite{Hop82}. Ce modèle est un réseau de neurones récurrent à unités binaires développant une dynamique de point fixe multistable. 
+Malgré des limitations bien connues en terme de capacité de stockage \shortcite{Amit1985}, le réseau de Hopfield présente l'avantage de fonctionner avec des principes compatibles avec les idées de Hebb (caractère local de la règle de plasticité, analogie possible entre attracteur et assemblée), et donc de constituer un modèle plus ``biologiquement plausible'' que les réseaux de neurones traditionnels.
+
+Le réseau de Hopfield implémente un principe de \textit {mémoire associative}. Il apprend ``par cœur'' un certain nombre de scènes (ou images). Il est ensuite capable, lorsque certains constituants d'une scène apprise sont présentés, de compléter la scène avec les éléments manquants, de rectifier les valeurs erronées etc. 
 L'espace d'états est organisé en un nombre fini de \textit{bassins d'attraction} définissant des patrons d'activité spécifiques et mutuellement exclusifs. L'activité du réseau finit par converger vers un de ces patrons en fonction des conditions initiales. Chacun des attracteurs s'interprète ici comme une assemblée distincte, c'est à dire comme un circuit de renforcement mutuel aboutissant à la stabilisation d'un patron d'activité macroscopique. 
 
+\subsection{Mise en œuvre et applications}
 
-\subsubsection{Appariement distribué et intégration}
+\subsubsection{Intégration}
 
-D'un point de vue computationnel, le modèle de Hopfield 
-implémente un mécanisme d'appariement entre un signal d'entrée, 
-fourni sous forme de condition initiale, et un des patrons stockés dans le graphe.
 Contrairement aux modèles classiques dans lesquels l'appariement 
-repose sur un produit scalaire, l’appariement s'effectue ici via  mécanisme de relaxation vers un attracteur. Le calcul de la réponse (le patron d'activité final) repose sur la stabilisation progressive d'un circuit d'activation particulier. On parle dans ce cas de processus  d'\textit{intégration} de la réponse (au sens de l'intégration progressive au cours du temps de caractéristiques d'activation conduisant au patron final).
+repose sur un produit scalaire, l’appariement s'effectue dans les réseaux récurrents via  mécanisme de relaxation vers un attracteur.
 
-Ce mécanisme d'intégration est spécifique aux réseaux de neurones récurrents, dans lequel des valeurs d'activation calculées aux temps précédents sont réutilisées pour aboutir au patron final.  
+Le calcul de la réponse (le patron d'activité final) repose sur la stabilisation progressive d'un circuit d'activation particulier, les valeurs calculées aux temps précédents étant réutilisées  pour aboutir progressivement au patron d'activité final. On parle dans ce cas de processus  d'\textit{intégration} de la réponse (au sens de l'intégration progressive au cours du temps de caractéristiques d'activation conduisant au patron final).
+ 
 Il n'y a donc pas, dans ce cadre, de distinction entre opérateur et opérande. L'information ne circulant pas dans un sens défini (de l'entrée vers la sortie), l'activité d'un nœud est, selon l'avancement du processus d'intégration, un opérande (une entrée) ou le résultat d'une opération.
 
-Le résultat macroscopique de ce processus est un mécanisme d'accroissement d'évidence, inscrit dans le temps, conduisant 
+Le résultat macroscopique de ce processus est un mécanisme d'\textit{accroissement d'évidence}, inscrit dans le temps, conduisant 
 au ``choix'' d'une des formes préalablement stockées dans le réseau. 
 
-Malgré des limitations bien connues en terme de capacité de stockage \shortcite{Amit1985}, le réseau de Hopfield présente l'avantage de fonctionner avec des principes compatibles avec les idées de Hebb (caractère local de la règle de plasticité, analogie possible entre attracteur et assemblée), et donc de constituer un modèle plus ``biologiquement plausible'' que les réseaux de neurones traditionnels.
+Le modèle de Hopfield 
+est un exemple d'implémentation de ce mécanisme d'appariement entre un signal d'entrée, 
+fourni sous forme de condition initiale, et un des patrons stockés dans le graphe.
+
+
+\subsubsection{Filtrage}\label{sec:filtrage}
+
+Selon les modèles classiques, la perception sensorielle s'apparente à un mécanisme de \textit{filtrage} des entrées perceptives.
+Le filtrage d'un signal correspond fonctionnellement au fait de pouvoir \textit{prédire le présent}. 
+Tout écart entre la prédiction et l'observation constitue un erreur de prédiction.
+La perception sensorielle est interprétée comme le résultat de l'intégration des erreurs perceptives afin de mettre à jour le modèle. 
+
+Le filtrage repose sur un \textit{modèle} prédictif (ou modèle interne)
+%Il nécessite également le maintien d'une activité prédictive interne
+généralement implémenté  %un modèle ``forward'' permettant d'appliquer 
+selon le principe de l'``observateur''
+\cite{Kalman1960,Wolpert2000}, où:
+\begin{itemize}
+	\item La sortie du modèle correspond à la prédiction actuelle,
+	\item Le signal d'entrée correspond
+	à l'observation effective. 
+\end{itemize}
+
+%\begin{itemize}
+%	\item se manifeste par la présence d'une erreur perceptive 
+%	\item et se résout via un mécanisme de traitement de l'erreur.
+%\end{itemize}
+
+La présence d'une erreur sensorielle fait entrer le système dans un conflit qui peut se résoudre de deux manières~:
+\begin{itemize}
+	\item Les modèles de la perception basés sur un appariement négatif \shortcite{Rao1999,Friston2009} font disparaître de la scène sensorielle les
+	éléments prédits, de sorte que, selon cette théorie, 
+	ce qui est ``perçu'' (ou intégré) est l'erreur sensorielle,
+	autrement dit la différence entre sensation et la prédiction.
+	\item Les modèles de la perception basés sur un appariement positif ``complètent'' le signal d'entrée avec le signal prédit:
+	\begin{itemize}
+		\item Si l'écart est faible, le système tend à ignorer ce changement
+		et persévère dans sa prédiction.
+		\item Si l'écart est important et/ou réitéré, le système met
+		à jour (reconfigure) son activité interne (son ``modèle'') afin de mieux anticiper l'entrée.  
+		\end{itemize} 	
+\end{itemize}
+
+{\color{Gray} D'un point de vue computationnel, le feedback sensoriel positif fonctionne selon un principe de ``pattern matching'',
+qui s'oppose dans son principe aux mécanismes de correction d'erreur basés sur le feedback négatif (``pattern mismatch'').}
+
+La persévération présente de nombreuses analogies avec les mécanismes de mémoire à court terme 
+{\color{Orange} décrits précédemment}. 
+Si une partie du signal disparaît par exemple, l'activité interne est 
+capable de compléter les morceaux manquants, selon un mécanisme auto-associatif qui s'apparente
+à celui des réseaux de Hopfield. Le réseau peut continuer par exemple à ``croire'' à l'intégrité des éléments de la scène visuelle
+(sensorielle) non perçus à cause de phénomènes d'occlusion.
+
+Chacune des approches présente des avantages et des inconvénients. 
+\begin{itemize}
+	\item L'appariement positif apporte de la robustesse, de la
+	mémoire à court terme (complétion, interpolation des données manquantes, traitement des ambiguïtés perceptives) 
+	mais peut également produire une résistance excessive aux changements
+	de la scène sensorielle. Le cas limite correspond au réseau qui ignore totalement son entrée sensorielle, 
+	persévérant indéfiniment sur un illusion perceptive produite par l'activité interne (``hallucination'').
+	\item L'appariement négatif apporte une parcimonie (perception de la différence d'activité), qui permet d'implémenter 
+	un principe de ``matching pursuit'' pour un traitement rapide du flux visuel \shortcite{Perrinet2010}.
+	Il présente cependant une sensibilité au bruit de mesure (fluctuations aléatoire), 
+	et nécessite dans certains cas la mise en place d'une remise à zéro 
+	périodique, qui peut être réalisée par une alternance entre mesure de l'erreur (perception) et correction 
+	d'erreur (déplacement moteur). 
+\end{itemize}
+
+%dans le cas de signaux spatio-temporels\footnote{Sauf si, évidemment, le modèle forward est fourni,
+%auquel cas .
 
 
 
@@ -1576,17 +1931,11 @@ Malgré des limitations bien connues en terme de capacité de stockage \shortcit
 Complexité, chaos et réduction de la complexité.
 
 
-\subsection{Principe d'appariement sélectif}
+%\subsection{Principe d'appariement sélectif}
 
 
 
-{\color{Cyan} 
-	Exemples :
-	\begin{itemize}
-		\item Appariement sélectif~: les barycentres des partitions génératrices permettant d'interpréter une donnée d'entrée comme membre d'une classe donnée. Principe de l'argmax ou du ``winner takes all''. Non-linéaire. \textit{Enumeration.}
-		\item Appariement non sélectif : les données sont interprétées comme une combinaison de facteurs.  projection des données sur une base de plus petite dimension. Matching pursuit. Dictionnaire. Combinaison linéaire. ACP, SVD, deep learning, ... \textit {Décomposition}.
-	\end{itemize}
-}
+
 
 %finissent la manière dont les données vont être traitées et interprétées.
 
@@ -1612,7 +1961,304 @@ sélection = Analogie accumulation d'évidence?
 
 Une des thèses du mémoire : feed+/feed-.
 
+\cleardoublepage
+
 \section{Contributions personnelles}
+
+\subsection{Route inverse}\label{sec:NN98}
+
+L'étude du mécanisme de reconnaissance par ``réduction'' de la dynamique constitue le cœur
+de ma thèse, sous la direction
+de Bernard Doyon, chercheur à L'INSERM au sein de l'équipe dirigée par Manuel Samuelidès à l'ONERA 
+de Toulouse, entre 1996 et 1999. 
+Certains travaux réalisés pendant la thèse de Mathias Quoy (1991-1994) \shortcite{Quo94}
+avaient déjà montré l'effet de réduction produit par 
+la plasticité Hebbienne dans les réseaux aléatoire récurrents à 
+dynamique chaotique intrinsèque.
+
+Le papier qui présente ces idées de la manière la plus complète est celui de Neural Networks, 
+datant de 1998 \shortcite{Dau98A}.
+Il porte sur l'étude de la réaction (spontanée ou acquise) d'un réseau de neurones récurrent aléatoire
+à des patrons (stimuli) également aléatoires.
+Il fait la synthèse de plusieurs résultats sur les réseaux récurrents aléatoires, 
+à la fois sur les comportements de grande taille et 
+sur les effets de taille finie, et présente pour la première fois les effets de la plasticité sur ce type de réseau.
+Il reprend pour ce qui me concerne des travaux réalisés pendant ma première année de thèse. %DAU98B}. 
+Les réseaux étudiés étant normalisés, 
+leur comportement est réglé par deux paramètres~: le gain de la fonction de réponse neuronale (assimilable
+à l'inverse d'une température) et la variabilité du seuil d'activation.
+Le signal présenté en entrée du réseau est un patron aléatoire statique qui vient se surimposer au seuil 
+d'activation (rendant donc les neurones plus ou moins excitables).
+Le réseau soumis à un tel signal converge vers un nouvel attracteur (autrement dit se reconfigure).
+
+{\color{Gray} Le point important est que le réseau ne produit pas de réponse (de ``read out'').
+	Le changement d'activité induit par la surimposition du patron statique n'a pas de signification
+	particulière. Il est juste possible, du point de vue extérieur, 
+	de distinguer la nouvelle organisation de l'ancienne, à partir de 
+	différents observables (indice de complexité, période interne, répartition des niveaux d'activité).}
+
+Le changement observé suite à la présentation d'un stimulus statique ne correspond pas à 
+de la multistabilité au sens classique (un système dynamique multistable pouvant converger 
+vers différents attracteurs pour des conditions initiales différentes).
+Ici le stimulus fait partie des ``paramètres'' du
+réseau. Ainsi, chaque stimulus distinct définit système dynamique distinct 
+convergeant vers un attracteur distinct. 
+Le fait de modifier le stimulus au cours d'une même simulation 
+revient à modifier le système dynamique ``en cours de route''. 
+La réalisation d'une opération (sous la forme d'une réorganisation de la dynamique
+suite à l'imposition d'un motif statique) repose
+donc sur un mécanisme différent de celui proposé par Hopfield \shortcite{Hop82}.
+Il s'agit essentiellement d'une relaxation sous contrainte, chaque
+stimulus étant l'expression d'une contrainte différente.
+L'ensemble des réponses aux contraintes statiques possibles constitue le \textit{répertoire 
+	dynamique} du réseau.
+
+Une règle de plasticité synaptique est ajoutée, correspondant à un dynamique lente sur les couplages, qui modifie 
+le graphe selon une règle inspirée de Hebb \shortcite{Heb49} 
+(à savoir que le lien entre deux neurones se renforce s'il
+existe une corrélation temporelle entre l'activité pré-synaptique et l'activité post-synaptique).
+Le papier étudie les changements dans le répertoire dynamique lorsque le réseau est soumis à ces changements 
+synaptiques dans le contexte d'une contrainte statique spécifique.  
+Le papier met en évidence des changements de comportements liés à cette dynamique sur les poids, conduisant 
+systématiquement à une simplification de l'activité intrinsèque (par exemple passage d'une activité
+chaotique à une activité de type cycle limite). On parle de ``réduction'' de la dynamique, la plasticité 
+produisant une ``route inverse'' de la complexité vers le point fixe.
+
+Une fois la session d'apprentissage terminée, la présentation du stimulus appris 
+a pour effet d'induire cette dynamique moins complexe (obtenue en fin de session).
+Cette activité est qualitativement différente, plus simple que l'activité induite par les autres stimuli. 
+La plasticité permet donc d'obtenir une réaction spécifique à une entrée particulière (ici une
+forme arbitraire générée par un tirage aléatoire). 
+
+La plasticité Hebbienne a donc pour effet de créer des comportements ``acquis'' spécifiques.
+Le mécanisme de Hebb (renforcement des liens entre les neurones les plus actifs) 
+tend à produire une classe de réactions différente
+face aux motifs appris. Les motifs en question sont ``reconnus''. 
+Le reste des motifs,
+ne présentant pas ces caractéristiques spatiales spécifiques, induisent une réaction ``par défaut''
+qualitativement différente.
+Il y a donc, pour des motifs quantitativement similaires (issus d'un tirage aléatoire de même loi), 
+des réponses qualitativement différentes.
+Ce mécanisme de séparation entre le connu et l'inconnu
+(appariement conditionnel) 
+%par le comportement dynamique du substrat
+rejoint l'hypothèse formulée par Freeman \shortcite{ska87} à propos de la perception des odeurs~: 
+activité simplifiée pour des odeurs connues, activité de fond chaotique pour les odeurs non familières.
+
+%Du point de vue computationnel, la plasticité synaptique indit une séparation de l'espace
+%des stimuli entre une région reconnue et une région inconnue. Il s'agit donc en premier lieu d'une opération de 
+%discrimination. Deuxièmement, c
+Chaque réponse à un motif se traduit par une activité spatio-temporellement distincte,
+l'apprentissage ayant pour effet de capturer (ou plutôt accentuer) un \emph{mode dynamique} particulier.
+Le réseau est vu comme un ``réservoir'' de comportements dynamiques spatio-temporellement différents. Le comportement
+spatio-temporel asocié au motif change sous l'effet de la plasticité, en conservant certaines
+de ses caractéristiques comme la période intrinsèque, qui se manifeste de façon ``pure'' 
+sous la forme d'un cycle limite. Ce comportement temporellement périodique 
+finit par disparaître si l'apprentissage est poussé jusqu'au point fixe. La règle 
+de plasticité Hebbienne, dans sa forme simple étudiée ici, n'est pas convergente et 
+l'apprentissage est stoppé de manière arbitraire à l'apparition du cycle limite
+pour les besoins de l'étude. 
+
+La principale difficulté rencontrée pour ces réseaux est la contamination 
+de la réaction induite à des patrons non appris. Si des motifs voisins du motif initialement appris
+induisent également une réduction de la dynamique, la réitération de l'apprentissage sur plusieurs motifs différents
+conduit invariablement à un effondrement généralisé de la complexité, étendant la réduction de
+dynamique à l'ensemble des motifs. 
+La capacité d'un réseau est définie comme le nombre de motifs pouvant être 
+appris sans provoquer cet effondrement.
+Cette capacité s'avère assez faible en pratique. 
+Dans notre cas, comme dans le cas du réseau de Hopfield, elle semble
+dépendre linéairement de la taille du réseau.
+
+Des changements marginaux sur la règle de plasticité, en limitant drastiquement le nombre
+de liens éligibles,
+permettent d'augmenter significativement la capacité des réseaux \shortcite{Dau98B,Dau98C},
+avec une 'loading capacity' empirique de l'ordre de 8\% (le nombre de
+motifs pouvant être appris avant l'effondrement catastrophique est de l'ordre de
+8 \% du nombre de neurones, ce qui reste relativement faible).
+
+%{\color{Violet}
+
+%Impact du papier?
+
+Le papier de Neural Networks, en démontrant pour la première fois l'effet de la plasticité Hebbienne sur 
+la dynamique intrinsèque des réseaux récurrents aléatoires, a reçu une bonne audience, dans la mesure où il est 
+un des premiers à présenter un cadre mathématique pour l'étude des réseaux de neurones récurrents perturbés
+par un signal extérieur. Le même principe est utilisé, dans une certaine mesure, dans les modèles de contrôle 
+proposés par Jun Tani dans les années 90 \cite{Tani2004}, ainsi que dans les modèles de réservoir computing proposés par 
+Maas et Markram \cite{MAASS02,Buonomano2009}.
+
+\cleardoublepage
+\includepdf[pages=1,offset=50 0]{pdf/1998-neural-networks.pdf}
+\includepdf[pages=2,offset=-65 0]{pdf/1998-neural-networks.pdf}
+\includepdf[pages=3,offset=50 0]{pdf/1998-neural-networks.pdf}
+\includepdf[pages=4,offset=-65 0]{pdf/1998-neural-networks.pdf}
+\includepdf[pages=5,offset=50 0]{pdf/1998-neural-networks.pdf}
+\includepdf[pages=6,offset=-65 0]{pdf/1998-neural-networks.pdf}
+\includepdf[pages=7,offset=50 0]{pdf/1998-neural-networks.pdf}
+\includepdf[pages=8,offset=-65 0]{pdf/1998-neural-networks.pdf}
+\includepdf[pages=9,offset=50 0]{pdf/1998-neural-networks.pdf}
+\includepdf[pages=10,offset=-65 0]{pdf/1998-neural-networks.pdf}
+\includepdf[pages=11,offset=50 0]{pdf/1998-neural-networks.pdf}
+\includepdf[pages=12,offset=-65 0]{pdf/1998-neural-networks.pdf}
+\includepdf[pages=13,offset=50 0]{pdf/1998-neural-networks.pdf}
+
+%\shortcite{Dau98A} {\bf Daucé, E., Quoy, M., Cessac, B., Doyon, B. and Samuelides, M. (1998) Self-organization and dynamics reduction in recurrent networks : stimulus presentation and learning, Neural Network 11:521-533}
+
+%\shortcite{Dau98B} {\bf Daucé E. and Doyon, B. (1998) Novelty Learning in a Discrete Time Chaotic Network, proc. of the 8th International Conference on Artificial Neural Networks (ICANN'98), L. Niklasson et al. eds, Vol. 2: 1051-1056, Springer, September 2-4, Skövde, Sweden}
+
+
+
+%- Une méthode d’apprentissage “non-supervisée” (il s’agit de capturer un mode dynamique)
+
+%- mecanisme de base de la route inverse. Notion de “reduction” de la dynamique par apprentissage (baisse de l’impredictibilité, analogie possible avec exploration/exploitation)
+
+%- encodage - patrons statiques - route vers le chaos - destabilisation - frontière du chaos
+%}
+
+\cleardoublepage
+
+\subsection{Architectures multi-couches} \label{sec:BioCyb02}
+
+La troisième série de résultats de la thèse et des publication associées \shortcite{Dau00,Dau02} porte sur une architecture 
+neuronale  permettant d'implémenter un modèle de la perception des signaux spatio-temporels.
+Ces résultats reposent sur une architecture de réseaux récurrents aléatoires à plusieurs couches (deux ou trois).
+Le formalisme multi-couches est le même que celui utilisé dans les réseaux équilibrés (voir section \ref{sec:balanced}).
+Ici les couches se distinguent non par la nature de leurs neurones mais par le rôle qu'elles prennent dans le processus
+d'apprentissage : une (ou deux) couche(s) primaire(s) ayant un rôle passif (sans dynamique intrinsèque)
+et une couche secondaire (ou associative) possédant une dynamique intrinsèque, analogue aux réseaux récurrents aléatoires
+simples présentés dans la section \ref{sec:NN98}.
+
+Le modèle se présente comme une architecture générique pour l'apprentissage 
+de motifs spatio-temporels. 
+{\color{Orange} Comme dans le cas précédent, il ne s'agit pas de l'apprentissage d'une réponse 
+(d'un read-out) mais d'une modification du comportement du système dynamique en présence
+de certains signaux.} La contrainte extérieure se manifeste ici sous
+la forme d'un signal spatio-temporel périodique, et la relaxation s'apparente à celle d'un oscillateur
+forcé. 
+Dans cette étude, comme dans l'étude précédente, l'accent est mis sur la plasticité et l'apprentissage, où 
+le comportement ``différent'' est un comportement acquis. 
+
+La règle Hebbienne utilisée est une règle d'ordre 1 (basée sur les différences d'activité), qui
+modifie les couplages synaptiques selon une estimation locale de la covariance entre les neurones 
+pré et post-synaptiques, en tenant compte du délai de transmission \shortcite{Sej77}. Cette règle, contrairement à la précédente, 
+tend à amplifier les variations d'activité. Elle tend asymptotiquement
+vers une activité de type cycle limite très robuste à large amplitude individuelle (et non vers un point fixe).
+Comme dans le cas précédent, du fait de la non-convergence asymptotique,
+la durée d'apprentissage est fixée par l'utilisateur/concepteur
+en vue d'optimiser un certain comportement (ici la résonance perceptive). 
+
+Dans la configuration initiale, la couche primaire reçoit passivement le signal spatio-temporel (séquence 
+périodique de motifs). Les liens feed-forward aléatoires transmettent ce signal à la couche 
+secondaire (dite couche associative). L'activité de la couche associative est un mélange entre cette projection aléatoire
+du signal d'entrée et l'activité intrinsèque chaotique (entretenue par les liens latéraux
+aléatoires de la couche secondaire). Les liens de feedback (secondaire vers primaire) sont initialement nuls.
+
+La plasticité synaptique a lieu sur deux classes de liens~: latéraux et feedback.  
+{\color{Gray} Elle inscrit dans le graphe les 
+séquences d'activation prédictibles au sein de l'activité neuronale. }
+Outre la réduction de la complexité de l'activité,
+la plasticité des liens de feedback crée une boucle d'amplification positive entre la couche associative
+et la couche sensorielle, qui transforme la corrélation statistique 
+en lien de causalité.
+\begin{itemize}
+\item L'existence de correspondances statistiques entre l'activité interne et le signal d'entrée produit en effet une amplification du signal d'entrée via cette activité de feedback.
+\item Cette projection induite de l'activité interne vers la couche sensorielle
+agit comme une prédiction \textit{dans le présent} (voir section \ref{sec:filtrage}), autrement dit fait reposer la connaissance de l'entrée
+sensorielle actuelle sur des informations observées dans le passé.
+\end{itemize}
+
+
+{\color{Gray} L'architecture proposée dans \shortcite{Dau02} implémente un principe de traitement
+sélectif de la scène sensorielle, en séparant l'espace des sensations entre ce qui est connu (ce qui produit 
+un changement qualitatif sous forme de résonance 
+perceptive) et ce qui est inconnu (pas de changement qualitatif).
+La reconnaissance se traduit par le franchissement d'un seuil (seuil de ``vigilance''),
+favorisant le développement d'une activité 
+spécifique qui participe à la consolidation et l'entretien de la résonance.}
+Le changement par rapport au modèle à une couche réside dans l'utilisation effective des changements qualitatifs 
+induits par la plasticité sous la forme du signal de feedback. 
+La plasticité permet de \textit{constituer des processus {\color{Orange} attentionnels} spécifiques à certaines configurations
+spatio-temporelles apprises}. Ces configurations connues, en activant une résonance, {\color{Orange} révèlent la nature
+des connaissance acquises par le réseau.}
+
+
+Plusieurs papiers de conférences apportent des éclairages complémentaires sur certains aspects du modèle. 
+Le papier de la conférence ICANN 2001 \shortcite{Dau01c} présente une version préliminaire du modèle perceptif à deux couches
+avec une règle d'apprentissage légèrement plus simple que celle du papier de Biological Cybernetics. 
+Le papier de SAB (2000) \shortcite{Dau00b} comporte une partie montrant l'effet de l'apprentissage sur des signaux mixtes composés
+d'une partie statique et d'une partie périodique. L'association apprise entre motifs statiques et motifs dynamiques 
+se manifeste alors par un niveau de correlation élévé entre la dynamique induite par les motifs mixtes
+et la dynamique induite par les motifs statiques seuls (les activités étant par contre qualitativement différentes).
+
+\cleardoublepage
+%\includepdf[pages=1,offset=70 -30]{pdf/2002-biological-cyb-ann1.pdf}
+\includepdf[pages=1,offset=70 -30]{pdf/2002-biological-cyb.pdf}
+\includepdf[pages=2,offset=-70 -30]{pdf/2002-biological-cyb.pdf}
+\includepdf[pages=3,offset=70 -30]{pdf/2002-biological-cyb.pdf}
+\includepdf[pages=4,offset=-70 -30]{pdf/2002-biological-cyb.pdf}
+\includepdf[pages=5,offset=70 -30]{pdf/2002-biological-cyb.pdf}
+\includepdf[pages=6,offset=-70 -30]{pdf/2002-biological-cyb.pdf}
+\includepdf[pages=7,offset=70 -30]{pdf/2002-biological-cyb.pdf}
+\includepdf[pages=8,offset=-70 -30]{pdf/2002-biological-cyb.pdf}
+\includepdf[pages=9,offset=70 -30]{pdf/2002-biological-cyb.pdf}
+\includepdf[pages=10,offset=-70 -30]{pdf/2002-biological-cyb.pdf}
+\includepdf[pages=11,offset=70 -30]{pdf/2002-biological-cyb.pdf}
+\includepdf[pages=12,offset=-70 -30]{pdf/2002-biological-cyb.pdf}
+\includepdf[pages=13,offset=70 -30]{pdf/2002-biological-cyb.pdf}
+\includepdf[pages=14,offset=-70 -30]{pdf/2002-biological-cyb.pdf}
+
+
+%{\color{Violet}
+%MECANISME DE DESYNCHRO VITAL POU LE FEEDBACK POSITIF. PASSE PAR DES ``CASSURES''.
+
+%Après apprentissage, la séparation de l'espace d'entrée entre
+%signaux connus et signaux inconnus passe par la capacité à provoquer une résonance entre 
+
+
+
+%NOTION D'ATTRACTEUR / DISCRETISATION / SIMPLIFICATION / CATEGORISATION
+
+%CARACTERE SUPERVISE / NON SUPERVISE ?
+
+%POINT DE VUE COGNITIF
+
+%POINT DE VUE COMPUTATIONNEL
+
+
+%L'idée d'un feedback positif comme support de la perception n'est pas nouvelle.
+%Il a été postulé de longue date comme support des opérations neuronales. 
+
+
+
+
+
+%{\bf 1999}
+
+%- reseaux à 2 pop : couche primaire et couche secondaire (perceptive).  Mecanisme de “resonance perceptive” (et “resistance au changement”). Importance des delais. 
+
+%- patrons conditionnants (= contexte)
+
+%- règle de covariance - Règle d’ordre 2 (différence-based / covariance rule) 
+
+%{\bf 2000-2001}
+
+%- Perception par feedback positif. Apprentisage “supervisé par la couche primaire”. La couche primaire est à la fois l’entrée et la sortie.
+
+%(Implicitement : 
+%(1) Réseau aléatoire avec delais = réservoir de séquences instables dont certaines s’instancient (“emergence”)
+%(2) Predictive coding avant l’heure (de type interpolation)
+%(3) Controle moteur “supervisé”
+
+%{\bf Daucé, E., Quoy, M. and Doyon, B. (2002) Resonant spatio-temporal learning in large random recurrent networks, Biol.Cybern. 87(3):185-198}
+
+%- implémentation d’un mécanisme de résonance support de la perception et de la mémoire (en particulier generalisation du principe d’interpolation de Hopfield dans le domaine spatio-temporel). Importance des delais dans le traitement temporel.
+
+%- alternances synchronisation (perçu) / non-sens. Système de perception dual. Figure sur fond (Gestalt). 
+
+
+%}
+
 
 \chapter{Architectures de contrôle}
 
@@ -1628,12 +2274,17 @@ Facteurs causaux
 
 \section{Notions spécifiques et propositions}
 
-L'activité récurrente produit un signal et crée de la nouveauté. 
+L'activité récurrente produit du signal et crée de la nouveauté. 
 
 L'agent organise l'environnement. 
 
 
 \section{Contributions personnelles}
+
+
+
+
+
 
 \chapter{Projet}
 
