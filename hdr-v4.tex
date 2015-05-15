@@ -410,7 +410,7 @@ Les principales avancées sont:
  \item généralisation des modèles physiques à l'analyse de l'imagerie... Modèles inverses. Friston
  \item STDP et codage par rang
  \item modèles de la décision et circuit de la récompense. Modèles du cervelet. Kalman.
- \item ce qui se fait en robotique. Franceschini. Japonais. MIT.
+ \item ce qui se fait en robotique. Franceschini. Japonais. Peters. MIT.
 \end{itemize}
 
 
@@ -436,8 +436,8 @@ Cognitives de Toulouse (PRESCOT), tenues à Labège, les 23 et 24
 septembre 1994. Bernard Doyon y présentait de façon très accessible l'étude de comportements chaotiques
 obtenus par simulation de réseaux de neurones, en faisant le parallèle avec le fonctionnement du cerveau 
 (en particulier avec l'étude des dimensions fractales des signaux électrophysiologiques pour différents états de veille
-et de sommeil, développée à l'époque par l'équipe d'Agnès Babloyantz à Bruxelles, ainsi que les travaux
-de Walter Freeman sur la réponse aus stimuli olfactifs sur des grilles d'électrodes chez le lapin).
+et de sommeil, développée à l'époque par l'équipe d'Agnès Babloyantz à Bruxelles \shortcite{Bab85}, ainsi que les travaux
+de Walter Freeman \shortcite{ska87} sur la réponse aus stimuli olfactifs sur des grilles d'électrodes chez le lapin).
 
 Suite à une discussion, j'ai décidé de m'engager dans cette voie de recherche (simulation de réseaux de neurones
 chaotiques) dans le cadre d'un stage du DEA de Representation de la Connaissance et Formalisation
@@ -453,8 +453,13 @@ J'ai intégré le petit groupe animé par Manuel Samuelidès, professeur à Supa
 à l'INSERM, autour des réseaux de neurones récurrents à connectivité aléatoire. Cette étude avait démarré 
 au début des années 90.
 
+Les premières études sur ce  type de modèle avaient été faites par Sompolinsky \shortcite{Som88} sur un système dynamique continu. 
+L'analyse d'une variante à temps
+discret avait été proposée par Cessac et Samuelidès \shortcite{Ces94}. La démonstration de {\color{Orange} cette propriété (dite de ``chaos local'')} a été  
+formellement achevée, dans le cas discret, par Moynot et Samuelides \shortcite{Moy00a} en 2000.
+
 Lors de mon arrivée, deux étudiants venaient de passer leur thèse sur ce thème.
-D'un côté, Bruno Cessac, diplômé en physique théorique de l'université Paul sabatier, avait travaillé sur l'analyse en
+D'un côté, Bruno Cessac, diplômé en physique théorique de l'université Paul Sabatier, avait travaillé sur l'analyse en
 champ moyen des réseaux de neurones récurrents aléatoires \cite{Ces95}. De l'autre, Mathias Quoy, diplômé de l'ENSEEIHT,
 avait travaillé sur le comportement à taille finie (route vers le chaos) \cite{Doyon1993,CESSAC94}.
 Mon rôle était alors principalement de continuer cette ligne de recherche,
@@ -466,7 +471,7 @@ limitaient à une culture grand public, via quelques lectures. C'est donc princi
 de lectures de travaux scientifiques que je me suis formé à ces deux domaines.
 L'ambiance de travail était très stimulante et nous avons rapidement pu produire 
 de nouveaux résultats qui ont constitué mon rapport de fin d'études et de DEA \cite{Dau95}.
-J'ai obteu mon diplôme d'ingénieur informaticien en juin 1995 et mon diplôme de DEA en septembre 1995. 
+J'ai obtenu mon diplôme d'ingénieur informaticien en juin 1995 et mon diplôme de DEA en septembre 1995. 
 Ayant terminé à la deuxième place, j'ai pu bénéficier d'une bourse ministérielle qui m'a permis de 
 poursuivre en thèse, toujours sous la direction de Bernard Doyon, au sein de l'équipe animée par Manuel 
 Samuelidès au DERI.
@@ -585,8 +590,8 @@ présentées s'il le souhaite.
 \subsection{Neurones et réseaux}
 
 Inspirés par le fonctionnement du cerveau, les réseaux de neurones sont des modèles de calculateurs 
- dans lesquels le ``programme'' (la fonction de réponse) est décrite par un réseau.
-Ce réseau est constitué d'un ensemble de nœuds, qui sont les unités de calcul, et un ensemble d'arêtes,  
+ dans lesquels le ``programme'' (la fonction de réponse) est décrite par un graphe.
+Ce graphe est constitué d'un ensemble de nœuds, qui sont les unités de calcul, et un ensemble d'arêtes,  
 pondérées et orientées, %définissant l'intensité du signal
 qui transportent le signal entre les différentes unités de calcul.
 
@@ -680,12 +685,12 @@ caractérise l'\textit{organisation structurelle} du réseau.
 %Selon que le graphe est acyclique, ou au contraire récurrent, .
 
 La description du réseau est donné par une \textit{fonction de couplage},
-définie le plus souvent par un tableau à double entrée $T$. Chaque neurone
-se voit attribuer un indice $i \in 1,...,n$ où $n$ est le nombre de neurones dans le réseau. Le tableau
-$T[i,j]$ contient alors les caractéristiques du lien du neurone $i$ vers le neurone $j$.
+définie le plus souvent par un tableau à double entrée noté $G$. Chaque neurone
+se voit attribuer un indice $i \in 1,...,N$ où $N$ est le nombre de neurones dans le réseau. Le tableau
+$G[i,j]$ contient alors les caractéristiques du lien du neurone $i$ vers le neurone $j$.
 Un exemple de paramétrisation est le temps de propagation $\tau_{ij}$ et poids synaptique $J_{ij}$. 
 Lorsque le poids synaptique est non-nul, on dit que les neurones $i$ et $j$ sont couplés. 
-Si $n$ est le nombre de neurones, le nombre de paramètres du réseau est en $O(n^2)$, correspondant à un principe de transmission du signal \textit{de plusieurs à plusieurs} (un neurone envoie son signal de sortie vers plusieurs destinataires, un neurone reçoit des signaux de plusieurs émetteurs).
+Si $N$ est le nombre de neurones, le nombre de paramètres du réseau est en $O(N^2)$, correspondant à un principe de transmission du signal \textit{de plusieurs à plusieurs} (un neurone envoie son signal de sortie vers plusieurs destinataires, un neurone reçoit des signaux de plusieurs émetteurs).
 
 \emph{Notations:}
 \begin{itemize} 
@@ -696,10 +701,10 @@ $$\boldsymbol{s}(t) = (s_1^\text{out}(t), ..., s_n^\text{out}(t))$$
 \end{itemize}
 
 Les activités des différents neurones sont donc \textit{inter}dépendantes du fait des couplages. 
-La \textit{fonction de réponse} du réseau $f_T$ est une fonction paramétrique 
-décrite par le tableau de paramètres $T$, telle que l'activité $\boldsymbol{s}(t)$ est solution de~:
+La \textit{fonction de réponse} du réseau $f$ est une fonction paramétrique 
+décrite par le tableau de paramètres $G$, telle que l'activité $\boldsymbol{s}(t)$ est solution de~:
 \begin{align}\label{eq:optim}
-\boldsymbol{s}(t) = f(\boldsymbol{S}(t);T)
+\boldsymbol{s}(t) = f(\boldsymbol{S}(t);G)
 \end{align}
 Il faut ici préciser, dans la mesure où les temps de transports sont supposés strictement positifs, que l'activité du réseau au temps $t$ est
 dépendante de l'historique des activités précédent strictement 
@@ -732,13 +737,13 @@ de transformation de ces signaux soient les mêmes.
 
 Du point de vue des calculateurs numériques, un calcul est décrit comme une séquence d'opérations élémentaires réalisées dans un certain ordre
 à partir de données d'entrée. Ces opérations élémentaires peuvent être réalisées par les portes logiques
-d'un circuit électronique, ou par tout mécanisme automatique capable de ségréger ses entrées sous la forme d'au moins 
+d'un circuit électronique, ou par tout mécanisme automatique capable de ségréguer ses entrées sous la forme d'au moins 
 deux états de sortie distincts. 
 %La généralisation 
 %aux calculateurs universels se fait à travers la présence de mémoires, c'est à dire d'unités capables de
 %conserver un état (haut ou bas) pour une durée indéterminée. 
 
-Dans la cas des réseaux de neurones, la mise en oeuvre d'un calcul repose sur la présence
+Dans la cas des réseaux de neurones, la mise en œuvre d'un calcul repose sur la présence
 de neurones d'\textit{entrée} soumis à des données extérieures, qui sont donc les opérandes du calcul.
 C'est le cas chez l'animal des cellules \textit{sensorielles}. 
 On note $\boldsymbol{I}(t) = \{\boldsymbol{I}(t')\}_{t' \in [t_0, t[}$ ce signal extérieur. 
@@ -750,7 +755,7 @@ La \textit{réponse} du réseau de neurones au signal d'entrée (la solution du 
  par ce signal d'entrée.
 En étendant la fonction de réponse aux entrées extérieures, l'activité $\boldsymbol{s}(t)$ est la solution de~:
 \begin{align}\label{eq:optim_input}
-\boldsymbol{s}(t) = f(\boldsymbol{S}(t), \boldsymbol{I}(t);T)
+\boldsymbol{s}(t) = f(\boldsymbol{S}(t), \boldsymbol{I}(t);G)
 \end{align}
 On dit également 
 que le réseau de neurones \textit{transforme} le signal d'entrée.
@@ -762,7 +767,7 @@ avec $h$ fonction de décodage (ou de ``\textit{read-out}'').
 
 Plus globalement, la fonction d'entrée/sortie (fonction de transfert) du réseau de neurones est~:
 \begin{align}\label{eq:E/S}
- \boldsymbol{u} = h(f(\boldsymbol{S},\boldsymbol{I};T))
+ \boldsymbol{u} = h(f(\boldsymbol{S},\boldsymbol{I};G))
 \end{align}
 
 La sortie $\boldsymbol{u}$ peut ainsi être interprétée comme le résultat du calcul réalisé à partir des données d'entrée $\boldsymbol{I}$. 
@@ -994,39 +999,98 @@ le caractère extrêmement inhomogène des réseaux de neurones naturels~:
 
 \subsection{Grands réseaux de neurones aléatoires}
 
-Un réseau de neurones aléatoire est un graphe orienté constitué de $N$ nœuds défini par la matrice des 
-couplages $J = \{J_{i,j}\}_{i \in 1..N,j \in 1..N}$ où chaque lien $J_{ij}$ est issu d'un tirage aléatoire indépendant.
+Un réseau de neurones aléatoire est un graphe orienté et pondéré $G$ constitué de $N$ nœuds défini par~:
+\begin{itemize}
+	\item la matrice des 
+	couplages $\boldsymbol{J} = \{J_{i,j}\}_{i \in 1..N,j \in 1..N}$ 
+	\item les seuils d'activation $\boldsymbol{\theta} = \{\theta_i\}_{i \in 1..N}$
+	\item les temps de propagation  $\boldsymbol{\tau} = \{\tau_{i,j}\}_{i \in 1..N,j \in 1..N}$
+	\item etc.
+\end{itemize} 
+tel que~:
+\begin{align}
+G \sim \mathcal{D}(\Theta)
+\end{align}
+où $\mathcal{D}$ est une distribution de probabilité sur l'espace des graphes et  $\Theta$ est un ensemble de paramètres qui définissent cette distribution.
+
 L'ajout d'une fonction de réponse sur les nœuds définit un système dynamique déterministe, constitué de $N$ neurones.
 
 La notion d'aléa ne porte donc pas sur la dynamique d'état mais sur le patron de connexions du réseau. 
 On parle de bruit ``figé'' dans les connexions (``\textit{quenched disorder}'').
 
+
+%Lorsque les liens $J_{ij}$ sont indépendants . 
 L'indépendance entre les différents liens est une caractéristique importante, qui permet d'analyser le comportement du modèle 
 à la limite des grandes tailles, c'est à dire en faisant tendre la taille $N$ vers l'infini. Avec un \textit{scaling} des poids approprié 
-(espérance, variance de la loi de tirage initial en $O(\frac{1}{N}$)), on peut montrer que la dynamique (déterministe) tend à la limite thermodynamique 
-vers un processus aléatoire, la corrélation entre les nœuds tendant vers 0. 
+(espérance, variance de la loi de tirage initial des poids en $O(\frac{1}{N}$)), on peut montrer que la dynamique (déterministe) tend à la limite thermodynamique 
+vers un processus aléatoire (processus Gaussien), la corrélation entre les nœuds tendant vers 0 \shortcite{Som88,Ces94,Moy00a}. 
 
 %{\color{Violet} activité intrinsèque}
 
-Les premières études sur ce  type de modèle avaient été faites par Sompolinsky \shortcite{Som88} sur un système dynamique continu. 
-L'analyse d'une variante à temps
-discret avait été proposée par Cessac et Samuelidès \shortcite{Ces94}. La démonstration de cette propriété (dite de ``chaos local'') a été  
-formellement achevée, dans le cas discret, par Moynot et Samuelides \shortcite{Moy00a} en 2000.
+\subsubsection{Modèle à temps discret}
+
+La dynamique à temps discret, et à temps de propagation constant est, en notation matricielle, définie par l'équation de récurrence ~:
+\begin{align}
+&\boldsymbol{x}(0) = \boldsymbol{x}_0&&\nonumber\\
+&\forall t > 0 :&& \nonumber\\
+&&\boldsymbol{h}(t) &= \boldsymbol{J} \mathbf{x}(t-1) - \boldsymbol{\theta}\\
+&& \boldsymbol{x}(t) &= f(\boldsymbol{h}(t);g)\nonumber
+\end{align}
+avec $f$ fonction de réponse sigmoïde et $g$ paramètre de contrôle (gain de la fonction de réponse). 
 
 \subsubsection{Limite thermodynamique}
-Le comportement d'une classe de réseaux (l'ensemble des réseaux définis par la même loi de tirage initial) peut être décrit à la limite thermodynamique par 
-des équations dites de ``champ moyen''. Ces équations définissent le processus aléatoire limite, autrement dit la dynamique temporelle de grandeurs caractéristiques comme l'activité moyenne, 
+
+ 
+Le comportement d'une classe de réseaux (l'ensemble des réseaux définis par la même distribution) peut être décrit à la limite thermodynamique par 
+des équations dites de ``champ moyen''. Ces équations définissent le processus aléatoire limite, décrit par la dynamique temporelle de grandeurs caractéristiques comme l'activité moyenne, 
 le moments d'ordre 2 et la covariance dans le temps \shortcite{Ces95}. 
+
+Lorsque les poids synaptiques sont tirés indépendamment selon une loi de moyenne $\frac{\mu_J}{N}$ et d'écart-type $\frac{\sigma_J}{\sqrt{N}}$, et les seuils selon une loi de moyenne  $\mu_\theta$ et d'écart-type $\sigma_\theta$,
+le processus Gaussien limite est défini au temps $t$ par~: 
+\begin{itemize}
+	\item sa moyenne $\mu_h(t) = \langle h_i(t)\rangle$
+	\item sa variance $\sigma_h^2(t) = \langle (h_i(t) - \mu_h(t))^2\rangle$
+	\item et sa covariance temporelle $\Delta_h(t,t') = \langle h_i(t) h_i(t') \rangle - \langle h_i(t) \rangle \langle h_i(t') \rangle$
+\end{itemize}
+où $h_i(t)$ est une variable aléatoire, selon:
+\begin{align}
+&\mu_h(t) = \mu_J m(t-1) + \mu_\theta\nonumber\\
+&\sigma_h^2(t) = \sigma_J^2 q(t-1) + \sigma_\theta^2\\
+&\Delta_h(t,t') = \sigma_J^2 C(t-1,t'-1) + \sigma_\theta^2\nonumber
+\end{align}
+avec~:
+\begin{align}
+&m(t) = \int_{-\infty}^{+\infty} Dh f\left(h\sigma_h(t) + \mu(t)\right)\nonumber\\
+&q(t) = \int_{-\infty}^{+\infty} Dh f^2\left(h\sigma_h(t) + \mu(t)\right)\\
+&C(t,t') = \int_{-\infty}^{+\infty} \int_{-\infty}^{+\infty} Dh Dh' f\left(\frac{\sqrt{\sigma_h^2(t)\sigma_h^2(t') - \Delta^2(t,t')}}{\sigma_h(t')}h + \frac{\Delta(t,t')}{\sigma_h(t')}h' + \mu(t)\right)
+f\left(h'\sigma_h(t')+\mu(t')\right)
+\end{align}
+
+avec $Dh = \frac{1}{\sqrt{2\pi}} \exp -\frac{h^2}{2} dh$.
+
 Les équations de champ moyen offrent ainsi une description ``macroscopiques'' de l'activité d'un réseau,
 représentative de l'activité qu'on peut attendre dans un réseau de taille finie issu d'un tirage particulier, et 
 constituent de fait un cadre d'analyse adapté à une approche ``multi-échelles''.
 
 \subsubsection{Route vers le chaos}
+
+\begin{figure}[b!]
+	\centerline{
+		\includegraphics[width = 0.7\linewidth]{figs/hermes_diagr_bif.eps}
+	}
+	\caption{Transitions de phase.
+		La figure représente l’activité moyenne d'un réseau récurrent aléatoire de 200 neurones sur 14 000 pas de temps,
+		tandis que l’on augmente lentement le gain
+		entre $g=4$ et $g=6$ (Beslon \& Daucé, 2002)}
+	\label{fig:hermes-bif}
+\end{figure} 
+
+
 Il est intéressant de constater que le processus stochastique limite, tel que décrit par les équations de champ moyen, 
 a une traduction à taille finie
 sous la forme d'une activité de type \textit{chaos déterministe}. L'existence d'un 
 paramètre de contrôle (le gain de la fonction de transfert des neurones) permet de reproduire, dans ces réseaux aléatoires, 
-un  comportement générique de déstabilisation, appelé route vers le chaos par ``quasi-périodicité'' \shortcite{Berger1988,Doyon1993}.
+un  comportement générique de déstabilisation, appelé route vers le chaos par ``quasi-périodicité'' \shortcite{Berger1988,Doyon1993} (voir figure \ref{fig:hermes-bif}).
 L'existence d'une telle frontière entre l'ordre et le chaos est également prouvée à la limite thermodynamique, mais dans ce
 cas la transition se fait brutalement, avec un passage discret d'un processus de type point fixe à un processus stochastique \shortcite{Ces95}.
 Cette frontière entre ordre et chaos est par principe intéressante puisqu'elle indique le lieu
@@ -1035,8 +1099,9 @@ où la variabilité de la dynamique, et donc potentiellement {\color{Orange} l'e
 \subsection{Réseaux équilibrés} \label{sec:balanced}
 
 L'activité nerveuse est caractérisée par la présence fréquente d'oscillations collectives, souvent transitoires, 
-observables à différentes échelles. {\color{Orange} Le mécanisme par lequel une population de neurones peut se mettre à osciller 
-ont déjà été présentés dans la section \ref{sec:balanced}}. 
+observables à différentes échelles \shortcite{WangXJ2010}. 
+%{\color{Orange} Le mécanisme par lequel une population de neurones peut se mettre à osciller 
+%ont déjà été présentés dans la section \ref{sec:balanced}}. 
 
 Les comportements oscillants ont été analysés de manière approfondie en modélisation à travers l'étude des réseaux de neurones dits ``équilibrés'' (\textit{balanced neural networks}).
 Il s'agit d'une 
@@ -1072,7 +1137,7 @@ des oscillations synchronisées,
 	\begin{itemize}
 		\item Différents régimes oscillatoires sont classiquement identifiés, classifiés selon la
 		bande de fréquence qu'ils occupent :  oscillations theta (3-8 Hz), oscillations alpha (10-15 Hz), oscillations beta (15-25 Hz) et
-		oscillations gamma (> 30 Hz) \cite{Wang2010}.
+		oscillations gamma (> 30 Hz) \cite{Bremer1949}.
 		\item L'anticipation de phase (phase précession) ou le retard de phase observés au niveau cellulaire dans 
 		un contexte d'oscillations theta \shortcite{Skaggs1996}
 		sont interprétés comme caractéristiques d'une activité au sein de laquelle l'ordre de tir 
@@ -1091,7 +1156,7 @@ des oscillations synchronisées,
 
 
 
-\subsection{Codage topographique}
+\subsection{Codage topographique et champ neuronal}\ref{sec:NField}
 
 \subsection{Neurones impulsionnels}
 
@@ -1103,15 +1168,32 @@ des oscillations synchronisées,
 
 \section{Contributions personnelles}
 
+{\color{Cyan}
+	Par rapport aux propositions, j'ai fait:
+	\begin{itemize}
+		\item ceci
+		\item cela
+		\item etc.
+	\end{itemize}
+}	
+
 \subsection{Réseaux aléatoires multi-populations}\label{sec:multi_pop}
-Les premières études auxquelles j'ai participé portaient sur l'étude des transitions de phase dans les réseaux de neurones
+Une des premières études auxquelles j'ai participé portait sur les transitions de phase dans les réseaux de neurones
 aléatoires. 
-Les différentes architectures neuronales étudiées ont tout d'abord
+Les différentes architectures neuronales étudiées ont 
 permis d'identifier des comportements caractéristiques, décrits sous la forme de différents régimes dynamiques. 
 {\color{Orange} Nous avons cherché à caractériser l'expressivité de ces substrats, c'est à dire leur capacité à produire
 des patrons d'activité pouvant servir de support à des opérations cognitives. }
 
-L'étude que nous avons présentée \shortcite{Dau99A,dauce01a} étudie le comportement d'un réseau dit ``équilibré'' (voir section \ref{sec:balanced}). 
+\begin{figure}[b!]
+	\centerline{
+		\includegraphics[width = 0.7\linewidth]{figs/map_2pop.eps}
+	}
+	\caption{Diagramme de bifurcation à la lite thermodynamique sur un réseau aléatoire équilibré à 2 populations, en fonction de $d$ (homogénéité) et $J$ (amplification).}
+	\label{fig:diagr-2pop}
+\end{figure} 
+
+L'étude présentée dans \shortcite{Dau99A,dauce01a} étudie le comportement d'un réseau dit ``équilibré'' (voir section \ref{sec:balanced}). 
 {\color{Gray} Le point de départ consistait à modéliser et reproduire certains comportements observés dans les 
 réseaux de neurones naturels composés d'une population de neurones excitateurs et d'une population de neurones inhibiteurs (réseaux équilibrés,.}
 Ce papier 
@@ -1130,7 +1212,7 @@ substrats à connectivité aléatoire.
 
 L'étude numérique proposée dans le papier fixe le rapport excitation/inhibition à $\frac{1}{2}$,
 ce qui correspond à un régime de faible activité \shortcite{Amit1989}. 
-Nous étudions le rôle contrasté de deux paramètres de contrôle (voir Figure 2). 
+Nous étudions le rôle contrasté de deux paramètres de contrôle (voir Figure \ref{fig:diagr-2pop}). 
 \begin{itemize}
 	\item Le premier paramètre, $J$, représente l'amplification du signal. L'augmentation
 	continue de ce paramètre tend à produire une bifurcation entre un régime simple (point fixe) et une activité 
@@ -1144,6 +1226,10 @@ entre un régime stationnaire et un régime non-stationnaire périodique. Nous m
 de bifurcation à 4 régions, comprenant un régime stationnaire de point fixe, un régime stationnaire complexe,
 un régime d'oscillations simple, et un régime d'oscillations complexes analogue à processus stochastique cyclostationnaire,
 ce dernier régime étant à notre connaissance mis en évidence pour la première fois dans ce type de réseaux.
+
+
+
+
 
 Notre étude a donc ouvert la voie à l'étude multi-population systématique des réseaux de neurones à connectivité aléatoire,
 voir par exemple \shortcite{Faugeras2009,Cabana2013}. %L'accent sur l'équilibre dynamique entre populations escitatrice et inhibitrice
@@ -1167,22 +1253,58 @@ voir par exemple \shortcite{Faugeras2009,Cabana2013}. %L'accent sur l'équilibre
 \includepdf[pages=11-12,landscape=true,nup=1x2,scale=1.1,offset= -70 -30]{pdf/2001-neural-proc-letters.pdf}
 
 \cleardoublepage
-\subsection{Criticalité des réseaux aléatoires}
+\subsection{Criticalité dans les réseaux aléatoires}
 
 Un des intérêts principaux des réseaux à connectivité aléatoire est leur capacité à générer des dynamiques complexes
 endogènes (donc sans stimulation extérieure). Ces dynamiques, bien que reposant sur des équations déterministes,
 se comportent comme des processus stochastique indépendants sur chaque neurone. Ce comportement n'est pourtant pas analogue
 à un simple bruit passif. 
 
+\begin{figure}[b!]
+	\centerline{
+		\includegraphics[width = 0.7\linewidth]{figs/simu_derive_periodes_x2.eps}
+	}
+	\caption{Activité d'un réseau récurrent aléatoire de 200 neurones, sur 10000 pas de temps, sous l’influence d'une entrée sensorielle à évolution lente. La période principale est estimée par spectre de Fourier sur
+		une fenêtre de 500 pas de temps (cette période étant représentative de la période propre de
+		chaque neurone actif). a) Activité moyenne. b) 
+		Période du mode principal (en échelle logarithmique) (Beslon \& Daucé, 2002)}
+	\label{fig:hermes-critic}
+\end{figure} 
+
+
 Une manière simple de caractériser le comportement non-linéaire (ou critique) d'une population de neurones consiste à introduire de petites perturbations
 dans la dynamique du réseau. 
-Une étude proposée dans le 3ème chapitre de l'ouvrage que nous avons co-dirigé avec Agnès Guillot \shortcite{Beslon2002} illustre bien le propos.
-Cette étude porte sur le modèle le plus simple, un réseau récurrent aléatoire comportant une seule population. Le paramètre d'amplification
+Une étude proposée dans le 3ème chapitre de l'ouvrage que nous avons co-dirigé avec Agnès Guillot \shortcite{Beslon2002} illustre le propos.
+Cette étude porte sur le modèle le plus simple, un réseau récurrent aléatoire comportant une seule population. Le paramètre de contrôle
 choisi place le réseau dans une région chaotique, proche de la transition vers le cycle limite.  
 Le réseau est soumis à une stimulation extérieure quasi stationnaire, évoluant à une vitesse très lente par rapport à la vitesse de 
-mise à jour du réseau. Une succession de régimes dynamiques distincts, séparés par des transitions brusques, est mise en évidence.
+mise à jour du réseau. Une succession de régimes dynamiques distincts, séparés par des transitions brusques, est mise en évidence (voir figure \ref{fig:hermes-critic}).
 Chaque régime est caractérisé par un patron d'activité différent, qui se manifeste par la présence de fréquences caractéristiques
-distinctes dans le spectre de Fourier du signal moyen.  
+distinctes dans le spectre de Fourier du signal moyen. 
+
+% DONNEES A REPRENDRE SUR SIMU99_0726.mat
+\begin{figure}[b!]
+	\centerline{
+		\includegraphics[width=0.3\linewidth]{figs/hist_periode_2.eps}
+		\hspace{0.5cm}
+		\includegraphics[width=0.3\linewidth]{figs/hist_periode_3.eps}
+		\hspace{0.5cm}
+		\includegraphics[width=0.3\linewidth]{figs/hist_periode_4.eps}
+	}
+	\centerline{
+		\includegraphics[width=0.3\linewidth]{figs/hist_periode_6.eps}
+		\hspace{0.5cm}
+		\includegraphics[width=0.3\linewidth]{figs/hist_periode_8.eps}
+		\hspace{0.5cm}
+		\includegraphics[width=0.3\linewidth]{figs/hist_periode_12.eps}
+	}
+	\caption{{\bf Capture de p\'eriode pour diff\'erentes valeurs de $\tau$ (période du signal).}
+		On a repr\'esent\'e sur ces histogrammes la r\'epartition des p\'eriodes, mesur\'ee sur 100 couples (r\'eseau, s\'equence d'entrée) pour $\tau=2$ (haut, gauche), $\tau=3$ (haut, milieu), $\tau=4$ (haut, droite), $\tau=6$ (bas, gauche), $\tau=8$ (bas, milieu) et $\tau=12$ (bas, droite).
+		Param\`etres~: $N=200$, $g=8$, $\bar{I}=0$, $\mu_{\theta}=0$, $\sigma_\theta=0$, $\mu_{J}=0$, $\sigma_J=1$, $\sigma_I=0.1$ (Daucé, 2001).
+	}
+	\label{fig:periode_expl}
+\end{figure}
+
 
 Une autre étude, présente dans mon manuscrit de thèse \shortcite{Dau00}, développe l'analyse spatio-temporelle des patrons d'activité de type cycle limite
 ou chaos léger.
@@ -1190,9 +1312,9 @@ L'existence d'une chaîne d'activation spontanée (synfire chain \shortcite{ABEL
 Différents modes (patrons d'activation spatio-temporels) se développent spontanément lorsque le réseau est soumis à des entrées statiques différentes \shortcite{Dau00b}.
 Enfin, l'analyse de la réponse du réseau à une stimulation périodique indique une ``bande passante'' de quelques unités temporelles, le réseau étant capable 
 de ``capturer'' (et donc d'amplifier) des signaux dont la période varie entre 2 et 10\--12 unités de temps
-(autrement dit à sélectionner un mode dynamique périodique interne compatible avec la période imposée) \shortcite{Dau00b}.
+(autrement dit à sélectionner un mode dynamique périodique interne compatible avec la période imposée) \shortcite{Dau00b} \--- voir figure \ref{fig:periode_expl}.
 Le comportements spontané des réseaux récurrents aléatoires est par ailleurs à la base du mécanisme de perception par feedback positif
-présentés dans le chapitre \ref{sec:FPos}. 
+présentés dans la section \ref{sec:BioCyb02}. 
 
 L'intérêt du comportement spontané des réseaux récurrents à connectivité aléatoires a été largement confirmé depuis. 
 Une étude plus systématique de la réponse linéaire dans les réseaux récurrents \shortcite{Cessac2007} met en évidence 
@@ -1202,9 +1324,9 @@ computing'' proposés par l'équipe de Wolfgang Maas \shortcite{Maass2002} repos
 spatio-temporel est capable de conserver une mémoire de quelques unités de temps utilisables pour produire des classifieurs sensibles
 au contexte temporel.
 
-{\color{Violet} Image du papillon-chenille.}
+{\color{Cyan} Image du papillon-chenille.}
 
-Ce modèle de réseau à connexions aléatoire offre un exemple de substrat dont la caractéristique principale est la \emph{capture dynamique}, reposant
+Ce modèle de réseau à connexions aléatoire offre un exemple de substrat dont la caractéristique principale est la \textit{capture dynamique}, reposant
 sur des transformations morphologiques des patrons d'activités (changements des distributions spatiales et temporelles des activités). Bien que construits sur
 un tirage aléatoire arbitraire, ils offrent donc un bon support pour le traitement (et la transformation) des signaux temporels. 
 Faire reposer le traitement sur un tirage arbitraire rejoint d'ailleurs un certain nombre de techniques de plongement (ou projection) aléatoires
@@ -1228,6 +1350,68 @@ utilisées en apprentissage automatique, tels le ``compressive sensing'' \shortc
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     1.2      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Modèles de champ neuronal}\label{sec:NatComp}
+
+La question adressée par le modèle publié en 2004 \shortcite{Dau04} est celle de l'implémentation d'un modèle de champ neuronal (voir section \ref{sec:NField}) sur un support composé
+d'unités discrètes.
+%, comme l'activité dite ``persistante'' ainsi qu'une bonne sensibilité au signal d'entrée (switch). 
+Sur les modèles jusqu'alors proposés, dans un cas l'activité focale était soit uniquement réactive \shortcite{Han96},  
+dans l'autre cas,
+l'activité persistante reposait sur un mécanisme de bistabilité cellulaire \shortcite{Cam98} ou encore sur une
+plasticité synaptique à court terme \shortcite{Com00}. 
+Notre modèle est une des premières implémentations d'un champ neuronal sur support discret reposant sur des mécanismes de réseau
+uniquement.
+
+Le papier étend le modèle récurrent aléatoire \shortcite{Dau01a} à des connectivités
+plus complexes, incluant des délais variables et les connexions dépendantes de la distance. 
+Un des apports du papier est de montrer 
+la stabilité de certains indicateurs (comme le niveau de réponse moyen) à travers les modèles. 
+Par exemple, l'introduction de délais différents entre les populations excitatrices et les populations inhibitrices conduit 
+à des changements qualitatifs (régime d'oscillations lentes synchronisées) mais non quantitatif (même réponse
+moyenne). 
+
+L'introduction d'une connectivité dépendante de la distance opère un changement plus radical, 
+puisque l'hypothèse fondatrice du modèle (indépendance des tirages) n'est plus vérifiée, 
+et donc l'hypothèse de chaos local (indépendance des activités) n'est plus valide.
+Les unités neuronales de chaque population reçoivent des coordonnées spatiales (ici prises uniformément sur un intervalle borné). %$[-\pi,\pi]$).
+Le tirage des poids synaptiques devient dépendant de la distance qui sépare deux unités.
+La valeur moyenne d'un poids est identique à celle du modèle précédent, 
+mais les noeuds les plus proches ont en espérance une valeur
+plus forte, et les noeuds les plus éloignés une valeur plus faible 
+(la distribution des poids synaptiques repose sur le produit
+entre la distribution uniforme initiale et un noyau gaussien conservatif).
+Le mécanisme du champ neuronal, qui se caractérise par une connectivité majoritairement excitatrice à 
+courte distance, et inhibitrice à longue distance, est implémenté à l'aide de ces noyaux gaussiens 
+tels que le rayon du noyau des liens excitateurs est plus faible que celui des liens inhibiteurs.  
+
+Le papier montre alors que les propriétés des réseaux aléatoires récurrents et celles des champs neuronaux s'additionnent dans ce modèle,
+puisqu'on peut mettre en évidence sur ce substrat la présence simultanée d'une activité de fond chaotique,
+de grandes oscillations lentes et de foyers d'activité de type champ neuronal. 
+Comme dans le cas du champ neuronal, l'activité persistante repose sur l'activité excitatrice locale, avec 
+un effet de lissage lié à l'hétérogénéité des connexions. Les oscillations lentes reposent comme précédemment
+l'existence de délais différenciés. Ce sont ces oscillations qui donnent au substrat 
+la capacité de répondre à des changements de faible amplitude (augmentent donc la sensibilité 
+du substrat au signal d'entrée). Il en résulte une implémentation d'un champ neuronal 
+sur un substrat composé d'unités neuronales discrètes.
+
+De manière plus générale, ce modèle nous fournit un premier exemple, dans le cadre des réseaux récurrents aléatoires,
+de l'effet de mémoire produit par une boucle de rétroaction positive. 
+
+Notre modèle propose une passerelle simple entre les modèles de champ neuronal continus et de
+réseaux de neurones à état et à temps discret. 
+Il s'étend facilement à des réseaux de neurones intègre-et-tire (non publié), avec des
+%L'activité produite repose néanmoins essentiellement sur la fréquence de tir des neurones (et non sur l'ordre de tir
+%ou la co-activation). Les propriétés obtenues ne sont donc 
+propriétés peu différentes qualitativement de celles qu'on 
+obtient avec des modèles à fréquence de décharge.
+Ce modèle a été utilisé en tant que couche perceptive dans des architectures de contrôle \shortcite{Dau04b,Dau07}. 
+D'autres modèles visant une plus grande fidélité aux processus biologiques 
+ont étudié l'effet de délais variables et de patrons de connexion hétérogènes (voir par exemple \shortcite{Roxin2005}),
+et plus généralement l'étude de l'interaction entre délais variables, topographie et dynamique reste un sujet d'actualité 
+en neurosciences computationnelles \shortcite{Voges2012,Lundqvist2012}.
+
+
 
 \chapter{Plasticité synaptique et apprentissage}
 Ce chapitre est consacré à l'étude des mécanismes d'apprentissage dans les réseaux de neurones récurrents.  
@@ -1965,6 +2149,15 @@ Une des thèses du mémoire : feed+/feed-.
 
 \section{Contributions personnelles}
 
+{\color{Cyan}
+	Par rapport aux propositions, j'ai fait:
+	\begin{itemize}
+		\item ceci
+		\item cela
+		\item etc.
+	\end{itemize}
+}	
+
 \subsection{Route inverse}\label{sec:NN98}
 
 L'étude du mécanisme de reconnaissance par ``réduction'' de la dynamique constitue le cœur
@@ -2270,7 +2463,9 @@ Espace de la tâche. Passage d'échelle et variable d'ordre.
 
 Scène sensorielle et scène motrice
 
-Facteurs causaux
+Facteurs causaux.
+
+La tâche. L'espace de la tâche (Marr) = niveau computationnel.
 
 \section{Notions spécifiques et propositions}
 
@@ -2282,7 +2477,14 @@ L'agent organise l'environnement.
 \section{Contributions personnelles}
 
 
-
+{\color{Cyan}
+	Par rapport aux propositions, j'ai fait:
+	\begin{itemize}
+		\item ceci
+		\item cela
+		\item etc.
+	\end{itemize}
+}	
 
 
 
