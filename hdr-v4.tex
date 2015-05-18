@@ -1542,18 +1542,18 @@ d'un tableau de paramètres via un ensemble de contraintes
 remonte historiquement au principes de la programmation dynamique \shortcite{Bellman1956}.
 
 Le but d'un algorithme d'apprentissage est de définir 
-le jeu de paramètres $T$ de manière à produire une sortie 
+le jeu de paramètres $\Theta$ de manière à produire une sortie 
 conforme au calcul souhaité. 
 Le jeu de paramètres est assimilables à un \textit{programme} et
 le choix de ces paramètres correspond à la programmation du réseau. 
 
 L'apprentissage automatique 
 s'exprime donc principalement
-sous la forme d'un problème d'optimisation dans des espaces vectoriels de grande dimension.  Il s'agit  d'optimiser une fonction de réponse $f_T$, définie selon un tableau de paramètres $T$, selon un critère d'optimalité défini par une fonction de coût $\mathcal{H}$ basée sur un jeu de contraintes $\mathbf{D}$~:
+sous la forme d'un problème d'optimisation dans des espaces vectoriels de grande dimension.  Il s'agit  d'optimiser une fonction de réponse $f_\Theta$, définie selon un tableau de paramètres $\Theta$, selon un critère d'optimalité défini par une fonction de coût $\mathcal{H}$ basée sur un jeu de contraintes $\mathbf{D}$~:
 \begin{equation}
-\min_T \mathcal{H}(T,\mathbf{D})
+\min_\Theta \mathcal{H}(\Theta,\mathbf{D})
 \end{equation}
-où $T$ est le ``programme'' et $\mathbf{D}$ les ``méta-données''.
+où $\Theta$ est le ``programme'' et $\mathbf{D}$ les ``méta-données''.
  
 Dans le cadre de l'apprentissage automatique, les contraintes $\mathbf{D}$ sont les données d'apprentissage, et prennent la forme d'une base d'exemples  organisée sous forme de couples $\{(x_1,y_1),...,(x_n,y_n)\}$.  L'optimisation consiste à trouver une fonction de l'espace des entrées $\mathcal{X}$ vers l'espace des sorties $\mathcal{Y}$ qui minimise la distance aux données. 
 
@@ -1606,7 +1606,7 @@ Cet appariement se réalise:
 \begin{itemize}
 	\item à l'aide d'un produit scalaire
 	\item par un calcul de distance
-	\item par accumulation d'évidence (identification de composants caractéristiques)
+	\item par un calcul probabiliste (vraisemblance, probabilité \textit{a posteriori},...) %accumulation d'évidence (identification de composants caractéristiques)
 	\item par une dynamique de relaxation (réseau de Hopfield)
 	%\item par prédiction et interpolation
 	\item etc.
@@ -1641,6 +1641,8 @@ La nature de cet espace de sortie (continu ou discret) définit deux grands type
 	Dans ce cas, la fonction de réponse repose sur un mécanisme d'\textit{appariement sélectif} (ou ``choix''), c'est à dire qu'en fin de compte, une forme unique est identifiée comme correspondant aux données d'entrée. Ce mécanisme est mieux connu sous le nom de ``winner takes all'' (le gagnant prend tout), implémenté par la fonction \textit{argmax}.
 	\item Lorsque l'espace de sortie est continu, on parle de problème de régression (ou de prédiction). La réponse est en général le résultat d'une \textit{décomposition} des données d'entrée sur une base de plus petite dimension. On parle dans ce cas d'\textit{appariement non exclusif} puisque les données d'entrée s'apparient à des degrés divers aux différentes formes de la base pour produire la réponse. 
 \end{itemize}
+
+
 
 {\color{Cyan} Remarque~: projection dans un espace de pls grande dimension \--- espace de redescription.}
 
@@ -1677,6 +1679,24 @@ Le principe d'un guidage plus ou moins contraignant se retrouve également dans 
 	\item de conditionnement pavlovien (lorsque le comportement est guidé par une réponse réflexe à un stimulus) {\color{Cyan}[PAVLOV]}
 	\item et conditionnement opérant (lorsque le comportement est guidé par une récompense ou une punition) {\color{Cyan}[SKINNER]}. 
 \end{itemize} 
+
+\paragraph{Modèles probabilistes}
+Un grand nombre de problèmes d'apprentissage peuvent s'exprimer de manière probabiliste. Dans ce cas, le problème d'apprentissage revient à déduire des données une distribution de probabilité sous-jacente (dite distribution génératrice). Les algorithmes d'apprentissage consistent alors à
+estimer cette distribution de probabilité en maximisant la vraisemblance des données, étant données un certain nombre de contraintes ou hypothèses a priori de régularité (nombre de sources, type de distribution, etc.) \shortcite{Bishop2006}
+
+Dans ce cadre~:
+\begin{itemize}
+	\item Soient $\mathcal{X}$ l'espace des observations, $X$ une v.a. sur $\mathcal{X}$, $\mathcal{Y}$ l'espace des sources,  $Y$ une v.a. sur $\mathcal{Y}$ et $f(X,Y;\Theta)$ la distribution génératrice.
+	\item L'optimisation porte sur les paramètres $\Theta$ de la distribution génératrice (maximum de vraisemblance). 
+	$$ \max_{\Theta} \sum_{(x,y)\in \boldsymbol{D}} f(x,y;\Theta)$$
+	\item La réponse est une distribution marginale
+	$f(Y|X=x;\Theta)$, déduite de la distribution génératrice et des observations à partir des formules de Bayes.
+\end{itemize} 
+
+Les modèles probabilistes se distinguent des modèles d'appariement standard par le caractère probabiliste de la réponse. Autrement dit, le programme fournit une liste des  probabilités de réponses et non une réponse unique. Le caractère combinatoire et facilement interprétable des probabilités donne à ces modèles une 
+puissance d'expression supérieure aux modèles standard.
+
+{\color{Orange} Hypothèse du sampling en neurosciences.}
 
 \paragraph{Apprendre et oublier}
 
