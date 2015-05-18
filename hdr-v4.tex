@@ -1143,24 +1143,26 @@ des oscillations synchronisées,
 		sont interprétés comme caractéristiques d'une activité au sein de laquelle l'ordre de tir 
 		des potentiels d'action individuels joue un rôle important.
 	\end{itemize}
-
 \end{itemize} 
 
+\subsection{Codage topographique et champ neuronal}\label{sec:NField}
 
+Le modèle du ``champ neuronal'' est un modèle de type champ moyen, c'est à dire qu'il décrit les réseaux de neurones d'un point de vue macroscopique. L'activité de larges populations de neurones s'apparente en effet, à la limite des grandes tailles, à un milieu continu dans lequel chaque portion de l'espace peut être décrit par la ``densité'' d'activité qui s'y développe.
 
+Le modèle le plus connu est décrit par des équation intégro-différentielles. Soit $x$ un point d'un espace (ou d'une portion d'espace) cartésien $\mathcal{X}$.
+Dans le modèle d'Amari \shortcite{Ama77B}, les neurones sont décrits par leur potentiel d'activation $V$ et par la sortie binaire de la fonction d'activation $f$ (fonction de Heaviside).  Le potentiel d'activation d'un neurone est donné par l'équation~:
+\begin{align}
+\tau \frac{dV(x,t)}{dt} = -V(x,t) + I(x,t) - \theta + \int_{y \in \mathcal{X}} W(||x-y||) f(V(y,t)) dy
+\end{align} 
+où $I$ est un signal extérieur et $W$ un noyau décrivant les interactions réciproques entre neurones en fonction de la distance $||x - y||$.
 
+Lorsque le noyau est 
 
-
-
-
-
-
-
-\subsection{Codage topographique et champ neuronal}\ref{sec:NField}
+\subsubsection{Rôle computationnel du codage topographique}
 
 \subsection{Neurones impulsionnels}
 
-
+\subsubsection{Rôle computationnel du codage impulsionnel}
 
 %\subsection{Applications}
 
@@ -1172,7 +1174,7 @@ des oscillations synchronisées,
 	Par rapport aux propositions, j'ai fait:
 	\begin{itemize}
 		\item ceci
-		\item cela
+		\item {\color{Orange} Proposition~: la présence d'une pulsation périodique permet d'implémenter les propriétés du neural field sans utiliser de mémoire cellulaire.}
 		\item etc.
 	\end{itemize}
 }	
