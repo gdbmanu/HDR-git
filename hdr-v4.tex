@@ -1054,23 +1054,29 @@ le processus Gaussien limite est défini au temps $t$ par~:
 \end{itemize}
 où $h_i(t)$ est une variable aléatoire, selon:
 \begin{align}
-&\mu_h(t) = \mu_J m(t-1) + \mu_\theta\nonumber\\
-&\sigma_h^2(t) = \sigma_J^2 q(t-1) + \sigma_\theta^2\\
-&\Delta_h(t,t') = \sigma_J^2 C(t-1,t'-1) + \sigma_\theta^2\nonumber
+&\mu_h(t) = \mu_J m(t-1) + \mu_\theta\\
+&\sigma_h^2(t) = \sigma_J^2 q(t-1) + \sigma_\theta^2 %\\
 \end{align}
 avec~:
 \begin{align}
-&m(t) = \int_{-\infty}^{+\infty} Dh f\left(h\sigma_h(t) + \mu(t)\right)\nonumber\\
-&q(t) = \int_{-\infty}^{+\infty} Dh f^2\left(h\sigma_h(t) + \mu(t)\right)\\
-&C(t,t') = \int_{-\infty}^{+\infty} \int_{-\infty}^{+\infty} Dh Dh' f\left(\frac{\sqrt{\sigma_h^2(t)\sigma_h^2(t') - \Delta^2(t,t')}}{\sigma_h(t')}h + \frac{\Delta(t,t')}{\sigma_h(t')}h' + \mu(t)\right)
-f\left(h'\sigma_h(t')+\mu(t')\right)
+&m(t) = \int_{-\infty}^{+\infty} Dh f\left(h\sigma_h(t) + \mu(t)\right)\\
+&q(t) = \int_{-\infty}^{+\infty} Dh f^2\left(h\sigma_h(t) + \mu(t)\right)
 \end{align}
 
 avec $Dh = \frac{1}{\sqrt{2\pi}} \exp -\frac{h^2}{2} dh$.
 
-Les équations de champ moyen offrent ainsi une description ``macroscopiques'' de l'activité d'un réseau,
-représentative de l'activité qu'on peut attendre dans un réseau de taille finie issu d'un tirage particulier, et 
+Les équations de champ moyen, qui forment un système à petit nombre de degrés de liberté, offrent ainsi une description ``macroscopiques'' de l'activité d'un réseau,
+représentative de l'activité moyenne qu'on peut attendre dans un réseau de taille finie issu d'un tirage particulier. Elles 
 constituent de fait un cadre d'analyse adapté à une approche ``multi-échelles''.
+
+{	
+\color{Gray}
+\begin{align}
+&\Delta_h(t,t') = \sigma_J^2 C(t-1,t'-1) + \sigma_\theta^2\\
+&C(t,t') = \int_{-\infty}^{+\infty} \int_{-\infty}^{+\infty} Dh Dh' f\left(\frac{\sqrt{\sigma_h^2(t)\sigma_h^2(t') - \Delta^2(t,t')}}{\sigma_h(t')}h + \frac{\Delta(t,t')}{\sigma_h(t')}h' + \mu(t)\right)
+f\left(h'\sigma_h(t')+\mu(t')\right)
+\end{align}
+}
 
 \subsubsection{Route vers le chaos}
 
