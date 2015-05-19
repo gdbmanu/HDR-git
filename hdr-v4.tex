@@ -2065,7 +2065,7 @@ au ``choix'' d'une des formes préalablement stockées dans le réseau.
 Le modèle de Hopfield 
 est un exemple d'implémentation de ce mécanisme d'appariement entre un signal d'entrée, 
 fourni sous forme de condition initiale, et un des patrons stockés dans le graphe.
-
+{\color{Orange} Il s'agit également une optimisation sous contraintes. Les liens sont les contraintes, il existe un terme d'énergie, avec convergence vers une solution locale (trouver ref dans bouquin ``dynamique des syst. complexes''+ à mettre en lien avec Berrou).}
 
 \subsubsection{Filtrage}\label{sec:filtrage}
 
@@ -2483,21 +2483,80 @@ et la dynamique induite par les motifs statiques seuls (les activités étant pa
 
 \chapter{Architectures de contrôle}
 
+{\color{Cyan} 
+
+\begin{itemize}	
+\item Langage de l'action. 
+
+\item Espace de la tâche. Passage d'échelle et variable d'ordre.
+
+\item Scène sensorielle et scène motrice
+
+\item Facteurs causaux.
+
+\item La tâche. L'espace de la tâche (Marr) = niveau computationnel.
+
+\end{itemize}
+}
+
 \section{Notions générales}
 
-Langage de l'action. 
+{\color{Cyan} Cette section présente un formalisme et des définitions visant à ...}
 
-Espace de la tâche. Passage d'échelle et variable d'ordre.
+\subsection{Contrôleur et environnement}
 
-Scène sensorielle et scène motrice
+L'approche dite ``située'' en robotique
+mobile et en intelligence artificielle \shortcite{Bro91,Varela91} prône la prise 
+en compte de la contrainte du corps
+comme élément structurant du développement de {\color{Orange} capacités cognitives} plus élaborées.
+{\color{Orange} Cette contrainte, qui s'exprime par les {\bf dépendances sensori-motrices}, et 
+la prise en compte des {\bf disparités d'échelle}, augmente néanmoins considérablement 
+la complexité des tâches
+d'apprentissage et de leur implémentation par plasticité synaptique. }
 
-Facteurs causaux.
+Le cadre que nous considérons ici est celui de la commande motrice. Nous considérons un programme doté d'effecteurs moteurs capables de déplacer et faire pivoter des masses articulées dans l'espace physique.  L'espace physique est décrit, d'une part, par ces effecteurs directement contrôlables, ainsi que d'autres éléments physiques non directement contrôlables. 
+\begin{itemize}
+	\item Le programme est le \textit{contrôleur}.
+	\item L'espace physique est l'\textit{environnement}.
+\end{itemize}  
 
-La tâche. L'espace de la tâche (Marr) = niveau computationnel.
+L'interaction d'un contrôleur avec son environnement passe par des transducteurs, qui sont les canaux de 
+communication entre les deux milieux~:
+appareils sensoriels et proprioceptifs chez les animaux, et contractions musculaires permettant de déplacer des masses
+articulées; senseurs et actuateurs pour les dispositifs de contrôle artificiels : capteurs qui traduisent des signaux physiques
+en signaux électriques, moteurs, joints et pistons pour les déplacements de masses.
+
+
+Le cadre que nous avons regardé jusqu'à présent est l'apprentissage en ``boucle ouverte'',
+dans lequel les actions physiques sur le milieu sont découplées des sensations. 
+{\color{Gray} C'est le cadre classique du conditionnement Pavlovien où les stimuli déclenchent
+des réponses comportementales automatiques ou induites par l'apprentissage.}
+La prise en compte plus réaliste
+des deux domaines matériels que sont le circuit logiciel et le milieu physique
+environnant conduit à déplacer 
+le cadre conceptuel de l'apprentissage vers l'apprentissage en ``boucle fermée''.
+Il se définit formellement par la présence de correlations entre les actions ou 
+les réponses produites et les manifestations sensorielles suivantes.
+Ce lien entre les actions et les perceptions est décrit, au niveau le plus général, par le modèle physique 
+au sein duquel le logiciel est plongé.
+Une séance d'apprentisage consiste à effectuer une série de ``choix'' qui orientent
+le cours futur de la séance. 
+La tâche n'est plus définie par rapport à la justesse des réponses instantanées, mais par rapport
+à la justesse de ce parcours dans l'espace des trajectoires possibles.
+
+
+
+
+Considérons un dispositif logiciel contrôlant un appareil 
+ayant des interactions répétées avec son milieu.
+Dans des environnements complexes où il est difficile de tout prévoir, la machine doit 
+adapter son comportement face aux situations particulières qui se présentent.
+Ce cahier des charges rejoint l'idée de méta-programme : il s'agit de produire des ajustements 
+qui améliorent les interactions du logiciel avec le milieu physique. 
 
 \section{Notions spécifiques et propositions}
 
-L'activité récurrente produit du signal et crée de la nouveauté. 
+L'activité récurrente produit du signal (et crée de la nouveauté). 
 
 L'agent organise l'environnement. 
 
