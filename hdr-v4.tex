@@ -801,9 +801,9 @@ potentiels d'action émis aux instants précédant $t$, en tenant compte des dé
 La théorie des \textit{systèmes dynamiques} repose sur un espace d'état $\mathcal{X}$, une trame temporelle 
 $\mathcal{T}$ et un
 flot $\phi$ qui est une application de $\mathcal{X} \times \mathcal{T}$ dans $\mathcal{X}$
-définissant pour tout couple $(x,t)$ la valeur de l'état suivant:
+définissant pour tout couple $(\boldsymbol{x},t)$ la valeur de l'état suivant:
 \begin{align}\label{eq:SD}
-x' = \phi(x,t)
+\boldsymbol{x}' = \phi(\boldsymbol{x},t)
 \end{align}
 La plupart des réseaux de neurones peuvent se modéliser sous cette forme, à partir du moment où 
 l'état du réseau à l'instant $t$ est entièrement spécifié, en tenant compte en particulier
@@ -814,11 +814,11 @@ La \textit{trajectoire} du système sur la plage temporelle $[t_0,t_f]$ est alor
 par l'intégration sur le flot de la condition initiale $\boldsymbol{x}_0$.
 
 \begin{itemize}
-\item Dans le cas d'un système dit ``autonome'', on a $\phi(x,t) = \phi(x)$ et
-la trajectoire du système $\{x(t)\}_{t \in [t_0,t_f], \boldsymbol{x}(t_0)= \boldsymbol{x}_0}$ 
+\item Dans le cas d'un système dit ``autonome'', on a $\phi(\boldsymbol{x},t) = \phi(\boldsymbol{x})$ et
+la trajectoire du système $\{\boldsymbol{x}(t)\}_{t \in [t_0,t_f], \boldsymbol{x}(t_0)= \boldsymbol{x}_0}$ 
 est entièrement définie par les conditions initiales. 
 \item Dans le cas d'un système dit ``ouvert'' (non-autonome), la dépendance temporelle
-est souvent modélisée sous la forme d'un signal externe $I(t)$, soit $\phi(x,t) = \phi(x,I(t))$. 
+est souvent modélisée sous la forme d'un signal externe $\boldsymbol{I}(t)$, soit $\phi(\boldsymbol{x},t) = \phi(\boldsymbol{x},\boldsymbol{I}(t))$. 
 Ce signal peut être:
   \begin{itemize}
   \item une donnée d'entrée dans le cas de modèles de traitement des données
@@ -1446,10 +1446,10 @@ L'efficacité d'une synapse dépend de plusieurs facteurs, comme la taille du bo
 La plasticité synaptique est un mécanisme biologique qui modifie l'efficacité de la synapse au cours du temps. En reprenant 
 les notations de l'équation (\ref{eq:SD}), 
 \begin{align}
-&x' = \phi(x,J,t) \label{eq:SD-plast-x}\\
-&J' = \psi(x,J,t) \label{eq:SD-plast-J}
-\end{align}
-où $x$ est un vecteur représentant l'état du système dynamique et $J$ une matrice représentant le graphe de connexions.
+&\boldsymbol{x}' = \phi(\boldsymbol{x},\boldsymbol{J},t) \label{eq:SD-plast-x}\\
+&\boldsymbol{J}' = \psi(\boldsymbol{x},\boldsymbol{J},t) \label{eq:SD-plast-J}
+\end{align}\label{eq:SD-plast}
+où $\boldsymbol{x}$ est un vecteur représentant l'état du système dynamique et $\boldsymbol{J}$ une matrice représentant le graphe de connexions.
 La plasticité (eq. \ref{eq:SD-plast-J})
 modifie donc les caractéristiques de la fonction de réponse des neurones (eq. \ref{eq:SD-plast-x}) et vice-versa. 
 Le mécanisme de plasticité introduit une interdépendance complexe entre le graphe, l'activité et le signal d'entrée s'il existe.
@@ -1458,10 +1458,10 @@ Le mécanisme de plasticité introduit une interdépendance complexe entre le gr
 Dans le cadre 
 proposé par Donald Hebb en 1949 \cite{Heb49}, et confirmé depuis par des observations \cite{Bli73,BIPOO98}, la plasticité est essentiellement un mécanisme local dépendant des échanges entre les cellules pré et post-synaptiques. On parle de potentiation à long terme (Long Term Potentiation - LTP). Le poids $J_{ij}$ est alors une quantité qui évolue au cours du temps sous la forme :
 \begin{align}
-J_{ij}(t) = F(S_i(t), S_j(t), J_{ij}(t_0))
+J_{ij}(t) = F(\boldsymbol{S}_i(t), \boldsymbol{S}_j(t), J_{ij}(t_0))
 \end{align}
 avec $t_0$ l'instant initial d'observation,
-$S_j(t) = \{s_j(t)\}_{t \in [t_0,..,t[}$  l'activité pré-synaptique, $S_i(t) = \{s_i(t)\}_{t \in [t_0,..,t[}$ l'activité post-synaptique,
+$\boldsymbol{S}_j(t) = \{s_j(t)\}_{t \in [t_0,..,t[}$  l'activité pré-synaptique, $\boldsymbol{S}_i(t) = \{s_i(t)\}_{t \in [t_0,..,t[}$ l'activité post-synaptique,
 et $F$ la fonction de mise à jour des synapses.
 %La plasticité est donc essentiellement un mécanisme \textit{local} qui modifie le couplage des cellules $i$ et $j$ en fonction 
 %de leurs activités respectives.  
@@ -2535,30 +2535,146 @@ La prise en compte plus réaliste
 des deux domaines matériels que sont le circuit logiciel et le milieu physique
 environnant conduit à déplacer 
 le cadre conceptuel de l'apprentissage vers l'apprentissage en ``boucle fermée''.
-Il se définit formellement par la présence de correlations entre les actions ou 
+Il se définit formellement par la présence de corrélations entre les actions ou 
 les réponses produites et les manifestations sensorielles suivantes.
-Ce lien entre les actions et les perceptions est décrit, au niveau le plus général, par le modèle physique 
+
+
+\subsubsection{Couplages sensori-moteurs}
+Ce lien entre les actions et les sensations est décrit, au niveau le plus général, par le modèle physique 
 au sein duquel le logiciel est plongé.
-Une séance d'apprentisage consiste à effectuer une série de ``choix'' qui orientent
-le cours futur de la séance. 
-La tâche n'est plus définie par rapport à la justesse des réponses instantanées, mais par rapport
-à la justesse de ce parcours dans l'espace des trajectoires possibles.
 
+Nous reprenons ici le formalisme des systèmes dynamiques proposé dans l'équation (\ref{eq:SD}). On suppose que le milieu physique et le programme obéissent à une description d'état, où 
+\begin{itemize}
+	\item $\boldsymbol{x}_\text{out}$ est un vecteur d'état  décrivant le milieu physique (actuateurs compris)
+	\item $\boldsymbol{x}_\text{out}$ est un vecteur d'état  décrivant le contrôleur \--- ou encore ``milieu'' logiciel (entrées sensorielles comprises).
+\end{itemize}
 
+L'évolution du système au cours du temps est alors décrite par le jeu d'équations~:
+\begin{align}
+&\boldsymbol{x}_\text{out}' = \phi_\text{out}(\boldsymbol{x}_\text{out},h_\text{out}(\boldsymbol{x}_\text{in})) \label{eq:SD-closed-out}\\
+&\boldsymbol{x}_\text{in}' = \phi_\text{in}(\boldsymbol{x}_\text{in},h_\text{in}(\boldsymbol{x}_\text{out})) \label{eq:SD-closed-in}
+\end{align}
+où $h_\text{in}$ et $h_\text{out}$ représentent (de manière simplifiée) les mécanismes de transduction entre le milieu physique et le circuit logiciel  et $\phi_\text{in}$ et $\phi_\text{out}$ les fonctions d'évolution d'état.
 
+Plus précisément~:
+\begin{itemize}
+	\item $\boldsymbol{I}(t) = h_\text{in}(\boldsymbol{x}_\text{out}(t))$ est le signal d'entrée du contrôleur.
+	\item $\boldsymbol{u}(t) = h_\text{out}(\boldsymbol{x}_\text{in}(t))$ est la commande motrice.
+	\item L'équation (\ref{eq:SD-closed-out}) décrit le lien entre les actions produites et les sensations.
+	\item L'équation (\ref{eq:SD-closed-in}) décrit le traitement appliqué à l'entrée sensorielle.
+\end{itemize}
+\paragraph {Remarques}
+\begin{itemize}
+	\item L'état de l'environnement n'est connu du contrôleur qu'à travers une projection $h_\text{in}$ qui n'est pas nécessairement inversible. On dit dans ce cas que l'environnement (ou une partie de l'environnement) est ``caché''.
+	\item 	La simplification, qui consiste à considérer un milieu intérieur (intensif) et un milieu extérieur (extensif)
+	couplés comme un seul et même système dynamique, se
+	heurte souvent au caractère inhomogène de ce couplage~:
+	\begin{itemize}  
+		\item Dans domaine biologique, les échelles de temps et d'espace des comportements macroscopiques 
+	(mouvements, déplacements, activité motrice)  
+	se distinguent des échelles de temps et d'espace observées au niveau de l'activité
+	nerveuse.
+	Les actions produites par le corps sont à une échelle temporelle lente en comparaison des potentiels d'action
+	produits par les neurones. On parle de \textit{Disparité d'échelle}.
+		\item 
+	En plus de la disparité d'échelle, les lois régissant les deux systèmes ne sont pas de même nature. 
+	Le monde physique est assez bien décrit par 
+	l'approximation newtonienne des masses en mouvement dans un milieu tri-dimensionnel.
+	%On parlera pour simplifier du milieu extensif pour désigner le monde physique, l'endroit où sont
+	%possibles des déplacements de masses par l'action des forces, les frottements et le contact. 
+	A l'inverse, l'activité logicielle s'inscrit dans un substrat où l'intensité des interactions est 
+	faiblement liée à la disposition spatiale, essentiellement produite par la connectique et 
+	les transports d'activité électrique.
+	%On parle pour simplifier de milieu intensif. % (ou milieu logiciel).
+	\end{itemize}
 
+\end{itemize}
+	
+\subsubsection{Apprentissage en boucle fermée}
+	
 Considérons un dispositif logiciel contrôlant un appareil 
 ayant des interactions répétées avec son milieu.
 Dans des environnements complexes où il est difficile de tout prévoir, la machine doit 
 adapter son comportement face aux situations particulières qui se présentent.
-Ce cahier des charges rejoint l'idée de méta-programme : il s'agit de produire des ajustements 
-qui améliorent les interactions du logiciel avec le milieu physique. 
+%Ce cahier des charges rejoint l'idée de méta-programme : il s'agit de 
+
+L'apprentissage en boucle fermée consiste à produire des ajustements 
+qui améliorent les interactions du logiciel avec le milieu physique, \textit{en tenant compte des boucles de rétroaction entre les commandes motrices et les signaux sensoriels} \cite{Wiener1965}. 	
+%L'apprentissage en boucle fermée 
+Il consiste à programmer le contrôleur de telle sorte que les actions produites dans le milieu se conforment à un certain nombre de critères (ou contraintes) définis \textit{a priori}.	
+Ces critères peuvent être :
+\begin{itemize}
+	\item le caractère non délétère des actions produites (endommagement du dispositif moteur ou de l'environnement)
+	\item la minimisation de certaine dépenses (consommation énergétique, effort, usure, chauffage des composants, ...)
+	\item la rapidité de la réponse
+	\item la stabilité et la reproductibilité des réponses, la robustesse, etc.
+	\item la capacité à prendre en compte de situations nouvelles
+	\item etc. 
+\end{itemize}
+
+Ces problèmes ont été analysés de longue date dans le cadre de la théorie de l'automatique (contrôle linéaire) et de la commande optimale, en particulier sous l'angle de la stabilité de la réponse à la commande {\color{Orange}[REFS]}.
+
+
+
+	
+\paragraph{Plasticité}
+Nous étudions, comme dans les chapitres précédents, l'apprentissage sous l'angle de la plasticité, en particulier la plasticité synaptique. %La plasticité consiste, comme nous l'avons vu, à appliquer des petits changements aux paramètres de la fonction de réponse du contrôleur.  
+Dans le cadre des modèles de réseaux de neurones, il s'agit essentiellement de modifier les poids synaptiques $J_{ij}$ entre les nœuds du graphe.
+
+En reprenant les notations proposées dans les chapitres précédents (e.g. les équations (\ref{eq:SD-plast-x}) et (\ref{eq:SD-plast-J})), la matrice $\boldsymbol{J}$ décrit les poids du réseau de neurones et l'évolution de cette matrice au cours du temps est donnée par~:
+\begin{align}
+&\boldsymbol{x}_\text{out}' = \phi_\text{out}(\boldsymbol{x}_ \text{out},h_\text{out}(\boldsymbol{x}_\text{in})) \label{eq:SD-closed-plast-out}\\ &\boldsymbol{x}_\text{in}' = \phi_\text{in}(\boldsymbol{x}_ \text{in},h_\text{in}(\boldsymbol{x}_\text{out}),\boldsymbol{J}) \label{eq:SD-closed-plast-in}\\
+ &\boldsymbol{J}' = \psi(\boldsymbol{x}_\text{in},\boldsymbol{J},\boldsymbol{y}) \label{eq:SD-closed-J}
+\end{align}
+avec $\boldsymbol{y}$ une consigne éventuellement déduite d'une observation, i.e. 
+$\boldsymbol{y} = h_\text{err} (\boldsymbol{x}_\text{out})$
+
+\paragraph{Tâche et espace de la tâche}
+
+{\color{Cyan}
+\begin{itemize}
+	\item système commandé
+	\item rétroaction, homéostasie
+	\item consigne, commande, point d'opération (tâche)
+\end{itemize}
+
+ID identification entre tâche et ``source'' ou ``mode d'action''.
+
+Etablir le lien conceptuel entre commande motrice et consigne.
+}
+
+\paragraph{Filtrage adaptatif}
+
+{\color{Cyan} Modèle de l'observateur.}
+
+\paragraph{Modèle inverse et modèle direct}
+
 
 \section{Notions spécifiques et propositions}
 
 L'activité récurrente produit du signal (et crée de la nouveauté). 
 
 L'agent organise l'environnement. 
+
+\subsection{Commande et signal}
+
+En quoi la commande motrice s'apparente à un signal
+
+Production d'information
+
+Bien spécifier l'articulation et la complémentarité avec les approches de type ``traitement du signal''
+
+
+\subsection{Commande par champ de vecteur}
+
+
+\subsection{Apprentissage par renforcement (temporal credit assignment)}
+
+Une séance d'apprentisage consiste à effectuer une série de ``choix'' qui orientent
+le cours futur de la séance. 
+La tâche n'est plus définie par rapport à la justesse des réponses instantanées, mais par rapport
+à la justesse de ce parcours dans l'espace des trajectoires possibles.
+
 
 
 \section{Contributions personnelles}
