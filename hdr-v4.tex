@@ -2633,6 +2633,26 @@ $\boldsymbol{y} = h_\text{err} (\boldsymbol{x}_\text{out})$
 
 \paragraph{Tâche et espace de la tâche}
 
+La théorie du contrôle classique décrit un problème de contrôle comme un problème d'optimisation basé sur~:
+\begin{itemize}
+	\item une consigne, correspondant à un état nominal $\boldsymbol{x}^*$ dans lequel on souhaite voir le milieu physique,
+	\item un contrôleur doté de capteurs et d'actuateurs,
+	\item et le milieu physique situé dans l'état $\boldsymbol{x}_\text{out}$.
+\end{itemize}
+
+Le problème d'optimisation consiste à programmer une fonction de réponse $\phi_\text{in}$ qui, étant donnée une consigne $\boldsymbol{x}^* \in \mathcal{C}$, conduit le milieu physique dans l'état désiré. Soit $\Theta$ un ensemble de paramètres pour décrire la fonction $\phi_\text{in}$. En tenant compte de la dynamique, le problème peut s'exprimer comme~:
+\begin{align}
+\max_{\Theta}  \int_{\boldsymbol{x}^* \in \mathcal{C}} \lim_{t\rightarrow\infty} ||\boldsymbol{x}^* - \boldsymbol{x}_\text{out}(t)||^2 d\boldsymbol{x}^*
+\end{align}
+Dans le cas d'un dispositif mécanique, $\boldsymbol{x}_\text{out}$ décrit par exemple les coordonnées spatiales d'un effecteur et $\boldsymbol{x}^*$ la position finale désirée.
+
+La différence $\boldsymbol{x}^* - \boldsymbol{x}_\text{out}(t)$ est appelée l'\textit{erreur motrice}.
+\begin{itemize}
+\item Dans le cas le plus simple (environnement observable), cette erreur est assimilée au signal d'entrée. 
+
+
+Lorsque l'espace $\mathcal{C}$ est discret, chaque  
+
 {\color{Cyan}
 \begin{itemize}
 	\item système commandé
@@ -2684,6 +2704,68 @@ La tâche n'est plus définie par rapport à la justesse des réponses instantan
 à la justesse de ce parcours dans l'espace des trajectoires possibles.
 
 \subsection{Friston}
+
+{\color{Violet}
+	Ce qu’il faut retenir de Friston :
+	
+	- un modèle en miroir. 
+	
+	- les actuateurs sont une partie de l’env.
+	
+	- perception = inference on states / learning = inference on parameters 
+	
+	- l’action vient rectifier une erreur de prediction
+	
+	- le reward est un prior sur la solution cherchée.
+	
+	Rq : le concept d’energie libre est repris de Prigogine?.
+	
+	Après relecture :
+	
+	- Le terme d’energie libre se divise entre accuracy (distance entre les causes predites et les causes observées - innovation : idem Kalman et/ou Hidden Markov) et complexity (entropie du modele de la mesure).
+	
+	- La structure de resolution est analogue à EM. 
+	E est l’inference des causes (par modele - ou mesure - inverse)
+	avec modele : estimation de x* par filtre de Kalman ou particulaire ou Viterbi 
+	avec identification du modele (recherche du modele generatif par inference - avec prior sur le nombre de causes...) 
+	
+	- exemple typique = apprentissage d’un dictionnaire (base orthonormale ou non). Pb : explosion combinatoire si sequences temporelles ou etats vectoriels (ou combinaison d’etats). Probleme mal posé.
+	modele libre (absence de modele)
+	
+	Action based. RL classique. Analogie etat caché / valeur (sortie du modele representationnel. L’etat interne ne represente pas l’etat du monde exterieur mais simplement l’avantage qu’on peut en attendre. Rq : le couple (actionneurs + environnement = systeme controllé = domaine extensif - masses en deplacements) est en general connu , c’est à dire qu’on a une connaissance complete. Le couple acteur + critique est l’agent - domaine intensif). Model free -  Policy gradient. Apprentissage direct du repertoire d’actions
+	(hierarchique) - Le prior est le posterior de la couche superieure (projection predictive en feed-back). La vraisemblance est le “matching” entre le signal de la couche inferieure et le filtre (feed-forward). “Bayesian surprise” - innovation = erreur perceptive
+	
+	Le modele libre est distinct du modele search. Ca conduit à l’idée d’information mutuelle sans contrainte d’identité.  
+	
+	M est l’identification (adaptative) du processus de mesure (ou du modele generatif ou du forward model). 
+	
+	Etape qu’on identifie à l’apprentissage. Idem apprentissage du perceptron et des reseaux de neurones en general (supervisé)  : pattern matching, max likelihood, ...
+	
+	Etape absente pour le filtre de Kalman ou les HMM. 
+	
+	Friston propose une maniere originale d’augmenter la likelihood (action qui maximise la vraisemblance perceptive) = passage du côté “obscur” de l’”action-oriented” perception (consequence perceptive de l’action) $\Rightarrow$ agir, c’est mettre le monde à l’epreuve
+	
+	En lien avec l’idée de sparsité $\Rightarrow$ minimiser la complexité en produisant des bases “sparse”
+	
+	- La logique EM est fondamentalement circulaire. Se resout classiquement par iteration sequentielle. On peut egalement supposer une difference d’échelle temporelle entre processus E (rapide) et processus M (lent). 
+	
+	-  Le RL peut etre vu comme un algo EM avec prior sur le modele (dans ce cas les causes sont essentiellement les actions). L’etape E est le calcul de la valeur des transitions (vraisemblance (posterior) de l’action etant donné la sensation). L’etape M est la mise à jour de la fonction de valeur (etant donné le reward - ici vu comme une mesure de la likelihood de la consequence perceptive). $\rightarrow$ consequence (ou inversion de l’argument): est vraisemblable un patron perceptif qui est recompensé - Tout ce qui n’est pas soumis à un mecanisme de recompense n’est pas perçu (perception ou non-sens - Cf. Merleau Ponty - Phénoménologie de la perception).
+	
+	- F est la log vraisemblance marginale (sur posterior q(.) et mesure f(.)) qui se decompose en 2 termes : la divergence (surprise bayesienne - accuracy) servant à optimiser q(.) et la log vraisemblance conditionnelle (complexité) servant à optimiser f(.)
+	
+	- La dualité accuracy / complexity peut etre vue comme le support d’autres dualités findamentales selon que l’on met l’accent sur l’un ou sur l’autre (exploration/exploitation), conservation /innovation etc… On peut imaginer un seuil d’innovation (== vigilance) qui permet de remettre en cause le posterior courant.
+	
+	- Il y a un lien entre l’exigence de parcimonie et le principe de substrat à ressource/expressivité limitée. 
+	
+	- Le predictive coding est une théorie des rôles complementaires des connexions feed-forward et feed-back + implementations mathematique du principe “perception = correction d’erreur”
+	
+	Karl Friston : ce qui est perçu est principalement l'ecart à la prediction (predictive coding).  Dynamical Causal modelling.
+	``{\emph Modern reformulations suggest
+		that both inference on states (that is, perception) and
+		inference on parameters (that is, learning) minimize
+		free energy (that is, minimize prediction error) and
+		serve to bound surprising exchanges with the world.}'' (Friston, 2010)
+}
 
 \section{Contributions personnelles}
 
