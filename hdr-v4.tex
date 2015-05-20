@@ -2563,8 +2563,8 @@ Plus précisément~:
 	\item L'équation (\ref{eq:SD-closed-out}) décrit le lien entre les actions produites et les sensations.
 	\item L'équation (\ref{eq:SD-closed-in}) décrit le traitement appliqué à l'entrée sensorielle.
 \end{itemize}
-\paragraph {Remarques}
-\begin{itemize}
+\paragraph {Remarques~:}
+\begin{enumerate}
 	\item L'état de l'environnement n'est connu du contrôleur qu'à travers une projection $h_\text{in}$ qui n'est pas nécessairement inversible. On dit dans ce cas que l'environnement (ou une partie de l'environnement) est ``caché''.
 	\item 	La simplification, qui consiste à considérer un milieu intérieur (intensif) et un milieu extérieur (extensif)
 	couplés comme un seul et même système dynamique, se
@@ -2587,8 +2587,8 @@ Plus précisément~:
 	les transports d'activité électrique.
 	%On parle pour simplifier de milieu intensif. % (ou milieu logiciel).
 	\end{itemize}
-
-\end{itemize}
+    \item {\color{Cyan} On peut compléter l'équation de manière symétrique avec une plasticité de l'environnement représentant la non-stationnarité, l'usure, le vieillissement et toutes sortes de changement ``lents''.}
+\end{enumerate}
 	
 \subsubsection{Apprentissage en boucle fermée}
 	
@@ -2629,6 +2629,8 @@ En reprenant les notations proposées dans les chapitres précédents (e.g. les 
 avec $\boldsymbol{y}$ une consigne éventuellement déduite d'une observation, i.e. 
 $\boldsymbol{y} = h_\text{err} (\boldsymbol{x}_\text{out})$
 
+{\color{Cyan} Ajouter quelques remarques sur dynamique lente, dynamique rapide, consigne,...}
+
 \paragraph{Tâche et espace de la tâche}
 
 {\color{Cyan}
@@ -2642,6 +2644,12 @@ ID identification entre tâche et ``source'' ou ``mode d'action''.
 
 Etablir le lien conceptuel entre commande motrice et consigne.
 }
+
+Définir la tâche dans le cadre d'un problème d'optimisation : établir une commande qui conduit le système dasn un état 
+
+\subsection{Approche probabiliste}
+
+\paragraph{Modèle de la mesure}
 
 \paragraph{Filtrage adaptatif}
 
@@ -2665,7 +2673,7 @@ Production d'information
 Bien spécifier l'articulation et la complémentarité avec les approches de type ``traitement du signal''
 
 
-\subsection{Commande par champ de vecteur}
+\subsection{Commande par champ de vecteur (?)}
 
 
 \subsection{Apprentissage par renforcement (temporal credit assignment)}
@@ -2675,7 +2683,7 @@ le cours futur de la séance.
 La tâche n'est plus définie par rapport à la justesse des réponses instantanées, mais par rapport
 à la justesse de ce parcours dans l'espace des trajectoires possibles.
 
-
+\subsection{Friston}
 
 \section{Contributions personnelles}
 
