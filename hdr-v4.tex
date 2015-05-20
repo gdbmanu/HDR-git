@@ -2546,7 +2546,7 @@ au sein duquel le logiciel est plongé.
 Nous reprenons ici le formalisme des systèmes dynamiques proposé dans l'équation (\ref{eq:SD}). On suppose que le milieu physique et le programme obéissent à une description d'état, où 
 \begin{itemize}
 	\item $\boldsymbol{x}_\text{out}$ est un vecteur d'état  décrivant le milieu physique (actuateurs compris)
-	\item $\boldsymbol{x}_\text{out}$ est un vecteur d'état  décrivant le contrôleur \--- ou encore ``milieu'' logiciel (entrées sensorielles comprises).
+	\item $\boldsymbol{x}_\text{in}$ est un vecteur d'état  décrivant le contrôleur \--- ou encore ``milieu'' logiciel (entrées sensorielles comprises).
 \end{itemize}
 
 L'évolution du système au cours du temps est alors décrite par le jeu d'équations~:
@@ -2582,7 +2582,7 @@ Plus précisément~:
 	l'approximation newtonienne des masses en mouvement dans un milieu tri-dimensionnel.
 	%On parlera pour simplifier du milieu extensif pour désigner le monde physique, l'endroit où sont
 	%possibles des déplacements de masses par l'action des forces, les frottements et le contact. 
-	A l'inverse, l'activité logicielle s'inscrit dans un substrat où l'intensité des interactions est 
+	A l'inverse, l'activité logicielle s'inscrit dans un réseau où l'intensité des interactions est 
 	faiblement liée à la disposition spatiale, essentiellement produite par la connectique et 
 	les transports d'activité électrique.
 	%On parle pour simplifier de milieu intensif. % (ou milieu logiciel).
@@ -2607,13 +2607,60 @@ Ces critères peuvent être :
 	\item le caractère non délétère des actions produites (endommagement du dispositif moteur ou de l'environnement)
 	\item la minimisation de certaine dépenses (consommation énergétique, effort, usure, chauffage des composants, ...)
 	\item la rapidité de la réponse
-	\item la stabilité et la reproductibilité des réponses, la robustesse, etc.
-	\item la capacité à prendre en compte de situations nouvelles
+	\item la résilience, la capacité à résister aux perturbations (homéostasie)
+	\item la stabilité et la reproductibilité des réponses, la robustesse.
 	\item etc. 
 \end{itemize}
 
-Ces problèmes ont été analysés de longue date dans le cadre de la théorie de l'automatique (contrôle linéaire) et de la commande optimale, en particulier sous l'angle de la stabilité de la réponse à la commande {\color{Orange}[REFS]}.
+Ces problèmes ont été analysés de longue date dans le cadre de la théorie de l'automatique (contrôle linéaire) et de la commande optimale, en particulier sous l'angle de la stabilité de la réponse à la commande et de l'homéostasie {\color{Orange}[REFS]}.
 
+
+\subsubsection{Tâches et problèmes de contrôle}
+
+La théorie du contrôle classique décrit un problème de contrôle comme un problème d'optimisation basé sur~:
+\begin{itemize}
+	\item une consigne, correspondant à un état nominal $\boldsymbol{x}^*$ dans lequel on souhaite voir le milieu physique,
+	\item un contrôleur doté de capteurs et d'actuateurs,
+	\item et le milieu physique situé dans l'état $\boldsymbol{x}_\text{out}$.
+\end{itemize}
+
+Le problème d'optimisation consiste à programmer une fonction de réponse $\phi_\text{in}$ qui, étant donnée une consigne $\boldsymbol{x}^* \in \mathcal{C}$, conduit le milieu physique dans l'état désiré. 
+L'ensemble $\mathcal{C}$,  continu ou discret, est l'ensemble des consignes (ou tâches) possibles.
+
+{\bf Exemple~}: Dans le cas d'un bras mécanique, $\boldsymbol{x}_\text{out}$ peut décrire les coordonnées spatiales d'un effecteur et $\boldsymbol{x}^*$ la position finale désirée.
+
+Soit $\Theta$ un ensemble de paramètres pour décrire la fonction $\phi_\text{in}$. En tenant compte de la dynamique, le problème peut s'exprimer comme~:
+\begin{align}
+\max_{\Theta}  \int_{\boldsymbol{x}^* \in \mathcal{C}} \lim_{t\rightarrow\infty} ||\boldsymbol{x}^* - \boldsymbol{x}_\text{out}(t)||^2 d\boldsymbol{x}^*
+\end{align}
+
+\paragraph{Erreur motrice et erreur de prédiction}
+ La différence $\boldsymbol{x}^* - \boldsymbol{x}_\text{out}(t)$ est appelée l'\textit{erreur motrice}.
+
+ Le principe de contrôle le plus élémentaire  correspond à une commande directement proportionnelle à l'erreur motrice, autrement dit $\boldsymbol{u}(t) \propto \boldsymbol{x}^* - \boldsymbol{x}_\text{out}(t)$. En tenant compte de l'inertie et des temps de réponse, il permet d'obtenir un contrôleur homéostatique stable  (résistant aux perturbations). 
+ 
+ 
+Le cas le plus courant en robotique et en modélisation biologiquement inspirée correspond néanmoins à une situation où l'erreur motrice n'est pas directement observable. Deux cas se présentent~: 
+\begin{enumerate}
+	\item $\boldsymbol{I}= h_\text{in}(\boldsymbol{x}_\text{out})$ est le signal issu des appareils de mesure. Le contrôleur doit, autant que possible, deviner la valeur de l'état, soit $\tilde{\boldsymbol{x}} \simeq h_\text{in}^{-1}(\boldsymbol{I})$ pour produire la commande. On parle de \textit{modèle inverse}.
+	\item Une autre approche consiste à comparer le signal observé au signal attendu  $h_\text{in}(\boldsymbol{x}^*)$. Ce signal attendu n'est pas directement observable. Il peut être \textit{reconstruit} via un \textit{modèle direct}. 
+	\begin{itemize}
+		\item On dit que le modèle effectue une prédiction sensorielle et la différence entre l'entrée prédite et l'entrée attendue est l'\textit{erreur de prédiction}.
+		\item La commande motrice doit être choisie de telles sorte que l'erreur de prédiction (et non plus l'erreur motrice) soit minimisée.
+	\end{itemize}
+\end{enumerate}
+
+
+
+ 
+\paragraph{Espace de la tâche}
+
+	Dans le cadre de problèmes de robotique, on distingue généralement~: 
+	\begin{itemize}
+		\item l'espace de la tâche (par exemple atteindre une certaine position de l'espace  avec l'extrémité du bras)
+		\item et l'espace des articulations, décrivant le détail des positions des éléments mécaniques composant le robot.
+	\end{itemize}	
+	Pour une position finale unique, il existe en général plusieurs configurations des articulations. 
 
 
 	
@@ -2631,27 +2678,6 @@ $\boldsymbol{y} = h_\text{err} (\boldsymbol{x}_\text{out})$
 
 {\color{Cyan} Ajouter quelques remarques sur dynamique lente, dynamique rapide, consigne,...}
 
-\paragraph{Tâche et espace de la tâche}
-
-La théorie du contrôle classique décrit un problème de contrôle comme un problème d'optimisation basé sur~:
-\begin{itemize}
-	\item une consigne, correspondant à un état nominal $\boldsymbol{x}^*$ dans lequel on souhaite voir le milieu physique,
-	\item un contrôleur doté de capteurs et d'actuateurs,
-	\item et le milieu physique situé dans l'état $\boldsymbol{x}_\text{out}$.
-\end{itemize}
-
-Le problème d'optimisation consiste à programmer une fonction de réponse $\phi_\text{in}$ qui, étant donnée une consigne $\boldsymbol{x}^* \in \mathcal{C}$, conduit le milieu physique dans l'état désiré. Soit $\Theta$ un ensemble de paramètres pour décrire la fonction $\phi_\text{in}$. En tenant compte de la dynamique, le problème peut s'exprimer comme~:
-\begin{align}
-\max_{\Theta}  \int_{\boldsymbol{x}^* \in \mathcal{C}} \lim_{t\rightarrow\infty} ||\boldsymbol{x}^* - \boldsymbol{x}_\text{out}(t)||^2 d\boldsymbol{x}^*
-\end{align}
-Dans le cas d'un dispositif mécanique, $\boldsymbol{x}_\text{out}$ décrit par exemple les coordonnées spatiales d'un effecteur et $\boldsymbol{x}^*$ la position finale désirée.
-
-La différence $\boldsymbol{x}^* - \boldsymbol{x}_\text{out}(t)$ est appelée l'\textit{erreur motrice}.
-\begin{itemize}
-\item Dans le cas le plus simple (environnement observable), cette erreur est assimilée au signal d'entrée. 
-
-
-Lorsque l'espace $\mathcal{C}$ est discret, chaque  
 
 {\color{Cyan}
 \begin{itemize}
@@ -2668,7 +2694,9 @@ Etablir le lien conceptuel entre commande motrice et consigne.
 Définir la tâche dans le cadre d'un problème d'optimisation : établir une commande qui conduit le système dasn un état 
 
 \subsection{Approche probabiliste}
+Le problème de l'observation de l'état est donc d'une importance particulière en contrôle puisque la justesse de la commande en dépend. 
 
+{\color{Cyan} Kalman - observateur}
 \paragraph{Modèle de la mesure}
 
 \paragraph{Filtrage adaptatif}
@@ -2698,7 +2726,7 @@ Bien spécifier l'articulation et la complémentarité avec les approches de typ
 
 \subsection{Apprentissage par renforcement (temporal credit assignment)}
 
-Une séance d'apprentisage consiste à effectuer une série de ``choix'' qui orientent
+Une séance d’apprentissage consiste à effectuer une série de ``choix'' qui orientent
 le cours futur de la séance. 
 La tâche n'est plus définie par rapport à la justesse des réponses instantanées, mais par rapport
 à la justesse de ce parcours dans l'espace des trajectoires possibles.
