@@ -521,6 +521,15 @@ et une couche secondaire (ou associative) possédant une dynamique intrinsèque,
 
 L'étude du mécanisme de reconnaissance par ``réduction'' de la dynamique constitue le coeur
 de ma thèse,
+
+
+
+Varela : ``le monde visuel est constitué par l'action''
+
+Sciences du sport : aproche écologique - Gibson. Biophysique.
+La tradition biomécanique de Marseille.
+
+Jirsa : école cybernétique 
 }
 
   
@@ -996,6 +1005,35 @@ le caractère extrêmement inhomogène des réseaux de neurones naturels~:
 	nous posons la question du rôle de ces distributions dans la formation de patrons d'activité (ou modes) variés, supports potentiels
 	d'opérations cognitives. }
 
+{\color{Cyan}{\bf
+	Notion de répertoire dynamique =~ vocabulaire d'un langage =~ expressivité
+	
+	sec. 3.3.1 ~:}
+	\begin{footnotesize}
+    {\it 
+	``Le changement observé suite à la présentation d'un stimulus statique ne correspond pas à 
+	de la multistabilité au sens classique (un système dynamique multistable pouvant converger 
+	vers différents attracteurs pour des conditions initiales différentes).
+	Ici le stimulus fait partie des ``paramètres'' du
+	réseau. Ainsi, chaque stimulus distinct définit système dynamique distinct 
+	convergeant vers un attracteur distinct. 
+	Le fait de modifier le stimulus au cours d'une même simulation 
+	revient à modifier le système dynamique ``en cours de route''. 
+	La réalisation d'une opération (sous la forme d'une réorganisation de la dynamique
+	suite à l'imposition d'un motif statique) repose
+	donc sur un mécanisme différent de celui proposé par Hopfield \shortcite{Hop82}.
+	Il s'agit essentiellement d'une relaxation sous contrainte, chaque
+	stimulus étant l'expression d'une contrainte différente.
+	L'ensemble des réponses aux contraintes statiques possibles constitue le \textit{répertoire 
+		dynamique} du réseau.
+	}\end{footnotesize}''
+	
+	TODO~: tracer une analogie avec 
+	\begin{itemize}
+		\item les systèmes soumis à un signal variant au cours du temps $\rightarrow$ formalisme de Fokker-Planck
+		\item les systèmes soumis à u bruit  
+	\end{itemize}
+}
 
 \subsection{Grands réseaux de neurones aléatoires}
 
@@ -1252,13 +1290,13 @@ voir par exemple \shortcite{Faugeras2009,Cabana2013}. %L'accent sur l'équilibre
 
 %La question de l'homogénéité/hétérogénéité est revenue à l'ordre du jour. Plusieurs papiers récents bla bla...}
 
-\cleardoublepage
-\includepdf[pages=1-2,landscape=true,nup=1x2,scale=1.1,offset= 70 -30]{pdf/2001-neural-proc-letters.pdf}
-\includepdf[pages=3-4,landscape=true,nup=1x2,scale=1.1,offset= -70 -30]{pdf/2001-neural-proc-letters.pdf}
-\includepdf[pages=5-6,landscape=true,nup=1x2,scale=1.1,offset= 70 -30]{pdf/2001-neural-proc-letters.pdf}
-\includepdf[pages=7-8,landscape=true,nup=1x2,scale=1.1,offset= -70 -30]{pdf/2001-neural-proc-letters.pdf}
-\includepdf[pages=9-10,landscape=true,nup=1x2,scale=1.1,offset= 70 -30]{pdf/2001-neural-proc-letters.pdf}
-\includepdf[pages=11-12,landscape=true,nup=1x2,scale=1.1,offset= -70 -30]{pdf/2001-neural-proc-letters.pdf}
+%\cleardoublepage
+%\includepdf[pages=1-2,landscape=true,nup=1x2,scale=1.1,offset= 70 -30]{pdf/2001-neural-proc-letters.pdf}
+%\includepdf[pages=3-4,landscape=true,nup=1x2,scale=1.1,offset= -70 -30]{pdf/2001-neural-proc-letters.pdf}
+%\includepdf[pages=5-6,landscape=true,nup=1x2,scale=1.1,offset= 70 -30]{pdf/2001-neural-proc-letters.pdf}
+%\includepdf[pages=7-8,landscape=true,nup=1x2,scale=1.1,offset= -70 -30]{pdf/2001-neural-proc-letters.pdf}
+%\includepdf[pages=9-10,landscape=true,nup=1x2,scale=1.1,offset= 70 -30]{pdf/2001-neural-proc-letters.pdf}
+%\includepdf[pages=11-12,landscape=true,nup=1x2,scale=1.1,offset= -70 -30]{pdf/2001-neural-proc-letters.pdf}
 
 \cleardoublepage
 \subsection{Criticalité dans les réseaux aléatoires}
@@ -1359,6 +1397,7 @@ utilisées en apprentissage automatique, tels le ``compressive sensing'' \shortc
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     1.2      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\cleardoublepage
 \subsection{Modèles de champ neuronal}\label{sec:NatComp}
 
 La question adressée par le modèle publié en 2004 \shortcite{Dau04} est celle de l'implémentation d'un modèle de champ neuronal (voir section \ref{sec:NField}) sur un support composé
@@ -1418,6 +1457,98 @@ D'autres modèles visant une plus grande fidélité aux processus biologiques
 ont étudié l'effet de délais variables et de patrons de connexion hétérogènes (voir par exemple \shortcite{Roxin2005}),
 et plus généralement l'étude de l'interaction entre délais variables, topographie et dynamique reste un sujet d'actualité 
 en neurosciences computationnelles \shortcite{Voges2012,Lundqvist2012}.
+
+\cleardoublepage
+\subsection{Modèles de la connectivité fonctionnelle large-échelle}
+
+L'apparition récente des techniques de tractographie par tenseurs de diffusion \shortcite{leBihan2001} permet d'analyser 
+la matière blanche du cerveau pour suivre la direction des  faisceaux de fibres. 
+Il est possible d'en déduire un patron de connectivité (le ``connectome'') reliant les principales régions du cortex. 
+Le patron de connectivité issu de cette analyse forme un réseau, constitué par deux matrices, l'une fournissant la distance entre les
+régions connectées, l'autre fournissant le ``poids'' de cette connexion en fonction de la densité de fibres.
+Ce réseau est relativement stable à travers les sujets.
+%Différents indicateurs globaux ont été proposés [CIITATIONS] dont la déviation par rapport 
+%à la moyenne vise à repérer (ou améliorer l'identifications) de pathologies [CITATIONS].
+
+Le connectome offre une vue d'ensemble de l'architecture du cerveau.
+L'analyse du connectome (analyse ``structurelle'')  vient en complément
+de l'analyse des patrons d'activité observés dans l'exercice d'une tâche (analyse fonctionnelle).
+%(les mêmes grandes autoroutes sont présentes)
+Dans le cadre de cette analyse structurelle, 
+plusieurs indicateurs ont été proposées pour distinguer les noeuds les plus centraux (les plus ``importants'')
+des noeuds périphériques. Il est possible de mettre en évidence d'un ``noyau central'' \shortcite{Hagmann2008}  
+regroupant des noeuds médians servant de lien (ou de relais) entre la plupart des autres régions.
+Cet ensemble de noeuds présente des points communs avec le patron d'activité ``par défaut'' observé en imagerie fonctionnelle 
+(l'activité observée lorsque le sujet n'est pas occupé à accomplir une tâche) \shortcite{Raichle2001}. 
+
+En partant de la structure du connectome, nous avons utilisé pour l'activation des noeuds
+différentes variantes du modèle ``à réponse graduelle'' de Hopfield \shortcite{Hopfield1984}, 
+en changeant les caractéristiques du seuil d'activation afin de contrôle le niveau d'activation moyen.
+Ces travaux ont permis de mettre en évidence un nombre très important d'attracteurs dans certaines gammes de paramètres.
+Ainsi, en condition de ``basse température'', le nombre d'attracteurs distincts peut atteindre plusieurs milliers
+(sur un modèle comportant 998 noeuds). %cette prolifération d'attracteurs est un indicateur du caractère 
+L'analyse des ensembles d'attracteurs obtenus permet d'identifier une douzaine de ``modes'' différents, chaque
+mode correspondant à l'activation d'une région anatomique particulière. Ces modes peuvent être comparés aux modules 
+régionaux mis en évidence par une analyse structurelle \shortcite{Hagmann2008} ainsi qu'avec les composants indépendants 
+identifiés sur les signaux fMRI de l'état de repos \shortcite{Damoiseaux2006}.
+
+L'ajout d'un terme de bruit dans l'équation de mise à jour permet de simuler une activité multistable \emph{temporellement}, 
+s'apparentant aux régimes dits de ``dynamique itinérante'' \shortcite{Tsuda92,Kan90},
+et dont les caractéristiques sont plus proches des signaux observés à l'état de repos. 
+Cette multistabilité temporelle conduit fréquemment le réseau vers des régimes d'activité plus simples 
+(noeuds uniformément actifs
+ou inactifs) par dérive lente de l'activité moyenne. 
+Seul un modèle à ``feedback négatif global'' présente une multistabilité temporelle à long terme,
+grâce au contrôle du niveau d'activité  qui empêche d'atteindre les régimes triviaux.
+
+%{\color{Violet}
+
+%{\bf 2011}
+
+%- approche Hopfield / connectome. Adatron pour “connectome inverse”
+
+%{\bf 2012}
+
+%- Connectome-based simulation : multistabilité spatiale et temporelle 
+
+%{\bf 2014}
+
+%- Connectome : identification de patchs à travers les patrons statiques (modele verre de spin). 
+
+%RSN
+
+%DTI
+
+%dualité covariance/causalité. 
+
+%connectivité structurelle / fonctionnelle
+%}
+
+%\cleardoublepage
+%\includepdf[pages=1,offset=70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+%\includepdf[pages=2,offset=-70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+%\includepdf[pages=3,offset=70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+%\includepdf[pages=4,offset=-70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+%\includepdf[pages=5,offset=70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+%\includepdf[pages=6,offset=-70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+%\includepdf[pages=7,offset=70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+%\includepdf[pages=8,offset=-70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+%\includepdf[pages=9,offset=70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+%\includepdf[pages=10,offset=-70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+%\includepdf[pages=11,offset=70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+%\includepdf[pages=12,offset=-70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+%\includepdf[pages=13,offset=70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+%\includepdf[pages=14,offset=-70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+%\includepdf[pages=15,offset=70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+%\includepdf[pages=16,offset=-70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+%\includepdf[pages=17,offset=70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+%\includepdf[pages=18,offset=-70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+%\includepdf[pages=19,offset=70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+%\includepdf[pages=20,offset=-70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+%\includepdf[pages=21,offset=70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+%\includepdf[pages=22,offset=-70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+%\includepdf[pages=23,offset=70 -20]{pdf/2015-PLOS-CB-ann.pdf}
+%\includepdf[pages=24,offset=-70 -20]{pdf/2015-PLOS-CB-ann.pdf}
 
 
 
@@ -2309,20 +2440,20 @@ par un signal extérieur. Le même principe est utilisé, dans une certaine mesu
 proposés par Jun Tani dans les années 90 \cite{Tani2004}, ainsi que dans les modèles de réservoir computing proposés par 
 Maas et Markram \cite{MAASS02,Buonomano2009}.
 
-\cleardoublepage
-\includepdf[pages=1,offset=50 0]{pdf/1998-neural-networks.pdf}
-\includepdf[pages=2,offset=-65 0]{pdf/1998-neural-networks.pdf}
-\includepdf[pages=3,offset=50 0]{pdf/1998-neural-networks.pdf}
-\includepdf[pages=4,offset=-65 0]{pdf/1998-neural-networks.pdf}
-\includepdf[pages=5,offset=50 0]{pdf/1998-neural-networks.pdf}
-\includepdf[pages=6,offset=-65 0]{pdf/1998-neural-networks.pdf}
-\includepdf[pages=7,offset=50 0]{pdf/1998-neural-networks.pdf}
-\includepdf[pages=8,offset=-65 0]{pdf/1998-neural-networks.pdf}
-\includepdf[pages=9,offset=50 0]{pdf/1998-neural-networks.pdf}
-\includepdf[pages=10,offset=-65 0]{pdf/1998-neural-networks.pdf}
-\includepdf[pages=11,offset=50 0]{pdf/1998-neural-networks.pdf}
-\includepdf[pages=12,offset=-65 0]{pdf/1998-neural-networks.pdf}
-\includepdf[pages=13,offset=50 0]{pdf/1998-neural-networks.pdf}
+%\cleardoublepage
+%\includepdf[pages=1,offset=50 0]{pdf/1998-neural-networks.pdf}
+%\includepdf[pages=2,offset=-65 0]{pdf/1998-neural-networks.pdf}
+%\includepdf[pages=3,offset=50 0]{pdf/1998-neural-networks.pdf}
+%\includepdf[pages=4,offset=-65 0]{pdf/1998-neural-networks.pdf}
+%\includepdf[pages=5,offset=50 0]{pdf/1998-neural-networks.pdf}
+%\includepdf[pages=6,offset=-65 0]{pdf/1998-neural-networks.pdf}
+%\includepdf[pages=7,offset=50 0]{pdf/1998-neural-networks.pdf}
+%\includepdf[pages=8,offset=-65 0]{pdf/1998-neural-networks.pdf}
+%\includepdf[pages=9,offset=50 0]{pdf/1998-neural-networks.pdf}
+%\includepdf[pages=10,offset=-65 0]{pdf/1998-neural-networks.pdf}
+%\includepdf[pages=11,offset=50 0]{pdf/1998-neural-networks.pdf}
+%\includepdf[pages=12,offset=-65 0]{pdf/1998-neural-networks.pdf}
+%\includepdf[pages=13,offset=50 0]{pdf/1998-neural-networks.pdf}
 
 %\shortcite{Dau98A} {\bf Daucé, E., Quoy, M., Cessac, B., Doyon, B. and Samuelides, M. (1998) Self-organization and dynamics reduction in recurrent networks : stimulus presentation and learning, Neural Network 11:521-533}
 
@@ -2412,22 +2543,21 @@ d'une partie statique et d'une partie périodique. L'association apprise entre m
 se manifeste alors par un niveau de correlation élévé entre la dynamique induite par les motifs mixtes
 et la dynamique induite par les motifs statiques seuls (les activités étant par contre qualitativement différentes).
 
-\cleardoublepage
-%\includepdf[pages=1,offset=70 -30]{pdf/2002-biological-cyb-ann1.pdf}
-\includepdf[pages=1,offset=70 -30]{pdf/2002-biological-cyb.pdf}
-\includepdf[pages=2,offset=-70 -30]{pdf/2002-biological-cyb.pdf}
-\includepdf[pages=3,offset=70 -30]{pdf/2002-biological-cyb.pdf}
-\includepdf[pages=4,offset=-70 -30]{pdf/2002-biological-cyb.pdf}
-\includepdf[pages=5,offset=70 -30]{pdf/2002-biological-cyb.pdf}
-\includepdf[pages=6,offset=-70 -30]{pdf/2002-biological-cyb.pdf}
-\includepdf[pages=7,offset=70 -30]{pdf/2002-biological-cyb.pdf}
-\includepdf[pages=8,offset=-70 -30]{pdf/2002-biological-cyb.pdf}
-\includepdf[pages=9,offset=70 -30]{pdf/2002-biological-cyb.pdf}
-\includepdf[pages=10,offset=-70 -30]{pdf/2002-biological-cyb.pdf}
-\includepdf[pages=11,offset=70 -30]{pdf/2002-biological-cyb.pdf}
-\includepdf[pages=12,offset=-70 -30]{pdf/2002-biological-cyb.pdf}
-\includepdf[pages=13,offset=70 -30]{pdf/2002-biological-cyb.pdf}
-\includepdf[pages=14,offset=-70 -30]{pdf/2002-biological-cyb.pdf}
+%\cleardoublepage
+%\includepdf[pages=1,offset=70 -30]{pdf/2002-biological-cyb.pdf}
+%\includepdf[pages=2,offset=-70 -30]{pdf/2002-biological-cyb.pdf}
+%\includepdf[pages=3,offset=70 -30]{pdf/2002-biological-cyb.pdf}
+%\includepdf[pages=4,offset=-70 -30]{pdf/2002-biological-cyb.pdf}
+%\includepdf[pages=5,offset=70 -30]{pdf/2002-biological-cyb.pdf}
+%\includepdf[pages=6,offset=-70 -30]{pdf/2002-biological-cyb.pdf}
+%\includepdf[pages=7,offset=70 -30]{pdf/2002-biological-cyb.pdf}
+%\includepdf[pages=8,offset=-70 -30]{pdf/2002-biological-cyb.pdf}
+%\includepdf[pages=9,offset=70 -30]{pdf/2002-biological-cyb.pdf}
+%\includepdf[pages=10,offset=-70 -30]{pdf/2002-biological-cyb.pdf}
+%\includepdf[pages=11,offset=70 -30]{pdf/2002-biological-cyb.pdf}
+%\includepdf[pages=12,offset=-70 -30]{pdf/2002-biological-cyb.pdf}
+%\includepdf[pages=13,offset=70 -30]{pdf/2002-biological-cyb.pdf}
+%\includepdf[pages=14,offset=-70 -30]{pdf/2002-biological-cyb.pdf}
 
 
 %{\color{Violet}
@@ -2479,6 +2609,275 @@ et la dynamique induite par les motifs statiques seuls (les activités étant pa
 
 
 %}
+
+\cleardoublepage
+\subsection{Plasticité dans les réseaux aléatoires équilibrés}
+
+L'étude présentée dans \shortcite{Hen08B} 
+est motivée par de nombreuses observations sur le rôle des oscillations 
+et de la synchronisation dans le fonctionnement du système nerveux
+{\bf!! ref chapitre introduction!!}.
+Les réseaux aléatoires équilibrés offrent, comme on l'a vu, la possibilité de développer des régimes 
+dynamiques plus variés, permettant en particulier la production d'oscillations synchronisées de
+grande amplitude dans certaines configurations.
+Il est intéressant dans ce cadre d'étudier comment la plasticité interagit avec la dynamique de population 
+pour produire des comportements nouveaux, en particulier des oscillations synchronisées.
+
+Plusieurs indicateurs de complexité ont été mis en place pour mesurer la nature de la dynamique spontanée.
+L'analyse du spectre de Fourier ne permet pas d'établir de fréquence caractéristique.
+L'autocorrélogramme du signal moyen montre une décroissance exponentielle caractéristique d'un bruit lissé. 
+Nous utilisons également un indicateur du nombre de degrés de liberté (basé sur l'ACP \shortcite{wright01}) qui montre
+une dimension intrinsèque du signal de l'ordre de 35 pour un réseau de 100 neurones, ce qui indique
+une très faible corrélation entre l'activité des différents neurones.
+Le réseau développe donc un régime de chaos fort.
+
+
+L'application de la STDP conduit la dynamique vers   
+un régime plus simple. La dimension intrinsèque décroît continument jusqu'à atteindre une valeur faible (entre 2 et 3),
+qui caractérise l'entrée dans un régime périodique  \shortcite{Hen08,Hen08B}. Cette
+activité périodique est maintenue de manière asymptotique,
+ce qui confirme l'appartenance de la STDP aux règles de plasticité d'ordre 1.
+La STDP a également un effet régulateur sur le niveau d'activité moyen. Pour
+différents taux d'activité individuels initiaux 
+(entre 50 et 400 Hz), la STDP conduit le système vers un régime où l'activité individuelle est de l'ordre de 200 Hz.
+Le caractère régulateur (homéostatique) de la STDP sur le taux de décharge moyen 
+est une caractéristique connue déjà notée par \shortcite{KEMPTER99}.
+
+L'activité finale est caractérisée par une périodicité intrinsèque marquée,
+de l'ordre de 20 ms (50 Hz). Cette période correspond à environ deux fois le délai moyen \shortcite{Hen08B},
+avec une même séquence d'activation qui se répète en boucle.
+L'effet de simplification et de stabilisation d'un régime périodique 
+dans les réseaux développant activité intrinsèque a été 
+moins souvent noté dans la littérature.
+Il semble ici être le résultat de la capture de régularités présentes dans la dynamique initiale,
+qui se distingue donc d'un pur processus aléatoire.
+La différence entre périodicité globale (50 Hz) et activité individuelle (200 Hz) s'explique par le fait
+que les neurones tirent en moyenne quatre fois par cycle.
+
+L'activité périodique finale est une activité très robuste. 
+Si l'on interrompt l'apprentissage suffisamment tôt, le comportement du réseau permet de séparer l'activité
+induite par le (ou les) motif(s) appris de celle induite par les autres motifs \shortcite{Hen08}. 
+En optimisant la durée d'apprentissage, une étude (non publiée) montre
+une capacité d'encodage similaire à celle des réseaux continus: le nombre maximal de motifs 
+pouvant induire une réponse spécifique est de l'ordre de 5\% du nombre de neurones dans le réseau.
+
+D'un point de vue computationnel, il n'y a qualitativement pas de différence entre le nouveau modèle et
+l'ancien. Le comportement induit par la STDP ne semble donc pas reposer sur l'ordre ou 
+l'instant de tir des potentiels d'action, mais plutôt sur leur fréquence de décharge.
+Cette étude %sur un réseau équilibré
+%permet de mettre 
+met en évidence un comportement très analogue à celui observé sur le modèle binaire \shortcite{Dau07},
+confirmant la parenté fonctionnelle entre la règle TD et la STDP. La STDP est appliquée uniquement sur les connexions 
+entre neurones excitateurs. Une convergence vers un régime d'oscillations synchronisées avec une période globales de 
+l'ordre de 25 Hz (et une fréquence moyenne individuelle de l'ordre de 200 Hz) est mis en 
+évidence. Il s'agit d'une synchronisation observable au niveau de la population, les activités individuelles
+restant relativement irrégulières et hétérogènes. Une analyse de la plasticité en fonction des délais met en évidence la potentiation des 
+délais longs ($>$ 8 ms) et une dépression des délais intermédiaires (4-8 ms) qui favorise l'entretien du comportement synchronisé (non publié).
+
+%\cleardoublepage
+%\includepdf[pages=1,offset=70 -30]{pdf/2008-NEUROCOMP-ann.pdf}
+%\includepdf[pages=2,offset=-70 -30]{pdf/2008-NEUROCOMP-ann.pdf}
+%\includepdf[pages=3,offset=70 -30]{pdf/2008-NEUROCOMP-ann.pdf}
+%\includepdf[pages=4,offset=-70 -30]{pdf/2008-NEUROCOMP-ann.pdf}
+%\includepdf[pages=5,offset=70 -30]{pdf/2008-NEUROCOMP-ann.pdf}
+
+
+\cleardoublepage
+\subsection{Plasticité et action de population}
+
+Une dernière étude, publiée récemment dans les proceedings d'ESANN \shortcite{Dau14a}, étudie l'effet de la STDP 
+dans un réseau équilibré sous influence d'un signal spatio-temporel. Deux cas sont considérés : signal périodique
+(se répétant toutes les 30 ms) ou signal non-périodique. L'activité spontanée sous influence de ces deux types de signaux
+est qualitativement la même initialement. La plasticité est appliquée 
+dans les deux situations.
+Lorsque le stimulus est apériodique, aucun changement qualitatif n'est observé.
+Lorsque le stimulus est périodique, l'activité devient plus régulière, avec 
+de grandes oscillations (période 16 Hz) observables au niveau de la population.
+Le comportement est assez proche du comportement de grandes oscillations lentes
+obtenu sous influence statique. On observe 
+néanmoins une synchronisation des oscillations du réseau avec la période 
+du stimulus, autrement dit il y a un accrochage de phase de sorte que la période interne (60 ms)
+est exactement le double de la période du signal (30 ms). Ce comportement d'accrochage est assez comparable
+à celui observé sur les réseaux plus simples. Le réseau devient ``réactif'' aux motifs périodiques appris,
+développant une ``action de population'' qui est un analogue global des potentiels
+d'action neuronaux.
+%
+%\cleardoublepage
+%\includepdf[pages=1-2,landscape=true,nup=1x2,scale=1.1,offset= 80 -30]{pdf/2014-esann-A-ann.pdf}
+%\includepdf[pages=3-4,landscape=true,nup=1x2,scale=1.1,offset= -80 -30]{pdf/2014-esann-A-ann.pdf}
+%\includepdf[pages=5-6,landscape=true,nup=1x2,scale=1.1,offset= 80 -30]{pdf/2014-esann-A-ann.pdf}
+
+%{\color{Violet}
+%Fred Henry : Master en 2005.
+
+%bourse these : 
+%juin 2005 Ste Marguerite (initiation de neurocomp)
+
+%These Fred : pb : le lien avec le mouvement?
+
+%* 2005-2006 * 
+
+%oct. 2005 NOLTA - 
+
+%jan 2006 institut H Poincaré - 
+
+%juillet 2006 CNS à Edinbourg (modèle Gaussien du Master)
+
+%* 2006-2007 *
+
+%Dyva en sept 2006 présenté par Fred - idées orientées neural field + colliculus + LIF simple
+
+%oct. 2006 premiere conf. Neurocomp - 
+%idées RL + couche récurrente intermédiaire. 
+%Policy Gradient (Bartlett) = local changes = Hebb/anti-Hebb
+%Idée d'interversion bruit/signal dans les modèles à 2 couches (Gaussiennes centrées?).
+%Illustration avec simu Khepera.
+
+%juin 2007 - NIPS (refusé). 
+%modèle LIF/SRM à courant (avec free mb. potential h). 
+%- Connexions gaussiennes centrées . DELAI FIXE (10 ms)
+%STDP --> activité périodique non synchronisée
+
+%papier EPJ-ST : modèle RL Hebb/anti-Hebb avec terme (1-H) (comme SAB) sur liens excitateurs - separation exc/inh.
+
+%* 2007-2008 *  
+
+%Dyva en sept 2007 (signé Daucé) - poursuite approche RL-PG appliquée aux saccades.
+%(Fred ne participe pas à ce projet)
+
+%ESANN avril 2008 : idem NIPS sauf DELAI VARIABLE (Poisson moy. 10 ms). STDP produit oscillations lentes. entrée = POTENTIEL.
+
+%Tentative publi dans neurocomputing - echec. (calcul plus fin de la ``loading capacity'' - !! sur ordi Centrale only)
+
+%* ATER Lille 2008-2009 *
+
+%oct. 2008 - 2eme Neurocomp. Distinction input courant/input potentiel. differents regimes sont obtenus selon le type
+%d'input / les parametres internes.
+
+%juillet 2009 : CNS - séparation excitateurs/inhib. Plasticité sur exc. seulement. delais variables. effet 
+%stdp sur delais.
+
+%septembre 2009 : suite projet RL. 
+
+%ACI 'temps et cerveau' va de 2002 à 2007 (5 ans???)
+
+%MAPS commence en septembre 2007 (le dossier a été monté en janvier-février 2007)
+
+
+%{\bf 2008}
+%- modèles à 2 couches (strictly excitatory/inhibitory). 
+
+%{\bf 2009}
+
+%- “Free membr. potential” (synaptic input) / modeles ECM à “horizon fini” 
+
+%Mean field
+
+%Mon apport :
+%- Multi-pop
+%- Délais
+%- frontiere
+%- contrib. Reseaux equilibrés --> comportementdes réseaux équilibrés à la frontière
+
+%On-off states?
+
+
+
+%{\bf 2008}
+
+%- Balanced networks et STDP.
+
+%{\bf 2014}
+
+%- population response (population “spike”) avec STDP. Importance des termes de reequilibrage des poids et de la SFA.  Idée de multi-échelle et de detecteur d’information mutuelle à travers l’activité. Idée de STDP comme sequence enhancement.
+
+%UP/DOWN
+
+%Brunel
+
+%Frequences, rythmes, periodicités
+
+
+%}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     2.4      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cleardoublepage
+\subsection{Discrimination de séquences spatio-temporelles}
+
+Les protocoles d'apprentissage présentés jusqu'à présent avaient pour but de 
+former une réponse induite. La forme de la réponse n'était pas 
+fixée à priori et dépendait des caractéristiques du substrat.
+Il n'y avait pas de ``read-out'', il s'agissait juste de produire une dynamique de relaxation qui se 
+conforme à (prenne forme avec) la contrainte imposée, en rendant le réseau plus réactif à certains 
+motifs présentés.
+
+
+Nous considérons ici une architecture 
+à entrées-sorties complète.
+Le réseau possède une couche d'entrée qui 
+transmet passivement le signal, une couche récurrente aléatoire, et une couche de sortie
+constituée dans ce cas de quelques neurones dont la sortie est lue.
+La forme de la réponse induite est imposée par l'expérimentateur,
+de manière supervisée ou semi-supervisée.
+
+La tâche consiste à discriminer quatre motifs spatio-temporels.
+Ces motifs possèdent des éléments en communs, de telles sorte qu'il est impossible de séparer les signaux
+sur la base de l'entrée instantanée.
+Chaque neurone de sortie représente une catégorie.
+La réponse est fixée par le neurone qui émet le premier potentiel d'action suite
+à la présentation du motif.
+
+Le protocole d'apprentissage consiste à présenter les séquences périodiquement, 
+lire les réponses produites, informer le réseau du caractère correct ou incorrect de sa
+réponse et appliquer une règle de plasticité visant à augmenter le taux de réponses correctes, selon
+un principe qui se rapproche de l'apprentissage par renforcement.
+
+L'apprentissage utilise sur les effets symétriques des règles Hebbienne et anti-Hebbienne 
+sur la dynamique des réseaux récurrents aléatoires, montrés dans \shortcite{dauce05}.
+Par exemple, l'anti-STDP (règle miroir de la STDP) a pour effet d'augmenter la complexité
+de la dynamique intrinsèque, soit un effet contraire à la STDP. L'application successive
+de la STDP puis de l'anti-STDP sur un réseau récurrent aléatoire 
+a pour effet de réduire la complexité puis de l'augmenter à nouveau.
+
+L'étude est également une implémentation originale du codage par rang, utilisant un principe 
+concurrent d'avance vs. retard de la réponse.
+Si la réponse est correcte, la STDP est appliquée sur la couche de sortie et sur la couche récurrente,
+ce qui tend à anticiper l'instant de réponse du neurone ayant tiré.
+Si la réponse est incorrecte, c'est l'anti-STDP qui est appliquée, 
+tendant à retarder la réponse.
+Le papier \shortcite{henry07} utilise des signaux temporels très lents, où
+la séquence est composée de 4 motifs durant chacun 100 ms, de sorte qu'une séquence
+complète dure 400 ms. Dans ce cas, le temps nécessaire pour atteindre des taux
+de réussite raisonnables s'exprime en heures (environ 100000 essais).
+Les résultats présentés dans \shortcite{Dau06} utilisent des séquences plus courtes (40 ms).
+Dans ce cas, environ 500 essais suffisent pour obtenir une discrimination parfaite.
+
+La différence de taux d'apprentissage et de taux de réussite s'explique principalement par 
+la différence d'échelle temporelle des séquences à apprendre. La mémoire d'une unité neuronale est de l'ordre de
+sa constante de membrane, soit 10 à 20 ms.
+Néanmoins, à la
+lumière des résultats du chapitre précédent, la plasticité semble 
+capable d'induire suffisamment de régularité dans la dynamique intrinsèque
+pour conserver une mémoire plus importante 
+au sein de la population. La difficulté à discriminer les séquences de 400 ms semble
+néanmoins fixer la limite supérieure de cette capacité (100 ms étant en pratique suffisant 
+pour discriminer deux séquences).
+
+%\cleardoublepage
+%\includepdf[pages=1,offset=70 -30]{pdf/2007-neurocomputing.pdf}
+%\includepdf[pages=2,offset=-70 -30]{pdf/2007-neurocomputing.pdf}
+%\includepdf[pages=3,offset=70 -30]{pdf/2007-neurocomputing.pdf}
+%\includepdf[pages=4,offset=-70 -30]{pdf/2007-neurocomputing.pdf}
+%\includepdf[pages=5,offset=70 -30]{pdf/2007-neurocomputing.pdf}
+%\includepdf[pages=6,offset=-70 -30]{pdf/2007-neurocomputing.pdf}
+%\includepdf[pages=7,offset=70 -30]{pdf/2007-neurocomputing.pdf}
+%\includepdf[pages=8,offset=-70 -30]{pdf/2007-neurocomputing.pdf}
+
+%{\color{Violet}
+%{\bf 2005}
+
 
 
 \chapter{Architectures de contrôle}
@@ -2625,16 +3024,32 @@ La théorie du contrôle classique décrit un problème de contrôle comme un pr
 \end{itemize}
 
 Le problème d'optimisation consiste à programmer une fonction de réponse $\phi_\text{in}$ qui, étant donnée une consigne $\boldsymbol{x}^* \in \mathcal{C}$, conduit le milieu physique dans l'état désiré. 
-L'ensemble $\mathcal{C}$,  continu ou discret, est l'ensemble des consignes (ou tâches) possibles.
+
 
 {\bf Exemple~}: Dans le cas d'un bras mécanique, $\boldsymbol{x}_\text{out}$ peut décrire les coordonnées spatiales d'un effecteur et $\boldsymbol{x}^*$ la position finale désirée.
 
-Soit $\Theta$ un ensemble de paramètres pour décrire la fonction $\phi_\text{in}$. En tenant compte de la dynamique, le problème peut s'exprimer comme~:
+	Dans le cadre de problèmes de robotique, on distingue généralement~: 
+	\begin{itemize}
+		\item l'espace de la tâche (par exemple atteindre une certaine position de l'espace  avec l'extrémité du bras)
+		\item et l'espace des articulations, décrivant le détail des positions des éléments mécaniques composant le robot.
+	\end{itemize}	
+	Pour une position finale unique, il existe en général plusieurs configurations des articulations. 
+	
+	
+\paragraph{}
+Soit $\Theta$ un ensemble de paramètres pour décrire la fonction $\phi_\text{in}$. En considérant principalement des consignes statiques, le problème peut s'exprimer comme~:
 \begin{align}
-\max_{\Theta}  \int_{\boldsymbol{x}^* \in \mathcal{C}} \lim_{t\rightarrow\infty} ||\boldsymbol{x}^* - \boldsymbol{x}_\text{out}(t)||^2 d\boldsymbol{x}^*
+\min_{\Theta}  \int_{\boldsymbol{x}^* \in \mathcal{C}} \lim_{t\rightarrow\infty} ||\boldsymbol{x}^*(t) - \boldsymbol{x}_\text{out}(t)||^2 d\boldsymbol{x}^*
 \end{align}
+où l'ensemble $\mathcal{C}$,  continu ou discret, est l'ensemble des consignes (ou tâches) possibles.
 
-\paragraph{Erreur motrice et erreur de prédiction}
+Une manière plus ``dynamique'' de présenter le problème d'optimisation est :
+\begin{align}
+\min_{\Theta}   \int_{t \in \mathcal{T}} ||\boldsymbol{x}^*(t) - \boldsymbol{x}_\text{out}(t)||^2 dt
+\end{align}
+où 	$\boldsymbol{x}^*(t)$ est une consigne variant au cours du temps.
+
+\subsubsection{Erreur motrice et erreur de prédiction}
  La différence $\boldsymbol{x}^* - \boldsymbol{x}_\text{out}(t)$ est appelée l'\textit{erreur motrice}.
 
  Le principe de contrôle le plus élémentaire  correspond à une commande directement proportionnelle à l'erreur motrice, autrement dit $\boldsymbol{u}(t) \propto \boldsymbol{x}^* - \boldsymbol{x}_\text{out}(t)$. En tenant compte de l'inertie et des temps de réponse, il permet d'obtenir un contrôleur homéostatique stable  (résistant aux perturbations). 
@@ -2646,25 +3061,21 @@ Le cas le plus courant en robotique et en modélisation biologiquement inspirée
 	\item Une autre approche consiste à comparer le signal observé au signal attendu  $h_\text{in}(\boldsymbol{x}^*)$. Ce signal attendu n'est pas directement observable. Il peut être \textit{reconstruit} via un \textit{modèle direct}. 
 	\begin{itemize}
 		\item On dit que le modèle effectue une prédiction sensorielle et la différence entre l'entrée prédite et l'entrée attendue est l'\textit{erreur de prédiction}.
-		\item La commande motrice doit être choisie de telles sorte que l'erreur de prédiction (et non plus l'erreur motrice) soit minimisée.
+		\item La commande motrice doit être choisie de telles sorte que l'erreur de prédiction (et non plus l'erreur motrice) soit minimisée {\color{Orange}[DEAN,FRISTON]}.
+		
+		Le problème devient~:
+	\begin{align}
+	\min_{\Theta}   \int_{t \in \mathcal{T}} ||h_\text{in}( \boldsymbol{x}^*(t)) - \boldsymbol{I}(t)||^2 dt
+	\end{align}	
 	\end{itemize}
 \end{enumerate}
 
 
 
- 
-\paragraph{Espace de la tâche}
-
-	Dans le cadre de problèmes de robotique, on distingue généralement~: 
-	\begin{itemize}
-		\item l'espace de la tâche (par exemple atteindre une certaine position de l'espace  avec l'extrémité du bras)
-		\item et l'espace des articulations, décrivant le détail des positions des éléments mécaniques composant le robot.
-	\end{itemize}	
-	Pour une position finale unique, il existe en général plusieurs configurations des articulations. 
 
 
 	
-\paragraph{Plasticité}
+\subsubsection{Plasticité}
 Nous étudions, comme dans les chapitres précédents, l'apprentissage sous l'angle de la plasticité, en particulier la plasticité synaptique. %La plasticité consiste, comme nous l'avons vu, à appliquer des petits changements aux paramètres de la fonction de réponse du contrôleur.  
 Dans le cadre des modèles de réseaux de neurones, il s'agit essentiellement de modifier les poids synaptiques $J_{ij}$ entre les nœuds du graphe.
 
@@ -2688,7 +3099,7 @@ $\boldsymbol{y} = h_\text{err} (\boldsymbol{x}_\text{out})$
 
 ID identification entre tâche et ``source'' ou ``mode d'action''.
 
-Etablir le lien conceptuel entre commande motrice et consigne.
+Établir le lien conceptuel entre commande motrice et consigne.
 }
 
 Définir la tâche dans le cadre d'un problème d'optimisation : établir une commande qui conduit le système dasn un état 
@@ -2696,7 +3107,22 @@ Définir la tâche dans le cadre d'un problème d'optimisation : établir une co
 \subsection{Approche probabiliste}
 Le problème de l'observation de l'état est donc d'une importance particulière en contrôle puisque la justesse de la commande en dépend. 
 
-{\color{Cyan} Kalman - observateur}
+{\color{Cyan} -le problème de l'observateur
+
+se décline principalement en~:
+\begin{itemize}
+\item Filtre de Kalman
+\item Modèles de Markov cachés
+\end{itemize}
+
+modèles dérivés~:
+\begin{itemize}
+	\item Accroissement d'évidence (mise à jour du posterior)
+		\item RL 
+\end{itemize}
+
+}
+
 \paragraph{Modèle de la mesure}
 
 \paragraph{Filtrage adaptatif}
