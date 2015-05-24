@@ -405,7 +405,7 @@ théorique)...
 
 Les principales avancées sont:
 \begin{itemize}
- \item le système Visuel, Olshausen, les champs récepteurs, les architectures profondes, approche profonde; non-negative matrix factorization.
+ \item le système Visuel, Olshausen, les champs récepteurs, les architectures profondes, approche profonde; non-negative matrix factorization [LEE + SEUNG 1999].
  \item dynamique stochastique, Fokker-Planck, etats de haute conductance, réseaux équilibrés
  \item généralisation des modèles physiques à l'analyse de l'imagerie... Modèles inverses. Friston
  \item STDP et codage par rang
@@ -433,7 +433,7 @@ d'Informatique, d'Hydraulique de Toulouse (ENSEEIHT) en Septembre 2002.
 Ma spécialisation vers les sciences cognitives s'est  tout d'abord faite avec la rencontre en début de troisième année avec Bernard
 Doyon, médecin et chercheur à l'INSERM (Hôpital de Purpan) suite aux assises du Pôle de Recherche en Science 
 Cognitives de Toulouse (PRESCOT), tenues à Labège, les 23 et 24 
-septembre 1994. Bernard Doyon y présentait de façon très accessible l'étude de comportements chaotiques
+septembre 1994. Bernard Doyon y présentait  l'étude de comportements chaotiques
 obtenus par simulation de réseaux de neurones, en faisant le parallèle avec le fonctionnement du cerveau 
 (en particulier avec l'étude des dimensions fractales des signaux électrophysiologiques pour différents états de veille
 et de sommeil, développée à l'époque par l'équipe d'Agnès Babloyantz à Bruxelles \shortcite{Bab85}, ainsi que les travaux
@@ -1279,6 +1279,9 @@ ce dernier régime étant à notre connaissance mis en évidence pour la premiè
 
 Notre étude a donc ouvert la voie à l'étude multi-population systématique des réseaux de neurones à connectivité aléatoire,
 voir par exemple \shortcite{Faugeras2009,Cabana2013}. %L'accent sur l'équilibre dynamique entre populations escitatrice et inhibitrice
+
+{\color{Orange}[CITER SOULA-BESLON] et ECM avec IF neurons}
+
 
 %{\color{Violet}
 %[O. Faugeras, J. Touboul, B. Cessac, “A constructive mean field analysis of multi population neural networks with random synaptic weights and stochastic inputs”, Front. Comput. Neurosci. (2009) 3:1.
@@ -2989,30 +2992,20 @@ Plus précisément~:
     \item {\color{Cyan} On peut compléter l'équation de manière symétrique avec une plasticité de l'environnement représentant la non-stationnarité, l'usure, le vieillissement et toutes sortes de changement ``lents''.}
 \end{enumerate}
 	
-\subsubsection{Apprentissage en boucle fermée}
-	
-Considérons un dispositif logiciel contrôlant un appareil 
-ayant des interactions répétées avec son milieu.
-Dans des environnements complexes où il est difficile de tout prévoir, la machine doit 
-adapter son comportement face aux situations particulières qui se présentent.
-%Ce cahier des charges rejoint l'idée de méta-programme : il s'agit de 
-
-L'apprentissage en boucle fermée consiste à produire des ajustements 
-qui améliorent les interactions du logiciel avec le milieu physique, \textit{en tenant compte des boucles de rétroaction entre les commandes motrices et les signaux sensoriels} \cite{Wiener1965}. 	
-%L'apprentissage en boucle fermée 
-Il consiste à programmer le contrôleur de telle sorte que les actions produites dans le milieu se conforment à un certain nombre de critères (ou contraintes) définis \textit{a priori}.	
-Ces critères peuvent être :
-\begin{itemize}
-	\item le caractère non délétère des actions produites (endommagement du dispositif moteur ou de l'environnement)
-	\item la minimisation de certaine dépenses (consommation énergétique, effort, usure, chauffage des composants, ...)
-	\item la rapidité de la réponse
-	\item la résilience, la capacité à résister aux perturbations (homéostasie)
-	\item la stabilité et la reproductibilité des réponses, la robustesse.
-	\item etc. 
-\end{itemize}
+ 	
+ Le contrôle en boucle fermée \cite{Wiener1965}
+ consiste à programmer le contrôleur de telle sorte que les actions produites dans le milieu se conforment à un certain nombre de critères (ou contraintes) définis \textit{a priori}.	
+ Ces critères peuvent être :
+ \begin{itemize}
+ 	\item le caractère non délétère des actions produites (endommagement du dispositif moteur ou de l'environnement)
+ 	\item la minimisation de certaine dépenses (consommation énergétique, effort, usure, chauffage des composants, ...)
+ 	\item la rapidité de la réponse
+ 	\item la résilience, la capacité à résister aux perturbations (homéostasie)
+ 	\item la stabilité et la reproductibilité des réponses, la robustesse.
+ 	\item etc. 
+ \end{itemize}
 
 Ces problèmes ont été analysés de longue date dans le cadre de la théorie de l'automatique (contrôle linéaire) et de la commande optimale, en particulier sous l'angle de la stabilité de la réponse à la commande et de l'homéostasie {\color{Orange}[REFS]}.
-
 
 \subsubsection{Tâches et problèmes de contrôle}
 
@@ -3028,26 +3021,16 @@ Le problème d'optimisation consiste à programmer une fonction de réponse $\ph
 
 {\bf Exemple~}: Dans le cas d'un bras mécanique, $\boldsymbol{x}_\text{out}$ peut décrire les coordonnées spatiales d'un effecteur et $\boldsymbol{x}^*$ la position finale désirée.
 
-	Dans le cadre de problèmes de robotique, on distingue généralement~: 
+{	\color{Gray}Dans le cadre de problèmes de robotique, on distingue généralement~: 
 	\begin{itemize}
 		\item l'espace de la tâche (par exemple atteindre une certaine position de l'espace  avec l'extrémité du bras)
 		\item et l'espace des articulations, décrivant le détail des positions des éléments mécaniques composant le robot.
 	\end{itemize}	
 	Pour une position finale unique, il existe en général plusieurs configurations des articulations. 
-	
+}
 	
 \paragraph{}
-Soit $\Theta$ un ensemble de paramètres pour décrire la fonction $\phi_\text{in}$. En considérant principalement des consignes statiques, le problème peut s'exprimer comme~:
-\begin{align}
-\min_{\Theta}  \int_{\boldsymbol{x}^* \in \mathcal{C}} \lim_{t\rightarrow\infty} ||\boldsymbol{x}^*(t) - \boldsymbol{x}_\text{out}(t)||^2 d\boldsymbol{x}^*
-\end{align}
-où l'ensemble $\mathcal{C}$,  continu ou discret, est l'ensemble des consignes (ou tâches) possibles.
 
-Une manière plus ``dynamique'' de présenter le problème d'optimisation est :
-\begin{align}
-\min_{\Theta}   \int_{t \in \mathcal{T}} ||\boldsymbol{x}^*(t) - \boldsymbol{x}_\text{out}(t)||^2 dt
-\end{align}
-où 	$\boldsymbol{x}^*(t)$ est une consigne variant au cours du temps.
 
 \subsubsection{Erreur motrice et erreur de prédiction}
  La différence $\boldsymbol{x}^* - \boldsymbol{x}_\text{out}(t)$ est appelée l'\textit{erreur motrice}.
@@ -3061,51 +3044,50 @@ Le cas le plus courant en robotique et en modélisation biologiquement inspirée
 	\item Une autre approche consiste à comparer le signal observé au signal attendu  $h_\text{in}(\boldsymbol{x}^*)$. Ce signal attendu n'est pas directement observable. Il peut être \textit{reconstruit} via un \textit{modèle direct}. 
 	\begin{itemize}
 		\item On dit que le modèle effectue une prédiction sensorielle et la différence entre l'entrée prédite et l'entrée attendue est l'\textit{erreur de prédiction}.
-		\item La commande motrice doit être choisie de telles sorte que l'erreur de prédiction (et non plus l'erreur motrice) soit minimisée {\color{Orange}[DEAN,FRISTON]}.
-		
-		Le problème devient~:
-	\begin{align}
-	\min_{\Theta}   \int_{t \in \mathcal{T}} ||h_\text{in}( \boldsymbol{x}^*(t)) - \boldsymbol{I}(t)||^2 dt
-	\end{align}	
+	
 	\end{itemize}
 \end{enumerate}
 
+\paragraph{Remarque~:} Il est possible d'établir une analogie entre consigne et programme. Une consigne s'apparente plus précisément à un \textit{programme moteur} qui conditionne la manière dont le contrôleur traite ses entrées sensorielles~: pour deux consignes différentes, les mêmes entrées sensorielles ne produisent pas la même réponse.  
 
+\subsubsection{Facteurs exogènes}
 
+Le problème de l'observation de l'état est donc d'une importance particulière en contrôle puisque la justesse de la commande en dépend. 
 
-
-	
-\subsubsection{Plasticité}
-Nous étudions, comme dans les chapitres précédents, l'apprentissage sous l'angle de la plasticité, en particulier la plasticité synaptique. %La plasticité consiste, comme nous l'avons vu, à appliquer des petits changements aux paramètres de la fonction de réponse du contrôleur.  
-Dans le cadre des modèles de réseaux de neurones, il s'agit essentiellement de modifier les poids synaptiques $J_{ij}$ entre les nœuds du graphe.
-
-En reprenant les notations proposées dans les chapitres précédents (e.g. les équations (\ref{eq:SD-plast-x}) et (\ref{eq:SD-plast-J})), la matrice $\boldsymbol{J}$ décrit les poids du réseau de neurones et l'évolution de cette matrice au cours du temps est donnée par~:
+L'estimation d’état dépend principalement de deux facteurs: le modèle physico-mécanique de l'environnement, et le modèle des capteurs. 
+Ces modèles sont souvent incomplets  et les facteurs non pris en compte (frottements, inertie, fatigue des composants, non-stationnarités, variations d'éclairage, bruit de mesure, fiabilité des capteurs, ...) sont modélisés comme des signaux extérieurs venant moduler de façon imprévisible le comportement du système. 
+ 
+Ces facteurs exogènes sont modélisés comme des signaux
+venant influencer le système, mais n'étant pas influencés par lui.   
+L'équation de mise à jour devient~:
 \begin{align}
-&\boldsymbol{x}_\text{out}' = \phi_\text{out}(\boldsymbol{x}_ \text{out},h_\text{out}(\boldsymbol{x}_\text{in})) \label{eq:SD-closed-plast-out}\\ &\boldsymbol{x}_\text{in}' = \phi_\text{in}(\boldsymbol{x}_ \text{in},h_\text{in}(\boldsymbol{x}_\text{out}),\boldsymbol{J}) \label{eq:SD-closed-plast-in}\\
- &\boldsymbol{J}' = \psi(\boldsymbol{x}_\text{in},\boldsymbol{J},\boldsymbol{y}) \label{eq:SD-closed-J}
+&\boldsymbol{x}_\text{out}' = \phi_\text{out}(\boldsymbol{x}_\text{out},\boldsymbol{u},\boldsymbol{\xi}_\text{out}) \label{eq:feed-noise-1} \\
+&\boldsymbol{I} = h_\text{in}(\boldsymbol{x}_\text{out},\boldsymbol{\chi}_\text{out}) \label{eq:feed-noise-2}\\
+&\boldsymbol{x}_\text{in}' = \phi_\text{in}(\boldsymbol{x}_\text{in},\boldsymbol{I},\boldsymbol{\xi}_\text{in}) \label{eq:feed-noise-3} \\
+&\boldsymbol{u} = h_\text{out}(\boldsymbol{x}_\text{in},\boldsymbol{\chi}_\text{in}) \label{eq:feed-noise-4}
 \end{align}
-avec $\boldsymbol{y}$ une consigne éventuellement déduite d'une observation, i.e. 
-$\boldsymbol{y} = h_\text{err} (\boldsymbol{x}_\text{out})$
+où les entrées $\boldsymbol{\xi}_\text{out}(t)$, $\boldsymbol{\chi}_\text{out}(t)$, $\boldsymbol{\xi}_\text{in}(t)$, $\boldsymbol{\chi}_\text{in}(t)$ représentent les écarts entre le modèle et la ``réalité''. 
 
-{\color{Cyan} Ajouter quelques remarques sur dynamique lente, dynamique rapide, consigne,...}
-
-
-{\color{Cyan}
-\begin{itemize}
-	\item système commandé
-	\item rétroaction, homéostasie
-	\item consigne, commande, point d'opération (tâche)
-\end{itemize}
-
-ID identification entre tâche et ``source'' ou ``mode d'action''.
-
-Établir le lien conceptuel entre commande motrice et consigne.
-}
-
-Définir la tâche dans le cadre d'un problème d'optimisation : établir une commande qui conduit le système dasn un état 
 
 \subsection{Approche probabiliste}
-Le problème de l'observation de l'état est donc d'une importance particulière en contrôle puisque la justesse de la commande en dépend. 
+
+
+
+Les écarts entre le modèle et les observations sont fréquemment modélisés comme des \textit{bruits}, issus de tirages aléatoires indépendant de la dynamique d'état, où~:
+\begin{itemize}
+	\item  $\boldsymbol{\xi}_\text{in}(t)$ et $\boldsymbol{\xi}_\text{out}(t)$ sont les bruits d'état.
+	\item  $\boldsymbol{\chi}_\text{in}(t)$ et $\boldsymbol{\chi}_\text{out}(t)$ sont les bruits de mesure.
+\end{itemize}  
+Les équations (\ref{eq:feed-noise-1}-\ref{eq:feed-noise-4}) décrivent alors la réalisation d'un processus stochastique reposant sur, d'une part, des modèles d'état (les variables ``porteuses'' de signal \--- ou d'information) et d'autre part des modèles de bruit (variables ``porteuses'' de bruit).
+
+
+\subsubsection{Filtrage}
+
+Le problème de filtrage consiste principalement à séparer le signal du bruit, à l'aide de la connaissance (ou \textit{a priori}) représenté par le modèle d'état.
+
+Soit $\boldsymbol{I}(t)$ le signal disponible sur les capteurs . Il s'agit d'estimer le mieux possible l'état extérieur \--- ou état ``caché'' $\boldsymbol{x}_\text{out}(t)$. Autrement dit il s'agit de soustraire du signal les bruits ($\boldsymbol{\xi}_\text{out}(t), \boldsymbol{\chi}_\text{out}(t)$), connaissant leurs caractéristiques statistiques.
+
+
 
 {\color{Cyan} -le problème de l'observateur
 
@@ -3131,12 +3113,84 @@ modèles dérivés~:
 
 \paragraph{Modèle inverse et modèle direct}
 
+\subsection{Apprentissage en boucle fermée}
+
+{\color{Gray} Considérons un dispositif logiciel contrôlant un appareil 
+ayant des interactions répétées avec son milieu.
+Dans des environnements complexes où il est difficile de tout prévoir, la machine doit 
+adapter son comportement face aux situations particulières qui se présentent.
+%Ce cahier des charges rejoint l'idée de méta-programme : il s'agit de 
+}
+
+
+
+L'apprentissage en boucle fermée consiste à produire des ajustements 
+qui améliorent les interactions du logiciel avec le milieu physique, en tenant compte des boucles de rétroaction entre les commandes motrices et les signaux sensoriels.
+
+{\color{Orange} Il s'agit d'une certaine façon d'améliorer le modèle de manière à prendre en compte les facteurs exogènes non modélisés.}
+
+Soit $\Theta$ un ensemble de paramètres pour décrire la fonction $\phi_\text{in}$. En considérant principalement des consignes statiques, le problème peut s'exprimer comme~:
+\begin{align}
+\min_{\Theta}  \int_{\mathcal{C}} \lim_{t\rightarrow\infty} ||\boldsymbol{x}^* - \boldsymbol{x}_\text{out}(t)||^2 d\boldsymbol{x}^*
+\end{align}
+où l'ensemble $\mathcal{C}$,  continu ou discret, est l'ensemble des consignes (ou tâches) possibles.
+
+Une manière plus ``dynamique'' de présenter le problème d'optimisation est :
+\begin{align}
+\min_{\Theta}   \int_{\mathbb{R}^+} ||\boldsymbol{x}^*(t) - \boldsymbol{x}_\text{out}(t)||^2 dt
+\end{align}
+où 	$\boldsymbol{x}^*(t)$ est une consigne variant au cours du temps.
+
+	Un autre problème consiste à choisir une commande motrice telle que l'erreur de prédiction (et non plus l'erreur motrice) soit minimisée {\color{Orange}[DEAN,FRISTON]}.
+	
+	Le problème devient~:
+	\begin{align}
+	\min_{\Theta}   \int_{t \in \mathcal{T}} ||h_\text{in}( \boldsymbol{x}^*(t)) - \boldsymbol{I}(t)||^2 dt
+	\end{align}	
+	
+	
+
+
+\subsubsection{Apprentissage sans consigne}
+
+{\color{Cyan} Tout l'AR}
+
+\subsubsection{Plasticité}
+Nous étudions, comme dans les chapitres précédents, l'apprentissage sous l'angle de la plasticité, en particulier la plasticité synaptique. %La plasticité consiste, comme nous l'avons vu, à appliquer des petits changements aux paramètres de la fonction de réponse du contrôleur.  
+Dans le cadre des modèles de réseaux de neurones, il s'agit essentiellement de modifier les poids synaptiques $J_{ij}$ entre les nœuds du graphe.
+
+En reprenant les notations proposées dans les chapitres précédents (e.g. les équations (\ref{eq:SD-plast-x}) et (\ref{eq:SD-plast-J})), la matrice $\boldsymbol{J}$ décrit les poids du réseau de neurones et l'évolution de cette matrice au cours du temps est donnée par~:
+\begin{align}
+&\boldsymbol{x}_\text{out}' = \phi_\text{out}(\boldsymbol{x}_ \text{out},h_\text{out}(\boldsymbol{x}_\text{in})) \label{eq:SD-closed-plast-out}\\ &\boldsymbol{x}_\text{in}' = \phi_\text{in}(\boldsymbol{x}_ \text{in},h_\text{in}(\boldsymbol{x}_\text{out}),\boldsymbol{J}) \label{eq:SD-closed-plast-in}\\
+&\boldsymbol{J}' = \psi(\boldsymbol{x}_\text{in},\boldsymbol{J},\boldsymbol{y}) \label{eq:SD-closed-J}
+\end{align}
+avec $\boldsymbol{y}$ une consigne éventuellement déduite d'une observation, i.e. 
+$\boldsymbol{y} = h_\text{err} (\boldsymbol{x}_\text{out})$
+
+{\color{Cyan} Ajouter quelques remarques sur dynamique lente, dynamique rapide, consigne,...}
+
+
+{\color{Cyan}
+	\begin{itemize}
+		\item système commandé
+		\item rétroaction, homéostasie
+		\item consigne, commande, point d'opération (tâche)
+	\end{itemize}
+	
+	ID identification entre tâche et ``source'' ou ``mode d'action''.
+	
+	Établir le lien conceptuel entre commande motrice et consigne.
+}
 
 \section{Notions spécifiques et propositions}
 
 L'activité récurrente produit du signal (et crée de la nouveauté). 
 
 L'agent organise l'environnement. 
+
+Commande invariante
+
+
 
 \subsection{Commande et signal}
 
