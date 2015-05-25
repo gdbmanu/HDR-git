@@ -3101,7 +3101,7 @@ Le problème de filtrage consiste principalement à séparer le signal du bruit,
 
 Soit $\boldsymbol{I}(t)$ le signal disponible sur les capteurs. Il s'agit d'estimer le mieux possible l'état extérieur \--- ou état ``caché'' $\boldsymbol{x}_\text{out}(t)$. Autrement dit il s'agit de soustraire du signal les bruits ($\boldsymbol{\xi}_\text{out}(t), \boldsymbol{\chi}_\text{out}(t)$), connaissant leurs caractéristiques statistiques.
 
-Le filtrage utilise un \textit{modèle interne}, qui est un processus miroir de l'environnement, dans lequel la variable d'état \textit{interne} $\boldsymbol{x}_\text{in}$ évolue en ``imitant'' l'environnement. On note dans ce cas $\boldsymbol{x}_\text{in}=\tilde{\boldsymbol{x}}_\text{out}$ cette estimation, sur laquelle le contrôleur s'appuie pour choisir sa commande.
+Le filtrage utilise un \textit{modèle interne}, qui est un processus miroir de l'environnement, dans lequel la variable d'état \textit{interne} $\boldsymbol{x}_\text{in}$ évolue en ``imitant'' l'environnement. On note dans ce cas $\tilde{\boldsymbol{x}}_\text{out}=\boldsymbol{x}_\text{in}$ cette estimation, sur laquelle le contrôleur s'appuie pour choisir sa commande.
 
 
 
@@ -3112,49 +3112,48 @@ Il s'agit donc de produire la meilleure estimation \textit{à chaque instant} de
 \paragraph{Dynamique interne} 
 Dans le cadre des modèles de filtrage, l'état interne tel que défini dans l'équation (\ref{eq:SD-closed-in}) est le résultat d'un processus \textit{récurrent} reposant
 \begin{itemize} 
-	\item sur des facteurs internes représentée par la probabilité a priori 
+	\item sur des facteurs internes représentés par la probabilité a priori 
 $P(\boldsymbol{x}_{t+1}|\boldsymbol{x}_t,\boldsymbol{u}_t)$ 
 	\item sur des facteurs externes représentés par la vraisemblance $ Q(\boldsymbol{I}_t|\boldsymbol{x}_t)$
 \end{itemize}
-L'évolution de l'état repose sur a formule de Bayes (\ref{eq:bayes}), soit le maximum a posteriori en tenant compte des estimations précédentes.  En prenant en compte de deux critères, on peut définir une dynamique sur la distribution comme~:
+où les indices représentent le temps en notation discrète.
+
+L'évolution de l'état repose sur a formule de Bayes (\ref{eq:bayes}), soit le maximum a posteriori en tenant compte des estimations précédentes.  En prenant en compte les deux critères, on peut définir une dynamique sur la distribution comme~:
 \begin{align}
-& f(\boldsymbol{x}_0) = f_0(\boldsymbol{x}_0)\\
-& P'(\boldsymbol{x}_{t+1}|\boldsymbol{x}_{0:t},\boldsymbol{I}_{1:t},\boldsymbol{u}_{1:t}) = P(\boldsymbol{x}_{t+1}|\boldsymbol{x}_t,\boldsymbol{u}_t) f(\boldsymbol{x}_t|\boldsymbol{x}_{0:t-1},\boldsymbol{I}_{1:t},\boldsymbol{u}_{1:t-1})  \\
-& f(\boldsymbol{x}_{t+1}|\boldsymbol{x}_{0:t},\boldsymbol{I}_{1:t+1},\boldsymbol{u}_{1:t}) = \frac{P'(\boldsymbol{x}_{t+1}|\boldsymbol{x}_{0:t},\boldsymbol{I}_{1:t},\boldsymbol{u}_{1:t}) Q(\boldsymbol{I}_{t+1}|\boldsymbol{x}_{t+1})}{\int_{\mathcal{X}}P'(\boldsymbol{y}|\boldsymbol{x}_{0:t},\boldsymbol{I}_{1:t},\boldsymbol{u}_{1:t}) Q(\boldsymbol{I}_{t+1}|\boldsymbol{y})d\boldsymbol{y}}
+& f(\tilde{\boldsymbol{x}}_0) = f_0(\tilde{\boldsymbol{x}}_0)\\
+& g(\tilde{\boldsymbol{x}}_{t+1}|\tilde{\boldsymbol{x}}_{0:t},\boldsymbol{I}_{1:t},\boldsymbol{u}_{1:t}) \propto P(\tilde{\boldsymbol{x}}_{t+1}|\tilde{\boldsymbol{x}}_t,\boldsymbol{u}_t) f(\tilde{\boldsymbol{x}}_t|\tilde{\boldsymbol{x}}_{0:t-1},\boldsymbol{I}_{1:t},\boldsymbol{u}_{1:t-1}) \label{eq:accum-1} \\
+& f(\tilde{\boldsymbol{x}}_{t+1}|\tilde{\boldsymbol{x}}_{0:t},\boldsymbol{I}_{1:t+1},\boldsymbol{u}_{1:t}) \propto
+Q(\boldsymbol{I}_{t+1}|\tilde{\boldsymbol{x}}_{t+1}) g(\tilde{\boldsymbol{x}}_{t+1}|\tilde{\boldsymbol{x}}_{0:t},\boldsymbol{I}_{1:t},\boldsymbol{u}_{1:t})  \label{eq:accum-2}
 \end{align}
+où les termes de normalisation ont été omis, avec  $\tilde{\boldsymbol{x}}_{0:t}$ représentant une trajectoire particulière du processus stochastique et les densités de probabilité $f$ et $g$ portent sur l'espace d'états $\mathcal{X}$ du processus externe.
  
+Le jeu d'équations (\ref{eq:accum-1}-\ref{eq:accum-2}) forme une équation d'\textit{observation} où la nouvelle estimation  $f(\tilde{\boldsymbol{x}}_{t+1}|\tilde{\boldsymbol{x}}_{0:t},\boldsymbol{I}_{1:t+1},\boldsymbol{u}_{1:t})$ se déduit de l'estimation précédente $f(\tilde{\boldsymbol{x}}_t|\tilde{\boldsymbol{x}}_{0:t-1},\boldsymbol{I}_{1:t},\boldsymbol{u}_{1:t-1})$ et de l'observation des nouveaux signaux $\boldsymbol{u}_t$ et $\boldsymbol{I}_{t+1}$. L'espace $\mathcal{X}$ est appelé l'espace des \textit{sources} de l'observation.
+
+\paragraph{Erreur de prédiction}
+L'équation (\ref{eq:accum-1}) représente la première étape de l'estimation aboutissant à une prédiction ``interne''  sur l'espace des sources. Cette prédiction est combinée (eq. \ref{eq:accum-2}) à la vraisemblance $Q$ , qui peut être vue comme une prédiction ``inverse'' sur l'espace des sources. 
+L'écart entre les deux distributions est l'\textit{erreur de prédiction}, également appelée \textit{innovation} \cite{Kalman1960}. Les différences de variance entre les distributions permettent de privilégier l'un ou l'autre selon que le bruit d'état ou le bruit de mesure dominent le processus d'observation.
+
+\paragraph{Remarques~:}
+\begin{itemize}
+	\item 
+	\item Dans le cas de modélisation par processus gaussiens, {\color{Orange} le produit de deux  gaussiennes est une gaussienne }. L'équation d'évolution est remplacée par l'évolution des paramètres de la distribution (moyenne et matrice de variance-covariance). Les modèles de filtrage classique 
+	utilisent l'erreur de {\color{Orange} prédiction sensorielle -- ou prédiction dans l'espace d'état?? (ou ``innovation'') $\boldsymbol{e}_\text{in}(t+dt)=\boldsymbol{I}(t+dt) - h_\text{in}(\boldsymbol{x}'_\text{out}(t+dt))$ pour corriger la prédiction interne. A REPRENDRE}
+	\item Pour des raisons de précision numérique, il est fréquent d'utiliser des logarithme de probabilités au lieu des probabilités elles-mêmes (le produit étant ``remplacé'' par une somme).
+	\item Cas particulier où il n'y a pas de transition d'état. Le processus de mesure seul est filtré, aboutissant à un mécanisme d'\textit{accumulation d'évidence}.
+\end{itemize}
 
 \paragraph{Exemples}~:
 \begin{itemize}
-	\item dans le cas des modèles de Markov cachés,  
+	\item le filtre de Kalman. Le filtre de Kalman [KALMAN1960] utilise un modèle gaussien de bruit, défini par une moyenne et une matrice de variance-covariance {\color{Orange} évoluant au cours du temps} (??).
+	L'environnement est modélisé comme un processus Gaussien soumis à .  
+	\item les modèles de Markov cachés  
+	\item les filtres à particules
 \end{itemize} 
 
 
-La nouvelle estimation  est, dans le cas 
-
-
-un compromis entre $\boldsymbol{x}_\text{out}'$ et $\boldsymbol{x}_\text{out}''$.
-Les modèles de filtrage classique \cite{Kalman1960}
-utilisent l'erreur de prédiction sensorielle (ou ``innovation'') $\boldsymbol{e}_\text{in}(t+dt)=\boldsymbol{I}(t+dt) - h_\text{in}(\boldsymbol{x}'_\text{out}(t+dt))$ pour corriger la prédiction interne. 
 
 
 
-repose donc sur l'écart entre la prédiction et l'observation.
-
- cette estimation repose sur
-
-connaissance du modèle (la manière dont ) 
-
-Globalement, nous avons donc une  
-
-
-Le filtre de Kalman [KALMAN1960] utilise un modèle gaussien de bruit, défini par une moyenne et une matrice de variance-covariance {\color{Orange} évoluant au cours du temps} (??).
-L'environnement est modélisé comme un processus Gaussien soumis à .  
-
- 
-Soit donc $\boldsymbol{x}_\text{out}$ l'état extérieur, modélisé comme une .   
-Cet écart à la moyenne doit être 
-compensé par la connaissance extraite des capteurs. 
 
 {\color{Cyan} -le problème de l'observateur
 
@@ -3215,12 +3214,27 @@ où 	$\boldsymbol{x}^*(t)$ est une consigne variant au cours du temps.
 	\min_{\Theta}   \int_{t \in \mathcal{T}} ||h_\text{in}( \boldsymbol{x}^*(t)) - \boldsymbol{I}(t)||^2 dt
 	\end{align}	
 	
-	
-
 
 \subsubsection{Apprentissage sans consigne}
 
+Avec modèle : la programmation dynamique.
+
+Friston. Rôle de la complexité.
+
+\subsubsection{Apprentissage sans modèle}
+
 {\color{Cyan} Tout l'AR}
+
+
+	Action based. RL classique. Analogie etat caché / valeur (sortie du modele representationnel. L’etat interne ne represente pas l’etat du monde exterieur mais simplement l’avantage qu’on peut en attendre.
+
+Model free -  Policy gradient. Apprentissage direct du repertoire d’actions	
+	
+	
+	-Friston: le reward est un prior sur la solution cherchée.
+	
+	 Rq : le couple (actionneurs + environnement = systeme controllé = domaine extensif - masses en deplacements) est en general connu , c’est à dire qu’on a une connaissance complete. Le couple acteur + critique est l’agent - domaine intensif). 
+
 
 \subsubsection{Plasticité}
 Nous étudions, comme dans les chapitres précédents, l'apprentissage sous l'angle de la plasticité, en particulier la plasticité synaptique. %La plasticité consiste, comme nous l'avons vu, à appliquer des petits changements aux paramètres de la fonction de réponse du contrôleur.  
@@ -3291,7 +3305,7 @@ La tâche n'est plus définie par rapport à la justesse des réponses instantan
 	
 	- l’action vient rectifier une erreur de prediction
 	
-	- le reward est un prior sur la solution cherchée.
+
 	
 	Rq : le concept d’energie libre est repris de Prigogine?.
 	
@@ -3307,7 +3321,7 @@ La tâche n'est plus définie par rapport à la justesse des réponses instantan
 	- exemple typique = apprentissage d’un dictionnaire (base orthonormale ou non). Pb : explosion combinatoire si sequences temporelles ou etats vectoriels (ou combinaison d’etats). Probleme mal posé.
 	modele libre (absence de modele)
 	
-	Action based. RL classique. Analogie etat caché / valeur (sortie du modele representationnel. L’etat interne ne represente pas l’etat du monde exterieur mais simplement l’avantage qu’on peut en attendre. Rq : le couple (actionneurs + environnement = systeme controllé = domaine extensif - masses en deplacements) est en general connu , c’est à dire qu’on a une connaissance complete. Le couple acteur + critique est l’agent - domaine intensif). Model free -  Policy gradient. Apprentissage direct du repertoire d’actions
+
 	(hierarchique) - Le prior est le posterior de la couche superieure (projection predictive en feed-back). La vraisemblance est le “matching” entre le signal de la couche inferieure et le filtre (feed-forward). “Bayesian surprise” - innovation = erreur perceptive
 	
 	Le modele libre est distinct du modele search. Ca conduit à l’idée d’information mutuelle sans contrainte d’identité.  
