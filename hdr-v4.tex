@@ -3133,13 +3133,41 @@ Le jeu d'équations (\ref{eq:accum-1}-\ref{eq:accum-2}) forme une équation d'\t
 L'équation (\ref{eq:accum-1}) représente la première étape de l'estimation aboutissant à une prédiction ``interne''  sur l'espace des sources. Cette prédiction est combinée (eq. \ref{eq:accum-2}) à la vraisemblance $Q$ , qui peut être vue comme une prédiction ``inverse'' sur l'espace des sources. 
 L'écart entre les deux distributions est l'\textit{erreur de prédiction}, également appelée \textit{innovation} \cite{Kalman1960}. Les différences de variance entre les distributions permettent de privilégier l'un ou l'autre selon que le bruit d'état ou le bruit de mesure dominent le processus d'observation.
 
+Ce modèle qui combine prédiction interne (récurrente) et correction via les entrées sensorielles et à la base des modèles de la perception. 
+La formulation de Kalman suggère
+une mise à jour de l'état basé sur un \textit{signal de correction}, construit à partir de la différence entre sensation et prédiction sensorielle~:
+ innovation, écart ou ``surprise''.
+
+{\color{Cyan} Idée de base : le signal est l'écart à la prédiction. Ce qui est perçu est ce qui diffère de la prédiction.
+
+Variante~1: prédiction sensorielle (hiérarchique)~: inversion du modèle : l'état interne prédit la perception. Inversion entre priors et posteriors. 
+
+
+Variante 2: Dean et les modèles du cervelet (Ito?). Un contrôleur basique est amélioré en trafiquant son input. 
+}
+
+Karl Friston : ce qui est perçu est principalement l'ecart à la prediction (predictive coding).
+Voir aussi section \ref{sec:filtrage} :
+``Les modèles de la perception basés sur un appariement négatif \shortcite{Rao1999,Friston2009} font disparaître de la scène sensorielle les
+éléments prédits,''
+
+{\color{Cyan}   Dynamical Causal modelling.
+``{\emph Modern reformulations suggest
+	that both inference on states (that is, perception) and
+	inference on parameters (that is, learning) minimize
+	free energy (that is, minimize prediction error) and
+	serve to bound surprising exchanges with the world.}'' (Friston, 2010)
+
+
+}
+
 \paragraph{Remarques~:}
 \begin{itemize}
 	\item 
 	\item Dans le cas de modélisation par processus gaussiens, {\color{Orange} le produit de deux  gaussiennes est une gaussienne }. L'équation d'évolution est remplacée par l'évolution des paramètres de la distribution (moyenne et matrice de variance-covariance). Les modèles de filtrage classique 
 	utilisent l'erreur de {\color{Orange} prédiction sensorielle -- ou prédiction dans l'espace d'état?? (ou ``innovation'') $\boldsymbol{e}_\text{in}(t+dt)=\boldsymbol{I}(t+dt) - h_\text{in}(\boldsymbol{x}'_\text{out}(t+dt))$ pour corriger la prédiction interne. A REPRENDRE}
 	\item Pour des raisons de précision numérique, il est fréquent d'utiliser des logarithme de probabilités au lieu des probabilités elles-mêmes (le produit étant ``remplacé'' par une somme).
-	\item Cas particulier où il n'y a pas de transition d'état. Le processus de mesure seul est filtré, aboutissant à un mécanisme d'\textit{accumulation d'évidence}.
+	\item Cas particulier où il n'y a pas de transition d'état. Le processus de mesure seul est filtré, aboutissant à un mécanisme d'\textit{accumulation d'évidence}. Principe de seuil de détection.
 \end{itemize}
 
 \paragraph{Exemples}~:
@@ -3234,6 +3262,13 @@ Model free -  Policy gradient. Apprentissage direct du repertoire d’actions
 	-Friston: le reward est un prior sur la solution cherchée.
 	
 	 Rq : le couple (actionneurs + environnement = systeme controllé = domaine extensif - masses en deplacements) est en general connu , c’est à dire qu’on a une connaissance complete. Le couple acteur + critique est l’agent - domaine intensif). 
+	 
+\subsubsection{Temporal credit assignment}
+
+Une séance d’apprentissage consiste à effectuer une série de ``choix'' qui orientent
+le cours futur de la séance. 
+La tâche n'est plus définie par rapport à la justesse des réponses instantanées, mais par rapport
+à la justesse de ce parcours dans l'espace des trajectoires possibles.
 
 
 \subsubsection{Plasticité}
@@ -3285,12 +3320,6 @@ Bien spécifier l'articulation et la complémentarité avec les approches de typ
 \subsection{Commande par champ de vecteur (?)}
 
 
-\subsection{Apprentissage par renforcement (temporal credit assignment)}
-
-Une séance d’apprentissage consiste à effectuer une série de ``choix'' qui orientent
-le cours futur de la séance. 
-La tâche n'est plus définie par rapport à la justesse des réponses instantanées, mais par rapport
-à la justesse de ce parcours dans l'espace des trajectoires possibles.
 
 \subsection{Friston}
 
