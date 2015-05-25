@@ -3041,10 +3041,10 @@ Le problème d'optimisation consiste à programmer une fonction de réponse $\ph
 Le cas le plus courant en robotique et en modélisation biologiquement inspirée correspond néanmoins à une situation où l'erreur motrice n'est pas directement observable. Deux cas se présentent~: 
 \begin{enumerate}
 	\item $\boldsymbol{I}= h_\text{in}(\boldsymbol{x}_\text{out})$ est le signal issu des appareils de mesure. Le contrôleur doit, autant que possible, deviner la valeur de l'état, soit $\tilde{\boldsymbol{x}} \simeq h_\text{in}^{-1}(\boldsymbol{I})$ pour produire la commande. On parle de \textit{modèle inverse}.
-	\item Une autre approche consiste à comparer le signal observé au signal attendu  $h_\text{in}(\boldsymbol{x}^*)$. Ce signal attendu n'est pas directement observable. Il peut être \textit{reconstruit} via un \textit{modèle direct}. 
+	\item Une autre approche consiste à comparer le signal observé au signal attendu  $\boldsymbol{I}^* = h_\text{in}(\boldsymbol{x}^*)$. Ce signal attendu n'est pas directement observable. Il peut être \textit{reconstruit} via un \textit{modèle direct}. 
 	\begin{itemize}
 		\item On dit que le modèle effectue une prédiction sensorielle et la différence entre l'entrée prédite et l'entrée attendue est l'\textit{erreur de prédiction}.
-	
+		\item La sortie motrice doit être telle que cette erreur de prédiction sensorielle soit minimisée.
 	\end{itemize}
 \end{enumerate}
 
@@ -3071,23 +3071,90 @@ où les entrées $\boldsymbol{\xi}_\text{out}(t)$, $\boldsymbol{\chi}_\text{out}
 
 \subsection{Approche probabiliste}
 
-
-
 Les écarts entre le modèle et les observations sont fréquemment modélisés comme des \textit{bruits}, issus de tirages aléatoires indépendant de la dynamique d'état, où~:
 \begin{itemize}
-	\item  $\boldsymbol{\xi}_\text{in}(t)$ et $\boldsymbol{\xi}_\text{out}(t)$ sont les bruits d'état.
-	\item  $\boldsymbol{\chi}_\text{in}(t)$ et $\boldsymbol{\chi}_\text{out}(t)$ sont les bruits de mesure.
+	\item  %$\boldsymbol{\xi}_\text{in}(t)$ et
+	 $\boldsymbol{\xi}_\text{out}(t)$ est le bruit d'état et $P$ le modèle de transition d'état externe, selon~:
+	 \begin{align}\boldsymbol{x}_\text{out}(t+dt)\sim P(\boldsymbol{X}|\boldsymbol{x}_\text{out}(t),\boldsymbol{u}(t))
+	 \end{align}
+	\item  %$\boldsymbol{\chi}_\text{in}(t)$ et
+	 $\boldsymbol{\chi}_\text{out}(t)$ est le bruit de mesure et $Q$ le modèle de mesure, selon~:
+	 \begin{align}
+	 \boldsymbol{I}(t)\sim Q(\mathcal{I}|\boldsymbol{x}_\text{out}(t))
+	 \end{align}
 \end{itemize}  
 Les équations (\ref{eq:feed-noise-1}-\ref{eq:feed-noise-4}) décrivent alors la réalisation d'un processus stochastique reposant sur, d'une part, des modèles d'état (les variables ``porteuses'' de signal \--- ou d'information) et d'autre part des modèles de bruit (variables ``porteuses'' de bruit).
 
+Étant donné l'état connu $\boldsymbol{x}_\text{out}(t)$, l'estimation d'état suivant peut être produite à l'aide de la formule de Bayes~:
+\begin{align}\label{eq:bayes}
+\mathbb{P}(\boldsymbol{x}|\boldsymbol{I}(t+dt)) = \frac{P(\boldsymbol{x}|\boldsymbol{x}_\text{out}(t),\boldsymbol{u}(t)) Q(\boldsymbol{I}(t+dt)|\boldsymbol{x})}{\int_{\mathcal{X}}P(\boldsymbol{y}|\boldsymbol{x}_\text{out}(t),\boldsymbol{u}(t)) Q(\boldsymbol{I}(t+dt)|\boldsymbol{y})d\boldsymbol{y}}
+\end{align}  
+où~:
+\begin{itemize}
+	\item $P(\boldsymbol{x}|\boldsymbol{x}_\text{out}(t),\boldsymbol{u}(t))$ est la probabilité \textit{a priori}.
+	\item  $Q(\boldsymbol{I}(t+dt)|\boldsymbol{x})$ est la vraisemblance de l'observation $\boldsymbol{I}$ étant donné $\boldsymbol{x}$. 
+\end{itemize}
 
 \subsubsection{Filtrage}
 
-Le problème de filtrage consiste principalement à séparer le signal du bruit, à l'aide de la connaissance (ou \textit{a priori}) représenté par le modèle d'état.
+Le problème de filtrage consiste principalement à séparer le signal du bruit, à l'aide de la connaissance (ou \textit{a priori}) représentée par les modèles d'état et les modèles de bruit.
 
-Soit $\boldsymbol{I}(t)$ le signal disponible sur les capteurs . Il s'agit d'estimer le mieux possible l'état extérieur \--- ou état ``caché'' $\boldsymbol{x}_\text{out}(t)$. Autrement dit il s'agit de soustraire du signal les bruits ($\boldsymbol{\xi}_\text{out}(t), \boldsymbol{\chi}_\text{out}(t)$), connaissant leurs caractéristiques statistiques.
+Soit $\boldsymbol{I}(t)$ le signal disponible sur les capteurs. Il s'agit d'estimer le mieux possible l'état extérieur \--- ou état ``caché'' $\boldsymbol{x}_\text{out}(t)$. Autrement dit il s'agit de soustraire du signal les bruits ($\boldsymbol{\xi}_\text{out}(t), \boldsymbol{\chi}_\text{out}(t)$), connaissant leurs caractéristiques statistiques.
+
+Le filtrage utilise un \textit{modèle interne}, qui est un processus miroir de l'environnement, dans lequel la variable d'état \textit{interne} $\boldsymbol{x}_\text{in}$ évolue en ``imitant'' l'environnement. On note dans ce cas $\boldsymbol{x}_\text{in}=\tilde{\boldsymbol{x}}_\text{out}$ cette estimation, sur laquelle le contrôleur s'appuie pour choisir sa commande.
 
 
+
+Le problème est principalement celui de compenser la dérive de l'estimation d'état dans le cas de processus aléatoires avec bruit additif (cas où l'écart à la moyenne augmente au cours du temps). 
+Il s'agit donc de produire la meilleure estimation \textit{à chaque instant} de l'état extérieur $\tilde{\boldsymbol{x}}_\text{out}(t+dt)$.
+
+
+\paragraph{Dynamique interne} 
+Dans le cadre des modèles de filtrage, l'état interne tel que défini dans l'équation (\ref{eq:SD-closed-in}) est le résultat d'un processus \textit{récurrent} reposant
+\begin{itemize} 
+	\item sur des facteurs internes représentée par la probabilité a priori 
+$P(\boldsymbol{x}_{t+1}|\boldsymbol{x}_t,\boldsymbol{u}_t)$ 
+	\item sur des facteurs externes représentés par la vraisemblance $ Q(\boldsymbol{I}_t|\boldsymbol{x}_t)$
+\end{itemize}
+L'évolution de l'état repose sur a formule de Bayes (\ref{eq:bayes}), soit le maximum a posteriori en tenant compte des estimations précédentes.  En prenant en compte de deux critères, on peut définir une dynamique sur la distribution comme~:
+\begin{align}
+& f(\boldsymbol{x}_0) = f_0(\boldsymbol{x}_0)\\
+& P'(\boldsymbol{x}_{t+1}|\boldsymbol{x}_{0:t},\boldsymbol{I}_{1:t},\boldsymbol{u}_{1:t}) = P(\boldsymbol{x}_{t+1}|\boldsymbol{x}_t,\boldsymbol{u}_t) f(\boldsymbol{x}_t|\boldsymbol{x}_{0:t-1},\boldsymbol{I}_{1:t},\boldsymbol{u}_{1:t-1})  \\
+& f(\boldsymbol{x}_{t+1}|\boldsymbol{x}_{0:t},\boldsymbol{I}_{1:t+1},\boldsymbol{u}_{1:t}) = \frac{P'(\boldsymbol{x}_{t+1}|\boldsymbol{x}_{0:t},\boldsymbol{I}_{1:t},\boldsymbol{u}_{1:t}) Q(\boldsymbol{I}_{t+1}|\boldsymbol{x}_{t+1})}{\int_{\mathcal{X}}P'(\boldsymbol{y}|\boldsymbol{x}_{0:t},\boldsymbol{I}_{1:t},\boldsymbol{u}_{1:t}) Q(\boldsymbol{I}_{t+1}|\boldsymbol{y})d\boldsymbol{y}}
+\end{align}
+ 
+
+\paragraph{Exemples}~:
+\begin{itemize}
+	\item dans le cas des modèles de Markov cachés,  
+\end{itemize} 
+
+
+La nouvelle estimation  est, dans le cas 
+
+
+un compromis entre $\boldsymbol{x}_\text{out}'$ et $\boldsymbol{x}_\text{out}''$.
+Les modèles de filtrage classique \cite{Kalman1960}
+utilisent l'erreur de prédiction sensorielle (ou ``innovation'') $\boldsymbol{e}_\text{in}(t+dt)=\boldsymbol{I}(t+dt) - h_\text{in}(\boldsymbol{x}'_\text{out}(t+dt))$ pour corriger la prédiction interne. 
+
+
+
+repose donc sur l'écart entre la prédiction et l'observation.
+
+ cette estimation repose sur
+
+connaissance du modèle (la manière dont ) 
+
+Globalement, nous avons donc une  
+
+
+Le filtre de Kalman [KALMAN1960] utilise un modèle gaussien de bruit, défini par une moyenne et une matrice de variance-covariance {\color{Orange} évoluant au cours du temps} (??).
+L'environnement est modélisé comme un processus Gaussien soumis à .  
+
+ 
+Soit donc $\boldsymbol{x}_\text{out}$ l'état extérieur, modélisé comme une .   
+Cet écart à la moyenne doit être 
+compensé par la connaissance extraite des capteurs. 
 
 {\color{Cyan} -le problème de l'observateur
 
@@ -3127,7 +3194,7 @@ adapter son comportement face aux situations particulières qui se présentent.
 L'apprentissage en boucle fermée consiste à produire des ajustements 
 qui améliorent les interactions du logiciel avec le milieu physique, en tenant compte des boucles de rétroaction entre les commandes motrices et les signaux sensoriels.
 
-{\color{Orange} Il s'agit d'une certaine façon d'améliorer le modèle de manière à prendre en compte les facteurs exogènes non modélisés.}
+{\color{Orange} Il s'agit d'une certaine façon d'améliorer le modèle d'état de manière à prendre en compte les facteurs exogènes non modélisés.}
 
 Soit $\Theta$ un ensemble de paramètres pour décrire la fonction $\phi_\text{in}$. En considérant principalement des consignes statiques, le problème peut s'exprimer comme~:
 \begin{align}
