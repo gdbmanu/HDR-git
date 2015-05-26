@@ -3101,12 +3101,12 @@ Le problème de filtrage consiste principalement à séparer le signal du bruit,
 
 Soit $\boldsymbol{I}(t)$ le signal disponible sur les capteurs. Il s'agit d'estimer le mieux possible l'état extérieur \--- ou état ``caché'' $\boldsymbol{x}_\text{out}(t)$. Autrement dit il s'agit de soustraire du signal les bruits ($\boldsymbol{\xi}_\text{out}(t), \boldsymbol{\chi}_\text{out}(t)$), connaissant leurs caractéristiques statistiques.
 
-Le filtrage utilise un \textit{modèle interne}, qui est un processus miroir de l'environnement, dans lequel la variable d'état \textit{interne} $\boldsymbol{x}_\text{in}$ évolue en ``imitant'' l'environnement. On note dans ce cas $\tilde{\boldsymbol{x}}_\text{out}=\boldsymbol{x}_\text{in}$ cette estimation, sur laquelle le contrôleur s'appuie pour choisir sa commande.
+Le filtrage utilise un \textit{modèle interne}, qui est un processus miroir de l'environnement, dans lequel la variable d'état \textit{interne} $\boldsymbol{x}_\text{in}$ évolue en ``imitant'' l'environnement. On note dans ce cas $\hat{\boldsymbol{x}}_\text{out}=\boldsymbol{x}_\text{in}$ cette estimation, sur laquelle le contrôleur s'appuie pour choisir sa commande.
 
 
 
 Le problème est principalement celui de compenser la dérive de l'estimation d'état dans le cas de processus aléatoires avec bruit additif (cas où l'écart à la moyenne augmente au cours du temps). 
-Il s'agit donc de produire la meilleure estimation \textit{à chaque instant} de l'état extérieur $\tilde{\boldsymbol{x}}_\text{out}(t+dt)$.
+Il s'agit donc de produire la meilleure estimation \textit{à chaque instant} de l'état extérieur $\hat{\boldsymbol{x}}_\text{out}(t+dt)$.
 
 
 \paragraph{Dynamique interne} 
@@ -3120,110 +3120,71 @@ où les indices représentent le temps en notation discrète.
 
 L'évolution de l'état repose sur a formule de Bayes (\ref{eq:bayes}), soit le maximum a posteriori en tenant compte des estimations précédentes.  En prenant en compte les deux critères, on peut définir une dynamique sur la distribution comme~:
 \begin{align}
-& f(\tilde{\boldsymbol{x}}_0) = f_0(\tilde{\boldsymbol{x}}_0)\\
-& g(\tilde{\boldsymbol{x}}_{t+1}|\tilde{\boldsymbol{x}}_{0:t},\boldsymbol{I}_{1:t},\boldsymbol{u}_{1:t}) \propto P(\tilde{\boldsymbol{x}}_{t+1}|\tilde{\boldsymbol{x}}_t,\boldsymbol{u}_t) f(\tilde{\boldsymbol{x}}_t|\tilde{\boldsymbol{x}}_{0:t-1},\boldsymbol{I}_{1:t},\boldsymbol{u}_{1:t-1}) \label{eq:accum-1} \\
-& f(\tilde{\boldsymbol{x}}_{t+1}|\tilde{\boldsymbol{x}}_{0:t},\boldsymbol{I}_{1:t+1},\boldsymbol{u}_{1:t}) \propto
-Q(\boldsymbol{I}_{t+1}|\tilde{\boldsymbol{x}}_{t+1}) g(\tilde{\boldsymbol{x}}_{t+1}|\tilde{\boldsymbol{x}}_{0:t},\boldsymbol{I}_{1:t},\boldsymbol{u}_{1:t})  \label{eq:accum-2}
+& f(\hat{\boldsymbol{x}}_0) = f_0(\hat{\boldsymbol{x}}_0)\\
+& g(\hat{\boldsymbol{x}}_{t+1}|\hat{\boldsymbol{x}}_{0:t},\boldsymbol{I}_{1:t},\boldsymbol{u}_{1:t}) \propto P(\hat{\boldsymbol{x}}_{t+1}|\hat{\boldsymbol{x}}_t,\boldsymbol{u}_t) f(\hat{\boldsymbol{x}}_t|\hat{\boldsymbol{x}}_{0:t-1},\boldsymbol{I}_{1:t},\boldsymbol{u}_{1:t-1}) \label{eq:accum-1} \\
+& f(\hat{\boldsymbol{x}}_{t+1}|\hat{\boldsymbol{x}}_{0:t},\boldsymbol{I}_{1:t+1},\boldsymbol{u}_{1:t}) \propto
+Q(\boldsymbol{I}_{t+1}|\hat{\boldsymbol{x}}_{t+1}) g(\hat{\boldsymbol{x}}_{t+1}|\hat{\boldsymbol{x}}_{0:t},\boldsymbol{I}_{1:t},\boldsymbol{u}_{1:t})  \label{eq:accum-2}
 \end{align}
-où les termes de normalisation ont été omis, avec  $\tilde{\boldsymbol{x}}_{0:t}$ représentant une trajectoire particulière du processus stochastique et les densités de probabilité $f$ et $g$ portent sur l'espace d'états $\mathcal{X}$ du processus externe.
+où les termes de normalisation ont été omis, avec  $\hat{\boldsymbol{x}}_{0:t}$ représentant une trajectoire particulière du processus stochastique et les densités de probabilité $f$ et $g$ portent sur l'espace d'états $\mathcal{X}$ du processus externe.
  
-Le jeu d'équations (\ref{eq:accum-1}-\ref{eq:accum-2}) forme une équation d'\textit{observation} où la nouvelle estimation  $f(\tilde{\boldsymbol{x}}_{t+1}|\tilde{\boldsymbol{x}}_{0:t},\boldsymbol{I}_{1:t+1},\boldsymbol{u}_{1:t})$ se déduit de l'estimation précédente $f(\tilde{\boldsymbol{x}}_t|\tilde{\boldsymbol{x}}_{0:t-1},\boldsymbol{I}_{1:t},\boldsymbol{u}_{1:t-1})$ et de l'observation des nouveaux signaux $\boldsymbol{u}_t$ et $\boldsymbol{I}_{t+1}$. L'espace $\mathcal{X}$ est appelé l'espace des \textit{sources} de l'observation.
+Le jeu d'équations (\ref{eq:accum-1}-\ref{eq:accum-2}) forme une équation d'\textit{observation} où la nouvelle estimation  $f(\hat{\boldsymbol{x}}_{t+1}|\hat{\boldsymbol{x}}_{0:t},\boldsymbol{I}_{1:t+1},\boldsymbol{u}_{1:t})$ se déduit de l'estimation précédente $f(\hat{\boldsymbol{x}}_t|\hat{\boldsymbol{x}}_{0:t-1},\boldsymbol{I}_{1:t},\boldsymbol{u}_{1:t-1})$ et de l'observation des nouveaux signaux $\boldsymbol{u}_t$ et $\boldsymbol{I}_{t+1}$. L'espace $\mathcal{X}$ est appelé l'espace des \textit{sources} de l'observation.
 
 \paragraph{Erreur de prédiction}
 L'équation (\ref{eq:accum-1}) représente la première étape de l'estimation aboutissant à une prédiction ``interne''  sur l'espace des sources. Cette prédiction est combinée (eq. \ref{eq:accum-2}) à la vraisemblance $Q$ , qui peut être vue comme une prédiction ``inverse'' sur l'espace des sources. 
 L'écart entre les deux distributions est l'\textit{erreur de prédiction}, également appelée \textit{innovation} \cite{Kalman1960}. Les différences de variance entre les distributions permettent de privilégier l'un ou l'autre selon que le bruit d'état ou le bruit de mesure dominent le processus d'observation.
 
-Ce modèle qui combine prédiction interne (récurrente) et correction via les entrées sensorielles et à la base des modèles de la perception. 
-La formulation de Kalman suggère
-une mise à jour de l'état basé sur un \textit{signal de correction}, construit à partir de la différence entre sensation et prédiction sensorielle~:
- innovation, écart ou ``surprise''.
-
-{\color{Cyan} Idée de base : le signal est l'écart à la prédiction. Ce qui est perçu est ce qui diffère de la prédiction.
-
-Variante~1: prédiction sensorielle (hiérarchique)~: inversion du modèle : l'état interne prédit la perception. Inversion entre priors et posteriors. 
-
-
-Variante 2: Dean et les modèles du cervelet (Ito?). Un contrôleur basique est amélioré en trafiquant son input. 
-}
-
-Karl Friston : ce qui est perçu est principalement l'ecart à la prediction (predictive coding).
-Voir aussi section \ref{sec:filtrage} :
-``Les modèles de la perception basés sur un appariement négatif \shortcite{Rao1999,Friston2009} font disparaître de la scène sensorielle les
-éléments prédits,''
-
-{\color{Cyan}   Dynamical Causal modelling.
-``{\emph Modern reformulations suggest
-	that both inference on states (that is, perception) and
-	inference on parameters (that is, learning) minimize
-	free energy (that is, minimize prediction error) and
-	serve to bound surprising exchanges with the world.}'' (Friston, 2010)
-
-
-}
-
 \paragraph{Remarques~:}
 \begin{itemize}
-	\item 
-	\item Dans le cas de modélisation par processus gaussiens, {\color{Orange} le produit de deux  gaussiennes est une gaussienne }. L'équation d'évolution est remplacée par l'évolution des paramètres de la distribution (moyenne et matrice de variance-covariance). Les modèles de filtrage classique 
-	utilisent l'erreur de {\color{Orange} prédiction sensorielle -- ou prédiction dans l'espace d'état?? (ou ``innovation'') $\boldsymbol{e}_\text{in}(t+dt)=\boldsymbol{I}(t+dt) - h_\text{in}(\boldsymbol{x}'_\text{out}(t+dt))$ pour corriger la prédiction interne. A REPRENDRE}
 	\item Pour des raisons de précision numérique, il est fréquent d'utiliser des logarithme de probabilités au lieu des probabilités elles-mêmes (le produit étant ``remplacé'' par une somme).
-	\item Cas particulier où il n'y a pas de transition d'état. Le processus de mesure seul est filtré, aboutissant à un mécanisme d'\textit{accumulation d'évidence}. Principe de seuil de détection.
+%	\item Dans le cas de modélisation par processus gaussiens, {\color{Orange} le produit de deux  gaussiennes est une gaussienne }. L'équation d'évolution est remplacée par l'évolution des paramètres de la distribution (moyenne et matrice de variance-covariance). Les modèles de filtrage classique 
+%	utilisent l'erreur de {\color{Orange} prédiction sensorielle -- ou prédiction dans l'espace d'état?? (ou ``innovation'') $\boldsymbol{e}_\text{in}(t+dt)=\boldsymbol{I}(t+dt) - h_\text{in}(\boldsymbol{x}'_\text{out}(t+dt))$ pour corriger la prédiction interne. A REPRENDRE}
+
+	\item Un cas particulier important est le modèle sans transition d'état ($\forall t, \boldsymbol{x}_{\text{out}}(t) = \boldsymbol{x}_\text{out}$). Ce cas correspond à des mesures bruitées multiples opérées sur les mêmes données. Le fait de multiplier les observations permet de réduire à chaque mesure l'incertitude sur l'état ``réel'' observé. Ce mécanisme, est appelé d'\textit{accumulation d'évidence}. Dans le cadre de campagnes de mesures, il permet de décider à chaque mesure s'il est nécessaire ou pas d'en effectuer une nouvelle, en fonction d'un seuil de fiabilité fixé \cite{Wald47}.
 \end{itemize}
 
 \paragraph{Exemples}~:
 \begin{itemize}
-	\item le filtre de Kalman. Le filtre de Kalman [KALMAN1960] utilise un modèle gaussien de bruit, défini par une moyenne et une matrice de variance-covariance {\color{Orange} évoluant au cours du temps} (??).
-	L'environnement est modélisé comme un processus Gaussien soumis à .  
-	\item les modèles de Markov cachés  
-	\item les filtres à particules
+	\item Le filtre de Kalman \shortcite{Kalman1960} utilise des modèles de bruit gaussiens, définis par une moyenne et une matrice de variance-covariance. L'environnement est modélisé comme un processus gaussien soumis à une commande extérieure connue.
+	\item Les modèles de chaines de Markov cachés \shortcite{Baum1966} utilisent une représentaton d'état discrète. L'environnement est  une chaîne de Markov connue. Chaque état de la chaîne génère une mesure selon une distribution connue. Le problème consiste principalement, à partir de la mesure, à identifier les transitions d'état (algorithmes forward-backward, de Viterbi,...).   
+	\item Les filtres particulaires \shortcite{Doucet2001} utilisent une approche de Monte Carlo pour échantillonner l'espace d'état du processus externe à chaque instant. Chaque ``particule'' suit la dynamique stochastique du processus externe $P(\hat{\boldsymbol{x}}_{t+1}|\hat{\boldsymbol{x}}_t,\boldsymbol{u}_t)$ et se voit attribuer un score de vraisemblance selon $Q(\boldsymbol{I}_{t+1}|\hat{\boldsymbol{x}}_{t+1})$. 
 \end{itemize} 
-
-
-
-
-
-
-{\color{Cyan} -le problème de l'observateur
-
-se décline principalement en~:
-\begin{itemize}
-\item Filtre de Kalman
-\item Modèles de Markov cachés
-\end{itemize}
-
-modèles dérivés~:
-\begin{itemize}
-	\item Accroissement d'évidence (mise à jour du posterior)
-		\item RL 
-\end{itemize}
-
-}
-
-\paragraph{Modèle de la mesure}
-
-\paragraph{Filtrage adaptatif}
-
-{\color{Cyan} Modèle de l'observateur.}
-
-\paragraph{Modèle inverse et modèle direct}
 
 \subsection{Apprentissage en boucle fermée}
 
-{\color{Gray} Considérons un dispositif logiciel contrôlant un appareil 
-ayant des interactions répétées avec son milieu.
+Nous considérons ici un dispositif logiciel contrôlant un appareil 
+ayant des interactions répétées avec son environnement.
 Dans des environnements complexes où il est difficile de tout prévoir, la machine doit 
 adapter son comportement face aux situations particulières qui se présentent.
 %Ce cahier des charges rejoint l'idée de méta-programme : il s'agit de 
-}
+
+L'apprentissage consiste à modifier au cours du temps le contrôleur décrit par la fonction  $\phi_\text{in}$ (voir eqs. \ref{eq:SD-closed-in} et \ref{eq:feed-noise-3}).
+La fonction $\phi_\text{in}$ est dans ce cadre une fonction paramétrique, décrite par l'ensemble de paramètres $\Theta$.
+Le problème d'apprentissage se présente alors comme un problème d'optimisation, où la mise à jour des paramètres repose sur l'optimisation d'un certain critère $\mathcal{H}$ lié à la qualité du contrôle opéré par le contrôleur.
+
+\begin{align}
+\min_{\Theta}  \mathcal{H}(\theta)
+\end{align}
+
+Le critère de qualité correspond en général à une mesure effectuée sur le dispositif physique en cours d'utilisation, dans le cadre d'une procédure de test ou de calibration.  
 
 
 
-L'apprentissage en boucle fermée consiste à produire des ajustements 
-qui améliorent les interactions du logiciel avec le milieu physique, en tenant compte des boucles de rétroaction entre les commandes motrices et les signaux sensoriels.
+{\color{Gray}L'apprentissage en boucle fermée consiste à produire des ajustements 
+qui améliorent les interactions du logiciel avec le milieu physique, en tenant compte des boucles de rétroaction entre les commandes motrices et les signaux sensoriels.}
 
-{\color{Orange} Il s'agit d'une certaine façon d'améliorer le modèle d'état de manière à prendre en compte les facteurs exogènes non modélisés.}
+Par exemple, selon la perspective du contrôle moteur, l'apprentissage consiste  à mieux prendre en compte les facteurs exogènes non modélisés de manière à améliorer la capacité du modèle à prédire ses entrées.
 
-Soit $\Theta$ un ensemble de paramètres pour décrire la fonction $\phi_\text{in}$. En considérant principalement des consignes statiques, le problème peut s'exprimer comme~:
+
+
+
+
+
+
+
+
+
+
+ En considérant principalement des consignes statiques, le problème peut s'exprimer comme~:
 \begin{align}
 \min_{\Theta}  \int_{\mathcal{C}} \lim_{t\rightarrow\infty} ||\boldsymbol{x}^* - \boldsymbol{x}_\text{out}(t)||^2 d\boldsymbol{x}^*
 \end{align}
@@ -3247,9 +3208,38 @@ où 	$\boldsymbol{x}^*(t)$ est une consigne variant au cours du temps.
 
 Avec modèle : la programmation dynamique.
 
-Friston. Rôle de la complexité.
+
+
+
+\subsubsection{Apprentissage du modèle}
+
+EM
+
+Friston(?). Rôle de la complexité.
+
+{\color{Cyan}   Dynamical Causal modelling.
+	``{\emph Modern reformulations suggest
+		that both inference on states (that is, perception) and
+		inference on parameters (that is, learning) minimize
+		free energy (that is, minimize prediction error) and
+		serve to bound surprising exchanges with the world.}'' (Friston, 2010)
+	
+	
+}
 
 \subsubsection{Apprentissage sans modèle}
+
+
+L'exploration motrice. Babbling.
+
+{\color{Purple} Un tel problème se formule de différentes manières.
+ Une première approche consiste à faire en sorte que le logiciel enrichisse le modèle du monde, 
+ c'est à dire ``acquière des connaissances'' pour mieux prévoir les effets de ses actions sur 
+ son environnement. Cette phase d'acquisition passe par le fait de ``tester'' le produit
+ de ses actions par essai/erreur. Le simple fait de produire une commande arbitraire
+ (aléatoire) permet de tester la conséquence sensorielle de cette commande, qui peut
+ être confrontée au modèle, utile en particulier pour l'apprentissage
+ des contingences sensori-motrices \shortcite{Andry2001}.}
 
 {\color{Cyan} Tout l'AR}
 
@@ -3263,7 +3253,37 @@ Model free -  Policy gradient. Apprentissage direct du repertoire d’actions
 	
 	 Rq : le couple (actionneurs + environnement = systeme controllé = domaine extensif - masses en deplacements) est en general connu , c’est à dire qu’on a une connaissance complete. Le couple acteur + critique est l’agent - domaine intensif). 
 	 
-\subsubsection{Temporal credit assignment}
+{\color{Purple}
+Cette importance de la commande aléatoire dans l'acquisition de connaissance a été formalisé
+dans le cadre de \emph{l'apprentissage par renforcement} \shortcite{SUTTON98}
+Cette approche repose sur la notion de signal de renforcement, qui est un ``méta signal'' 
+dont le rôle est de transformer le manière dont le logiciel traite le signal,
+selon des modalités variées comme la consommation énergétique, l'exposition aux signaux nociceptifs ou bénéfiques, 
+ou encore la réduction d'incertitude.
+Si le milieu contient des éléments nocifs ou aversifs par exemple, l'amélioration 
+peut passer par une augmentation de la sensibilité logicielle à une classe de signaux 
+associés à (ou précurseurs de) la sensation aversive, et à une facilitation des comportements permettant de
+mieux éviter les situations où le signal aversif est présent. 
+La plupart des modèles de renforcement reposent sur des tables de correspondance (``Look-up table''), adaptées
+aux environnements et aux choix d'action discrets, mais souffrent de problèmes
+d'explosion combinatoire dans des environnements continus et/ou complexes.
+
+Les signaux de renforcement (méta-signaux) servent à ``sculpter'' le programme
+au cours des interactions entre le logiciel et son environnement.
+Le programme qui résulte de ces interactions varie 
+selon l'expressivité du substrat (la structure du circuit logique),
+le caractère déterministe ou stochastique des politiques d'exploration
+et enfin le caractère convexe ou non de la tâche. 
+Le choix entre les réponses peut être départagé selon l'espérance de récompense 
+associée à chacune d'elles, mais aussi selon le degré d'incertitude associé, 
+certaines réponses mal connues (ou certaines sources et/ou chemins mal modélisés) pouvant potentiellement apporter des 
+récompenses supérieures. C'est le fameux dilemne ``exploration/exploitation''.
+}
+	 
+\paragraph{Problème du bandit manchot}
+Importance de la commande aléatoire. Dilemme exploration exploitation.	 Bandit.
+	 
+\paragraph{Temporal credit assignment}
 
 Une séance d’apprentissage consiste à effectuer une série de ``choix'' qui orientent
 le cours futur de la séance. 
@@ -3312,16 +3332,50 @@ Commande invariante
 
 En quoi la commande motrice s'apparente à un signal
 
-Production d'information
+Production de signal = activité récurrente autonome. Exemple d'un système coupé de ses entrées temporairement--> possibilité de poursuivre la commande mais risque de dérive.
+
+Production d'information. Commande aléatoire et apprentissage. Babbling (exploration).
+
+Différentes consignes correspondent à différents programmes (manières de traiter l'information).
+
+
 
 Bien spécifier l'articulation et la complémentarité avec les approches de type ``traitement du signal''
 
 
-\subsection{Commande par champ de vecteur (?)}
+\subsection{Modèles biologiques de la perception}
+
+\subsubsection{Filtrage et perception}
+Le modèle qui combine prédiction interne (récurrente) et correction via les entrées sensorielles et à la base des modèles de la perception. 
+La formulation de Kalman suggère
+une mise à jour de l'état basé sur un \textit{signal de correction}, construit à partir de la différence entre sensation et prédiction sensorielle~:
+innovation, écart ou ``surprise''.
+
+{\color{Cyan} Idée de base : le signal est l'écart à la prédiction. Ce qui est perçu est ce qui diffère de la prédiction.
+	
+	Variante~1: prédiction sensorielle (hiérarchique)~: inversion du modèle : l'état interne prédit la perception. Inversion entre priors et posteriors. 
+	
+	
+	Variante 2: Dean et les modèles du cervelet (Ito?). Un contrôleur basique est amélioré en trafiquant son input. 
+}
+
+Karl Friston : ce qui est perçu est principalement l'ecart à la prediction (predictive coding).
+Voir aussi section \ref{sec:filtrage} :
+``Les modèles de la perception basés sur un appariement négatif \shortcite{Rao1999,Friston2009} font disparaître de la scène sensorielle les
+éléments prédits,''
 
 
+\subsubsection{Codage par population}
+
+\subsection{Modèles biologiques de la commande}
+
+\subsubsection{Modèles de la correction motrice}
+
+\subsubsection{Commande par champ de vecteur}
 
 \subsection{Friston}
+
+
 
 {\color{Violet}
 	Ce qu’il faut retenir de Friston :
@@ -3384,6 +3438,8 @@ Bien spécifier l'articulation et la complémentarité avec les approches de typ
 		free energy (that is, minimize prediction error) and
 		serve to bound surprising exchanges with the world.}'' (Friston, 2010)
 }
+
+
 
 \section{Contributions personnelles}
 
