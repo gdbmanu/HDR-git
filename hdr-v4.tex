@@ -3120,14 +3120,14 @@ où les indices représentent le temps en notation discrète.
 
 L'évolution de l'état repose sur a formule de Bayes (\ref{eq:bayes}), soit le maximum a posteriori en tenant compte des estimations précédentes.  En prenant en compte les deux critères, on peut définir une dynamique sur la distribution comme~:
 \begin{align}
-& f(\hat{\boldsymbol{x}}_0) = f_0(\hat{\boldsymbol{x}}_0)\\
-& g(\hat{\boldsymbol{x}}_{t+1}|\hat{\boldsymbol{x}}_{0:t},\boldsymbol{I}_{1:t},\boldsymbol{u}_{1:t}) \propto P(\hat{\boldsymbol{x}}_{t+1}|\hat{\boldsymbol{x}}_t,\boldsymbol{u}_t) f(\hat{\boldsymbol{x}}_t|\hat{\boldsymbol{x}}_{0:t-1},\boldsymbol{I}_{1:t},\boldsymbol{u}_{1:t-1}) \label{eq:accum-1} \\
-& f(\hat{\boldsymbol{x}}_{t+1}|\hat{\boldsymbol{x}}_{0:t},\boldsymbol{I}_{1:t+1},\boldsymbol{u}_{1:t}) \propto
-Q(\boldsymbol{I}_{t+1}|\hat{\boldsymbol{x}}_{t+1}) g(\hat{\boldsymbol{x}}_{t+1}|\hat{\boldsymbol{x}}_{0:t},\boldsymbol{I}_{1:t},\boldsymbol{u}_{1:t})  \label{eq:accum-2}
+& f({\boldsymbol{x}}_0) = f_0({\boldsymbol{x}}_0)\\
+& g({\boldsymbol{x}}_{t+1}|{\boldsymbol{x}}_{0:t},\boldsymbol{I}_{1:t},\boldsymbol{u}_{1:t}) \propto P({\boldsymbol{x}}_{t+1}|{\boldsymbol{x}}_t,\boldsymbol{u}_t) f({\boldsymbol{x}}_t|{\boldsymbol{x}}_{0:t-1},\boldsymbol{I}_{1:t},\boldsymbol{u}_{1:t-1}) \label{eq:accum-1} \\
+& f({\boldsymbol{x}}_{t+1}|{\boldsymbol{x}}_{0:t},\boldsymbol{I}_{1:t+1},\boldsymbol{u}_{1:t}) \propto
+Q(\boldsymbol{I}_{t+1}|{\boldsymbol{x}}_{t+1}) g({\boldsymbol{x}}_{t+1}|{\boldsymbol{x}}_{0:t},\boldsymbol{I}_{1:t},\boldsymbol{u}_{1:t})  \label{eq:accum-2}
 \end{align}
-où les termes de normalisation ont été omis, avec  $\hat{\boldsymbol{x}}_{0:t}$ représentant une trajectoire particulière du processus stochastique et les densités de probabilité $f$ et $g$ portent sur l'espace d'états $\mathcal{X}$ du processus externe.
+où les termes de normalisation ont été omis, avec  ${\boldsymbol{x}}_{0:t}$ représentant une trajectoire particulière du processus stochastique et les densités de probabilité $f$ et $g$ portent sur l'espace d'états $\mathcal{X}$ du processus externe.
  
-Le jeu d'équations (\ref{eq:accum-1}-\ref{eq:accum-2}) forme une équation d'\textit{observation} où la nouvelle estimation  $f(\hat{\boldsymbol{x}}_{t+1}|\hat{\boldsymbol{x}}_{0:t},\boldsymbol{I}_{1:t+1},\boldsymbol{u}_{1:t})$ se déduit de l'estimation précédente $f(\hat{\boldsymbol{x}}_t|\hat{\boldsymbol{x}}_{0:t-1},\boldsymbol{I}_{1:t},\boldsymbol{u}_{1:t-1})$ et de l'observation des nouveaux signaux $\boldsymbol{u}_t$ et $\boldsymbol{I}_{t+1}$. L'espace $\mathcal{X}$ est appelé l'espace des \textit{sources} de l'observation.
+Le jeu d'équations (\ref{eq:accum-1}-\ref{eq:accum-2}) forme une équation d'\textit{observation} où la nouvelle estimation  $f({\boldsymbol{x}}_{t+1}|{\boldsymbol{x}}_{0:t},\boldsymbol{I}_{1:t+1},\boldsymbol{u}_{1:t})$ se déduit de l'estimation précédente $f({\boldsymbol{x}}_t|{\boldsymbol{x}}_{0:t-1},\boldsymbol{I}_{1:t},\boldsymbol{u}_{1:t-1})$ et de l'observation des nouveaux signaux $\boldsymbol{u}_t$ et $\boldsymbol{I}_{t+1}$. L'espace $\mathcal{X}$ est appelé l'espace des \textit{sources} de l'observation.
 
 \paragraph{Erreur de prédiction}
 L'équation (\ref{eq:accum-1}) représente la première étape de l'estimation aboutissant à une prédiction ``interne''  sur l'espace des sources. Cette prédiction est combinée (eq. \ref{eq:accum-2}) à la vraisemblance $Q$ , qui peut être vue comme une prédiction ``inverse'' sur l'espace des sources. 
@@ -3146,7 +3146,7 @@ L'écart entre les deux distributions est l'\textit{erreur de prédiction}, éga
 \begin{itemize}
 	\item Le filtre de Kalman \shortcite{Kalman1960} utilise des modèles de bruit gaussiens, définis par une moyenne et une matrice de variance-covariance. L'environnement est modélisé comme un processus gaussien soumis à une commande extérieure connue.
 	\item Les modèles de chaines de Markov cachés \shortcite{Baum1966} utilisent une représentaton d'état discrète. L'environnement est  une chaîne de Markov connue. Chaque état de la chaîne génère une mesure selon une distribution connue. Le problème consiste principalement, à partir de la mesure, à identifier les transitions d'état (algorithmes forward-backward, de Viterbi,...).   
-	\item Les filtres particulaires \shortcite{Doucet2001} utilisent une approche de Monte Carlo pour échantillonner l'espace d'état du processus externe à chaque instant. Chaque ``particule'' suit la dynamique stochastique du processus externe $P(\hat{\boldsymbol{x}}_{t+1}|\hat{\boldsymbol{x}}_t,\boldsymbol{u}_t)$ et se voit attribuer un score de vraisemblance selon $Q(\boldsymbol{I}_{t+1}|\hat{\boldsymbol{x}}_{t+1})$. 
+	\item Les filtres particulaires \shortcite{Doucet2001} utilisent une approche de Monte Carlo pour échantillonner l'espace d'état du processus externe à chaque instant. Chaque ``particule'' suit la dynamique stochastique du processus externe $P({\boldsymbol{x}}_{t+1}|{\boldsymbol{x}}_t,\boldsymbol{u}_t)$ et se voit attribuer un score de vraisemblance selon $Q(\boldsymbol{I}_{t+1}|{\boldsymbol{x}}_{t+1})$. 
 \end{itemize} 
 
 \subsection{Apprentissage en boucle fermée}
@@ -3157,7 +3157,31 @@ Dans des environnements complexes où il est difficile de tout prévoir, la mach
 adapter son comportement face aux situations particulières qui se présentent.
 %Ce cahier des charges rejoint l'idée de méta-programme : il s'agit de 
 
-L'apprentissage consiste à modifier au cours du temps le contrôleur décrit par la fonction  $\phi_\text{in}$ (voir eqs. \ref{eq:SD-closed-in} et \ref{eq:feed-noise-3}).
+Le cadre étudié jusqu'à présent repose sur des modèles de l'environnement physique. L'apprentissage se justifie lorsque, d'une manière ou d'une autre, les modèles ne sont pas considérés satisfaisants et doivent être ``améliorés''. 
+L'apprentissage consiste de manière générale à modifier au cours du temps le contrôleur décrit par la fonction  $\phi_\text{in}$ (voir eqs. \ref{eq:SD-closed-in} et \ref{eq:feed-noise-3}) dans un sens qui améliore un critère de performance prédéfini.
+
+La mise à jour d'un modèle ou d'une fonction de réponse consiste en général à modifier un jeu de paramètres $\Theta$ qui décrit la fonction en question (en d'autres termes ce jeu de paramètres est le ``programme'').  
+
+{\color{Orange} Dans le cadre que nous avons regardé jusqu'à présent (modèles de la mesure, filtrage),  l'état extérieur $\boldsymbol{x}_\text{out}$ est l'état caché ``latent'' à estimer.
+Le produit du processus de mesure est une distribution $f$ portant sur l'espace des variables latentes, reposant sur un modèle de la mesure paramétré par $\Theta$, noté en abrégé $f(\boldsymbol{x}|\Theta)$.
+Le processus de mesure étant décrit par $\Theta$,  son amélioration  repose sur le choix de paramètres qui réduisent l'incertitude sur la valeur de $\boldsymbol{x}_\text{out}$, autrement dit 
+$$-\min_\Theta \int f(\boldsymbol{x},\Theta) \log f(\boldsymbol{x},\Theta) d\boldsymbol{x}$$
+où $f(\boldsymbol{x},\Theta)$ est la loi jointe. L'amélioration de la mesure consiste à réduire l'incertitude sur $\boldsymbol{x}$ qui s'exprime comme :
+
+
+$f(\boldsymbol{x}|\Theta) f(\Theta) =
+f(\Theta|\boldsymbol{x}) f(\boldsymbol{x})$
+
+
+
+a fonction de réponse $f$, telle qu'on  est 
+
+consiste principalement à identifier cet état latent et la commande $\boldsymbol{u}$ se déduit de la différence entre cet état estimé et la consigne.
+Améliorer la fonction consiste 
+
+L'apprentissage consiste alors principalement, étant donnés 
+}
+
 La fonction $\phi_\text{in}$ est dans ce cadre une fonction paramétrique, décrite par l'ensemble de paramètres $\Theta$.
 Le problème d'apprentissage se présente alors comme un problème d'optimisation, où la mise à jour des paramètres repose sur l'optimisation d'un certain critère $\mathcal{H}$ lié à la qualité du contrôle opéré par le contrôleur.
 
@@ -3165,7 +3189,13 @@ Le problème d'apprentissage se présente alors comme un problème d'optimisatio
 \min_{\Theta}  \mathcal{H}(\theta)
 \end{align}
 
-Le critère de qualité correspond en général à une mesure effectuée sur le dispositif physique en cours d'utilisation, dans le cadre d'une procédure de test ou de calibration.  
+
+
+Dans le cadre probabiliste défini plus haut, On note   la distribution jointe portant sur l'état latent de $\boldsymbol{x}$ estimé via un processus de mesure paramétré par   distribution estimation de  $\boldsymbol{x}$  on pourra définir le modèle interne $P$ et la mesure $Q$ comme des lois paramétrées par $\Theta$, i.e.   
+
+
+
+{\color{Orange} Le critère de qualité correspond en général à une mesure effectuée sur le dispositif physique en cours d'utilisation, dans le cadre d'une procédure de test ou de calibration.  }
 
 
 
@@ -3207,8 +3237,6 @@ où 	$\boldsymbol{x}^*(t)$ est une consigne variant au cours du temps.
 \subsubsection{Apprentissage sans consigne}
 
 Avec modèle : la programmation dynamique.
-
-
 
 
 \subsubsection{Apprentissage du modèle}
