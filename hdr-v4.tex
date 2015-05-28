@@ -2941,7 +2941,7 @@ Il se définit formellement par la présence de corrélations entre les actions 
 les réponses produites et les manifestations sensorielles suivantes.
 
 
-\subsubsection{Couplages sensori-moteurs}
+\subsubsection{Couplages sensori-moteurs}\label{sec:consigne}
 Ce lien entre les actions et les sensations est décrit, au niveau le plus général, par le modèle physique 
 au sein duquel le logiciel est plongé.
 
@@ -3165,51 +3165,55 @@ adapter son comportement face aux situations particulières qui se présentent.
 %Ce cahier des charges rejoint l'idée de méta-programme : il s'agit de 
 
 Le cadre étudié jusqu'à présent repose sur des modèles de l'environnement physique. L'apprentissage se justifie lorsque, d'une manière ou d'une autre, les modèles ne sont pas considérés satisfaisants et doivent être ``améliorés''. 
-L'apprentissage consiste de manière générale à modifier au cours du temps le contrôleur décrit par la fonction  $\phi_\text{in}$ (voir eqs. \ref{eq:SD-closed-in} et \ref{eq:feed-noise-3}) dans un sens qui améliore un critère de performance prédéfini.
+L'apprentissage consiste donc à modifier le contrôleur décrit par la fonction  $\phi_\text{in}$ (voir eqs. \ref{eq:SD-closed-in} et \ref{eq:feed-noise-3}) dans un sens qui améliore un critère de performance prédéfini. La mise à jour d'un modèle ou d'une fonction de réponse consiste en général à modifier un jeu de paramètres $\Theta$ qui décrit le modèle.
 
-La mise à jour d'un modèle ou d'une fonction de réponse consiste en général à modifier un jeu de paramètres $\Theta$ qui décrit la fonction en question (en d'autres termes ce jeu de paramètres est le ``programme'').  
+\begin{itemize}
+\item Dans le cas des modèles de filtrage, il s'agit par exemple d'améliorer les modèles $P$ (processus externe) et $Q$ (mesure), afin de mieux prendre en compte les facteurs exogènes non modélisés afin de mieux prédire les entrées.  L'apprentissage consiste ainsi à 
+Dans le cadre que nous avons regardé jusqu'à présent (modèles de la mesure, filtrage),  l'état extérieur $\boldsymbol{x}_\text{out}$ est l'état caché ``latent'' à estimer.
+Le produit du processus de mesure est la distribution \textit{a posteriori} $\hat{f}$ portant sur l'espace des variables latentes, paramétré par $\Theta$, i.e. $\hat{f}(\boldsymbol{x})=f(\boldsymbol{x}|\boldsymbol{I},\boldsymbol{u},\Theta)$.
+L'amélioration du processus de filtrage repose alors sur le fait de trouver de nouveaux paramètres $\Theta'$ en estimant la vraisemblance des paramètres étant donnée l'état latent, soit~:
+ $$\max_{\Theta'} \int f(\Theta'|\boldsymbol{x},\boldsymbol{I},\boldsymbol{u}) \hat{f}(\boldsymbol{x}) d\boldsymbol{x}$$
+ce qui permet, de manière récurrente, de produire une nouvelle distribution a posteriori  $\hat{f}'$ qui elle-même produit un nouveau jeu de paramètres $\Theta''$ etc.
+Cette succession d'estimations et de maximisations donne son nom à l'algorithme EM \shortcite{Dempster1977} qui, étant données les observations, converge vers une distribution limite $\hat{f}^*$.
+\item Dans le cas du contrôle avec consigne (voir section \ref{sec:consigne}), l'amélioration consiste à faire en sorte que le contrôleur obéisse mieux à la consigne, autrement dit minimise l'erreur motrice $\boldsymbol{x}^* - \boldsymbol{x}_\text{out}$. Soit $\Theta$ un jeu de paramètres définisant la fonction de transfert du contrôleur. Ce critère peut s'exprimer sous la forme d'un problème d'optimisation~:
+\begin{itemize}
+  \item avec mesure directe~:
+    $$\min_{\Theta'} ||\boldsymbol{x}^*-\boldsymbol{x}_\text{out}||^2 $$
+    Ce critère de qualité correspond en général à une mesure effectuée sur le dispositif physique en cours d'utilisation, dans le cadre d'une procédure de test ou de calibration. 
+  \item sans mesure directe, mais avec un modèle d'environnement:
+   $$\min_{\Theta'} \int ||\boldsymbol{x}^*-\boldsymbol{x}||^2 \hat{f}(\boldsymbol{x}) d\boldsymbol{x}$$
+   Il ne s'agit pas d'améliorer le modèle mais plutôt, en présence d'un contrôleur imparfait (ne conduisant pas à l'état désiré), de biaiser le modèle pour corriger la commande motrice dans un sens qui améliore le contrôle. {\color{Orange}[DEAN,ITO]}
+  \item sans mesure directe, sans modèle d'environnement, à partir de l'observation $\boldsymbol{I}$ seule~:
+  $$\min_{\Theta'}   ||h_\text{in}( \boldsymbol{x}^*) - \boldsymbol{I}||^2 $$
+\end{itemize}
+\item Dans le cas du contrôle sans consigne, l'apprentissage peut se baser sur un signal qualitatif issu d'une mesure effectuée sur le dispositif physique. Cette mesure,
+est assimilée à un signal de récompense ("reward" $r$) ou de punition ("loss" $l$). 
+Le contrôleur ne connaît pas $\boldsymbol{x}^*$, et se base donc sur cette information qualitative pour définir sa réponse motrice, afin de maximiser le gain (et/ou minimiser la perte), soit~:
+    $$\max_{\Theta'} r \text{  }\left(\text{ou  } \min_{\Theta'} l\right)$$ 
+Un cas particulier très étudié en contrôle est celui de la récompense différée (temporal credit assignment), auquel cas ce n'est pas la récompense directe que l'on optimise mais une valeur estimée de son espérance, soit~:
+	$$\max_{\Theta'} \mathbb{E}(r) $$
+	\begin{itemize}
+	\item Si l'environnement est connu, ce problème est celui de la \textit{programmation dynamique} \shortcite{Bellman1956}.
+	\item Si l'environnement est inconnu, on parle d'apprentissage \textit{par renforcement} \shortcite{Sut88}.
+	\end{itemize}
+\end{itemize}
 
-{\color{Orange} Dans le cadre que nous avons regardé jusqu'à présent (modèles de la mesure, filtrage),  l'état extérieur $\boldsymbol{x}_\text{out}$ est l'état caché ``latent'' à estimer.
-Le produit du processus de mesure est une distribution $f$ portant sur l'espace des variables latentes, reposant sur un modèle de la mesure paramétré par $\Theta$, noté en abrégé $f(\boldsymbol{x}|\Theta)$.
-Le processus de mesure étant décrit par $\Theta$,  son amélioration  repose sur le choix de paramètres qui réduisent l'incertitude sur la valeur de $\boldsymbol{x}_\text{out}$, autrement dit 
-$$-\min_\Theta \int f(\boldsymbol{x},\Theta) \log f(\boldsymbol{x},\Theta) d\boldsymbol{x}$$
-où $f(\boldsymbol{x},\Theta)$ est la loi jointe. L'amélioration de la mesure consiste à réduire l'incertitude sur $\boldsymbol{x}$ qui s'exprime comme :
+%La fonction $\phi_\text{in}$ est dans ce cadre une fonction paramétrique, décrite par l'ensemble de paramètres $\Theta$.
+%Le problème d'apprentissage se présente alors comme un problème d'optimisation, où la mise à jour des paramètres repose sur l'optimisation d'un certain critère $\mathcal{H}$ lié à la qualité du contrôle opéré par le contrôleur.
 
-
-$f(\boldsymbol{x}|\Theta) f(\Theta) =
-f(\Theta|\boldsymbol{x}) f(\boldsymbol{x})$
+%\begin{align}
+%\min_{\Theta}  \mathcal{H}(\theta)
+%\end{align}
 
 
 
-a fonction de réponse $f$, telle qu'on  est 
-
-consiste principalement à identifier cet état latent et la commande $\boldsymbol{u}$ se déduit de la différence entre cet état estimé et la consigne.
-Améliorer la fonction consiste 
-
-L'apprentissage consiste alors principalement, étant donnés 
-}
-
-La fonction $\phi_\text{in}$ est dans ce cadre une fonction paramétrique, décrite par l'ensemble de paramètres $\Theta$.
-Le problème d'apprentissage se présente alors comme un problème d'optimisation, où la mise à jour des paramètres repose sur l'optimisation d'un certain critère $\mathcal{H}$ lié à la qualité du contrôle opéré par le contrôleur.
-
-\begin{align}
-\min_{\Theta}  \mathcal{H}(\theta)
-\end{align}
-
-
-
-Dans le cadre probabiliste défini plus haut, On note   la distribution jointe portant sur l'état latent de $\boldsymbol{x}$ estimé via un processus de mesure paramétré par   distribution estimation de  $\boldsymbol{x}$  on pourra définir le modèle interne $P$ et la mesure $Q$ comme des lois paramétrées par $\Theta$, i.e.   
-
-
-
-{\color{Orange} Le critère de qualité correspond en général à une mesure effectuée sur le dispositif physique en cours d'utilisation, dans le cadre d'une procédure de test ou de calibration.  }
+%Dans le cadre probabiliste défini plus haut, On note   la distribution jointe portant sur l'état latent de $\boldsymbol{x}$ estimé via un processus de mesure paramétré par   distribution estimation de  $\boldsymbol{x}$  on pourra définir le modèle interne $P$ et la mesure $Q$ comme des lois paramétrées par $\Theta$, i.e.   
 
 
 
 {\color{Gray}L'apprentissage en boucle fermée consiste à produire des ajustements 
 qui améliorent les interactions du logiciel avec le milieu physique, en tenant compte des boucles de rétroaction entre les commandes motrices et les signaux sensoriels.}
 
-Par exemple, selon la perspective du contrôle moteur, l'apprentissage consiste  à mieux prendre en compte les facteurs exogènes non modélisés de manière à améliorer la capacité du modèle à prédire ses entrées.
 
 
 
@@ -3219,9 +3223,7 @@ Par exemple, selon la perspective du contrôle moteur, l'apprentissage consiste 
 
 
 
-
-
- En considérant principalement des consignes statiques, le problème peut s'exprimer comme~:
+{\color{Gray}  En considérant principalement des consignes statiques, le problème peut s'exprimer comme~:
 \begin{align}
 \min_{\Theta}  \int_{\mathcal{C}} \lim_{t\rightarrow\infty} ||\boldsymbol{x}^* - \boldsymbol{x}_\text{out}(t)||^2 d\boldsymbol{x}^*
 \end{align}
@@ -3239,7 +3241,7 @@ où 	$\boldsymbol{x}^*(t)$ est une consigne variant au cours du temps.
 	\begin{align}
 	\min_{\Theta}   \int_{t \in \mathcal{T}} ||h_\text{in}( \boldsymbol{x}^*(t)) - \boldsymbol{I}(t)||^2 dt
 	\end{align}	
-	
+	}
 
 \subsubsection{Apprentissage sans consigne}
 
