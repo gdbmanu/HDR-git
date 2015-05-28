@@ -2991,23 +2991,22 @@ Plus précisément~:
 	\end{itemize}
     \item {\color{Cyan} On peut compléter l'équation de manière symétrique avec une plasticité de l'environnement représentant la non-stationnarité, l'usure, le vieillissement et toutes sortes de changement ``lents''.}
 \end{enumerate}
-	
- 	
- Le contrôle en boucle fermée \cite{Wiener1965}
- consiste à programmer le contrôleur de telle sorte que les actions produites dans le milieu se conforment à un certain nombre de critères (ou contraintes) définis \textit{a priori}.	
- Ces critères peuvent être :
- \begin{itemize}
- 	\item le caractère non délétère des actions produites (endommagement du dispositif moteur ou de l'environnement)
- 	\item la minimisation de certaine dépenses (consommation énergétique, effort, usure, chauffage des composants, ...)
- 	\item la rapidité de la réponse
- 	\item la résilience, la capacité à résister aux perturbations (homéostasie)
- 	\item la stabilité et la reproductibilité des réponses, la robustesse.
- 	\item etc. 
- \end{itemize}
-
-Ces problèmes ont été analysés de longue date dans le cadre de la théorie de l'automatique (contrôle linéaire) et de la commande optimale, en particulier sous l'angle de la stabilité de la réponse à la commande et de l'homéostasie {\color{Orange}[REFS]}.
 
 \subsubsection{Tâches et problèmes de contrôle}
+
+Le contrôle en boucle fermée \cite{Wiener1965}
+consiste à programmer le contrôleur de telle sorte que les actions produites dans le milieu se conforment à un certain nombre de critères (ou contraintes) définis \textit{a priori}.	
+Ces critères peuvent être :
+\begin{itemize}
+	\item le caractère non délétère des actions produites (endommagement du dispositif moteur ou de l'environnement)
+	\item la minimisation de certaine dépenses (consommation énergétique, effort, usure, chauffage des composants, ...)
+	\item la rapidité de la réponse
+	\item la résilience, la capacité à résister aux perturbations (homéostasie)
+	\item la stabilité et la reproductibilité des réponses, la robustesse.
+	\item etc. 
+\end{itemize}
+
+Ces problèmes ont été analysés de longue date dans le cadre de la théorie de l'automatique (contrôle linéaire) et de la commande optimale, en particulier sous l'angle de la stabilité de la réponse à la commande et de l'homéostasie {\color{Orange}[REFS]}.
 
 La théorie du contrôle classique décrit un problème de contrôle comme un problème d'optimisation basé sur~:
 \begin{itemize}
@@ -3028,17 +3027,24 @@ Le problème d'optimisation consiste à programmer une fonction de réponse $\ph
 	\end{itemize}	
 	Pour une position finale unique, il existe en général plusieurs configurations des articulations. 
 }
-	
-\paragraph{}
 
+\paragraph{Remarque~:} Il est possible d'établir une analogie entre consigne et programme. Une consigne s'apparente plus précisément à un \textit{programme moteur} qui conditionne la manière dont le contrôleur traite ses entrées sensorielles~: pour deux consignes différentes, les mêmes entrées sensorielles ne produisent pas la même réponse.  
 
-\subsubsection{Erreur motrice et erreur de prédiction}
+\subsubsection{Rétroaction négative vs. contrôle balistique}
+
+ Le principe de contrôle par rétroaction négative (\textit{negative feedback control})  correspond à une commande directement proportionnelle à l'erreur motrice, autrement dit $\boldsymbol{u}(t) \propto \boldsymbol{x}^* - \boldsymbol{x}_\text{out}(t)$. En tenant compte de l'inertie et des temps de réponse, il permet d'obtenir un contrôleur homéostatique stable  (résistant aux perturbations). 
+ 
  La différence $\boldsymbol{x}^* - \boldsymbol{x}_\text{out}(t)$ est appelée l'\textit{erreur motrice}.
+  
+ On oppose au contrôle par feedback négatif le contrôle dit \textit{balistique} dans lequel l'erreur motrice n'est pas mesurée. Le contrôle repose sur la consigne $\boldsymbol{x}^*$ seule.
 
- Le principe de contrôle le plus élémentaire  correspond à une commande directement proportionnelle à l'erreur motrice, autrement dit $\boldsymbol{u}(t) \propto \boldsymbol{x}^* - \boldsymbol{x}_\text{out}(t)$. En tenant compte de l'inertie et des temps de réponse, il permet d'obtenir un contrôleur homéostatique stable  (résistant aux perturbations). 
+%\subsubsection{Erreur motrice et erreur de prédiction}
+
+
+
  
- 
-Le cas le plus courant en robotique et en modélisation biologiquement inspirée correspond néanmoins à une situation où l'erreur motrice n'est pas directement observable. Deux cas se présentent~: 
+\subsubsection{Estimation d'état}
+Le cas le plus courant en robotique et en modélisation biologiquement inspirée correspond à une situation où l'erreur motrice n'est pas directement observable. Deux cas se présentent~: 
 \begin{enumerate}
 	\item $\boldsymbol{I}= h_\text{in}(\boldsymbol{x}_\text{out})$ est le signal issu des appareils de mesure. Le contrôleur doit, autant que possible, deviner la valeur de l'état, soit $\tilde{\boldsymbol{x}} \simeq h_\text{in}^{-1}(\boldsymbol{I})$ pour produire la commande. On parle de \textit{modèle inverse}.
 	\item Une autre approche consiste à comparer le signal observé au signal attendu  $\boldsymbol{I}^* = h_\text{in}(\boldsymbol{x}^*)$. Ce signal attendu n'est pas directement observable. Il peut être \textit{reconstruit} via un \textit{modèle direct}. 
@@ -3048,7 +3054,8 @@ Le cas le plus courant en robotique et en modélisation biologiquement inspirée
 	\end{itemize}
 \end{enumerate}
 
-\paragraph{Remarque~:} Il est possible d'établir une analogie entre consigne et programme. Une consigne s'apparente plus précisément à un \textit{programme moteur} qui conditionne la manière dont le contrôleur traite ses entrées sensorielles~: pour deux consignes différentes, les mêmes entrées sensorielles ne produisent pas la même réponse.  
+
+
 
 \subsubsection{Facteurs exogènes}
 
