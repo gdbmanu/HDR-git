@@ -2259,9 +2259,9 @@ Chacune des approches présente des avantages et des inconvénients.
 	\item L'appariement négatif apporte une parcimonie (perception de la différence d'activité), qui permet d'implémenter 
 	un principe de ``matching pursuit'' pour un traitement rapide du flux visuel \shortcite{Perrinet2010}.
 	Il présente cependant une sensibilité au bruit de mesure (fluctuations aléatoire), 
-	et nécessite dans certains cas la mise en place d'une remise à zéro 
-	périodique, qui peut être réalisée par une alternance entre mesure de l'erreur (perception) et correction 
-	d'erreur (déplacement moteur). 
+	{\color{Orange} et nécessite dans certains cas la mise en place d'une remise à zéro 
+	périodique , qui peut être réalisée par une alternance entre mesure de l'erreur (perception) et correction 
+	d'erreur (déplacement moteur).} 
 \end{itemize}
 
 %dans le cas de signaux spatio-temporels\footnote{Sauf si, évidemment, le modèle forward est fourni,
@@ -2960,8 +2960,8 @@ où $h_\text{in}$ et $h_\text{out}$ représentent (de manière simplifiée) les 
 
 Plus précisément~:
 \begin{itemize}
-	\item $\boldsymbol{I}(t) = h_\text{in}(\boldsymbol{x}_\text{out}(t))$ est le signal d'entrée du contrôleur.
-	\item $\boldsymbol{u}(t) = h_\text{out}(\boldsymbol{x}_\text{in}(t))$ est la commande motrice.
+	\item On note $\boldsymbol{I}(t) = h_\text{in}(\boldsymbol{x}_\text{out}(t))$ le signal d'entrée du contrôleur.
+	\item On note $\boldsymbol{u}(t) = h_\text{out}(\boldsymbol{x}_\text{in}(t))$  la commande motrice.
 	\item L'équation (\ref{eq:SD-closed-out}) décrit le lien entre les actions produites et les sensations.
 	\item L'équation (\ref{eq:SD-closed-in}) décrit le traitement appliqué à l'entrée sensorielle.
 \end{itemize}
@@ -3036,17 +3036,33 @@ Le problème d'optimisation consiste à programmer une fonction de réponse $\ph
  
  La différence $\boldsymbol{x}^* - \boldsymbol{x}_\text{out}(t)$ est appelée l'\textit{erreur motrice}.
   
- On oppose au contrôle par feedback négatif le contrôle dit \textit{balistique} dans lequel l'erreur motrice n'est pas mesurée. Le contrôle repose sur la consigne $\boldsymbol{x}^*$ seule.
-
+ On oppose au contrôle par feedback négatif le contrôle dit \textit{balistique} dans lequel l'erreur motrice n'est pas mesurée. Le contrôle repose sur la consigne $\boldsymbol{x}^*$ seule. On parle aussi de contrôle en position. 
+ 
+ Plusieurs méthodes permettent d'implémenter ce type de contrôle:
+ \begin{itemize}
+ 	\item Dans le cadre du contrôle linéaire, la commande balistique repose sur l'inversion de la fonction de transfert de l'environnement. Si $\boldsymbol{x}^*$ est la position finale désirée, on a $\boldsymbol{u} =  \phi_\text{out}^{-1}(\boldsymbol{x}^*)$. On parle de commande par modèle inverse.
+	\item Le cas des modèles non-linéaires peut être traité via  la combinaison de ``primitives motrices'' dans l'espace de la tâche \shortcite{Mussa2004}.
 %\subsubsection{Erreur motrice et erreur de prédiction}
 
+\end{itemize}
 
+Le contrôle balistique présente plusieurs propriétés intéressantes~:
+\begin{itemize}
+	\item la commande $\boldsymbol{u}$ reste constante pendant toute la durée d'exécution.
+    \item la commande est insensible aux conditions initiales. Quelle que soit la position initiale du contrôleur, la commande conduit ``mécaniquement'' le système contrôlé vers son point fixe $\boldsymbol{x}^*$. %
+    \item le contrôleur est insensible à ses entrées sensorielles. Autrement dit la conséquence sensorielle de la commande n'est pas utile pour le contrôle lui-même. Le signal mesuré sur les capteurs peut néanmoins conduite le contrôleur à \textit{réviser la consigne} si le signal d'entrée  n'est pas conforme au signal attendu.
+\end{itemize}
 
+Une version ``dynamique'' du contrôle balistique a été proposée par \shortcite{Schoner97}, dans laquelle~:
+\begin{itemize}
+	\item la commande motrice est implémentée sous la forme d'un champ de potentiel dans l'espace de la tâche  (combinaison de champs de force);
+	\item la consigne évolue continuellement en fonction des entrées sensorielles.
+\end{itemize} 
  
 \subsubsection{Estimation d'état}
-Le cas le plus courant en robotique et en modélisation biologiquement inspirée correspond à une situation où l'erreur motrice n'est pas directement observable. Deux cas se présentent~: 
+Le cas le plus courant en robotique et en modélisation biologiquement inspirée correspond à une situation où l'état de l'environnement n'est pas directement observable. Deux cas se présentent~: 
 \begin{enumerate}
-	\item $\boldsymbol{I}= h_\text{in}(\boldsymbol{x}_\text{out})$ est le signal issu des appareils de mesure. Le contrôleur doit, autant que possible, deviner la valeur de l'état, soit $\tilde{\boldsymbol{x}} \simeq h_\text{in}^{-1}(\boldsymbol{I})$ pour produire la commande. On parle de \textit{modèle inverse}.
+	\item $\boldsymbol{I}= h_\text{in}(\boldsymbol{x}_\text{out})$ est le signal issu des appareils de mesure. Le contrôleur doit, autant que possible, deviner la valeur de l'état, soit $\tilde{\boldsymbol{x}} \simeq h_\text{in}^{-1}(\boldsymbol{I})$ pour produire la commande. On parle là encore de \textit{modèle inverse} de la mesure.
 	\item Une autre approche consiste à comparer le signal observé au signal attendu  $\boldsymbol{I}^* = h_\text{in}(\boldsymbol{x}^*)$. Ce signal attendu n'est pas directement observable. Il peut être \textit{reconstruit} via un \textit{modèle direct}. 
 	\begin{itemize}
 		\item On dit que le modèle effectue une prédiction sensorielle et la différence entre l'entrée prédite et l'entrée attendue est l'\textit{erreur de prédiction}.
@@ -3113,7 +3129,7 @@ Le filtrage utilise un \textit{modèle interne}, qui est un processus miroir de 
 
 
 Le problème est principalement celui de compenser la dérive de l'estimation d'état dans le cas de processus aléatoires avec bruit additif (cas où l'écart à la moyenne augmente au cours du temps). 
-Il s'agit donc de produire la meilleure estimation \textit{à chaque instant} de l'état extérieur $\hat{\boldsymbol{x}}_\text{out}(t+dt)$.
+Il s'agit donc de produire la meilleure estimation \textit{à chaque instant} de l'état extérieur $\hat{\boldsymbol{x}}_\text{out}$.
 
 
 \paragraph{Dynamique interne} 
@@ -3168,10 +3184,10 @@ Le cadre étudié jusqu'à présent repose sur des modèles de l'environnement p
 L'apprentissage consiste donc à modifier le contrôleur décrit par la fonction  $\phi_\text{in}$ (voir eqs. \ref{eq:SD-closed-in} et \ref{eq:feed-noise-3}) dans un sens qui améliore un critère de performance prédéfini. La mise à jour d'un modèle ou d'une fonction de réponse consiste en général à modifier un jeu de paramètres $\Theta$ qui décrit le modèle.
 
 \begin{itemize}
-\item Dans le cas des modèles de filtrage, il s'agit par exemple d'améliorer les modèles $P$ (processus externe) et $Q$ (mesure), afin de mieux prendre en compte les facteurs exogènes non modélisés afin de mieux prédire les entrées.  L'apprentissage consiste ainsi à 
+\item Dans le cas des modèles de filtrage, il s'agit par exemple d'améliorer les modèles $P$ (processus externe) et $Q$ (mesure), afin de mieux prendre en compte les facteurs exogènes non modélisés afin de mieux prédire les entrées.  %L'apprentissage consiste ainsi à 
 Dans le cadre que nous avons regardé jusqu'à présent (modèles de la mesure, filtrage),  l'état extérieur $\boldsymbol{x}_\text{out}$ est l'état caché ``latent'' à estimer.
 Le produit du processus de mesure est la distribution \textit{a posteriori} $\hat{f}$ portant sur l'espace des variables latentes, paramétré par $\Theta$, i.e. $\hat{f}(\boldsymbol{x})=f(\boldsymbol{x}|\boldsymbol{I},\boldsymbol{u},\Theta)$.
-L'amélioration du processus de filtrage repose alors sur le fait de trouver de nouveaux paramètres $\Theta'$ en estimant la vraisemblance des paramètres étant donnée l'état latent, soit~:
+L'amélioration du processus repose alors sur le fait de trouver de nouveaux paramètres $\Theta'$ en estimant la vraisemblance des paramètres étant donnée l'état latent, soit~:
  $$\max_{\Theta'} \int f(\Theta'|\boldsymbol{x},\boldsymbol{I},\boldsymbol{u}) \hat{f}(\boldsymbol{x}) d\boldsymbol{x}$$
 ce qui permet, de manière récurrente, de produire une nouvelle distribution a posteriori  $\hat{f}'$ qui elle-même produit un nouveau jeu de paramètres $\Theta''$ etc.
 Cette succession d'estimations et de maximisations donne son nom à l'algorithme EM \shortcite{Dempster1977} qui, étant données les observations, converge vers une distribution limite $\hat{f}^*$.
@@ -3182,9 +3198,10 @@ Cette succession d'estimations et de maximisations donne son nom à l'algorithme
     Ce critère de qualité correspond en général à une mesure effectuée sur le dispositif physique en cours d'utilisation, dans le cadre d'une procédure de test ou de calibration. 
   \item sans mesure directe, mais avec un modèle d'environnement:
    $$\min_{\Theta'} \int ||\boldsymbol{x}^*-\boldsymbol{x}||^2 \hat{f}(\boldsymbol{x}) d\boldsymbol{x}$$
-   Il ne s'agit pas d'améliorer le modèle mais plutôt, en présence d'un contrôleur imparfait (ne conduisant pas à l'état désiré), de biaiser le modèle pour corriger la commande motrice dans un sens qui améliore le contrôle. {\color{Orange}[DEAN,ITO]}
+   {\color{Orange} En présence d'un contrôleur imparfait (ne conduisant pas à l'état désiré), il est souvent plus simple de biaiser la consigne dans un sens qui améliore le contrôle, sans modifier le contrôleur lui même, comme proposé par  {\color{Orange}[DEAN,ITO]}}
   \item sans mesure directe, sans modèle d'environnement, à partir de l'observation $\boldsymbol{I}$ seule~:
   $$\min_{\Theta'}   ||h_\text{in}( \boldsymbol{x}^*) - \boldsymbol{I}||^2 $$
+  {\color{Cyan} Dans le cas des modèles du cervelet $I$ est la conséquence proprioceptive de la commande.}
 \end{itemize}
 \item Dans le cas du contrôle sans consigne, l'apprentissage peut se baser sur un signal qualitatif issu d'une mesure effectuée sur le dispositif physique. Cette mesure,
 est assimilée à un signal de récompense ("reward" $r$) ou de punition ("loss" $l$). 
@@ -3341,6 +3358,8 @@ avec $\boldsymbol{y}$ une consigne éventuellement déduite d'une observation, i
 $\boldsymbol{y} = h_\text{err} (\boldsymbol{x}_\text{out})$
 
 {\color{Cyan} Ajouter quelques remarques sur dynamique lente, dynamique rapide, consigne,...}
+
+{\color{Cyan} \bf à lier avec le concept d'appariement positif qui est central pour la plasticité Hebbienne}
 
 
 {\color{Cyan}
