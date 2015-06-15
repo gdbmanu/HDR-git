@@ -209,7 +209,7 @@
 
 % Qu'est-ce qu'un système apprenant
 
-Le but de ce document est de fournir un aperçu étendu des questions et des approches que j'ai 
+Le but de ce document est de fournir un aperçu détaillé des questions et des approches que j'ai 
 eu l'occasion d'aborder au cours des vingts dernières années, depuis mes premiers pas en recherche. 
 {\color{Orange} Ce document est organisé autour des différentes contributions et productions scientifiques auxquelles
 j'ai participé, dans un ordre non chronologique mais thématique.
@@ -222,33 +222,40 @@ Le terme computationnel fait référence à la notion de calcul. On peut donc é
 bien que ce terme soit peu usité\footnote{  
 sans doute pour ne pas le confondre avec le bio-calcul, 
 qui concerne les opérations réalisées au niveau moléculaire, autrement dit
-le fonctionnement de la cellule en tant que machine.}
+le fonctionnement de la cellule en tant que machine.}.
 \emph{Les neurosciences computationnelles 
 visent donc à identifier ce qui, dans l'activité des neurones, s'apparente à un calcul; à identifier 
 le type et la nature des opérations réalisées par le système nerveux}. 
-
-{\color{Cyan}
-Mon parcours en résumé...
-
-L'organisation du document...
-}
 
 \section{Neurosciences computationnelles}
 
 Si les principes de fonctionnement élémentaires du système nerveux central (neurones, synapses) 
 commencent à être bien connus, 
-le fonctionnement intégré du système dans son ensemble reste l'objet de nombreuses conjectures.
+le fonctionnement intégré du système dans son ensemble fait l'objet de nombreuses conjectures.
 Les modèles mathématiques et les simulations informatiques permettent de proposer des hypothèses 
 de fonctionnement et/ou 
 de valider certaines hypothèses issues de l'observation. 
-{\color{Orange} Les neurosciences computationnelles sont ainsi la branche de l'{\bf !!informatique!!} qui, d'une part, élabore des modèles de calcul 
-	inspirés par les hypothèses proposées en neurosciences, et, d'autre part, propose des interprétations
-	de données biologiques à partir de principes et modèles issus des sciences de l'information.}
+
 Ainsi, l'étude du système nerveux, sous l'angle computationnel, a deux objectifs:
 \begin{enumerate} 
 \item explorer des mécanismes de calcul alternatifs 
 \item comprendre le fonctionnement du cerveau
 \end{enumerate}
+
+% Les neurosciences computationnelles sont le domaine scientifique qui, 
+% \begin{itemize}
+% \item d'une part, élabore des modèles de calcul 
+% inspirés par les hypothèses formulées dans le cadre des neurosciences, c'est-à-dire prend
+% exemple sur des architectures ou des circuits neuronaux réels pour valider ou invalider des hypothèses
+% liées aux types d'opérations produites par le système nerveux;
+% \item d'autre part, interprète
+% les données biologiques à partir de principes et de modèles issus des sciences de l'information. 
+% La question n'est pas nécessairement de
+% produire le meilleur algorithme, ou de résoudre une nouvelle tâche, mais de produire des
+% modèles permettant de mieux comprendre les opérations réalisées par le cerveau.
+% \end{itemize}
+% 
+
 
 \paragraph{Mécanismes de calcul alternatifs} Le premier objectif est
 de s'inspirer du fonctionnement du système nerveux pour découvrir de nouveaux principes pour le calcul artificiel,
@@ -269,25 +276,18 @@ utilise des principes et méthodes différents). L'objectif est, à partir des o
 identifier les rôles et les interactions à l'intérieur du système nerveux, et potentiellement
 de mieux soigner les désordres et maladies neurologiques. 
 
-{\color{Orange} Cette approche a environ une soixantaine d'années d'existence, {\bf !!!FLOU!!!et se confond parfois avec} 
-les sciences cognitives
-(étude des opérations de haut niveau réalisées par le cerveau), 
-les neurosciences fonctionnelles (étude des rôles des différentes structures anatomiques), 
-et l'apprentissage automatique (programmes s'adaptant aux données).}
-
-{\color{Orange} Dans le cadre des neurosciences computationnelles, la question n'est pas nécessairement de
-produire le meilleur algorithme, ou de résoudre une nouvelle tâche, mais de produire des
-modèles permettant de mieux comprendre les opérations réalisées par le cerveau, ou de prendre
-exemple sur des architectures ou des circuits neuronaux réels pour valider ou invalider des hypothèses
-liées aux types d'opérations produites par le système nerveux.}
+%{\color{Orange} Cette approche a environ une soixantaine d'années d'existence, {\bf !!!FLOU!!!et se confond parfois avec} 
+%les sciences cognitives
+%(étude des opérations de haut niveau réalisées par le cerveau), 
+%les neurosciences fonctionnelles (étude des rôles des différentes structures anatomiques), 
+%et l'apprentissage automatique (programmes s'adaptant aux données).}
 
 
 
-\subsection{Une nouvelle discipline?}
 
 
+\subsection{Une approche pluridisciplinaire}
 
-{\color{Purple} 
 Les neurosciences computationnelles sont par définition pluridisciplinaires. 
 \begin{itemize}
 \item Elles reposent en premier lieu sur le 
@@ -302,7 +302,7 @@ learning}).
 développement d'interfaces bioniques nécessite une meilleure connaissance des mécanismes de 
 contrôle à l'oeuvre chez l'homme et l'animal.
 \end{itemize}
-}
+
 
 \paragraph{Trois niveaux d'analyse}
 Selon la typologie classique proposée par David Marr \shortcite{Marr82}, 
@@ -319,15 +319,7 @@ l'équation à résoudre, la brique logicielle qui la résout et le circuit logi
 Marr postule une relative indépendance entre les différents niveaux de description, en établissant une
 claire séparation entre le substrat neuronal, le circuit de traitement et l'espace de la tâche. 
 
-{\color{Orange}{\bf !!
-	Cette séparation correspond assez bien au problème des disparités d'échelle 
-	évoqué plus haut.!!} La contrainte physique du corps, engagé dans différentes tâches, à des échelles
-spatiales macroscopiques et des échelles temporelles lentes d'une part.
-La contrainte du circuit microscopique, constitué d'unité neuronales échangeant rapidement des signaux discrets
-d'autre part.
-Entre les deux, un niveau architectural, constitué de circuits imbriqués intégrant l'activité de
-larges portion du cerveau, 
-constituant un niveau de description relativement indépendant des deux autres.}
+
 
 %XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 \paragraph{Approche ascendante (ou ``bottom-up'')}
@@ -367,7 +359,7 @@ Les neurosciences computationnelles se sont fortement développées, et ont comm
 s'organiser en tant que champ de recherche, à partir de la fin des années 90, avec le soutien de plusieurs programmes 
 nationaux et internationaux. On citera, parmi les plus actifs, le réseau
 Bernstein pour les neurosciences computationnelles en Allemagne, développé depuis 2004, 
-le collectif INSC (International Neuroinformatics Coordination Facility) qui tente de coordonner les 
+le collectif INCF (International Neuroinformatics Coordination Facility) qui tente de coordonner les 
 nombreux projets de recherche de la discipline au niveau international (basé en Suède). Elles ont 
 bénéficié de nombreux soutiens financiers européens (NEST, Brain scales, Blue Brain project, ...)
 qui se sont récemment concrétisés par l'attribution d'un financement 'Flagship' pour le projet ``Human Brain
@@ -390,10 +382,51 @@ la relatif manque de visibilité du domaine.
 Il existe enfin quelques conférences spécifiquement dédiées à ce champ de recherche, comme la conférence CNS (Computational
 Neurosciences) et la conférence CoSyNe (Computational and Systems Neuroscience). Dans le domaine de la robotique bio-inspirée,
 on peut citer la conférence SAB (Simulation of Adaptive Behavior) qui a eu un fort impact au début des années 2000 mais a 
-fini par disparaître faute d'audience suffisante. 
+fini par disparaître faute d'audience. 
 
 \subsection{Les neurosciences computationnelles en France}
 %Voir : https://web.archive.org/web/20131020013653/http://neurocomp.fr/
+
+Les neurosciences computationnelles sont principalement soutenues en France à l'heure actuelle 
+par les
+
+Disparition de la commission interdisciplinaire du CNRS?
+(CID 44-45
+Cognition, langage, traitement de l’information, systèmes naturels et artificiels)
+disparue en 2011 (sections 27-34)
+
+Role de l'INSERM?
+- Jirsa
+- Wendling à Rennes
+
+CNRS :
+- Signal / image / modèles dynamiques (physique stat)
+- Masson-Perrinet
+- chez Thorpe
+- Alain Destexhe à l'UNIC
+
+
+ISIR pour le versant robotique. 
++  ETIS Cergy 
++ equipe biorobotique
+
+Codage :
+- institut de la vision
+- ENS : group for neural theory
+
+- INS : Jirsa
+- INRIA : Neuromathcomp; hugues Berry; Frédéric Alexandre ; le reste de Cortex/Neurosys à Nancy
+
++ labo de physique stat ENS (Nadal / Hakim)
+
+Les masters : pas de master de computational neuroscience en France. 
+computational biology (Nice) - cogMaster (Paris)
++ master de physique theorique à l'ENS ()
+
+INCF french node : UNIC (Fregnac)
+
+EITN (project?) - hebergé institut de la vision.
+
 
 \subsection{Etat de l'art} Le champ de recherche s'organise autour de plusieurs pôles. 
 (1) simulation neuro-réaliste : mieux comprendre le fonctionnement du neurone, et des interacions entre neurones. 
@@ -443,8 +476,8 @@ Suite à une discussion, j'ai décidé de m'engager dans cette voie de recherche
 chaotiques) dans le cadre d'un stage du DEA de Representation de la Connaissance et Formalisation
 du Raisonnement (RCFR), qui faisait partie des DEAs pouvant être suivis en parallèle de la troisième année d'études. 
 Les cours étaient centrés sur la logique formelle, en particulier les grammaires génératives, 
-les systèmes experts, les modèles linguistiques et la théorie de jeux. Les réseaux de neurones y étaient très peu voire 
-pas abordés. 
+les systèmes experts, les modèles linguistiques et la théorie de jeux. Les réseaux de neurones et l'apprentissage y étaient peu 
+abordés. 
 
 Le stage était situé au sein du Département d'Etudes et de Recherche en Informatique (DERI), 
 dans un laboratoire de l'Office Nationale de Recherche d'Etudes et de Recherche Aérospoatiales (ONERA) rattaché à 
@@ -460,8 +493,8 @@ formellement achevée, dans le cas discret, par Moynot et Samuelides \shortcite{
 
 Lors de mon arrivée, deux étudiants venaient de passer leur thèse sur ce thème.
 D'un côté, Bruno Cessac, diplômé en physique théorique de l'université Paul Sabatier, avait travaillé sur l'analyse en
-champ moyen des réseaux de neurones récurrents aléatoires \cite{Ces95}. De l'autre, Mathias Quoy, diplômé de l'ENSEEIHT,
-avait travaillé sur le comportement à taille finie (route vers le chaos) \cite{Doyon1993,CESSAC94}.
+champ moyen des réseaux de neurones récurrents aléatoires \shortcite{Ces95}. De l'autre, Mathias Quoy, diplômé de l'ENSEEIHT,
+avait travaillé sur le comportement à taille finie (route vers le chaos) \shortcite{Doyon1993,CESSAC94}.
 Mon rôle était alors principalement de continuer cette ligne de recherche,
 et en particulier approfondir la question de la plasticité synaptique
 et de l'apprentissage dans ce type de réseaux. 
@@ -470,9 +503,9 @@ Je connaissais alors peu de choses des systèmes dynamiques et du chaos, et mes 
 limitaient à une culture grand public, via quelques lectures. C'est donc principalement au travers 
 de lectures de travaux scientifiques que je me suis formé à ces deux domaines.
 L'ambiance de travail était très stimulante et nous avons rapidement pu produire 
-de nouveaux résultats qui ont constitué mon rapport de fin d'études et de DEA \cite{Dau95}.
+de nouveaux résultats qui ont constitué mon rapport de fin d'études et de DEA \shortcite{Dau95}.
 J'ai obtenu mon diplôme d'ingénieur informaticien en juin 1995 et mon diplôme de DEA en septembre 1995. 
-Ayant terminé à la deuxième place, j'ai pu bénéficier d'une bourse ministérielle qui m'a permis de 
+J'ai pu bénéficier d'une bourse ministérielle qui m'a permis de 
 poursuivre en thèse, toujours sous la direction de Bernard Doyon, au sein de l'équipe animée par Manuel 
 Samuelidès au DERI.
 
@@ -537,12 +570,12 @@ Jirsa : école cybernétique
 
 
 Les recherches que j'ai menées balayent un grand nombre de modèles, des plus détaillés ({\bf !!REF!! neurones à 
-impulsion} \cite{gerstner02}, {\bf !!REF!! neurones à conductance}) \cite{HH52} 
+impulsion} \shortcite{gerstner02}, {\bf !!REF!! neurones à conductance}) \shortcite{HH52} 
 aux plus grossiers (activités de {\bf !!REF!! masses neuronales} à l'échelle
-macroscopique \cite{Wilson1972}, modèles basés sur des mesures psychophysiques). 
+macroscopique \shortcite{Wilson1972}, modèles basés sur des mesures psychophysiques). 
 Différentes architectures et méthodes d'apprentissage sont proposées, reposant sur différents 
-paradigmes ({\bf !!supervisé} \cite{Rosen58}, {\bf !!REF!! non supervisé} \cite{Koh82}, 
-{\bf !!REF!! par renforcement} \cite{SUTTON98}), 
+paradigmes ({\bf !!supervisé} \shortcite{Rosen58}, {\bf !!REF!! non supervisé} \shortcite{Koh82}, 
+{\bf !!REF!! par renforcement} \shortcite{SUTTON98}), 
 sur des tâches de contrôle en boucle ouverte ou
 en boucle fermée, et s'inspirant à des degrés divers de l'architecture du système nerveux.
 
@@ -584,15 +617,18 @@ Les trois premières parties présentent les résultats
 
 \chapter{Dynamique des grands réseaux de neurones aléatoires}\label{chap:dyn}
 
-{\color{Cyan} Ce chapitre est consacré à l'analyse des capacités d'expression des grands réseaux de neurones. Je présente dans une première section quelques notions essentielles concernant la modélisation des neurones et des réseaux de neurones. La deuxième section présente quelques notions plus spécifiques à l'étude des grands réseaux de neurones ainsi que des propositions propres à ce mémoire. Enfin, la troisième section présente quelques résultats issus des travaux auxquels j'ai participé dans ce cadre.  [REPRENDRE CHAPEAU]}
+{\color{Cyan} Ce chapitre est consacré à l'analyse des capacités d'expression des grands réseaux de neurones. 
+Je présente dans une première section quelques notions essentielles concernant la modélisation des neurones et des réseaux de neurones. 
+La deuxième section présente quelques notions plus spécifiques à l'étude des grands réseaux de neurones ainsi que des propositions propres à ce mémoire. 
+Enfin, la troisième section récapitule les résultats issus des travaux auxquels j'ai participé dans ce cadre.}
 
 \cleardoublepage
 
 \section{Notions générales}
 
-Cette section présente un formalisme et des définitions visant à établir un cadre commun aux
+Cette section présente un formalisme et des définitions communes aux
 études portant sur les ``réseaux de neurones''. 
-La plupart des définitions sont donc extrêmement générales, avec un niveau de détail faible.
+%La plupart des définitions sont donc extrêmement générales, avec un niveau de détail faible.
 Les références et exemples indiqués permettent au lecteur d'approfondir les notions
 présentées s'il le souhaite.
 
@@ -608,7 +644,7 @@ Il existe de nombreux modèles de neurones et de nombreux modèles de réseaux d
 repose donc sur un choix du modélisateur, qui est fonction du mécanisme qu'il souhaite étudier, des outils
 d'analyse et/ou de la puissance de calcul dont il dispose. 
 
-Je liste ci-dessous quelques propriétés et éléments de vocabulaire communs à la plupart des modèles de réseaux de
+Les propriétés et éléments de vocabulaire listés ci-dessous sont communs à la plupart des modèles de réseaux de
 neurones, indépendamment de leur utilisation en modélisation ou en apprentissage automatique. 
 
 \subsubsection{Activité et signal}
@@ -1031,7 +1067,7 @@ le caractère extrêmement inhomogène des réseaux de neurones naturels~:
 	TODO~: tracer une analogie avec 
 	\begin{itemize}
 		\item les systèmes soumis à un signal variant au cours du temps $\rightarrow$ formalisme de Fokker-Planck
-		\item les systèmes soumis à u bruit  
+		\item les systèmes soumis à du bruit  
 	\end{itemize}
 }
 
@@ -1306,7 +1342,7 @@ voir par exemple \shortcite{Faugeras2009,Cabana2013}. %L'accent sur l'équilibre
 
 Un des intérêts principaux des réseaux à connectivité aléatoire est leur capacité à générer des dynamiques complexes
 endogènes (donc sans stimulation extérieure). Ces dynamiques, bien que reposant sur des équations déterministes,
-se comportent comme des processus stochastique indépendants sur chaque neurone. Ce comportement n'est pourtant pas analogue
+se comportent comme des processus stochastiques indépendants sur chaque neurone. Ce comportement n'est pourtant pas analogue
 à un simple bruit passif. 
 
 \begin{figure}[b!]
@@ -1798,7 +1834,7 @@ La nature de cet espace de sortie (continu ou discret) définit deux grands type
 
 La construction du dictionnaire de formes s'appuie sur des contraintes exprimées dans les données d'apprentissage. On distingue en général l'apprentissage guidé par l'erreur (supervisé ou semi-supervisé) et l'apprentissage guidé par le modèle.
 \begin{itemize}
-	\item L'apprentissage est guidé par l'erreur lorsqu'il existe une fonction d'erreur (ou fontion de ``\textit{feedback}'') $l$  qui ``note'' la réponse produite par la fonction de réponse. Exemples~:
+	\item L'apprentissage est guidé par l'erreur lorsqu'il existe une fonction d'erreur (ou fonction de ``\textit{feedback}'') $l$  qui ``note'' la réponse produite par la fonction de réponse. Exemples~:
 	\begin{itemize}
 		\item  fonction différence~: $l(y,f_T(x)) = y - f_T(x)$
 		\item fonction distance~:
@@ -3387,7 +3423,15 @@ L'agent organise l'environnement.
 
 Commande invariante
 
-
+{\color{Gray}{\bf !!
+	Cette séparation correspond assez bien au problème des disparités d'échelle 
+	évoqué plus haut.!!} La contrainte physique du corps, engagé dans différentes tâches, à des échelles
+spatiales macroscopiques et des échelles temporelles lentes d'une part.
+La contrainte du circuit microscopique, constitué d'unité neuronales échangeant rapidement des signaux discrets
+d'autre part.
+Entre les deux, un niveau architectural, constitué de circuits imbriqués intégrant l'activité de
+larges portion du cerveau, 
+constituant un niveau de description relativement indépendant des deux autres.}
 
 \subsection{Commande et signal}
 
