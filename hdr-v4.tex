@@ -3618,7 +3618,17 @@ Friston(?). Rôle de la complexité.
 
 L'exploration motrice. Babbling.
 
-{\color{Purple} Un tel problème se formule de différentes manières.
+{\color{Purple} 
+
+Considérons un dispositif logiciel contrôlant un appareil 
+ayant des interactions répétées avec son milieu.
+Dans des environnements complexes où il est difficile de tout prévoir, la machine doit 
+adapter son comportement face aux situations particulières qui se présentent.
+{\color{Orange} Ce cahier des charges rejoint l'idée de méta-programme : il s'agit de produire des ajustements 
+qui améliorent les interactions du logiciel avec le milieu physique. }
+
+
+Un tel problème se formule de différentes manières.
  Une première approche consiste à faire en sorte que le logiciel enrichisse le modèle du monde, 
  c'est à dire ``acquière des connaissances'' pour mieux prévoir les effets de ses actions sur 
  son environnement. Cette phase d'acquisition passe par le fait de ``tester'' le produit
@@ -3706,6 +3716,8 @@ de la récompense au cours du temps).
 La traduction de ces principes sous la forme d'une règle de plasticité conduit à une règle qui s'apparente à 
 la règle de Hebb \shortcite{florian06}. 
 
+
+
 {\color{Cyan} Ajouter quelques remarques sur dynamique lente, dynamique rapide, consigne,...}
 
 {\color{Cyan} \bf à lier avec le concept d'appariement positif qui est central pour la plasticité Hebbienne}
@@ -3788,7 +3800,30 @@ Voir aussi section \ref{sec:filtrage} :
 
 \subsection{Friston}
 
-
+Une autre manière de formaliser ce problème, comme proposée par Karl Friston \shortcite{Friston2010},
+repose sur l'idée d'une minimisation de la distance entre les éléments prédits et 
+observés de la scène perceptive (incluant les conséquence sensorielles
+des commandes motrices), sous la contrainte de l'expressivité du substrat, c'est à dire
+le nombre et le type de configurations (ou  formes) qu'il peut atteindre (ou atteint effectivement).
+Cette théorie de l'apprentissage en boucle fermée est une reformulation dans un contexte bio-inspiré des
+algorithmes d'optimisation utilisés en contrôle optimal \shortcite{Kalman1960} et en analyse des données \shortcite{Dempster1977}.
+Contrairement à l'apprentissage par renforcement, il s'agit d'une approche non-supervisée, fondée non sur un 
+modèle explicite (correspondance entre le modèle et la réalisté physique extérieure) 
+mais sur des jeux de contraintes entre le milieu extérieur et le milieu intérieur. 
+L'apport original de Friston est en particulier de considérer la commande motrice 
+comme une des modalités permettant de rectifier l'erreur de
+prédiction, au même titre que la plasticité synaptique par exemple.  
+La commande motrice permet ici de replacer les éléments de la scène à l'emplacement où le logiciel souhaite les voir,
+selon une configuration cible (un attracteur) que les couplages sensori-moteurs passés ont dicté.
+%{\color{Violet} Le principe d'un déplacement moteur servant à confirmer (ou tester) la prédiction rejoint
+%l'idée de perception active [SCANNING] - comportement d'orientation.}
+Ces améliorations de prédiction peuvent ainsi passer par deux stratégies : 
+l'amélioration du logiciel et/ou l'amélioration du milieu.
+En reprenant l'exemple précédent (signaux aversifs dans l'environnement), un exemple de stratégie 
+d'action sur le milieu serait d'éloigner physiquement
+les facteurs aversifs du lieu où l'appareil évolue (sa niche). 
+Dans les deux cas, un changement physique (modification du logiciel ou modification du milieu)
+se traduit par une réduction de l'exposition au signal aversif. 
 
 {\color{Violet}
 	Ce qu’il faut retenir de Friston :
@@ -3869,7 +3904,7 @@ Voir aussi section \ref{sec:filtrage} :
 
 \subsection{Alternance comportementale en robotique autonome}
 
-Dans le cadre d'un court séjour de fin de thèse (juillet 1999), j'ai participé à une étude sur l'apprentissage d'un comportement moteur
+Dans le cadre d'un court séjour de fin de thèse (juillet 1999), j'ai participé à une étude sur l'apprentissage  moteur
 sur une plate-forme robotique réelle  
 au sein de l'équipe de neurocybernetique dirigée par Philippe Gaussier au laboratoire ETIS (Cergy-Pontoise).
 L'expérience a été conduite sur la plateforme de contrôle robotique PerAc \shortcite{Gaussier1995}, et publiée dans 
@@ -3903,7 +3938,7 @@ la tâche apprise, et un comportement irrégulier sans correspondance avec la t�
 Les rotations irrégulières induisent une succession de signaux visuels qui, par hasard, se mettent à correspondre 
 à la séquence apprise, et font basculer l'ensemble dans le régime périodique où les entrées visuelles redeviennent prévisibles.
 
-\begin{figure}[b!]
+\begin{figure}[t!]
 	\centerline{
 		\includegraphics[width = 0.7\linewidth]{figs/bc_robot_rotation.eps}
 	}
@@ -3942,32 +3977,39 @@ information rapidly leads the robot to a "chaotic" behavior }(From Dauce et al.,
 Cette expérience robotique offre un exemple clair de couplage entre une activité mécanique (des déplacements) et une activité 
 logicielle (un réseau de neurones récurrent). Une activité neuronale périodique couplée avec une activité mécanique périodique et/ou  
 une activité neuronale irrégulière couplée avec une activité mécanique irrégulière. 
-Le contrôle ne fonctionne pas sur la correction d'erreur, comme dans le contrôle traditionnel, mais sur 
-l'appariement de séquences spatio-temporelles (pattern matching) et sur la persistance de cet appariement
-pour des versions dégradées du signal appris. 
+La commande ne repose pas sur la correction d'erreur, comme dans le contrôle traditionnel, mais sur 
+\begin{itemize}
+ \item l'appariement de séquences spatio-temporelles (pattern matching)
+ \item et sur la persistance de cet appariement pour des versions dégradées du signal appris. 
+\end{itemize}
 L'erreur (la non-correspondance) ne produit pas une correction mais une transition vers une activité irrégulière
 qui s'apparente à une exploration aléatoire de l'espace des couplages sensori-moteurs jusqu'à atteindre un nouvel
 attracteur comportemental.
 
+\paragraph{Passage d'échelle}
 Une interprétation possible de ces résultats du point de vue de l'approche dynamique de la
-cognition articielle a été proposée dans le livre que j'ai co-édité avec Agnès Guillot en 2002 \shortcite{Gui02}.
-
-Le mécanisme de synchronisation transitoire, ou de résonance, 
+cognition articielle a été proposée dans le livre que j'ai co-édité avec Agnès Guillot en 2002 \shortcite{Gui02}~:
+\begin{itemize}
+\item Le mécanisme de synchronisation transitoire, ou de résonance, 
 au sein de systèmes constitués de nombreuses unités couplées, est interprété
-comme favorisant la communication entre les différentes échelles \shortcite{Dau02c1}. 
+comme favorisant la \textit{communication entre les différentes échelles} \shortcite{Dau02c1}. 
 Ce type de mécanisme n'est pas encore, à ma connaissance, implémenté dans des architectures de contrôle, 
 mais son importance a déjà été souligné dans \shortcite{Konig1995} et \shortcite{Varela2001}.
-La non-reconnaissance correspondrait à une situation où le milieu neuronal 
+\item 
+La \textit{non-reconnaissance} correspondrait à une situation où le milieu neuronal 
 produit une activité à haut degré de liberté, sans effet macroscopique par absence de coordination. 
-La reconnaissance correspondrait à 
+\item
+La \textit{reconnaissance} correspondrait à 
 une situation où le milieu neuronal ``renonce'' transitoirement à ses degrés de liberté et se coordonne, 
 favorisant le couplage 
 avec la dynamique macroscopique. 
-La coordination de la population permettrait le passage à une description ``grande échelle'' de l'activité neuronale, 
+La coordination de la population permettrait \textit{le passage à une description ``grande échelle''} de l'activité neuronale, 
 perceptible au niveau de description supérieur, 
 caractérisé par une échelle spatiale plus large et une échelle temporelle plus lente,
 le même mécanisme pouvant en principe se décliner à différentes échelles.
+\end{itemize}
 
+\paragraph{Alternance comportementale}
 L'importance de la désynchronisation, comme complément de la synchronisation, est également souligné dans \shortcite{Rod99}.
 Le fonctionnement en boucle fermée par couplage positif (par renforcement mutuel) contient en effet fondamentalement
 le risque de l'enfermement dans un attracteur comportemental unique, correspondant à
@@ -4000,77 +4042,14 @@ mais également sur des mécanismes actifs de désynchronisation, comme la fatig
 
 \subsection{Contrôle adaptatif en boucle fermée}
 
-{\color{Gray} Considérons un dispositif logiciel contrôlant un appareil 
-ayant des interactions répétées avec son milieu.
-Dans des environnements complexes où il est difficile de tout prévoir, la machine doit 
-adapter son comportement face aux situations particulières qui se présentent.
-Ce cahier des charges rejoint l'idée de méta-programme : il s'agit de produire des ajustements 
-qui améliorent les interactions du logiciel avec le milieu physique. 
-
-Un tel problème se formule de différentes manières.
-Une première approche consiste à faire en sorte que le logiciel enrichisse le modèle du monde, 
-c'est à dire ``acquière des connaissances'' pour mieux prévoir les effets de ses actions sur 
-son environnement. Cette phase d'acquisition passe par le fait de ``tester'' le produit
-de ses actions par essai/erreur. Le simple fait de produire une commande arbitraire
-(aléatoire) permet de tester la conséquence sensorielle de cette commande, qui peut
-être confrontée au modèle, utile en particulier pour l'apprentissage
-des contingences sensori-motrices \shortcite{Andry2001}.
-Cette importance de la commande aléatoire dans l'acquisition de connaissance a été formalisé
-dans le cadre de \emph{l'apprentissage par renforcement} \shortcite{SUTTON98}
-Cette approche repose sur la notion de signal de renforcement, qui est un ``méta signal'' 
-dont le rôle est de transformer le manière dont le logiciel traite le signal,
-selon des modalités variées comme la consommation énergétique, l'exposition aux signaux nociceptifs ou bénéfiques, 
-ou encore la réduction d'incertitude.
-Si le milieu contient des éléments nocifs ou aversifs par exemple, l'amélioration 
-peut passer par une augmentation de la sensibilité logicielle à une classe de signaux 
-associés à (ou précurseurs de) la sensation aversive, et à une facilitation des comportements permettant de
-mieux éviter les situations où le signal aversif est présent. 
-La plupart des modèles de renforcement reposent sur des tables de correspondance (``Look-up table''), adaptées
-aux environnements et aux choix d'action discrets, mais souffrent de problèmes
-d'explosion combinatoire dans des environnements continus et/ou complexes.
-
-Les signaux de renforcement (méta-signaux) servent à ``sculpter'' le programme
-au cours des interactions entre le logiciel et son environnement.
-Le programme qui résulte de ces interactions varie 
-selon l'expressivité du substrat (la structure du circuit logique),
-le caractère déterministe ou stochastique des politiques d'exploration
-et enfin le caractère convexe ou non de la tâche. 
-Le choix entre les réponses peut être départagé selon l'espérance de récompense 
-associée à chacune d'elles, mais aussi selon le degré d'incertitude associé, 
-certaines réponses mal connues (ou certaines sources et/ou chemins mal modélisés) pouvant potentiellement apporter des 
-récompenses supérieures. C'est le fameux dilemne ``exploration/exploitation''.
-
-Une autre manière de formaliser ce problème, comme proposée par Karl Friston \shortcite{Friston2010},
-repose sur l'idée d'une minimisation de la distance entre les éléments prédits et 
-observés de la scène perceptive (incluant les conséquence sensorielles
-des commandes motrices), sous la contrainte de l'expressivité du substrat, c'est à dire
-le nombre et le type de configurations (ou  formes) qu'il peut atteindre (ou atteint effectivement).
-Cette théorie de l'apprentissage en boucle fermée est une reformulation dans un contexte bio-inspiré des
-algorithmes d'optimisation utilisés en contrôle optimal \shortcite{Kalman1960} et en analyse des données \shortcite{Dempster1977}.
-Contrairement à l'apprentissage par renforcement, il s'agit d'une approche non-supervisée, fondée non sur un 
-modèle explicite (correspondance entre le modèle et la réalisté physique extérieure) 
-mais sur des jeux de contraintes entre le milieu extérieur et le milieu intérieur. 
-L'apport original de Friston est en particulier de considérer la commande motrice 
-comme une des modalités permettant de rectifier l'erreur de
-prédiction, au même titre que la plasticité synaptique par exemple.  
-La commande motrice permet ici de replacer les éléments de la scène à l'emplacement où le logiciel souhaite les voir,
-selon une configuration cible (un attracteur) que les couplages sensori-moteurs passés ont dicté.
-%{\color{Violet} Le principe d'un déplacement moteur servant à confirmer (ou tester) la prédiction rejoint
-%l'idée de perception active [SCANNING] - comportement d'orientation.}
-Ces améliorations de prédiction peuvent ainsi passer par deux stratégies : 
-l'amélioration du logiciel et/ou l'amélioration du milieu.
-En reprenant l'exemple précédent (signaux aversifs dans l'environnement), un exemple de stratégie 
-d'action sur le milieu serait d'éloigner physiquement
-les facteurs aversifs du lieu où l'appareil évolue (sa niche). 
-Dans les deux cas, un changement physique (modification du logiciel ou modification du milieu)
-se traduit par une réduction de l'exposition au signal aversif. 
+{\color{Violet} 
 
 Les réseaux de neurones récurrents aléatoires offrent, comme nous l'avons vu,
-un cadre propice à l'étude des couplages entre un milieu logiciel neuronal et un environnement
+un cadre propice à l'étude des couplages entre un contrôleur neuronal et un environnement
 physique. 
-Notre approche se situe  à l'intersection des deux démarches évoquées. 
-D'une part, la dynamique contrainte d'un tel réseau présente des propriétés de système
-critique qui suggèrent une capacité à explorer différents répertoires comportementaux
+%Notre approche se situe  à l'intersection des deux démarches évoquées. 
+D'une part, la dynamique contrainte d'un tel réseau présente des propriétés de 
+criticalité qui suggèrent une capacité à explorer différents répertoires comportementaux
 au cours d'un historique d'interactions avec un environnement.
 D'autre part, l'idée d'exploiter cette complexité intrinsèque de la dynamique interne
 pour stabiliser des couplages sensori-moteurs par des mécanismes de plasticité 
