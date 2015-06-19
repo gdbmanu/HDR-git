@@ -445,6 +445,7 @@ Robotique :
 + ISIR : Girard/Sigaud
 +  ETIS Cergy 
 + equipe biorobotique
++ LIRMM
 
 Codage et vision:
 - institut de la vision
@@ -607,7 +608,7 @@ Les années 90 ont également vu un certain renouveau
 dans
 le champ des sciences cognitives, avec, entre autres, 
 l'apparition des 
-concepts de cognition ``située'' \shortcite{Bro91}, 
+concepts de cognition ``située'' \shortcite{Bro91}, et
 d'''énaction'' \shortcite{Varela91}.
 %, et la mise en avant 
 %du problème de l'assemblage (``binding problem'') \shortcite{Gra89}.
@@ -616,11 +617,12 @@ Ces nouvelles approches mettent en avant le rôle de l'expérimentation motrice 
 
 Une expérience de robotique mobile inspirée de ces idées a été effectuée dans le cadre d'un court séjour de fin de thèse (juillet 1999)
 au sein de l'équipe de neurocybernetique dirigée par Philippe Gaussier au laboratoire ETIS (Cergy-Pontoise).
-Cette équipe, qui met en oeuvre l'approche située dans une perspective développementale et cognitive, a développé
-plusieurs modèles d'apprentissage sensori-moteur inspiré par les cartes ``cognitives'' inspirées du fonctionnement de l'hippocampe
+Cette équipe, qui met en œuvre l'approche située dans une perspective développementale et cognitive, a développé
+plusieurs modèles d'apprentissage sensori-moteur reposant sur des cartes ``cognitives'' inspirées du fonctionnement de l'hippocampe
 \shortcite{OKe78}.  
 L'idée était ici
-d'étudier le comportement de l'architecture développée dans le cadre de ma thèse dans un contexte de
+d'étudier le comportement de l'architecture d'apprentissage 
+développée dans le cadre de ma thèse dans un contexte de
 contrôle en boucle fermée. 
 L'apprentissage dans ce contexte revient à stabiliser par plasticité synaptique 
 certaines séquences d'interaction (certaines séquences d'associations sensori-motrices). 
@@ -643,7 +645,11 @@ Ce laboratoire, devenu depuis ``Institut des Sciences du Mouvement'' regroupe de
 expérimentale et la psychophysique. J'ai été intégré au sein de l'équipe animée alors par Reinoud Bootsma ``Information et Dynamique du Mouvement''.
 Cette équipe étudiait alors principalement le lien entre des mesures psychophysiques  et 
 les consignes motrices et sensorielles (de type ``Tâche de Fitts''), selon une approche dite ``écologique''
-de la perception et de l'action \shortcite{Gib79}.  
+de la perception et de l'action \shortcite{Gib79}\footnote{L'approche
+écologique fait reposer la commande motrice sur 
+l'existence de 
+motifs invariants dans la relation de l'agent à son environnement (comme le point de fuite)
+servant de support à la l'actionnabilité de cet environnement.}.
 
 Je suis resté au sein de ce laboratoire jusqu'en 2011. Tout en conservant ma thématique principale,
 mes recherches se sont orientées vers la question du rôle des dynamiques intrinsèques 
@@ -651,10 +657,10 @@ dans l'apprentissage moteur~:
 \begin{itemize}
  \item Etude sur le comportement critique des réseaux aléatoires de taille finie, dans le cadre d'une co-direction d'ouvrage \shortcite{Gui02} (voir section \ref{sec:criticalite}).
  \item Extension des modèles de réseaux aléatoires équilibrés, avec  couplages aléatoires dépendants de la distance
- permettant de développer des dynamiques méta-stables à ``foyers d'activité''  (voir section \label{sec:NatComp})
- \item Apprentissage d'uncontrôle moteur en boucle fermée, modèles Hebbiens de l'apprentissage par renforcement (voir section \label{sec:})
+ permettant de développer des dynamiques méta-stables à ``foyers d'activité''  \shortcite{dauce04a} (voir section \ref{sec:NatComp})
+ \item Apprentissage d'un contrôle moteur en boucle fermée, modèles Hebbiens de l'apprentissage par renforcement \shortcite{Dau04b} (voir section \ref{sec:SAB04})
 \end{itemize}
-L'environnement pour approfondir [TODO].
+%L'environnement pour approfondir [TODO].
 
 
 
@@ -669,9 +675,14 @@ biologiquement plausibles) \shortcite{Sam07}.
 Une des questions au coeur de ce projet était la possibilité d'étendre l'analyse de champ moyen 
 des réseaux  récurrents aléatoires au cas des neurones impulsionnels, ainsi bien sûr que d'exploiter les
 possibilités dynamiques de ces modèles pour l'apprentissage et le contrôle.
-Les changements principaux sont donc : sortie discrète (spikes), mise à jour par equation différentielle 
-(et non plus équation aux différences finies), prise en compte explicite des délais et des constantes temporelles,
-spécialisation des neurones (excitation/inhibition).
+Les changements principaux sont donc : 
+\begin{itemize}
+\item sortie discrète (spikes), 
+\item mise à jour par equation différentielle 
+(et non plus équation aux différences finies), 
+\item prise en compte explicite des délais et des constantes temporelles,
+\item spécialisation des neurones (excitation/inhibition).
+\end{itemize}
 Ce projet collaboratif a abouti à la publication d'un numéro spécial dans la revue ``European Physical Journal \---
 Special Topics'' \shortcite{ces07b}.
 
@@ -711,7 +722,7 @@ L'utilisation d'un patron de connectivité plus réaliste a été proposé dans 
 avec séparation fonctionnelle des neurones excitateurs et inhibiteurs, et utilisation de neurones à 
 conductance \shortcite{Kepler1992}. 
 
-\subsubsection{Les projets MAPS et NOAT (2007-2010)}
+\subsubsection{Les projets MAPS et NOAT (2007-2010)}\label{sec:MAPS}
 
 A travers deux projets ANR, j'ai pu aborder ces aspects de modélisation inspirés par des observations
 électrophysiologiques et psycho-physiques 
@@ -916,7 +927,7 @@ Je présente dans une première section quelques notions essentielles concernant
 La deuxième section présente quelques notions plus spécifiques à l'étude des grands réseaux de neurones ainsi que des propositions propres à ce mémoire. 
 Enfin, la troisième section récapitule les résultats issus des travaux auxquels j'ai participé dans ce cadre.}
 
-\cleardoublepage
+%\cleardoublepage
 
 \section{Notions générales}
 
@@ -1295,7 +1306,7 @@ Le modèle de champ moyen considère l'activité instantanée de populations de 
 donné, le nombre de neurones émettant un PA divisé par la taille de la population.
 Un interprétation commune de l'activité des
 
-\cleardoublepage
+%\cleardoublepage
 
 \section{Notions spécifiques et propositions}
 Cette section 
@@ -1540,7 +1551,7 @@ Lorsque le noyau est
 
 %\subsection{Applications}
 
-\cleardoublepage
+%\cleardoublepage
 
 \section{Contributions personnelles}
 
@@ -1623,7 +1634,7 @@ voir par exemple \shortcite{Faugeras2009,Cabana2013}. %L'accent sur l'équilibre
 
 %La question de l'homogénéité/hétérogénéité est revenue à l'ordre du jour. Plusieurs papiers récents bla bla...}
 
-%\cleardoublepage
+%%\cleardoublepage
 %\includepdf[pages=1-2,landscape=true,nup=1x2,scale=1.1,offset= 70 -30]{pdf/2001-neural-proc-letters.pdf}
 %\includepdf[pages=3-4,landscape=true,nup=1x2,scale=1.1,offset= -70 -30]{pdf/2001-neural-proc-letters.pdf}
 %\includepdf[pages=5-6,landscape=true,nup=1x2,scale=1.1,offset= 70 -30]{pdf/2001-neural-proc-letters.pdf}
@@ -1631,7 +1642,7 @@ voir par exemple \shortcite{Faugeras2009,Cabana2013}. %L'accent sur l'équilibre
 %\includepdf[pages=9-10,landscape=true,nup=1x2,scale=1.1,offset= 70 -30]{pdf/2001-neural-proc-letters.pdf}
 %\includepdf[pages=11-12,landscape=true,nup=1x2,scale=1.1,offset= -70 -30]{pdf/2001-neural-proc-letters.pdf}
 
-\cleardoublepage
+%\cleardoublepage
 \subsection{Criticalité dans les réseaux aléatoires}\label{sec:criticalite}
 
 Un des intérêts principaux des réseaux à connectivité aléatoire est leur capacité à générer des dynamiques complexes
@@ -1711,7 +1722,7 @@ un tirage aléatoire arbitraire, ils offrent donc un bon support pour le traitem
 Faire reposer le traitement sur un tirage arbitraire rejoint d'ailleurs un certain nombre de techniques de plongement (ou projection) aléatoires
 utilisées en apprentissage automatique, tels le ``compressive sensing'' \shortcite{Baraniuk2007} ou l'architecture ``extreme learning'' \shortcite{Huang2006}.
 
-%\cleardoublepage
+%%\cleardoublepage
 %\includepdf[pages=1, offset=70 -20]{pdf/2000-sab-ann.pdf}
 %\includepdf[pages=2, offset=-70 -20]{pdf/2000-sab-ann.pdf}
 %\includepdf[pages=3, offset=70 -20]{pdf/2000-sab-ann.pdf}
@@ -1730,7 +1741,7 @@ utilisées en apprentissage automatique, tels le ``compressive sensing'' \shortc
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     1.2      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\cleardoublepage
+%\cleardoublepage
 \subsection{Modèles de champ neuronal}\label{sec:NatComp}
 
 La question adressée par le modèle publié en 2004 \shortcite{Dau04} est celle de l'implémentation d'un modèle de champ neuronal (voir section \ref{sec:NField}) sur un support composé
@@ -1791,7 +1802,7 @@ ont étudié l'effet de délais variables et de patrons de connexion hétérogè
 et plus généralement l'étude de l'interaction entre délais variables, topographie et dynamique reste un sujet d'actualité 
 en neurosciences computationnelles \shortcite{Voges2012,Lundqvist2012}.
 
-\cleardoublepage
+%\cleardoublepage
 \subsection{Modèles de la connectivité fonctionnelle large-échelle}
 
 L'apparition récente des techniques de tractographie par tenseurs de diffusion \shortcite{leBihan2001} permet d'analyser 
@@ -1857,7 +1868,7 @@ grâce au contrôle du niveau d'activité  qui empêche d'atteindre les régimes
 %connectivité structurelle / fonctionnelle
 %}
 
-%\cleardoublepage
+%%\cleardoublepage
 %\includepdf[pages=1,offset=70 -20]{pdf/2015-PLOS-CB-ann.pdf}
 %\includepdf[pages=2,offset=-70 -20]{pdf/2015-PLOS-CB-ann.pdf}
 %\includepdf[pages=3,offset=70 -20]{pdf/2015-PLOS-CB-ann.pdf}
@@ -1898,7 +1909,7 @@ Ce chapitre est consacré à l'étude des mécanismes d'apprentissage dans les r
 
 \section{Notions générales}
 
-\cleardoublepage
+%\cleardoublepage
 
 \subsection{Plasticité synaptique}
 
@@ -2309,7 +2320,7 @@ Les implémentations les plus connues du principe de Hebb sont~:
 %	\item Apprentissage avec consigne
 %\end{itemize}
 
-\cleardoublepage
+%\cleardoublepage
 
 \section{Notions spécifiques et propositions}
 
@@ -2392,7 +2403,7 @@ où:
 	\end{itemize}
 	}
 	
-	{\color{Red} IL FAUT CREUSER ET DEVELOPPER CETTE NOTION D'APPARIEMENT}
+%	{\color{Red} IL FAUT CREUSER ET DEVELOPPER CETTE NOTION D'APPARIEMENT}
 
 	
 	}
@@ -2457,9 +2468,7 @@ cette notion d'activation ``macroscopique'' étant à distinguer de l'activation
 On parlera par la suite de \textit{réponse de population} (ou réponse collective)  lorsque le réseau ``réagit'' ainsi à une entrée particulière en réduisant son nombre de degrés de liberté.
 
 Ce principe de sélection par la dynamique d'un réseau récurrent a été exprimé dans les travaux de Walter Freeman \shortcite{ska87} dans le cadre d'un modèle de la perception des odeurs.
-On retrouve une idée analogue dans les travaux de Hermann Haken \shortcite{Haken1983}, qui a conceptualisé le principe de réponse par réduction de la dynamique collective à travers la notion de \textit{paramètre d'ordre}, emprunté à la thermodynamique.
-
-
+On retrouve une idée analogue dans les travaux de Hermann Haken \shortcite{Haken1983}, qui a conceptualisé le principe de réponse par réduction de la dynamique collective à travers la notion de \textit{paramètre d'ordre}, emprunté à la thermodynamique, permettant de constituer une ``variété centrale'' sur laquelle le système dynamique évolue (\textit{Center Manifold reduction}).
 
 
 \subsection{Assemblées neuronales}
@@ -2635,7 +2644,7 @@ sélection = Analogie accumulation d'évidence?
 
 Une des thèses du mémoire : feed+/feed-.
 
-\cleardoublepage
+%\cleardoublepage
 
 \section{Contributions personnelles}
 
@@ -2771,7 +2780,7 @@ par un signal extérieur. Le même principe est utilisé, dans une certaine mesu
 proposés par Jun Tani dans les années 90 \cite{Tani2004}, ainsi que dans les modèles de réservoir computing proposés par 
 Maas et Markram \cite{MAASS02,Buonomano2009}.
 
-%\cleardoublepage
+%%\cleardoublepage
 %\includepdf[pages=1,offset=50 0]{pdf/1998-neural-networks.pdf}
 %\includepdf[pages=2,offset=-65 0]{pdf/1998-neural-networks.pdf}
 %\includepdf[pages=3,offset=50 0]{pdf/1998-neural-networks.pdf}
@@ -2799,7 +2808,7 @@ Maas et Markram \cite{MAASS02,Buonomano2009}.
 %- encodage - patrons statiques - route vers le chaos - destabilisation - frontière du chaos
 %}
 
-\cleardoublepage
+%\cleardoublepage
 
 \subsection{Architectures multi-couches} \label{sec:BioCyb02}
 
@@ -2874,7 +2883,7 @@ d'une partie statique et d'une partie périodique. L'association apprise entre m
 se manifeste alors par un niveau de correlation élévé entre la dynamique induite par les motifs mixtes
 et la dynamique induite par les motifs statiques seuls (les activités étant par contre qualitativement différentes).
 
-%\cleardoublepage
+%%\cleardoublepage
 %\includepdf[pages=1,offset=70 -30]{pdf/2002-biological-cyb.pdf}
 %\includepdf[pages=2,offset=-70 -30]{pdf/2002-biological-cyb.pdf}
 %\includepdf[pages=3,offset=70 -30]{pdf/2002-biological-cyb.pdf}
@@ -2941,7 +2950,7 @@ et la dynamique induite par les motifs statiques seuls (les activités étant pa
 
 %}
 
-\cleardoublepage
+%\cleardoublepage
 \subsection{Plasticité dans les réseaux aléatoires équilibrés}
 
 L'étude présentée dans \shortcite{Hen08B} 
@@ -3004,7 +3013,7 @@ l'ordre de 25 Hz (et une fréquence moyenne individuelle de l'ordre de 200 Hz) e
 restant relativement irrégulières et hétérogènes. Une analyse de la plasticité en fonction des délais met en évidence la potentiation des 
 délais longs ($>$ 8 ms) et une dépression des délais intermédiaires (4-8 ms) qui favorise l'entretien du comportement synchronisé (non publié).
 
-%\cleardoublepage
+%%\cleardoublepage
 %\includepdf[pages=1,offset=70 -30]{pdf/2008-NEUROCOMP-ann.pdf}
 %\includepdf[pages=2,offset=-70 -30]{pdf/2008-NEUROCOMP-ann.pdf}
 %\includepdf[pages=3,offset=70 -30]{pdf/2008-NEUROCOMP-ann.pdf}
@@ -3012,7 +3021,7 @@ délais longs ($>$ 8 ms) et une dépression des délais intermédiaires (4-8 ms)
 %\includepdf[pages=5,offset=70 -30]{pdf/2008-NEUROCOMP-ann.pdf}
 
 
-\cleardoublepage
+%\cleardoublepage
 \subsection{Plasticité et action de population}
 
 Une dernière étude, publiée récemment dans les proceedings d'ESANN \shortcite{Dau14a}, étudie l'effet de la STDP 
@@ -3032,7 +3041,7 @@ est exactement le double de la période du signal (30 ms). Ce comportement d'acc
 développant une ``action de population'' qui est un analogue global des potentiels
 d'action neuronaux.
 %
-%\cleardoublepage
+%%\cleardoublepage
 %\includepdf[pages=1-2,landscape=true,nup=1x2,scale=1.1,offset= 80 -30]{pdf/2014-esann-A-ann.pdf}
 %\includepdf[pages=3-4,landscape=true,nup=1x2,scale=1.1,offset= -80 -30]{pdf/2014-esann-A-ann.pdf}
 %\includepdf[pages=5-6,landscape=true,nup=1x2,scale=1.1,offset= 80 -30]{pdf/2014-esann-A-ann.pdf}
@@ -3133,7 +3142,7 @@ d'action neuronaux.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%     2.4      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\cleardoublepage
+%\cleardoublepage
 \subsection{Discrimination de séquences spatio-temporelles}
 
 Les protocoles d'apprentissage présentés jusqu'à présent avaient pour but de 
@@ -3195,7 +3204,7 @@ au sein de la population. La difficulté à discriminer les séquences de 400 ms
 néanmoins fixer la limite supérieure de cette capacité (100 ms étant en pratique suffisant 
 pour discriminer deux séquences).
 
-%\cleardoublepage
+%%\cleardoublepage
 %\includepdf[pages=1,offset=70 -30]{pdf/2007-neurocomputing.pdf}
 %\includepdf[pages=2,offset=-70 -30]{pdf/2007-neurocomputing.pdf}
 %\includepdf[pages=3,offset=70 -30]{pdf/2007-neurocomputing.pdf}
@@ -3482,7 +3491,9 @@ Le jeu d'équations (\ref{eq:accum-1}-\ref{eq:accum-2}) forme une équation d'\t
 \paragraph{Erreur de prédiction}
 L'équation (\ref{eq:accum-1}) représente la première étape de l'estimation aboutissant à une prédiction ``interne''  sur l'espace des sources. Cette prédiction est combinée (eq. \ref{eq:accum-2}) à la vraisemblance $Q$ , qui peut être vue comme une prédiction ``inverse'' sur l'espace des sources. 
 L'écart entre les deux distributions est l'\textit{erreur de prédiction}, également appelée \textit{innovation} \cite{Kalman1960}. Les différences de variance entre les distributions permettent de privilégier l'un ou l'autre selon que le bruit d'état ou le bruit de mesure dominent le processus d'observation.
-
+\begin{flushleft}
+	
+\end{flushleft}
 \paragraph{Remarques~:}
 \begin{itemize}
 	\item Pour des raisons de précision numérique, il est fréquent d'utiliser des logarithme de probabilités au lieu des probabilités elles-mêmes (le produit étant ``remplacé'' par une somme).
@@ -3699,22 +3710,7 @@ En reprenant les notations proposées dans les chapitres précédents (e.g. les 
 avec $\boldsymbol{y}$ une consigne éventuellement déduite d'une observation, i.e. 
 $\boldsymbol{y} = h_\text{err} (\boldsymbol{x}_\text{out})$
 
-\paragraph{Règle de Hebb et renforcement}
-Le lien entre ces mécanismes d'apprentissage Hebbiens et 
-les méthodes acteur-critique classiques n'est pas direct. Dans les méthodes classiques, le choix de 
-l'action (``actor'') est découplé de l'évaluation des conséquences du choix de l'action (``critic'').
-Chaque situation sensorielle se voit attribuer une valeur en relation avec les bénéfices futurs attendus.
-Dans le cas que nous considérons (réseaux de neurones) la critique n'est pas implémentée. 
-Le réseau se contente d'explorer l'espace des réponses 
-associées à différents contextes. 
-Ce cadre se rapproche formellement d'une version simplifiée de l'apprentissage par renforcement 
-appelée ``Direct policy gradient'' \shortcite{Wil92,Bar99}, où la réponse est construite 
-par ajustement direct des paramètres de la politique (la règle qui détermine le choix
-entre les différentes réponses possibles). L'amélioration de la politique au cours du temps passe par 
-un principe de descente de gradient guidé par les récompenses (c'est à dire qui tend à augmenter l'espérance
-de la récompense au cours du temps).
-La traduction de ces principes sous la forme d'une règle de plasticité conduit à une règle qui s'apparente à 
-la règle de Hebb \shortcite{florian06}. 
+
 
 
 
@@ -3737,35 +3733,198 @@ la règle de Hebb \shortcite{florian06}.
 
 \section{Notions spécifiques et propositions}
 
+{\color{Cyan}
 L'activité récurrente produit du signal (et crée de la nouveauté). 
 
 L'agent organise l'environnement. 
 
-Commande invariante
+Commande invariante}
 
-{\color{Gray}{\bf !!
-	Cette séparation correspond assez bien au problème des disparités d'échelle 
-	évoqué plus haut.!!} La contrainte physique du corps, engagé dans différentes tâches, à des échelles
-spatiales macroscopiques et des échelles temporelles lentes d'une part.
-La contrainte du circuit microscopique, constitué d'unité neuronales échangeant rapidement des signaux discrets
-d'autre part.
-Entre les deux, un niveau architectural, constitué de circuits imbriqués intégrant l'activité de
-larges portion du cerveau, 
-constituant un niveau de description relativement indépendant des deux autres.}
 
-\subsection{Commande et signal}
+Au cerveau traiteur de signal, tel qu'il est classiquement étudié en neurosciences computationnelles,  s'oppose de manière symétrique le cerveau \textit{émetteur} de signal. 
+L'activité du cerveau de l'animal éveillé consiste en grande partie à produire des ordres moteurs qui se traduisent directement au sein de l'environnement par des déplacements de masses, des rotations d'articulations, des déformations etc.
+résumés par l'équation (\ref{eq:SD-closed-out}), où l'environnement est le canal de transmission et de traitement de l'information motrice émise par le cerveau. 
+Cette description purement formelle de l'activité motrice comme signal est bien sûre peu habituelle pour les activités motrices élémentaires (orientation locomotion, etc.) mais se comprend facilement si on considère l'activité motrice consistant à produire des sons articulés chez l'homme ou plus généralement tout type de communication animale.
 
-En quoi la commande motrice s'apparente à un signal
+Le fait de considérer le cerveau comme simple traiteur de signal, ou symétriquement comme simple émetteur de signal, n'est bien sûr pas satisfaisant, le seul niveau de description adéquat étant celui de la boucle de rétroaction formé par le contrôleur neuronal et son environnement, autrement dit le \textit{couplage} entre, 
+\begin{itemize}
+	\item d'une part, l'appareillage moteur et son environnement (eq. \ref{eq:SD-closed-out})
+	\item  d'autre part l'appareillage sensoriel et le contrôleur  (eq. \ref{eq:SD-closed-in})
+\end{itemize}
 
-Production de signal = activité récurrente autonome. Exemple d'un système coupé de ses entrées temporairement--> possibilité de poursuivre la commande mais risque de dérive.
+Dans ce cadre, nous regardons plus spécifiquement deux questions~:
+\begin{itemize}
+	\item le rôle de l'activité endogène dans la production motrice
+	\item la question du passage d'échelle entre différents niveaux de description
+\end{itemize}
+
+\subsection{Rôle de l'activité endogène dans la production motrice}\label{sec:RL-RN}
+Les réseaux de neurones récurrents aléatoires offrent, comme nous l'avons vu,
+un cadre propice à l'étude des couplages entre un contrôleur neuronal et un environnement
+physique. 
+Dans le cadre de la production des ordres moteurs, l'activité récurrente endogène, telles qu'elle se développe par exemple dans les réseaux récurrents aléatoires, apparaît propre à susciter des commandes relativement indépendantes du contexte sensoriel. 
+
+
+
+{\color{Cyan} Production de signal = activité récurrente autonome. Exemple d'un système coupé de ses entrées temporairement--> possibilité de poursuivre la commande mais risque de dérive.
 
 Production d'information. Commande aléatoire et apprentissage. Babbling (exploration).
 
 Différentes consignes correspondent à différents programmes (manières de traiter l'information).
+}
+ 
+Ici, notre hypothèse de travail est simplement que \textit{l'activité endogène est le mécanisme principal permettant à un agent d'enrichir son répertoire de comportements.} L'activité endogène spontanée, telle qu'observée dans les réseaux récurrents aléatoires, constitue un ``réservoir'' de comportements moteurs dont la réalisation peut être facilitée ou supprimée via des mécanismes de renforcement, mais aussi via des aspects contingents comme l'historique des couplages sensori-moteurs entre l'agent et son environnement, en particulier, dans le cadre de taches sous-spécifiées (ou non-convexes) comme les déplacements de masses articulées.  
+
+
+
+\subsubsection{Apprentissage par renforcement}
+
+
+%Notre approche se situe  à l'intersection des deux démarches évoquées. 
+
+
+La traduction naturelle des algorithmes de renforcement dans un contexte de réseau de neurones récurrent est 
+l'application d'une règle de plasticité dont le but est de favoriser les comportements conduisant à un méta-signal positif.
+\begin{itemize}
+	\item D'une part, la dynamique contrainte d'un tel réseau présente des propriétés de 
+	criticalité qui suggèrent une capacité à explorer différents répertoires comportementaux
+	au cours d'un historique d'interactions avec un environnement.
+	\item D'autre part, l'idée d'exploiter cette complexité intrinsèque de la dynamique interne
+	pour stabiliser des couplages sensori-moteurs par des mécanismes de plasticité 
+	utilisant des méta-signaux de type ``réussite/échec'' obéit aux principes de 
+	l'apprentissage par renforcement.
+\end{itemize}
+
+
+Le lien entre ces mécanismes d'apprentissage Hebbiens et 
+les méthodes acteur-critique classiques n'est pas direct. Dans les méthodes classiques, le choix de 
+l'action (``actor'') est découplé de l'évaluation des conséquences du choix de l'action (``critic'').
+Chaque situation sensorielle se voit attribuer une valeur en relation avec les bénéfices futurs attendus.
+Dans le cas que nous considérons (réseaux de neurones) la critique n'est pas implémentée. 
+Le réseau se contente d'explorer l'espace des réponses 
+associées à différents contextes. 
+Ce cadre se rapproche formellement d'une version simplifiée de l'apprentissage par renforcement 
+appelée ``Direct policy gradient'' \shortcite{Wil92,Bar99}, où la réponse est construite 
+par ajustement direct des paramètres de la politique (la règle qui détermine le choix
+entre les différentes réponses possibles). L'amélioration de la politique au cours du temps passe par 
+un principe de descente de gradient guidé par les récompenses (c'est à dire qui tend à augmenter l'espérance
+de la récompense au cours du temps).
+La traduction de ces principes sous la forme d'une règle de plasticité conduit à une règle qui s'apparente à 
+la règle de Hebb \shortcite{florian06}. 
+
+Ce type de tâche nécessite également de prendre en compte (et produire les 
+modifications synaptiques) liées à la totalité de la trajectoire dans le cas de récompenses ponctuelles 
+(problème du ``temporal credit assignment'' \shortcite{SUTTON98}).
+L'utilisation de récompenses ponctuelles nécessite ainsi de mettre en place un mécanisme de trace synaptique, 
+c'est à dire une mémoire locale des co-activations récentes pour appliquer la modification synaptique, dans un sens
+Hebbien ou anti-Hebbien selon les cas. 
+%a prise en compte de la boucle de rétroact
+
+{\color{Cyan}
+Les maths du Policy gradient}
+
+
+\subsubsection{Codage prédictif et commande motrice}
+
+Une autre manière de formaliser ce problème, comme proposée par Karl Friston \shortcite{Friston2010},
+repose sur l'idée d'une minimisation de la distance entre les éléments prédits et 
+observés de la scène perceptive (incluant les conséquence sensorielles
+des commandes motrices), sous la contrainte de l'expressivité du réseau de neurones, c'est à dire
+le nombre et le type de configurations (ou  formes) qu'il peut atteindre (ou atteint effectivement).
+Cette théorie de l'apprentissage en boucle fermée est une reformulation dans un contexte bio-inspiré des
+algorithmes d'optimisation utilisés en contrôle optimal \shortcite{Kalman1960} et en analyse des données \shortcite{Dempster1977}.
+Contrairement à l'apprentissage par renforcement, il s'agit d'une approche non-supervisée, fondée non sur un 
+modèle explicite (correspondance entre le modèle et la réalisté physique extérieure) 
+mais sur des jeux de contraintes entre le milieu extérieur et le milieu intérieur. 
+L'apport original de Friston est en particulier de considérer la commande motrice 
+comme un des degrés de liberté permettant à l'agent de rectifier l'erreur de
+prédiction, au même titre que la plasticité synaptique par exemple.  
+La commande motrice permet ici de replacer les éléments de la scène à l'emplacement où le logiciel souhaite les voir,
+selon une configuration cible (un attracteur) que les couplages sensori-moteurs passés ont dicté.
+%{\color{Violet} Le principe d'un déplacement moteur servant à confirmer (ou tester) la prédiction rejoint
+%l'idée de perception active [SCANNING] - comportement d'orientation.}
+{\color{Gray} Ces améliorations de prédiction peuvent ainsi passer par deux stratégies : 
+l'amélioration du logiciel et/ou l'amélioration du milieu.
+En reprenant l'exemple précédent (signaux aversifs dans l'environnement), un exemple de stratégie 
+d'action sur le milieu serait d'éloigner physiquement
+les facteurs aversifs du lieu où l'appareil évolue (sa niche). 
+Dans les deux cas, un changement physique (modification du logiciel ou modification du milieu)
+se traduit par une réduction de l'exposition au signal aversif.} 
+
+
+
+\subsection{Fonctionnement fractionnaire et fonctionnement intégré}\label{sec:echelle}
+Le problème des disparités d'échelle est reconnu de longue date dans le champ des sciences cognitives. Résumé brièvement,
+il repose sur la constatation de la difficulté à considérer sur le même plan~:
+\begin{itemize} 
+\item d'une part la contrainte physique du corps, engagé dans différentes tâches, à des échelles
+spatiales macroscopiques et des échelles temporelles lentes,
+\item et d'autre part la contrainte du circuit microscopique, constitué d'unité neuronales échangeant rapidement des signaux discrets.
+\end{itemize}
+
+Nous insistons sur la différence de nature
+(ou l'hétérogénéité) entre d'une part le milieu extérieur, caractérisé par des grandeurs extensives (des masses et
+des articulations en déplacement, des changements continus) 
+et le milieu intérieur (milieu logiciel) caractérisé par des activité bornées, discrètes,
+changeant rapidement et de manière abrupte.
+Entre les deux,  un niveau architectural (dit ``mésoscopique'') est également considéré, constitué de circuits imbriqués intégrant l'activité de larges portion du cerveau.
+Chacun de ces niveaux de description est traditionnellement considéré de manière séparée, 
+et l'effort consistant à traduire un des niveaux de description dans un autre, effort ayant pris une place importante dans les neurosciences computationnelles, s'appelle l'approche ``multi-échelles'' \shortcite{Varela2001}.
+
+L'hypothèse du \textit{passage d'échelle} suggère des moments transitoires où l'activité microscopique rejoint 
+l'activité macroscopique lors des épisodes de synchronisation, conduisant à une réduction de 
+complexité selon un principe déjà suggéré par la synergétique \shortcite{Haken1983}.
+Une hypothèse communément admise est que ce couplage transitoire entre activité motrice et activité neuronale repose sur la réduction du nombre de degrés de liberté, au sein d'assemblées neuronales spécifiques, se traduisant une synchronisation des activités et des corrélations à grande échelle \cite{Gra89}.
+
+Notre hypothèse de travail est ici d'\textit{identifier ces couplages transitoires aux mécanismes d'appariement étudiés dans les sections précédentes.}
+Nous considérons donc ici la commande motrice comme un mécanisme de relaxation qui conjugue~:
+\begin{itemize}
+	\item un attracteur appartenant à l'espace des activités neuronales 
+	\item avec un attracteur appartenant à l'espace de la réalisation motrice.
+\end{itemize}
+
+\subsubsection{Passage d'échelle}
+
+\begin{itemize}
+	\item Le mécanisme de synchronisation transitoire, ou de résonance, 
+	au sein de systèmes constitués de nombreuses unités couplées, est interprété
+	comme favorisant la \textit{communication entre les différentes échelles} \shortcite{Dau02c1}. 
+	Ce type de mécanisme n'est pas encore, à ma connaissance, implémenté dans des architectures de contrôle, 
+	mais son importance a déjà été souligné dans \shortcite{Konig1995} et \shortcite{Varela2001}.
+	\item 
+	La \textit{non-reconnaissance} correspondrait à une situation où le milieu neuronal 
+	produit une activité à haut degré de liberté, sans effet macroscopique par absence de coordination. 
+	\item
+	La \textit{reconnaissance} correspondrait à 
+	une situation où le milieu neuronal ``renonce'' transitoirement à ses degrés de liberté et se coordonne, 
+	favorisant le couplage 
+	avec la dynamique macroscopique. 
+	La coordination de la population permettrait \textit{le passage à une description ``grande échelle''} de l'activité neuronale, 
+	perceptible au niveau de description supérieur, 
+	caractérisé par une échelle spatiale plus large et une échelle temporelle plus lente,
+	le même mécanisme pouvant en principe se décliner à différentes échelles.
+\end{itemize}
+
+\paragraph{Alternance comportementale}
+L'importance de la désynchronisation, comme complément de la synchronisation, est également souligné dans \shortcite{Rod99}.
+Le fonctionnement en boucle fermée par couplage positif (par renforcement mutuel) contient en effet fondamentalement
+le risque de l'enfermement dans un attracteur comportemental unique, correspondant à
+la répétition indéfinie de la même tâche.  Au mécanisme de synchronisation doit donc correspondre un
+mécanisme de désynchronisation, qui peut reposer sur des facteurs déstabilisants liés à une
+mauvaise correspondance internes ou externe, 
+mais également sur des mécanismes actifs de désynchronisation, comme la fatigue neuronale par exemple.
+
+{\color{Gray}
+\subsection{Commande et signal}
+
+
 
 
 
 Bien spécifier l'articulation et la complémentarité avec les approches de type ``traitement du signal''
+
+\subsection{RN aléatoires et renforcement}
+
 
 
 \subsection{Modèles biologiques de la perception}
@@ -3800,32 +3959,8 @@ Voir aussi section \ref{sec:filtrage} :
 
 \subsection{Friston}
 
-Une autre manière de formaliser ce problème, comme proposée par Karl Friston \shortcite{Friston2010},
-repose sur l'idée d'une minimisation de la distance entre les éléments prédits et 
-observés de la scène perceptive (incluant les conséquence sensorielles
-des commandes motrices), sous la contrainte de l'expressivité du substrat, c'est à dire
-le nombre et le type de configurations (ou  formes) qu'il peut atteindre (ou atteint effectivement).
-Cette théorie de l'apprentissage en boucle fermée est une reformulation dans un contexte bio-inspiré des
-algorithmes d'optimisation utilisés en contrôle optimal \shortcite{Kalman1960} et en analyse des données \shortcite{Dempster1977}.
-Contrairement à l'apprentissage par renforcement, il s'agit d'une approche non-supervisée, fondée non sur un 
-modèle explicite (correspondance entre le modèle et la réalisté physique extérieure) 
-mais sur des jeux de contraintes entre le milieu extérieur et le milieu intérieur. 
-L'apport original de Friston est en particulier de considérer la commande motrice 
-comme une des modalités permettant de rectifier l'erreur de
-prédiction, au même titre que la plasticité synaptique par exemple.  
-La commande motrice permet ici de replacer les éléments de la scène à l'emplacement où le logiciel souhaite les voir,
-selon une configuration cible (un attracteur) que les couplages sensori-moteurs passés ont dicté.
-%{\color{Violet} Le principe d'un déplacement moteur servant à confirmer (ou tester) la prédiction rejoint
-%l'idée de perception active [SCANNING] - comportement d'orientation.}
-Ces améliorations de prédiction peuvent ainsi passer par deux stratégies : 
-l'amélioration du logiciel et/ou l'amélioration du milieu.
-En reprenant l'exemple précédent (signaux aversifs dans l'environnement), un exemple de stratégie 
-d'action sur le milieu serait d'éloigner physiquement
-les facteurs aversifs du lieu où l'appareil évolue (sa niche). 
-Dans les deux cas, un changement physique (modification du logiciel ou modification du milieu)
-se traduit par une réduction de l'exposition au signal aversif. 
 
-{\color{Violet}
+\color{Violet}
 	Ce qu’il faut retenir de Friston :
 	
 	- un modèle en miroir. 
@@ -3986,37 +4121,9 @@ L'erreur (la non-correspondance) ne produit pas une correction mais une transiti
 qui s'apparente à une exploration aléatoire de l'espace des couplages sensori-moteurs jusqu'à atteindre un nouvel
 attracteur comportemental.
 
-\paragraph{Passage d'échelle}
 Une interprétation possible de ces résultats du point de vue de l'approche dynamique de la
-cognition articielle a été proposée dans le livre que j'ai co-édité avec Agnès Guillot en 2002 \shortcite{Gui02}~:
-\begin{itemize}
-\item Le mécanisme de synchronisation transitoire, ou de résonance, 
-au sein de systèmes constitués de nombreuses unités couplées, est interprété
-comme favorisant la \textit{communication entre les différentes échelles} \shortcite{Dau02c1}. 
-Ce type de mécanisme n'est pas encore, à ma connaissance, implémenté dans des architectures de contrôle, 
-mais son importance a déjà été souligné dans \shortcite{Konig1995} et \shortcite{Varela2001}.
-\item 
-La \textit{non-reconnaissance} correspondrait à une situation où le milieu neuronal 
-produit une activité à haut degré de liberté, sans effet macroscopique par absence de coordination. 
-\item
-La \textit{reconnaissance} correspondrait à 
-une situation où le milieu neuronal ``renonce'' transitoirement à ses degrés de liberté et se coordonne, 
-favorisant le couplage 
-avec la dynamique macroscopique. 
-La coordination de la population permettrait \textit{le passage à une description ``grande échelle''} de l'activité neuronale, 
-perceptible au niveau de description supérieur, 
-caractérisé par une échelle spatiale plus large et une échelle temporelle plus lente,
-le même mécanisme pouvant en principe se décliner à différentes échelles.
-\end{itemize}
+cognition articielle a été proposée dans le livre que j'ai co-édité avec Agnès Guillot en 2002 \shortcite{Gui02}, selon le principe du \textit{passage d'échelle} présenté dans la section \ref{sec:echelle}.  
 
-\paragraph{Alternance comportementale}
-L'importance de la désynchronisation, comme complément de la synchronisation, est également souligné dans \shortcite{Rod99}.
-Le fonctionnement en boucle fermée par couplage positif (par renforcement mutuel) contient en effet fondamentalement
-le risque de l'enfermement dans un attracteur comportemental unique, correspondant à
-la répétition indéfinie de la même tâche.  Au mécanisme de synchronisation doit donc correspondre un
-mécanisme de désynchronisation, qui peut reposer sur des facteurs déstabilisants liés à une
-mauvaise correspondance internes ou externe, 
-mais également sur des mécanismes actifs de désynchronisation, comme la fatigue neuronale par exemple.
 
 %- Comportement d’itinerance au niveau du couple agent/environnement (robot ETIS). “Accrochage” = perte d’autonomie / information mutuelle. Alternance entre synchronisation et désynchronisation (bruit destructeur).
 
@@ -4040,76 +4147,79 @@ mais également sur des mécanismes actifs de désynchronisation, comme la fatig
 %{\bf Quoy, M., Banquet, J.-P. and Daucé, E. (2001) Learning and control with chaos : from biology to robotics, Behavioral and Brain Sciences 24(5):824-825}
 %}
 
-\subsection{Contrôle adaptatif en boucle fermée}
+\subsection{Contrôle adaptatif en boucle fermée}\label{sec:SAB04}
+	
+	L'apprentissage en boucle fermée a été tenté sur des architectures analogues à \shortcite{Dau02} (couches primaires vs. couche associative récurrente)
+	dans des environnements variés à états continus (robotiques simulée, pendule inverse, ...), dans lesquels 
+ la commande motrice est 
+	issue de l'activité de la (ou des) couche(s) associative(s).
+	\begin{itemize}
+		\item 	Les changements comportementaux reposent sur l'activité de la couche associative, soumise 
+		à une influence interne (l'activité intrinsèque) et une influence externe (signal en provenance de la couche sensorielle).
+		%Le principe de base était d'assimiler la couche secondaire à une couche motrice, c'est à dire 
+		%%d'assimiler l'activité irrégulière produite par cette couche à une activité motrice.
+		En l'absence de consigne, la commande motrice doit en effet être le produit
+		de l'activité interne. 
+		\item Le caractère irrégulier de l'activité initiale doit traduire 
+		l'absence de direction privilégiée de la réponse motrice. 
+		Le caractère organisateur des règles Hebbiennes était censé induire un comportement plus prédictible 
+		au fil du temps.
+		La prise en compte du signal de renforcement dans la règle de plasticité était censé augmenter
+		l'adéquation des comportements à la contrainte exprimée par le signal.
+	\end{itemize}
 
-{\color{Violet} 
+	
+	\paragraph{}
+	Cette tâche s'est révélée plus difficile à implémenter que la précédente~:
+	\begin{itemize}
+		\item 
+	Dans le cas précédent, la séquence à apprendre (le répertoire comportemental) était fixée par le concepteur. 
+	Ici, le répertoire comportemental est supposé émerger des interactions avec l'environnement.
+	\item 
+	Une autre facilité dans le cas précédent était que le concepteur stoppait la séance d'apprentissage
+	lorsqu'il estimait que le réseau avait suffisamment appris. 
+	Dans le cas de l'apprentissage par renforcement, la plasticité est appliquée de manière continue, ce qui peut conduire
+	à des problèmes de surapprentissage (et de résistance au changement de la dynamique interne qui rend le réseau
+	insensible à son environnement).
+		\item De plus, un environnement continu classique (contrairement à un environnement discret) 
+		présente peu d'occasions d'interactions périodiques avec l'environnement.
+		Dans un contexte d'environnement continu, la dynamique externe est lente par rapport 
+		à la dynamique neuronale.
+	\end{itemize}
+	
 
-Les réseaux de neurones récurrents aléatoires offrent, comme nous l'avons vu,
-un cadre propice à l'étude des couplages entre un contrôleur neuronal et un environnement
-physique. 
-%Notre approche se situe  à l'intersection des deux démarches évoquées. 
-D'une part, la dynamique contrainte d'un tel réseau présente des propriétés de 
-criticalité qui suggèrent une capacité à explorer différents répertoires comportementaux
-au cours d'un historique d'interactions avec un environnement.
-D'autre part, l'idée d'exploiter cette complexité intrinsèque de la dynamique interne
-pour stabiliser des couplages sensori-moteurs par des mécanismes de plasticité 
-utilisant des méta-signaux de type ``réussite/échec'' obéit aux principes de 
-l'apprentissage par renforcement.
+	\paragraph{}
+	Dans ce cadre, 
+	\begin{itemize}
+		\item Les règles Hebbiennes d'ordre 0 (basées sur la conjonction d'activité) se sont révélées 
+		plus efficaces pour la résolution des tâches, bien que moins propices aux effets de synchronisation et de résonance.
+		\item 	Les problèmes de surapprentissage ont été résolus par l'utilisation d'une règle qui bloque la plasticité en cas d'influence exclusive
+		d'une population afférente. La plasticité ne se développe que sur les neurones soumis à 
+		plusieurs influences, interne ou externe.
+		Le terme limitatif  bloque la plasticité lorsqu'une classe de liens afférents atteint à elle seule
+		le seuil d'activation du neurone.
+	\end{itemize}
 
-La traduction naturelle des algorithmes de renforcement dans un contexte de réseau de neurones récurrent est 
-l'application d'une règle de plasticité dont le but est de favoriser les comportements conduisant à un méta-signal positif.
-Ce type de tâche nécessite de prendre en compte (et produire les 
-modifications synaptiques) liées à la totalité de la trajectoire dans le cas de récompenses ponctuelles 
-(problème du ``temporal credit assignment'' \shortcite{SUTTON98}).
-L'utilisation de récompenses ponctuelles nécessite ainsi de mettre en place un mécanisme de trace synaptique, 
-c'est à dire une mémoire locale des co-activations récentes pour appliquer la modification synaptique, dans un sens
-Hebbien ou anti-Hebbien selon les cas. 
 
-Cette approche a été tentée sur des architectures analogues à \shortcite{Dau02} (couches primaires vs. couche associative récurrente)
-dans des environnements variés à états continus (robotiques simulée, pendule inverse, ...).
-Ce principe conduit à la définition d'architectures où la commande motrice est 
-issue de l'activité de la (ou des) couche(s) associative(s).
-Les changements comportementaux reposent sur l'activité de cette couche associative, soumise 
-à une influence interne (l'activité intrinsèque) et une influence externe (signal en provenance de la couche sensorielle).
-%Le principe de base était d'assimiler la couche secondaire à une couche motrice, c'est à dire 
-%%d'assimiler l'activité irrégulière produite par cette couche à une activité motrice.
-En l'absence de consigne, la commande motrice doit en effet être le produit
-de l'activité interne. Le caractère irrégulier de l'activité initiale doit traduire 
-l'absence de direction privilégiée de la réponse motrice. 
-Le caractère organisateur des règles Hebbiennes était censé induire un comportement plus prédictible 
-au fil du temps.
-La prise en compte du signal de renforcement dans la règle de plasticité était censé augmenter
-l'adéquation des comportements à la contrainte exprimée par le signal.
 
-Cette tâche s'est révélée beaucoup plus difficile à implémenter que la précédente. 
-Dans le cas précédent, la séquence à apprendre (le répertoire comportemental) était fixée par le concepteur. 
-Ici, le répertoire comportemental est supposé émerger des interactions avec l'environnement.
-Une autre facilité dans le cas précédent était que le concepteur stoppait la séance d'apprentissage
-lorsqu'il estimait que le réseau avait suffisamment appris. 
-Dans le cas de l'apprentissage par renforcement, la plasticité est appliquée de manière continue, ce qui peut conduire
-à des problèmes de surapprentissage (et de résistance au changement de la dynamique interne qui rend le réseau
-insensible à son environnement).
 
-Un environnement continu classique (contrairement à un environnement discret) 
-présente peu d'occasions d'interactions périodiques avec l'environnement.
-Dans un contexte d'environnement continu, la dynamique externe est lente par rapport 
-à la dynamique neuronale.
-Dans ce cadre, les règles Hebbiennes d'ordre 0 (basées sur la conjonction d'activité) se sont révélées 
-plus efficaces pour la résolution des tâches, bien que moins propices aux effets de synchronisation et de résonance.
-Les problèmes de surapprentissage ont été résolus par l'utilisation d'une règle qui bloque la plasticité en cas d'influence exclusive
-d'une population afférente. La plasticité ne se développe que sur les neurones soumis à 
-plusieurs influences, interne ou externe.
-Le terme limitatif  bloque la plasticité lorsqu'une classe de liens afférents atteint à elle seule
-le seuil d'activation du neurone.
-}
+\subsubsection{Modèle de 2004}
 
+\begin{figure}[t!]
+	\centerline{
+		\includegraphics[width=0.7\linewidth]{figs/controleur_diagram3.eps}
+	}
+	\caption{{\bf Interconnection pattern for the perception-action network} 
+		The network is composed of 6 populations. Filled arrows represent excitatory connections. Unfilled arrows represent inhibitory connections. A functional module is composed of two strongly interconnected populations, one excitatory and one inhibitory. Sensory module {\bf S1} is composed of populations 1 and 2, motor module {\bf M1} of populations 3 and 4, motor module {\bf M2} of populations 5 and 6. Module S1 owns a topology in its interconnection pattern (topological links are mentioned with symbol ``T'').  The 3 modules are interconnected through excitatory links (the inhibitory neurons only act locally). Module S1 sends (excitatory) signals toward toward modules M1 and M2. Modules M1 and M2 can inhibit each other through the excitation of their neighbor inhibitory layer (dotted links). Those lateral interactions are initially set to zero (from (Daucé, 2004a)).}
+	\label{fig_controleur}
+\end{figure}
 Le premier papier présentant une application des problèmes de renforcement 
 dans le cadre de réseaux récurrents aléatoires a été publié dans les proceedings de 
 la conférence SAB'04 (Simulation of Adaptive Behaviors) \shortcite{Dau04b}. 
 L'architecture neuronale est basée sur 3 modules~: un module sensoriel et deux
 modules moteurs. 
 Chaque module est constitué de deux populations de neurones~: une population
-excitatrice et une population inhibitrice.
+excitatrice et une population inhibitrice (voir figure \ref{fig_controleur}).
 L'environnement est un pendule inversé.
 La tâche consiste à transmettre au pendule l'effet de deux forces opposées produites par le niveau d'activité 
 des deux couches motrices.
@@ -4132,9 +4242,14 @@ L'intérêt de ce modèle est qu'il repose sur un principe de ciblage de la plas
 de liens qui est cohérent avec le principe biologique de libération de neurotransmetteurs ciblant des
 synapses différentes dans le cas de signaux de renforcement positifs et négatifs \shortcite{daw06}. 
 
+%{\color{Violet} 
+	
+	
+
+\subsubsection{Modèle de 2007}
 Un second modèle, présenté dans \shortcite{Dau07}, implémente cette fois-ci le principe 
 d'une application alternée de règles Hebbiennes (resp. anti-Hebbiennes) pour les récompenses positives (resp. négatives),
-conformément ausx idées exprimées dans \shortcite{dauce05},
+conformément aux idées exprimées dans \shortcite{dauce05},
 sur les liens excitateurs uniquement.
 L'architecture comprend cette fois-ci deux modules~: un module perceptif et un module moteur, constitués chacun d'une population
 excitatrice et d'une population inhibitrice.
@@ -4142,12 +4257,13 @@ Une particularité de ce modèle est l'influence inhibitrice du module moteur ve
 a pour effet d'inhiber l'entrée sensorielle lorsque la couche motrice est active.
 Des résultats comparables au cas précédent sont obtenus, avec un signal de renforcement plus simple uniquement basé sur la vitesse angulaire.
 
+\paragraph{}
 Dans ces deux modèles, l'exploration des réponses possibles repose sur la dynamique intrinsèque qui s'avère suffisamment variée
 pour explorer différents types de réponses et stabiliser celles qui conviennent le mieux. La dynamique chaotique joue donc ici
 principalement le rôle d'un bruit d'exploration. Les comportements obtenus sont principalement réactifs, il n'y a pas 
 de mise en évidence de résonance et/ou de persévérance entre certains couplages sensori-moteurs et la dynamique interne.
 
-%\cleardoublepage
+%%\cleardoublepage
 %\includepdf[pages=1,offset=70 -30]{pdf/2004-sab-ann.pdf}
 %\includepdf[pages=2,offset=-70 -30]{pdf/2004-sab-ann.pdf}
 %\includepdf[pages=3,offset=70 -30]{pdf/2004-sab-ann.pdf}
@@ -4159,7 +4275,7 @@ de mise en évidence de résonance et/ou de persévérance entre certains coupla
 %\includepdf[pages=9,offset=70 -30]{pdf/2004-sab-ann.pdf}
 %\includepdf[pages=10,offset=-70 -30]{pdf/2004-sab-ann.pdf}
 
-%\cleardoublepage
+%%\cleardoublepage
 %\includepdf[pages=34,offset=70 -30]{pdf/2007-epj-st-ann3.pdf}
 %\includepdf[pages=35,offset=-70 -30]{pdf/2007-epj-st-ann3.pdf}
 %\includepdf[pages=36,offset=70 -30]{pdf/2007-epj-st-ann3.pdf}
@@ -4168,12 +4284,26 @@ de mise en évidence de résonance et/ou de persévérance entre certains coupla
 
 
 
-\cleardoublepage
+%\cleardoublepage
 \subsection{Codage topographique et renforcement}
 
 Deux études portant sur des mécanismes d'apprentissage par renforcement dans des architectures neuronales ont
-été publiées dans le cadre de l'étude du codage topographique ({\bf!! Projet MAPS, voir section ...!!}). 
+été publiées dans le cadre de l'étude du codage topographique 
+dans le cadre de l'ANR MAPS (voir section \ref{sec:MAPS}). 
 
+\begin{figure}[t!]
+	\centerline{
+		\begin{tabular}{cc}
+			\includegraphics[height=6cm]{figs/global_2D.png} &
+			\includegraphics[height=6cm]{figs/network_2D_noise.png}\\
+			{\bf -~A~-} & {\bf -~B~-} 
+		\end{tabular}
+	}
+	\caption{{\bf -~A~- Environment}~: A rotating eyeball is tracking a punctual target (cross)~: $\theta$ is the actual eye direction, $\phi$ is the subjective target direction (relative to the pupil's direction). {\bf -~B~- Controller}~: The visual layer is composed of 256 neurons sending excitatory axons toward a motor layer composed of 32 neurons. The premotor neurons inhibit each other. A slow noise $b(t)$ is added to every premotor neuron. $I(t)$ is the visual signal, and $u(t)$ is the command (see text for more details) (from Daucé, 2009).}
+	\label{fig:ICANN09}
+\end{figure}
+
+\subsubsection{Modèle de 2009}
 La première étude, publiée dans \shortcite{Dau09}, est une extension des architectures présentées dans la section
 précédente. La tâche est l'apprentissage d'un comportement de poursuite oculaire dans un environnement en
 forme de tore (de ``donut'').
@@ -4182,13 +4312,29 @@ Deux populations de neurones à spikes sont utilisées. Le signal de renforcemen
 entre l'orientation visuelle courante et la position de la cible. La couche primaire est une rétine avec
 une déformation ``fovéale'', sur la quelle la position de la cible est codée sous la forme d'une ``bulle'' d'activité.
 La deuxième couche est une couche motrice primaire constituée de 32 neurones, 
-chaque neurone codant pour une direction différente. 
+chaque neurone codant pour une direction différente (voir figure \ref{fig:ICANN09}). 
 La commande finale est la composition de ces commandes individuelles. 
 La principale différence avec le dernier modèle 
 de la section précédente est l'absence d'activité intrinsèque dans la couche secondaire.
-Celle-ci est remplacée par un bruit exploratoire plus conforme à la théorie du Policy gradient \cite{Wil92}.
+Celle-ci est remplacée par un bruit exploratoire conforme à la théorie du Policy gradient \cite{Wil92}.
 
-La règle de Policy Gradient {\bf!! (voir section ...)!!} a été implémentée dans un cadre neuronal réaliste (neurones impulsionnels), 
+
+\begin{figure}[t!]
+	\centerline{
+		\begin{tabular}{cc}
+			\includegraphics[width=0.75\linewidth]{figs/icann-learn.png}&
+			\includegraphics[width=0.25\linewidth]{figs/field_vert.png}
+		\end{tabular}
+	}
+	\centerline{
+		{\bf -~A~- }  \hspace{3.3cm} {\bf -~B~-} \hspace{3.8cm} {\bf -~C~-}
+	}
+	\caption{{\bf -~A~-} Evolution of the mean distance ($\|\psi-\theta\|$) on a 1 s interval, during the 250 s of the learning process {\bf -~B~-} Samples from the controller and target dynamics, on 200 ms intervals, with 10 ms resolution. The red dots give the target direction (the diamond gives the final direction in the interval). The blue dots give the eye direction. {\bf -~C~-} (top) Initial average motor output for a target appearing at the considered subjective direction, (bottom) final average motor output (from (Daucé, 2009)).}
+	\label{fig:ICANN09-2}
+\end{figure}
+
+
+La règle de Policy Gradient (voir section \ref{sec:RL-RN}) a été implémentée dans un cadre neuronal réaliste (neurones impulsionnels), 
 à partir du modèle SRM (Spike Response Model) de Gerstner \shortcite{gerstner02}. Le modèle SRM possède en particulier un terme 
 appelé le potentiel de membrane ''libre'' (ou encore ``entrée synaptique'') utile pour calculer précisément la probabilité
 de tir du neurone.
@@ -4201,7 +4347,7 @@ Cette règle présente de bonnes propriétés de convergence, et peut donc être
 sans risque de faire diverger l'activité du réseau.
 
 L'interprétation de cette règle, dans le cadre des réseaux récurrents aléatoires, consiste à définir des activités
-``concurrentes'', et à leur assigner des rôles différents (bruit ou signal) selon les lieux. 
+``concurrentes'', et à leur assigner des rôles différents (bruit ou signal) selon le faisceau d'axones considéré. 
 Dans le schéma le plus simple (une couche
 primaire et une couche associative récurrente aléatoire), le signal d'origine sensorielle est interprété comme
 un terme de bruit par les synapses des axones récurrents, et, inversement le signal intrinsèque est interprété comme du bruit
@@ -4220,7 +4366,9 @@ situées dans le champ visuel opposé à leur mouvement,
 implémentant un mécanisme de correction d'erreur.
 Le caractère régulier (et donc prévisible) du mouvement de la cible induit 
 de plus un composant rotationnel, visible sur le champ
-de mouvement.
+de mouvement (voir figure \ref{fig:ICANN09-2}).
+
+
 La différence principale avec des modèles similaires \shortcite{florian06}
 est l'utilisation d'un bruit ``lent'' dont le diagramme d'autocorrélation se rapproche de
 celui de l'erreur motrice (la distance à la cible). 
@@ -4234,7 +4382,7 @@ les caractéristiques sont plus faciles à maîtriser, au prix de la perte de ce
 comme la réduction de complexité (la réduction du bruit) à l'issue de l'apprentissage.
 
 
-%\cleardoublepage
+%%\cleardoublepage
 %\includepdf[pages=1-2,landscape=true,nup=1x2,scale=1.1,offset= 70 -30]{pdf/2009-icann-final-ann.pdf}
 %\includepdf[pages=3-4,landscape=true,nup=1x2,scale=1.1,offset= -70 -30]{pdf/2009-icann-final-ann.pdf}
 %\includepdf[pages=5-6,landscape=true,nup=1x2,scale=1.1,offset= 70 -30]{pdf/2009-icann-final-ann.pdf}
@@ -4243,7 +4391,9 @@ comme la réduction de complexité (la réduction du bruit) à l'issue de l'appr
 
 %[- voir les transparents RNCM + apprentissage par coeur]
 
-\cleardoublepage
+%\cleardoublepage
+
+\subsubsection{Modèle de 2010}
 Le deuxième modèle, présenté dans \shortcite{Dauce2010}, est l'équivalent linéaire de l'architecture 
 précédente. Ce modèle simplifié est appliqué à des tâches de contrôle plus complexes.
 Il fournit également une méthodologie d'apprentissage par renforcement relativement originale, 
@@ -4307,7 +4457,7 @@ Cette étude apporte une intuition sur le principe d'un apprentissage
 position du corps dans l'élaboration de la commande motrice dans le cadre
 du codage topographique (voir aussi \cite{Pouget1997}).
 
-%\cleardoublepage
+%%\cleardoublepage
 %\includepdf[pages=2,offset=70 -30]{pdf/2010-neurocomp-ann.pdf}
 %\includepdf[pages=3,offset=-70 -30]{pdf/2010-neurocomp-ann.pdf}
 %\includepdf[pages=4,offset=70 -30]{pdf/2010-neurocomp-ann.pdf}
