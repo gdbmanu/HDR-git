@@ -3082,7 +3082,7 @@ et la dynamique induite par les motifs statiques seuls (les activités étant pa
 %}
 
 %\cleardoublepage
-\subsection{Plasticité dans les réseaux aléatoires équilibrés}
+\subsection{Plasticité dans les populations de neurones impulsionnels}
 
 
 Le travail sur des modèles plus réalistes biologiquement a été réalisé, en co-direction avec Gilles Montagne, sur le projet de thèse de
@@ -3098,7 +3098,7 @@ Frédéric Henry a travaillé sur un simulateur de réseaux de neurones impulsio
 
 
 
-L'étude présentée dans \shortcite{Hen08B} 
+\paragraph{STDP dans les réseaux récurrents aléatoires} L'étude présentée dans \shortcite{Hen08B} 
 est motivée par de nombreuses observations sur le rôle des oscillations 
 et de la synchronisation dans le fonctionnement du système nerveux.
 Les réseaux aléatoires équilibrés offrent, comme on l'a vu (section \ref{sec:balanced}), la possibilité de développer des régimes 
@@ -3153,8 +3153,6 @@ qui se distingue donc d'un pur processus aléatoire.
 La différence entre périodicité globale (50 Hz) et activité individuelle (200 Hz) s'explique par le fait
 que les neurones tirent en moyenne quatre fois par cycle.
 
-
-
 L'activité périodique finale est une activité très robuste. 
 Si l'on interrompt l'apprentissage suffisamment tôt, le comportement du réseau permet de séparer l'activité
 induite par le (ou les) motif(s) appris de celle induite par les autres motifs \shortcite{Hen08}. 
@@ -3163,13 +3161,19 @@ une capacité d'encodage similaire à celle des réseaux continus: le nombre max
 pouvant induire une réponse spécifique est de l'ordre de 5\% du nombre de neurones dans le réseau.
 
 D'un point de vue computationnel, il n'y a qualitativement pas de différence entre le nouveau modèle et
-l'ancien. Le comportement induit par la STDP ne semble donc pas reposer sur l'ordre ou 
+l'ancien \shortcite{Dau98A}. Le comportement induit par la STDP ne semble donc pas reposer sur l'ordre ou 
 l'instant de tir des potentiels d'action, mais plutôt sur leur fréquence de décharge.
+
+\paragraph{STDP dans les réseaux équilibrés}
+L'utilisation d'un patron de connectivité plus réaliste a été proposé dans une étude datée de 2009 \shortcite{Henry09},
+avec séparation fonctionnelle des neurones excitateurs et inhibiteurs, et utilisation de neurones à 
+conductance \shortcite{Kepler1992}. 
 Cette étude %sur un réseau équilibré
 %permet de mettre 
 met en évidence un comportement très analogue à celui observé sur le modèle binaire \shortcite{Dau07},
 confirmant la parenté fonctionnelle entre la règle TD et la STDP
-(voir \shortcite{Rao01}). La STDP est appliquée uniquement sur les connexions 
+(voir \shortcite{Rao01}). 
+La STDP est appliquée uniquement sur les connexions 
 entre neurones excitateurs. Une convergence vers un régime d'oscillations synchronisées avec une période globales de 
 l'ordre de 25 Hz (et une fréquence moyenne individuelle de l'ordre de 200 Hz) est mis en 
 évidence. Il s'agit d'une synchronisation observable au niveau de la population, les activités individuelles
@@ -3185,7 +3189,7 @@ délais longs ($>$ 8 ms) et une dépression des délais intermédiaires (4-8 ms)
 
 
 %\cleardoublepage
-\subsection{Plasticité et action de population}
+\paragraph{STDP et action de population}
 
 Une dernière étude, publiée récemment dans les proceedings d'ESANN \shortcite{Dau14a}, étudie l'effet de la STDP 
 dans un réseau équilibré sous influence d'un signal spatio-temporel. Deux cas sont considérés : signal périodique
@@ -3603,8 +3607,6 @@ Le cas le plus courant en robotique et en modélisation biologiquement inspirée
 		\item La sortie motrice doit être telle que cette erreur de prédiction sensorielle soit minimisée.
 	\end{itemize}
 \end{enumerate}
-
-
 
 
 \subsubsection{Facteurs exogènes}
@@ -4150,12 +4152,64 @@ Voir aussi section \ref{sec:filtrage} :
 \subsubsection{Codage par population}
 
 \subsection{Modèles biologiques de la commande}
-
+{\color{Cyan} TODO}
 \subsubsection{Modèles de la correction motrice}
-
+{\color{Cyan} TODO}
 \subsubsection{Commande par champ de vecteur}
+{\color{Cyan} TODO}
+}
+\subsection{Apprendre et oublier dans les environnements non stationnaires}
 
-\subsection{Friston}
+La non-stationnarité est une caractéristique d'environnements eux-mêmes soumis à des transformations,
+soit par l'action du contrôleur, soit par des actions extérieures (sans rapport avec le contrôleur). 
+L'interaction entre un logiciel et un humain produit par exemple un historique d'interactions, correspondant
+généralement à des étapes de ``calibration'' (côté logiciel) et à une ``prise en main'' 
+de l'interface (côté l'humain).
+{\color{Gray}
+	La calibration d'un logiciel est généralement effectuée sous le contrôle d'un
+	assistant. La calibration correspond à des étapes au cours desquelles on 
+	impose au sujet une série de commandes, permettant de calculer par des méthodes
+	supervisés
+	un classifieur spécifique. 
+}
+
+Les modèles probabiliste de l'apprentissage utilisent souvent une hypothèse de stationnarité qui 
+suppose que les données d'entrée sont issues d'un processus stochastique dont les caractéristiques
+ne varient pas au cours du temps.
+%Seul le programme voit ses caractéristiques évoluer par effet de la plasticité au cours du temps.
+Cette hypothèse n'est pas vérifiée dans le cas du contrôle en boucle fermée, où non seulement le programme 
+mais également l'environnement voient leurs caractéristiques évoluer au cours du temps. 
+
+Ainsi les régularités observéees durant les premières phases de l'apprentisage ne sont plus nécessairement présentes
+à une étape ultérieure de l'apprentissage~: certaines trajectoires sont ``abandonnées''. Dans une perspective de parcimonie 
+(ou de ressource limitée), il est avantageux d'oublier certains faits passés pour mieux appréhender les faits nouveaux, autrement
+dit oublier pour mieux apprendre.
+Cette prise en compte du ``vieillissement'' de l'environnement conduit à accorder plus de crédit à des observations
+récentes qu'à des observations anciennes \shortcite{Kivinen2004}. 
+
+\begin{itemize}
+	\item L'apprentissage ``en ligne'' \shortcite{} {\color{Cyan} [NIPS LECUN 2002]}
+	apporte un cadre d'analyse naturel au
+	traitement de la non stationnarité. 
+	L'ajustement permanent du contrôleur  
+	lui permet en effet de suivre les changements environnementaux en mettant à jour son modèle.
+	\item Le lien avec l'apprentissage par renforcement se fait naturellement, {\color{Cyan} via...}
+\end{itemize}
+
+{\color{cyan} APPRENTISSAGE DIRECT DE LA POLITIQUE}
+
+%(l'humain apprend à se servir de l'interface).
+
+ 
+ 
+ 
+ ,
+
+%[APPRENDRE ET OUBLIER]. Le papier de Kivinen.
+
+
+
+
 
 
 %\color{Violet}
@@ -4220,7 +4274,7 @@ Voir aussi section \ref{sec:filtrage} :
 %		serve to bound surprising exchanges with the world.}'' (Friston, 2010)
 
 
-}
+
 
 
 
@@ -4617,7 +4671,7 @@ la cible et de l'effecteur final dans l'espace visuel rétinocentré, et donnée
 	}
 	
 	\caption{\footnotesize{{\bf A:} Multi-joint arm control setup. {\bf B:} Typical motor response during target switch (target represented by red crosses) (a) initially (b) after learning (c) after damage (third joint blocked at 0) (d) after recovery (from (Daucé \& Dutech, 2010)).}}
-	\label{fig:ICANN09-2}
+	\label{fig:ncomp10}
 \end{figure}
 
 Deux tâches sont étudiées~
@@ -4625,6 +4679,13 @@ Deux tâches sont étudiées~
 	\item  Saccades vers des cibles en mouvement
 	\item Contrôle d'un bras articulé
 \end{itemize}
+
+Nous regardons ici comment un bruit générateur interne %est une des composantes 
+%qui 
+va permettre de faire des choix en stabilisant certaines réponses 
+dans le cadre de processus d'optimisation non-convexes (plusieurs contrôleurs/solutions possibles),
+conduisant à des solutions différentes (et donc des environnements perceptifs différents) selon le hasard
+des initialisation et des choix aléatoires produits par le modèle.
 
 \paragraph{Saccades vers des cibles en mouvement} 
 Une première tâche, en boucle ouverte, 
@@ -4645,41 +4706,59 @@ sortie, développent une variabilité suffisante pour permettre à
 la règle de plasticité de dissocier les deux composantes de la commande.
 
 \paragraph{Contrôle d'un bras articulé} La seconde tâche est l'apprentissage du contrôle
-d'un bras articulé à nombreux degrés de liberté (tâche dite de cinématique inverse).
-La scène visuelle est constituée d'une carte bidimensionnelle donnant la position de
-la cible. Les données proprioceptives sont 
-également apportées sous forme de quatre cartes unidimensionnelles traduisant la position 
-angulaire des différents joints.
-La tâche consistant à guider l'extrémité du bras vers la cible est une tâche de contrôle
-inversé (il faut trouver la combinaison de positions angulaires qui fait coïncider la position
+d'un bras articulé à nombreux degrés de liberté (tâche dite de cinématique inverse) (figure \ref{fig:ncomp10}).
+\begin{itemize}
+	\item La scène visuelle (position de
+	la cible) est codée sur une carte bidimensionnelle.
+	\item
+	 Les données proprioceptives sont 
+	 également apportées sous forme de quatre cartes unidimensionnelles traduisant la position 
+	 angulaire des différentes articulations.
+	\item La couche de sortie est constitué de quatre unités motrices dont la fréquence de décharge définit la vitesse angulaire de l'articulation (commande en vitesse). 
+\end{itemize}
+ 
+ La cible effectue périodiquement des ``sauts'' aléatoires dans l'espace visuel. La tâche consiste à guider l'extrémité du bras vers la cible (autrement dit trouver la combinaison de positions angulaires qui fait coïncider la position
 effective de la cible avec la position effective de l'extrémité du bras).
+%La tâche consiste donc à suivre les mouvements de cette cible avec le
+%bras articulé.
 Il s'agit d'une tâche d'optimisation non convexe (de nombreuses 
-solutions existent). L'utilisation d'une entrée topographique permet néanmoins 
-de ``lisser'' la solution, des positions visuellement proches conduisant à
-des réponses motrices proches.
-Dans le cadre de la tâche en boucle fermée, 
-la cible effectue périodiquement des ``sauts'' aléatoires dans l'espace visuel.
-La tâche consiste donc à suivre les mouvements de cette cible avec le
-bras articulé.
-La commande motrice produit des déplacements angulaires, ce qui permet d'apprendre
-un mouvement relatif à la position courante du bras
-(et non un mouvement absolu par rapport à la position de la cible dans le champ visuel
-seul, comme dans le cas de la tâche en boucle ouverte).
-Le contrôleur doit donc utiliser l'information proprioceptive pour produire sa commande motrice.
-Dans ce cas, le contrôleur apprend une commande liée à la différence entre la position de 
+	solutions existent) dans le cadre d'un dispositif de contrôle en boucle fermée.
+\begin{itemize}
+	\item 
+L'apprentissage repose sur une règle de policy gradient adaptée au cas d'une commande linéaire perturbée par un bruit gaussien, comme considéré ici. 
+\item 
+Le signal de récompense est basé sur la distance de l'effecteur final à la cible, avec un terme de régularisation pénalisant la vitesse. 
+\end{itemize}
+
+%Le contrôleur doit donc utiliser l'information proprioceptive pour produire sa commande motrice.
+% ce qui permet d'apprendre
+%un mouvement relatif à la position courante du bras
+%(et non un mouvement absolu par rapport à la position de la cible dans le champ visuel
+%seul, comme dans le cas de la tâche en boucle ouverte).
+
+Le contrôleur apprend à une commande correspondant, 
+dans l'espace de la tâche, 
+à la différence entre la position de 
 la cible et la position de l'effecteur final déduite des données proprioceptives,
 par combinaison linéaire du champ récepteur visuel et des champs proprioceptifs angulaires.
-Une autre façon de voir les choses est de dire que la commande motrice est calculée
-à partir du référentiel constitué par la position courante du bras articulé.
+L'utilisation d'un codage topographique permet  
+de ``lisser'' la solution, des positions visuellement proches conduisant à
+des réponses motrices proches.
+
+
+
+
 
 %{\color{red} [TODO : modèle complémentaire (pour saccade ou bras articulé) : 
 %entrée visuelle relative (rétinienne) et commande motrice de type point fixe]}
 
 \paragraph{}Cette étude permet d'aborder la question de la prise en compte de différents référentiels
-dans l'élaboration d'une commande motrice. Certaines donnéess sensorielles sont définies dans un certain référentiel
+dans l'élaboration d'une commande motrice. Certaines données sensorielles sont définies dans un certain référentiel
 (référentiel de la rétine pour l’œil par exemple) tandis que 
 les commandes opèrent dans un référentiel différent (référentiel du tronc
 dans le cas de la saccade). 
+Dans notre cas, la commande motrice est calculée
+à partir du référentiel constitué par la position courante du bras articulé.
 Cette étude apporte une intuition sur le principe d'un apprentissage 
 ``par cœur'' des règles de translation permettant de prendre en compte la
 position du corps dans l'élaboration de la commande motrice dans le cadre
@@ -4748,6 +4827,257 @@ du codage topographique (voir aussi \cite{Pouget1997}).
 %- RL / chaos $\Rightarrow$ exploration chaotique
 
 %}
+
+\section{Modèles biologiques de la commande motrice}
+
+Cette section présente une série de résultats relatifs à des projets plus directement orientés vers la modélisation des mécanismes perceptifs et moteurs
+tels qu'ils apparaissent dans les études neurophysiologiques et comportementales. 
+L'orientation est une des modalités fondamentales de l'activité motrice, consistant à déplacer les organes récepteurs dans une direction qui optimise
+leur exposition à des signaux d'intérêt. Nous étudions deux modalités de ce comportement d'orientation~: 
+\begin{itemize}
+	\item d'une part l'orientation 
+	visuelle, et plus particulièrement la saccade oculaire, en tant que modèle de boucle sensori-motrice élémentaire,
+	\item et de l'autre l'orientation 
+	temporelle, c'est à dire la capacité du sujet à concentrer ses ressources attentionnelles à un instant choisi dans le temps.
+\end{itemize} 
+
+\subsection{Modèles de l'orientation spatiale}
+
+
+
+La saccade oculaire est un mouvement présent chez l'ensemble des vertébrés consistant à orienter 
+la partie centrale de la rétine (la fovea) vers un point d'intérêt de l'espace visuel.
+Le comportement d'orientation saccadique, par opposition aux comportements locomoteurs
+ou alimentaires, est constitué de mouvements brefs (discrets), permettant 
+d'explorer la scène visuelle. La saccade oculaire est le prototype des mouvements 
+dits ``balistiques'', partant d'une posture initiale et s'achevant sur une posture finale
+(par opposition a des mouvements d'ajustement ou de contrôle guidé par 
+un feedback comme la poursuite oculaire par exemple).
+
+Etant donnée une cible visuelle présente en périphérie de la rétine, la tâche consiste à positionner 
+le corps (tronc, tête et globe oculaire) de telle sorte que cette cible soit placée au centre de la rétine.
+Le mouvement consiste donc, étant donnée la posture corps-tête-oeil initiale, à produire
+un déplacement corps-tête-oeil conduisant à la posture cible finale. La séquence qui, à partir des données
+sensorielles et proprioceptives, génère une activité phasique (une bouffée d'activité) des motoneurones 
+conduisant au déplacement désiré est appelée la transformation visuo-motrice (dite
+transformation ``spatio-temporelle'' \shortcite{MOSCHO98}). 
+Elle implique la traduction d'une activité exprimant des coordonnées spatiales   
+vers une activité temporellement bornée exprimant une vélocité motrice transitoire.
+Une version simplifiée de la tâche est la saccade à tête fixe consistant à orienter le globe
+oculaire seul.
+
+Le colliculus est une carte topographique bilatérale (champ visuel droit, champ visuel gauche) 
+dont la stimulation électrique permet de déclencher des saccades.
+L'amplitude des saccades dépend de la position de la stimulation sur la carte, et non de la fréquence 
+ou de l'intensité de la stimulation. 
+La commande motrice étant ballistique (sans feedback visuel ou proprioceptif),
+les premiers travaux de modélisation \shortcite{Rob75} suggèrent l'existence d'un intégrateur
+dans le circuit de la commande déterminant la durée de la saccade en fonction de la  
+distance déjà parcourue (intégration de la commande de vitesse au cours du temps).
+%La commande est alors proportionnelle à l'erreur motrice (la distance restant à parcourir).
+Pour tenir compte de certaines observations (en particulier la résistance à
+des variations de fréquences conduisant à des saccades plus lentes mais toujours précises),
+l'hypothèse d'un chemin double contrôlant à la fois la vitesse et la durée 
+de la saccade a été émis par \shortcite{Groh2001}.
+
+\begin{figure}[t!]
+	%\centerline{
+	
+	\begin{tabular}{ccc}
+		\includegraphics[width=0.45\linewidth]{figs/FFscheme.png}&
+		\includegraphics[width=0.45\linewidth]{figs/disynaptic_inhib.pdf} \\ %&
+		%\includegraphics[width=0.25\linewidth]{figs/SC_activity.png}
+		%\\
+		{\bf (a)}   &    {\bf (b)}  %&  {\bf (d)}
+	\end{tabular}
+	
+	\caption{(a) General scheme. We build a complete SC topographic map and the path from bidimensional collicular map to premotor burst neurons, 
+		including central mesencephalic reticular formation (cMRF) and omni-pause neurons (OPN). ``G'' denotes gaussian topographic connections
+		while ``E'' denotes exponential topographic connections.
+		(b) Disynaptic inhibition in the SC motor
+		map. Only the excitatory neurons send axons toward the burst generator
+		%(c) Activity on the superior colliculus during stimulation.
+		%(d) The size of the bump depends on the stimulation frequency and intensity.
+		(from Mouraud et al., 2011).
+	}\label{fig:SC-01}
+\end{figure}
+
+\begin{figure}[t!]
+	%\centerline{
+	
+	\begin{tabular}{ccc}
+		\includegraphics[width=0.5\linewidth]{figs/ff_oblique_1.png} &
+		\includegraphics[width=0.5\linewidth]{figs/ff_oblique_2.png}
+		\\
+		{\bf (a)}   &    {\bf (b)}
+	\end{tabular}
+	
+	\caption{
+		(a) Map of eye displacements as a function of the stimulation site (inset : horizontal saccades). 
+		(b) Eye displacement when varying stimulation frequency and intensity, for 4 different stimulation sites (from Mouraud et al., 2011).}\label{fig:SC-02}
+\end{figure}
+
+Le travail réalisé en collaboration avec Alain Guillaume et Anthony Mouraud a consisté à étudier 
+et implémenter sur un simulateur de réseaux de neurones réaliste cette hypothèse de chemin double
+vers les neurones prémoteurs. 
+Le logiciel utilisé est le simulateur de neurones impulsionnels ``DAMNED'' 
+développé par Anthony Mouraud et Didier Puzenat \shortcite{Mouraud2009}. 
+Notre modèle étudie la transformation sensori-motrices à l'aide d'une architecture réaliste
+impliquant plusieurs milliers de neurones. La carte colliculaire est organisée de manière topographique
+selon un principe de champ neuronal (connexions excitatrices à courte distance, connexions
+inhibitrices à longue distance). Les projections directes des neurones colliculaires vers les neurones pré-moteurs
+obéissent à un gradient exponentiel, l'amplitude de la saccade augmentant non linéairement
+avec l'excentricité. 
+
+Notre modèle repose sur l'hypothèse d'un contrôle effectué selon trois modalités:
+contrôle du déclenchement, contrôle de la vélocité et contrôle de la durée.
+Si la vélocité repose bien sur les projection directe du colliculus vers les neurones pré-moteurs,
+nous faisons l'hypothèse que le contrôle du déclenchement et le contrôle de la durée reposent 
+sur une structure de la formation réticulée appelée cMRF (centro-medial reticular formation)
+dont le rôle dans le contrôle de la saccade est connu \shortcite{Waitzman1996}.  
+
+
+
+Un premier modèle, présenté à l'édition 2011 de la conférence CNS \shortcite{Dauce2011}, attribue un rôle double
+aux cellules du cMRF. Les cellules contralatérales règlent le déclenchement de la saccade tandis que les cellules 
+ipsilatérales participent à sa terminaison via une intégration sous-liminaire du signal émis par les 
+neurones pré-moteurs  (voir figures \ref{fig:SC-01} et \ref{fig:SC-02}). Ce modèle utilise des neurones dont la constante de membrane lente 
+permet de faire l'économie d'un mécanisme d'intégration plus élaboré. La brève bouffée 
+émise par les neurones ipsilatéraux lorsque le potentiel atteint le seuil interrompt 
+simultanément l'activité des neurones prémoteurs et celle du colliculus, mettant fin à 
+la saccade.
+
+
+
+Ce premier modèle, de fonctionnement relativement simple, ne prend pas en compte certaine observations qui 
+reportent une prise en compte par le système saccadique de l'activité effective des neurones pré-moteurs \shortcite{Barton2003}.
+Un second modèle, incluant un lien de feedback des neurone prémoteurs vers les neurones du cMRF
+a été implémenté. Ce modèle, qui permettait de prendre en compte l'interruption temporaire de l'activité
+des neurones prémoteurs présentait néanmoins des tracés de saccades moins précis, et n'a pas fait l'objet de publication.
+
+%\cleardoublepage
+%\includepdf[pages=1,offset=70 -30]{pdf/2011-CNS-mouraud.pdf}
+%\includepdf[pages=2,offset=-70 -30]{pdf/2011-CNS-mouraud.pdf}
+
+
+\subsection{Modèles de l'orientation temporelle}
+
+
+
+La problématique de l'orientation temporelle est celle des mécanismes neuronaux supports de l'orientation de l'attention vers des instants
+précis, ``situés'' sur un axe temporel.
+L'objectif général du projet ``NOAT'' (voir section \ref{sec:bio}) était de comparer deux formes distinctes d'orientation de l'attention temporelle : 
+l'attention implicite (stimulus inclus dans un contexte temporellement structuré) 
+et attention explicite (indices endogènes donnant une information de durée), 
+et de proposer de les caractériser fonctionnellement et neuralement.
+Dans le cadre des études en psychologie
+expérimentale, la focalisation de l'attention peut être mesurée en comparant des temps de réponse
+entre les essais sur lesquels les cibles apparaissent au moment escompté  et ceux sur lesquels elles apparaissent plus tôt ou plus tard.
+Les études d'imagerie identifient quant à elles
+le réseau de l'orientation temporelle 
+dans les cortex latéralisés gauches prémoteur inférieur et pariétal \shortcite{Coull2004}. 
+
+Du côté de la modélisation, les modèles de l'attention temporelle offrent un défi 
+intéressant dans la mesure où la trame temporelle, telle qu'elle est utilisée en physique
+newtonienne, n'a aucune contrepartie sensorielle. 
+Seule existe dans notre environnement sensible la succession entre les événements, 
+et éventuellement le caractère causal de ces successions. 
+La difficulté des tâches d'orientation temporelle (estimation de l'instant de survenue d'un événement) 
+se traduit par des écarts de jugement temporel importants d'un essai à l'autre,  
+augmentant linéairement avec la durée demandée
+(ce qui suggère une difficulté proportionnelle à la durée), 
+cette propriété étant observable à la fois chez
+l'homme et chez l'animal \shortcite{Gibbon1977}.
+
+D'un point de vue computationnel, la trame temporelle se présente comme une variable
+explicative cachée, que le sujet doit reconstruire pour interpréter son environnement. 
+Les modèles computationnels 
+proposés dans la littérature supposent l'existence d'une activité intrinsèque, agissant comme
+le tic-tac d'une horloge, cette activité étant ensuite intégrée pour former une
+estimation interne du temps passé \shortcite{Gold01,Simen2011}.
+
+
+
+Le processus implémenté \shortcite{Malhotra2011} utilise un principe d'accumulation d'évidence concurrente. 
+Les différentes hypothèses ont initialement le même a-priori (chaque hypothèse
+étant assignée à un intervalle temporel distinct). Le déroulement temporel (l'intégration du signal 
+endogène) permet de mettre à jour le modèle génératif au fur et à mesure que certaines hypothèses
+perdent en plausibilité. Il y a donc une mise à jour dynamique du modèle correspondant à un changement
+de modèle génératif (une ``révision des croyances''~: 4 hypothèses, puis 3 hypothèses, puis 2...).
+De manière intéressante, la meilleure correspondance avec les données psychométriques ne correspond
+pas au modèle exact des données. Nous avons été obligés de biaiser les priors (``responsibilities'') en donnant un poids
+plus important à la source la plus proche de l'estimation temporelle courante,
+sur le principe d'un biais ``optimiste''. Une autre hypothèse serait que 
+le poids accordé à l'instant courant serait proportionnel au sentiment d'achèvement, 
+c'est à dire à la proportion d'intervalle temporel subjectif parcouru.
+
+Par ailleurs, la similarité formelle de ce modèle avec l'approche probabiliste du contrôle moteur \cite{Haruno2001}
+suggère un lien possible entre l'estimation temporelle et la simulation motrice \cite{Jeannerod2001}. 
+
+{\color{Cyan} [LIEN EM - FRISTON]}
+
+\section{Interfaces cerveau-machine}
+
+Une interface cerveau-machine (``Brain Computer Interface'' - BCI) est un dispositif qui mesure l'activité électrique 
+à la surface du cerveau (en général de manière non-invasive) afin de produire une commande.
+Les applications possibles sont en premier lieu la supplétion motrice pour des handicapés moteurs sévères,
+mais également les jeux, le monitoring, la réhabilitation motrice, etc. 
+Les dispositifs BCI sont de bons exemples de systèmes ``embarqués'', avec des possibilité
+d'interaction en boucle fermée entre le logiciel et l'humain~:
+la réponse produite par le logiciel (le feedback) a une conséquence directement mesurable 
+sur l'activité électrique émise par le sujet, et vice versa.
+Dans ce cadre, le sujet humain est la source des signaux (il joue le rôle  de l'``environnement'' du 
+logiciel BCI).
+
+Dans un cadre adaptatif, l'interface logicielle doit donc apprendre, pour chaque utilisateur, 
+à discriminer les tâches différentes activités électriques 
+produites.
+De la part du sujet, la maîtrise de l'interface comprend également une phase d'apprentissage  
+pouvant induire des modifications dans son activité électro-encéphalographique,
+dans le sens d'un signal plus net, mais aussi dans la répartition spatiale et les temps de réponse
+de l'activité électrique.
+Par ailleurs, des dégradations du signal peuvent aussi 
+être observées en cas de lassitude, de distraction, de somnolence...
+
+Dans le cadre du projet CO-ADAPT (voir section \ref{sec:bio}), 
+ma contribution a principalement porté sur une l'interfaces de type clavier virtuel appelée ``P300 speller''.
+L'onde ``P300'' est une activité positive à dominante occipitale qui apparait environ 300 ms après un stimulus 
+``surprenant'', ou différent des autres, dans une série de stimuli qui lui est préssentée.
+Le P300-speller est constitué d'une grille de symboles. Des groupes de symboles sont illuminés 
+de façon brève et aléatoire à fréquence élevée.  Le sujet doit simplement fixer le symbole qu'il souhaite 
+épeler. Une réponse distincte de l'activité de fond est attendue chaque fois que la lettre souhaitée est illuminée.
+En recoupant les groupes de symboles qui ont induit une réponse P300, le symbole attendu est écrit à 
+l'écran et une nouvelle série de flash démarre.
+
+\paragraph{Apprentissage direct de la politique} La qualité de la réponse repose sur la justesse du classifieur qui doit discriminer les signaux P300 des signaux non-P300.
+La première étude sur l'apprentissage par renforcement du P300-speller reprend 
+le schéma de Kivinen \shortcite{Kivinen2004} (prise en compte de l'oubli) lorsque le classifieur est soumis à des signaux de renforcement
+et non des signaux d'erreur classiques, selon le principe du policy-gradient (apprentisage direct de la politique). 
+
+Le modèle proposé utilisait un terme de régularisation combiné à un paramètre d'apprentissage permettant
+de définir une constante de temps caractéristique correspondant à la durée pendant laquelle les données 
+du passé sont prises en compte avant d'être oubliées.
+
+{\color{Cyan} TODO --- papier envoyé à IJCNN}
+
+\paragraph{Accumulation d'évidence} Considérons un classifieur 
+probabiliste qui, à chaque illumination d'un nouveau groupe de lettres (toutes les 200 ms),  
+donne un nombre entre 0 et 1, interprété comme la probabilité que ce groupe de lettre aît produit un P300.
+A l'aide de ce nombre, il est possible mettre à jour
+les probabilités attachées à chaque symbole de la grille. 
+Ainsi, à chaque nouveau flash, la probablité s'affine jusqu'à ce qu'un symbole soit déclaré ``gagnant''
+lorsque la probabilité qui lui est attachée dépasse un certain seuil. % (dans notre cas 0.9).
+Il est possible de construire un classifieur générique 
+à l'aide des données issues d'un groupe de sujet et de l'appliquer sans calibration sur un nouveau sujet,
+avec des taux de réussites proches de l'état de l'art des classifieurs spécifiques aux sujets. 
+Le principe d'accumulation permet également d'optimiser le nombre
+de flashs. % (le nombre de flash est adaptatif). 
+Enfin, en ajoutant une hypothèse Gaussienne, il est possible de 
+définir un algorithme adaptatif (gradient logistique) qui met à jour en permanence le classifieur afin mieux correspondre aux
+données du sujet et améliorer le taux de réussite et la vitesse de la réponse. 
+La validation du modèle adaptatif Gaussien sur des données P300 a été présenté à la conférence ESANN 2014 \shortcite{Dau14b}.
+Le schéma d'accumulation d'évidence fait partie de la mise à jour du logiciel OpenVibes \shortcite{Renard2010} développé
+entre autres à l'INRIA, et a fait l'objet de plusieurs publications dans des conférences \shortcite{Thomas2013,Thomas2014}.
 
 
 \chapter{Projet}
