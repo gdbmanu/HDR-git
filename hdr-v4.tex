@@ -3946,11 +3946,59 @@ L'activité du cerveau de l'animal éveillé consiste en grande partie à produi
 résumés par l'équation (\ref{eq:SD-closed-out}), où l'environnement est le canal de transmission et de traitement de l'information motrice émise par le cerveau. 
 Cette description purement formelle de l'activité motrice comme signal est bien sûre peu habituelle pour les activités motrices élémentaires (orientation locomotion, etc.) mais se comprend facilement si on considère l'activité motrice consistant à produire des sons articulés chez l'homme ou plus généralement tout type de communication animale.
 
+
+
+
+
 Le fait de considérer le cerveau comme simple traiteur de signal, ou symétriquement comme simple émetteur de signal, n'est bien sûr pas satisfaisant, le seul niveau de description adéquat étant celui de la boucle de rétroaction formé par le contrôleur neuronal et son environnement, autrement dit le \textit{couplage} entre, 
 \begin{itemize}
 	\item d'une part, l'appareillage moteur et son environnement (eq. \ref{eq:SD-closed-out})
 	\item  d'autre part l'appareillage sensoriel et le contrôleur  (eq. \ref{eq:SD-closed-in})
 \end{itemize}
+
+L'architecture même du système nerveux central suggère une organisation orientée vers la réalisation de tâches,
+%D'un point de vue architectural, il existe de nombreuses preuves d'
+reposant sur une organisation parallèle, avec de nombreux circuits dédiés à des tâches distinctes.
+L'étude d'organismes relativement primitifs permet 
+d'identifier les tâches élémentaires, celles qui sont présentes à
+tous les niveaux du règne animal et qui structurent l'organisation du système nerveux central.
+On distingue ainsi classiquement~:
+\begin{itemize}
+	\item l'orientation (déplacement les organes des sens vers les stimuli d'intérêt, 
+éloignement et évitement des stimuli aversifs), 
+\item 
+la locomotion (déplacement du corps) 
+\item 
+et l'ensemble des comportements consistant à utiliser les ressources de l'environnement (activité alimentaire
+par exemple) \shortcite{brembs03,Grillner2008,Stephenson2011}.
+\end{itemize}
+
+En particulier, 
+\begin{itemize}
+	\item un circuit parmi les plus primitifs est celui 
+	de la sélection de l'action organisé autour des structures sous-corticales (ganglions de la base) 
+	fonctionnant par désinhibition  
+	sélective de choix d'actions concurrents, comme mis en évidence par 
+	\shortcite{Grillner2008}. 
+	\item La dérivation de la commande motrice à travers le cervelet conduit par ailleurs
+	à des ajustements posturaux associés à un contrôle fin et adaptatif des commandes motrices \shortcite{Wolpert1998,Zeeuw1998}.
+	\item D'autres circuits plus récents, comme ceux de l'hippocampe, 
+	sont impliqués dans la navigation spatiale, et la mémorisation \shortcite{McClelland1995},  
+	exprimant en particulier la situation de l'animal dans un environnement connu mémorisé (son territoire) 
+	d'un point de vue extérieur, implémentant un mécanisme d'orientation dans un
+	référentiel extéro-centré \shortcite{OKe78}. 
+	\item 
+	Les boucles entre le cortex, le striatum et le cervelet semblent également associées 
+	chez certains mammifères à la simulation motrice
+	précédent le déclenchement de l'action \shortcite{Jeannerod2001}, etc.
+\end{itemize}
+
+
+
+
+
+
+
 
 Dans ce cadre, nous regardons plus spécifiquement deux questions~:
 \begin{itemize}
@@ -4150,14 +4198,8 @@ Voir aussi section \ref{sec:filtrage} :
 
 
 \subsubsection{Codage par population}
-
-\subsection{Modèles biologiques de la commande}
-{\color{Cyan} TODO}
-\subsubsection{Modèles de la correction motrice}
-{\color{Cyan} TODO}
-\subsubsection{Commande par champ de vecteur}
-{\color{Cyan} TODO}
 }
+
 \subsection{Apprendre et oublier dans les environnements non stationnaires}
 
 La non-stationnarité est une caractéristique d'environnements eux-mêmes soumis à des transformations,
@@ -4198,12 +4240,15 @@ récentes qu'à des observations anciennes \shortcite{Kivinen2004}.
 
 {\color{cyan} APPRENTISSAGE DIRECT DE LA POLITIQUE}
 
+{\color{Cyan} Ligne de recherche sur les mecanismes d'apprentissage en ligne avec (ou sans ) signaux de renforcement :
+	1. accumulation d'évidence
+	2. choix et adaptation}
+
 %(l'humain apprend à se servir de l'interface).
 
  
  
- 
- ,
+
 
 %[APPRENDRE ET OUBLIER]. Le papier de Kivinen.
 
@@ -4272,7 +4317,6 @@ récentes qu'à des observations anciennes \shortcite{Kivinen2004}.
 %		inference on parameters (that is, learning) minimize
 %		free energy (that is, minimize prediction error) and
 %		serve to bound surprising exchanges with the world.}'' (Friston, 2010)
-
 
 
 
@@ -4828,7 +4872,7 @@ du codage topographique (voir aussi \cite{Pouget1997}).
 
 %}
 
-\section{Modèles biologiques de la commande motrice}
+\subsection{Modèles biologiques de l'orientation}
 
 Cette section présente une série de résultats relatifs à des projets plus directement orientés vers la modélisation des mécanismes perceptifs et moteurs
 tels qu'ils apparaissent dans les études neurophysiologiques et comportementales. 
@@ -4841,7 +4885,7 @@ leur exposition à des signaux d'intérêt. Nous étudions deux modalités de ce
 	temporelle, c'est à dire la capacité du sujet à concentrer ses ressources attentionnelles à un instant choisi dans le temps.
 \end{itemize} 
 
-\subsection{Modèles de l'orientation spatiale}
+\subsubsection{Modèles de l'orientation spatiale}
 
 
 
@@ -4960,7 +5004,7 @@ des neurones prémoteurs présentait néanmoins des tracés de saccades moins pr
 %\includepdf[pages=2,offset=-70 -30]{pdf/2011-CNS-mouraud.pdf}
 
 
-\subsection{Modèles de l'orientation temporelle}
+\subsubsection{Modèles de l'orientation temporelle}
 
 
 
@@ -5016,7 +5060,7 @@ suggère un lien possible entre l'estimation temporelle et la simulation motrice
 
 {\color{Cyan} [LIEN EM - FRISTON]}
 
-\section{Interfaces cerveau-machine}
+\subsection{Interfaces cerveau-machine}
 
 Une interface cerveau-machine (``Brain Computer Interface'' - BCI) est un dispositif qui mesure l'activité électrique 
 à la surface du cerveau (en général de manière non-invasive) afin de produire une commande.
