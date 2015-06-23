@@ -715,8 +715,9 @@ et d'un article \shortcite{Henry06,Dau06,henry07}  (voir section \ref{sec:discri
 \item
 Deux papier
 de conférences \shortcite{Hen08,Hen08B} étudient un protocole d'apprentissage où un réseau aléatoire est 
-soumis à des motifs statiques aléatoires (comme dans \shortcite{Dau98A}).
-L'utilisation d'un patron de connectivité plus réaliste a été proposé dans une étude datée de 2009 \shortcite{Henry09},
+soumis à des motifs statiques aléatoires (comme dans \shortcite{Dau98A}), montrant un caractère régulateur de la règle de Hebb sur la dynamique du réseau (voir section \ref{sec:STDP}).
+\item 
+Un patron de connectivité plus réaliste a été proposé dans une étude datée de 2009 \shortcite{Henry09},
 avec séparation fonctionnelle des neurones excitateurs et inhibiteurs, et utilisation de neurones à 
 conductance \shortcite{Kepler1992}. 
 \end{itemize}
@@ -3083,7 +3084,7 @@ et la dynamique induite par les motifs statiques seuls (les activités étant pa
 
 %\cleardoublepage
 \subsection{Plasticité dans les populations de neurones impulsionnels}
-
+\label{sec:STDP}
 
 Le travail sur des modèles plus réalistes biologiquement a été réalisé, en co-direction avec Gilles Montagne, sur le projet de thèse de
 Frédéric Henry, étudiant du master de sciences cognitives à Lyon (voir section \ref{sec:bio}).
@@ -3941,13 +3942,16 @@ L'agent organise l'environnement.
 Commande invariante}
 
 
+\subsection{Remarques préliminaires}
+
+\subsubsection{Production motrice}
 Au cerveau traiteur de signal, tel qu'il est classiquement étudié en neurosciences computationnelles,  s'oppose de manière symétrique le cerveau \textit{émetteur} de signal. 
 L'activité du cerveau de l'animal éveillé consiste en grande partie à produire des ordres moteurs qui se traduisent directement au sein de l'environnement par des déplacements de masses, des rotations d'articulations, des déformations etc.
 résumés par l'équation (\ref{eq:SD-closed-out}), où l'environnement est le canal de transmission et de traitement de l'information motrice émise par le cerveau. 
 Cette description purement formelle de l'activité motrice comme signal est bien sûre peu habituelle pour les activités motrices élémentaires (orientation locomotion, etc.) mais se comprend facilement si on considère l'activité motrice consistant à produire des sons articulés chez l'homme ou plus généralement tout type de communication animale.
 
 
-
+%Le déclenchement et la régulation de l'action sont donc au cœur de l'activité du système nerveux, mobilisant l'essentiel de son fonctionnement (si on songe par exemple au cervelet qui contient plus de la moitié des neurones de l'encéphale).   
 
 
 Le fait de considérer le cerveau comme simple traiteur de signal, ou symétriquement comme simple émetteur de signal, n'est bien sûr pas satisfaisant, le seul niveau de description adéquat étant celui de la boucle de rétroaction formé par le contrôleur neuronal et son environnement, autrement dit le \textit{couplage} entre, 
@@ -3955,10 +3959,16 @@ Le fait de considérer le cerveau comme simple traiteur de signal, ou symétriqu
 	\item d'une part, l'appareillage moteur et son environnement (eq. \ref{eq:SD-closed-out})
 	\item  d'autre part l'appareillage sensoriel et le contrôleur  (eq. \ref{eq:SD-closed-in})
 \end{itemize}
+La prise en compte de la boucle de rétroaction illustre le caractère profondément imbriqué des activités motrices et perceptives, rendant difficile l'identification d'une causalité (d'une "source") autre que 
+la relation agent-environnement elle-même \footnote{Ce paradoxe de l'origine a été noté de longue date par l'école cybernétique \shortcite{Dupuy1992}.}. 
 
-L'architecture même du système nerveux central suggère une organisation orientée vers la réalisation de tâches,
+
+\subsubsection{Circuits neuronaux de la commande motrice}
+Par rapport au cadre classique de la commande, la difficulté en modélisation repose sur la multiplicité des tâches (réalisations motrices) accomplies par le couplage cerveau-environnement. 
+L'étude du système nerveux central suggère en effet %une architecture orientée vers la réalisation de tâches,
 %D'un point de vue architectural, il existe de nombreuses preuves d'
-reposant sur une organisation parallèle, avec de nombreux circuits dédiés à des tâches distinctes.
+%reposant sur 
+une organisation parallèle, avec de nombreux circuits dédiés à des tâches distinctes.
 L'étude d'organismes relativement primitifs permet 
 d'identifier les tâches élémentaires, celles qui sont présentes à
 tous les niveaux du règne animal et qui structurent l'organisation du système nerveux central.
@@ -3973,7 +3983,7 @@ et l'ensemble des comportements consistant à utiliser les ressources de l'envir
 par exemple) \shortcite{brembs03,Grillner2008,Stephenson2011}.
 \end{itemize}
 
-En particulier, 
+Ces tâches globales sont réalisées par l'activité coordonnée de différents circuits s'étendant à l'ensemble des structures de l'encéphale~: 
 \begin{itemize}
 	\item un circuit parmi les plus primitifs est celui 
 	de la sélection de l'action organisé autour des structures sous-corticales (ganglions de la base) 
@@ -3994,25 +4004,34 @@ En particulier,
 \end{itemize}
 
 
+%Dans la cadre des modèles vus jusqu'à présent, l'activité endogène permet, via la plasticité, de réaliser un \textit{appariement conditionnel} entre un signal perceptif et un "dictionnaire" de formes arbitraires issu d'un réseau de neurones aléatoire. 
+%Ce même mécanisme (plasticité-appariement) peut être postulé dans le cadre plus général de la boucle fermée agent-environnement, en identifiant les différents "mots" du dictionnaire à (1) l'activité d'une assemblée de neurones et (2) des réalisations (trajectoires) dans l'espace des couplages sensori-moteurs~:  
+%\begin{itemize}
+%	\item 
+%	En étendant la notion d'appariement au cadre du contrôle moteur, nous identifions une tâche à une trajectoire l'espace des couples $(\boldsymbol{x}_\text{in},\boldsymbol{x}_\text{out})$. Ce cadre général ne présume pas des modes de réalisation particuliers de  l'appariement. Il doit reposer
+%	sur l'activation concurrente de circuits de contrôle distincts, via des
+%	mécanismes de sélection.
+%	Les dynamiques de relaxation, telles que nous les avons vues, sont un des modes possibles de sélection de la tâche.
+%	\item 
+%	La plasticité synaptique 
+	
+\paragraph{}
+La recherche de principes généraux à l'apprentissage moteur en biologie se heurte donc à un certain nombre de difficultés liées au caractère extrêmement complexe et imbriqués des circuits biologiques, et au caractère multi-tâches du cerveau.
 
-
-
-
-
-
-Dans ce cadre, nous regardons plus spécifiquement deux questions~:
-\begin{itemize}
-	\item le rôle de l'activité endogène dans la production motrice
-	\item la question du passage d'échelle entre différents niveaux de description
+Le cadre général défini jusqu'à présent permet néanmoins de fixer quelques lignes directrices. 
+\begin{itemize} 
+	\item Premièrement, nous avons cherché à mettre en avant le rôle de l'activité endogène dans la production motrice, et particulièrement l'exploration motrice dans le cadre de l'apprentissage.
+	\item Deuxièmement, nous avons cherché à identifier des mécanismes d'appariement sensori-moteurs compatibles avec le paradigme de l'apprentissage Hebbien et de la formation d'assemblées neuronales.
 \end{itemize}
+Cette section présente un certain nombre de principes et d'hypothèses
+liés à ces deux questions particulières.
+
 
 \subsection{Rôle de l'activité endogène dans la production motrice}\label{sec:RL-RN}
 Les réseaux de neurones récurrents aléatoires offrent, comme nous l'avons vu,
 un cadre propice à l'étude des couplages entre un contrôleur neuronal et un environnement
 physique. 
 Dans le cadre de la production des ordres moteurs, l'activité récurrente endogène, telles qu'elle se développe par exemple dans les réseaux récurrents aléatoires, apparaît propre à susciter des commandes relativement indépendantes du contexte sensoriel. 
-
-
 
 {\color{Cyan} Production de signal = activité récurrente autonome. Exemple d'un système coupé de ses entrées temporairement--> possibilité de poursuivre la commande mais risque de dérive.
 
@@ -4023,32 +4042,16 @@ Différentes consignes correspondent à différents programmes (manières de tra
  
 Ici, notre hypothèse de travail est simplement que \textit{l'activité endogène est le mécanisme principal permettant à un agent d'enrichir son répertoire de comportements.} L'activité endogène spontanée, telle qu'observée dans les réseaux récurrents aléatoires, constitue un ``réservoir'' de comportements moteurs dont la réalisation peut être facilitée ou supprimée via des mécanismes de renforcement, mais aussi via des aspects contingents comme l'historique des couplages sensori-moteurs entre l'agent et son environnement, en particulier, dans le cadre de taches sous-spécifiées (ou non-convexes) comme les déplacements de masses articulées.  
 
-
-
 \subsubsection{Apprentissage par renforcement}
 
 
 %Notre approche se situe  à l'intersection des deux démarches évoquées. 
 
-
-La traduction naturelle des algorithmes de renforcement dans un contexte de réseau de neurones récurrent est 
-l'application d'une règle de plasticité dont le but est de favoriser les comportements conduisant à un méta-signal positif.
-\begin{itemize}
-	\item D'une part, la dynamique contrainte d'un tel réseau présente des propriétés de 
-	criticalité qui suggèrent une capacité à explorer différents répertoires comportementaux
-	au cours d'un historique d'interactions avec un environnement.
-	\item D'autre part, l'idée d'exploiter cette complexité intrinsèque de la dynamique interne
-	pour stabiliser des couplages sensori-moteurs par des mécanismes de plasticité 
-	utilisant des méta-signaux de type ``réussite/échec'' obéit aux principes de 
-	l'apprentissage par renforcement.
-\end{itemize}
-
-
 Le lien entre ces mécanismes d'apprentissage Hebbiens et 
 les méthodes acteur-critique classiques n'est pas direct. Dans les méthodes classiques, le choix de 
 l'action (``actor'') est découplé de l'évaluation des conséquences du choix de l'action (``critic'').
 Chaque situation sensorielle se voit attribuer une valeur en relation avec les bénéfices futurs attendus.
-Dans le cas que nous considérons (réseaux de neurones) la critique n'est pas implémentée. 
+Dans le cas que nous considérons (réseaux de neurones aléatoires), la critique n'est pas implémentée. 
 Le réseau se contente d'explorer l'espace des réponses 
 associées à différents contextes. 
 Ce cadre se rapproche formellement d'une version simplifiée de l'apprentissage par renforcement 
@@ -4060,10 +4063,19 @@ de la récompense au cours du temps).
 La traduction de ces principes sous la forme d'une règle de plasticité conduit à une règle qui s'apparente à 
 la règle de Hebb \shortcite{florian06}. 
 
-Ce type de tâche nécessite également de prendre en compte (et produire les 
+Dans la cadre des réseaux de neurones récurrents aléatoires~:
+\begin{itemize}
+	\item D'une part, les propriétés de 
+	criticalité et le caractère chaotique de la dynamique contrainte suggèrent une capacité à explorer différents répertoires comportementaux
+	au cours d'un historique d'interactions avec un environnement.
+	\item D'autre part, le caractère simplificateur (réducteur) de la règle de Hebb sur la dynamique interne
+	est favorable à la stabilision de couplages sensori-moteurs dans l'espace de la tâche.
+\end{itemize}
+
+Le principe de l'apprentissage par renforcment suggère également de prendre en compte (et produire les 
 modifications synaptiques) liées à la totalité de la trajectoire dans le cas de récompenses ponctuelles 
 (problème du ``temporal credit assignment'' \shortcite{SUTTON98}).
-L'utilisation de récompenses ponctuelles nécessite ainsi de mettre en place un mécanisme de trace synaptique, 
+L'utilisation de récompenses ponctuelles nécessite ainsi de mettre en place un mécanisme de \textit{trace synaptique}, 
 c'est à dire une mémoire locale des co-activations récentes pour appliquer la modification synaptique, dans un sens
 Hebbien ou anti-Hebbien selon les cas. 
 %a prise en compte de la boucle de rétroact
@@ -4082,7 +4094,7 @@ le nombre et le type de configurations (ou  formes) qu'il peut atteindre (ou att
 Cette théorie de l'apprentissage en boucle fermée est une reformulation dans un contexte bio-inspiré des
 algorithmes d'optimisation utilisés en contrôle optimal \shortcite{Kalman1960} et en analyse des données \shortcite{Dempster1977}.
 Contrairement à l'apprentissage par renforcement, il s'agit d'une approche non-supervisée, fondée non sur un 
-modèle explicite (correspondance entre le modèle et la réalisté physique extérieure) 
+modèle explicite (correspondance entre le modèle et la réalité physique extérieure) 
 mais sur des jeux de contraintes entre le milieu extérieur et le milieu intérieur. 
 L'apport original de Friston est en particulier de considérer la commande motrice 
 comme un des degrés de liberté permettant à l'agent de rectifier l'erreur de
@@ -4163,7 +4175,7 @@ mauvaise correspondance internes ou externe,
 mais également sur des mécanismes actifs de désynchronisation, comme la fatigue neuronale par exemple.
 
 {\color{Gray}
-\subsection{Commande et signal}
+\subsection*{Commande et signal}
 
 
 
@@ -4171,13 +4183,13 @@ mais également sur des mécanismes actifs de désynchronisation, comme la fatig
 
 Bien spécifier l'articulation et la complémentarité avec les approches de type ``traitement du signal''
 
-\subsection{RN aléatoires et renforcement}
+\subsection*{RN aléatoires et renforcement}
 
 
 
-\subsection{Modèles biologiques de la perception}
+\subsection*{Modèles biologiques de la perception}
 
-\subsubsection{Filtrage et perception}
+\subsubsection*{Filtrage et perception}
 Le modèle qui combine prédiction interne (récurrente) et correction via les entrées sensorielles et à la base des modèles de la perception. 
 La formulation de Kalman suggère
 une mise à jour de l'état basé sur un \textit{signal de correction}, construit à partir de la différence entre sensation et prédiction sensorielle~:
@@ -4197,7 +4209,7 @@ Voir aussi section \ref{sec:filtrage} :
 éléments prédits,''
 
 
-\subsubsection{Codage par population}
+\subsubsection*{Codage par population}
 }
 
 \subsection{Apprendre et oublier dans les environnements non stationnaires}
