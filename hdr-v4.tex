@@ -1931,7 +1931,7 @@ grâce au contrôle du niveau d'activité  qui empêche d'atteindre les régimes
 
 
 
-\chapter{Plasticité synaptique et apprentissage}
+\chapter{Plasticité synaptique et apprentissage}\label{chap:app}
 Ce chapitre est consacré à l'étude des mécanismes d'apprentissage dans les réseaux de neurones récurrents.  
 
 {\color{Cyan} Il est organisé en trois sections:
@@ -3978,7 +3978,7 @@ Ces tâches globales sont réalisées par l'activité coordonnée de différents
 	exprimant en particulier la situation de l'animal dans un environnement connu mémorisé (son territoire) 
 	d'un point de vue extérieur, implémentant un mécanisme d'orientation dans un
 	référentiel extéro-centré \shortcite{OKe78}. 
-	\item 
+	\item Le cortex, région anatomiquement la plus récente, est principalement lié au traitement sensoriel et aux commandes motrices fines. 
 	Les boucles entre le cortex, le striatum et le cervelet semblent également associées 
 	chez certains mammifères à la simulation motrice
 	précédent le déclenchement de l'action \shortcite{Jeannerod2001}, etc.
@@ -4000,12 +4000,16 @@ Ces tâches globales sont réalisées par l'activité coordonnée de différents
 La recherche de principes généraux à l'apprentissage moteur en biologie se heurte donc à un certain nombre de difficultés liées au caractère extrêmement complexe et imbriqués des circuits biologiques, et au caractère multi-tâches du cerveau.
 
 Le cadre général défini jusqu'à présent permet néanmoins de fixer quelques lignes directrices. 
-\begin{itemize} 
-	\item Premièrement, nous avons cherché à mettre en avant le rôle de l'activité endogène dans la production motrice, et particulièrement l'exploration motrice dans le cadre de l'apprentissage.
-	\item Deuxièmement, nous avons cherché à identifier des mécanismes d'appariement sensori-moteurs compatibles avec le paradigme de l'apprentissage Hebbien et de la formation d'assemblées neuronales.
-\end{itemize}
-Cette section présente un certain nombre de principes et d'hypothèses
-liés à ces deux questions particulières.
+\begin{enumerate} 
+	\item Nous mettons en avant le rôle de l'activité endogène dans la production motrice, et particulièrement l'exploration motrice dans le cadre de l'apprentissage.
+	\item Nous cherchons à identifier des mécanismes d'appariement sensori-moteurs compatibles avec le paradigme de l'apprentissage Hebbien et de la formation d'assemblées neuronales. Plus généralement, dans le cadre des systèmes dynamiques couplés (\ref{eq:feed-noise-1}-\ref{eq:feed-noise-1}), nous regardons le principe de l'appariement conditionnel vu dans le chapitre \ref{chap:app}.
+	\item Nous cherchons également à établir un lien plus général entre apprentissage moteur et reconnaissance de formes.  Nous développons des modèles 
+	séquentiels dans lesquels la règle de plasticité s'apparente à un apprentissage ``par coeur'' de la fonction de réponse du contrôleur $\phi_\text{out}^{-1}(\boldsymbol{x}^*)$.
+\end{enumerate}
+
+
+%Cette section présente un certain nombre de principes et d'hypothèses
+%liés à ces deux questions particulières.
 
 
 \subsection{Rôle de l'activité endogène dans la production motrice}\label{sec:RL-RN}
@@ -4053,7 +4057,7 @@ Dans la cadre des réseaux de neurones récurrents aléatoires~:
 	est favorable à la stabilision de couplages sensori-moteurs dans l'espace de la tâche.
 \end{itemize}
 
-Le principe de l'apprentissage par renforcment suggère également de prendre en compte (et produire les 
+Le principe de l'apprentissage par renforcement suggère également de prendre en compte (et produire les 
 modifications synaptiques) liées à la totalité de la trajectoire dans le cas de récompenses ponctuelles 
 (problème du ``temporal credit assignment'' \shortcite{SUTTON98}).
 L'utilisation de récompenses ponctuelles nécessite ainsi de mettre en place un mécanisme de \textit{trace synaptique}, 
@@ -5035,7 +5039,7 @@ estimation interne du temps passé \shortcite{Gold01,Simen2011}.
 
 
 
-Le processus implémenté \shortcite{Malhotra2011} utilise un principe d'accumulation d'évidence concurrente. 
+Le processus implémenté \shortcite{Malhotra2011} utilise un principe d'accumulation d'évidence concurrente (voir eqs \label{eq:accum-1}-\label{eq:accum-2}). 
 Les différentes hypothèses ont initialement le même a-priori (chaque hypothèse
 étant assignée à un intervalle temporel distinct). Le déroulement temporel (l'intégration du signal 
 endogène) permet de mettre à jour le modèle génératif au fur et à mesure que certaines hypothèses
@@ -5323,6 +5327,9 @@ of Adaptive Behavior (SAB'04)~: 305-314
 \includepdf[pages=5,offset=-70 -30]{pdf/2010-neurocomp.pdf}
 \includepdf[pages=6,offset=70 -30]{pdf/2010-neurocomp.pdf}
 \includepdf[pages=7,offset=-70 -30]{pdf/2010-neurocomp.pdf}
+
+
+
 \bibliographystyle{mslapa}%{apalike}%{apacite}
 
 \bibliography{biblio}
