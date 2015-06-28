@@ -1672,7 +1672,8 @@ Le cadre du contrôle présenté ici repose sur des modèles de l'environnement 
 
 Dans le cadre du contrôle tel présenté précédemment, l'apprentissage consiste donc à modifier le contrôleur décrit par la fonction  $\phi_\text{in}$ (voir eqs. \ref{eq:SD-closed-in} et \ref{eq:feed-noise-3}) dans un sens qui améliore un critère de performance prédéfini. La mise à jour d'un modèle ou d'une fonction de réponse consiste en général à modifier un jeu de paramètres $\Theta$ qui décrit le modèle.
 
-Dans le cas des modèles de filtrage, il s'agit par exemple d'améliorer les modèles $P$ (processus externe) et $Q$ (mesure), afin de mieux prendre en compte les facteurs exogènes non modélisés afin de mieux prédire les entrées.  %L'apprentissage consiste ainsi à 
+Cette famille de modèles est basé sur un modèle \textit{génératif}  $P_\Theta(\boldsymbol{X}|\boldsymbol{x},\boldsymbol{u})$ et $Q_\Theta(\mathcal{I}|\boldsymbol{x})$, où $\Theta$ est le jeu de paramètres définissant les deux distributions.  
+Dans le cas des modèles de filtrage, il s'agit par exemple d'améliorer les modèles $P_\Theta$ (processus externe) et $Q_\Theta$ (mesure), afin de mieux prendre en compte les facteurs exogènes non modélisés afin de mieux prédire les entrées.  %L'apprentissage consiste ainsi à 
 Dans le cadre que nous avons regardé jusqu'à présent (modèles de la mesure, filtrage),  l'état extérieur $\boldsymbol{x}_\text{out}$ est l'état caché ``latent'' à estimer.
 Le produit du processus de mesure est la distribution \textit{a posteriori} $\hat{f}$ portant sur l'espace des variables latentes, paramétré par $\Theta$, i.e. $\hat{f}(\boldsymbol{x})=f(\boldsymbol{x}|\boldsymbol{I},\boldsymbol{u},\Theta)$.
 L'amélioration du processus repose alors sur le fait de trouver de nouveaux paramètres $\Theta'$ en estimant la vraisemblance des paramètres étant donné l'état latent, soit~:
@@ -1736,12 +1737,13 @@ manière à rendre le signal arrivant à l'instant $t$ le plus prédictible poss
 et d'utiliser l'erreur de prédiction pour améliorer autant que possible les prédictions futures, soit 
 par un mécanisme de plasticité, soit par le déclenchement d'une action visant à réduire l'écart à la prédiction.
 
-Cette famille de modèles est basé sur un modèle \textit{génératif} interne $P_\Theta(\boldsymbol{X}|\boldsymbol{x},\boldsymbol{u})$ et $Q_\Theta(\mathcal{I}|\boldsymbol{x})$, où $\Theta$ est le jeu de paramètres définissant les deux distributions.  Le vecteur d'état $\boldsymbol{x}$ est ici produit selon un principe de ``codage par population'' \shortcite{Georgopoulos1986,Averbeck2006}, autrement dit via un échantillonnage de $P_\Theta$. 
+
 L'absence de consigne conduit à effectuer l'optimisation à la fois sur les paramètres du modèle et sur la commande, soit, en reprenant les notations précédentes~:  
 $$\max_{\Theta',\boldsymbol{u}'}\int \mathbb{P}(\Theta',\boldsymbol{u}'|\boldsymbol{x},\boldsymbol{I}) \hat{f}(\boldsymbol{x}) d\boldsymbol{x} $$
 
 %{\color{Cyan} Dans le cas des modèles du cervelet $I$ est la conséquence proprioceptive de la commande.}
 
+Le vecteur d'état $\boldsymbol{x}$ est ici produit selon un principe de ``codage par population'' \shortcite{Georgopoulos1986,Averbeck2006}, autrement dit via un échantillonnage de $P_\Theta$. 
 
 Ce cadre est intéressant dans la mesure où il offre 
 une interprétation relativement nouvelle 
@@ -1876,7 +1878,188 @@ l'idée de \textit{circuit reconfigurable}, basée sur l'existence d'une \textit
 neurones \textit{récurrent}.  
 Le but est de caractériser ces mécanismes, et 
 d'identifier les points communs avec  
-des mécanismes similaires à l'{\oe}uvre dans le cerveau. 
+des mécanismes similaires à l'{\oe}uvre dans le cerveau.
+
+\subsubsection{Généralités}
+Par rapport au cadre classique de la commande, la difficulté en modélisation repose sur la multiplicité des tâches (réalisations motrices) accomplies par le couplage cerveau-environnement. 
+L'étude du système nerveux central suggère en effet %une architecture orientée vers la réalisation de tâches,
+%D'un point de vue architectural, il existe de nombreuses preuves d'
+%reposant sur 
+une organisation parallèle, avec de nombreux circuits dédiés à des tâches distinctes.
+L'étude d'organismes relativement primitifs permet 
+d'identifier les tâches élémentaires, celles qui sont présentes à
+tous les niveaux du règne animal et qui structurent l'organisation du système nerveux central.
+On distingue ainsi classiquement~:
+\begin{itemize}
+	\item l'orientation (déplacement les organes des sens vers les stimuli d'intérêt, 
+	éloignement et évitement des stimuli aversifs), 
+	\item 
+	la locomotion (déplacement du corps) 
+	\item 
+	et l'ensemble des comportements consistant à utiliser les ressources de l'environnement (activité alimentaire
+	par exemple) \shortcite{brembs03,Grillner2008,Stephenson2011}.
+\end{itemize}
+
+Ces tâches globales sont réalisées par l'activité coordonnée de différents circuits s'étendant à l'ensemble des structures de l'encéphale~: 
+\begin{itemize}
+	\item un circuit parmi les plus primitifs est celui 
+	de la sélection de l'action organisé autour des structures sous-corticales (ganglions de la base) 
+	fonctionnant par désinhibition  
+	sélective de choix d'actions concurrents, comme mis en évidence par 
+	\shortcite{Grillner2008}. 
+	\item La dérivation de la commande motrice à travers le cervelet conduit par ailleurs
+	à des ajustements posturaux associés à un contrôle fin et adaptatif des commandes motrices \shortcite{Wolpert1998,Zeeuw1998}.
+	\item D'autres circuits plus récents, comme ceux de l'hippocampe, 
+	sont impliqués dans la navigation spatiale, et la mémorisation \shortcite{McClelland1995},  
+	exprimant en particulier la situation de l'animal dans un environnement connu mémorisé (son territoire) 
+	d'un point de vue extérieur, implémentant un mécanisme d'orientation dans un
+	référentiel extéro-centré \shortcite{OKe78}. 
+	\item Le cortex, région anatomiquement la plus récente, est principalement lié au traitement sensoriel et aux commandes motrices fines. 
+	Les boucles entre le cortex, le striatum et le cervelet semblent également associées 
+	chez certains mammifères à la simulation motrice
+	précédent le déclenchement de l'action \shortcite{Jeannerod2001}, etc.
+\end{itemize}
+
+\subsubsection{Approche}
+Pour modéliser le cerveau nous utilisons l'analogie du circuit reconfigurable.
+Un circuit est ici un graphe (connexe) constitué de nœuds et d'arêtes. 
+L'activité qui se développe dans le circuit repose sur la transmission de
+signaux sur les axones via les neurones qui en sont les relais.
+L'idée est donc que le graphe qui sert à modéliser l'activité nerveuse 
+est organisé de telle sorte qu'il existe une multitude de circuits ``concurrents''.
+A un instant donné, un seul de ces circuits est ``actif'', et les autres sont ``désactivés''.
+Chaque circuit est dédié à une ``tâche'' qui, dans une perspective computationnelle, 
+s'apparente à un calcul, ou dans une perspective de contrôle, s'apparente à un ``programme moteur''.
+%Ce cadre très générique est relativement consensuel en neurosciences et dans 
+%les sciences cognitives ne général.
+
+La question qui se pose dans ce cadre est celle de l'''interrupteur'' ou 
+du ``tableau de commandes'' qui
+permet de basculer d'un circuit à l'autre. 
+Une approche courante en modélisation est de stipuler l'existence d'une chaîne de traitement hiérarchique, 
+des organes des sens vers des centres de traitement de plus en plus spécialisés, conduisant
+à l'identification d'un objet ou partenaire vis à vis duquel un programme moteur adéquat 
+peut être déclenché. Selon cette approche, il y a un programme superviseur, un tableau de branchement qui 
+associe les réponses motrices aux situations identifiées. 
+   
+Dans une chaîne de traitement séquentiel, chaque couche de 
+traitement est constituée d'un certain nombre de filtres sélectionnant 
+certaines caractéristiques de la scène sensorielle. Puis les couches suivantes effectuent
+ des combinaisons de ces filtres, puis les suivantes des combinaisons de combinaisons etc.
+On parle en anglais de ``pattern matching'' que nous avons traduit ici par ``appariement''.
+Différents algorithmes permettent, comme nous l'avons vu dans la section précédente, de 
+construire de telles chaînes de traitement de manière automatique à partir d'une simple 
+base d'exemples, via des mécanismes de'''auto-encodage''.
+   
+Par opposition à ce  traitement séquentiel, nous considérons 
+une hypothèse alternative qui serait celle d'un branchement ``non centralisé''.
+Cela revient à regarder des mécanismes de traitement  
+dans lesquels l'appariement n'est pas réalisé 
+au niveau des neurones, mais au niveau 
+d'une population de neurones. 
+ Pour qu'une décision soit réalisé par une population, il faut que les neurones 
+ échangent de l'information pour aboutir à un ``consensus''. Dans le langage des systèmes
+ dynamiques, on parle de mécanisme de \textit{relaxation}.
+L'idée est donc que le cerveau, en présence d'un signal, construit sa réponse
+via une relaxation vers le circuit ayant la meilleure ``correspondance'' avec ce signal.
+
+Le choix du mécanisme de relaxation, par opposition au produit scalaire, ne 
+ correspond pas uniquement à un niveau de description plus ``fin''. 
+Il correspond en effet à une architecture neuronale différente, dite architecture
+récurrente. Un réseau de neurones est dit récurrent lorsque le graphe qui le décrit
+contient des cycles. Cela signifie concrètement que le signal produit par les
+neurones peut circuler à l'infini, ``en boucle'', à l'intérieur du réseau.
+On parle d'activité interne ou encore activité ``endogène''. 
+Le choix des réseaux de neurones récurrents se justifie également en raison de leur plus grande plausibilité biologique \shortcite{Compte2006,Fiser2010}. 
+
+Les réseaux de neurones récurrents sont donc capables de maintenir une activité persistante en l'absence de stimulation extérieure. 
+Le cadre à considérer pour traiter l'appariement est celui des systèmes dynamiques ``ouverts'' dans lesquels
+l'activité endogène d'un réseau de neurones récurrent est ``perturbée'' par un signal extérieur. 
+La réponse du réseau correspond alors à un compromis entre les contraintes internes, exprimées
+par le graphe, et les contraintes externes, exprimées par le signal, via une relaxation. 
+
+L'identification des dynamiques de relaxation à des opérateurs
+d'appariement signifie essentiellement~:
+\begin{itemize}
+	\item que la dynamique de relaxation doit 
+	permettre de séparer l'espace des signaux en régions distinctes.
+	Les dynamiques de relaxation obtenues
+	pour certaines classes de signaux doivent être \textit{qualitativement différentes}
+	de celles obtenues pour d'autres classes de signaux.  
+	\item qu'il existe des mécanismes de plasticité permettant de faire ``bouger les frontières''
+	entre les différentes régions, voire d'en créer de nouvelles et d'en faire disparaître. Le modèle de plasticité synaptique le mieux établi est la \textit{règle de Hebb} \shortcite{Heb49}, confirmée à de nombreuses reprises par les observations \shortcite{Bli73,BIPOO98}. 
+	La règle de Hebb inscrit dans la structure du graphe les conjonctions d'activité pré et post-synaptique se produisant de façon répétée au cours du temps. 
+\end{itemize}
+
+Le but est d'identifier la mise en œuvre d'un mécanisme d'appariement dans des réseaux de neurones récurrents soumis à la règle de Hebb.
+La règle de Hebb %, souvent sous-estimée pour ses plus faibles performances pratiques, doit être réexaminée dans le cadre des réseaux de neurones récurrents.
+%Autrement dit la plasticité de Hebb 
+doit être interprétée selon la logique des réseaux de neurones récurrents, cette logique étant largement différente de celle des réseaux à couches, comme nous l'avons vu~:
+\begin{itemize}
+	\item La logique à l’œuvre dans les réseaux de neurones à couches est celle d'un calcul \textit{réparti}. Le calcul est produit par étapes des couches d'entrée jusqu'à la couche de sortie; les couches cachées réalisent les calculs intermédiaires.
+	\item Le calcul implémenté par les réseaux de neurones récurrents est un calcul \textit{distribué}, c'est à dire que l'ensemble du calcul est réparti à parts égales sur les différents nœuds du réseau. Le ``temps de calcul'' correspond au temps de relaxation vers un attracteur. % Ce calcul est réalisé par l'ensemble des neurones du réseau. 
+	On parle aussi de réponse de population (ne dépendant pas d'un neurone seul).
+\end{itemize} 
+
+\paragraph{} La thèse principale développée ici est que :
+\begin{itemize}
+	\item[]
+	\textit{La plasticité de Hebb construit une fonction d'\textbf{appariement conditionnel} s'appuyant sur les propriétés de l'activité persistante.}
+\end{itemize}
+où:
+\begin{itemize}
+	\item[]
+	\textit{Le mécanisme d'appariement est assimilé, dans le cas des réseaux de neurones récurrents, à une \textbf{ réduction sélective de la complexité} de la dynamique.} 
+\end{itemize}
+
+\paragraph{}  En détail, nous faisons les propositions suivantes~:
+\begin{itemize}
+	\item Un réseau récurrent (en régime ``persistant'') se comporte comme un ``réservoir'' de patrons d'activité (ou ``assemblées'' de neurones). Chaque patron d'activité correspond à l'activation d'un circuit spécifique sur le graphe.
+	\item Le calcul repose sur l'appariement entre l'entrée (le signal extérieur) et un des patrons d'activité activables sur le graphe. On parle de \textit{reconfiguration} du circuit.
+	\item Cet appariement se traduit par une réduction de complexité 
+	correspondant à la relaxation du système dynamique vers un attracteur de dimension faible.
+	\item Cette réduction sélective de complexité repose sur l'action de la plasticité de Hebb sur le graphe en présence de signaux contenant ``suffisamment'' de régularités.
+\end{itemize}
+
+
+
+
+ 
+%Ces circuits concurrents  Leur activation est conditionnée par des configurations spécifiques de l'environnement moteur et sensoriel ainsi que par des mécanismes de sélection internes.
+% L'apparition ou la disparition de certains circuits au cours du développement de l'individu repose sur des mécanismes de plasticité. 
+%Le problème est donc de regarder comment un tel processus se r matériellement.
+ 
+ 
+\paragraph{Réseaux de neurones récurrents aléatoires} Au sein de ce problème générique, nous étudions plus particulièrement le cas des réseaux de neurones définis par des graphes aléatoires.
+ 
+
+
+- le rôle du hasard dans la constitution de tels circuits.
+
+- plasticité de Hebb
+
+  - propriétés dynamiques des circuits aléatoires
+
+  - hasard et plasticité
+
+- le rôle de l'activité endogène dans le mécanisme d 'appariement
+
+- approche multi-échelles et hypothèse du ``passage d'échelle''
+
+- codage par population
+
+- signaux spatio-temporels
+
+- apprentissage en ligne
+
+- apprentissage par renforcement
+
+Nous utilisons des modèles de réseaux de neurones  
+
+Expressivité 
+
+
+
 
 Résultat principaux :
 
@@ -4264,14 +4447,6 @@ récentes qu'aux observations anciennes \shortcite{Kivinen2004}, et donc \textit
 \section{Notions spécifiques et propositions}
 
 Cette section présente quelques notions plus spécialisées utiles à la compréhension de mes travaux, dédiées à l'étude de la plasticité des réseaux de neurones récurrents. 
-\begin{itemize}
-\item
-Le choix des réseaux de neurones récurrents se justifie principalement en raison de leur plus grande plausibilité biologique \shortcite{Compte2006,Fiser2010}. Comme nous l'avons vu, les réseaux de neurones récurrents sont capables de maintenir une activité persistante en l'absence de stimulation extérieure. 
-\item Le modèle de plasticité synaptique le mieux établi est la \textit{règle de Hebb} \shortcite{Heb49}, confirmée à de nombreuses reprises par les observations \shortcite{Bli73,BIPOO98}. 
-La règle de Hebb inscrit dans la structure du graphe les conjonctions d'activité pré et post-synaptique se produisant de façon répétée au cours du temps. 
-\end{itemize}
-
-Le but est d'identifier certains principes computationnels à l’œuvre dans des réseaux de neurones récurrents soumis à la règle de Hebb.
 
 {\color{Gray} Ne prenant pas en compte de signal d'erreur, cette règle est classiquement interprétée dans le cadre 
 théorique de l'apprentissage non-supervisé. 
@@ -4282,34 +4457,6 @@ théorique de l'apprentissage non-supervisé.
 \end{itemize}
 Ces modèles sont porteurs de limitations (en terme de capacité de stockage ou de preuve de convergence) qui rendent difficiles l'utilisation de la règle de Hebb dans le cadre de problèmes pratiques. }
 
-La règle de Hebb %, souvent sous-estimée pour ses plus faibles performances pratiques, doit être réexaminée dans le cadre des réseaux de neurones récurrents.
-%Autrement dit la plasticité de Hebb 
-doit être interprétée selon la logique des réseaux de neurones récurrents, cette logique étant largement différente de celle des réseaux à couches.
-\begin{itemize}
-	\item La logique à l’œuvre dans les réseaux de neurones à couches est celle d'un calcul \textit{réparti}. Le calcul est produit par étapes des couches d'entrée jusqu'à la couche de sortie; les couches cachées réalisent les calculs intermédiaires.
-	\item Le calcul implémenté par les réseaux de neurones récurrents est un calcul \textit{distribué}, c'est à dire que l'ensemble du calcul est réparti à parts égales sur les différents nœuds du réseau. Le ``temps de calcul'' correspond au temps de relaxation vers un attracteur. % Ce calcul est réalisé par l'ensemble des neurones du réseau. 
-	On parle aussi de réponse de population (ne dépendant pas d'un neurone seul).
-\end{itemize} 
-
-\paragraph{} La thèse principale développée ici est que :
-\begin{itemize}
-	\item[]
-	\textit{La plasticité de Hebb construit une fonction d'\textbf{appariement conditionnel} s'appuyant sur les propriétés de l'activité persistante.}
-\end{itemize}
-où:
-\begin{itemize}
-	\item[]
-\textit{Le mécanisme d'appariement est assimilé, dans le cas des réseaux de neurones récurrents, à une \textbf{ réduction sélective de la complexité} de la dynamique.} 
-\end{itemize}
-
-\paragraph{} En détail, nous faisons les propositions suivantes~:
-\begin{itemize}
-	\item Un réseau récurrent (en régime ``persistant'') se comporte comme un ``réservoir'' de patrons d'activité (ou ``assemblées'' de neurones). Chaque patron d'activité correspond à l'activation d'un circuit spécifique sur le graphe.
-	\item Le calcul repose sur l'appariement entre l'entrée (le signal extérieur) et un des patrons d'activité activables sur le graphe. On parle de \textit{reconfiguration} du circuit.
-	\item Cet appariement se traduit par une réduction de complexité 
-	 correspondant à la relaxation du système dynamique vers un attracteur de dimension faible.
-	\item Cette réduction sélective de complexité repose sur l'action de la plasticité de Hebb sur le graphe en présence de signaux contenant ``suffisamment'' de régularités.
-\end{itemize}
 
 {\color{Cyan}
 	Idée de base~: étudier le rôle de l'activité récurrente (persistante) dans le cadre de l'apprentissage. En particulier: reconnaissance de patrons spatio-temporels. 
@@ -5636,44 +5783,8 @@ la relation agent-environnement elle-même \footnote{Ce paradoxe de l'origine a 
 
 
 \subsubsection{Circuits neuronaux de la commande motrice}
-Par rapport au cadre classique de la commande, la difficulté en modélisation repose sur la multiplicité des tâches (réalisations motrices) accomplies par le couplage cerveau-environnement. 
-L'étude du système nerveux central suggère en effet %une architecture orientée vers la réalisation de tâches,
-%D'un point de vue architectural, il existe de nombreuses preuves d'
-%reposant sur 
-une organisation parallèle, avec de nombreux circuits dédiés à des tâches distinctes.
-L'étude d'organismes relativement primitifs permet 
-d'identifier les tâches élémentaires, celles qui sont présentes à
-tous les niveaux du règne animal et qui structurent l'organisation du système nerveux central.
-On distingue ainsi classiquement~:
-\begin{itemize}
-	\item l'orientation (déplacement les organes des sens vers les stimuli d'intérêt, 
-éloignement et évitement des stimuli aversifs), 
-\item 
-la locomotion (déplacement du corps) 
-\item 
-et l'ensemble des comportements consistant à utiliser les ressources de l'environnement (activité alimentaire
-par exemple) \shortcite{brembs03,Grillner2008,Stephenson2011}.
-\end{itemize}
 
-Ces tâches globales sont réalisées par l'activité coordonnée de différents circuits s'étendant à l'ensemble des structures de l'encéphale~: 
-\begin{itemize}
-	\item un circuit parmi les plus primitifs est celui 
-	de la sélection de l'action organisé autour des structures sous-corticales (ganglions de la base) 
-	fonctionnant par désinhibition  
-	sélective de choix d'actions concurrents, comme mis en évidence par 
-	\shortcite{Grillner2008}. 
-	\item La dérivation de la commande motrice à travers le cervelet conduit par ailleurs
-	à des ajustements posturaux associés à un contrôle fin et adaptatif des commandes motrices \shortcite{Wolpert1998,Zeeuw1998}.
-	\item D'autres circuits plus récents, comme ceux de l'hippocampe, 
-	sont impliqués dans la navigation spatiale, et la mémorisation \shortcite{McClelland1995},  
-	exprimant en particulier la situation de l'animal dans un environnement connu mémorisé (son territoire) 
-	d'un point de vue extérieur, implémentant un mécanisme d'orientation dans un
-	référentiel extéro-centré \shortcite{OKe78}. 
-	\item Le cortex, région anatomiquement la plus récente, est principalement lié au traitement sensoriel et aux commandes motrices fines. 
-	Les boucles entre le cortex, le striatum et le cervelet semblent également associées 
-	chez certains mammifères à la simulation motrice
-	précédent le déclenchement de l'action \shortcite{Jeannerod2001}, etc.
-\end{itemize}
+
 
 
 %Dans la cadre des modèles vus jusqu'à présent, l'activité endogène permet, via la plasticité, de réaliser un \textit{appariement conditionnel} entre un signal perceptif et un "dictionnaire" de formes arbitraires issu d'un réseau de neurones aléatoire. 
