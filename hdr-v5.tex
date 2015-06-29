@@ -904,32 +904,11 @@ Nous nous plaçons dans une perspective de modélisation biologique. Nous cherch
 de s'adapter à son environnement. Les nœuds du réseau sont les neurones et les arêtes du graphe sont les axones transportant le signal d'un neurone à l'autre.  La contrainte de plausibilité biologique impose de prendre en compte les observations et données expérimentales dans l'élaboration des modèles.  
 
 
-Dans le cadre de ce rapport, nous regardons plus particulièrement les contraintes suivantes~:
-\begin{itemize}
-	\item Existence d'une activité endogène, produite par la transmission
-	en boucle du signal produit par les neurones à travers un graphe de connexions récurrentes.
-	\item Utilisation de graphes aléatoires pour décrire les interactions entre les neurones. Les neurones sont donc branchés aléatoirement sur tout ou partie de leurs voisins.
-	\item Caractère local de la plasticité synaptique. Seuls les signaux pré et post-synaptiques déterminent les changements structuraux.
-	\item Existence de boucles de rétroaction entre le réseau de neurones et son environnement. Les entrées du réseau sont causalement liées aux réponses produites par le réseau aux instants précédents. 
-\end{itemize}
 
 
-Par ailleurs~:
-\begin{itemize}
-	\item 
-	Les résultats présentés dans ce rapport s'appuient sur les études des comportements à large échelle de systèmes dynamiques constitués par l'interaction de nombreuses unités couplées, qui lient 
-	l'activité ``microscopique'' à des grandeurs ``macroscopiques'' basées sur les comportements moyens et les corrélations d'activité \shortcite{Wilson1972,Ama72,Amit1985,Som88,Ces94B,Ami97}, etc.
-	\item Les études sur la plasticité synaptique reposent largement sur  la simulation numérique. Les simulations numériques visent à établir des comportements d'ensemble difficilement déductibles du modèle, en particulier lorsque les modifications locales introduites par la plasticité synaptique ont des conséquences sur la dynamique d'ensemble. 
-	\item Nous validons principalement les modèles d'apprentissage proposés sur des tâches liées au contrôle moteur. Nous cherchons à établir les conditions dans lesquelles un réseau de neurones peut acquérir des compétences de contrôle sur l'appareil moteur et/ou sur des périphériques de sortie.  Ces validations impliquent~:
-	\begin{itemize}
-		\item Des problèmes ``jouets'' dont nous maîtrisons les paramètres,
-		\item Des architectures neuronales directement inspirés par les observations biologiques 
-		\item Des applications relevant du domaine de l’ingénierie (interfaces cerveau-machine en particulier)
-	\end{itemize} 
-\end{itemize}
 
 
-Dans le cadre de ce rapport, les résultats  ont été organisés autour de trois grandes thématiques~:
+Les résultats  ont été organisés autour de trois grandes thématiques~:
 \begin{enumerate}
 	\item La thématique des ``capacités d'expression'' des réseaux de neurones à couplages aléatoires, dans le cadre de leur interaction avec un signal extérieur. 
 	\item La thématique de la plasticité synaptique et de l'apprentissage, via une \textit{réduction de dynamique} induite par la plasticité de Hebb.
@@ -937,17 +916,11 @@ Dans le cadre de ce rapport, les résultats  ont été organisés autour de troi
 \end{enumerate}
 
 
-Enfin, le travail de compilation et de relecture/réexamen de résultats parfois anciens liés à la rédaction de ce rapport a été l'occasion de développer quelques rapprochements qui ne sont pas présentes en tant que telles dans les publications. 
-Je cherche en particulier à éclairer les résultats
-sous l'angle de l'opération d'\textit{appariement} (``pattern matching''), qui est au centre des algorithmes d'apprentissage automatique, en particulier~:
-\begin{itemize}
-\item interpréter la réduction de dynamique induite par plasticité Hebbienne en présence de certains signaux externes comme un mécanisme d'appariement \textit{conditionnel}. 
-\item dans le cadre de la commande des systèmes dynamiques, établir un lien entre appariement, rétroaction positive et mouvement balistique (par opposition au contrôle  par rétroaction négative et mouvement de poursuite).
-\end{itemize} 
 
 
 
-\chapter{Problématique générale}
+
+\chapter{Principes et modèles}
 
 L'étude des réseaux de neurones naturels suggère un mode de fonctionnement
 intermédiaire entre le ``pattern matching'' (reconnaissance de formes) et les systèmes dynamiques. 
@@ -1589,6 +1562,10 @@ négatif? Peut-on
 s'adapter à un environnement autrement qu'en extrayant des ``dictionnaires'' d'invariants
 perceptifs et moteurs de l'environnement?
 
+
+
+
+\subsection{Problème des disparités d'échelle}
 La séparation conceptuelle et pratique entre d'une part l'approche systèmes dynamiques, d'autre part la reconnaissance de formes 
 semble reposer sur le caractère disparate, d'une part de l'environnement métrique sur lequel s'applique
 le contrôle, et d'autre part sur la multitude des récepteurs supports de l'information sensorielle.
@@ -1597,6 +1574,21 @@ le contrôle, et d'autre part sur la multitude des récepteurs supports de l'inf
 Cette dichotomie implique un mode de fonctionnement composite, basé d'une part sur des rapports entre quantités (monde physique), 
 et d'autre part sur des rapports entre formes (monde digital).
 
+Le problème des disparités d'échelle, reconnu de longue date dans le champ des sciences cognitives, repose sur la constatation de la difficulté à considérer sur le même plan~:
+\begin{itemize} 
+	\item d'une part la contrainte physique du corps, engagé dans différentes tâches, à des échelles
+	spatiales macroscopiques et des échelles temporelles lentes,
+	\item et d'autre part la contrainte du circuit microscopique, constitué d'unité neuronales échangeant rapidement des signaux discrets.
+\end{itemize}
+
+Nous insistons sur la différence de nature
+(ou l'hétérogénéité) entre d'une part le milieu extérieur, caractérisé par des grandeurs extensives (des masses et
+des articulations en déplacement, des changements continus) 
+et le milieu intérieur (milieu logiciel) caractérisé par des activité bornées, discrètes,
+changeant rapidement et de manière abrupte.
+Entre les deux,  un niveau architectural (dit ``mésoscopique'') est également considéré, constitué de circuits imbriqués intégrant l'activité de larges portion du cerveau.
+Chacun de ces niveaux de description est traditionnellement considéré de manière séparée, 
+et l'effort consistant à traduire un des niveaux de description dans un autre, effort ayant pris une place importante dans les neurosciences computationnelles, s'appelle l'approche ``multi-échelles'' \shortcite{Varela2001}.
 
 \subsection{Espace métrique et espace sensoriel}	
 	Dans le cadre des algorithmes d'apprentissage, l'universalité de l'apprentissage (sa capacité à
@@ -1676,9 +1668,13 @@ Cette famille de modèles est basé sur un modèle \textit{génératif}  $P_\The
 Dans le cas des modèles de filtrage, il s'agit par exemple d'améliorer les modèles $P_\Theta$ (processus externe) et $Q_\Theta$ (mesure), afin de mieux prendre en compte les facteurs exogènes non modélisés afin de mieux prédire les entrées.  %L'apprentissage consiste ainsi à 
 Dans le cadre que nous avons regardé jusqu'à présent (modèles de la mesure, filtrage),  l'état extérieur $\boldsymbol{x}_\text{out}$ est l'état caché ``latent'' à estimer.
 Le produit du processus de mesure est la distribution \textit{a posteriori} $\hat{f}$ portant sur l'espace des variables latentes, paramétré par $\Theta$, i.e. $\hat{f}(\boldsymbol{x})=f(\boldsymbol{x}|\boldsymbol{I},\boldsymbol{u},\Theta)$.
-L'amélioration du processus repose alors sur le fait de trouver de nouveaux paramètres $\Theta'$ en estimant la vraisemblance des paramètres étant donné l'état latent, soit~:
+L'amélioration du processus repose alors sur le fait de trouver de nouveaux paramètres $\Theta'$ en estimant la vraisemblance des paramètres étant donné l'état latent, soit en marginalisant~:
 \begin{align}
-\max_{\Theta'} \int \mathbb{P}(\Theta'|\boldsymbol{x},\boldsymbol{I},\boldsymbol{u}) \hat{f}(\boldsymbol{x}) d\boldsymbol{x} \label{eq:Friston}
+	\mathbb{P}'(\Theta) = \int \mathbb{P}(\Theta|\boldsymbol{x},\boldsymbol{I},\boldsymbol{u}) \hat{f}(\boldsymbol{x}) d\boldsymbol{x}
+\end{align}
+soit en maximisant~:
+\begin{align}
+	\max_{\Theta'} \int  \hat{f}(\boldsymbol{x}) d\boldsymbol{x} \label{eq:Friston}
 \end{align}
 ce qui permet, de manière récurrente, de produire une nouvelle distribution a posteriori  $\hat{f}'$ qui elle-même produit un nouveau jeu de paramètres $\Theta''$ etc.
 Cette succession d'estimations et de maximisations donne son nom à l'algorithme EM \shortcite{Dempster1977} qui, étant données les observations, converge vers une distribution limite $\hat{f}^*$.
@@ -1739,11 +1735,11 @@ par un mécanisme de plasticité, soit par le déclenchement d'une action visant
 
 
 L'absence de consigne conduit à effectuer l'optimisation à la fois sur les paramètres du modèle et sur la commande, soit, en reprenant les notations précédentes~:  
-$$\max_{\Theta',\boldsymbol{u}'}\int \mathbb{P}(\Theta',\boldsymbol{u}'|\boldsymbol{x},\boldsymbol{I}) \hat{f}(\boldsymbol{x}) d\boldsymbol{x} $$
+$$\max_{\Theta',\boldsymbol{u}'}\int \hat{f}(\boldsymbol{x}) d\boldsymbol{x} %= \min_{\Theta',\boldsymbol{u}'} \int -  \log\hat{f}(\boldsymbol{x}) d\boldsymbol{x} 
+$$
 
 %{\color{Cyan} Dans le cas des modèles du cervelet $I$ est la conséquence proprioceptive de la commande.}
-
-Le vecteur d'état $\boldsymbol{x}$ est ici produit selon un principe de ``codage par population'' \shortcite{Georgopoulos1986,Averbeck2006}, autrement dit via un échantillonnage de $P_\Theta$. 
+où la distribution a posteriori $\hat{f}(\boldsymbol{x})$ est produite de manière générative selon un principe de ``codage par population'' \shortcite{Georgopoulos1986,Averbeck2006}, autrement dit via un échantillonnage de $P_\Theta$. 
 
 Ce cadre est intéressant dans la mesure où il offre 
 une interprétation relativement nouvelle 
@@ -1789,7 +1785,7 @@ ses manifestations sensorielles.
 %	sensorielles, à savoir la scène effective et la scène prédite.
 %	Il existe dans les deux cas une activité de prédiction active, via un modèle ``forward''.
 
-\subsection{Cas de la rétroaction positive}
+\subsection{Observations et modèles}
 
 
 
@@ -1798,8 +1794,47 @@ ses manifestations sensorielles.
 %bien entendu issus de l'historique d'apprentissage. 
 %}
 
+\paragraph{Observations}
+Par rapport au cadre classique de la commande, la difficulté en modélisation biologique repose sur la multiplicité des réalisations motrices accomplies par le couplage cerveau-environnement. 
+L'étude du système nerveux central suggère en effet %une architecture orientée vers la réalisation de tâches,
+%D'un point de vue architectural, il existe de nombreuses preuves d'
+%reposant sur 
+une organisation parallèle, avec de nombreux circuits dédiés à des tâches distinctes.
+L'étude d'organismes relativement primitifs permet 
+d'identifier les tâches élémentaires, celles qui sont présentes à
+tous les niveaux du règne animal et qui structurent l'organisation du système nerveux central.
+On distingue ainsi classiquement~:
+\begin{itemize}
+	\item l'orientation (déplacement les organes des sens vers les stimuli d'intérêt, 
+	éloignement et évitement des stimuli aversifs), 
+	\item 
+	la locomotion (déplacement du corps) 
+	\item 
+	et l'ensemble des comportements consistant à utiliser les ressources de l'environnement (activité alimentaire
+	par exemple) \shortcite{brembs03,Grillner2008,Stephenson2011}.
+\end{itemize}
 
+Ces tâches globales sont réalisées par l'activité coordonnée de différents circuits s'étendant à l'ensemble des structures de l'encéphale~: 
+\begin{itemize}
+	\item un circuit parmi les plus primitifs est celui 
+	de la sélection de l'action organisé autour des structures sous-corticales (ganglions de la base) 
+	fonctionnant par désinhibition  
+	sélective de choix d'actions concurrents, comme mis en évidence par 
+	\shortcite{Grillner2008}. 
+	\item La dérivation de la commande motrice à travers le cervelet conduit par ailleurs
+	à des ajustements posturaux associés à un contrôle fin et adaptatif des commandes motrices \shortcite{Wolpert1998,Zeeuw1998}.
+	\item D'autres circuits plus récents, comme ceux de l'hippocampe, 
+	sont impliqués dans la navigation spatiale, et la mémorisation \shortcite{McClelland1995},  
+	exprimant en particulier la situation de l'animal dans un environnement connu mémorisé (son territoire) 
+	d'un point de vue extérieur, implémentant un mécanisme d'orientation dans un
+	référentiel extéro-centré \shortcite{OKe78}. 
+	\item Le cortex, région anatomiquement la plus récente, est principalement lié au traitement sensoriel et aux commandes motrices fines. 
+	Les boucles entre le cortex, le striatum et le cervelet semblent également associées 
+	chez certains mammifères à la simulation motrice
+	précédent le déclenchement de l'action \shortcite{Jeannerod2001}, etc.
+\end{itemize}
 
+\paragraph{Modèles}
 Il existe de nombreux modèles utilisant les principes du contrôle adaptatif pour modéliser
 l'activité nerveuse. On citera parmi les plus connus \shortcite{Rob75,Wolpert1998}.
 Les schémas de guidage par correction d'erreur sont par ailleurs 
@@ -1828,6 +1863,8 @@ comme dans le cas de la locomotion. Cette activité rythmique spontanée peut ê
 		persiste dans le nouveau)?}. Un mouvement balistique simple peut être vu par exemple comme la transition d'une posture inadaptée vers une
 	posture plus adaptée aux contraintes exprimées par l'environnement.
 \end{itemize} 
+
+
 
 
 
@@ -1871,56 +1908,76 @@ Le manque de développements applicatifs vient probablement
 
 
 
-\chapter{Principaux résultats}
+\chapter{Considérations supplémentaires}
 
-Les travaux présentés dans ce mémoire sont centrés sur
+{\color{Gray} Les travaux présentés dans ce mémoire sont centrés sur
 l'idée de \textit{circuit reconfigurable}, basée sur l'existence d'une \textit{activité endogène} produite par un réseau de 
 neurones \textit{récurrent}.  
 Le but est de caractériser ces mécanismes, et 
 d'identifier les points communs avec  
-des mécanismes similaires à l'{\oe}uvre dans le cerveau.
+des mécanismes similaires à l'{\oe}uvre dans le cerveau.}
 
-\subsubsection{Généralités}
-Par rapport au cadre classique de la commande, la difficulté en modélisation repose sur la multiplicité des tâches (réalisations motrices) accomplies par le couplage cerveau-environnement. 
-L'étude du système nerveux central suggère en effet %une architecture orientée vers la réalisation de tâches,
-%D'un point de vue architectural, il existe de nombreuses preuves d'
-%reposant sur 
-une organisation parallèle, avec de nombreux circuits dédiés à des tâches distinctes.
-L'étude d'organismes relativement primitifs permet 
-d'identifier les tâches élémentaires, celles qui sont présentes à
-tous les niveaux du règne animal et qui structurent l'organisation du système nerveux central.
-On distingue ainsi classiquement~:
+Le travail de compilation et de relecture/réexamen de résultats parfois anciens liés à la rédaction de ce rapport a été l'occasion de développer quelques rapprochements qui ne sont pas présentes en tant que telles dans les publications. 
+
+Comme nous l'avons vu, la plupart des algorithmes d'apprentissage fonctionnent selon un principe d'\textit{appariement} (``pattern matching''), c'est à dire sur la construction, à partir des données, d'un ensemble de vecteurs ``caractéristiques''. 
 \begin{itemize}
-	\item l'orientation (déplacement les organes des sens vers les stimuli d'intérêt, 
-	éloignement et évitement des stimuli aversifs), 
-	\item 
-	la locomotion (déplacement du corps) 
-	\item 
-	et l'ensemble des comportements consistant à utiliser les ressources de l'environnement (activité alimentaire
-	par exemple) \shortcite{brembs03,Grillner2008,Stephenson2011}.
+	\item Ces vecteurs caractéristiques, vus comme un dictionnaire de formes, constituent une base de description synthétique des données d'entrée. 
+	\item La projection des données d'entrée sur cet espace de redescription facilite ensuite leur traitement et leur interprétation. 
+\end{itemize} 
+L’apprentissage revient donc à la constitution d'un vocabulaire de base qui sert de clé d'interprétation des données d'entrée. 
+
+Nous avons souligné dans la partie précédente le caractère parfois incompatible entre d'une part la théorie du contrôle, et d'autre part l'apprentissage moteur. Nous formons l'hypothèse que cette difficulté à faire apprendre des compétences motrices à un dispositif artificiel repose sur l'opposition entre deux grands principes fonctionnels~: le feedback positif et le feedback négatif.
+\begin{itemize}
+	\item Le mécanisme d'appariement, central dans l'apprentissage, repose majoritairement sur une logique de feedback positif (ou résonance)
+	\item la théorie du contrôle, telle qu'elle est définie en sciences de l'ingénieur, repose majoritairement sur une logique de feedback négatif (correction de l'erreur motrice)
 \end{itemize}
 
-Ces tâches globales sont réalisées par l'activité coordonnée de différents circuits s'étendant à l'ensemble des structures de l'encéphale~: 
-\begin{itemize}
-	\item un circuit parmi les plus primitifs est celui 
-	de la sélection de l'action organisé autour des structures sous-corticales (ganglions de la base) 
-	fonctionnant par désinhibition  
-	sélective de choix d'actions concurrents, comme mis en évidence par 
-	\shortcite{Grillner2008}. 
-	\item La dérivation de la commande motrice à travers le cervelet conduit par ailleurs
-	à des ajustements posturaux associés à un contrôle fin et adaptatif des commandes motrices \shortcite{Wolpert1998,Zeeuw1998}.
-	\item D'autres circuits plus récents, comme ceux de l'hippocampe, 
-	sont impliqués dans la navigation spatiale, et la mémorisation \shortcite{McClelland1995},  
-	exprimant en particulier la situation de l'animal dans un environnement connu mémorisé (son territoire) 
-	d'un point de vue extérieur, implémentant un mécanisme d'orientation dans un
-	référentiel extéro-centré \shortcite{OKe78}. 
-	\item Le cortex, région anatomiquement la plus récente, est principalement lié au traitement sensoriel et aux commandes motrices fines. 
-	Les boucles entre le cortex, le striatum et le cervelet semblent également associées 
-	chez certains mammifères à la simulation motrice
-	précédent le déclenchement de l'action \shortcite{Jeannerod2001}, etc.
+
+
+
+Si l'on souhaite construire des dispositifs artificiels capable d'apprendre des tâches motrices de la même manière qu'ils apprennent à classifier des signaux et des images, il faut opérer un renversement conceptuel en théorie du contrôle afin de rendre compatible le contrôle moteur avec l'apprentissage, en particulier \textit{utiliser les principes du feedback positif et de l'appariement pour le contrôle moteur.}
+
+\paragraph{}
+Les travaux présentés dans ce mémoire offrent des portes d'entrée vers ce principe de contrôle par appariement et feedback positif.
+Pour les développer, nous avons utilisé un certain nombre de parti-pris méthodologiques~:
+ \begin{itemize}
+ 	\item Utiliser le cerveau comme source d'inspiration. Nos travaux sont largement basés sur la littérature et les observations en neurosciences. Nous considérons en particulier la plasticité de Hebb comme modèle de référence pour nos algorithmes d'apprentissage.
+	\item Nous adoptons l'hypothèse d'architectures de contrôle basée sur l'opérateur d'appariement. En particulier nous cherchons à généraliser le principe d'appariement (``pattern matching''), à l’œuvre en apprentisage automatique, au cas des systèmes dynamiques non-linéaires bouclés.
+	\item Nous partons d'une hypothèse de calcul \textit{distribué} implémenté par les réseaux de neurones récurrents, c'est à dire que l'ensemble du calcul est réparti à parts égales sur les différents nœuds du réseau. Le ``temps de calcul'' correspond au temps de relaxation vers un attracteur. % Ce calcul est réalisé par l'ensemble des neurones du réseau. 
+	On parle aussi de réponse de population (ne dépendant pas d'un neurone seul).
 \end{itemize}
 
-\subsubsection{Approche}
+%{\color{Gray} En particulier nous cherchons à éclairer les résultats
+%sous l'angle de l'opération d'\textit{ap\-pa\-rie\-ment} (``pattern matching''), qui est au centre des algorithmes d'apprentissage automatique, en particulier~:
+%\begin{itemize}
+%	\item interpréter la réduction de dynamique induite par plasticité Hebbienne en présence de certains signaux externes comme un mécanisme d'appariement \textit{conditionnel}. 
+%	\item dans le cadre de la commande des systèmes dynamiques, établir un lien entre appariement, rétroaction positive et mouvement balistique (par opposition au contrôle  par rétroaction négative et mouvement de poursuite).
+%\end{itemize} 
+%}
+
+
+
+
+
+
+    %Il s'agit de voir ce qui, dans un comportement d'ensemble complexe, s'apparente à un mécanisme plus simple. 
+
+
+
+\paragraph{}
+Par ailleurs~:
+\begin{itemize} 	
+	\item Les études sur la plasticité synaptique reposent largement sur  la simulation numérique. Les simulations numériques visent à établir des comportements d'ensemble difficilement déductibles du modèle, en particulier lorsque les modifications locales introduites par la plasticité synaptique ont des conséquences sur la dynamique d'ensemble. 
+	\item Nous validons principalement les modèles d'apprentissage proposés sur des tâches liées au contrôle moteur. Nous cherchons à établir les conditions dans lesquelles un réseau de neurones peut acquérir des compétences de contrôle sur l'appareil moteur et/ou sur des périphériques de sortie.  Ces validations impliquent~:
+	\begin{itemize}
+		\item Des problèmes ``jouets'' dont nous maîtrisons les paramètres,
+		\item Des architectures neuronales directement inspirés par les observations biologiques 
+		\item Des applications relevant du domaine de l’ingénierie (interfaces cerveau-machine en particulier)
+	\end{itemize}  	
+ \end{itemize}
+
+\section{Notre approche}
+
 Pour modéliser le cerveau nous utilisons l'analogie du circuit reconfigurable.
 Un circuit est ici un graphe (connexe) constitué de nœuds et d'arêtes. 
 L'activité qui se développe dans le circuit repose sur la transmission de
@@ -1936,7 +1993,7 @@ s'apparente à un calcul, ou dans une perspective de contrôle, s'apparente à u
 La question qui se pose dans ce cadre est celle de l'''interrupteur'' ou 
 du ``tableau de commandes'' qui
 permet de basculer d'un circuit à l'autre. 
-Une approche courante en modélisation est de stipuler l'existence d'une chaîne de traitement hiérarchique, 
+Une approche courante en modélisation est de stipuler l'existence d'une chaîne de traitement séquentielle et hiérarchique, 
 des organes des sens vers des centres de traitement de plus en plus spécialisés, conduisant
 à l'identification d'un objet ou partenaire vis à vis duquel un programme moteur adéquat 
 peut être déclenché. Selon cette approche, il y a un programme superviseur, un tableau de branchement qui 
@@ -1978,20 +2035,19 @@ l'activité endogène d'un réseau de neurones récurrent est ``perturbée'' par
 La réponse du réseau correspond alors à un compromis entre les contraintes internes, exprimées
 par le graphe, et les contraintes externes, exprimées par le signal, via une relaxation. 
 
-L'identification des dynamiques de relaxation à des opérateurs
-d'appariement signifie essentiellement~:
+La  généralisation  des opérateurs
+d'appariement au cas des dynamiques de relaxation  signifie essentiellement~:
 \begin{itemize}
-	\item que la dynamique de relaxation doit 
+	\item[(i)] que la dynamique de relaxation doit 
 	permettre de séparer l'espace des signaux en régions distinctes.
 	Les dynamiques de relaxation obtenues
 	pour certaines classes de signaux doivent être \textit{qualitativement différentes}
 	de celles obtenues pour d'autres classes de signaux.  
-	\item qu'il existe des mécanismes de plasticité permettant de faire ``bouger les frontières''
-	entre les différentes régions, voire d'en créer de nouvelles et d'en faire disparaître. Le modèle de plasticité synaptique le mieux établi est la \textit{règle de Hebb} \shortcite{Heb49}, confirmée à de nombreuses reprises par les observations \shortcite{Bli73,BIPOO98}. 
-	La règle de Hebb inscrit dans la structure du graphe les conjonctions d'activité pré et post-synaptique se produisant de façon répétée au cours du temps. 
+	\item[(ii)] qu'il existe des mécanismes de plasticité permettant de faire ``bouger les frontières''
+	entre les différentes régions, voire d'en créer de nouvelles et d'en faire disparaître.
 \end{itemize}
 
-Le but est d'identifier la mise en œuvre d'un mécanisme d'appariement dans des réseaux de neurones récurrents soumis à la règle de Hebb.
+{\color{Gray}Le but est d'étudier l'appariement tel qu'il se réalise dans des réseaux de neurones récurrents soumis à la règle de Hebb.
 La règle de Hebb %, souvent sous-estimée pour ses plus faibles performances pratiques, doit être réexaminée dans le cadre des réseaux de neurones récurrents.
 %Autrement dit la plasticité de Hebb 
 doit être interprétée selon la logique des réseaux de neurones récurrents, cette logique étant largement différente de celle des réseaux à couches, comme nous l'avons vu~:
@@ -2000,16 +2056,197 @@ doit être interprétée selon la logique des réseaux de neurones récurrents, 
 	\item Le calcul implémenté par les réseaux de neurones récurrents est un calcul \textit{distribué}, c'est à dire que l'ensemble du calcul est réparti à parts égales sur les différents nœuds du réseau. Le ``temps de calcul'' correspond au temps de relaxation vers un attracteur. % Ce calcul est réalisé par l'ensemble des neurones du réseau. 
 	On parle aussi de réponse de population (ne dépendant pas d'un neurone seul).
 \end{itemize} 
+}
 
-\paragraph{} La thèse principale développée ici est que :
+\subsubsection{(i) Séparation des signaux} L'équation de récurrence:
+$$\dot{\boldsymbol{x}} = \phi(\boldsymbol{x}(t), I(t))$$
+permet de modéliser l'interaction entre une activité endogène (décrite par $\boldsymbol{x}$) et un signal extérieur (décrit par $I$).
+L'évolution de l'état du système dynamique au cours du temps décrit une trajectoire dans un espace de dimension $N$ (où $N$ est le nombre de nœuds du réseau).  
+On note $n \leq N$ le nombre de degrés de liberté sur lesquels évolue  \textit{effectivement} la dynamique (la dimension de la variété sur laquelle évolue la trajectoire limite). La valeur de $n$ s'interprète comme le \textit{degré de réduction} opéré par le signal sur l'activité du réseau. 
+\begin{itemize}
+	\item dans le cas d'une entrée bruitée, $n$ peut être proche de $N$
+	\item lorsqu'au contraire l'entrée suscite l'activation d'une assemblée neuronale spécifique, la valeur de $n$  tend à être faible (quelques unités) 
+\end{itemize} 
+Cette approche permet plus généralement de distinguer des signaux ``stabilisateurs'', tendant à corréler les neurones, des signaux déstabilisateurs, tendant à décorréler les neurones.
+
+L'étude de la dimension effective de l'activité induite permet, entre autres, d'opérer une séparation entre~:
+\begin{itemize}
+	\item les signaux d'entrée qui induisent une réduction de la dynamique
+	\item et ceux qui ne font pas.
+\end{itemize}
+Cette distinction, au sein de l'espace des signaux d'entrée, entre signaux réducteurs et signaux non-réducteurs correspond à un principe de \textit{sélection}.
+
+De manière schématique, 
+\begin{itemize}
+	\item une activité à faible nombre de degrés de liberté correspond à un réseau de neurones ``activé'' (le signal est sélectionné).
+	\item une activité à haut nombre de degrés de liberté correspond à un réseau de neurones ``inactif'' (le signal est rejeté).
+\end{itemize}
+cette notion d'activation ``macroscopique'' étant à distinguer de l'activation  ``microscopique'' des neurones.
+On parlera par la suite de \textit{réponse de population} (ou réponse collective)  lorsque le réseau ``réagit'' ainsi à une entrée particulière en réduisant son nombre de degrés de liberté.
+
+Ce principe de sélection par la dynamique d'un réseau récurrent a été exprimé dans les travaux de Walter Freeman \shortcite{ska87} dans le cadre d'un modèle de la perception des odeurs.
+On retrouve une idée analogue dans les travaux de Hermann Haken \shortcite{Haken1983}, qui a conceptualisé le principe de réponse par réduction de la dynamique collective à travers la notion de \textit{paramètre d'ordre}, permettant de constituer une ``variété centrale'' sur laquelle le système dynamique évolue (\textit{center manifold reduction}).
+
+
+
+\subsubsection{(ii) Plasticité}
+
+Le modèle de plasticité synaptique le mieux établi est la \textit{règle de Hebb} \shortcite{Heb49}, confirmée à de nombreuses reprises par les observations \shortcite{Bli73,BIPOO98}. 
+La règle de Hebb inscrit dans la structure du graphe les conjonctions d'activité pré et post-synaptique se produisant de façon répétée au cours du temps (voir section \ref{sec:app-plast}). 
+
+Le principe de plasticité par conjonction d'activité est articulé, dans le livre de Hebb, avec le concept d'\textit{assemblée neuronale} \cite{Heb49}. 
+Une assemblée neuronale est un sous-ensemble de nœuds du réseau s'activant de manière coordonnée, et de façon réitérée au cours du temps.
+{\color{Gray} La notion d'assemblée est donc liée à la notion d'activité~: une assemblée est un patron d'activité qui réapparaît fréquemment.}
+% (l'activité d'un nœud étant identifiée à un état ``haut'').
+
+{\color{Gray} La notion d'assemblée se distingue de la notion de population~: 
+	\begin{itemize}
+		\item les populations de neurones sont définies par des caractères architecturaux
+		\item les assemblées de neurones sont définies par la dynamique.
+	\end{itemize} 
+	
+	On identifie fréquemment l'activation d'une assemblée à la réalisation d'une tâche spécifique.}
+
+Une assemblée est donc, selon l'idée originale de Hebb, un patron d'activité caractéristique, sélectionné (stabilisée) par la règle de plasticité. 
+{\color{Gray} D'un point de vue computationnel, cette
+	assemblée de neurones actifs est une forme (un vecteur caractéristique)  ``stockée'' dans le réseau, qui a la possibilité de s'''activer'' en fonction du contexte.}
+On parlera dans la suite, pour désigner cette activité coordonnée, d'une activité \textit{macroscopique} (par opposition à l'activité microscopique du neurone seul). 
+
+Une assemblée de neurones peut être vue comme une \textit{unité de description} de l'activité du réseau.
+A un instant donné, une assemblée se trouve soit dans l'état inactif, soit dans l'état ``activé''. L'état du réseau est alors décrit, de manière macroscopique, par la (ou les) assemblée(s) particulière(s) qui est (sont) active(s) à cet instant \footnote{L'idée d'unité de description se ramène à la notion de \textit{paramètre d'ordre} \shortcite{Wei89} qui est, dans le cas de l'étude des transitions de phase, un opérateur permettant de mesurer un type d'organisation spécifique. Il est nul
+	si le milieu étudié est dans une phase différente de la phase décrite par l'opérateur. Il est ``actif'' lorsque le milieu obéit à cette organisation spécifique.}.
+
+Enfin, selon cette perspective, le réseau de neurones se comporte comme un \textit{graphe  reconfigurable} au sein duquel des circuits (assemblées) peuvent être activés ou désactivés au cours du temps.
+
+%\subsubsection{Fonctionnement fractionnaire et fonctionnement intégré}
+\subsubsection{Appariement conditionnel}
+
+
+
+
+La transformation des données d'entrée sous la forme d'un (ou plusieurs) vecteur(s) caractéristique(s) correspond à une   \textit{simplification} de ces données.
+\begin{itemize}
+	\item Dans le cas des réseaux de neurones à couches, cette simplification correspond à une dimension de la couche de sortie plus faible que celle de la couche d'entrée.
+	\item Dans le cas des réseaux récurrents, cette simplification se traduit par une \textit{réduction du nombre de degrés de liberté} sur lesquels évolue la dynamique des neurones. L'activité du réseau accepte alors une description sur un espace de plus petite dimension.
+\end{itemize}
+
+\paragraph{La réponse ``je ne sais pas'' }
+Contrairement aux classifieurs traditionnels qui apparient \textit{nécessairement} le signal d'entrée avec une des formes stockées dans la structure, il existe des réseaux de neurones 
+réalisant des \emph{appariements \textit{conditionnels}} tels que~:
+\begin{itemize}
+	\item les signaux de forme connue s'apparient avec une des formes stockées dans le réseau;
+	\item les signaux inconnus ne s'apparient avec aucune des formes stockées dans le réseau.  
+\end{itemize}
+Autrement dit l'appariement conditionnel autorise le réseau à \textit{ne pas choisir}. Parmi l'ensemble des réponses possibles, le réseau produit la réponse ``je ne sais pas'' lorsque le signal présenté n'est pas suffisamment proche d'une forme connue.
+
+\begin{itemize}
+	\item Ce rejet des entrées inconnues correspond, dans la littérature statistique, au principe de ``rejet de distance'', lorsqu'un phénomène observé est trop éloigné du modèle et classé comme ``aberrant''.
+	\item une implémentation connue de ce principe dans le cadre des réseaux de neurones est le réseau ART \cite{ART98}, qui implémente un principe de ``vigilance'' correspondant à l'identification d'une entrée non-référencée par le réseau.
+\end{itemize}
+
+La thèse principale développée ici est que :
 \begin{itemize}
 	\item[]
-	\textit{La plasticité de Hebb construit une fonction d'\textbf{appariement conditionnel} s'appuyant sur les propriétés de l'activité persistante.}
+	\textit{La plasticité de Hebb construit une fonction d'\textbf{appariement conditionnel} s'appuyant sur les propriétés de l'activité persistante d'un système dynamique de grande dimension.}
 \end{itemize}
 où:
 \begin{itemize}
 	\item[]
 	\textit{Le mécanisme d'appariement est assimilé, dans le cas des réseaux de neurones récurrents, à une \textbf{ réduction sélective de la complexité} de la dynamique.} 
+\end{itemize}
+
+\section{Exemples}
+
+\subsection{Réseaux de neurones récurrents}
+
+
+Le principe d'assemblée neuronale s'interprète principalement dans le cadre des réseaux de neurones récurrents. 
+Nous avons vu que les réseaux de neurones récurrents sont capables de développer une activité propre (activité ``endogène''), c'est à dire que les neurones peuvent demeurer dans un état ``actif'' en absence de stimulation extérieure. Cette activité interne repose sur la transmission ``en boucle'' de l'activité des neurones sur le graphe. 
+
+Dans ce cadre, une assemblée peut être vue comme une séquence d'activation interne stable au cours du temps. On parle parfois de ``chaîne d'activation'' \--- \textit{synfire chain} \shortcite{Abe93}. Un certain nombre de modèles artificiels implémentent ce principe, comme le modèle des  ``groupes polychrones'' 
+postulé par \shortcite{Izh06}.
+
+{\color{Gray}	
+	pouvant présenter des régularités liée aux régularités du graphe ou liée à une influence extérieure (activité induite). 
+	%La règle de Hebb s'interprète dans ce cadre comme le fait de capturer dans la structure du réseau les régularités statistiques (covariances) présentes dans l'activité spontanée. 
+	Une assemblées apparaissant fréquemment tend à s'inscrire dans le graphe de connexions, ce qui tend à favoriser sa réapparition dans le futur.
+}
+
+Le modèle mathématique qui implémente le principe d'assemblée de la manière la plus simple est le modèle de Hopfield \shortcite{Hop82}. Ce modèle est un réseau de neurones récurrent à unités binaires développant une dynamique de point fixe multistable. 
+Malgré des limitations bien connues en terme de capacité de stockage \shortcite{Amit1985}, le réseau de Hopfield présente l'avantage de fonctionner avec des principes compatibles avec les idées de Hebb (caractère local de la règle de plasticité, analogie possible entre attracteur et assemblée), et donc de constituer un modèle plus ``biologiquement plausible'' que les réseaux de neurones traditionnels.
+
+Le réseau de Hopfield implémente un principe de \textit {mémoire associative}. Il apprend ``par cœur'' un certain nombre de scènes (ou images). Il est ensuite capable, lorsque certains constituants d'une scène apprise sont présentés, de compléter la scène avec les éléments manquants, de rectifier les valeurs erronées etc. 
+L'espace d'états est organisé en un nombre fini de \textit{bassins d'attraction} définissant des patrons d'activité spécifiques et mutuellement exclusifs. L'activité du réseau finit par converger vers un de ces patrons en fonction des conditions initiales. Chacun des attracteurs s'interprète ici comme une assemblée distincte, c'est à dire comme un circuit de renforcement mutuel aboutissant à la stabilisation d'un patron d'activité macroscopique. 
+
+\subsection{Passage d'échelle en contrôle moteur} \label{sec:echelle}
+
+
+%
+
+
+
+L'hypothèse du \textit{passage d'échelle} suggère des moments transitoires où l'activité microscopique rejoint 
+l'activité macroscopique lors des épisodes de synchronisation, conduisant à une réduction de 
+complexité selon le principe déjà évoqué suggéré par la synergétique \shortcite{Haken1983}.
+L'hypothèse est ici que ce couplage transitoire entre activité motrice et activité neuronale repose sur la réduction du nombre de degrés de liberté, au sein d'assemblées neuronales spécifiques, se traduisant une synchronisation des activités et des corrélations à grande échelle \shortcite{Gra89}.
+
+Dans le cadre de l'analyse des mécanismes d'appariement présentés dans les sections précédentes, %. d'\textit{identifier ces couplages transitoires aux }
+nous considérons la commande motrice comme un mécanisme de relaxation qui conjugue~:
+\begin{itemize}
+	\item un attracteur appartenant à l'espace des activités neuronales 
+	\item avec un attracteur appartenant à l'espace de la réalisation motrice.
+\end{itemize}
+
+
+
+\begin{itemize}
+	\item Le mécanisme de synchronisation transitoire, ou de résonance, 
+	au sein de systèmes constitués de nombreuses unités couplées, est interprété
+	comme favorisant la \textit{communication entre les différentes échelles} \shortcite{Dau02c1}. 
+	Ce type de mécanisme n'est pas encore, à ma connaissance, implémenté dans des architectures de contrôle, 
+	mais son importance a déjà été souligné dans \shortcite{Konig1995} et \shortcite{Varela2001}.
+	\item 
+	La \textit{non-reconnaissance} correspondrait à une situation où le milieu neuronal 
+	produit une activité à haut degré de liberté, sans effet macroscopique par absence de coordination. 
+	\item
+	La \textit{reconnaissance} correspondrait à 
+	une situation où le milieu neuronal ``renonce'' transitoirement à ses degrés de liberté et se coordonne, 
+	favorisant le couplage 
+	avec la dynamique macroscopique. 
+	La coordination de la population permettrait \textit{le passage à une description ``grande échelle''} de l'activité neuronale, 
+	perceptible au niveau de description supérieur, 
+	caractérisé par une échelle spatiale plus large et une échelle temporelle plus lente,
+	le même mécanisme pouvant en principe se décliner à différentes échelles.
+\end{itemize}
+
+\paragraph{Alternance comportementale}
+L'importance de la désynchronisation, comme complément de la synchronisation, est également souligné dans \shortcite{Rod99}.
+Le fonctionnement en boucle fermée par couplage positif (par renforcement mutuel) contient en effet fondamentalement
+le risque de l'enfermement dans un attracteur comportemental unique, correspondant à
+la répétition indéfinie de la même tâche.  Au mécanisme de synchronisation doit donc correspondre un
+mécanisme de désynchronisation, qui peut reposer sur des facteurs déstabilisants liés à une
+mauvaise correspondance internes ou externe, 
+mais également sur des mécanismes actifs de désynchronisation, comme la fatigue neuronale par exemple.
+
+\chapter{Résultats}
+
+Les travaux présentés sont centrés sur l'apprentissage au sens large et plus particulièrement l'apprentissage moteur.
+Dans le cadre de ce rapport, nous regardons plus particulièrement les contraintes suivantes~:
+\begin{itemize}
+	\item Existence d'une activité endogène, produite par la transmission
+	en boucle du signal produit par les neurones à travers un graphe de connexions récurrentes.
+	\item Utilisation de graphes aléatoires pour décrire les interactions entre les neurones. Les neurones sont donc branchés aléatoirement sur tout ou partie de leurs voisins.
+	\item Caractère local de la plasticité synaptique. Seuls les signaux pré et post-synaptiques déterminent les changements structuraux.
+	\item Existence de boucles de rétroaction entre le réseau de neurones et son environnement. Les entrées du réseau sont causalement liées aux réponses produites par le réseau aux instants précédents. 
+\end{itemize}
+
+\paragraph{}
+Les résultats présentés s'appuient en grande partie sur les comportements de systèmes dynamiques de grande dimension, c'est  dire constitués par l'interaction de nombreuses unités couplées~:
+\begin{itemize}
+	\item De nombreuses études permettent de lier 
+	l'activité ``microscopique'' de ces systèmes à des grandeurs ``macroscopiques'' basées sur les comportements moyens et les corrélations d'activité \shortcite{Wilson1972,Ama72,Amit1985,Som88,Ces94B,Ami97}, etc.
+	\item Le but est d'exploiter des comportements d'ensemble simples qui peuvent apparaître dans les systèmes de grande dimension, selon le principe de \textit{réduction} proposé dans le cadre de la physique des systèmes hors d'équilibre \shortcite{Haken1983}.
+	\item Les comportements d'ensemble  sont alors interprétés comme des \textit{implémentations} d'opérateurs  plus simples.
 \end{itemize}
 
 \paragraph{}  En détail, nous faisons les propositions suivantes~:
@@ -4496,115 +4733,9 @@ Ces modèles sont porteurs de limitations (en terme de capacité de stockage ou 
 	
 
 
-\subsection{Appariement et réduction}
-
-Comme nous l'avons vu, la plupart des algorithmes d'apprentissage fonctionnent selon un principe d'\textit{appariement} (``pattern matching''), c'est à dire sur la construction, à partir des données, d'un ensemble de vecteurs ``caractéristiques''. 
-\begin{itemize}
-	\item Ces vecteurs caractéristiques, vus comme un dictionnaire de formes, constituent une base de description synthétique des données d'entrée. 
-	\item La projection des données d'entrée sur cet espace de description facilite ensuite leur traitement et leur interprétation. 
-\end{itemize} 
-L’apprentissage revient donc à la constitution d'un vocabulaire de base qui sert de clé d'interprétation des données d'entrée. 
-
-La transformation des données d'entrée sous la forme d'un (ou plusieurs) vecteur(s) caractéristique(s) correspond à une   \textit{simplification} de ces données.
-\begin{itemize}
-	\item Dans le cas des réseaux de neurones à couches, cette simplification correspond à une dimension de la couche de sortie plus faible que celle de la couche d'entrée.
-	\item Dans le cas des réseaux récurrents, cette simplification se traduit par une \textit{réduction du nombre de degrés de liberté} sur lesquels évolue la dynamique des neurones. L'activité du réseau accepte alors une description sur un espace de plus petite dimension.
-\end{itemize}
-
-\paragraph{La réponse ``je ne sais pas'' }
-Contrairement aux classifieurs traditionnels qui apparient \textit{nécessairement} le signal d'entrée avec une des formes stockées dans la structure, il existe des réseaux de neurones 
-réalisant des \emph{appariements \textit{conditionnels}} tels que~:
-\begin{itemize}
-	\item les signaux de forme connue s'apparient avec une des formes stockées dans le réseau;
-	\item les signaux inconnus ne s'apparient avec aucune des formes stockées dans le réseau.  
-\end{itemize}
-Autrement dit l'appariement conditionnel autorise le réseau à \textit{ne pas choisir}. Parmi l'ensemble des réponses possibles, le réseau produit la réponse ``je ne sais pas'' lorsque le signal présenté n'est pas suffisamment proche d'une forme connue.
-
-\begin{itemize}
-	\item Ce rejet des entrées inconnues correspond, dans la littérature statistique, au principe de ``rejet de distance'', lorsqu'un phénomène observé est trop éloigné du modèle et classé comme ``aberrant''.
-	\item une implémentation connue de ce principe dans le cadre des réseaux de neurones est le réseau ART \cite{ART98}, qui implémente un principe de ``vigilance'' correspondant à l'identification d'une entrée non-référencée par le réseau.
-\end{itemize}
-
-\paragraph{Cas des réseaux de neurones récurrents} Nous nous intéressons ici plus particulièrement au traitement des données dans les réseaux de neurones récurrents. L'équation de récurrence:
-$$\dot{\boldsymbol{x}} = \phi(\boldsymbol{x}(t), I(t))$$
-permet de modéliser l'interaction entre une activité endogène (décrite par $\boldsymbol{x}$) et un signal extérieur (décrit par $I$).
-L'évolution de l'état du système dynamique au cours du temps décrit une trajectoire dans un espace de dimension $N$ (où $N$ est le nombre de nœuds du réseau).  
-On note $n \leq N$ le nombre de degrés de liberté sur lesquels évolue  \textit{effectivement} la dynamique (la dimension de la variété sur laquelle évolue la trajectoire limite). La valeur de $n$ s'interprète comme le degré de réduction opéré par le signal sur l'activité du réseau. 
-\begin{itemize}
-	\item dans le cas d'une entrée bruitée, $n$ peut être proche de $N$
-	\item lorsqu'au contraire l'entrée suscite l'activation d'une assemblée neuronale spécifique, la valeur de $n$  tend à être faible (quelques unités) 
-\end{itemize} 
-Cette approche permet plus généralement de distinguer des signaux ``stabilisateurs'', tendant à corréler les neurones, des signaux déstabilisateurs, tendant à décorréler les neurones.
-
-\paragraph{Réponse de population}
-
-L'étude de la dimension effective de l'activité induite permet, entre autres, d'opérer une séparation entre~:
-\begin{itemize}
-	\item les signaux d'entrée qui induisent une réduction de la dynamique
-	\item et ceux qui ne font pas.
-\end{itemize}
-Cette distinction, au sein de l'espace des signaux d'entrée, entre signaux réducteurs et signaux non-réducteurs correspond à un principe de \textit{sélection}.
-
-De manière schématique, 
-\begin{itemize}
-	\item une activité à faible nombre de degrés de liberté correspond à un réseau de neurones ``activé'' (le signal est sélectionné).
-	\item une activité à haut nombre de degrés de liberté correspond à un réseau de neurones ``inactif'' (le signal est rejeté).
-\end{itemize}
-cette notion d'activation ``macroscopique'' étant à distinguer de l'activation  ``microscopique'' des neurones.
-On parlera par la suite de \textit{réponse de population} (ou réponse collective)  lorsque le réseau ``réagit'' ainsi à une entrée particulière en réduisant son nombre de degrés de liberté.
-
-Ce principe de sélection par la dynamique d'un réseau récurrent a été exprimé dans les travaux de Walter Freeman \shortcite{ska87} dans le cadre d'un modèle de la perception des odeurs.
-On retrouve une idée analogue dans les travaux de Hermann Haken \shortcite{Haken1983}, qui a conceptualisé le principe de réponse par réduction de la dynamique collective à travers la notion de \textit{paramètre d'ordre}, emprunté à la thermodynamique, permettant de constituer une ``variété centrale'' sur laquelle le système dynamique évolue (\textit{Center Manifold reduction}).
 
 
-\subsection{Assemblées neuronales}
-
-
-Le principe de plasticité par conjonction d'activité est articulé, dans le livre de Hebb, avec le concept d'\textit{assemblée neuronale} \cite{Heb49}. 
-Une assemblée neuronale est un sous-ensemble de nœuds du réseau s'activant de manière coordonnée, et de façon réitérée au cours du temps.
-{\color{Gray} La notion d'assemblée est donc liée à la notion d'activité~: une assemblée est un patron d'activité qui réapparaît fréquemment.}
-% (l'activité d'un nœud étant identifiée à un état ``haut'').
-
-{\color{Gray} La notion d'assemblée se distingue de la notion de population~: 
-	\begin{itemize}
-		\item les populations de neurones sont définies par des caractères architecturaux
-		\item les assemblées de neurones sont définies par la dynamique.
-	\end{itemize} 
-	
-	On identifie fréquemment l'activation d'une assemblée à la réalisation d'une tâche spécifique.}
-
-Une assemblée est donc, selon l'idée originale de Hebb, un patron d'activité caractéristique, sélectionné (stabilisée) par la règle de plasticité. 
-{\color{Gray} D'un point de vue computationnel, cette
-assemblée de neurones actifs est une forme (un vecteur caractéristique)  ``stockée'' dans le réseau, qui a la possibilité de s'''activer'' en fonction du contexte.}
-On parlera dans la suite, pour désigner cette activité coordonnée, d'une activité \textit{macroscopique} (par opposition à l'activité microscopique du neurone seul). 
-
-Une assemblée de neurones peut être vue comme une \textit{unité de description} de l'activité du réseau.
-A un instant donné, une assemblée se trouve soit dans l'état inactif, soit dans l'état ``activé''. L'état du réseau est alors décrit, de manière macroscopique, par la (ou les) assemblée(s) particulière(s) qui est (sont) active(s) à cet instant \footnote{L'idée d'unité de description se ramène à la notion de \textit{paramètre d'ordre} \shortcite{Haken1983} qui est, dans le cas de l'étude des transitions de phase, un opérateur permettant de mesurer un type d'organisation spécifique. Il est nul
-	si le milieu étudié est dans une phase différente de la phase décrite par l'opérateur. Il est ``actif'' lorsque le milieu obéit à cette organisation spécifique.}.
-
-Enfin, selon cette perspective, le réseau de neurones se comporte comme un \textit{graphe  reconfigurable} au sein duquel des circuits (assemblées) peuvent être activés ou désactivés au cours du temps.
-
-\subsubsection{Activité récurente}
-
-
-	Le principe d'assemblée neuronale s'interprète principalement dans le cadre des réseaux de neurones récurrents. 
-	Nous avons vu que les réseaux de neurones récurrents sont capables de développer une activité propre (activité ``endogène''), c'est à dire que les neurones peuvent demeurer dans un état ``actif'' en absence de stimulation extérieure. Cette activité interne repose sur la transmission ``en boucle'' de l'activité des neurones sur le graphe. 
-	
-	Dans ce cadre, une assemblée peut être vue comme une séquence d'activation interne stable au cours du temps. On parle parfois de ``chaîne d'activation'' \--- \textit{synfire chain} \shortcite{Abe93}. Un certain nombre de modèles artificiels implémentent ce principe, comme le modèle des  ``groupes polychrones'' 
-	postulé par \shortcite{Izh06}.
-	
-{\color{Gray}	
-	pouvant présenter des régularités liée aux régularités du graphe ou liée à une influence extérieure (activité induite). 
-	%La règle de Hebb s'interprète dans ce cadre comme le fait de capturer dans la structure du réseau les régularités statistiques (covariances) présentes dans l'activité spontanée. 
-	Une assemblées apparaissant fréquemment tend à s'inscrire dans le graphe de connexions, ce qui tend à favoriser sa réapparition dans le futur.
-}
-
-Le modèle mathématique qui implémente le principe d'assemblée de la manière la plus simple est le modèle de Hopfield \shortcite{Hop82}. Ce modèle est un réseau de neurones récurrent à unités binaires développant une dynamique de point fixe multistable. 
-Malgré des limitations bien connues en terme de capacité de stockage \shortcite{Amit1985}, le réseau de Hopfield présente l'avantage de fonctionner avec des principes compatibles avec les idées de Hebb (caractère local de la règle de plasticité, analogie possible entre attracteur et assemblée), et donc de constituer un modèle plus ``biologiquement plausible'' que les réseaux de neurones traditionnels.
-
-Le réseau de Hopfield implémente un principe de \textit {mémoire associative}. Il apprend ``par cœur'' un certain nombre de scènes (ou images). Il est ensuite capable, lorsque certains constituants d'une scène apprise sont présentés, de compléter la scène avec les éléments manquants, de rectifier les valeurs erronées etc. 
-L'espace d'états est organisé en un nombre fini de \textit{bassins d'attraction} définissant des patrons d'activité spécifiques et mutuellement exclusifs. L'activité du réseau finit par converger vers un de ces patrons en fonction des conditions initiales. Chacun des attracteurs s'interprète ici comme une assemblée distincte, c'est à dire comme un circuit de renforcement mutuel aboutissant à la stabilisation d'un patron d'activité macroscopique. 
-
+\paragraph{Cas des réseaux de neurones récurrents} 
 \subsection{Mise en œuvre et applications}
 
 \subsubsection{Intégration}
@@ -5900,66 +6031,6 @@ se traduit par une réduction de l'exposition au signal aversif.}
 
 
 
-\subsection{Fonctionnement fractionnaire et fonctionnement intégré}\label{sec:echelle}
-Le problème des disparités d'échelle est reconnu de longue date dans le champ des sciences cognitives. Résumé brièvement,
-il repose sur la constatation de la difficulté à considérer sur le même plan~:
-\begin{itemize} 
-\item d'une part la contrainte physique du corps, engagé dans différentes tâches, à des échelles
-spatiales macroscopiques et des échelles temporelles lentes,
-\item et d'autre part la contrainte du circuit microscopique, constitué d'unité neuronales échangeant rapidement des signaux discrets.
-\end{itemize}
-
-Nous insistons sur la différence de nature
-(ou l'hétérogénéité) entre d'une part le milieu extérieur, caractérisé par des grandeurs extensives (des masses et
-des articulations en déplacement, des changements continus) 
-et le milieu intérieur (milieu logiciel) caractérisé par des activité bornées, discrètes,
-changeant rapidement et de manière abrupte.
-Entre les deux,  un niveau architectural (dit ``mésoscopique'') est également considéré, constitué de circuits imbriqués intégrant l'activité de larges portion du cerveau.
-Chacun de ces niveaux de description est traditionnellement considéré de manière séparée, 
-et l'effort consistant à traduire un des niveaux de description dans un autre, effort ayant pris une place importante dans les neurosciences computationnelles, s'appelle l'approche ``multi-échelles'' \shortcite{Varela2001}.
-
-L'hypothèse du \textit{passage d'échelle} suggère des moments transitoires où l'activité microscopique rejoint 
-l'activité macroscopique lors des épisodes de synchronisation, conduisant à une réduction de 
-complexité selon un principe déjà suggéré par la synergétique \shortcite{Haken1983}.
-Une hypothèse communément admise est que ce couplage transitoire entre activité motrice et activité neuronale repose sur la réduction du nombre de degrés de liberté, au sein d'assemblées neuronales spécifiques, se traduisant une synchronisation des activités et des corrélations à grande échelle \shortcite{Gra89}.
-
-Notre hypothèse de travail est ici d'\textit{identifier ces couplages transitoires aux mécanismes d'appariement étudiés dans les sections précédentes.}
-Nous considérons donc ici la commande motrice comme un mécanisme de relaxation qui conjugue~:
-\begin{itemize}
-	\item un attracteur appartenant à l'espace des activités neuronales 
-	\item avec un attracteur appartenant à l'espace de la réalisation motrice.
-\end{itemize}
-
-\subsubsection{Passage d'échelle}
-
-\begin{itemize}
-	\item Le mécanisme de synchronisation transitoire, ou de résonance, 
-	au sein de systèmes constitués de nombreuses unités couplées, est interprété
-	comme favorisant la \textit{communication entre les différentes échelles} \shortcite{Dau02c1}. 
-	Ce type de mécanisme n'est pas encore, à ma connaissance, implémenté dans des architectures de contrôle, 
-	mais son importance a déjà été souligné dans \shortcite{Konig1995} et \shortcite{Varela2001}.
-	\item 
-	La \textit{non-reconnaissance} correspondrait à une situation où le milieu neuronal 
-	produit une activité à haut degré de liberté, sans effet macroscopique par absence de coordination. 
-	\item
-	La \textit{reconnaissance} correspondrait à 
-	une situation où le milieu neuronal ``renonce'' transitoirement à ses degrés de liberté et se coordonne, 
-	favorisant le couplage 
-	avec la dynamique macroscopique. 
-	La coordination de la population permettrait \textit{le passage à une description ``grande échelle''} de l'activité neuronale, 
-	perceptible au niveau de description supérieur, 
-	caractérisé par une échelle spatiale plus large et une échelle temporelle plus lente,
-	le même mécanisme pouvant en principe se décliner à différentes échelles.
-\end{itemize}
-
-\paragraph{Alternance comportementale}
-L'importance de la désynchronisation, comme complément de la synchronisation, est également souligné dans \shortcite{Rod99}.
-Le fonctionnement en boucle fermée par couplage positif (par renforcement mutuel) contient en effet fondamentalement
-le risque de l'enfermement dans un attracteur comportemental unique, correspondant à
-la répétition indéfinie de la même tâche.  Au mécanisme de synchronisation doit donc correspondre un
-mécanisme de désynchronisation, qui peut reposer sur des facteurs déstabilisants liés à une
-mauvaise correspondance internes ou externe, 
-mais également sur des mécanismes actifs de désynchronisation, comme la fatigue neuronale par exemple.
 
 {\color{Gray}
 \subsection*{Commande et signal}
