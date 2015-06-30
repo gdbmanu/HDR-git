@@ -912,9 +912,9 @@ Les résultats  ont été organisés autour de trois grandes thématiques~:
 \end{enumerate}
 
 
-\part{\color{Orange}Principaux résultats et perspectives}
+\part{\color{Orange}Résultats et perspectives}
 
-\chapter{Principes et modèles}
+\chapter{Principaux modèles}
 
 L'étude des réseaux de neurones naturels suggère un mode de fonctionnement
 intermédiaire entre le ``pattern matching'' (reconnaissance de formes) et les systèmes dynamiques. 
@@ -1508,7 +1508,7 @@ perceptifs et moteurs de l'environnement?
 
 
 
-\subsection{Problème des disparités d'échelle}
+\subsection{Problème des disparités d'échelle}\label{sec:disparite}
 La séparation conceptuelle et pratique entre d'une part l'approche systèmes dynamiques, d'autre part la reconnaissance de formes 
 semble reposer sur le caractère disparate, d'une part de l'environnement métrique sur lequel s'applique
 le contrôle, et d'autre part sur la multitude des récepteurs supports de l'information sensorielle.
@@ -1601,13 +1601,13 @@ et l'effort consistant à traduire un des niveaux de description dans un autre, 
 
 
 
-\subsection{Modèles existants}
+\subsection{Approche probabiliste}
 
 Le cadre du contrôle présenté ici repose sur des modèles de l'environnement physique. L'apprentissage au sens classique se justifie lorsque, d'une manière ou d'une autre, les modèles ne sont pas considérés satisfaisants et doivent être ``améliorés''. 
 
 Dans le cadre du contrôle tel présenté précédemment, l'apprentissage consiste donc à modifier le contrôleur décrit par la fonction  $\phi_\text{in}$ (voir eqs. \ref{eq:SD-closed-in} et \ref{eq:feed-noise-3}) dans un sens qui améliore un critère de performance prédéfini. La mise à jour d'un modèle ou d'une fonction de réponse consiste en général à modifier un jeu de paramètres $\Theta$ qui décrit le modèle.
 
-Cette famille de modèles est basé sur un modèle \textit{génératif}  $P(\boldsymbol{X}|\boldsymbol{x},\boldsymbol{u},\Theta)$ et $Q(\mathcal{I}|\boldsymbol{x},\Theta)$, où $\Theta$ est le jeu de paramètres définissant les deux distributions.  
+Cette approche est basé sur un modèle \textit{génératif}  $P(\boldsymbol{X}|\boldsymbol{x},\boldsymbol{u},\Theta)$ et $Q(\mathcal{I}|\boldsymbol{x},\Theta)$, où $\Theta$ est le jeu de paramètres définissant les deux distributions.  
 Dans le cas des modèles de filtrage, il s'agit par exemple d'améliorer les modèles $P_\Theta$ (processus externe) et $Q_\Theta$ (mesure), afin de mieux prendre en compte les facteurs exogènes non modélisés afin de mieux prédire les entrées.  %L'apprentissage consiste ainsi à 
 Dans le cadre que nous avons regardé jusqu'à présent (modèles de la mesure, filtrage),  l'état extérieur $\boldsymbol{x}_\text{out}$ est l'état caché ``latent'' à estimer.
 Le produit du processus de mesure est la distribution \textit{a posteriori} $\hat{f}$ portant sur l'espace des variables latentes, paramétré par $\Theta$, i.e. $\hat{f}(\boldsymbol{x})=f(\boldsymbol{x}|\boldsymbol{I},\boldsymbol{u},\Theta)$.
@@ -1679,7 +1679,7 @@ $$\max_{\Theta',\boldsymbol{u}'}\int L(\boldsymbol{x},\Theta',\boldsymbol{u}')\h
 $$
 
 %{\color{Cyan} Dans le cas des modèles du cervelet $I$ est la conséquence proprioceptive de la commande.}
-où la distribution a posteriori $\hat{f}(\boldsymbol{x})$ est produite de manière générative selon un principe de ``codage par population'' \shortcite{Georgopoulos1986,Averbeck2006}, autrement dit via un échantillonnage de $P_\Theta$. 
+où la distribution a posteriori $\hat{f}(\boldsymbol{x})$ est générée selon un principe de ``codage par population'' \shortcite{Georgopoulos1986,Averbeck2006}, autrement dit via un échantillonnage de $P_\Theta$. 
 
 Ce cadre est intéressant dans la mesure où il offre 
 une interprétation relativement nouvelle 
@@ -1725,7 +1725,7 @@ ses manifestations sensorielles.
 %	sensorielles, à savoir la scène effective et la scène prédite.
 %	Il existe dans les deux cas une activité de prédiction active, via un modèle ``forward''.
 
-\subsection{Observations et modèles}
+\subsection{Modèles bio-inspirés}
 
 
 
@@ -1805,9 +1805,6 @@ comme dans le cas de la locomotion. Cette activité rythmique spontanée peut ê
 \end{itemize} 
 
 
-
-
-
 Les mécanismes de contrôle par feedback positif ont jusqu'à présent principalement été étudiés 
 sous la forme d'oscillateurs simples ou couplés \shortcite{Haken1985,Sternad2008}, servant de support à schémas moteurs périodiques.
 comme celui de la locomotion. 
@@ -1848,7 +1845,7 @@ Le manque de développements applicatifs vient probablement
 
 
 
-\chapter{Considérations supplémentaires}
+\chapter{Problématique d'ensemble}
 
 {\color{Gray} Les travaux présentés dans ce mémoire sont centrés sur
 l'idée de \textit{circuit reconfigurable}, basée sur l'existence d'une \textit{activité endogène} produite par un réseau de 
@@ -1856,23 +1853,6 @@ neurones \textit{récurrent}.
 Le but est de caractériser ces mécanismes, et 
 d'identifier les points communs avec  
 des mécanismes similaires à l'{\oe}uvre dans le cerveau.}
-
-Le travail de compilation et de relecture/réexamen de résultats parfois anciens liés à la rédaction de ce rapport a été l'occasion de développer quelques rapprochements qui ne sont pas présents en tant que telles dans les publications. 
-
-Comme nous l'avons vu, la plupart des algorithmes d'apprentissage fonctionnent selon un principe d'\textit{appariement} (``pattern matching''), c'est à dire sur la construction, à partir des données, d'un ensemble de vecteurs ``caractéristiques''. 
-\begin{itemize}
-	\item Ces vecteurs caractéristiques, vus comme un dictionnaire de formes, constituent une base de description synthétique des données d'entrée. 
-	\item La projection des données d'entrée sur cet espace de redescription facilite ensuite leur traitement et leur interprétation. 
-\end{itemize} 
-L’apprentissage revient donc à la constitution d'un vocabulaire de base qui sert de clé d'interprétation des données d'entrée. 
-
-Nous avons souligné dans la partie précédente le caractère parfois incompatible entre d'une part la théorie du contrôle, et d'autre part l'apprentissage moteur. Nous formons l'hypothèse que cette difficulté à faire apprendre des compétences motrices à un dispositif artificiel repose sur l'opposition entre deux grands principes fonctionnels~: le feedback positif et le feedback négatif.
-\begin{itemize}
-	\item Le mécanisme d'appariement, central dans l'apprentissage, repose majoritairement sur une logique de feedback positif (ou résonance)
-	\item la théorie du contrôle, telle qu'elle est définie en sciences de l'ingénieur, repose majoritairement sur une logique de feedback négatif (correction de l'erreur motrice)
-\end{itemize}
-
-Si l'on souhaite construire des dispositifs artificiels capable d'apprendre des tâches motrices de la même manière qu'ils apprennent à classifier des signaux et des images, il faut opérer un renversement conceptuel en théorie du contrôle afin de rendre compatible le contrôle moteur avec l'apprentissage, en particulier \textit{utiliser les principes du feedback positif et de l'appariement pour le contrôle moteur.}
 
 
 
@@ -2276,7 +2256,7 @@ dynamique de relaxation d'un réseau de neurones dont le graphe
 de connexions est basé sur l'analyse des faisceaux de matière blanche à l'échelle du cerveau entier \shortcite{Hagmann2008}.
 Ces travaux ont permis de mettre en évidence un nombre très important d'attracteurs dans certaines gammes de paramètres.
 L'analyse des ensembles d'attracteurs obtenus permet d'identifier une douzaine de ``modes'' différents, chaque
-mode correspondant à l'activation d'une région anatomique particulière. Ces modes peuvent être comparés aux modules 
+mode correspondant à l'activation d'un réseau anatomique particulière. Ces modes peuvent être comparés aux modules 
 régionaux mis en évidence par une analyse structurelle \shortcite{Hagmann2008} ainsi qu'avec les composants indépendants 
 identifiés sur les signaux fMRI de l'état de repos \shortcite{Damoiseaux2006}.
 Ils permettent de simuler certains aspects de la dynamique large échelle (en particulier l'alternance entre différents patrons d'activité au cours du temps).
@@ -2780,6 +2760,153 @@ très concrètes dans un cadre de traitement du signal pur (interfaces cerveau-m
 \section{Bilan}
 
 
+Le travail de compilation et de relecture/réexamen de résultats parfois anciens liés à la rédaction de ce rapport a été l'occasion de développer quelques rapprochements qui ne sont pas présents en tant que telles dans les publications. 
+
+Comme nous l'avons vu, la plupart des algorithmes d'apprentissage fonctionnent selon un principe d'\textit{appariement} (``pattern matching''), c'est à dire sur la construction, à partir des données, d'un ensemble de vecteurs ``caractéristiques''. 
+\begin{itemize}
+	\item Ces vecteurs caractéristiques, vus comme un dictionnaire de formes, constituent une base de description synthétique des données d'entrée. 
+	\item La projection des données d'entrée sur cet espace de redescription facilite ensuite leur traitement et leur interprétation. 
+\end{itemize} 
+L’apprentissage revient donc à la constitution d'un vocabulaire de base qui sert de clé d'interprétation des données d'entrée. 
+
+Nous avons souligné dans la partie précédente le caractère parfois incompatible entre d'une part la théorie du contrôle, et d'autre part l'apprentissage moteur. Nous formons l'hypothèse que cette difficulté à faire apprendre des compétences motrices à un dispositif artificiel repose sur l'opposition entre deux grands principes fonctionnels~: le feedback positif et le feedback négatif.
+\begin{itemize}
+	\item Le mécanisme d'appariement, central dans l'apprentissage, repose majoritairement sur une logique de feedback positif (ou résonance)
+	\item La théorie du contrôle, telle qu'elle est définie en sciences de l'ingénieur, repose majoritairement sur une logique de feedback négatif (correction de l'erreur motrice)
+\end{itemize}
+
+Le caractère à la fois distribué et qualitatif de l'activité neuronale abolit la notion de distance entre signaux (voir section \ref{sec:disparite}), ce qui rend difficile 
+la réalisation d'opérations (quantitatives) simples comme l'addition ou la différence
+de deux quantités, pourtant nécessaires lorsque les réponses motrices doivent prendre en compte des sources sensorielles 
+multiples issues de référentiels variés (proprioception de la position du corps et coordonnées rétiniennes pour attraper
+une cible par exemple). 
+Le caractère distribué de l'activité neuronale 
+rend ainsi difficile les opérations de type ``forward'', c'est-à-dire 
+une transformation qui, étant donnés des 
+objets sur un espace de manipulations et 
+un changement de référentiel, prédit la disposition de ces mêmes objets sur la scène visuelle.
+
+Si l'on souhaite construire des dispositifs artificiels capable d'apprendre des tâches motrices de la même manière qu'ils apprennent à classifier des signaux et des images, il faut opérer un renversement conceptuel en théorie du contrôle afin de rendre compatible le contrôle moteur avec l'apprentissage, en particulier \textit{utiliser les principes du feedback positif et de l'appariement pour le contrôle moteur.}
+
+Cette approche implique, comme dans le cas de l'analyse des signaux, une \textit{décomposition de l'espace des tâches} en tâches élémentaires, autrement dit la capacité à constituer de très nombreux circuits de commande associés à des configurations précises de l'environnement. 
+
+Néanmoins, si chaque composante sensorielle de l'espace métrique environnant 
+est décomposée en constituants élémentaires (intervalles ou ``pixels'' d'environnement), activant
+ou désactivant différentes populations de neurones primaires, 
+alors les transformations aussi simples que les translations, rotations, ou même les simples copies d'activité, 
+doivent être apprises ``par coeur'' \cite{Pouget1997} et ne peuvent résulter de la combinaison 
+(additives ou soustractives) d'activités unitaires.
+%c'est à dire d'un calcul.
+
+%{\color{Violet}
+%Ceci pose un problème en particulier lorsqu'il s'agit de contrôler les déplacements du corps à partir de l'activité
+%distribuée induite par les récepteurs sensoriels.
+%En fait, le passage par un domaine de description qualitatif
+%ne pose pas de problème tant qu'il s'agit d'associer (de manière univoque) un
+%patron d'activité (un attracteur {\color{red}[ATTENTION NOTION D'ATTRACTEUR = MIXTE]}) et une commande motrice%, comme dans le
+%cas de la carte colliculaire vue précédemment. 
+%Le problème se pose lorsqu'il faut
+%réaliser des opérations arithmétiques entre plusieurs grandeurs du monde physique,
+%moduler une réponse à partir d'un écart à une valeur de référence par exemple, 
+%c'est à
+%dire plus généralement lorsqu'il s'agit d'estimer, au sein de l'espace de description
+%qualitatif, des quantités \emph{relatives} à différents
+%points de l'espace métrique ou de l'espace sensoriel (et non des quantités absolues). 
+%}
+
+
+
+%[NE PAS OUBLIER L'ACTIVITE VESTIBULAIRE]
+
+
+Par exemple, un simple ``pattern matching'' nécessiterait un apprentissage par coeur de la conséquence visuelle 
+de toutes les combinaisons de dispositions d'objets et de tous les changements de référentiel tronc-tête, ce qui parait 
+computationellement très coûteux. Il est nécessaire néanmoins que le ``lien'' praxo-visuel entre les différents 
+objets de la scène ne soit pas perdu
+au cours des déplacement du regard. 
+(Un raisonnement symétrique peut être appliqué pour le cas des déplacements du corps dans un environnement visuel stable)
+
+
+
+\paragraph{}
+Il existe trois grandes catégories d'approches pour traiter de cette question, plus
+généralement appelée ``question
+de l'assemblage'' (``binding problem'')~: (1) l'activité tierce, (2) l'assemblage
+dynamique et (3) la mémoire (ou les transformations) extérieure(s).
+{\bf!!Par ailleurs, la manière dont les liens entre les deux espaces (pratique et visuel) se construisent est également une question
+	à part entière, dont la mise en oeuvre pratique dépend largement du choix computationnel (1, 2 ou 3) effectué.!!}
+
+\paragraph{Activité tierce}	La structure algorithmique la plus simple est celle de l'activité tierce (ou  projection inverse), 
+c'est à 
+dire une zone d'activité (ou un neurone) instancie un objet complet, répondant 
+de manière sélective à une combinaison spécifique de ses différents constituants.
+Cette approche est celle dite du ``neurone grand-mère''. 
+S'il apparaît peu probable qu'un seul neurone soit le support de la liaison,
+rien n'exclut qu'une population de neurones puisse répondre de façon sélective
+à toutes les configurations d'interaction avec un objet particulier (par exemple
+notre grand-mère) \shortcite{Quiroga2005}, voir aussi \shortcite{Dehaene2011}.
+Une telle activité est donc la continuation à travers
+toutes ses transformations (déplacement du corps, mouvement des yeux) 
+d'un même objet de l'environnement,
+autrement dit une ``présence de l'objet''.
+Dans sa forme la plus élaborée, l'activité tierce est 
+un modèle de l'environnement, constituée des principales quantités 
+relatives aux objets d'intérêt, dans un espace extérocentré. 
+Malheureusement, cette reconstruction de la structure externe de l'environnement 
+par modèle inverse suppose implicitement des transformations géométriques au sein
+du substrat permettant de projeter l'objet invariant sur la scène prémotrice ou visuelle,
+la réalisation computationnelle de telles projections dans un substrat distribué n'étant pas garantie
+(à l'heure actuelle).
+
+\paragraph{Assemblage dynamique} L'approche ``distribuée'', également appelée approche ``dynamique'', stipule
+le caractère non exclusif des activités des population : il n'existe pas de
+neurone ou de population de neurones répondant exclusivement à un invariant 
+de haut niveau. Le lien doit reposer sur des
+canaux de communication transitoires, ou encore des résonances, s'établissant à travers le
+substrat entre différentes activités constituants partiels de la scène.
+L'invariance est ici la susceptibilité à ``résoner ensemble'' (la persistance de la résonance à 
+travers les changements; l'existence de canaux le permettant)
+qui distingue ce qui est possible de ce qui ne l'est pas (les associations de constituants
+plausibles et celles qui ne le sont pas).
+%Cette approche est bien sûr très séduisante, mais pose des difficultés importantes 
+%dès qu'il s'agit de 
+L'hypothèse de l'assemblage dynamique est celle qui, à l'heure actuelle, semble la plus susceptible
+d'implémenter le lien praxo-visuel, sans faire appel à une activité centrale spécifique ou
+à un modèle interne. Elle évite en particulier le coût combinatoire des changements de
+référentiels. Le mécanisme le plus populaire est celui qui a été proposé initialement
+par \shortcite{Konig91a} (voir également \shortcite{Rod99,Wang2010}) 
+basé sur les résonances entre oscillateurs. Il reste néanmoins
+de nombreuses questions relatives à l'implémentaton concrète (ou opérationnelle) de ces mécanismes,
+ainsi que sur leur caractère (ou non) prédictif. 
+
+\paragraph{Mémoire extérieure}	Une troisième approche, celle de la ``mémoire extérieure'' \cite{ORe01}
+reprend la tradition 
+de l'approche écologique impulsée par Gibson \cite{Gib79}. L'existence de 
+motifs invariants dans la relation de l'agent à son environnement (comme le point de fuite)
+sert de support à la manipulation de cet environnement.
+Le lien instrumental avec les objets (le mode d'utilisation des objets)
+institue une forme d'invariance  qui est reproduite à travers le temps à chaque rencontre
+avec le même type d'objets.
+L'approche Gibsonienne met donc au premier plan l'activité motrice en tant que soubassement
+de la constitution d'invariants dans le rapport au monde.
+D'un point de vue algorithmique, on peut imaginer par exemple des activités ``template'' 
+correspondant à des successions caractéristiques d'actions (actions stéréotypées).
+Dans le cadre de l'exploration visuelle, on peut imaginer des séquences caractéristiques
+de saccades selon le type de scène visuelle à explorer,
+%(le patron d'exploration
+%constituants le lien entre les points d'attention focale).
+%Il faut imaginer des patrons d'exploration visuelle caractéristiques, 
+ce ``plan de visite''
+%pour les différents types de scène,
+constituant le socle d'interprétation des éléments de la scène.
+%Cette approche procédurale, en faisant reposer l'invariance sur des ``dictionnaires'' de schémas 
+%sensori-moteurs, accorde peu de rôle à l'activité intrinsèque, laissant
+%donc peu de place aux processus de décision et à la mémoire.
+La mise en relation entre les éléments se réduit ici à un schéma d'exploration (ou d'utilisation) 
+caractéristique de ces différents éléments, constitutif d'une unité d'action. 
+
+
+\section{[TODO]}
 
 
 
@@ -2849,6 +2976,8 @@ pour rendre possible cette traduction inverse.
 
 
 \section{Problèmes ouverts}
+
+
 
 \section{Perspectives}
 
@@ -2938,84 +3067,9 @@ de toutes les combinaisons de dispositions d'objets et de tous les changements d
 computationellement très coûteux (\shortcite{Pouget1997,Pouget2002}). Il est nécessaire néanmoins que le ``lien'' praxo-visuel entre les différents objets de la scène ne soit pas perdu
 au cours des déplacement moteurs. 
 (Un raisonnement symétrique peut être appliqué pour le cas des déplacements du corps dans un environnement visuel stable)
-
-
-Il existe trois grandes catégories d'approches pour traiter de cette question, plus
-généralement appelée ``question
-de l'assemblage'' (``binding problem'')~: (1) l'activité tierce, (2) l'assemblage
-dynamique et (3) la mémoire (ou les transformations) extérieure(s).
-{\bf!!Par ailleurs, la manière dont les liens entre les deux espaces (pratique et visuel) se construisent est également une question
-	à part entière, dont la mise en oeuvre pratique dépend largement du choix computationnel (1, 2 ou 3) effectué.!!}
-
-\paragraph{Activité tierce}	La structure algorithmique la plus simple est celle de l'activité tierce (ou  projection inverse), 
-c'est à 
-dire une zone d'activité (ou un neurone) instancie un objet complet, répondant 
-de manière sélective à une combinaison spécifique de ses différents constituants.
-Cette approche est celle dite du ``neurone grand-mère''. 
-S'il apparaît peu probable qu'un seul neurone soit le support de la liaison,
-rien n'exclut qu'une population de neurones puisse répondre de façon sélective
-à toutes les configurations d'interaction avec un objet particulier (par exemple
-notre grand-mère) \shortcite{Quiroga2005}, voir aussi \shortcite{Dehaene2011}.
-Une telle activité est donc la continuation à travers
-toutes ses transformations (déplacement du corps, mouvement des yeux) 
-d'un même objet de l'environnement,
-autrement dit une ``présence de l'objet''.
-Dans sa forme la plus élaborée, l'activité tierce est 
-un modèle de l'environnement, constituée des principales quantités 
-relatives aux objets d'intérêt, dans un espace extérocentré. 
-Cette reconstruction de la structure externe de l'environnement 
-par modèle inverse suppose implicitement des transformations géométriques au sein
-du substrat permettant de projeter l'objet invariant sur la scène prémotrice ou visuelle,
-la réalisation computationnelle de telles projections dans un substrat distribué n'étant pas garantie
-(à l'heure actuelle).
-
-\paragraph{Assemblage dynamique} L'approche ``distribuée'', également appelée approche ``dynamique'', stipule
-le caractère non exclusif des activités des population : il n'existe pas de
-neurone ou de population de neurones répondant exclusivement à un invariant 
-de haut niveau. Le lien doit reposer sur des
-canaux de communication transitoires, ou encore des résonances, s'établissant à travers le
-substrat entre différentes activités constituants partiels de la scène.
-L'invariance est ici la susceptibilité à ``résoner ensemble'' (la persistance de la résonance à 
-travers les changements; l'existence de canaux le permettant)
-qui distingue ce qui est possible de ce qui ne l'est pas (les associations de constituants
-plausibles et celles qui ne le sont pas).
-%Cette approche est bien sûr très séduisante, mais pose des difficultés importantes 
-%dès qu'il s'agit de 
-L'hypothèse de l'assemblage dynamique est celle qui, à l'heure actuelle, semble la plus susceptible
-d'implémenter le lien praxo-visuel, sans faire appel à une activité centrale spécifique ou
-à un modèle interne. Elle évite en particulier le coût combinatoire des changements de
-référentiels. Le mécanisme le plus populaire est celui qui a été proposé initialement
-par \shortcite{Konig91a} (voir également \shortcite{Rod99,Wang2010}) 
-basé sur les résonances entre oscillateurs. Il reste néanmoins
-de nombreuses questions relatives à l'implémentaton concrète (ou opérationnelle) de ces mécanismes,
-ainsi que sur leur caractère (ou non) prédictif. 
-
-\paragraph{Assemblage dynamique}	Une troisième approche, celle de la ``mémoire extérieure'' \cite{ORe01}
-reprend la tradition 
-de l'approche écologique impulsée par Gibson \cite{Gib79}. L'existence de 
-motifs invariants dans la relation de l'agent à son environnement (comme le point de fuite)
-sert de support à la manipulation de cet environnement.
-Le lien instrumental avec les objets (le mode d'utilisation des objets)
-institue une forme d'invariance  qui est reproduite à travers le temps à chaque rencontre
-avec le même type d'objets.
-L'approche Gibsonienne met donc au premier plan l'activité motrice en tant que soubassement
-de la constitution d'invariants dans le rapport au monde.
-D'un point de vue algorithmique, on peut imaginer par exemple des activités ``template'' 
-correspondant à des successions caractéristiques d'actions (actions stéréotypées).
-Dans le cadre de l'exploration visuelle, on peut imaginer des séquences caractéristiques
-de saccades selon le type de scène visuelle à explorer,
-%(le patron d'exploration
-%constituants le lien entre les points d'attention focale).
-%Il faut imaginer des patrons d'exploration visuelle caractéristiques, 
-ce ``plan de visite''
-%pour les différents types de scène,
-constituant le socle d'interprétation des éléments de la scène.
-%Cette approche procédurale, en faisant reposer l'invariance sur des ``dictionnaires'' de schémas 
-%sensori-moteurs, accorde peu de rôle à l'activité intrinsèque, laissant
-%donc peu de place aux processus de décision et à la mémoire.
-La mise en relation entre les éléments se réduit ici à un schéma d'exploration (ou d'utilisation) 
-caractéristique de ces différents éléments, constitutif d'une unité d'action. 
 }
+
+
 
 Nous partirons de l'activité humaine telle qu'elle se déploie à
 l'échelle macroscopique.
@@ -3088,50 +3142,6 @@ plusieurs millions de neurone sensoriels, chaque neurone étant la manifestation
 
 
 
-Cette distribution de l'activité (et leur caractère qualitatif) rend ainsi difficile 
-la réalisation d'opérations (quantitatives) simples comme l'addition ou la différence
-de deux quantités, pourtant nécessaires lorsque les réponses motrices doivent prendre en compte des sources sensorielles 
-multiples issues de référentiels variés (proprioception de la position du corps et coordonnées rétiniennes pour attraper
-une cible par exemple). 
-Si chaque composante sensorielle de l'espace métrique environnant 
-est décomposée en constituants élémentaires (intervalles ou ``pixels'' d'environnement), activant
-ou désactivant différentes populations de neurones primaires, 
-alors les transformations aussi simples que les translations, rotations, ou même les simples copies d'activité, 
-doivent être apprises ``par coeur'' \cite{Pouget1997} et ne peuvent résulter de la combinaison 
-(additives ou soustractives) d'activités unitaires.
-%c'est à dire d'un calcul.
-
-%{\color{Violet}
-%Ceci pose un problème en particulier lorsqu'il s'agit de contrôler les déplacements du corps à partir de l'activité
-%distribuée induite par les récepteurs sensoriels.
-%En fait, le passage par un domaine de description qualitatif
-%ne pose pas de problème tant qu'il s'agit d'associer (de manière univoque) un
-%patron d'activité (un attracteur {\color{red}[ATTENTION NOTION D'ATTRACTEUR = MIXTE]}) et une commande motrice%, comme dans le
-%cas de la carte colliculaire vue précédemment. 
-%Le problème se pose lorsqu'il faut
-%réaliser des opérations arithmétiques entre plusieurs grandeurs du monde physique,
-%moduler une réponse à partir d'un écart à une valeur de référence par exemple, 
-%c'est à
-%dire plus généralement lorsqu'il s'agit d'estimer, au sein de l'espace de description
-%qualitatif, des quantités \emph{relatives} à différents
-%points de l'espace métrique ou de l'espace sensoriel (et non des quantités absolues). 
-%}
-
-
-
-%[NE PAS OUBLIER L'ACTIVITE VESTIBULAIRE]
-
-Le problème est, comme nous l'avons vu, le caractère distribué de l'activité neuronale 
-qui rend difficile les opérations de type ``forward'', c'est-à-dire 
-une transformation qui, étant donnés des 
-objets sur un espace de manipulations et 
-un changement de référentiel, prédit la disposition de ces mêmes objets sur la scène visuelle.
-Par exemple, un simple ``pattern matching'' nécessiterait un apprentissage par coeur de la conséquence visuelle 
-de toutes les combinaisons de dispositions d'objets et de tous les changements de référentiel tronc-tête, ce qui parait 
-computationellement très coûteux. Il est nécessaire néanmoins que le ``lien'' praxo-visuel entre les différents 
-objets de la scène ne soit pas perdu
-au cours des déplacement du regard. 
-(Un raisonnement symétrique peut être appliqué pour le cas des déplacements du corps dans un environnement visuel stable)
 
 
 %[ASSEMBLAGE DE CIRCONSTANCE - STRUCTURE PLASTIQUE VERSATILE - LIGANDS ENTRE DIFFERENTS PATRONS]
@@ -7246,6 +7256,52 @@ of Adaptive Behavior (SAB'04)~: 305-314
 \includepdf[pages=6,offset=-70 -30]{pdf/2007-neurocomputing.pdf}
 \includepdf[pages=7,offset=70 -30]{pdf/2007-neurocomputing.pdf}
 \includepdf[pages=8,offset=-70 -30]{pdf/2007-neurocomputing.pdf}
+
+\chapter{Learning an Control with large Dynamic Neural Networks (2007)}\label{app:EPJ07}
+\paragraph{Authors~:} Daucé E 
+\paragraph{Journal~:} European Physical Journal - Special Topics 142(1) ~: 123-161
+
+\cleardoublepage
+\includepdf[pages=1, offset=70 -50]{pdf/2007-epj-st.pdf}
+\includepdf[pages=2, offset=-70 -50]{pdf/2007-epj-st.pdf}
+\includepdf[pages=3, offset=70 -50]{pdf/2007-epj-st.pdf}
+\includepdf[pages=4, offset=-70 -50]{pdf/2007-epj-st.pdf}
+\includepdf[pages=5, offset=70 -50]{pdf/2007-epj-st.pdf}
+\includepdf[pages=6, offset=-70 -50]{pdf/2007-epj-st.pdf}
+\includepdf[pages=7, offset=70 -50]{pdf/2007-epj-st.pdf}
+\includepdf[pages=8, offset=-70 -50]{pdf/2007-epj-st.pdf}
+\includepdf[pages=9, offset=70 -50]{pdf/2007-epj-st.pdf}
+\includepdf[pages=10, offset=-70 -50]{pdf/2007-epj-st.pdf}
+\includepdf[pages=11, offset=70 -50]{pdf/2007-epj-st.pdf}
+\includepdf[pages=12, offset=-70 -50]{pdf/2007-epj-st.pdf}
+\includepdf[pages=13, offset=70 -50]{pdf/2007-epj-st.pdf}
+\includepdf[pages=14, offset=-70 -50]{pdf/2007-epj-st.pdf}
+\includepdf[pages=15, offset=70 -50]{pdf/2007-epj-st.pdf}
+\includepdf[pages=16, offset=-70 -50]{pdf/2007-epj-st.pdf}
+\includepdf[pages=17, offset=70 -50]{pdf/2007-epj-st.pdf}
+\includepdf[pages=18, offset=-70 -50]{pdf/2007-epj-st.pdf}
+\includepdf[pages=19, offset=70 -50]{pdf/2007-epj-st.pdf}
+\includepdf[pages=20, offset=-70 -50]{pdf/2007-epj-st.pdf}
+\includepdf[pages=21, offset=70 -50]{pdf/2007-epj-st.pdf}
+\includepdf[pages=22, offset=-70 -50]{pdf/2007-epj-st.pdf}
+\includepdf[pages=23, offset=70 -50]{pdf/2007-epj-st.pdf}
+\includepdf[pages=24, offset=-70 -50]{pdf/2007-epj-st.pdf}
+\includepdf[pages=25, offset=70 -50]{pdf/2007-epj-st.pdf}
+\includepdf[pages=26, offset=-70 -50]{pdf/2007-epj-st.pdf}
+\includepdf[pages=27, offset=70 -50]{pdf/2007-epj-st.pdf}
+\includepdf[pages=28, offset=-70 -50]{pdf/2007-epj-st.pdf}
+\includepdf[pages=29, offset=70 -50]{pdf/2007-epj-st.pdf}
+\includepdf[pages=30, offset=-70 -50]{pdf/2007-epj-st.pdf}
+\includepdf[pages=31, offset=70 -50]{pdf/2007-epj-st.pdf}
+\includepdf[pages=32, offset=-70 -50]{pdf/2007-epj-st.pdf}
+\includepdf[pages=33, offset=70 -50]{pdf/2007-epj-st.pdf}
+\includepdf[pages=34, offset=-70 -50]{pdf/2007-epj-st.pdf}
+\includepdf[pages=35, offset=70 -50]{pdf/2007-epj-st.pdf}
+\includepdf[pages=36, offset=-70 -50]{pdf/2007-epj-st.pdf}
+\includepdf[pages=37, offset=70 -50]{pdf/2007-epj-st.pdf}
+\includepdf[pages=38, offset=-70 -50]{pdf/2007-epj-st.pdf}
+\includepdf[pages=39, offset=70 -50]{pdf/2007-epj-st.pdf}
+
 
 \chapter{Spike-Timing dependent plasticity and regime transitions in random recurrent neural networks (2008)}\label{app:NCP08}
 \paragraph{Authors~:} Henry F and Daucé E
