@@ -1105,8 +1105,8 @@ d'action divisé par la taille de la population.
 
 Le  ``pattern matching'' (correspondance de forme)
 est l'opération consistant 
-à mettre en correspondance un modèle (patron) avec une forme (signal), dans le cas le plus simple
-via un produit scalaire. 
+à mettre en correspondance un modèle $\boldsymbol{w}$ (patron) avec une forme $\boldsymbol{I}$ (signal), dans le cas le plus simple
+via un produit scalaire $\langle\boldsymbol{w},\boldsymbol{I}\rangle$. 
 On utilisera ici le terme ``appariement'' comme traduction de ``pattern matching''.
 
 Le principe de l'appariement appartient au monde de 
@@ -1117,7 +1117,7 @@ l'apprentissage automatique et du traitement du signal~:
 	comme par exemple la décomposition en des ondelettes, ou plus généralement sur des bases de filtres orthogonaux
 	ou pas, incomplets, complets ou ``surcomplets''.
 	\item L'appariement est également le principe 
-	à la base des algorithmes d'apprentisage automatique, où des dictionnaires se construisent par 
+	à la base des algorithmes d'apprentisage automatique, où des dictionnaires $\{\boldsymbol{w}_1, ..., \boldsymbol{w}_K\}$ se construisent par 
 	extraction d'invariants morphologiques (ou vecteurs caractéristiques) à partir des données présentées.
 \end{itemize} 
 
@@ -1178,15 +1178,17 @@ Le choix de ces formes caractéristiques est bien sûr dépendant des capacités
 
 \paragraph{Types de problèmes}
 
-La fonction de réponse $f$ est en général une projection sur un espace $\mathcal{Y}$ de dimension plus petite que l'espace d'entrée $\mathcal{X}$.
+La fonction de réponse $h$ est en général une projection sur un espace $\mathcal{U}$ de dimension plus petite que l'espace d'entrée $\mathcal{X}$.
 La fonction opère donc une \textit{réduction} de son espace d'entrée, c'est à dire qu'elle réduit les données d'entrée à un petit nombre de caractéristiques. C'est donc un transformation non-inversible du signal d'entrée avec perte d'information.
 
 La nature de cet espace de sortie (continu ou discret) définit deux grands types de problèmes d'apprentissage. 
 
 \begin{itemize}
 	\item Lorsque l'espace de sortie est discret, la réponse est une \textit{catégorie}. On parle de catégorisation ou de classification des données d'entrée. 
-	Dans ce cas, la fonction de réponse repose sur un mécanisme d'\textit{appariement sélectif} (ou ``choix''), c'est à dire qu'en fin de compte, une forme unique est identifiée comme correspondant aux données d'entrée. Ce mécanisme est mieux connu sous le nom de ``winner takes all'' (le gagnant prend tout), implémenté par la fonction \textit{argmax}.
+	Dans ce cas, la fonction de réponse repose sur un mécanisme d'\textit{appariement sélectif} (ou ``choix''), c'est à dire qu'en fin de compte, une forme unique est identifiée comme correspondant aux données d'entrée. Ce mécanisme est mieux connu sous le nom de ``winner takes all'' (le gagnant prend tout), implémenté par la fonction \textit{argmax}~:
+	$$ u = \arg\max_{k\in{1..K}} \langle\boldsymbol{w}_k,\boldsymbol{I}\rangle$$
 	\item Lorsque l'espace de sortie est continu, on parle de problème de régression (ou de prédiction). La réponse est en général le résultat d'une \textit{décomposition} des données d'entrée sur une base de plus petite dimension. On parle dans ce cas d'\textit{appariement non exclusif} puisque les données d'entrée s'apparient à des degrés divers aux différentes formes de la base pour produire la réponse. 
+	$$ \boldsymbol{u} =  h(\langle\boldsymbol{w}_1,\boldsymbol{I}\rangle, ..., \langle\boldsymbol{w}_K,\boldsymbol{I}\rangle)$$
 \end{itemize}
 
 
@@ -1195,18 +1197,20 @@ La nature de cet espace de sortie (continu ou discret) définit deux grands type
 Le but d'un algorithme d'apprentissage est de définir 
 le jeu de paramètres $\Theta$ de manière à produire une sortie 
 conforme au calcul souhaité. 
-Le jeu de paramètres est assimilables à un \textit{programme} et
+Le jeu de paramètres est assimilables à un \textit{programme}, par exemple
+ $\Theta = \{\boldsymbol{w}_1, ..., \boldsymbol{w}_K\}$, ou
+ encore $\Theta =G$ (graphe), et
 le choix de ces paramètres correspond à la programmation du réseau. 
 
 L'apprentissage automatique 
 s'exprime donc principalement
-sous la forme d'un problème d'optimisation dans des espaces vectoriels de grande dimension.  Il s'agit  d'optimiser une fonction de réponse $f_\Theta$, définie selon un tableau de paramètres $\Theta$, selon un critère d'optimalité défini par une fonction de coût $\mathcal{H}$ basée sur un jeu de contraintes $\mathbf{D}$~:
+sous la forme d'un problème d'optimisation dans des espaces vectoriels de grande dimension.  Il s'agit  d'optimiser une fonction de réponse $h_\Theta$, définie selon un tableau de paramètres $\Theta$, selon un critère d'optimalité défini par une fonction de coût $\mathcal{H}$ basée sur un jeu de contraintes $\mathbf{D}$~:
 \begin{equation}
 \min_\Theta \mathcal{H}(\Theta,\mathbf{D})
 \end{equation}
 où $\Theta$ est le ``programme'' et $\mathbf{D}$ les ``méta-données''.
 
-Dans le cadre de l'apprentissage automatique, les contraintes $\mathbf{D}$ sont les données d'apprentissage, et prennent la forme d'une base d'exemples  organisée sous forme de couples $\{(x_1,y_1),...,(x_n,y_n)\}$.  L'optimisation consiste à trouver une fonction de l'espace des entrées $\mathcal{X}$ vers l'espace des sorties $\mathcal{Y}$ qui minimise la distance aux données. 
+Dans le cadre de l'apprentissage automatique, les contraintes $\mathbf{D}$ sont les données d'apprentissage, et prennent la forme d'une base d'exemples  organisée sous forme de couples $\{(\boldsymbol{I}_1,u_1),...,(\boldsymbol{I}_n,u_n)\}$.  L'optimisation consiste à trouver une fonction de l'espace des entrées $\mathcal{I}$ vers l'espace des sorties $\mathcal{U}$ qui minimise la distance aux données. 
 
 
 L'optimisation par énumération est généralement impossible pour les problèmes de grande dimension. On a alors recours à des algorithmes dits d'''optimisation stochastique'', utilisant des hypothèses simplificatrices (comme la séparabilité linéaire des données ou encore le caractère Gaussien de distributions génératrices).  
@@ -1225,6 +1229,22 @@ permettant de mieux prédire et classifier les données nouvelles.
 	et patron de connexions), déterminent une
 	méthode d'optimisation spécifique.
 \end{itemize}
+
+\paragraph{Modèles probabilistes}
+Un grand nombre de problèmes d'apprentissage peuvent s'exprimer de manière probabiliste. Dans ce cas, le problème d'apprentissage revient à déduire des données une distribution de probabilité sous-jacente (dite distribution génératrice). Les algorithmes d'apprentissage consistent alors à
+estimer cette distribution de probabilité en maximisant la vraisemblance des données, étant données un certain nombre de contraintes ou hypothèses a priori de régularité (nombre de sources, type de distribution, etc.) \shortcite{Bishop2006}
+
+Dans ce cadre~:
+\begin{itemize}
+	\item Soient $\mathcal{I}$ l'espace des observations, $I$ une v.a. sur $\mathcal{I}$, $\mathcal{U}$ l'espace des sources,  $U$ une v.a. sur $\mathcal{U}$ et $f(I,U;\Theta)$ la distribution génératrice.
+	\item L'optimisation porte sur les paramètres $\Theta$ de la distribution génératrice (maximum de vraisemblance). 
+	$$ \max_{\Theta} \sum_{(\boldsymbol{I},u)\in \boldsymbol{D}} f(\boldsymbol{I},u;\Theta)$$
+	\item La réponse est une distribution marginale
+	$f(U=u|I=\boldsymbol{I};\Theta)$, déduite de la distribution génératrice et des observations à partir des formules de Bayes.
+\end{itemize} 
+
+Les modèles probabilistes se distinguent des modèles d'appariement standard par le caractère probabiliste de la réponse. Autrement dit, le programme fournit une liste des  probabilités de réponses et non une réponse unique. Le caractère combinatoire et facilement interprétable des probabilités donne à ces modèles une 
+puissance supérieure aux modèles standard.
 
 \subsubsection{Réseaux de neurones en apprentissage automatique}
 
@@ -1592,11 +1612,11 @@ Le cadre du contrôle présenté ici repose sur des modèles de l'environnement 
 
 Dans le cadre du contrôle tel présenté précédemment, l'apprentissage consiste donc à modifier le contrôleur décrit par la fonction  $\phi_\text{in}$ (voir eqs. \ref{eq:SD-closed-in} et \ref{eq:feed-noise-3}) dans un sens qui améliore un critère de performance prédéfini. La mise à jour d'un modèle ou d'une fonction de réponse consiste en général à modifier un jeu de paramètres $\Theta$ qui décrit le modèle.
 
-Cette approche est basé sur un modèle \textit{génératif}  $P(\boldsymbol{X}|\boldsymbol{x},\boldsymbol{u},\Theta)$ et $Q(\mathcal{I}|\boldsymbol{x},\Theta)$, où $\Theta$ est le jeu de paramètres définissant les deux distributions.  
-Dans le cas des modèles de filtrage, il s'agit par exemple d'améliorer les modèles $P_\Theta$ (processus externe) et $Q_\Theta$ (mesure), afin de mieux prendre en compte les facteurs exogènes non modélisés afin de mieux prédire les entrées.  %L'apprentissage consiste ainsi à 
+Cette approche est basé sur un modèle \textit{génératif}  $P(X|\boldsymbol{x},\boldsymbol{u},\Theta)$ et $Q(I|\boldsymbol{x},\Theta)$, où $\Theta$ est le jeu de paramètres définissant les deux distributions.  
+Dans le cas des modèles de filtrage, il s'agit par exemple d'améliorer les modèles $P$ (processus externe) et $Q$ (mesure), afin de mieux prendre en compte les facteurs exogènes non modélisés et de mieux prédire les entrées.  %L'apprentissage consiste ainsi à 
 Dans le cadre que nous avons regardé jusqu'à présent (modèles de la mesure, filtrage),  l'état extérieur $\boldsymbol{x}_\text{out}$ est l'état caché ``latent'' à estimer.
 Le produit du processus de mesure est la distribution \textit{a posteriori} $\hat{f}$ portant sur l'espace des variables latentes, paramétré par $\Theta$, i.e. $\hat{f}(\boldsymbol{x})=f(\boldsymbol{x}|\boldsymbol{I},\boldsymbol{u},\Theta)$.
-L'amélioration du processus repose alors sur le fait de trouver de nouveaux paramètres $\Theta'$ en estimant la vraisemblance $L(\boldsymbol{x},\Theta)$\footnote{égale à $Q(\boldsymbol{I}|\boldsymbol{x},\Theta')$ quand il n'y a pas de dynamique d'état et à  $Q(\boldsymbol{I}_{t+1}|{\boldsymbol{x}}_{t+1},\Theta')P({\boldsymbol{x}}_{t+1}|{\boldsymbol{x}}_t,\boldsymbol{u}_t,\Theta')$ quand il y a une dynamique d'état.} des paramètres étant donné l'état latent $\boldsymbol{x}$, en maximisant~:
+L'amélioration du processus repose alors sur le fait de trouver de nouveaux paramètres $\Theta'$ en estimant la vraisemblance $L(\boldsymbol{x},\Theta')$\footnote{égale à $Q(\boldsymbol{I}|\boldsymbol{x},\Theta')$ quand il n'y a pas de dynamique d'état et à  $Q(\boldsymbol{I}_{t+1}|{\boldsymbol{x}}_{t+1},\Theta')P({\boldsymbol{x}}_{t+1}|{\boldsymbol{x}}_t,\boldsymbol{u}_t,\Theta')$ quand il y a une dynamique d'état.} des paramètres étant donné l'état latent $\boldsymbol{x}$, en maximisant~:
 \begin{align}
 	\max_{\Theta'} \int L(\boldsymbol{x},\Theta')
 	 \hat{f}(\boldsymbol{x}) d\boldsymbol{x} \label{eq:Friston}
@@ -1935,7 +1955,9 @@ La transformation des données d'entrée sous la forme d'un (ou plusieurs) vecte
 \end{itemize}
 
 L'équation de récurrence:
-$$\dot{\boldsymbol{x}} = \phi(\boldsymbol{x}(t), I(t))$$
+\begin{align}
+	\dot{\boldsymbol{x}} = \phi(\boldsymbol{x}(t), I(t)) \label{eq:recurrence}
+\end{align}
 permet de modéliser l'interaction entre une activité endogène (décrite par $\boldsymbol{x}$) et un signal extérieur (décrit par $I$).
 L'évolution de l'état du système dynamique au cours du temps décrit une trajectoire dans un espace de dimension $N$ (où $N$ est le nombre de nœuds du réseau).  
 On note $n \leq N$ le nombre de degrés de liberté sur lesquels évolue  \textit{effectivement} la dynamique (la dimension de la variété sur laquelle évolue la trajectoire limite). La valeur de $n$ s'interprète comme le \textit{degré de réduction} opéré par le signal sur l'activité du réseau. 
@@ -1988,7 +2010,7 @@ Dans le cadre
 proposé par Donald Hebb en 1949, la plasticité est essentiellement un mécanisme local dépendant des échanges entre les cellules pré et post-synaptiques. On parle de potentiation à long terme (Long Term Potentiation - LTP). Le poids $J_{ij}$ est alors une quantité qui évolue au cours du temps sous la forme :
 \begin{align}
 J_{ij}(t) = F(\boldsymbol{S}_i(t), \boldsymbol{S}_j(t), J_{ij}(t_0))
-\end{align}
+\end{align}\label{eq:plast-hebb}
 avec $t_0$ l'instant initial d'observation,
 $\boldsymbol{S}_j(t) = \{s_j(t)\}_{t \in [t_0,..,t[}$  l'activité pré-synaptique, $\boldsymbol{S}_i(t) = \{s_i(t)\}_{t \in [t_0,..,t[}$ l'activité post-synaptique,
 et $F$ la fonction de mise à jour des synapses.
@@ -2221,30 +2243,29 @@ La dynamique à temps discret, et à temps de propagation constant est, en notat
 \end{align}
 avec $f$ fonction de réponse sigmoïde et $g$ paramètre de contrôle (gain de la fonction de réponse). 
 
-L'indépendance entre les différents liens est une caractéristique importante, qui permet d'analyser le comportement du modèle 
+L'indépendance statistique entre les différents liens est une caractéristique importante, qui permet d'analyser le comportement du modèle 
 à la limite des grandes tailles, c'est à dire en faisant tendre la taille $N$ vers l'infini. Avec un \textit{scaling} des poids approprié 
 (espérance, variance de la loi de tirage initial des poids en $O(\frac{1}{N}$)), on peut montrer que la dynamique (déterministe) tend à la limite thermodynamique 
-vers un processus aléatoire (processus Gaussien), la corrélation entre les nœuds tendant vers 0 \shortcite{Som88,Ces94,Moy00a}. 
-
-
-
+vers un processus aléatoire (processus Gaussien), la corrélation entre les nœuds tendant vers 0 \shortcite{Som88,Ces94,Moy00a}.
+ 
 
 Les réseaux étudiés étant normalisés, 
-leur comportement est réglé par deux paramètres~: le gain de la fonction de réponse neuronale (assimilable
-à l'inverse d'une température) et la variabilité du seuil d'activation.
-Le signal présenté en entrée du réseau est un patron aléatoire statique qui vient se surimposer au seuil 
+leur comportement est réglé par deux paramètres~: le gain $g$ de la fonction de réponse neuronale (assimilable
+à l'inverse d'une température) et la variabilité $\sigma_\theta$ du seuil d'activation.
+Le signal présenté en entrée du réseau est un vecteur aléatoire  qui vient se surimposer au seuil 
 d'activation (rendant donc les neurones plus ou moins excitables).
 Le réseau soumis à un tel signal converge vers un nouvel attracteur (autrement dit se reconfigure).
 
-
-
+L'existence d'un 
+paramètre de contrôle (le gain de la fonction de transfert des neurones) permet de reproduire, dans ces réseaux aléatoires, 
+un  comportement générique de déstabilisation, appelé route vers le chaos par ``quasi-périodicité'' \shortcite{Berger1988,Doyon1993} (voir figure \ref{fig:hermes-bif}).
 L'étude proposée dans \shortcite{Beslon2002},
 également rapportée dans \shortcite{Dau07}, porte sur un réseau récurrent aléatoire comportant une seule population. 
 Le paramètre de contrôle
 choisi place le réseau dans une région chaotique, proche de la transition vers le cycle limite.  
 Le réseau est soumis à une stimulation extérieure quasi stationnaire, évoluant à une vitesse très lente par rapport à la vitesse de 
 mise à jour du réseau. Une succession de régimes dynamiques distincts, séparés par des transitions brusques, est mise en évidence.
-Chaque régime est caractérisé par un patron d'activité différent, qui se manifeste par la présence de fréquences caractéristiques
+Chaque régime est caractérisé par une distribution d'activité différente, qui se manifeste par la présence de fréquences caractéristiques
 distinctes dans le spectre de Fourier du signal moyen (voir section \ref{sec:criticalite}). La différence qualitative entre les différents régimes observés (différence de fréquence principale) peut servir de support à une catégorisation des l'espace des entrées.  
 
 
@@ -2305,7 +2326,26 @@ le caractère régulateur du paramètre d'hétérogénéité dans les régimes d
 
 
 \subsubsection{c. Les graphes de connexions à la fois topographiquement organisés et équilibrés permettent d'implémenter une mémoire à court terme sur des neurones impulsionnels, sans faire appel à des mécanismes de cellulaires spécifiques.}
-Le modèle proposé dans \shortcite{Dau04,Dau04b} met en évidence la présence simultanée d'une activité de fond chaotique,
+Le modèle du ``champ neuronal'' est un modèle de type champ moyen, c'est à dire qu'il décrit les réseaux de neurones d'un point de vue macroscopique. L'activité de larges populations de neurones s'apparente en effet, à la limite des grandes tailles, à un milieu continu dans lequel chaque portion de l'espace peut être décrit par la ``densité'' d'activité qui s'y développe.
+
+Le modèle le plus connu est décrit par des équation intégro-différentielles. Soit $x$ un point d'un espace (ou d'une portion d'espace) cartésien $\mathcal{X}$.
+Dans le modèle d'Amari \shortcite{Ama77B}, les neurones sont décrits par leur potentiel d'activation $V$ et par la sortie binaire de la fonction d'activation $f$ (fonction de Heaviside).  Le potentiel d'activation d'un neurone est donné par l'équation~:
+\begin{align}
+\tau \frac{dV(x,t)}{dt} = -V(x,t) + I(x,t) - \theta + \int_{y \in \mathcal{X}} W(||x-y||) f(V(y,t)) dy
+\end{align} 
+où $I$ est un signal extérieur et $W$ un noyau décrivant les interactions réciproques entre neurones en fonction de la distance $||x - y||$.
+
+La question adressée par le modèle publié en 2004 \shortcite{Dau04} est celle de l'implémentation d'un modèle de champ neuronal (voir section \ref{sec:NField}) sur un support composé
+d'unités discrètes.
+%, comme l'activité dite ``persistante'' ainsi qu'une bonne sensibilité au signal d'entrée (switch). 
+Sur les modèles jusqu'alors proposés, dans un cas l'activité focale était soit uniquement réactive \shortcite{Han96},  
+dans l'autre cas,
+l'activité persistante reposait sur un mécanisme de bistabilité cellulaire \shortcite{Cam98} ou encore sur une
+plasticité synaptique à court terme \shortcite{Com00}. 
+Notre modèle est une des premières implémentations d'un champ neuronal sur support discret reposant sur des mécanismes de réseau
+uniquement.
+
+Le modèle proposé dans \shortcite{Dau04,Dau04b} (voir section \ref{sec:NatComp}) met en évidence la présence simultanée d'une activité de fond chaotique,
 de grandes oscillations lentes et de foyers d'activité de type champ neuronal, sur un réseau de neurones composé d'unités neuronales binaires.
 Comme dans le cas du champ neuronal continu \shortcite{Ama77B}, l'activité persistante repose sur l'activité excitatrice locale, avec 
 un effet de lissage lié à l'hétérogénéité des connexions. Les oscillations lentes reposent sur 
@@ -2318,6 +2358,13 @@ changements sont forts, ou encore une mémoire à court terme (rémanence) lorsq
 L'étude proposée dans \shortcite{Golos2014} (voir section \ref{sec:PLOSsub} et annexe \ref{app:PLOSsub}) étudie la 
 dynamique de relaxation d'un réseau de neurones dont le graphe 
 de connexions est basé sur l'analyse des faisceaux de matière blanche à l'échelle du cerveau entier \shortcite{Hagmann2008}.
+
+La dynamique, inspirée par \cite{Hopfield1984}, est définie par l' équation différentielle~:
+			$$\tau\frac{dx_i}{dt} = -x_i + \frac{1}{2} \sum_{j=1}^N J_{ij} (1 + \tanh(g(p x_j - \theta_j)))
+		\hspace{1cm}\text{avec}\hspace{1cm}
+			\theta_i = \frac{1}{2}\sum_{j=1}^N J_{ij}$$
+où $g$ est le gain, $p$ une constante de proportionnalité (ratio excitation/inhibition) et $ \boldsymbol{J}$ la matrice des couplages issue de l'imagerie fonctionnelle humaine.
+
 Ces travaux ont permis de mettre en évidence un nombre très important d'attracteurs dans certaines gammes de paramètres.
 L'analyse des ensembles d'attracteurs obtenus permet d'identifier une douzaine de ``modes'' différents, chaque
 mode correspondant à l'activation d'un réseau anatomique particulière. Ces modes peuvent être comparés aux modules 
@@ -2325,22 +2372,69 @@ régionaux mis en évidence par une analyse structurelle \shortcite{Hagmann2008}
 identifiés sur les signaux fMRI de l'état de repos \shortcite{Damoiseaux2006}.
 Ils permettent de simuler certains aspects de la dynamique large échelle (en particulier l'alternance entre différents patrons d'activité au cours du temps).
 
+\subsubsection{e. La plasticité de Hebb, appliquée à des réseaux de neurones récurrents aléatoires, provoque une réduction de complexité des dynamiques spontanée et induites}
+L'appariement 
+par relaxation/réduction, sous sa forme la plus simple, 
+s'exprime comme une transition
+depuis une activité à haut degré de liberté (chaos) vers une activité plus simple (cycle limite) en présence d'un stimulus 
+statique \shortcite{Dau98A,Hen08B}.
+
+Les règles de plasticité Hebbiennes définissent une dynamique sur les liens synaptiques (voir eqs. \ref{eq:SD-plast-x}, \ref{eq:SD-plast-J} et \ref{eq:plast-hebb}), selon les valeurs des activités pré et post-synaptiques. Dans la forme simple étudiée ici, a plasticité  
+repose soit sur la conjonction des activités pré et post-synaptiques, i.e~:
+$$\dot{J}_{ij} = F({J}_{ij}, s_i^\text{out} \times s_j^\text{in})$$
+(on parle alors de règle d'ordre 0),
+soit sur des différences d'activité, i.e. 
+$$\dot{J}_{ij} = F({J}_{ij},(s_i^\text{out} - m_i^\text{out})  \times(s_j^\text{in}-m_j^\text{in}))$$
+où $m_i^\text{in/out}$ est une activité de référence,  par exemple l'activité moyenne. On parle dans ce cas de règle d'ordre 1. 
+Ces règles de plasticité ne sont pas nécessairement convergentes. Elles sont généralement appliquées sur des durées brèves, en fonction des études (par exemple jusqu'à l'apparition d'un changement de régime dynamique).
+
+Dans le cadre de systèmes dynamiques ouverts (c'est à dire soumis à un signal d'entrée, voir eq. \ref{eq:recurrence}), nous mettons en évidence deux mécanismes de réduction distincts~:
+\begin{itemize}
+	\item Le papier \shortcite{Dau98A} met en évidence  une simplification systématique de l'activité intrinsèque dans le cas d'une règle d'ordre 0. 
+	La réponse au motif
+	d'entrée change sous l'effet de la plasticité~:
+	en partant d'un régime chaotique, la dynamique évolue vers un cycle limite, puis, de manière asymptotique, vers le point fixe. On parle de ``réduction'' de la dynamique, la plasticité 
+	produisant une ``route inverse'' de la complexité vers le point fixe
+	(voir figure \ref{fig:inverse}).
+	\item Dans le cas des règles d'ordre 1 (par exemple des différences temporelles \shortcite{Dau07}, ou la règle de la covariance \shortcite{Dau02}) la plasticité produit dans les mêmes conditions une transition depuis un régime irrégulier chaotique vers un régime périodique, tendant asymptotiquement vers de grandes oscillations sur la dynamique d'ensemble.  
+\end{itemize}
+
+%{\color{Gray}
+%Le mécanisme de reconnaissance que nous étudions est assez éloigné d'un mécanisme 
+%calculatoire traditionnel puisqu'il s'agit principalement 
+%d'une réaction accrue à certains signaux. Il permet néanmoins de tracer une frontière entre le ``connu'' et l'``inconnu'',
+%et peut donc servir de base à des modèles de la perception, puis d'interpolation sur le principe de la 
+%complétion perceptive \shortcite{Hop82}.
+%Les formes produisant une réponse accrue sont ``vues'', les autres sont ignorées et demeurent ``non-perçues''. 
+%Le mécanisme permettant de passer de l'ignorance à la perception repose sur la répétition (les signaux apparaissant le 
+%plus souvent sont appris, ceux qui apparaissent rarement sont ignorés) 
+%et sur leur faculté à produire des réponses différenciées dans le substrat (c'est le substrat qui fixe le
+%caractère différent ou similaire de deux formes).
+%}
+
+La plasticité a donc pour effet de capturer (ou plutôt accentuer) un \textit{mode dynamique} particulier.
+Elle a également pour effet de séparer l'espace
+des entrées entre régions ``connues'' et régions ``inconnues''~: 
+à l'issue de l'''apprentissage'', le réseau est capable de discriminer
+les entrées similaires au motif appris, en produisant une réponse spécifique, et les entrées non-similaires, en produisant une réponse générique.
+Le réseau peut donc être vu comme un ``réservoir'' de réponses dynamiques morphologiquement (ou qualitativement) distinctes
+construites par le mécanisme de plasticité en présence de signaux présentés  de manière répétée.  
+
 
 \subsubsection{z. La plasticité induite et le principe de trace synaptique implémentent l'apprentissage par renforcement dans des espaces d'action continus.}
 La plasticité induite est un mécanisme  de plasticité déclenché par un signal extérieur. 
 Il peut s'agir, dans un cadre biologique, d'un neurotransmetteur ou d'une entrée synaptique spécifique, i.e.~:
 \begin{align}
-\delta J_{ij}(t) = F( \boldsymbol{S}_i(t), \boldsymbol{S}_j(t), y(t))
+\dot{J}_{ij} = F(\boldsymbol{S}_i(t), \boldsymbol{S}_j(t), \boldsymbol{y}(t),J_{ij})
 \end{align}
-(voir aussi eq. \label{eq:SD-plast})
+(voir aussi eq. \ref{eq:SD-plast}) avec $\boldsymbol{S}_i(t) = \{s_i(t)\}_{t \in [t_0,..,t[}$ l'activité post-synaptique, $F$ la fonction de mise à jour et $\boldsymbol{y}(t)$
+un signal extérieur qui vient ``moduler'' la plasticité.
 
-Ce signal extérieur $y(t)$ est~: 
-\begin{itemize}
-	\item dans le cas le plus simple, un  déclencheur binaire qui ``ouvre'' ou ``ferme'' le mécanisme de plasticité;
-	\item un facteur réel qui, selon son signe, conduit à une plasticité Hebbiennes ou anti-Hebbienne;
-	\item un signal d'erreur transmis par des synapses spécifiques. Dans ce cas, $y$ a le rôle d'un ``méta-signal'' transmettant une consigne sur la manière dont il faut modifier le graphe de connexions;
-	\item...
-\end{itemize}
+Ce signal extérieur $\boldsymbol{y}(t)$ est, dans le cas le plus simple, un  déclencheur binaire qui ``ouvre'' ou ``ferme'' le mécanisme de plasticité ou encore un scalaire qui, selon son signe, conduit à une plasticité Hebbiennes ou anti-Hebbienne.
+
+Le principe de trace synaptique consiste à stocker l'historique long des corrélations d'activités pré et post-synaptiques dans une mémoire spécifique, selon le principe des ``traces d'éligibilité'' \shortcite{Sut88}, soit~:
+$$ \dot{Z}_{ij} = F_Z(\boldsymbol{S}_i(t), \boldsymbol{S}_j(t), Z_{ij})$$
+$$ \dot{J}_{ij} = F_J(Z_{ij},\boldsymbol{y}(t))$$
 
 
 
@@ -2474,32 +2568,6 @@ l'attracteur neuronal par boucle de rétroaction positive \shortcite{Dau02,Dau02
 \subsection{Plasticité d'ordre 1}
 
 \paragraph{Apprentissage Hebbien dans les réseaux aléatoires}
-Nous avons abordé le principe de la reconnaissance par résonance qui, sous sa forme la plus simple, s'exprime comme une transition
-entre une activité non-spécifique (chaos) et une activité plus simple (cycle limite) en présence d'un stimulus 
-familier \shortcite{Dau98A,Hen08B}.
-Le mécanisme de reconnaissance que nous étudions est assez éloigné d'un mécanisme 
-calculatoire traditionnel puisqu'il s'agit principalement 
-d'une réaction accrue à certains signaux. Il permet néanmoins de tracer une frontière entre le ``connu'' et l'``inconnu'',
-et peut donc servir de base à des modèles de la perception, puis d'interpolation sur le principe de la 
-complétion perceptive \shortcite{Hop82}.
-Les formes produisant une réponse accrue sont ``vues'', les autres sont ignorées et demeurent ``non-perçues''. 
-Le mécanisme permettant de passer de l'ignorance à la perception repose sur la répétition (les signaux apparaissant le 
-plus souvent sont appris, ceux qui apparaissent rarement sont ignorés) 
-et sur leur faculté à produire des réponses différenciées dans le substrat (c'est le substrat qui fixe le
-caractère différent ou similaire de deux formes).
-
-Du point de vue computationnel, la plasticité synaptique inscrit dans le substrat une séparation de l'espace
-des stimuli entre une région reconnue et une région inconnue. Il s'agit donc en premier lieu d'une opération de 
-discrimination. Deuxièmement, chaque réponse à un motif se traduit par une activité spatio-temporellement distincte,
-l'apprentissage ayant pour effet de capturer (ou plutôt accentuer) un \emph{mode dynamique} particulier.
-Le réseau est vu comme un ``réservoir'' de comportements dynamiques spatio-temporellement différents. Le comportement
-spatio-temporel asocié au motif change sous l'effet de la plasticité, en conservant certaines
-de ses caractéristiques comme la période intrinsèque, qui se manifeste de façon ``pure'' 
-sous la forme d'un cycle limite. Ce comportement temporellement périodique 
-finit par disparaître si l'apprentissage est poussé jusqu'au point fixe. La règle 
-de plasticité Hebbienne, dans sa forme simple étudiée ici, n'est pas convergente et 
-l'apprentissage est stoppé de manière arbitraire à l'apparition du cycle limite
-pour les besoins de l'étude. 
 
 La principale difficulté rencontrée pour ces réseaux est la contamination 
 de la réaction induite à des patrons non appris. Si des motifs voisins du motif initialement appris
@@ -2860,6 +2928,7 @@ Si l'on souhaite construire des dispositifs artificiels capable d'apprendre des 
 
 Cette approche implique, comme dans le cas de l'analyse des signaux, une \textit{décomposition de l'espace des tâches} en tâches élémentaires, autrement dit la capacité à constituer de très nombreux circuits de commande associés à des configurations précises de l'environnement. 
 
+\subsubsection{Espace visuel et espace pré-moteur}
 L'activité humaine est fortement guidée par la composante visuelle.
 Si on regarde de plus près l'interrelation entre l'exploration visuelle et
 l'action simple consistant à manipuler des objets situés à portée de bras,
@@ -4703,21 +4772,7 @@ Le principe d'un guidage plus ou moins contraignant se retrouve également dans 
 	\item et conditionnement opérant (lorsque le comportement est guidé par une récompense ou une punition) {\color{Cyan}[SKINNER]}. 
 \end{itemize} 
 
-\paragraph{Modèles probabilistes}
-Un grand nombre de problèmes d'apprentissage peuvent s'exprimer de manière probabiliste. Dans ce cas, le problème d'apprentissage revient à déduire des données une distribution de probabilité sous-jacente (dite distribution génératrice). Les algorithmes d'apprentissage consistent alors à
-estimer cette distribution de probabilité en maximisant la vraisemblance des données, étant données un certain nombre de contraintes ou hypothèses a priori de régularité (nombre de sources, type de distribution, etc.) \shortcite{Bishop2006}
 
-Dans ce cadre~:
-\begin{itemize}
-	\item Soient $\mathcal{X}$ l'espace des observations, $X$ une v.a. sur $\mathcal{X}$, $\mathcal{Y}$ l'espace des sources,  $Y$ une v.a. sur $\mathcal{Y}$ et $f(X,Y;\Theta)$ la distribution génératrice.
-	\item L'optimisation porte sur les paramètres $\Theta$ de la distribution génératrice (maximum de vraisemblance). 
-	$$ \max_{\Theta} \sum_{(x,y)\in \boldsymbol{D}} f(x,y;\Theta)$$
-	\item La réponse est une distribution marginale
-	$f(Y|X=x;\Theta)$, déduite de la distribution génératrice et des observations à partir des formules de Bayes.
-\end{itemize} 
-
-Les modèles probabilistes se distinguent des modèles d'appariement standard par le caractère probabiliste de la réponse. Autrement dit, le programme fournit une liste des  probabilités de réponses et non une réponse unique. Le caractère combinatoire et facilement interprétable des probabilités donne à ces modèles une 
-puissance d'expression supérieure aux modèles standard.
 
 {\color{Orange} Hypothèse du sampling en neurosciences.}
 
