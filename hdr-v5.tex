@@ -676,8 +676,8 @@ dans l'apprentissage moteur~:
 
 \subsubsection{Neurones à impulsion (2004-2014)}
 
-\paragraph{ACI ``DYNN'' (2002-2007)} Le travail sur les neurones à impulsion a été initié dans le cadre du programme de collaboration de l'ACI en neurosciences
-intégratives et computationnelles ``temps et cerveau'', projet ``DYNN'' 
+\paragraph{ACI ``Temps et Cerveau'' - projet ``DYNN'' (2002-2007)} Le travail sur les neurones à impulsion a été initié dans le cadre du programme de collaboration de l'ACI en neurosciences
+intégratives et computationnelles ``Temps et cerveau'', projet ``DYNN'' 
 (Dynamique des réseaux de neurones artificiels
 biologiquement plausibles) \shortcite{Sam07}.
 Une des questions au coeur de ce projet était la possibilité d'étendre l'analyse de champ moyen 
@@ -691,8 +691,19 @@ Les changements principaux sont donc :
 \item prise en compte explicite des délais et des constantes temporelles,
 \item spécialisation des neurones (excitation/inhibition).
 \end{itemize}
+Mes contributions dans ce domaine portent sur l'étude des transferts d'échelle 
+entre neurones fréquentiels et neurones à potentiels d'action, à la définition de 
+patrons de connectivité séparant clairement neurones excitateurs et neurones inhibiteurs,
+et à la mise en place d'un formalisme architectural indépendant des modèles.
 Ce projet collaboratif a abouti à la publication d'un numéro spécial dans la revue ``European Physical Journal \---
 Special Topics'' \shortcite{ces07b}.
+
+J'ai également
+étudié dans ce cadre
+les conditions de l'émergence d'oscillations synchronisées \textit{induites} par plasticité synaptique dans des réseaux équilibrés
+constitués d'unités binaires (autrement dit neurones impulsionnels sans mémoire).
+Les principaux résultats concernant l'application de la plasticité 
+sur ces réseaux  sont détaillés dans le papier EPJ-ST de 2007 \shortcite{Dau07} (voir annexe \ref{app:EPJ07}).
 
 \paragraph{Apprentissage dans les réseaux équilibrés}
 
@@ -979,13 +990,13 @@ de transformation de ces signaux soient les mêmes~:
 		\item La mise en œuvre d'un calcul repose sur la présence
 		de neurones d'\textit{entrée} soumis à des données extérieures, qui sont donc les opérandes du calcul.
 		C'est le cas chez l'animal des cellules \textit{sensorielles}. 
-		On note $\boldsymbol{I}(t) = \{\boldsymbol{I}(t')\}_{t' \in [t_0, t[}$ ce signal extérieur. 
-		Si le neurone $i$ est un neurone d'entrée, on a $I_i \neq 0$. Si le neurone $i$ n'est pas un neurone d'entrée,  
-		on a $I_i = 0$.
+		On note $\boldsymbol{I}(t) = \{I_i(t')\}_{i \in \{1,...,N\}, t' \in [t_0, t[}$ ce signal extérieur. 
+		Si le neurone $i$ est un neurone d'entrée, on a $\exists t : I_i(t) \neq 0$. Si le neurone $i$ n'est pas un neurone d'entrée,  
+		on a $\forall t : I_i (t) = 0$.
 		Le signal extérieur est généralement considéré comme indépendant de l'activité du réseau de neurones.
 		\item L'équivalent formel de l'encodage 
-		est un ``patron d'activité'' constitué des différents degrés d'appartenance
-		du signal aux différentes composantes du dictionnaire. 
+		est un ``patron d'activité'' $\boldsymbol{S}(t)$ constitué de
+		l'ensemble des états de sortie du réseau depuis l'instant initial, i.e.  $\boldsymbol{S}(t) = \{s_i(t')\}_{i \in \{1,...,N\}, t' \in [t_0, t[}$. 
 		Le calcul est quant à lui réalisé au travers des liens récurrents liant mutuellement les 
 		composantes actives (liens d'affinité ou d'incompatibilité principalement). 
 		C'est le résultat des interactions entre les différentes composantes qui constitue le calcul.
@@ -1000,7 +1011,7 @@ de transformation de ces signaux soient les mêmes~:
 
 La \textit{réponse} du réseau de neurones au signal d'entrée (la solution du calcul) est le patron d'activité induit
 par ce signal d'entrée.
-En étendant la fonction de réponse aux entrées extérieures, l'activité $\boldsymbol{s}(t)$ est la solution de~:
+En étendant la fonction de réponse aux entrées extérieures, l'activité instantanée $\boldsymbol{s}(t)$ est la solution de~:
 \begin{align}\label{eq:optim_input}
 \boldsymbol{s}(t) = f(\boldsymbol{S}(t), \boldsymbol{I}(t);G)
 \end{align}
@@ -1199,7 +1210,7 @@ le jeu de paramètres $\Theta$ de manière à produire une sortie
 conforme au calcul souhaité. 
 Le jeu de paramètres est assimilables à un \textit{programme}, par exemple
  $\Theta = \{\boldsymbol{w}_1, ..., \boldsymbol{w}_K\}$, ou
- encore $\Theta =G$ (graphe), et
+ encore $\Theta =G$ (graphe -- voir aussi eq. \ref{eq:graphe-aleatoire}), et
 le choix de ces paramètres correspond à la programmation du réseau. 
 
 L'apprentissage automatique 
@@ -1240,7 +1251,7 @@ Dans ce cadre~:
 	\item L'optimisation porte sur les paramètres $\Theta$ de la distribution génératrice (maximum de vraisemblance). 
 	$$ \max_{\Theta} \sum_{(\boldsymbol{I},u)\in \boldsymbol{D}} f(\boldsymbol{I},u;\Theta)$$
 	\item La réponse est une distribution marginale
-	$f(U=u|I=\boldsymbol{I};\Theta)$, déduite de la distribution génératrice et des observations à partir des formules de Bayes.
+	$f(U=u|I=\boldsymbol{I};\Theta)$, déduite de la distribution génératrice et des observations à partir de la formule de Bayes.
 \end{itemize} 
 
 Les modèles probabilistes se distinguent des modèles d'appariement standard par le caractère probabiliste de la réponse. Autrement dit, le programme fournit une liste des  probabilités de réponses et non une réponse unique. Le caractère combinatoire et facilement interprétable des probabilités donne à ces modèles une 
@@ -1451,7 +1462,7 @@ Le cas le plus courant en robotique et en modélisation biologiquement inspirée
 
 \subsubsection{Facteurs exogènes}
 
-Le problème de l'observation de l'état est donc d'une importance particulière en contrôle puisque la justesse de la commande en dépend. 
+Le problème de l'observation de l'état est d'une importance particulière en contrôle puisque la justesse de la commande en dépend. 
 
 L'estimation d’état dépend principalement de deux facteurs: le modèle physico-mécanique de l'environnement, et le modèle des capteurs. 
 Ces modèles sont souvent incomplets  et les facteurs non pris en compte (frottements, inertie, fatigue des composants, non-stationnarités, variations d'éclairage, bruit de mesure, fiabilité des capteurs, ...) sont modélisés comme des signaux extérieurs venant moduler de façon imprévisible le comportement du système. 
@@ -1479,7 +1490,7 @@ Les écarts entre le modèle et les observations sont fréquemment modélisés c
 	\item  %$\boldsymbol{\chi}_\text{in}(t)$ et
 	$\boldsymbol{\chi}_\text{out}(t)$ est le bruit de mesure et $Q$ le modèle de mesure, selon~:
 	\begin{align}
-	\boldsymbol{I}(t)\sim Q(\mathcal{I}|\boldsymbol{x}_\text{out}(t))
+	\boldsymbol{I}(t)\sim Q(I|\boldsymbol{x}_\text{out}(t))
 	\end{align}
 \end{itemize}  
 Les équations (\ref{eq:feed-noise-1}-\ref{eq:feed-noise-4}) décrivent alors la réalisation d'un processus stochastique reposant sur, d'une part, des modèles d'état (les variables ``porteuses'' de signal \--- ou d'information) et d'autre part des modèles de bruit (variables ``porteuses'' de bruit).
@@ -1494,13 +1505,13 @@ où~:
 	\item  $Q(\boldsymbol{I}(t+dt)|\boldsymbol{x})$ est la vraisemblance de l'observation $\boldsymbol{I}$ étant donné $\boldsymbol{x}$. 
 \end{itemize}
 
-\subsubsection{Filtrage}
+\subsubsection{Filtrage}\label{page:filtrage}
 
 Le problème de filtrage consiste principalement à séparer le signal du bruit, à l'aide de la connaissance (ou \textit{a priori}) représentée par les modèles d'état et les modèles de bruit.
 
 Soit $\boldsymbol{I}(t)$ le signal disponible sur les capteurs. Il s'agit d'estimer le mieux possible l'état extérieur \--- ou état ``caché'' $\boldsymbol{x}_\text{out}(t)$. Autrement dit il s'agit de soustraire du signal les bruits ($\boldsymbol{\xi}_\text{out}(t), \boldsymbol{\chi}_\text{out}(t)$), connaissant leurs caractéristiques statistiques.
 
-Le filtrage utilise un \textit{modèle interne}, qui est un processus miroir de l'environnement, dans lequel la variable d'état \textit{interne} $\boldsymbol{x}_\text{in}$ évolue en ``imitant'' l'environnement. On note dans ce cas $\hat{\boldsymbol{x}}_\text{out}=\boldsymbol{x}_\text{in}$ cette estimation, sur laquelle le contrôleur s'appuie pour choisir sa commande.
+Le filtrage utilise un \textit{modèle interne}, qui est un processus miroir de l'environnement, dans lequel la variable d'état \textit{interne} $\boldsymbol{x}_\text{in}$ évolue en ``imitant'' l'environnement. On note dans ce cas $\boldsymbol{x}_\text{in}=\hat{\boldsymbol{x}}_\text{out}$ cette estimation, sur laquelle le contrôleur s'appuie pour choisir sa commande.
 
 
 
@@ -1852,12 +1863,12 @@ Le manque de développements applicatifs vient probablement
 
 \chapter{Problématique d'ensemble}
 
-{\color{Gray} Les travaux présentés dans ce mémoire sont centrés sur
+Les travaux présentés dans ce mémoire sont centrés sur
 l'idée de \textit{circuit reconfigurable}, basée sur l'existence d'une \textit{activité endogène} produite par un réseau de 
 neurones \textit{récurrent}.  
 Le but est de caractériser ces mécanismes, et 
 d'identifier les points communs avec  
-des mécanismes similaires à l'{\oe}uvre dans le cerveau.}
+des mécanismes similaires à l'{\oe}uvre dans le cerveau.
 
 
 
@@ -1954,11 +1965,14 @@ La transformation des données d'entrée sous la forme d'un (ou plusieurs) vecte
 	\item Dans le cas des réseaux récurrents, cette simplification se traduit par une \textit{réduction du nombre de degrés de liberté} sur lesquels évolue la dynamique des neurones. L'activité du réseau accepte alors une description sur un espace de plus petite dimension.
 \end{itemize}
 
+
 L'équation de récurrence:
 \begin{align}
-	\dot{\boldsymbol{x}} = \phi(\boldsymbol{x}(t), I(t)) \label{eq:recurrence}
+\dot{\boldsymbol{x}} = \phi(\boldsymbol{x}(t), I(t)) \label{eq:recurrence}
 \end{align}
 permet de modéliser l'interaction entre une activité endogène (décrite par $\boldsymbol{x}$) et un signal extérieur (décrit par $I$).
+
+\paragraph{Réduction de la dynamique}\label{page:reduction}
 L'évolution de l'état du système dynamique au cours du temps décrit une trajectoire dans un espace de dimension $N$ (où $N$ est le nombre de nœuds du réseau).  
 On note $n \leq N$ le nombre de degrés de liberté sur lesquels évolue  \textit{effectivement} la dynamique (la dimension de la variété sur laquelle évolue la trajectoire limite). La valeur de $n$ s'interprète comme le \textit{degré de réduction} opéré par le signal sur l'activité du réseau. 
 \begin{itemize}
@@ -1983,21 +1997,23 @@ De manière schématique,
 Cette notion d'activation ``macroscopique'' est à distinguer de l'activation  ``microscopique'' des neurones.
 On parlera par la suite de \textit{réponse de population} (ou réponse collective)  lorsque le réseau ``réagit'' ainsi à une entrée particulière en réduisant son nombre de degrés de liberté.
 
-\paragraph{}
-Contrairement aux classifieurs traditionnels qui apparient \textit{nécessairement} le signal d'entrée avec une des formes stockées dans la structure, ce comportement correspond à un \emph{appariement \textit{conditionnel}} tels que~:
+\paragraph{Appariement conditionnel}\label{page:appariement-conditionnel}
+Contrairement aux classifieurs traditionnels qui apparient \textit{nécessairement} le signal d'entrée avec une des formes stockées dans la structure, ce comportement correspond à un \textit{appariement conditionnel} tels que~:
 \begin{itemize}
 	\item les signaux de forme connue s'apparient avec une des formes stockées dans le réseau;
 	\item les signaux inconnus ne s'apparient avec aucune des formes stockées dans le réseau.  
 \end{itemize}
-Autrement dit l'appariement conditionnel autorise le réseau à \textit{ne pas choisir}. Parmi l'ensemble des réponses possibles, le réseau produit la réponse ``je ne sais pas'' lorsque le signal présenté n'est pas suffisamment proche d'une forme connue.
+
+\paragraph{}Autrement dit l'appariement conditionnel autorise le réseau à \textit{ne pas choisir}. Parmi l'ensemble des réponses possibles, le réseau produit la réponse ``je ne sais pas'' lorsque le signal présenté n'est pas suffisamment proche d'une forme connue.
 
 \begin{itemize}
 	\item Ce rejet des entrées inconnues correspond, dans la littérature statistique, au principe de ``rejet de distance'', lorsqu'un phénomène observé est trop éloigné du modèle et classé comme ``aberrant''.
 	\item une implémentation connue de ce principe dans le cadre des réseaux de neurones est le réseau ART \cite{ART98}, qui implémente un principe de ``vigilance'' correspondant à l'identification d'une entrée non-référencée par le réseau.
+	\item Ce principe de sélection par la dynamique d'un réseau récurrent a 
+	été exprimé dans les travaux de Walter Freeman \shortcite{ska87} dans le cadre d'un modèle de la perception des odeurs.
 \end{itemize}
 
-Ce principe de sélection par la dynamique d'un réseau récurrent a été exprimé dans les travaux de Walter Freeman \shortcite{ska87} dans le cadre d'un modèle de la perception des odeurs.
-On retrouve une idée analogue dans les travaux de Hermann Haken \shortcite{Haken1983}, qui a conceptualisé le principe de réponse par réduction de la dynamique collective à travers la notion de \textit{paramètre d'ordre}, permettant de constituer une ``variété centrale'' sur laquelle le système dynamique évolue (\textit{center manifold reduction}).
+
 
 
 
@@ -2009,9 +2025,9 @@ La règle de Hebb inscrit dans la structure du graphe les conjonctions d'activit
 Dans le cadre 
 proposé par Donald Hebb en 1949, la plasticité est essentiellement un mécanisme local dépendant des échanges entre les cellules pré et post-synaptiques. On parle de potentiation à long terme (Long Term Potentiation - LTP). Le poids $J_{ij}$ est alors une quantité qui évolue au cours du temps sous la forme :
 \begin{align}
-J_{ij}(t) = F(\boldsymbol{S}_i(t), \boldsymbol{S}_j(t), J_{ij}(t_0))
-\end{align}\label{eq:plast-hebb}
-avec $t_0$ l'instant initial d'observation,
+\dot{J}_{ij} = F(\boldsymbol{S}_i(t), \boldsymbol{S}_j(t), J_{ij}) \label{eq:plast-hebb}
+\end{align}
+avec 
 $\boldsymbol{S}_j(t) = \{s_j(t)\}_{t \in [t_0,..,t[}$  l'activité pré-synaptique, $\boldsymbol{S}_i(t) = \{s_i(t)\}_{t \in [t_0,..,t[}$ l'activité post-synaptique,
 et $F$ la fonction de mise à jour des synapses.
 %La plasticité est donc essentiellement un mécanisme \textit{local} qui modifie le couplage des cellules $i$ et $j$ en fonction 
@@ -2044,28 +2060,29 @@ Les implémentations les plus connues du principe de Hebb sont~:
 
 
 \paragraph{Assemblées neuronales} Le principe de plasticité par conjonction d'activité est articulé, dans le livre de Hebb, avec le concept d'\textit{assemblée neuronale} \cite{Heb49}. 
-Une assemblée neuronale est un sous-ensemble de nœuds du réseau s'activant de manière coordonnée, et de façon réitérée au cours du temps.
-{\color{Gray} La notion d'assemblée est donc liée à la notion d'activité~: une assemblée est un patron d'activité qui réapparaît fréquemment.}
-% (l'activité d'un nœud étant identifiée à un état ``haut'').
-
-{\color{Gray} La notion d'assemblée se distingue de la notion de population~: 
+Une assemblée neuronale\footnote{La notion d'assemblée se distingue de la notion de population~: 
 	\begin{itemize}
-		\item les populations de neurones sont définies par des caractères architecturaux
+		\item les populations de neurones sont définies par des caractères anatomiques ou architecturaux
 		\item les assemblées de neurones sont définies par la dynamique.
 	\end{itemize} 
 	
-	On identifie fréquemment l'activation d'une assemblée à la réalisation d'une tâche spécifique.}
+} est un sous-ensemble de nœuds du réseau s'activant de manière coordonnée, et de façon réitérée au cours du temps.  Toujours selon l'idée originale de Hebb, ce patron d'activité, qui réapparaît fréquemment, a été \textit{sélectionné} (stabilisé) au cours du temps par la règle de plasticité. 	
+%{\color{Gray} La notion d'assemblée est donc liée à la notion d'activité~: u}
+% (l'activité d'un nœud étant identifiée à un état ``haut'').
 
-Une assemblée est donc, selon l'idée originale de Hebb, un patron d'activité caractéristique, sélectionné (stabilisée) par la règle de plasticité. 
-{\color{Gray} D'un point de vue computationnel, cette
-	assemblée de neurones actifs est une forme (un vecteur caractéristique)  ``stockée'' dans le réseau, qui a la possibilité de s'''activer'' en fonction du contexte.}
-On parlera dans la suite, pour désigner cette activité coordonnée, d'une activité \textit{macroscopique} (par opposition à l'activité microscopique du neurone seul). 
 
-Une assemblée de neurones peut être vue comme une \textit{unité de description} de l'activité du réseau.
-A un instant donné, une assemblée se trouve soit dans l'état inactif, soit dans l'état ``activé''. L'état du réseau est alors décrit, de manière macroscopique, par la (ou les) assemblée(s) particulière(s) qui est (sont) active(s) à cet instant \footnote{L'idée d'unité de description se ramène à la notion de \textit{paramètre d'ordre} \shortcite{Wei89} qui est, dans le cas de l'étude des transitions de phase, un opérateur permettant de mesurer un type d'organisation spécifique. Il est nul
+
+%	{\color{Gray} D'un point de vue computationnel, cette
+%		assemblée de neurones actifs est une forme (un vecteur caractéristique)  ``stockée'' dans le réseau, qui a la possibilité de s'''activer'' en fonction du contexte.}
+
+
+Il est possible,  par ailleurs,  d'identifier  l'activation d'une assemblée à la réalisation d'une tâche spécifique. On parlera dans la suite, pour désigner cette activité coordonnée, d'une activité \textit{macroscopique} (par opposition à l'activité microscopique du neurone seul). On retrouve une idée voisine dans les travaux de Hermann Haken \shortcite{Haken1983}, qui a conceptualisé le principe de réponse par réduction de la dynamique collective à travers la notion de \textit{paramètre d'ordre}, permettant de constituer une ``variété centrale'' sur laquelle le système dynamique évolue (\textit{center manifold reduction}).
+
+Une assemblée de neurones peut être vue comme une \textit{unité de description} de l'activité du réseau\footnote{de la même manière qu'un \textit{paramètre d'ordre} \shortcite{Wei89}, dans le cas de l'étude des transitions de phase, permet de mesurer un type d'organisation spécifique. Il est nul
 	si le milieu étudié est dans une phase différente de la phase décrite par l'opérateur. Il est ``actif'' lorsque le milieu obéit à cette organisation spécifique.}.
+A un instant donné, une assemblée se trouve soit dans l'état inactif, soit dans l'état ``activé''. L'état du réseau est alors décrit, de manière macroscopique, par la (ou les) assemblée(s) particulière(s) qui est (sont) active(s) à cet instant.
 
-Enfin, selon cette perspective, le réseau de neurones se comporte comme un \textit{graphe  reconfigurable} au sein duquel des circuits (assemblées) peuvent être activés ou désactivés au cours du temps.
+Ainsi, selon cette perspective, le réseau de neurones se comporte comme un \textit{graphe  reconfigurable} au sein duquel des circuits (assemblées) peuvent être activés ou désactivés au cours du temps.
 
 %\subsubsection{Fonctionnement fractionnaire et fonctionnement intégré}
 
@@ -2076,7 +2093,7 @@ Enfin, selon cette perspective, le réseau de neurones se comporte comme un \tex
 
 
 
-\paragraph{} La thèse principale développée ici est que :
+\paragraph{} Une des thèses principales développées ici est que :
 \begin{itemize}
 	\item[]
 	\textit{La plasticité de Hebb construit une fonction d'\textbf{appariement conditionnel} s'appuyant sur les propriétés de l'activité persistante d'un système dynamique de grande dimension.}
@@ -2151,7 +2168,7 @@ nous considérons la commande motrice comme un mécanisme de relaxation qui conj
 	le même mécanisme pouvant en principe se décliner à différentes échelles.
 \end{itemize}
 
-\paragraph{Alternance comportementale}
+\paragraph{Alternance comportementale}\label{page:alternance}
 L'importance de la désynchronisation, comme complément de la synchronisation, est également souligné dans \shortcite{Rod99}.
 Le fonctionnement en boucle fermée par couplage positif (par renforcement mutuel) contient en effet fondamentalement
 le risque de l'enfermement dans un attracteur comportemental unique, correspondant à
@@ -2164,7 +2181,7 @@ mais également sur des mécanismes actifs de désynchronisation, comme la fatig
 
 \paragraph{}
 Les travaux présentés dans ce mémoire offrent des portes d'entrée vers ce principe de contrôle par appariement et feedback positif
-évoqué dans le chapitre précédent.
+évoqué dans les chapitres précédents.
 Pour les développer, nous avons utilisé un certain nombre de parti-pris méthodologiques~:
 \begin{itemize}
 	\item Utiliser le cerveau comme source d'inspiration. Nos travaux sont largement basés sur la littérature et les observations en neurosciences. Nous considérons en particulier la plasticité de Hebb comme modèle de référence pour nos algorithmes d'apprentissage.
@@ -2227,9 +2244,9 @@ Un réseau de neurones aléatoire est un graphe orienté et pondéré $G$ consti
 \end{itemize} 
 tel que~:
 \begin{align}
-G \sim \mathcal{D}(\Theta)
+G \sim \mathcal{D}(\Xi) \label{eq:graphe-aleatoire}
 \end{align}
-où $\mathcal{D}$ est une distribution de probabilité sur l'espace des graphes et  $\Theta$ est un ensemble de paramètres qui définissent cette distribution.
+où $\mathcal{D}$ est une distribution de probabilité sur l'espace des graphes et  $\Xi$ est un ensemble de paramètres ``macroscopiques'' qui définissent cette distribution.
 La notion d'aléa ne porte donc pas sur la dynamique d'état mais sur le patron de connexions du réseau. 
 On parle de bruit ``figé'' dans les connexions (``\textit{quenched disorder}'').
 
@@ -2238,10 +2255,10 @@ La dynamique à temps discret, et à temps de propagation constant est, en notat
 \begin{align}
 &\boldsymbol{x}(0) = \boldsymbol{x}_0&&\nonumber\\
 &\forall t > 0 :&& \nonumber\\
-&&\boldsymbol{h}(t) &= \boldsymbol{J} \mathbf{x}(t-1) - \boldsymbol{\theta} + \boldsymbol{I}(t)\\
+&&\boldsymbol{h}(t) &= \boldsymbol{J} \mathbf{x}(t-1) - \boldsymbol{\theta} + \boldsymbol{I}(t) \\
 && \boldsymbol{x}(t) &= f(\boldsymbol{h}(t);g)\nonumber
 \end{align}
-avec $f$ fonction de réponse sigmoïde et $g$ paramètre de contrôle (gain de la fonction de réponse). 
+avec $f$ fonction de réponse sigmoïde et $g$ paramètre de contrôle (gain de la fonction de réponse du neurone). 
 
 L'indépendance statistique entre les différents liens est une caractéristique importante, qui permet d'analyser le comportement du modèle 
 à la limite des grandes tailles, c'est à dire en faisant tendre la taille $N$ vers l'infini. Avec un \textit{scaling} des poids approprié 
@@ -2299,7 +2316,7 @@ avec~:
 
 avec $Dh = \frac{1}{\sqrt{2\pi}} \exp -\frac{h^2}{2} dh$.
 
-Les équations de champ moyen, qui forment un système à petit nombre de degrés de liberté, offrent ainsi une description ``macroscopiques'' de l'activité d'un réseau,
+Les équations de champ moyen, qui forment un système à petit nombre de degrés de liberté, offrent ainsi une description ``macroscopique'' de l'activité d'un réseau,
 représentative de l'activité moyenne qu'on peut attendre dans un réseau de taille finie issu d'un tirage particulier. Elles 
 constituent de fait un cadre d'analyse adapté à une approche ``multi-échelles''.
 
@@ -2379,23 +2396,25 @@ s'exprime comme une transition
 depuis une activité à haut degré de liberté (chaos) vers une activité plus simple (cycle limite) en présence d'un stimulus 
 statique \shortcite{Dau98A,Hen08B}.
 
-Les règles de plasticité Hebbiennes définissent une dynamique sur les liens synaptiques (voir eqs. \ref{eq:SD-plast-x}, \ref{eq:SD-plast-J} et \ref{eq:plast-hebb}), selon les valeurs des activités pré et post-synaptiques. Dans la forme simple étudiée ici, a plasticité  
+Les règles de plasticité Hebbiennes définissent une dynamique sur les liens synaptiques (voir equations (\ref{eq:SD-plast-x})-(\ref{eq:SD-plast-J}),
+page~\pageref{eq:SD-plast-x}, et equation~(\ref{eq:plast-hebb}), page~\pageref{eq:plast-hebb}), selon les valeurs des activités pré et post-synaptiques. Dans la forme simple étudiée ici, a plasticité  
 repose soit sur la conjonction des activités pré et post-synaptiques, i.e~:
-$$\dot{J}_{ij} = F({J}_{ij}, s_i^\text{out} \times s_j^\text{in})$$
+\begin{equation}\dot{J}_{ij} = F(s_i^\text{out} \times s_j^\text{in},{J}_{ij}) \label{eq:plast-0}\end{equation}
 (on parle alors de règle d'ordre 0),
 soit sur des différences d'activité, i.e. 
-$$\dot{J}_{ij} = F({J}_{ij},(s_i^\text{out} - m_i^\text{out})  \times(s_j^\text{in}-m_j^\text{in}))$$
+\begin{equation}\dot{J}_{ij} = F((s_i^\text{out} - m_i^\text{out})  \times(s_j^\text{in}-m_j^\text{in}),{J}_{ij})\label{eq:plast-0}\end{equation}
+\label{page:hebb-ordre}
 où $m_i^\text{in/out}$ est une activité de référence,  par exemple l'activité moyenne. On parle dans ce cas de règle d'ordre 1. 
 Ces règles de plasticité ne sont pas nécessairement convergentes. Elles sont généralement appliquées sur des durées brèves, en fonction des études (par exemple jusqu'à l'apparition d'un changement de régime dynamique).
 
-Dans le cadre de systèmes dynamiques ouverts (c'est à dire soumis à un signal d'entrée, voir eq. \ref{eq:recurrence}), nous mettons en évidence deux mécanismes de réduction distincts~:
+Dans le cadre de systèmes dynamiques ouverts (c'est à dire soumis à un signal d'entrée, voir équation \ref{eq:recurrence} page \pageref{eq:recurrence}), nous mettons en évidence deux mécanismes de réduction distincts~:
 \begin{itemize}
 	\item Le papier \shortcite{Dau98A} met en évidence  une simplification systématique de l'activité intrinsèque dans le cas d'une règle d'ordre 0. 
 	La réponse au motif
 	d'entrée change sous l'effet de la plasticité~:
 	en partant d'un régime chaotique, la dynamique évolue vers un cycle limite, puis, de manière asymptotique, vers le point fixe. On parle de ``réduction'' de la dynamique, la plasticité 
 	produisant une ``route inverse'' de la complexité vers le point fixe
-	(voir figure \ref{fig:inverse}).
+	(figure \ref{fig:inverse}, page \pageref{fig:inverse}).
 	\item Dans le cas des règles d'ordre 1 (par exemple des différences temporelles \shortcite{Dau07}, ou la règle de la covariance \shortcite{Dau02}) la plasticité produit dans les mêmes conditions une transition depuis un régime irrégulier chaotique vers un régime périodique, tendant asymptotiquement vers de grandes oscillations sur la dynamique d'ensemble.  
 \end{itemize}
 
@@ -2416,25 +2435,117 @@ La plasticité a donc pour effet de capturer (ou plutôt accentuer) un \textit{m
 Elle a également pour effet de séparer l'espace
 des entrées entre régions ``connues'' et régions ``inconnues''~: 
 à l'issue de l'''apprentissage'', le réseau est capable de discriminer
-les entrées similaires au motif appris, en produisant une réponse spécifique, et les entrées non-similaires, en produisant une réponse générique.
-Le réseau peut donc être vu comme un ``réservoir'' de réponses dynamiques morphologiquement (ou qualitativement) distinctes
-construites par le mécanisme de plasticité en présence de signaux présentés  de manière répétée.  
+les entrées similaires au motif appris, en produisant une réponse \textit{spécifique}, et les entrées non-similaires, en produisant une réponse \textit{générique}.
+Le réseau peut donc être vu comme un ``réservoir'' de réponses qualitativement distinctes,
+construites par le mécanisme de plasticité en présence de signaux présentés  de manière répétée. 
+
+La principale difficulté rencontrée pour ces réseaux est la contamination 
+de la réaction induite à des patrons non appris. Si des motifs voisins du motif initialement appris
+induisent également une réduction de la dynamique, la réitération de l'apprentissage sur plusieurs motifs différents
+conduit invariablement à un effondrement généralisé de la complexité, étendant la réduction de
+dynamique à l'ensemble des motifs. 
+La capacité d'un réseau est définie comme le nombre de motifs pouvant être 
+appris sans provoquer cet effondrement.
+Cette capacité s'avère assez faible en pratique. 
+Dans notre cas, comme dans le cas du réseau de Hopfield, elle semble
+dépendre linéairement de la taille du réseau.
+
+\subsubsection{f. La plasticité de Hebb inscrit, dans des réseaux récurrents à deux couches, des fonctions de réponse auto-associatives sur des signaux d'entrée spatio-temporels périodiques.}
+ 
+Les travaux présentés dans \shortcite{Dau00,Dau02} implémentent un modèle de la perception de signaux spatio-temporels périodiques, sur un réseau récurrent aléatoire à deux couches, constitué d'une couche primaire sans dynamique intrinsèque et une couche associative possédant une dynamique intrinsèque, analogue aux réseaux récurrents aléatoires
+simples présentés précédemment (figure~\ref{fig:BC02-archi}, page~\pageref{fig:BC02-archi}).
+\begin{itemize}
+	\item 
+Sur des réseaux récurrents de grande taille, les signaux périodiques sont ``capturés par la dynamique interne du réseau par accrochage de fréquence. Ils activent spontanément un circuit spécifique sur la couche secondaire (figure \ref{fig:periode_expl}, page \pageref{fig:periode_expl}).
+\item  
+La plasticité, en présence d'un signal d'entrée spatio-temporel, régularise ce circuit d'activité interne. Du fait des correspondances statistiques entre cette activité interne et la couche d'entrée, la plasticité a également pour effet d'intensifier le motif spatio-temporel d'entrée via les liens de feedback (figure \ref{fig:BC02-app}, page \pageref{fig:BC02-app})
+	\item L'aller-retour du signal entre la couche primaire et la couche secondaire conduit à une \textit{résonance} (ou réverbération) entre l'entrée sensorielle et la couche interne.
+	\item L'activité de réverbération constitue une réponse de population. La réponse est ``activée'' en présence de signaux concordants avec les formes spatio-temporelles apprises, et ``désactivée'' dans le cas contraire, conformément au principe d'appariement conditionnel (voir page \pageref{page:appariement-conditionnel}). 
+\end{itemize}
+
+La réponse induite par la plasticité correspond fonctionnellement à un mécanisme de filtrage (voir page \pageref{page:filtrage}), autrement dit une \textit{prédiction dans le présent}.
+Le feedback correspond à la prédiction actuelle, tandis que l'entrée sensorielle correspond
+à l'observation effective. Tout écart entre la prédiction et l'observation fait entrer le système dans un 
+conflit qui peut se résoudre de deux manières~:
+\begin{itemize}
+	\item Si l'écart est faible, le système tend à ignorer ce changement
+et persévère dans sa prédiction.
+Si une partie du signal disparaît par exemple, l'activité interne est 
+capable de compléter les morceaux manquants, selon un mécanisme auto-associatif qui s'apparente
+à celui des réseaux de Hopfield \shortcite{Hop82}. 
+ 
+ La persévération correspond également à un mécanisme de mémoire à court terme, conservant une mémoire de l'activité passée dans l'activité présente. 
+	\item Si l'écart est important et/ou réitéré, le système met
+	à jour son activité interne (son ``modèle'') afin de mieux anticiper l'entrée.  L'irruption de composants sensoriels  dissonants favorisent la 
+	désagrégation de l'activité résonante. Le réseau retourne alors à son
+	état de base (non réverbérant).
+	
+	Au cours du temps, les caractéristiques du signal présenté en entrée conduisent à des alternances de décomposition et de recomposition de l'activité réverbérante.
+	On peut également assimiler ces transitions au passage d'un état ``bas'' (non spécifique) à un état ``haut''
+	(spécifique), puis au retour vers un état ``bas'', etc., un peu comme dans le modèle de \shortcite{Brunel2000persistent} (voir aussi page~\pageref{page:alternance}).
+\end{itemize} 
 
 
-\subsubsection{z. La plasticité induite et le principe de trace synaptique implémentent l'apprentissage par renforcement dans des espaces d'action continus.}
+\subsubsection{g. Dans les réseaux aléatoires de neurones à impulsions, la STDP permet de construire une fonction de réponse arbitraire sur un espace  d'entrée de séquences d'activation.}
+
+La discrimination entre les différentes séquences temporelles repose sur l'entretien
+au niveau de la couche récurrente d'une activité qui permet de conserver la mémoire 
+de faits passés, sur le principe du réservoir déjà évoqué \shortcite{Maass2002}.
+Le caractère très désordonné des activités individuelles
+dans les réseaux de neurones à impulsions rend difficile
+la capture de dépendances aux échelles temporelles fines.
+Les réponses induites par la STDP s'apparentent à des ``bursts'' (bouffées) d'activité, qui impliquent 
+une grande partie des neurones du réseau.
+Dans le cas d'une activité fortement
+irrégulière (chaos profond), la population de neurones semble garder une 
+mémoire assez faible des faits passés (autocorrélation du même ordre de grandeur). 
+
+L'étude présentée dans \shortcite{henry07} (voir annexe \ref{app:NCO07}) montre néanmoins
+le caractère séquentiel de l'activité induite par la STDP, support ici de la mémoire à court terme.
+L'activité auto-entretenue 
+permet la prise en compte de dépendances entre des événements séparés par 
+plus de 100~ms.
+L'application alternée des plasticités Hebbienne et anti-Hebbienne ouvre par ailleurs la voie
+à l'implémentation de mécanismes d'apprentissage par renforcement dans les réseaux de neurones récurrents,
+présentés plus loin.
+
+La présence de séquences d'activation spatio-temporelles reproductibles (dites ``groupes polychrones''), 
+telles que postulées par \shortcite{Izh06} en tant
+qu'unités opérationnelles élémentaires, 
+peut également être mise en évidence dans les réseaux aléatoires.
+Une étude que j'ai publiée récemment, utilisant des unités neuronales un peu plus détaillées \shortcite{Dau14a}  (voir annexe \ref{app:ESANN14A})
+montre que la réponse de
+population à des stimuli spatio-temporels suit une séquence reproductible (mais bruitée) qui 
+peut être amplifiée par la plasticité (voir figure~\ref{fig:ESANN14}, page~\pageref{fig:ESANN14}).
+ La STDP identifie bien des séquences d'activation reproductibles
+ dans le signal d'entrée, rendant possible l'apprentissage et la ségrégation par le réseau des séquences d'activité spécifiques,
+ entre les signaux produisant une réponse de type bouffée, 
+ et ceux qui ne le font pas.
+ La STDP induit donc bien une structuration de l'activité interne 
+ en amplifiant certaines séquences d'activation présentées de manière répétée (mais non périodiques) en entrée du réseau, favorisant
+ l'émergence de séquences d'activation stables, comme postulé par \shortcite{izhikevich04,izhikevich06} ( 
+ et contrairement aux observations de \shortcite{morrison07}). 
+
+
+
+
+
+\subsubsection{z. Dans des espaces d'action continus, l'apprentissage par renforcement peut être implémenté via la plasticité induite et le principe de trace synaptique.}
 La plasticité induite est un mécanisme  de plasticité déclenché par un signal extérieur. 
 Il peut s'agir, dans un cadre biologique, d'un neurotransmetteur ou d'une entrée synaptique spécifique, i.e.~:
 \begin{align}
 \dot{J}_{ij} = F(\boldsymbol{S}_i(t), \boldsymbol{S}_j(t), \boldsymbol{y}(t),J_{ij})
-\end{align}
+\end{align}\label{eq:plast-induite}
 (voir aussi eq. \ref{eq:SD-plast}) avec $\boldsymbol{S}_i(t) = \{s_i(t)\}_{t \in [t_0,..,t[}$ l'activité post-synaptique, $F$ la fonction de mise à jour et $\boldsymbol{y}(t)$
 un signal extérieur qui vient ``moduler'' la plasticité.
 
 Ce signal extérieur $\boldsymbol{y}(t)$ est, dans le cas le plus simple, un  déclencheur binaire qui ``ouvre'' ou ``ferme'' le mécanisme de plasticité ou encore un scalaire qui, selon son signe, conduit à une plasticité Hebbiennes ou anti-Hebbienne.
 
 Le principe de trace synaptique consiste à stocker l'historique long des corrélations d'activités pré et post-synaptiques dans une mémoire spécifique, selon le principe des ``traces d'éligibilité'' \shortcite{Sut88}, soit~:
-$$ \dot{Z}_{ij} = F_Z(\boldsymbol{S}_i(t), \boldsymbol{S}_j(t), Z_{ij})$$
-$$ \dot{J}_{ij} = F_J(Z_{ij},\boldsymbol{y}(t))$$
+\begin{align}
+&\dot{Z}_{ij} = F_Z(\boldsymbol{S}_i(t), \boldsymbol{S}_j(t), Z_{ij})\\
+&\dot{J}_{ij} = F_J(Z_{ij},\boldsymbol{y}(t))
+\end{align} \label{eq:plast-trace}
 
 
 
@@ -2569,16 +2680,7 @@ l'attracteur neuronal par boucle de rétroaction positive \shortcite{Dau02,Dau02
 
 \paragraph{Apprentissage Hebbien dans les réseaux aléatoires}
 
-La principale difficulté rencontrée pour ces réseaux est la contamination 
-de la réaction induite à des patrons non appris. Si des motifs voisins du motif initialement appris
-induisent également une réduction de la dynamique, la réitération de l'apprentissage sur plusieurs motifs différents
-conduit invariablement à un effondrement généralisé de la complexité, étendant la réduction de
-dynamique à l'ensemble des motifs. 
-La capacité d'un réseau est définie comme le nombre de motifs pouvant être 
-appris sans provoquer cet effondrement.
-Cette capacité s'avère assez faible en pratique. 
-Dans notre cas, comme dans le cas du réseau de Hopfield, elle semble
-dépendre linéairement de la taille du réseau.
+
 
 \paragraph{Modèles de la perception}
 
@@ -2601,120 +2703,15 @@ Cette projection induite de l'activité interne vers la couche sensorielle
 agit comme une prédiction \emph{dans le présent}, autrement dit fait reposer la connaissance de l'entrée
 sensorielle actuelle sur des informations observées dans le passé {\bf (!!FIGURE!!)}.
 
-Le fait de pouvoir \emph{prédire le présent} correspond fonctionnellement à un mécanisme de filtrage. 
-Le feedback correspond à la prédiction actuelle, tandis que l'entrée sensorielle correspond
-à l'observation effective. Tout écart entre la prédiction et l'observation fait entrer le système dans un 
-conflit qui peut se résoudre de deux manières. Si l'écart est faible, le système tend à ignorer ce changement
-et persévère dans sa prédiction. Si l'écart est important et/ou réitéré, le système met
-à jour son activité interne (son ``modèle'') afin de mieux anticiper l'entrée.  
-La persévération présente de nombreuses analogies avec les mécanismes de mémoire à court terme 
-décrits précédemment. Si une partie du signal disparaît par exemple, l'activité interne est 
-capable de compléter les morceaux manquants, selon un mécanisme auto-associatif qui s'apparente
-à celui des réseaux de Hopfield. Le réseau peut continuer par exemple à ``croire'' à l'intégrité des éléments de la scène visuelle
-(sensorielle) non perçus à cause de phénomènes d'occlusion.
 
-Le mécanisme de résonance est logiquement suivi d'un retour à
-l'état de base,  lorsque les conditions de la synchronisation ne sont plus remplies.
-Des mécanismes internes de fatigue et/ou l'irruption de composants sensoriels ou moteurs dissonants favorise la 
-désagrégation, puis éventuellement la recomposition de l'activité nerveuse
-et la convergence vers un nouvel attracteur.
-On peut également assimiler ce mécanisme au passage d'un état ``bas'' (non spécifique) à un état ``haut''
-(spécifique), puis au retour vers un état ``bas'', un peu comme dans le modèle de \shortcite{Brunel2000persistent}.
 
-\paragraph{Plasticité dans les réseaux équilibrés}
-En complément de l'analyse des effets de population précédemment mentionnés, j'ai
-étudié, dans le cadre de l'ACI ``Temps et Cerveau'',  
-les conditions de l'émergence d'oscillations synchronisées \emph{induites} dans des réseaux équilibrés
-constitués d'unités binaires (autrement dit neurones impulsionnels sans mémoire).
-Les principaux résultats concernant l'application de la plasticité 
-sur ces réseaux  sont détaillés dans le papier EPJ-ST de 2007 \shortcite{Dau07}.
-Entre autres, le papier présente une nouvelle règle de plasticité Hebbienne, 
-la règle TD (qui présente des analogies avec la règle des différences temporelles de Sutton et Barto \shortcite{SUTTON98}), qui est 
-une règle du premier ordre stricte basée sur la conjugaison de l'activité entrante et la \emph{différence d'activité} sortante.
-L'étude présente en premier lieu une région paramétrique dans laquelle on peut observer des transitions entre 
-un régime de faible activité et un régime chaotique synchronisé, en fonction du coefficient de variation 
-(une moindre variabilité des poids produisant ici un régime plus chaotique).  
-En partant d'un de ces régime à activité faible non-synchronisée, la plasticité 
-a pour effet de produire une transition vers un régime à activité synchronisée. 
-La passage d'une activité non-synchrone à une activité synchronisée est spécifique aux réseaux équilibrés
-(la synchronisation à grande échelle reposant sur les effets de balancier entre population excitatrice et inhibitrice).
-Comme dans les autres études, il est possible d'appliquer la plasticité lorsque le réseau
-est soumis à un motif statique. Dans ce cas, la plasticité inscrit dans le réseau des comportements
-spécifiques (ici de grandes oscillations synchronisées) associées aux motifs appris. 
+
 
 \paragraph{Réseaux de neurones impulsionnels}
 
-Le passage des neurones binaires aux neurones à potentiels d'action 
-modifie la nature des régimes dynamiques produits par le réseau. Une différence importante avec les modèles à sortie 
-continue est la définition précise de l'échelle temporelle sur les délais de transmission comme sur 
-les constantes de temps et les périodes réfractaires. L'activité produite par ces réseaux apparaît
-plus ``désordonnée'' que celle des réseaux à sortie continue. Ainsi, aucune activité de type cycle limite
-n'est mise en évidence : seules les activités de type chaotiques
-sont observées lorsque le réseau est actif; si les liens 
-récurrents ne sont pas assez forts, l'activité s'éteint.
-Pas de paramètre de contrôle ici permettant de décrire une route
-vers le chaos par quasi-périodicité, qui était une des caractéristique des réseaux récurrents 
-aléatoires à sortie continue.
-
-Les modèles de neurones impulsionnels présentés dans \shortcite{Hen08B,Dau14a} montrent, à une échelle temporelle plus fine, une capacité
-à produire une bouffée d'activité de population (sur une soixantaine de millisecondes), suivie par un retour
-à l'état de base. 
-Les dynamiques contraintes 
-relaxent vers des régime présentant le même degré de chaos que la dynamique spontanée.
-Seule la répartition des niveaux d'activité varie.
-Les réponses induites par les motifs ne sont pas qualitativement différentes.
-
-
-En utilisant la technique de transfert d'échelle temporelle (augmentation du pas de discrétisation d'Euler), il est facile
-d'établir la correspondance entre la STDP et la règle TD décrite précédemment \shortcite{Dau07},
-comme cela avait déjà été noté par \shortcite{Rao01}.
-%L'effet de la STDP sur l'activité des réseaux récurrents aléatoires a d'abord été étudié sur un réseau simple
-%constitué de connexions gaussiennes centrées. 
-
-Pour séparer les réponses, on applique la STDP sous l'influence
-d'un motif particulier. Selon les gammes de paramètres, deux effets peuvent être observés. Dans
-certains cas \shortcite{Hen08}, un régime synchronisé est obtenu avec de grandes oscillations 
-et une période de l'ordre de 50 à 100 ms (10-15 Hz), lorsque la dynamique est soutenue
-par la stimulation (et s'éteint en l'absence de stimulation). Dans ce cas, la dynamique 
-finale s'éteint puis renait périodiquement sous
-l'effet de la stimulation externe. Dans d'autres cas, le régime est très proche du régime périodique asynchrone
-obtenu en dynamique spontanée \shortcite{Hen08B}, avec un comportement ``quasi synchrone'' observable lorsque le
-réseau est soumis à des motifs binaires.
-
-L'étude des effets de la STDP sur la dynamique intrinsèque des réseaux
-récurrents aléatoires indique de nombreux points communs entre les réseaux de neurones à
-sortie fréquentielle et les réseaux de neurones impulsionnels. Des comportements
-qualitativement similaires se retrouvent entre les deux familles de modèles, traduisant 
-une plasticité essentiellement fondée sur les fréquences de décharges.
-L'application de la STDP dans les réseaux de neurones à impulsions ne semble donc pas,
-selon ces études, exploiter les capacités d'expression plus étendues du substrat, comme
-l'ordre ou les instants de tir.
-Une explication possible est le caractère très désordonné des activités individuelles, rendant difficile
-la capture de dépendances aux échelles temporelles fines.
-Les réponses de population s'apparentent à des ``bursts'' (bouffées) d'activité, qui impliquent 
-une grande partie des neurones. Une analyse plus détaillée permet néanmoins d'identifier une séquence reproductible
-au sein de ces bouffées, qui peut en principe servir de support un traitement ultérieur (non publié).
-
-Le résultat de ce schéma computationnel est un fonctionnement par ``\mbox{sauts}'' d'un attracteur à un autre, 
-et une alternance entre destabilisation et stabilité.
-Bien que possiblement implémenté par des équations aux dérivées partielles, la logique
-de ce schéma est donc essentiellement celle d'un fonctionnement discret, voire séquentiel.
 
 \paragraph{Discrimination de signaux spatio-temporels} 
-La discrimination entre les différentes séquences temporelles repose sur l'entretien
-au niveau de la couche récurrente d'une activité qui permet de conserver la mémoire 
-de faits passés, sur le principe du réservoir déjà évoqué \shortcite{Maass2002}.
-Dans le cas d'une activité fortement
-irrégulière (chaos profond), la population de neurones semble garder une 
-mémoire assez faible des faits passés (autocorrélation du même ordre de grandeur). 
-L'étude présentée dans \shortcite{henry07} confirme donc
-le caractère séquentiel de l'activité induite par la plasticité, support ici de la mémoire à court terme.
 
-L'application alternée des plasticités Hebbienne et anti-Hebbienne ouvre par ailleurs la voie
-à l'implémentation de mécanismes d'apprentissage par renforcement dans les substrats neuronaux, 
-ainsi qu'à une modélisation plus précise des mécanismes de plasticité liés à la récompense et 
-à la punition dans le cerveau \shortcite{Barto1995,Schultz1997,Gurney2001}. Ces aspects sont analysés 
-plus en détail dans la section suivante.
 
 
 \subsection{Plasticité induite}
@@ -4456,6 +4453,24 @@ en neurosciences computationnelles \shortcite{Voges2012,Lundqvist2012}.
 
 \subsection{Extension aux populations de neurones impulsionnels}
 
+{\color{Violet}
+Le passage des neurones binaires aux neurones à potentiels d'action 
+modifie la nature des régimes dynamiques produits par le réseau. Une différence importante avec les modèles à sortie 
+continue est la définition précise de l'échelle temporelle sur les délais de transmission comme sur 
+les constantes de temps et les périodes réfractaires. L'activité produite par ces réseaux apparaît
+plus ``désordonnée'' que celle des réseaux à sortie continue. Ainsi, aucune activité de type cycle limite
+n'est mise en évidence : seules les activités de type chaotiques
+sont observées lorsque le réseau est actif; si les liens 
+récurrents ne sont pas assez forts, l'activité s'éteint.
+Pas de paramètre de contrôle ici permettant de décrire une route
+vers le chaos par quasi-périodicité, qui était une des caractéristique des réseaux récurrents 
+aléatoires à sortie continue.
+
+
+
+
+}
+
 Les architectures multi-populations ont été approfondies à partir de l'approche par ``faisceaux d'axones'' (voir section \ref{sec:balanced}), indépendants
 de la définition spatiale. Les divers paramètres de contrôle en jeu, à savoir le taux d'amplification, le coefficient de variation, 
 le délai moyen participent à définir des architectures de contrôle diversifiées définies principalement par le nombre 
@@ -4670,41 +4685,6 @@ Exemples (avec maths):
 \paragraph{STDP}
 
 % % Plasticité de Hebb
-
-La Spike Timing-Dependent Plasticity (STDP) est  une règle de plasticité dépendant de l'ordre de tir des neurones pré-synaptique et post-synaptique.
-%L'utilisation d'une échelle temporelle fine permet d'améliorer le principe Hebbien~: %de transformation de la conjugaison
-%d'activité en causalité. 
-Cette règle est facilitatrice pour les synapses où l'activité 
-pré-synaptique précède causalement l'activité post-synaptique, et, à
-l'inverse, suppressive pour les synapses où l'activité post-synaptique précède (de manière anti-causale) l'activité pré-synaptique.
-Cette règle tend donc à favoriser les conjugaisons d'activité causalement liées, mais surtout, de manière symétrique, d'empêcher les 
-activités non causalement liées. 
-
-La mise en évidence de cette règle sur les synapses naturelles \shortcite{Bi98} a
-favorisé le dévelopement de nombreux modèles computationnels~:
-\begin{itemize}
-	\item  
-Dans des architectures feed-forward,  la STDP  réduit la latence de réponse des neurones 
-aux patrons spatio-temporels appris, permettant d'implémenter un codage par rang \shortcite{song00,guyonneau05}.
-\item 
-Le cas des réseaux récurrents est plus ambigu: 
-	\begin{itemize}
-		\item dans certaines implémentations, la STDP semble favoriser 
-l'émergence de séquences d'activation stables \shortcite{izhikevich04,izhikevich06}.
-\item 
-D'autres modèles, utilisant une implémentation différente, indiquent une absence de 
-structuration de l'activité, avec des synapses instables sur touts la durée de la simulation \shortcite{morrison07}. 
-	\end{itemize}
-\end{itemize}
-
-
-
-\paragraph{Remarque} On notera que l'application alternée d'une plasticité Hebbienne et anti-Hebbienne ouvre la voie
-à l'implémentation de mécanismes d'apprentissage par renforcement, 
-ainsi qu'à la modélisation des mécanismes de plasticité liés à la récompense et 
-à la punition dans le cerveau \shortcite{Barto1995,Schultz1997,Gurney2001}. Ces aspects sont analysés 
-plus en détail dans le chapitre suivant.
-
 
 
 \subsection{Apprentissage}
@@ -5098,9 +5078,10 @@ L'ensemble des réponses aux contraintes statiques possibles constitue le \texti
 \end{itemize}
 
 Une règle de plasticité synaptique est ajoutée, correspondant à un dynamique lente sur les couplages, qui modifie 
-le graphe selon une règle inspirée de Hebb \shortcite{Heb49} 
+le graphe selon une règle inspirée de Hebb \shortcite{Heb49}~:
+$${J}_{ij}(t) - {J}_{ij}(t-1) \propto (s_i^\text{out}(t)-0.5)\times(s_j^\text{in}(t)-0.5)$$
 (à savoir que le lien entre deux neurones se renforce s'il
-existe une corrélation temporelle entre l'activité pré-synaptique et l'activité post-synaptique).
+existe une corrélation entre l'activité pré-synaptique et l'activité post-synaptique).
 Le papier étudie les changements dans le répertoire dynamique lorsque le réseau est soumis à ces changements 
 synaptiques dans le contexte d'une contrainte statique spécifique.  
 Le papier met en évidence des changements de comportements liés à cette dynamique sur les poids, conduisant 
@@ -5192,6 +5173,7 @@ Maas et Markram \cite{MAASS02,Buonomano2009}.
 
 \subsection{Architectures multi-couches} \label{sec:BioCyb02}
 
+
 Les travaux présentés dans \shortcite{Dau00,Dau02} présentent une architecture 
 neuronale  permettant d'implémenter un modèle de la perception des signaux spatio-temporels.
 Ils reposent sur une architecture de réseaux récurrents aléatoires à plusieurs couches (deux ou trois).
@@ -5230,7 +5212,13 @@ le comportement ``différent'' est un comportement acquis.
 
 La règle Hebbienne utilisée est une règle d'ordre 1 (basée sur les différences d'activité), qui
 modifie les couplages synaptiques selon une estimation locale de la covariance entre les neurones 
-pré et post-synaptiques, en tenant compte du délai de transmission \shortcite{Sej77}. Cette règle, contrairement à la précédente, 
+pré et post-synaptiques, en tenant compte du délai de transmission \shortcite{Sej77}. 
+
+$${J}_{ij}(t) - {J}_{ij}(t-1) \propto (s_i^\text{out}(t)-m_i^\text{out}(t))\times(s_j^\text{in}(t)-m_j^\text{in}(t))$$
+avec~:
+$$m_i(t) = \beta s_i(t) + (1 - \beta) m_i(t-1) \text{, avec } \beta \in ]0,1[ $$
+
+Cette règle, contrairement à la précédente, 
 tend à amplifier les variations d'activité. Elle tend asymptotiquement
 vers une activité de type cycle limite très robuste à large amplitude individuelle (et non vers un point fixe).
 Comme dans le cas précédent, du fait de la non-convergence asymptotique,
@@ -5373,6 +5361,37 @@ et la dynamique induite par les motifs statiques seuls (les activités étant pa
 \subsection{Plasticité dans les populations de neurones impulsionnels}
 \label{sec:STDP}
 
+
+En complément de l'analyse des effets de population précédemment mentionnés, j'ai
+étudié, dans le cadre de l'ACI ``Temps et Cerveau'',  
+les conditions de l'émergence d'oscillations synchronisées \textit{induites} dans des réseaux équilibrés
+constitués d'unités binaires (autrement dit neurones impulsionnels sans mémoire).
+Les principaux résultats concernant l'application de la plasticité 
+sur ces réseaux  sont détaillés dans le papier EPJ-ST de 2007 \shortcite{Dau07} (voir annexe \ref{app:EPJ07}).
+Entre autres, 
+\begin{itemize}
+	\item le papier présente une nouvelle règle de plasticité Hebbienne, 
+la règle TD (qui présente des analogies avec la règle des différences temporelles de Sutton et Barto \shortcite{SUTTON98}), qui est 
+une règle du premier ordre (voir page \pageref{page:hebb-ordre}) stricte basée sur la conjugaison de l'activité entrante et la \textit{différence d'activité} sortante~:
+$$\dot{J}_{ij} - F((s_i^\text{out}(t)-s_i^\text{out}(t-1)) \times s_j^\text{in}, J_{ij})$$
+\item 
+L'étude présente en premier lieu une région paramétrique dans laquelle on peut observer des transitions entre 
+un régime de faible activité et un régime chaotique synchronisé, en fonction du coefficient de variation 
+(une moindre variabilité des poids produisant ici un régime plus chaotique).  
+\item 
+En partant d'un de ces régime à activité faible non-synchronisée, la plasticité 
+a pour effet de produire une transition vers un régime à activité synchronisée. 
+La passage d'une activité non-synchrone à une activité synchronisée est spécifique aux réseaux équilibrés
+(la synchronisation à grande échelle reposant sur les effets de balancier entre population excitatrice et inhibitrice).
+\item
+Comme dans les autres études, il est possible d'appliquer la plasticité lorsque le réseau
+est soumis à un motif statique. Dans ce cas, la plasticité inscrit dans le réseau des comportements
+spécifiques (ici de grandes oscillations synchronisées) associées aux motifs appris. 
+\end{itemize}
+
+
+
+\paragraph{}
 Le travail sur des modèles plus réalistes biologiquement a été réalisé, en co-direction avec Gilles Montagne, sur le projet de thèse de
 Frédéric Henry, étudiant du master de sciences cognitives à Lyon (voir section \ref{sec:bio}).
 
@@ -5386,7 +5405,56 @@ Frédéric Henry a travaillé sur un simulateur de réseaux de neurones impulsio
 
 
 
-\paragraph{STDP dans les réseaux récurrents aléatoires} L'étude présentée dans \shortcite{Hen08B} 
+\paragraph{STDP}
+
+La plasticité dépendante des instants de tir (\textit{Spike-timing dependent plasticity} -- STDP)  est  une règle de plasticité dépendant de l'ordre de tir des neurones pré-synaptique et post-synaptique.
+%L'utilisation d'une échelle temporelle fine permet d'améliorer le principe Hebbien~: %de transformation de la conjugaison
+%d'activité en causalité. 
+Cette règle est facilitatrice pour les synapses où l'activité 
+pré-synaptique précède causalement l'activité post-synaptique, et, à
+l'inverse, suppressive pour les synapses où l'activité post-synaptique précède (de manière anti-causale) l'activité pré-synaptique.
+Cette règle tend donc à favoriser les conjugaisons d'activité causalement liées, mais surtout, de manière symétrique, d'empêcher les 
+activités non causalement liées. 
+
+La mise en évidence de cette règle sur les synapses naturelles \shortcite{Bi98} a
+favorisé le dévelopement de nombreux modèles computationnels~:
+\begin{itemize}
+	\item  
+	Dans des architectures feed-forward,  la STDP  réduit la latence de réponse des neurones 
+	aux patrons spatio-temporels appris, permettant d'implémenter un codage par rang \shortcite{song00,guyonneau05}.
+	\item 
+	Le cas des réseaux récurrents est plus ambigu: 
+	\begin{itemize}
+		\item dans certaines implémentations, la STDP semble favoriser 
+		l'émergence de séquences d'activation stables \shortcite{izhikevich04,izhikevich06}.
+		\item 
+		D'autres modèles, utilisant une implémentation différente, indiquent une absence de 
+		structuration de l'activité, avec des synapses instables sur touts la durée de la simulation \shortcite{morrison07}. 
+	\end{itemize}
+\end{itemize}
+
+
+Une formulation possible de la règle est la suivante~:
+$$\dot{J}_{ij} = F((s_i^\text{out} \times m_j^\text{in}) - (s_j^\text{in} \times m_i^\text{out} ), J_{ij})$$
+où $s_j^\text{in}$ est l'activité pré-synaptique, $s_i^\text{out}$ est l'activité post-synaptique, $m_j^\text{in}$ une trace exponentielle de l'activité pré-synaptique, et $m_i^\text{out}$ une trace exponentielle de l'activité post-synaptique. Cette règle peut formellement être  aux règles de plasticité d'ordre 1 (voir page \ref{page:hebb-ordre}).
+
+En utilisant la technique de transfert d'échelle temporelle (augmentation du pas de discrétisation d'Euler), il est par ailleurs facile
+d'établir la correspondance entre la STDP et la règle TD décrite précédemment \shortcite{Dau07},
+comme cela avait déjà été noté par \shortcite{Rao01}.
+%L'effet de la STDP sur l'activité des réseaux récurrents aléatoires a d'abord été étudié sur un réseau simple
+%constitué de connexions gaussiennes centrées. 
+
+
+{\color{Gray} \paragraph{Remarque} On notera que l'application alternée d'une plasticité Hebbienne et anti-Hebbienne ouvre la voie
+à l'implémentation de mécanismes d'apprentissage par renforcement, 
+ainsi qu'à la modélisation des mécanismes de plasticité liés à la récompense et 
+à la punition dans le cerveau \shortcite{Barto1995,Schultz1997,Gurney2001}. Ces aspects sont analysés 
+plus en détail dans le chapitre suivant.}
+
+
+
+\paragraph{STDP dans les réseaux récurrents aléatoires} 
+L'étude présentée dans \shortcite{Hen08B} 
 est motivée par de nombreuses observations sur le rôle des oscillations 
 et de la synchronisation dans le fonctionnement du système nerveux.
 Les réseaux aléatoires équilibrés offrent, comme on l'a vu (section \ref{sec:balanced}), la possibilité de développer des régimes 
@@ -5395,13 +5463,35 @@ grande amplitude dans certaines configurations.
 Il est intéressant dans ce cadre d'étudier comment la plasticité interagit avec la dynamique de population 
 pour produire des comportements nouveaux, en particulier des oscillations synchronisées.
 
-Plusieurs indicateurs de complexité ont été mis en place pour mesurer la nature de la dynamique spontanée.
+Les modèles de neurones impulsionnels présentés dans \shortcite{Hen08B,Dau14a} montrent, à une échelle temporelle fine, une capacité
+à produire une bouffée d'activité de population (sur une soixantaine de millisecondes), suivie par un retour
+à l'état de base. 
+Les dynamiques contraintes 
+relaxent vers des régime présentant le même degré de chaos que la dynamique spontanée.
+Seule la répartition des niveaux d'activité varie.
+Les réponses induites par les motifs ne sont pas qualitativement différentes.
+
+Plusieurs indicateurs de complexité ont été mis en place pour mesurer la nature des dynamiques spontanée et induite.
 L'analyse du spectre de Fourier ne permet pas d'établir de fréquence caractéristique.
 L'autocorrélogramme du signal moyen montre une décroissance exponentielle caractéristique d'un bruit lissé. 
 Nous utilisons également un indicateur du nombre de degrés de liberté (basé sur l'ACP \shortcite{wright01}) qui montre
 une dimension intrinsèque du signal de l'ordre de 35 pour un réseau de 100 neurones, ce qui indique
 une très faible corrélation entre l'activité des différents neurones.
 Le réseau développe donc un régime de chaos fort.
+
+Pour séparer les réponses, on applique la STDP sous l'influence
+d'un motif particulier. Selon les gammes de paramètres, deux effets peuvent être observés. Dans
+certains cas \shortcite{Hen08}, un régime synchronisé est obtenu avec de grandes oscillations 
+et une période de l'ordre de 50 à 100 ms (10-15 Hz), lorsque la dynamique est soutenue
+par la stimulation (et s'éteint en l'absence de stimulation). Dans ce cas, la dynamique 
+finale s'éteint puis renait périodiquement sous
+l'effet de la stimulation externe. Dans d'autres cas, le régime est très proche du régime périodique asynchrone
+obtenu en dynamique spontanée \shortcite{Hen08B}, avec un comportement ``quasi synchrone'' observable lorsque le
+réseau est soumis à des motifs binaires.
+
+
+
+
 
 \begin{figure}[b!]
 	\centerline{
@@ -5447,6 +5537,21 @@ induite par le (ou les) motif(s) appris de celle induite par les autres motifs \
 En optimisant la durée d'apprentissage, une étude (non publiée) montre
 une capacité d'encodage similaire à celle des réseaux continus: le nombre maximal de motifs 
 pouvant induire une réponse spécifique est de l'ordre de 5\% du nombre de neurones dans le réseau.
+
+{\color{Violet}
+	L'étude des effets de la STDP sur la dynamique intrinsèque des réseaux
+	récurrents aléatoires indique de nombreux points communs entre les réseaux de neurones à
+	sortie fréquentielle et les réseaux de neurones impulsionnels. Des comportements
+	qualitativement similaires se retrouvent entre les deux familles de modèles, traduisant 
+	une plasticité essentiellement fondée sur les fréquences de décharges.
+}
+{\color{Gray}
+	
+	Le résultat de ce schéma computationnel est un fonctionnement par ``\mbox{sauts}'' d'un attracteur à un autre, 
+	et une alternance entre destabilisation et stabilité.
+	Bien que possiblement implémenté par des équations aux dérivées partielles, la logique
+	de ce schéma est donc essentiellement celle d'un fonctionnement discret, voire séquentiel.
+}
 
 D'un point de vue computationnel, il n'y a qualitativement pas de différence entre le nouveau modèle et
 l'ancien \shortcite{Dau98A}. Le comportement induit par la STDP ne semble donc pas reposer sur l'ordre ou 
@@ -5495,6 +5600,14 @@ est exactement le double de la période du signal (30 ms). Ce comportement d'acc
 à celui observé sur les réseaux plus simples. Le réseau devient ``réactif'' aux motifs périodiques appris,
 développant une ``action de population'' qui est un analogue global des potentiels
 d'action neuronaux.
+
+{\color{Violet}
+Une sensibilité acquise à des patrons spatio-temporels spécifiques, telles qu'observée dans les modèles fréquentiels (voir paragraphes précédents), 
+peut donc être obtenue à l'échelle de quelques millisecondes, mettant en jeu un faible nombre de spikes par neurone.
+Le même mécanisme peut donc être identifiés à différentes échelles, les opérations
+à échelle temporelle courte étant elles-même possiblement ``portées'' (ou embarquées) dans des opérations à échelle temporelle plus larges.
+}
+
 
 \begin{figure}[t!]
 
