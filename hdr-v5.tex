@@ -2684,15 +2684,16 @@ L'apprentissage par renforcement définit un cadre formel à l'apprentissage de 
 d'essais/erreur.
 Le bruit moteur (réponse motrice aléatoire) joue un rôle important dans cette famille d'algorithmes.
 On parle d'\textit{exploration motrice}.
-Dans un contexte de réseau de neurones récurrents aléatoires, le   caractère irrégulier de la dynamique intrinsèque  sert de support à l'exploration 
-motrice. L'apprentissage vise à produire des régularités dans cette dynamique intrinsèque afin de stabiliser certaines réponses motrices.
-
+La fonction d'appariement probabiliste $\pi_\Theta(\boldsymbol{u}|\boldsymbol{I})$, qui associe des probabilités de réponses aux différentes sorties en fonction de l'entrée, est appelée la ``politique''. Dans un système de contrôle en boucle fermée, la réponse effective $\boldsymbol{u}$ induit alors une nouvelle observation $\boldsymbol{I}'$ via l'échantillonnage du modèle inconnu $P$, etc. A l'instant $t$, un signal de récompense $r_t$ indique si cette séquence de choix était correcte ou pas. La séquence de décisions $\boldsymbol{u}_{1:t}$ vise ici à maximiser l'espérance de $r(t)$, qui joue le rôle d'une ``vraisemblance'' sur l'espace des couplages sensori-moteurs $(\boldsymbol{I},\boldsymbol{u})$.
 
 Les algorithmes  classiques
 utilisent un signal de renforcement pour guider l'apprentissage.  
+L'algorithme du ``policy gradient'' \cite{Wil92,peters08}, par exemple,  met à jour la fonction d'appariement par ``apprentissage direct'' selon une descente de gradient qui s'apparente à la recherche du ``maximum de vraisemblance''. 
+
 %Ce signal extérieur $\boldsymbol{y}(t)$ est, dans le cas le plus simple, un  déclencheur binaire qui ``ouvre'' ou ``ferme'' le mécanisme de plasticité ou encore un scalaire qui, selon son signe, conduit à une plasticité Hebbiennes ou anti-Hebbienne.
-Dans un contexte de réseau de neurones récurrent,
-le but de la plasticité est de favoriser les réponses liées à un renforcement positif (apprentissage ``Hebbien''), et de défavoriser les réponses liées à un renforcement négatif (apprentissage
+Dans un contexte de réseau de neurones récurrents aléatoires, le   caractère irrégulier de la dynamique intrinsèque  sert de support à l'exploration 
+motrice. L'apprentissage vise à produire des régularités dans cette dynamique intrinsèque afin de stabiliser certaines réponses motrices.
+Le but de la plasticité est de favoriser les réponses liées à un renforcement positif (apprentissage ``Hebbien''), et de défavoriser les réponses liées à un renforcement négatif (apprentissage
 ``anti-Hebbien'').
 On parle de plasticité ``induite''. 
 
@@ -2730,8 +2731,15 @@ Les résultats principaux sont les suivants~:
 	les signaux externes, ou, au contraire, les signaux générés en interne (page \pageref{page:SAB04} et annexe \ref{app:SAB04}).
 	\item Le modèle proposé dans \cite{Dau07} alterne règle Hebbienne et anti-Hebbienne, et ajoute un principe d'alternance entre l'activité perceptive
 	et l'activité motrice (page~\pageref{page:EPJST} et annexe \ref{app:EPJ07}).	
-	\item Les modèles proposés dans \cite{Dau09} (page~\pageref{page:ICANN09} et annexe \ref{app:ICANN09}) et \cite{Dauce2010}, (page~\pageref{page:NCO10} et annexe \ref{app:NCO10}) utilisent les mêmes principes
-	en systématisent l'usage du codage topographique
+	\item 
+	
+	
+	Le lien entre le 
+	policy gradient et la plasticité de Hebb induite est établi dans 
+	\shortcite{Dau09} (page~\pageref{page:ICANN09} sur un modèle de neurones à impulsions,  et dans  \cite{Dauce2010}, (page~\pageref{page:NCO10} et annexe \ref{app:NCO10}) sur des neurones  fréquentiels. 	
+	
+	Ces modèles
+	systématisent de plus l'usage du codage topographique
 	sur les couches sensorielles et proprioceptives,
 	et mettent l'accent sur la formation de champs récepteurs. Dans ces modèles, la dynamique intrinsèque 
 	est remplacée par un bruit ``lent'' 
@@ -2752,9 +2760,10 @@ c'est à dire par décomposition de la tâche complète en sous-tâches élémen
 Les modèles probabilistes basés sur des processus stochastiques markoviens (voir equations (\ref{eq:accum1}) - (\ref{eq:accum2})) sont très populaires en modélisation biologiquement inspirée du fait de leur capacité rendre compte des profils de réponse extrêmement bruités à la fois de l'activité neuronale et des réponses comportementales.
 Les processus markoviens peuvent également implémenter, au même titre que les modèles déterministes, les phénomènes d'activité persistante, de rémanence et de mémoire à court terme, etc.
 
-Nous considérons ici le cadre un peu plus restreint où le modèle d'état  $P$ n'est pas connu. 
+Nous considérons ici le cadre 
+ restreint où le modèle d'état  $P$ n'est pas connu. 
 %L'apprentissage consiste à construire ce modèle à partir des observations, en maximisant sa vraisemblance, étant données les observations (voir équation \ref{eq:Friston}) ainsi que des a priori sur la nature de ce modèle (nombre d'états, caractère Gaussien du bruit de mesure etc.).
-Nous considérons le cas où l'\textit{observation} $\boldsymbol{I} = (\boldsymbol{I}(1),...,\boldsymbol{I}(t)))$ est 
+Nous considérons le cas où l'\textit{observation} $\boldsymbol{I}_{1:t} = (\boldsymbol{I}(1),...,\boldsymbol{I}(t)))$ est 
 le résultat de l'échantillonnage
  de ce modèle caché $P$.
  Le calcul de la distribution a posteriori $\hat{f}$ repose sur l'observation $Q_\Theta(I|X)$ uniquement (voir page \pageref{eq:accum2}).  
@@ -2762,25 +2771,18 @@ L'évolution de $\hat{f}$ au cours du temps décrit le processus de mise à jour
 % Si  $\boldsymbol{I}(t_f)$ est la dernière observation, $\hat{f}(t_f)$ permet de produire une 
 % décision basée sur l'{``accumulation d'évidence''}.
 
-Dans le cadre des modèles de l'appariement, l'évolution temporelle de  $\hat{f}$ constitue un modèle de la décision par délibération, où, comme dans le cas des réseaux de neurones récurrents, plusieurs ``passages'' sont nécessaires pour aboutir à un compromis. L'estimation faite à l'instant $t$ sert de prior pour affiner l'estimation à l'instant $t+1$. 
+Dans le cadre des modèles de l'appariement, l'évolution temporelle de  $\hat{f}$ modélise un mécanisme de décision par délibération, où, comme dans le cas des réseaux de neurones récurrents, plusieurs ``passages'' sont nécessaires pour aboutir à un compromis. L'estimation faite à l'instant $t$ sert de prior pour affiner l'estimation à l'instant $t+1$. 
 
-{\color{Cyan}
+
 \begin{itemize}
-	\item L'apprentissage par renforcement consiste à construire un modèle génératif $\pi_\Theta(\boldsymbol{u}|\boldsymbol{I})$ basé sur
-	l'appariement entre  permettant, via la réalisation d'une action, de générer la nouvelle observation. La ``vraisemblance'' 
-	se situe  L'appariement consiste ici à associer une observation $\boldsymbol{I}$ à des  consignes motrices $\boldsymbol{u}$ (assimilables à des états latents), via une `politique'' , qui joue formellement le rôle d'une probabilité a posteriori sur l'espace des actions. L'algorithme du ``policy gradient'' \cite{Wil92,peters08} construit la fonction d'appariement par ``apprentissage direct'', c'est à dire principalement un e descente de gradient dans    Le cas des  et le signal de renforcement sert à construire la et la fonction $\hat{f}$ 
+	\item Le modèle présenté dans \shortcite{Malhotra2011} reproduit des données psychométriques sur les temps de réponse à des ``périodes préparatrices'' de longueur variable (``variable foreperiod''). Plusieurs modèles génératifs $P_1, ..., P_k$ sont mis en concurrence. Le défilement du temps au cours d'un essai permet d'éliminer certaines hypothèses, réduisant l'incertitude et les temps de réponse au stimulus.
+	\item Une application récente de ce mécanisme concerne les interfaces cerveau-machine de type ``clavier virtuel P300'' \shortcite{Dau14b}. Le programme repose sur un modèle générique de la réponse EEG au stimulus cible (dite ``onde P300''). Le mécanisme d'accumulation  permet ici d'optimiser les temps de réponse du dispositif. Un seuil de décision définit l'instant où suffisamment d'évidence a été accumulée pour afficher la lettre courante et passer à la suivante.  
 \end{itemize}
+Ces algorithmes reposent par ailleurs sur des modèles paramétriques de la mesure, qui permettent la mise à jour du modèle après chaque série de mesures, selon le principe du maximum de vraisemblance, implémenté via une descente de gradient ou via l'algorithme EM (voir page \pageref{eq:Friston}). Dans le cas du clavier virtuel P300, la mise à jour du modèle de la mesure permet de d'adapter l'interface à l'utilisateur, en améliorant la réactivité de l'interface au fur et à mesure de son utilisation.
+ 
 
-Dans les modèles sans dynamique d'état (i.e. $P_\Theta=\text{Id}$), le mécanisme de filtrage vise à affiner au cours du temps différentes hypothèses concurrentes concernant l'état du monde, via une séquence d'observations. 
-Dans le cas de signaux d'entrée de faible intensité o fortement bruités, le passage du temps permet en effet d'éliminer certaines hypothèses par 
 
-principe de révision des croyances, 
-portant sur les intervalles courts, donnant plus de vraisemblance 
-(et donc des temps de réaction plus courts) 
-aux hypothèses les plus tardives. 
 
-Dans les environnements bruités, un même 
-Dans ce cadre, le mécanise de la \textit{décision} consiste à 
 
 
 Accumulation, EM, bla bla, en-ligne, apprendre et oublier
@@ -2788,7 +2790,7 @@ Accumulation, EM, bla bla, en-ligne, apprendre et oublier
 Gaurav
 
 Eoin
-}
+
 
 \subsubsection{z. Commande balistique}
 
