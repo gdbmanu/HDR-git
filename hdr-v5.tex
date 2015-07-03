@@ -2106,7 +2106,7 @@ Ces tâches globales sont réalisées par l'activité coordonnée de différents
 	précédent le déclenchement de l'action \shortcite{Jeannerod2001}, etc.
 \end{itemize}
 
-\paragraph{Modèles}
+\paragraph{Modèles}\label{sec:feed-plus}
 Il existe de nombreux modèles utilisant les principes du contrôle adaptatif pour modéliser
 l'activité nerveuse. On citera parmi les plus connus \shortcite{Rob75,Wolpert1998}.
 Les schémas de guidage par correction d'erreur sont par ailleurs 
@@ -2266,7 +2266,6 @@ L'indépendance statistique entre les différents liens est une caractéristique
 (espérance, variance de la loi de tirage initial des poids en $O(\frac{1}{N}$)), on peut montrer que la dynamique (déterministe) tend à la limite thermodynamique 
 vers un processus aléatoire (processus Gaussien), la corrélation entre les nœuds tendant vers 0 \shortcite{Som88,Ces94,Moy00a}.
  
-
 Les réseaux étudiés étant normalisés, 
 leur comportement est réglé par deux paramètres~: le gain $g$ de la fonction de réponse neuronale (assimilable
 à l'inverse d'une température) et la variabilité $\sigma_\theta$ du seuil d'activation.
@@ -2487,7 +2486,7 @@ capable de compléter les morceaux manquants, selon un mécanisme auto-associati
 \end{itemize} 
 
 
-\subsubsection{g. Dans les réseaux aléatoires de neurones à impulsions, la STDP permet de construire une fonction de réponse arbitraire sur un espace  d'entrée de séquences d'activation.}
+\subsubsection{g. Dans les réseaux récurrents aléatoires de neurones à impulsions, la STDP permet de construire une fonction de réponse arbitraire sur un espace  d'entrée de séquences d'activation.}
 
 {\color{Cyan} STDP}
 
@@ -2529,12 +2528,33 @@ peut être amplifiée par la plasticité (voir figure~\ref{fig:ESANN14}, page~\p
  en amplifiant certaines séquences d'activation présentées de manière répétée (mais non périodiques) en entrée du réseau, favorisant
  l'émergence de séquences d'activation stables, comme postulé par \shortcite{izhikevich04,izhikevich06} ( 
  et contrairement aux observations de \shortcite{morrison07}). 
+ 
+\subsubsection{h. L'apprentissage ``par cœur'' d'appariements sensori-moteurs spécifiques met en évidence, en milieu ouvert, des couplages transitoires entre la dynamique d'un réseau récurrent aléatoire et les trajectoires motrices.}
 
+Certaines activités motrices (périodiques en particulier) 
+semblent reposer sur un mécanisme de feedback positif,
+dans lesquels le milieu physique et la commande motrice forment un couple qui s'auto-renforce, 
+comme dans le cas de la locomotion. Cette activité rythmique spontanée peut être modulée par divers facteurs
+(contacts avec le sol ou avec des obstacles, orientation visuelle, ...) (voir aussi page \pageref{sec:feed-plus}).
 
+L'expérience présentée dans 
+\shortcite{Quo00,Dau00b,Quoy2001,Dau02} a été conduite sur la plateforme de contrôle robotique PerAc \shortcite{Gaussier1995}.
+Le robot, placé dans un environnement ouvert, apprend, par plasticité Hebbienne, à associer un ensemble d'amers visuels avec des réponses motrices imposées (voir figure \ref{fig:PerAc-2} page \pageref{fig:PerAc-2}). 
+Pendant le test, les petits décalages angulaires liés aux frottements 
+introduisent un décalage progressif de la scène visuelle, et une perte de correspondance entre la prédiction et 
+l'observation.
+On observe alors, au niveau comportemental, une alternance entre un comportement périodique, correspondant à
+la tâche apprise (``exploitation''), et un comportement irrégulier sans correspondance avec la tâche (``exploration'').
 
+Cette expérience robotique offre un exemple clair de couplage entre activité mécanique (déplacements moteurs) et l'activité 
+endogène du réseau de neurones.  
+La commande ne repose pas sur la correction d'erreur, comme dans le contrôle traditionnel, mais sur l'appariement 
+de la dynamique endogène avec des séquences spatio-temporelles apprises, et sur la persistance de cet appariement pour des versions dégradées du signal appris. 
+L'erreur (la non-correspondance) ne produit pas une correction mais une transition vers une activité irrégulière
+qui s'apparente à une exploration aléatoire de l'espace des couplages sensori-moteurs jusqu'à atteindre un nouvel
+attracteur comportemental.
 
-
-\subsubsection{h. Dans des espaces d'action continus, l'apprentissage par renforcement peut être implémenté via la plasticité Hebbienne induite et le principe de trace synaptique. La dynamique endogène chaotique joue le rôle d'un bruit d'exploration.}
+\subsubsection{i. Dans des espaces d'état et d'action continus, l'apprentissage par renforcement peut être implémenté via la plasticité Hebbienne induite et le principe de trace synaptique. La dynamique endogène chaotique joue le rôle d'un bruit d'exploration.}
 
 L'apprentissage par renforcement définit un cadre formel à l'apprentissage de règles de contrôle moteur selon un principe
 d'essais/erreur.
@@ -2544,7 +2564,6 @@ Dans un contexte de réseau de neurones récurrents aléatoires à dynamique int
 motrice. L'apprentissage vise à produire des régularités dans cette dynamique intrinsèque afin de stabiliser certaines réponses motrices.
 
 
-
 Les algorithmes  classiques
 utilisent un signal de renforcement pour guider l'apprentissage.  
 %Ce signal extérieur $\boldsymbol{y}(t)$ est, dans le cas le plus simple, un  déclencheur binaire qui ``ouvre'' ou ``ferme'' le mécanisme de plasticité ou encore un scalaire qui, selon son signe, conduit à une plasticité Hebbiennes ou anti-Hebbienne.
@@ -2552,6 +2571,8 @@ Dans un contexte de réseau de neurones récurrent,
 le but de la plasticité est de favoriser les réponses liées à un renforcement positif (sens ``Hebbien''), et de défavoriser les réponses liées à un renforcement négatif (sens
 anti-Hebbien).
 On parle de plasticité ``induite''. 
+
+
 
 La plasticité induite est un mécanisme  de plasticité déclenché par un signal extérieur. 
 Il peut s'agir, dans un cadre biologique, d'un neurotransmetteur ou d'une entrée synaptique spécifique, i.e.~:
@@ -2573,7 +2594,13 @@ Le principe de trace synaptique consiste à stocker l'historique long des corré
 \end{align} \label{eq:plast-trace}
 
 \paragraph{}
-Résultats~:
+Un environnement continu classique (contrairement à un environnement discret) 
+présente peu d'occasions d'interactions périodiques avec l'environnement.
+Dans un contexte d'environnement continu, la dynamique externe est lente par rapport 
+à la dynamique neuronale.
+Dans ce cadre, les règles Hebbiennes d'ordre 0 (basées sur la conjonction d'activité) se sont révélées 
+plus efficaces pour la résolution des tâches, bien que moins propices aux effets de synchronisation et de résonance.
+Les résultats principaux sont les suivants~:
 \begin{itemize}
 	\item La règle d'apprentissage proposée dans \cite{Dau04b} est strictement Hebbienne, mais distingue 
 	les différents faisceaux d'axones arrivant sur le neurones, autrement dit identifie les différentes
@@ -2589,12 +2616,39 @@ Résultats~:
 	ayant la même constante de temps caractéristique que l'erreur motrice.
 \end{itemize}
 
+
+
 Contrairement aux modèles de la perception basés sur la résonance perceptive, les modèles mis
-en place dans le cadre de ces tâches de contrôle en boucle fermée fonctionnent selon des principes d'appariement ``classiques'', 
+en place dans ce cadre fonctionnent selon des principes d'appariement ``classiques'', 
 c'est à dire par décomposition de la tâche complète en sous-tâches élémentaires, en appariant des régions de l'espace sensoriel avec des réponses motrice spécifique, correspondant à des ``cartes motrices'' (voir figure \ref{fig:ICANN09-2}, page \pageref{fig:ICANN09-2}). 
 
-{\color{Gray}de manière continue  selon un principe de feedback négatif (le signal transitant
-principalement sous la forme de corrections à apporter à la trajectoire courante)}.
+%{\color{Gray}de manière continue  selon un principe de feedback négatif (le signal transitant
+%principalement sous la forme de corrections à apporter à la trajectoire courante)}.
+
+\subsubsection{z. L'appariement par ``accumulation d'évidence'' implémente, de manière à la fois pratique et biologiquement plausible, un processus de décision dans un espace de choix concurrents.}
+
+Les modèles probabilistes basés sur des processus stochastiques markoviens (voir equations (\ref{eq:accum1}) - (\ref{eq:accum1})) sont très populaires en modélisation biologiquement inspirée du fait de leur capacité rendre compte des profils de réponse extrêmement bruités à la fois de l'activité neuronale et des réponses comportementales.
+Les processus markoviens peuvent également implémenter, au même titre que les modèles déterministes, les principes d'activité persistante, de rémanence et de mémoire à court terme.
+
+Plasticité???
+
+
+Accumulation, EM, bla bla, en-ligne, apprendre et oublier
+
+Gaurav
+
+Eoin
+
+\subsubsection{z. En présence de signaux de renforcement binaires, l'apprentissage par exploration non-stochastique a les mêmes bornes d'erreur que l'apprentissage supervisé.}
+
+L'exploration non-stochastique des 
+espaces de réponse motrice
+
+
+consiste 
+Dans le cas de signaux d'entrée et d'espaces de réponses de grande dimension, en présence d'un signal de renforcement minimaliste de type bien/mal, 
+
+
 
 {
 	\color{Violet} Différentes études sur l'algorithme de policy gradient en tant que tel ont par ailleurs
@@ -2779,45 +2833,6 @@ sensorielle actuelle sur des informations observées dans le passé {\bf (!!FIGU
 
 
 
-Cette approche a été tentée sur des architectures analogues à \shortcite{Dau02} (couches primaires vs. couche associative récurrente)
-dans des environnements variés à états continus (robotiques simulée, pendule inverse, ...).
-Ce principe conduit à la définition d'architectures où la commande motrice est 
-issue de l'activité de la (ou des) couche(s) associative(s).
-Les changements comportementaux reposent sur l'activité de cette couche associative, soumise 
-à une influence interne (l'activité intrinsèque) et une influence externe (signal en provenance de la couche sensorielle).
-%Le principe de base était d'assimiler la couche secondaire à une couche motrice, c'est à dire 
-%%d'assimiler l'activité irrégulière produite par cette couche à une activité motrice.
-En l'absence de consigne, la commande motrice doit en effet être le produit
-de l'activité interne. Le caractère irrégulier de l'activité initiale doit traduire 
-l'absence de direction privilégiée de la réponse motrice. 
-Le caractère organisateur des règles Hebbiennes était censé induire un comportement plus prédictible 
-au fil du temps.
-La prise en compte du signal de renforcement dans la règle de plasticité était censé augmenter
-l'adéquation des comportements à la contrainte exprimée par le signal.
-
-Cette tâche s'est révélée beaucoup plus difficile à implémenter que la précédente. 
-Dans le cas précédent, la séquence à apprendre (le répertoire comportemental) était fixée par le concepteur. 
-Ici, le répertoire comportemental est supposé émerger des interactions avec l'environnement.
-Une autre facilité dans le cas précédent était que le concepteur stoppait la séance d'apprentissage
-lorsqu'il estimait que le réseau avait suffisamment appris. 
-Dans le cas de l'apprentissage par renforcement, la plasticité est appliquée de manière continue, ce qui peut conduire
-à des problèmes de surapprentissage (et de résistance au changement de la dynamique interne qui rend le réseau
-insensible à son environnement).
-
-Un environnement continu classique (contrairement à un environnement discret) 
-présente peu d'occasions d'interactions périodiques avec l'environnement.
-Dans un contexte d'environnement continu, la dynamique externe est lente par rapport 
-à la dynamique neuronale.
-Dans ce cadre, les règles Hebbiennes d'ordre 0 (basées sur la conjonction d'activité) se sont révélées 
-plus efficaces pour la résolution des tâches, bien que moins propices aux effets de synchronisation et de résonance.
-Les problèmes de surapprentissage ont été résolus par l'utilisation d'une règle qui bloque la plasticité en cas d'influence exclusive
-d'une population afférente. La plasticité ne se développe que sur les neurones soumis à 
-plusieurs influences, interne ou externe.
-Le terme limitatif  bloque la plasticité lorsqu'une classe de liens afférents atteint à elle seule
-le seuil d'activation du neurone.
-
-
-
 
 
 
@@ -2899,6 +2914,13 @@ très concrètes dans un cadre de traitement du signal pur (interfaces cerveau-m
 
 \chapter{Discussion}
 
+- projet lien visuo-praxique
+
+- stdp et capture de séquences d'activité
+
+- dynamique de taille finie, circuits d'activation et discretisation e l'espace sensoriel
+
+- exploration non-stochastique de l'environnement
 
 \textit{Ce chapitre présente enfin un certain nombre de questions laissées ouvertes par ces travaux, et présente
 	un cadre conceptuel général pour des développements possibles en neurosciences computationnelles. Deux projets
@@ -6545,7 +6567,7 @@ L'intégration des informations visuelles et sensori-motrices est réalisée par
 \end{figure} 
 
 
-L'architecture de contrôle était constituée de trois couches~: 
+L'architecture de contrôle est constituée de trois couches~: 
 deux couches primaires (une couche visuelle et une couche motrice) et une couche associative
 (voir figure \ref{fig:PerAc}). L'apprentissage reposait
 sur l'imposition sur la couche motrice d'une commande périodique constituée d'une séquence de trois 
