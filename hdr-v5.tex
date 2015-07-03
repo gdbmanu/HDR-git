@@ -934,14 +934,217 @@ Le but est de caractériser ces mécanismes, et
 d'identifier les points communs avec  
 des mécanismes similaires à l'{\oe}uvre dans le cerveau.
 
-
-
-\section{Notre approche}
+\section{Neurones et réseaux}
 
 Pour modéliser le cerveau nous utilisons l'analogie du circuit reconfigurable.
 Un circuit est ici un graphe (connexe) constitué de nœuds et d'arêtes. 
 L'activité qui se développe dans le circuit repose sur la transmission de
 signaux sur les axones via les neurones qui en sont les relais.
+
+
+Inspirés par le fonctionnement du cerveau, les réseaux de neurones sont des modèles de calculateurs 
+dans lesquels le ``programme'' (la fonction de réponse) est décrite par un graphe.
+Ce graphe est constitué d'un ensemble de nœuds, qui sont les unités de calcul, et un ensemble d'arêtes,  
+pondérées et orientées, %définissant l'intensité du signal
+qui transportent le signal entre les différentes unités de calcul.
+
+Le signal produit par les neurones biologiques n'est pas une grandeur continue.
+Le système nerveux est donc caractérisé par l'émission et la réception de signaux discrets, qui présentent 
+à première vue une certaine analogie avec les signaux numériques, 
+à ceci près qu'il n'existe pas d'horloge centrale pour cadencer les opérations\footnote{
+	Cette question reste néanmoins débattue. Elle a été récemment relancée par \shortcite{Koubeissi2014}.}.
+C'est ce caractère discret des opérations neuronales qui avait inspiré les premiers modèles de neurones,
+au sein desquels les unités neuronales se comportaient comme des portes logiques \shortcite{MCu43}, par analogie avec 
+les circuits logiques des architectures informatiques.
+
+Il existe de nombreux modèles de neurones et de nombreux modèles de réseaux de neurones. La modélisation des processus neuronaux
+repose donc sur un choix du modélisateur, qui est fonction du mécanisme qu'il souhaite étudier, des outils
+d'analyse et/ou de la puissance de calcul dont il dispose. 
+
+Les propriétés et éléments de vocabulaire listés ci-dessous sont communs à la plupart des modèles de réseaux de
+neurones, indépendamment de leur utilisation en modélisation ou en apprentissage automatique. 
+
+\subsubsection{Activité et signal}
+
+Chaque unité de calcul (ou neurone) est modélisée comme une fonction de réponse $f$ qui 
+traite un jeu de \textit{données d'entrée} multimodal $s^\text{in}_1, ..., s^\text{in}_n$.
+On peut supposer sans perte de généralité que les données d'entrée sont indexées sur l'axe temporel.
+On parle alors de \textit{signal d'entrée} où $s^\text{in}_i = \{s^\text{in}_i(t)\}_{t \in \{t_0,... t_f\}}$ 
+représente un jeu de données indexé sur une trame temporelle et 
+$s^\text{in}_i(t)$ représente un point de mesure du $i^\text{ème}$ signal à l'instant $t$.
+
+La sortie du neurone au temps $t_f$ est un scalaire: 
+\begin{align}\label{eq:neurone_s_out}
+	s^\text{out}(t_f) = f(s^\text{in}_1, ..., s^\text{in}_n)
+\end{align}
+(on parle aussi de \textit{réponse} du neurone aux signaux d'entrée).
+Un neurone est donc une unité élémentaire de traitement des données. %Un neurone est implicitement une unitÃ© de traitement \textit{non-linÃ©aire}.
+
+Le signal de sortie du neurone $s^\text{out} = \{s^\text{out}(t)\}_{t \in \{t_0,... t_f\}}$ est constituée 
+d'une succession d'états ``hauts'' et d'états ``bas''.
+Un neurone dont la sortie à l'instant $t$ est dans l'état haut est dit \textit{activé}. Un neurone 
+dont la sortie à l'instant $t$ est dans l'état bas est dit \textit{inactif}. 
+
+\emph{Exemples:}
+\begin{itemize}
+	\item Dans le cas le plus simple des neurones binaires, 
+	le signal de sortie est une succession de 0 (inactif) ou de 1 (actif) \shortcite{MCu43}. 
+	\item Dans le cas plus complexe de neurones à impulsions, le signal de sortie est un train de potentiels d'action (PA), représenté par une 
+	somme de Diracs tels que $s(t) = \sum_{\hat{t} \in \mathcal{T}_\text{out}} \delta(t - \hat{t})$, où $\mathcal{T}_\text{out}$ est un ensemble
+	contenant les instants de décharge (voir par exemple \shortcite{gerstner02}).
+	%Dans le cas de neurones fréquentiels, le signal contient des grandeurs continues correspondant à la fréquence de décharge instantanée
+	%de la sortie.
+\end{itemize}
+
+Le signal de sortie (la suite d'états hauts et d'états bas) est aussi appelé l'\textit{activité} du neurone. Ce signal est transporté sur un axone, qui se
+sépare à son extrémité en plusieurs branches se terminant par une (ou plusieurs) synapse(s). 
+
+Les synapses sont les canaux d'entrée des neurones. 
+Chaque synapse traite un signal $s_i^\text{in}$ émis par un autre neurone pré-synaptique $i$ du réseau et produit une \textit{entrée synaptique} $e(s_i^\text{in}$).
+L'état \textit{interne} du neurone post-synaptique est donné par son \textit{potentiel de membrane} $V$.
+La somme des entrées synaptiques agit sur la valeur de ce potentiel de membrane. 
+L'intégration de la totalité des entrées peut être exprimée par une fonction de mise à jour du potentiel de membrane de la forme:
+\begin{align}\label{eq:neurone_V}
+	V = g(s_1^\text{in}, ..., s_n^\text{in})
+\end{align}
+où $s_1^\text{in}, ..., s_n^\text{in}$ sont les $n$ signaux entrants.
+
+\emph{Exemples:}
+\begin{itemize}
+	\item Dans le cas le plus simple, $g$ est une combinaison linéaire des entrées synaptiques \shortcite{MCu43,Rosen58}.
+	\item Les modèles plus détaillés prennent en compte 
+	la fonction de transfert des synapses ainsi que les interactions non-linéaires entre les influences excitatrices et les influences inhibitrices \shortcite{DESTEXHE97}.
+\end{itemize}
+
+L'activation d'un neurone repose ensuite sur un mécanisme non linéaire de \textit{passage de seuil}.
+
+\emph{Exemples:}
+\begin{itemize}
+	\item Dans le modèle le plus simple \shortcite{MCu43}, l'état de sortie (0 ou 1) dépend d'un
+	seuil d'activation $\theta$ tel que $s=1$ (état haut) si $V>\theta$ et $s=0$ (état bas) sinon.
+	\item
+	Dans les modèles plus détaillés \shortcite{Lapicque1907,HH52}, le passage à l'état haut déclenche un mécanisme actif de réinitialisation qui ramène
+	le potentiel de membrane vers sa valeur de repos $V_0 < \theta$.  Ce mécanisme de réinitialisation, qui interdit
+	le maintien de la sortie dans l'état haut, rend l'état haut  
+	plus rare (et donc plus porteur d'information) que l'état bas. Il a également pour effet d'effacer 
+	la mémoire des données d'entrée antérieures au dernier potentiel d'action.
+\end{itemize}
+
+
+%% A mettre dans la partie sur la plasticité
+%Un des modèles les plus étudiés en modélisation est le modèle de l'\textit{intégrateur à fuite}. 
+%La valeur du potentiel dépend de l'historique des signaux d'entrée depuis le dernier PA jusqu'à l'instant $t$. 
+%{\bf !! TODO  mécanisme de décision basé sur l'accumulation + figure!!}.
+% La partie suivante doit commencer avec les modèles de la décision : décision bayésienne, intégrateur à seuil, décision de Hopfield,
+% décision du champ neuronal, avec pour finir le modèle de Pouget (compromis dynamique)
+% Préciser ensuite le mécanisme de sélection/intégration
+
+\subsubsection{Réseau de neurones}
+
+Plusieurs neurones connectés entre eux via des axones constituent 
+un \textit{réseau de neurones}. Le schéma de connexion, sous la forme d'un graphe orienté, 
+caractérise l'\textit{organisation structurelle} du réseau. 
+%Selon que le graphe est acyclique, ou au contraire récurrent, .
+
+Les signaux transitant de neurone à neurone via les axones d'un réseau de neurones contiennent une succession d'états hauts et
+d'états bas qui présentent une ressemblance  avec les signaux digitaux produits par les calculateurs 
+numériques. Cette analogie de forme n'implique cependant pas que les principes de traitement et
+de transformation de ces signaux soient les mêmes~:
+
+\begin{itemize}
+	\item Dans les calculateurs numériques traditionnels, 
+	\begin{enumerate}
+		\item Un calcul est décrit comme une séquence d'opérations élémentaires réalisées dans un certain ordre
+		à partir de données d'entrée. Ces opérations élémentaires peuvent être réalisées par les portes logiques
+		d'un circuit électronique, ou par tout mécanisme automatique capable de ségréguer ses entrées sous la forme d'au moins 
+		deux états de sortie distincts.
+		\item Les opérations entre chaînes de bits passent par 
+		une unité centrale qui réalise les opérations nécessaires aux algorithmes de calcul, reposant sur un
+		code prédéfini qui attribue par exemple différentes puissances de 2 aux différents bits d'un octet, etc.  
+	\end{enumerate}
+	\item Dans la cas des réseaux de neurones, 
+	\begin{enumerate}
+		\item La mise en œuvre d'un calcul repose sur la présence
+		de neurones d'\textit{entrée} soumis à des données extérieures, qui sont donc les opérandes du calcul.
+		C'est le cas chez l'animal des cellules \textit{sensorielles}. 
+		On note $\boldsymbol{I}(t) = \{I_i(t')\}_{i \in \{1,...,N\}, t' \in [t_0, t[}$ ce signal extérieur. 
+		Si le neurone $i$ est un neurone d'entrée, on a $\exists t : I_i(t) \neq 0$. Si le neurone $i$ n'est pas un neurone d'entrée,  
+		on a $\forall t : I_i (t) = 0$.
+		Le signal extérieur est généralement considéré comme indépendant de l'activité du réseau de neurones.
+		\item L'équivalent formel de l'encodage 
+		est un ``patron d'activité'' $\boldsymbol{S}(t)$ constitué de
+		l'ensemble des états de sortie du réseau depuis l'instant initial, i.e.  $\boldsymbol{S}(t) = \{s_i(t')\}_{i \in \{1,...,N\}, t' \in [t_0, t[}$. 
+		Le calcul est quant à lui réalisé au travers des liens récurrents liant mutuellement les 
+		composantes actives (liens d'affinité ou d'incompatibilité principalement). 
+		C'est le résultat des interactions entre les différentes composantes qui constitue le calcul.
+		Dans le cas le plus extrême (Winner takes all), 
+		le résultat du calcul est l'activité d'un noeud unique du réseau.
+		%La généralisation 
+		%aux calculateurs universels se fait à travers la présence de mémoires, c'est à dire d'unités capables de
+		%conserver un état (haut ou bas) pour une durée indéterminée. 
+	\end{enumerate}
+\end{itemize}
+
+\paragraph{Graphe et fonction de réponse}
+La description du réseau est donné par une \textit{fonction de couplage},
+définie le plus souvent par un tableau à double entrée noté $G$. Chaque neurone
+se voit attribuer un indice $i \in 1,...,N$ où $N$ est le nombre de neurones dans le réseau. Le tableau
+$G[i,j]$ contient alors les caractéristiques du lien du neurone $i$ vers le neurone $j$.
+Un exemple de paramétrisation est le temps de propagation $\tau_{ij}$ et poids synaptique $J_{ij}$. 
+Lorsque le poids synaptique est non-nul, on dit que les neurones $i$ et $j$ sont couplés. 
+Si $N$ est le nombre de neurones, le nombre de paramètres du réseau est en $O(N^2)$, correspondant à un principe de transmission du signal \textit{de plusieurs à plusieurs} (un neurone envoie son signal de sortie vers plusieurs destinataires, un neurone reçoit des signaux de plusieurs émetteurs).
+
+\emph{Notations:}
+\begin{itemize} 
+	\item Le \textit{vecteur d'activité} $\boldsymbol{s}(t)$ (ou activité de population) est un vecteur de taille $n$ contenant l'ensemble des 
+	sorties à l'instant $t$~: 
+	$$\boldsymbol{s}(t) = (s_1^\text{out}(t), ..., s_n^\text{out}(t))$$
+	\item Le \textit{patron d'activité} est constituée de l'ensemble des signaux émis entre l'instant initial $t_0$  et l'instant d'observation $t$, soit: $$\boldsymbol{S}(t)=\{\boldsymbol{s}(t')\}_{t' \in [t_0, t[}$$
+\end{itemize}
+
+Les activités des différents neurones sont donc \textit{inter}dépendantes du fait des couplages. 
+La \textit{fonction de réponse} du réseau $f$ est une fonction paramétrique 
+décrite par le tableau de paramètres $G$, telle que l'activité $\boldsymbol{s}(t)$ est solution de~:
+\begin{align}\label{eq:optim}
+	\boldsymbol{s}(t) = f(\boldsymbol{S}(t);G)
+\end{align}
+Il faut ici préciser, dans la mesure où les temps de transports sont supposés strictement positifs, que l'activité du réseau au temps $t$ est
+dépendante de l'historique des activités précédent strictement 
+l'instant $t$. L'activité d'un neurone post-synaptique $i$ au temps $t$ est dépendante des signaux pré-synaptiques
+produits aux instants $t' < t$, en tenant compte du \textit{temps de transport} de ces signaux sur les axones. Plus précisément, si $j$ est le 
+neurone pré-synaptique et $i$ le neurone post-synaptique, on a:
+\begin{align}\label{eq:transport}
+	s^\text{in}_{ij}(t) = s^\text{out}_{j}(t - \tau_{ij})
+\end{align}
+
+\paragraph{Fonction de sortie du réseau} La \textit{réponse} du réseau de neurones au signal d'entrée (la solution du calcul) est le patron d'activité induit
+par ce signal d'entrée.
+
+En étendant la fonction de réponse aux entrées extérieures, l'activité instantanée $\boldsymbol{s}(t)$ est la solution de~:
+\begin{align}\label{eq:SIG}
+\boldsymbol{s}(t) = f(\boldsymbol{S}(t), \boldsymbol{I}(t);G)
+\end{align}
+avec $\boldsymbol{S}(t)$ l'activité développée dans le réseau jusqu'au temps $t$, $\boldsymbol{I}(t)$ le signal d'entrée et $G$ le graphe.
+On dit également 
+que le réseau de neurones \textit{transforme} le signal d'entrée.
+
+Il est possible de définir une \textit{fonction de sortie} qui \textit{décode} ce patron d'activité. 
+La sortie du réseau est alors 
+$$\boldsymbol{u} = h(\boldsymbol{s})$$
+avec $h$ fonction de décodage (ou de ``\textit{read-out}'').
+
+Plus globalement, la fonction d'entrée/sortie (fonction de transfert) du réseau de neurones est~:
+\begin{align}\label{eq:E/S}
+\boldsymbol{u} = h(f(\boldsymbol{S},\boldsymbol{I};G))
+\end{align}
+
+La sortie $\boldsymbol{u}$ peut ainsi être interprétée comme le résultat du calcul réalisé à partir des données d'entrée $\boldsymbol{I}$. 
+Dans la mesure où ce résultat est le produit de 
+l'activité conjointe (et parallèle) des neurones du réseau, on se situe dans un contexte de \textit{calcul distribué}, par opposition au calcul
+séquentiel centralisé réalisé par les ordinateurs traditionnels.
+
+
+\section{Notre approche}
 L'idée est donc que le graphe qui sert à modéliser l'activité nerveuse 
 est organisé de telle sorte qu'il existe une multitude de circuits ``concurrents''.
 A un instant donné, un seul de ces circuits est ``actif'', et les autres sont ``désactivés''.
@@ -965,9 +1168,9 @@ traitement est constituée d'un certain nombre de filtres sélectionnant
 certaines caractéristiques de la scène sensorielle. Puis les couches suivantes effectuent
 des combinaisons de ces filtres, puis les suivantes des combinaisons de combinaisons etc.
 On parle en anglais de ``pattern matching'' que nous avons traduit ici par ``appariement''.
-Différents algorithmes permettent, comme nous l'avons vu dans la section précédente, de 
+Différents algorithmes permettent, comme nous le verrons par la suite, de 
 construire de telles chaînes de traitement de manière automatique à partir d'une simple 
-base d'exemples, via des mécanismes de'''auto-encodage''.
+base d'exemples, via des mécanismes d'{``auto-encodage''}.
 
 \paragraph{}
 Par opposition à ce  traitement séquentiel, nous considérons 
@@ -992,9 +1195,42 @@ On parle d'activité interne ou encore activité ``endogène''.
 Le choix des réseaux de neurones récurrents se justifie également en raison de leur plus grande plausibilité biologique \shortcite{Compte2006,Fiser2010}. 
 
 \paragraph{}
-Les réseaux de neurones récurrents sont donc capables de maintenir une activité persistante en l'absence de stimulation extérieure. 
+Les réseaux de neurones récurrents sont capables de maintenir une activité persistante en l'absence de stimulation extérieure. 
 Le cadre à considérer pour traiter l'appariement est celui des systèmes dynamiques ``ouverts'' dans lesquels
 l'activité endogène d'un réseau de neurones récurrent est ``perturbée'' par un signal extérieur. 
+
+
+\paragraph{Systèmes dynamiques}
+
+La théorie des \textit{systèmes dynamiques} repose sur un espace d'état $\mathcal{X}$, une trame temporelle 
+$\mathcal{T}$ et un
+flot $\phi$ qui est une application de $\mathcal{X} \times \mathcal{T}$ dans $\mathcal{X}$
+définissant pour tout couple $(\boldsymbol{x},t)$ la valeur de l'état suivant:
+\begin{align}\label{eq:SD}
+\boldsymbol{x}' = \phi(\boldsymbol{x},t)
+\end{align}
+La plupart des réseaux de neurones peuvent se modéliser sous cette forme, à partir du moment où 
+l'état du réseau à l'instant $t$ est entièrement spécifié, en tenant compte en particulier
+du potentiel de membrane et 
+des différents temps de transport sur les axones. 
+
+La \textit{trajectoire} du système sur la plage temporelle $[t_0,t_f]$ est alors définie 
+par l'intégration sur le flot de la condition initiale $\boldsymbol{x}_0$.
+
+\begin{itemize}
+	\item Dans le cas d'un système dit ``autonome'', on a $\phi(\boldsymbol{x},t) = \phi(\boldsymbol{x})$ et
+	la trajectoire du système $\{\boldsymbol{x}(t)\}_{t \in [t_0,t_f], \boldsymbol{x}(t_0)= \boldsymbol{x}_0}$ 
+	est entièrement définie par les conditions initiales. 
+	\item Dans le cas d'un système dit ``ouvert'' (non-autonome), la dépendance temporelle
+	est souvent modélisée sous la forme d'un signal externe $\boldsymbol{I}(t)$, soit $\phi(\boldsymbol{x},t) = \phi(\boldsymbol{x},\boldsymbol{I}(t))$. 
+	Ce signal peut être:
+	\begin{itemize}
+		\item une donnée d'entrée dans le cas de modèles de traitement des données
+		\item un bruit externe dans le cas de modèles stochastiques
+	\end{itemize}
+\end{itemize}
+
+
 La réponse du réseau correspond alors à un compromis entre les contraintes internes, exprimées
 par le graphe, et les contraintes externes, exprimées par le signal, via une relaxation. 
 
@@ -1082,6 +1318,18 @@ Contrairement aux classifieurs traditionnels qui apparient \textit{nécessaireme
 
 
 \subsubsection{(ii) Plasticité}
+
+
+La plasticité synaptique est un mécanisme biologique qui modifie l'efficacité de la synapse au cours du temps. En reprenant 
+les notations de l'équation (\ref{eq:SD}), 
+\begin{align}
+&\boldsymbol{x}' = \phi(\boldsymbol{x},\boldsymbol{J},t) \label{eq:SD-plast-x}\\
+&\boldsymbol{J}' = \psi(\boldsymbol{x},\boldsymbol{J},t) \label{eq:SD-plast-J}
+\end{align}
+où $\boldsymbol{x}$ est un vecteur représentant l'état du système dynamique et $\boldsymbol{J}$ une matrice représentant le graphe de connexions.
+La plasticité (eq. \ref{eq:SD-plast-J})
+modifie donc les caractéristiques de la fonction de réponse des neurones (eq. \ref{eq:SD-plast-x}) et vice-versa. 
+Le mécanisme de plasticité introduit une interdépendance complexe entre le graphe, l'activité et le signal d'entrée s'il existe.
 
 Le modèle de plasticité synaptique le mieux établi est la \textit{règle de Hebb} \shortcite{Heb49}, confirmée à de nombreuses reprises par les observations \shortcite{Bli73,BIPOO98}. 
 La règle de Hebb inscrit dans la structure du graphe les conjonctions d'activité pré et post-synaptique se produisant de façon répétée au cours du temps (voir section \ref{sec:app-plast}). 
@@ -1191,6 +1439,41 @@ Malgré des limitations bien connues en terme de capacité de stockage \shortcit
 Le réseau de Hopfield implémente un principe de \textit {mémoire associative}. Il apprend ``par cœur'' un certain nombre de scènes (ou images). Il est ensuite capable, lorsque certains constituants d'une scène apprise sont présentés, de compléter la scène avec les éléments manquants, de rectifier les valeurs erronées etc. 
 L'espace d'états est organisé en un nombre fini de \textit{bassins d'attraction} définissant des patrons d'activité spécifiques et mutuellement exclusifs. L'activité du réseau finit par converger vers un de ces patrons en fonction des conditions initiales. Chacun des attracteurs s'interprète ici comme une assemblée distincte, c'est à dire comme un circuit de renforcement mutuel aboutissant à la stabilisation d'un patron d'activité macroscopique. 
 
+\subsection{Grands réseaux et champ moyen}
+
+{\color{Cyan}
+	
+	
+	
+	
+	%Les modèle qui servent de fondement aux neurosciences computationnelles 
+	%sont les modèles de neurones à conductance [REF DESTEXHE] dont le plus connu est le modèle de Hudgkin-Huxley. 
+	
+	
+	L'activité des neurones telle que mesurée par électrophysiologie présente
+	un caractère irrégulier où les temps d'émission des potentiels d'action (PA) semblent obéir à un processus de Poisson [CITATION].
+	Un tel processus est caractérisé par sa fréquence instantanée $\nu(t)$, qui donne le nombre de PA émis par seconde.
+	Cette grandeur peut être mesurée 
+	à travers l'observation d'un train de PA produit par un neurone particulier (nombre de PA émis divisé par
+	l'intervalle d'observation).
+	
+	De nombreux modèles stochastiques de neurones ont été proposés qui prennent en compte le caractère aléatoire de la 
+	réponse des neurones biologiques \shortcite{Tuc88,gerstner02}.
+	[REF : IF neuron, modèle de ]. 
+	
+	[MATHS??]
+	
+	Les modèles mathématique permettant de déduire les propriétés ``macroscopiques'' ( comportements moyens, 
+	corrélations d'activité, etc.) à partir de caractéristiques
+	``microscopique'' s'appellent les modèles de ``champ moyen'' \shortcite{Wilson1972,Ama72,Amit1985,Som88,Ces94B,Ami97}, etc.
+	Les modèle de champ moyen considèrent l'activité instantanée de populations de neurones à travers leur fréquence de décharge moyenne $\nu(t)$, qui exprime, à un instant
+	donné, le nombre de neurones émettant un potentiel
+	d'action divisé par la taille de la population.
+	
+	
+	
+}
+
 \subsection{Passage d'échelle en contrôle moteur} \label{sec:echelle}
 
 
@@ -1232,16 +1515,9 @@ nous considérons la commande motrice comme un mécanisme de relaxation qui conj
 	le même mécanisme pouvant en principe se décliner à différentes échelles.
 \end{itemize}
 
-\paragraph{Alternance comportementale}\label{page:alternance}
-L'importance de la désynchronisation, comme complément de la synchronisation, est également souligné dans \shortcite{Rod99}.
-Le fonctionnement en boucle fermée par couplage positif (par renforcement mutuel) contient en effet fondamentalement
-le risque de l'enfermement dans un attracteur comportemental unique, correspondant à
-la répétition indéfinie de la même tâche.  Au mécanisme de synchronisation doit donc correspondre un
-mécanisme de désynchronisation, qui peut reposer sur des facteurs déstabilisants liés à une
-mauvaise correspondance internes ou externe, 
-mais également sur des mécanismes actifs de désynchronisation, comme la fatigue neuronale par exemple.
 
-\chapter{Principaux modèles}
+
+\chapter{Apprentissage et contrôle}
 
 L'étude des réseaux de neurones naturels suggère un mode de fonctionnement
 intermédiaire entre le ``pattern matching'' (reconnaissance de formes) et les systèmes dynamiques. 
@@ -1265,167 +1541,6 @@ toujours en compte le caractère parfois incompatible des deux modes de fonction
 
 Ce chapitre présente les différentes approches d'un point de vue mathématique, et indique quelques pistes de synthèses telles que proposées dans la littérature.
 
-\section{Calcul distribué}
-
-Les premiers modèles mariant les deux approches remontent historiquement aux années 60-70 \shortcite{HUBELWIESEL62,Grossberg1970}.
-%es premiers modèles sur la formation des patrons de réponse visuelle  remontent également à cette époque \shortcite{}. 
-L'idée générale est celle d'un système dynamique de grande dimension, constitué d'un grand nombre de
-variables d'état, chaque variable d'état reflétant une composante de la scène sensorielle, les différentes composantes
-interagissant par des relations de voisinage excitatrices ou inhibitrices. De ces modèles sont issus les grands
-principes architecturaux, avec le principe d'un signal transitant par différentes ``couches'', et les
-notions de liens feed-forward, feed-back et latéraux.
-Ces modèles ont connu un développement important dans les années 80, aboutissant aux modèles classiques
-\shortcite{Hop82,Koh82,Car87}.
-
-
-%[NEURONE = ACTIVITE QUANTITATIVE ET QUALITATIVE (INTENSIVE ET EXTENSIVE)]
-
-%[APPROCHE MIXTE => SUBSTRAT]
-
-
-
-\paragraph{Réseaux de neurones}
-Les signaux transitant de neurone à neurone via les axones d'un réseau de neurones contiennent une succession d'états hauts et
-d'états bas qui présentent une ressemblance  avec les signaux digitaux produits par les calculateurs 
-numériques. Cette analogie de forme n'implique cependant pas que les principes de traitement et
-de transformation de ces signaux soient les mêmes~:
-
-\begin{itemize}
-	\item Dans les calculateurs numériques traditionnels, 
-	\begin{enumerate}
-		\item Un calcul est décrit comme une séquence d'opérations élémentaires réalisées dans un certain ordre
-		à partir de données d'entrée. Ces opérations élémentaires peuvent être réalisées par les portes logiques
-		d'un circuit électronique, ou par tout mécanisme automatique capable de ségréguer ses entrées sous la forme d'au moins 
-		deux états de sortie distincts.
-		\item Les opérations entre chaînes de bits passent par 
-		une unité centrale qui réalise les opérations nécessaires aux algorithmes de calcul, reposant sur un
-		code prédéfini qui attribue par exemple différentes puissances de 2 aux différents bits d'un octet, etc.  
-	\end{enumerate}
-	\item Dans la cas des réseaux de neurones, 
-	\begin{enumerate}
-		\item La mise en œuvre d'un calcul repose sur la présence
-		de neurones d'\textit{entrée} soumis à des données extérieures, qui sont donc les opérandes du calcul.
-		C'est le cas chez l'animal des cellules \textit{sensorielles}. 
-		On note $\boldsymbol{I}(t) = \{I_i(t')\}_{i \in \{1,...,N\}, t' \in [t_0, t[}$ ce signal extérieur. 
-		Si le neurone $i$ est un neurone d'entrée, on a $\exists t : I_i(t) \neq 0$. Si le neurone $i$ n'est pas un neurone d'entrée,  
-		on a $\forall t : I_i (t) = 0$.
-		Le signal extérieur est généralement considéré comme indépendant de l'activité du réseau de neurones.
-		\item L'équivalent formel de l'encodage 
-		est un ``patron d'activité'' $\boldsymbol{S}(t)$ constitué de
-		l'ensemble des états de sortie du réseau depuis l'instant initial, i.e.  $\boldsymbol{S}(t) = \{s_i(t')\}_{i \in \{1,...,N\}, t' \in [t_0, t[}$. 
-		Le calcul est quant à lui réalisé au travers des liens récurrents liant mutuellement les 
-		composantes actives (liens d'affinité ou d'incompatibilité principalement). 
-		C'est le résultat des interactions entre les différentes composantes qui constitue le calcul.
-		Dans le cas le plus extrême (Winner takes all), 
-		le résultat du calcul est l'activité d'un noeud unique du réseau.
-			%La généralisation 
-			%aux calculateurs universels se fait à travers la présence de mémoires, c'est à dire d'unités capables de
-			%conserver un état (haut ou bas) pour une durée indéterminée. 
-	\end{enumerate}
-\end{itemize}
-
-
-La \textit{réponse} du réseau de neurones au signal d'entrée (la solution du calcul) est le patron d'activité induit
-par ce signal d'entrée.
-En étendant la fonction de réponse aux entrées extérieures, l'activité instantanée $\boldsymbol{s}(t)$ est la solution de~:
-\begin{align}\label{eq:optim_input}
-\boldsymbol{s}(t) = f(\boldsymbol{S}(t), \boldsymbol{I}(t);G)
-\end{align}
-avec $\boldsymbol{S}(t)$ l'activité développée dans le réseau jusqu'au temps $t$, $\boldsymbol{I}(t)$ le signal d'entrée et $G$ le graphe (voir section \ref{sec:activite} pour plus de détails).
-On dit également 
-que le réseau de neurones \textit{transforme} le signal d'entrée.
-
-Il est possible de définir une \textit{fonction de sortie} qui \textit{décode} ce patron d'activité. 
-La sortie du réseau est alors 
-$$\boldsymbol{u} = h(\boldsymbol{s})$$
-avec $h$ fonction de décodage (ou de ``\textit{read-out}'').
-
-Plus globalement, la fonction d'entrée/sortie (fonction de transfert) du réseau de neurones est~:
-\begin{align}\label{eq:E/S}
-\boldsymbol{u} = h(f(\boldsymbol{S},\boldsymbol{I};G))
-\end{align}
-
-La sortie $\boldsymbol{u}$ peut ainsi être interprétée comme le résultat du calcul réalisé à partir des données d'entrée $\boldsymbol{I}$. 
-Dans la mesure où ce résultat est le produit de 
-l'activité conjointe (et parallèle) des neurones du réseau, on se situe dans un contexte de \textit{calcul distribué}, par opposition au calcul
-séquentiel centralisé réalisé par les ordinateurs traditionnels.
-
-\paragraph{Systèmes dynamiques}
-L'inspiration biologique conduit à étudier des modèles alternatifs au traitement
-séquentiel standard. 
-
-La théorie des \textit{systèmes dynamiques} repose sur un espace d'état $\mathcal{X}$, une trame temporelle 
-$\mathcal{T}$ et un
-flot $\phi$ qui est une application de $\mathcal{X} \times \mathcal{T}$ dans $\mathcal{X}$
-définissant pour tout couple $(\boldsymbol{x},t)$ la valeur de l'état suivant:
-\begin{align}\label{eq:SD}
-\boldsymbol{x}' = \phi(\boldsymbol{x},t)
-\end{align}
-La plupart des réseaux de neurones peuvent se modéliser sous cette forme, à partir du moment où 
-l'état du réseau à l'instant $t$ est entièrement spécifié, en tenant compte en particulier
-du potentiel de membrane et 
-des différents temps de transport sur les axones. 
-
-La \textit{trajectoire} du système sur la plage temporelle $[t_0,t_f]$ est alors définie 
-par l'intégration sur le flot de la condition initiale $\boldsymbol{x}_0$.
-
-\begin{itemize}
-	\item Dans le cas d'un système dit ``autonome'', on a $\phi(\boldsymbol{x},t) = \phi(\boldsymbol{x})$ et
-	la trajectoire du système $\{\boldsymbol{x}(t)\}_{t \in [t_0,t_f], \boldsymbol{x}(t_0)= \boldsymbol{x}_0}$ 
-	est entièrement définie par les conditions initiales. 
-	\item Dans le cas d'un système dit ``ouvert'' (non-autonome), la dépendance temporelle
-	est souvent modélisée sous la forme d'un signal externe $\boldsymbol{I}(t)$, soit $\phi(\boldsymbol{x},t) = \phi(\boldsymbol{x},\boldsymbol{I}(t))$. 
-	Ce signal peut être:
-	\begin{itemize}
-		\item une donnée d'entrée dans le cas de modèles de traitement des données
-		\item un bruit externe dans le cas de modèles stochastiques
-	\end{itemize}
-\end{itemize}
-
-{\color{Cyan}
-
-\subsubsection{Grands réseaux et champ moyen}
-
-
-%Les modèle qui servent de fondement aux neurosciences computationnelles 
-%sont les modèles de neurones à conductance [REF DESTEXHE] dont le plus connu est le modèle de Hudgkin-Huxley. 
-{\color{Cyan}
-	
- L'activité des neurones telle que mesurée par électrophysiologie présente
- un caractère irrégulier où les temps d'émission des potentiels d'action (PA) semblent obéir à un processus de Poisson [CITATION].
- Un tel processus est caractérisé par sa fréquence instantanée $\nu(t)$, qui donne le nombre de PA émis par seconde.
- Cette grandeur peut être mesurée 
- à travers l'observation d'un train de PA produit par un neurone particulier (nombre de PA émis divisé par
- l'intervalle d'observation).
- 
- De nombreux modèles stochastiques de neurones ont été proposés qui prennent en compte le caractère aléatoire de la 
- réponse des neurones biologiques \shortcite{Tuc88,GERSTNER02}.
- 	[REF : IF neuron, modèle de ]. 
- 
- [MATHS??]
-	
-Les modèles mathématique permettant de déduire les propriétés ``macroscopiques'' ( comportements moyens, 
-	corrélations d'activité, etc.) à partir de caractéristiques
-	``microscopique'' s'appellent les modèles de ``champ moyen'' \shortcite{Wilson1972,Ama72,Amit1985,Som88,Ces94B,Ami97}, etc.
-Les modèle de champ moyen considèrent l'activité instantanée de populations de neurones à travers leur fréquence de décharge moyenne $\nu(t)$, qui exprime, à un instant
-donné, le nombre de neurones émettant un potentiel
-d'action divisé par la taille de la population.
-
-
-\paragraph{Taux de décharge instantané}
-
-
-\paragraph{Activité de population}
-
-
-
-
-}
-%\cleardoublepage
-
-
-\paragraph{Modèles de champ neuronal}
-}
 
 \section{Apprentissage et plasticité}\label{sec:app-plast}
 \subsection{L'appariement (``Pattern matching'')}
@@ -1505,7 +1620,7 @@ Le choix de ces formes caractéristiques est bien sûr dépendant des capacités
 
 \paragraph{Types de problèmes}
 
-La fonction de réponse $h$ est en général une projection sur un espace $\mathcal{U}$ de dimension plus petite que l'espace d'entrée $\mathcal{X}$.
+La fonction de réponse $h$ (voir page \pageref{eq:SIG}) est en général une projection sur un espace $\mathcal{U}$ de dimension plus petite que l'espace d'entrée $\mathcal{I}$.
 La fonction opère donc une \textit{réduction} de son espace d'entrée, c'est à dire qu'elle réduit les données d'entrée à un petit nombre de caractéristiques. C'est donc un transformation non-inversible du signal d'entrée avec perte d'information.
 
 La nature de cet espace de sortie (continu ou discret) définit deux grands types de problèmes d'apprentissage. 
@@ -1577,8 +1692,18 @@ puissance supérieure aux modèles standard.
 
 Les réseaux de neurones et leurs méthodes de programmation sont un des piliers de la recherche 
 en apprentissage automatique.    
+Les premiers modèles remontent historiquement aux années 60-70 \shortcite{HUBELWIESEL62,Grossberg1970}.
+%es premiers modèles sur la formation des patrons de réponse visuelle  remontent également à cette époque \shortcite{}. 
+L'idée générale est celle d'un système dynamique de grande dimension, constitué d'un grand nombre de
+variables d'état, chaque variable d'état reflétant une composante de la scène sensorielle, les différentes composantes
+interagissant par des relations de voisinage excitatrices ou inhibitrices. De ces modèles sont issus les grands
+principes architecturaux, avec le principe d'un signal transitant par différentes ``couches'', et les
+notions de liens feed-forward, feed-back et latéraux.
+Ces modèles ont connu un développement important dans les années 80, aboutissant aux modèles classiques
+\shortcite{Hop82,Koh82,Car87}.
 
-Ils sont principalement utilisés pour
+
+Ils à l'heure actuelle sont principalement utilisés pour
 des tâches de catégorisation de leurs données d'entrée.
 Les méta-données sont alors constituées 
 d'un jeu de données d'entrée ainsi que des sorties attendues,
@@ -1659,25 +1784,13 @@ De nombreux points communs peuvent être établis entre l'apprentissage computat
 
 
 
-\paragraph{Plasticité}
-La plasticité synaptique est un mécanisme biologique qui modifie l'efficacité de la synapse au cours du temps. En reprenant 
-les notations de l'équation (\ref{eq:SD}), 
-\begin{align}
-&\boldsymbol{x}' = \phi(\boldsymbol{x},\boldsymbol{J},t) \label{eq:SD-plast-x}\\
-&\boldsymbol{J}' = \psi(\boldsymbol{x},\boldsymbol{J},t) \label{eq:SD-plast-J}
-\end{align}\label{eq:SD-plast}
-où $\boldsymbol{x}$ est un vecteur représentant l'état du système dynamique et $\boldsymbol{J}$ une matrice représentant le graphe de connexions.
-La plasticité (eq. \ref{eq:SD-plast-J})
-modifie donc les caractéristiques de la fonction de réponse des neurones (eq. \ref{eq:SD-plast-x}) et vice-versa. 
-Le mécanisme de plasticité introduit une interdépendance complexe entre le graphe, l'activité et le signal d'entrée s'il existe.
-
 \paragraph{}
-Il est facile d'établir une correspondance formelle entre l'apprentissage (au sens informatique) et la plasticité, en identifiant~:
+La correspondance formelle entre l'apprentissage (au sens informatique) et la plasticité (voir page \pageref{eq:SD-plast-x}) consiste à identifier~:
 \begin{itemize}
-	\item les paramètres de la fonction de réponse aux poids synaptiques,
-	\item et la plasticité à un mécanisme de mise à jour des paramètres guidé par les données.
+	\item les paramètres de la fonction de réponse avec les poids synaptiques,
+	\item et la plasticité avec un mécanisme de mise à jour des paramètres guidé par les données.
 \end{itemize} 
-Ce cadre général est celui des réseaux de neurones~: la fonction de réponse est implémentée sous la forme d'un graphe : les noeuds sont les ``neurones'' et les arêtes sont les ``synapses''. 
+Ce cadre général est celui des réseaux de neurones~: la fonction de réponse est implémentée sous la forme d'un graphe : les nœuds sont les ``neurones'' et les arêtes sont les ``synapses''. 
 Nous aurons l'occasion d'étudier par la suite les modèles plus directement inspirés par la biologie. Avant cela, nous abordons l'autre grande approche utilisée en modélisation neuronale, à savoir les modèles issus de la théorie des systèmes dynamiques et du contrôle.
 
 \section{Systèmes dynamiques et contrôle}
@@ -1846,8 +1959,8 @@ où les indices représentent le temps en notation discrète.
 
 L'évolution de l'état repose sur a formule de Bayes (\ref{eq:bayes}), soit le maximum a posteriori en tenant compte des estimations précédentes.  En prenant en compte les deux critères, on peut définir une dynamique sur la distribution comme~:
 \begin{align}
-& f({\boldsymbol{x}}_0) = f_0({\boldsymbol{x}}_0)\\
-& g({\boldsymbol{x}}_{t+1}|{\boldsymbol{x}}_{0:t},\boldsymbol{I}_{1:t},\boldsymbol{u}_{1:t}) \propto P({\boldsymbol{x}}_{t+1}|{\boldsymbol{x}}_t,\boldsymbol{u}_t) f({\boldsymbol{x}}_t|{\boldsymbol{x}}_{0:t-1},\boldsymbol{I}_{1:t},\boldsymbol{u}_{1:t-1}) \label{eq:accum1} \\
+& f({\boldsymbol{x}}_0) = f_0({\boldsymbol{x}}_0)\nonumber\\
+& g({\boldsymbol{x}}_{t+1}|{\boldsymbol{x}}_{0:t},\boldsymbol{I}_{1:t},\boldsymbol{u}_{1:t}) \propto P({\boldsymbol{x}}_{t+1}|{\boldsymbol{x}}_t,\boldsymbol{u}_t) f({\boldsymbol{x}}_t|{\boldsymbol{x}}_{0:t-1},\boldsymbol{I}_{1:t},\boldsymbol{u}_{1:t-1}) \label{eq:accum1} \\ 
 & f({\boldsymbol{x}}_{t+1}|{\boldsymbol{x}}_{0:t},\boldsymbol{I}_{1:t+1},\boldsymbol{u}_{1:t}) \propto
 Q(\boldsymbol{I}_{t+1}|{\boldsymbol{x}}_{t+1}) g({\boldsymbol{x}}_{t+1}|{\boldsymbol{x}}_{0:t},\boldsymbol{I}_{1:t},\boldsymbol{u}_{1:t})  \label{eq:accum2}
 \end{align}
@@ -1919,6 +2032,8 @@ changeant rapidement et de manière abrupte.
 Entre les deux,  un niveau architectural (dit ``mésoscopique'') est également considéré, constitué de circuits imbriqués intégrant l'activité de larges portion du cerveau.
 Chacun de ces niveaux de description est traditionnellement considéré de manière séparée, 
 et l'effort consistant à traduire un des niveaux de description dans un autre, effort ayant pris une place importante dans les neurosciences computationnelles, s'appelle l'approche ``multi-échelles'' \shortcite{Varela2001}.
+
+
 
 
 
@@ -2546,7 +2661,7 @@ l'observation.
 On observe alors, au niveau comportemental, une alternance entre un comportement périodique, correspondant à
 la tâche apprise (``exploitation''), et un comportement irrégulier sans correspondance avec la tâche (``exploration'').
 
-Cette expérience robotique offre un exemple clair de couplage entre activité mécanique (déplacements moteurs) et l'activité 
+Cette expérience robotique offre un exemple  de couplage entre activité mécanique (déplacements moteurs) et l'activité 
 endogène du réseau de neurones.  
 La commande ne repose pas sur la correction d'erreur, comme dans le contrôle traditionnel, mais sur l'appariement 
 de la dynamique endogène avec des séquences spatio-temporelles apprises, et sur la persistance de cet appariement pour des versions dégradées du signal appris. 
@@ -2554,13 +2669,22 @@ L'erreur (la non-correspondance) ne produit pas une correction mais une transiti
 qui s'apparente à une exploration aléatoire de l'espace des couplages sensori-moteurs jusqu'à atteindre un nouvel
 attracteur comportemental.
 
-\subsubsection{i. Dans des espaces d'état et d'action continus, l'apprentissage par renforcement peut être implémenté via la plasticité Hebbienne induite et le principe de trace synaptique. La dynamique endogène chaotique joue le rôle d'un bruit d'exploration.}
+\paragraph{}\label{page:alternance}
+L'importance de la désynchronisation, comme complément de la synchronisation, est également souligné dans \shortcite{Rod99}.
+Le fonctionnement en boucle fermée par couplage positif (par renforcement mutuel) contient en effet fondamentalement
+le risque de l'enfermement dans un attracteur comportemental unique, correspondant à
+la répétition indéfinie de la même tâche.  Au mécanisme de synchronisation doit donc correspondre un
+mécanisme de désynchronisation, qui peut reposer sur des facteurs déstabilisants liés à une
+mauvaise correspondance internes ou externe, 
+mais également sur des mécanismes actifs de désynchronisation, comme la fatigue neuronale par exemple.
+
+\subsubsection{i. Dans des espaces d'état et d'action continus, l'apprentissage par renforcement peut être implémenté via la plasticité Hebbienne induite et le principe de trace synaptique. La dynamique endogène joue le rôle d'un bruit d'exploration.}
 
 L'apprentissage par renforcement définit un cadre formel à l'apprentissage de règles de contrôle moteur selon un principe
 d'essais/erreur.
 Le bruit moteur (réponse motrice aléatoire) joue un rôle important dans cette famille d'algorithmes.
 On parle d'\textit{exploration motrice}.
-Dans un contexte de réseau de neurones récurrents aléatoires à dynamique intrinsèque chaotique, dont le caractère irrégulier sert de support à l'exploration 
+Dans un contexte de réseau de neurones récurrents aléatoires, le   caractère irrégulier de la dynamique intrinsèque  sert de support à l'exploration 
 motrice. L'apprentissage vise à produire des régularités dans cette dynamique intrinsèque afin de stabiliser certaines réponses motrices.
 
 
@@ -2568,18 +2692,16 @@ Les algorithmes  classiques
 utilisent un signal de renforcement pour guider l'apprentissage.  
 %Ce signal extérieur $\boldsymbol{y}(t)$ est, dans le cas le plus simple, un  déclencheur binaire qui ``ouvre'' ou ``ferme'' le mécanisme de plasticité ou encore un scalaire qui, selon son signe, conduit à une plasticité Hebbiennes ou anti-Hebbienne.
 Dans un contexte de réseau de neurones récurrent,
-le but de la plasticité est de favoriser les réponses liées à un renforcement positif (sens ``Hebbien''), et de défavoriser les réponses liées à un renforcement négatif (sens
-anti-Hebbien).
+le but de la plasticité est de favoriser les réponses liées à un renforcement positif (apprentissage ``Hebbien''), et de défavoriser les réponses liées à un renforcement négatif (apprentissage
+``anti-Hebbien'').
 On parle de plasticité ``induite''. 
-
-
 
 La plasticité induite est un mécanisme  de plasticité déclenché par un signal extérieur. 
 Il peut s'agir, dans un cadre biologique, d'un neurotransmetteur ou d'une entrée synaptique spécifique, i.e.~:
 \begin{align}
 \dot{J}_{ij} = F(\boldsymbol{S}_i(t), \boldsymbol{S}_j(t), \boldsymbol{y}(t),J_{ij})
 \end{align}\label{eq:plast-induite}
-(voir aussi eq. \ref{eq:SD-plast}) avec $\boldsymbol{S}_i(t) = \{s_i(t)\}_{t \in [t_0,..,t[}$ l'activité post-synaptique, $F$ la fonction de mise à jour et $\boldsymbol{y}(t)$
+(voir aussi les équations (\ref{eq:SD-plast-x})-\ref{eq:SD-plast-J})) avec $\boldsymbol{S}_i(t) = \{s_i(t)\}_{t \in [t_0,..,t[}$ l'activité post-synaptique, $F$ la fonction de mise à jour et $\boldsymbol{y}(t)$
 un signal extérieur qui vient ``moduler'' la plasticité.
 
 L'utilisation de récompenses ponctuelles nécessite de plus de prendre en compte (et produire les 
@@ -2625,12 +2747,40 @@ c'est à dire par décomposition de la tâche complète en sous-tâches élémen
 %{\color{Gray}de manière continue  selon un principe de feedback négatif (le signal transitant
 %principalement sous la forme de corrections à apporter à la trajectoire courante)}.
 
-\subsubsection{z. L'appariement par ``accumulation d'évidence'' implémente, de manière à la fois pratique et biologiquement plausible, un processus de décision dans un espace de choix concurrents.}
+\subsubsection{z. L'appariement par ``accumulation d'évidence'' implémente un mécanisme de mise à jour et de révision des croyances dans un espace de choix concurrents.}
 
-Les modèles probabilistes basés sur des processus stochastiques markoviens (voir equations (\ref{eq:accum1}) - (\ref{eq:accum1})) sont très populaires en modélisation biologiquement inspirée du fait de leur capacité rendre compte des profils de réponse extrêmement bruités à la fois de l'activité neuronale et des réponses comportementales.
-Les processus markoviens peuvent également implémenter, au même titre que les modèles déterministes, les principes d'activité persistante, de rémanence et de mémoire à court terme.
+Les modèles probabilistes basés sur des processus stochastiques markoviens (voir equations (\ref{eq:accum1}) - (\ref{eq:accum2})) sont très populaires en modélisation biologiquement inspirée du fait de leur capacité rendre compte des profils de réponse extrêmement bruités à la fois de l'activité neuronale et des réponses comportementales.
+Les processus markoviens peuvent également implémenter, au même titre que les modèles déterministes, les phénomènes d'activité persistante, de rémanence et de mémoire à court terme, etc.
 
-Plasticité???
+Nous considérons ici le cadre un peu plus restreint où le modèle d'état  $P$ n'est pas connu. 
+%L'apprentissage consiste à construire ce modèle à partir des observations, en maximisant sa vraisemblance, étant données les observations (voir équation \ref{eq:Friston}) ainsi que des a priori sur la nature de ce modèle (nombre d'états, caractère Gaussien du bruit de mesure etc.).
+Nous considérons le cas où l'\textit{observation} $\boldsymbol{I} = (\boldsymbol{I}(1),...,\boldsymbol{I}(t)))$ est 
+le résultat de l'échantillonnage
+ de ce modèle caché $P$.
+ Le calcul de la distribution a posteriori $\hat{f}$ repose sur l'observation $Q_\Theta(I|X)$ uniquement (voir page \pageref{eq:accum2}).  
+L'évolution de $\hat{f}$ au cours du temps décrit le processus de mise à jour et de révision des croyances sur la source des données.
+% Si  $\boldsymbol{I}(t_f)$ est la dernière observation, $\hat{f}(t_f)$ permet de produire une 
+% décision basée sur l'{``accumulation d'évidence''}.
+
+Dans le cadre des modèles de l'appariement, l'évolution temporelle de  $\hat{f}$ constitue un modèle de la décision par délibération, où, comme dans le cas des réseaux de neurones récurrents, plusieurs ``passages'' sont nécessaires pour aboutir à un compromis. L'estimation faite à l'instant $t$ sert de prior pour affiner l'estimation à l'instant $t+1$. 
+
+{\color{Cyan}
+\begin{itemize}
+	\item L'apprentissage par renforcement consiste à construire un modèle génératif $\pi_\Theta(\boldsymbol{u}|\boldsymbol{I})$ basé sur
+	l'appariement entre  permettant, via la réalisation d'une action, de générer la nouvelle observation. La ``vraisemblance'' 
+	se situe  L'appariement consiste ici à associer une observation $\boldsymbol{I}$ à des  consignes motrices $\boldsymbol{u}$ (assimilables à des états latents), via une `politique'' , qui joue formellement le rôle d'une probabilité a posteriori sur l'espace des actions. L'algorithme du ``policy gradient'' \cite{Wil92,peters08} construit la fonction d'appariement par ``apprentissage direct'', c'est à dire principalement un e descente de gradient dans    Le cas des  et le signal de renforcement sert à construire la et la fonction $\hat{f}$ 
+\end{itemize}
+
+Dans les modèles sans dynamique d'état (i.e. $P_\Theta=\text{Id}$), le mécanisme de filtrage vise à affiner au cours du temps différentes hypothèses concurrentes concernant l'état du monde, via une séquence d'observations. 
+Dans le cas de signaux d'entrée de faible intensité o fortement bruités, le passage du temps permet en effet d'éliminer certaines hypothèses par 
+
+principe de révision des croyances, 
+portant sur les intervalles courts, donnant plus de vraisemblance 
+(et donc des temps de réaction plus courts) 
+aux hypothèses les plus tardives. 
+
+Dans les environnements bruités, un même 
+Dans ce cadre, le mécanise de la \textit{décision} consiste à 
 
 
 Accumulation, EM, bla bla, en-ligne, apprendre et oublier
@@ -2638,6 +2788,9 @@ Accumulation, EM, bla bla, en-ligne, apprendre et oublier
 Gaurav
 
 Eoin
+}
+
+\subsubsection{z. Commande balistique}
 
 \subsubsection{z. En présence de signaux de renforcement binaires, l'apprentissage par exploration non-stochastique a les mêmes bornes d'erreur que l'apprentissage supervisé.}
 
@@ -3683,141 +3836,6 @@ présentées s'il le souhaite.
 
 \subsection{Neurones et réseaux}
 
-Inspirés par le fonctionnement du cerveau, les réseaux de neurones sont des modèles de calculateurs 
- dans lesquels le ``programme'' (la fonction de réponse) est décrite par un graphe.
-Ce graphe est constitué d'un ensemble de nœuds, qui sont les unités de calcul, et un ensemble d'arêtes,  
-pondérées et orientées, %définissant l'intensité du signal
-qui transportent le signal entre les différentes unités de calcul.
-
-Le signal produit par les neurones biologiques n'est pas une grandeur continue.
-Le système nerveux est donc caractérisé par l'émission et la réception de signaux discrets, qui présentent 
-à première vue une certaine analogie avec les signaux numériques, 
-à ceci près qu'il n'existe pas d'horloge centrale pour cadencer les opérations\footnote{
-	Cette question reste néanmoins débattue. Elle a été récemment relancée par \shortcite{Koubeissi2014}.}.
-C'est ce caractère discret des opérations neuronales qui avait inspiré les premiers modèles de neurones,
-au sein desquels les unités neuronales se comportaient comme des portes logiques \shortcite{MCu43}, par analogie avec 
-les circuits logiques des architectures informatiques.
-
-Il existe de nombreux modèles de neurones et de nombreux modèles de réseaux de neurones. La modélisation des processus neuronaux
-repose donc sur un choix du modélisateur, qui est fonction du mécanisme qu'il souhaite étudier, des outils
-d'analyse et/ou de la puissance de calcul dont il dispose. 
-
-Les propriétés et éléments de vocabulaire listés ci-dessous sont communs à la plupart des modèles de réseaux de
-neurones, indépendamment de leur utilisation en modélisation ou en apprentissage automatique. 
-
-\subsubsection{Activité et signal}
-
-Chaque unité de calcul (ou neurone) est modélisée comme une fonction de réponse $f$ qui 
-traite un jeu de \textit{données d'entrée} multimodal $s^\text{in}_1, ..., s^\text{in}_n$.
-On peut supposer sans perte de généralité que les données d'entrée sont indexées sur l'axe temporel.
-On parle alors de \textit{signal d'entrée} où $s^\text{in}_i = \{s^\text{in}_i(t)\}_{t \in \{t_0,... t_f\}}$ 
-représente un jeu de données indexé sur une trame temporelle et 
-$s^\text{in}_i(t)$ représente un point de mesure du $i^\text{ème}$ signal à l'instant $t$.
-
-La sortie du neurone au temps $t_f$ est un scalaire: 
-\begin{align}\label{eq:neurone_s_out}
-s^\text{out}(t_f) = f(s^\text{in}_1, ..., s^\text{in}_n)
-\end{align}
-(on parle aussi de \textit{réponse} du neurone aux signaux d'entrée).
-Un neurone est donc une unité élémentaire de traitement des données. %Un neurone est implicitement une unitÃ© de traitement \textit{non-linÃ©aire}.
-
-Le signal de sortie du neurone $s^\text{out} = \{s^\text{out}(t)\}_{t \in \{t_0,... t_f\}}$ est constituée 
-d'une succession d'états ``hauts'' et d'états ``bas''.
-Un neurone dont la sortie à l'instant $t$ est dans l'état haut est dit \textit{activé}. Un neurone 
-dont la sortie à l'instant $t$ est dans l'état bas est dit \textit{inactif}. 
-
-\emph{Exemples:}
-\begin{itemize}
-\item Dans le cas le plus simple des neurones binaires, 
-le signal de sortie est une succession de 0 (inactif) ou de 1 (actif) \shortcite{MCu43}. 
-\item Dans le cas plus complexe de neurones à impulsions, le signal de sortie est un train de potentiels d'action (PA), représenté par une 
-somme de Diracs tels que $s(t) = \sum_{\hat{t} \in \mathcal{T}_\text{out}} \delta(t - \hat{t})$, où $\mathcal{T}_\text{out}$ est un ensemble
-contenant les instants de décharge (voir par exemple \shortcite{gerstner02}).
-%Dans le cas de neurones fréquentiels, le signal contient des grandeurs continues correspondant à la fréquence de décharge instantanée
-%de la sortie.
-\end{itemize}
-
-Le signal de sortie (la suite d'états hauts et d'états bas) est aussi appelé l'\textit{activité} du neurone. Ce signal est transporté sur un axone, qui se
-sépare à son extrémité en plusieurs branches se terminant par une (ou plusieurs) synapse(s). 
-
-Les synapses sont les canaux d'entrée des neurones. 
-Chaque synapse traite un signal $s_i^\text{in}$ émis par un autre neurone pré-synaptique $i$ du réseau et produit une \textit{entrée synaptique} $e(s_i^\text{in}$).
-L'état \textit{interne} du neurone post-synaptique est donné par son \textit{potentiel de membrane} $V$.
-La somme des entrées synaptiques agit sur la valeur de ce potentiel de membrane. 
-L'intégration de la totalité des entrées peut être exprimée par une fonction de mise à jour du potentiel de membrane de la forme:
-\begin{align}\label{eq:neurone_V}
-V = g(s_1^\text{in}, ..., s_n^\text{in})
-\end{align}
-où $s_1^\text{in}, ..., s_n^\text{in}$ sont les $n$ signaux entrants.
-
-\emph{Exemples:}
-\begin{itemize}
-\item Dans le cas le plus simple, $g$ est une combinaison linéaire des entrées synaptiques \shortcite{MCu43,Rosen58}.
-\item Les modèles plus détaillés prennent en compte 
-la fonction de transfert des synapses ainsi que les interactions non-linéaires entre les influences excitatrices et les influences inhibitrices \shortcite{DESTEXHE97}.
-\end{itemize}
-
-L'activation d'un neurone repose ensuite sur un mécanisme non linéaire de \textit{passage de seuil}.
-
-\emph{Exemples:}
-\begin{itemize}
-\item Dans le modèle le plus simple \shortcite{MCu43}, l'état de sortie (0 ou 1) dépend d'un
-seuil d'activation $\theta$ tel que $s=1$ (état haut) si $V>\theta$ et $s=0$ (état bas) sinon.
-\item
-Dans les modèles plus détaillés \shortcite{Lapicque1907,HH52}, le passage à l'état haut déclenche un mécanisme actif de réinitialisation qui ramène
-le potentiel de membrane vers sa valeur de repos $V_0 < \theta$.  Ce mécanisme de réinitialisation, qui interdit
-le maintien de la sortie dans l'état haut, rend l'état haut  
-plus rare (et donc plus porteur d'information) que l'état bas. Il a également pour effet d'effacer 
-la mémoire des données d'entrée antérieures au dernier potentiel d'action.
-\end{itemize}
-
-
-%% A mettre dans la partie sur la plasticité
-%Un des modèles les plus étudiés en modélisation est le modèle de l'\textit{intégrateur à fuite}. 
-%La valeur du potentiel dépend de l'historique des signaux d'entrée depuis le dernier PA jusqu'à l'instant $t$. 
-%{\bf !! TODO  mécanisme de décision basé sur l'accumulation + figure!!}.
-% La partie suivante doit commencer avec les modèles de la décision : décision bayésienne, intégrateur à seuil, décision de Hopfield,
-% décision du champ neuronal, avec pour finir le modèle de Pouget (compromis dynamique)
-% Préciser ensuite le mécanisme de sélection/intégration
-
-\subsubsection{Réseau de neurones}
-
-Plusieurs neurones connectés entre eux via des axones constituent 
-un \textit{réseau de neurones}. Le schéma de connexion, sous la forme d'un graphe orienté, 
-caractérise l'\textit{organisation structurelle} du réseau. 
-%Selon que le graphe est acyclique, ou au contraire récurrent, .
-
-La description du réseau est donné par une \textit{fonction de couplage},
-définie le plus souvent par un tableau à double entrée noté $G$. Chaque neurone
-se voit attribuer un indice $i \in 1,...,N$ où $N$ est le nombre de neurones dans le réseau. Le tableau
-$G[i,j]$ contient alors les caractéristiques du lien du neurone $i$ vers le neurone $j$.
-Un exemple de paramétrisation est le temps de propagation $\tau_{ij}$ et poids synaptique $J_{ij}$. 
-Lorsque le poids synaptique est non-nul, on dit que les neurones $i$ et $j$ sont couplés. 
-Si $N$ est le nombre de neurones, le nombre de paramètres du réseau est en $O(N^2)$, correspondant à un principe de transmission du signal \textit{de plusieurs à plusieurs} (un neurone envoie son signal de sortie vers plusieurs destinataires, un neurone reçoit des signaux de plusieurs émetteurs).
-
-\emph{Notations:}
-\begin{itemize} 
-\item Le \textit{vecteur d'activité} $\boldsymbol{s}(t)$ (ou activité de population) est un vecteur de taille $n$ contenant l'ensemble des 
-sorties à l'instant $t$~: 
-$$\boldsymbol{s}(t) = (s_1^\text{out}(t), ..., s_n^\text{out}(t))$$
-\item Le \textit{patron d'activité} est constituée de l'ensemble des signaux émis entre l'instant initial $t_0$  et l'instant d'observation $t$, soit: $$\boldsymbol{S}(t)=\{\boldsymbol{s}(t')\}_{t' \in [t_0, t[}$$
-\end{itemize}
-
-Les activités des différents neurones sont donc \textit{inter}dépendantes du fait des couplages. 
-La \textit{fonction de réponse} du réseau $f$ est une fonction paramétrique 
-décrite par le tableau de paramètres $G$, telle que l'activité $\boldsymbol{s}(t)$ est solution de~:
-\begin{align}\label{eq:optim}
-\boldsymbol{s}(t) = f(\boldsymbol{S}(t);G)
-\end{align}
-Il faut ici préciser, dans la mesure où les temps de transports sont supposés strictement positifs, que l'activité du réseau au temps $t$ est
-dépendante de l'historique des activités précédent strictement 
-l'instant $t$. L'activité d'un neurone post-synaptique $i$ au temps $t$ est dépendante des signaux pré-synaptiques
-produits aux instants $t' < t$, en tenant compte du \textit{temps de transport} de ces signaux sur les axones. Plus précisément, si $j$ est le 
-neurone pré-synaptique et $i$ le neurone post-synaptique, on a:
-\begin{align}\label{eq:transport}
-s^\text{in}_{ij}(t) = s^\text{out}_{j}(t - \tau_{ij})
-\end{align}
-
 \subsubsection{Architecture de réseau}
 
 On parle d'\textit{architecture de réseau} pour décrire les propriétés générales du graphe.
@@ -3845,7 +3863,7 @@ d'activité produits par le réseau.
 \subsubsection{Quelques notions de la théorie des systèmes dynamiques}
 L'activité du réseau au temps $t$ est le résultat de l'intégration des
 potentiels d'action émis aux instants précédant $t$, en tenant compte des délais de transmission, et de la valeur courante du signal externe
-(voir eqs. (\ref{eq:optim_input}) (\ref{eq:SD})).
+(voir eqs. (\ref{eq:SIG}) (\ref{eq:SD})).
 
 
 
