@@ -1407,7 +1407,7 @@ La perspective des assemblées neuronales permet de voir les réseaux de neurone
 .
 
 
-\subsubsection{Grands réseaux et champ moyen}
+\subsubsection{Activité de champ moyen}
 
  On retrouve une idée voisine dans les travaux de Hermann Haken \shortcite{Haken1983}, qui a conceptualisé le principe de réponse par réduction de la dynamique collective à travers la notion de \textit{paramètre d'ordre}, permettant de constituer une ``variété centrale'' sur laquelle le système dynamique évolue (\textit{center manifold reduction}).
  Un paramètre d'ordre peut être vue comme une \textit{unité de description} de l'activité d'un système dynamique, généralement de grande taille.
@@ -1419,7 +1419,7 @@ La perspective des assemblées neuronales permet de voir les réseaux de neurone
 	Les modèles mathématique permettant de déduire les propriétés ``macroscopiques'' ( comportements moyens, 
 	corrélations d'activité, etc.) à partir de caractéristiques
 	``microscopique'' s'appellent les modèles de ``champ moyen'' \shortcite{Wilson1972,Ama72,Amit1985,Som88,Ces94B,Ami97}, etc.
-	Les modèle de champ moyen considèrent l'activité instantanée de populations de neurones à travers un ou plusieurs paramètres d'ordre, également appelées variables macroscopiques, qui expriment une caractéristique d'ensemble de l'activité qui se développe dans le réseau. 
+	Les modèle de champ moyen considèrent l'activité instantanée de populations de neurones à travers un ou plusieurs paramètres d'ordre qui expriment une caractéristique d'ensemble de l'activité qui se développe dans le réseau. 
 	La variable d'ensemble la plus utilisée est la fréquence de décharge moyenne d'une population $\nu(t)$, qui exprime, à un instant
 	donné, le nombre de neurones émettant un potentiel
 	d'action divisé par la taille de la population.
@@ -1441,8 +1441,7 @@ La perspective des assemblées neuronales permet de voir les réseaux de neurone
 	à travers l'observation d'un train de PA produit par un neurone particulier (nombre de PA émis divisé par
 	l'intervalle d'observation).
 	
-	De nombreux modèles stochastiques de neurones ont été proposés qui prennent en compte le caractère stochastique de la 
-	réponse des neurones biologiques \shortcite{Tuc88,gerstner02}.
+
 	[REF : IF neuron, modèle de ]. 
 	
 	[MATHS??]
@@ -2749,13 +2748,18 @@ Les résultats principaux sont les suivants~:
 	Le lien entre le 
 	policy gradient et la plasticité de Hebb induite est établi dans 
 	\shortcite{Dau09} (page~\pageref{page:ICANN09} sur un modèle de neurones à impulsions,  et dans  \cite{Dauce2010}, (page~\pageref{page:NCO10} et annexe \ref{app:NCO10}) sur des neurones  fréquentiels. 	
+	\begin{itemize}
+		\item 	Ces modèles
+		systématisent de plus l'usage du codage topographique
+		sur les couches sensorielles et proprioceptives,
+		et mettent l'accent sur la formation de champs récepteurs. 
+		\item De nombreux modèles  de neurones  prennent en compte le caractère stochastique de la 
+		réponse des neurones biologiques \shortcite{Tuc88,gerstner02}. Dans ces modèles, le bruit d'exploration est un bruit de membrane ``lent'' 
+		ayant la même constante de temps caractéristique que l'erreur motrice.
+	\end{itemize}
+
 	
-	Ces modèles
-	systématisent de plus l'usage du codage topographique
-	sur les couches sensorielles et proprioceptives,
-	et mettent l'accent sur la formation de champs récepteurs. Dans ces modèles, la dynamique intrinsèque 
-	est remplacée par un bruit ``lent'' 
-	ayant la même constante de temps caractéristique que l'erreur motrice.
+		
 \end{itemize}
 
 
@@ -2800,8 +2804,69 @@ Ces algorithmes reposent par ailleurs sur des modèles paramétriques de la mesu
  	\item Par ailleurs, de manière analogue à \shortcite{Kivinen2004}, l'utilisation d'un terme de régularisation dans la mise à jour réalise un modèle de mesure ``glissant'' qui permet de s'adapter aux non-stationnarités de l'environnement \shortcite{Dauce2013b,Dauce2015}.
  \end{itemize}
 
-\subsubsection{k. Commande balistique et intégratin sous-liminaires}
+{\color{Violet}
+L'idée est donc que la réactivité au stimulus (readiness) est proportionnelle à cette probabilité 
+estimée d'apparition.
 
+Nous avons regardé en particulier le cas de la période préparatrice variable (``variable foreperiod''), 
+où les stimuli apparaissant à des intervalles variant d'un essai à l'autre.
+Dans ce cas, les temps de réponse
+indiquent une meilleure réactivité pour les intervalles
+les plus longs. Ainsi les ressources attentionnelles ne sont pas équitablement
+réparties.
+Conformément à un principe de révision des croyances, 
+le passage du temps permet en effet d'éliminer les hypothèses
+portant sur les intervalles courts, donnant plus de vraisemblance 
+(et donc des temps de réaction plus courts) 
+aux hypothèses les plus tardives. 
+
+
+Les modèles mis en place dans le cadre de l'orientation temporelle \shortcite{Malhotra2011} mettent à
+jour des mécanismes prenant place sur des échelles de l'ordre plusieurs secondes, 
+qui semblent quant à eux liés à la simulation motrice via une possible boucle réentrante. 
+Le principe de boucle réentrante dans lequel des états de l'environnement sont progressivement invalidés 
+s'apparente à un mécanisme d'accroissement d'évidence dans 
+le cadre de la mise en concurrence d'hypothèses variées, analogue fonctionnellement aux schémas
+basés sur l'accumulation d'évidence (ou vraisemblance Bayésienne) \shortcite{Wolpert2000,Haruno2001}.
+Ces mêmes schémas sont par ailleurs mis en oeuvre dans la réalisation d'architectures de contrôle
+très concrètes dans un cadre de traitement du signal pur (interfaces cerveau-machines) \shortcite{Thomas2014}.
+
+}
+
+{\color{Cyan}
+\subsubsection{k. Commande balistique et intégratin sous-liminaires}
+}
+{\color{Violet}
+L'orientation visuelle est un comportement moteur très spécifique, qui 
+s'apparente plus au monde de la perception qu'au monde de la motricité, reposant sur des circuits de
+contrôle distincts des circuits de commande de l'appareil moteur.
+Ce système, situé dans le tectum (partie supérieure du tronc cérébral) 
+au niveau des couches profondes
+du colliculus supérieur, développe une activité topographiqement organisée responsable de la commande
+des mouvements rapides des globes oculaires.
+
+Même si on se limite aux saccades à tête fixe, le circuit de la commande saccadique demeure assez complexe
+et non totalement élucidé. Si l'on exclut les étapes de traitement visuel conduisant à l'identification
+d'un point d'intérêt en périphérie de la rétine, la structure au carrefour de la transformation 
+visuo-motrice est
+une carte rétinotopique située sur la partie supérieure du tectum,
+appelée le colliculus supérieur. 
+Le déclenchement de la saccade implique 
+de nombreuses catégories de neurones du tronc cérébral, incluant des inhibiteurs toniques,
+des neurones prémoteurs excitateurs et inhibiteurs variés appartenant à la formation réticulée, 
+une dérivation via le cervelet et enfin des motoneurones oculaires. 
+
+L'étude et la reproduction des mécanismes neuronaux d'orientation visuelle,
+tels que tentés dans \shortcite{Dauce2011},
+montrent l'existence d'une activité autonome contrôlée dans le temps et dans l'espace sur
+la durée de la saccade (100~ms environ), c'est à dire sur un intervalle temporel précis, ``programmé''.
+Notre étude, en implémentant de façon très détaillée les populations de neurones en jeu, 
+a permis de 
+souligner l'importance sans doute sous-évaluée des neurones d'une structure 
+de la région réticulaire (centro-medial reticular formation - cMRF) dans le contrôle de la saccade. 
+}
+
+{\color{Cyan}
 L'étude des mouvements d'orientation visuelle constitue un champ de recherche à part entière en neurosciences.
 
 poursuite vs. commande balistique.
@@ -2809,7 +2874,7 @@ poursuite vs. commande balistique.
 Rôle des intégrateurs neuronaux
 
 Mécanisme de décision par ``levée d'inhibition'' (niveau ellulaire etnon au niveau de population)
-
+}
 
 
 
@@ -3020,34 +3085,6 @@ sur certains aspects du calcul neuronal.
 
 
 \paragraph{Orientation visuelle}
-L'orientation visuelle est un comportement moteur très spécifique, qui 
-s'apparente plus au monde de la perception qu'au monde de la motricité, reposant sur des circuits de
-contrôle distincts des circuits de commande de l'appareil moteur.
-Ce système, situé dans le tectum (partie supérieure du tronc cérébral) 
-au niveau des couches profondes
-du colliculus supérieur, développe une activité topographiqement organisée responsable de la commande
-des mouvements rapides des globes oculaires.
-
-Même si on se limite aux saccades à tête fixe, le circuit de la commande saccadique demeure assez complexe
-et non totalement élucidé. Si l'on exclut les étapes de traitement visuel conduisant à l'identification
-d'un point d'intérêt en périphérie de la rétine, la structure au carrefour de la transformation 
-visuo-motrice est
-une carte rétinotopique située sur la partie supérieure du tectum,
-appelée le colliculus supérieur. 
-Le déclenchement de la saccade implique 
-de nombreuses catégories de neurones du tronc cérébral, incluant des inhibiteurs toniques,
-des neurones prémoteurs excitateurs et inhibiteurs variés appartenant à la formation réticulée, 
-une dérivation via le cervelet et enfin des motoneurones oculaires. 
-
-L'étude et la reproduction des mécanismes neuronaux d'orientation visuelle,
-tels que tentés dans \shortcite{Dauce2011},
-montrent l'existence d'une activité autonome contrôlée dans le temps et dans l'espace sur
-la durée de la saccade (100~ms environ), c'est à dire sur un intervalle temporel précis, ``programmé''.
-Notre étude, en implémentant de façon très détaillée les populations de neurones en jeu, 
-a permis de 
-souligner l'importance sans doute sous-évaluée des neurones d'une structure 
-de la région réticulaire (centro-medial reticular formation - cMRF) dans le contrôle de la saccade. 
-
 
 
 %en lien avec le déplacement
@@ -3058,33 +3095,6 @@ de la région réticulaire (centro-medial reticular formation - cMRF) dans le co
 %(Les récepteurs vestibulaires sont par ailleurs au coeur du maintien de la position verticale)
 
 \paragraph{Orientation temporelle}
-
-
-L'idée est donc que la réactivité au stimulus (readiness) est proportionnelle à cette probabilité 
-estimée d'apparition.
-
-Nous avons regardé en particulier le cas de la période préparatrice variable (``variable foreperiod''), 
-où les stimuli apparaissant à des intervalles variant d'un essai à l'autre.
-Dans ce cas, les temps de réponse
-indiquent une meilleure réactivité pour les intervalles
-les plus longs. Ainsi les ressources attentionnelles ne sont pas équitablement
-réparties.
-Conformément à un principe de révision des croyances, 
-le passage du temps permet en effet d'éliminer les hypothèses
-portant sur les intervalles courts, donnant plus de vraisemblance 
-(et donc des temps de réaction plus courts) 
-aux hypothèses les plus tardives. 
-
-
-Les modèles mis en place dans le cadre de l'orientation temporelle \shortcite{Malhotra2011} mettent à
-jour des mécanismes prenant place sur des échelles de l'ordre plusieurs secondes, 
-qui semblent quant à eux liés à la simulation motrice via une possible boucle réentrante. 
-Le principe de boucle réentrante dans lequel des états de l'environnement sont progressivement invalidés 
-s'apparente à un mécanisme d'accroissement d'évidence dans 
-le cadre de la mise en concurrence d'hypothèses variées, analogue fonctionnellement aux schémas
-basés sur l'accumulation d'évidence (ou vraisemblance Bayésienne) \shortcite{Wolpert2000,Haruno2001}.
-Ces mêmes schémas sont par ailleurs mis en oeuvre dans la réalisation d'architectures de contrôle
-très concrètes dans un cadre de traitement du signal pur (interfaces cerveau-machines) \shortcite{Thomas2014}.
 
 
 
