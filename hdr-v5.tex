@@ -1085,7 +1085,7 @@ de transformation de ces signaux soient les mêmes~:
 	\end{enumerate}
 \end{itemize}
 
-\paragraph{Graphe et fonction de réponse}
+\paragraph{Graphe et fonction de réponse}\label{page:graphe}
 La description du réseau est donné par une \textit{fonction de couplage},
 définie le plus souvent par un tableau à double entrée noté $G$. Chaque neurone
 se voit attribuer un indice $i \in 1,...,N$ où $N$ est le nombre de neurones dans le réseau. Le tableau
@@ -1641,7 +1641,7 @@ le jeu de paramètres $\Theta$ de manière à produire une sortie
 conforme au calcul souhaité. 
 Le jeu de paramètres est assimilables à un \textit{programme}, par exemple
  $\Theta = \{\boldsymbol{w}_1, ..., \boldsymbol{w}_K\}$, ou
- encore $\Theta =G$ (graphe -- voir aussi eq. \ref{eq:graphe-aleatoire}), et
+ encore $\Theta =G$ (graphe -- voir aussi page \pageref{page:graphe}), et
 le choix de ces paramètres correspond à la programmation du réseau. 
 
 L'apprentissage automatique 
@@ -2755,7 +2755,7 @@ c'est à dire par décomposition de la tâche complète en sous-tâches élémen
 %{\color{Gray}de manière continue  selon un principe de feedback négatif (le signal transitant
 %principalement sous la forme de corrections à apporter à la trajectoire courante)}.
 
-\subsubsection{z. L'appariement par ``accumulation d'évidence'' implémente un mécanisme de mise à jour et de révision des croyances dans un espace de choix concurrents.}
+\subsubsection{j. L'appariement par ``accumulation d'évidence'' implémente un mécanisme de mise à jour et de révision des croyances dans un espace de choix concurrents.}
 
 Les modèles probabilistes basés sur des processus stochastiques markoviens (voir equations (\ref{eq:accum1}) - (\ref{eq:accum2})) sont très populaires en modélisation biologiquement inspirée du fait de leur capacité rendre compte des profils de réponse extrêmement bruités à la fois de l'activité neuronale et des réponses comportementales.
 Les processus markoviens peuvent également implémenter, au même titre que les modèles déterministes, les phénomènes d'activité persistante, de rémanence et de mémoire à court terme, etc.
@@ -2773,43 +2773,52 @@ L'évolution de $\hat{f}$ au cours du temps décrit le processus de mise à jour
 
 Dans le cadre des modèles de l'appariement, l'évolution temporelle de  $\hat{f}$ modélise un mécanisme de décision par délibération, où, comme dans le cas des réseaux de neurones récurrents, plusieurs ``passages'' sont nécessaires pour aboutir à un compromis. L'estimation faite à l'instant $t$ sert de prior pour affiner l'estimation à l'instant $t+1$. 
 
+{\color{Cyan}
+[il manque des refs sur le sampling temporel et les intégrateurs neuronaux  \shortcite{Gold2001,Simen2011,khoei2013}
+/ la simulation motrice \cite{Haruno2001}]
+}
 
 \begin{itemize}
 	\item Le modèle présenté dans \shortcite{Malhotra2011} reproduit des données psychométriques sur les temps de réponse à des ``périodes préparatrices'' de longueur variable (``variable foreperiod''). Plusieurs modèles génératifs $P_1, ..., P_k$ sont mis en concurrence. Le défilement du temps au cours d'un essai permet d'éliminer certaines hypothèses, réduisant l'incertitude et les temps de réponse au stimulus.
 	\item Une application récente de ce mécanisme concerne les interfaces cerveau-machine de type ``clavier virtuel P300'' \shortcite{Dau14b}. Le programme repose sur un modèle générique de la réponse EEG au stimulus cible (dite ``onde P300''). Le mécanisme d'accumulation  permet ici d'optimiser les temps de réponse du dispositif. Un seuil de décision définit l'instant où suffisamment d'évidence a été accumulée pour afficher la lettre courante et passer à la suivante.  
 \end{itemize}
-Ces algorithmes reposent par ailleurs sur des modèles paramétriques de la mesure, qui permettent la mise à jour du modèle après chaque série de mesures, selon le principe du maximum de vraisemblance, implémenté via une descente de gradient ou via l'algorithme EM (voir page \pageref{eq:Friston}). Dans le cas du clavier virtuel P300, la mise à jour du modèle de la mesure permet de d'adapter l'interface à l'utilisateur, en améliorant la réactivité de l'interface au fur et à mesure de son utilisation.
+Ces algorithmes reposent par ailleurs sur des modèles paramétriques de la mesure, qui permettent la mise à jour du modèle après chaque série de mesures, selon le principe du maximum de vraisemblance, implémenté via une descente de gradient ou via l'algorithme EM (voir page \pageref{eq:Friston}). 
+ \begin{itemize}
+ 	\item Dans le cas du clavier virtuel P300, la mise à jour du modèle de la mesure permet, en partant d'un modèle d'utilisateur générique, d'adapter l'interface à l'utilisateur, ce qui améliore la réactivité de l'interface au fur et à mesure de son utilisation \cite{Dau14b}
+ 	\item Par ailleurs, de manière analogue à \shortcite{Kivinen2004}, l'utilisation d'un terme de régularisation dans la mise à jour réalise un modèle de mesure ``glissant'' qui permet de s'adapter aux non-stationnarités de l'environnement \shortcite{Dauce2013b,Dauce2015}.
+ \end{itemize}
+
+\subsubsection{k. Commande balistique et intégratin sous-liminaires}
+
+L'étude des mouvements d'orientation visuelle constitue un champ de recherche à part entière en neurosciences.
+
+poursuite vs. commande balistique.
+
+Rôle des intégrateurs neuronaux
+
+Mécanisme de décision par ``levée d'inhibition'' (niveau ellulaire etnon au niveau de population)
+
+
+
+
+\subsubsection{l. En présence de signaux de renforcement binaires instantanés, l'apprentissage par exploration non-stochastique a les mêmes bornes d'erreur que l'apprentissage supervisé.}
+
+L'analogie entre les algorithmes d'apprentissage par renforcement et la recherche du maximum de vraisemblance peut être poussée un peu plus loin dans le cas où le problème d'apprentissage consiste à apparier une entrée $\boldsymbol{I}_t$ à une catégorie $\boldsymbol{u}_t$ sur la base d'un signal de renforcement instantané binaire $r_t$ de type ``bien/pas bien''. Une correspondance formelle peut alors être établie entre l'algorithme du policy gradient (sans trace) et l'algorithme du gradient logistique qui suit le maximum de vraisemblance sous hypothèse gaussienne.
+Avec un choix judicieux des valeurs de récompense, la mise à jour du policy gradient \textit{rejoint en espérance} le gradient logistique, ce qui permet d'appliquer une politique de \textit{choix non stochastique} (politique du maximum a posteriori). 
+
+\begin{itemize}
+	\item Cette approche est mise en oeuvre dans le cadre d'un clavier virtuel P300 guidé par une touche ``backspace''  \shortcite{Dauce2013b,Dauce2015} (voir page et annexe \ref{app:IJCNN15}). 
+	\begin{itemize}
+		\item Nous montrons qu'avec une décision non-stochastique et en l'absence de modèle, le classifieur converge vers taux de réponse comparable à l'état de l'art en classification BCI.
+		\item Nous montrons également, dans le cas d'environnements non-stationnaires 
+	\end{itemize} 
+	\item Dans le cadre voisin de l'optimisation quadratique  \shortcite{Vapnik1998,Crammer2006}, nous montrons également, dans le cadre
+	d'un guidage binaire (dit de type ``bandit'' \-- travail de thèse d'Hongliang Zhong), que la borne de l'erreur cumulée est identique à celle obtenue avec un guidage complet.  
+	Contrairement à l'algorithme du banditron généralement utilisé dans ce cadre \shortcite{Kakade2008}, cette propriété conduit également à la possibilité de politiques d'exploration avec un bruit arbitrairement petit, autrement dit à une politique générale de choix non-stochastique.
+\end{itemize}
  
 
 
-
-
-
-Accumulation, EM, bla bla, en-ligne, apprendre et oublier
-
-Gaurav
-
-Eoin
-
-
-\subsubsection{z. Commande balistique}
-
-\subsubsection{z. En présence de signaux de renforcement binaires, l'apprentissage par exploration non-stochastique a les mêmes bornes d'erreur que l'apprentissage supervisé.}
-
-L'exploration non-stochastique des 
-espaces de réponse motrice
-
-
-consiste 
-Dans le cas de signaux d'entrée et d'espaces de réponses de grande dimension, en présence d'un signal de renforcement minimaliste de type bien/mal, 
-
-
-
-{
-	\color{Violet} Différentes études sur l'algorithme de policy gradient en tant que tel ont par ailleurs
-été proposées, dans un cadre de classification automatique
-basé sur une information de type ``bandit'' \shortcite{Dauce2013b, Dauce2015}.
-}
 
 
 \section{Dynamique et expressivité des grands réseaux de neurones}
@@ -7624,6 +7633,23 @@ of Adaptive Behavior (SAB'04)~: 305-314
 \includepdf[pages=5,offset=-70 -30]{pdf/2010-neurocomp.pdf}
 \includepdf[pages=6,offset=70 -30]{pdf/2010-neurocomp.pdf}
 \includepdf[pages=7,offset=-70 -30]{pdf/2010-neurocomp.pdf}
+
+\chapter{How and where does the brain predict the when: a Bayesian approach to modeling temporal expectation (2011)}\label{app:CNS11A}
+\paragraph{Authors~:} Malhotra, G et Daucé E
+\paragraph{Journal~:} BMC Neuroscience 12 (suppl 1) : P53
+
+\cleardoublepage
+\includepdf[pages=1,offset=70 -30]{pdf/2011-CNS-malhotra.pdf}
+\includepdf[pages=2,offset=-70 -30]{pdf/2011-CNS-malhotra.pdf}
+
+\chapter{Simple spatio-temporal transformation with sub-threshold integration in the saccadic system (2011)}\label{app:CNS11B}
+
+\paragraph{Authors~:} Daucé E, Mouraud A et Guillaume, A
+\paragraph{Journal~:} BMC Neuroscience 12 (suppl 1) : P133
+
+\cleardoublepage
+\includepdf[pages=1,offset=70 -30]{pdf/2011-CNS-mouraud.pdf}
+\includepdf[pages=2,offset=-70 -30]{pdf/2011-CNS-mouraud.pdf}
 
 \chapter{Toward STDP-based population action in large networks of spiking neurons (2014)}\label{app:ESANN14A}
 \paragraph{Authors~:} Daucé E
