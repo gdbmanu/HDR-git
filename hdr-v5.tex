@@ -353,6 +353,15 @@ Ce peuvent être des contraintes physiques (limites d'extension, de course, ...)
 L'élaboration d'un modèle descriptif prenant en compte plusieurs échelles permet alors d'émettre des hypothèses 
 sur les sources (physiques ou logiques) des limitations comportementales observées. 
 
+\paragraph{}
+Il importe dans tous les cas de prendre en compte la différence de nature
+(ou l'hétérogénéité) entre d'une part le milieu extérieur, caractérisé par des grandeurs extensives (des masses et
+des articulations en déplacement, des changements continus) 
+et le milieu intérieur (milieu logiciel) caractérisé par des activité bornées, discrètes,
+changeant rapidement et de manière abrupte.
+Entre les deux,  un niveau architectural (dit ``mésoscopique'') doit également être considéré, constitué de circuits imbriqués intégrant l'activité de larges portion du cerveau.
+Chacun de ces niveaux de description est traditionnellement considéré de manière séparée, 
+et l'effort consistant à traduire un des niveaux de description dans un autre, effort ayant pris une place importante dans les neurosciences computationnelles, s'appelle l'approche ``multi-échelles'' \shortcite{Varela2001}.
 
 \subsection{Développement}
 Les neurosciences computationnelles se sont fortement développées, et ont commencé à
@@ -1297,14 +1306,14 @@ De manière schématique,
 Cette notion d'activation ``macroscopique'' est à distinguer de l'activation  ``microscopique'' des neurones.
 On parlera par la suite de \textit{réponse de population} (ou réponse collective)  lorsque le réseau ``réagit'' ainsi à une entrée particulière en réduisant son nombre de degrés de liberté.
 
-\paragraph{Appariement conditionnel}\label{page:appariement-conditionnel}
-Contrairement aux classifieurs traditionnels qui apparient \textit{nécessairement} le signal d'entrée avec une des formes stockées dans la structure, ce comportement correspond à un \textit{appariement conditionnel} tels que~:
+\paragraph{Appariement / rejet}\label{page:appariement-conditionnel}
+Contrairement aux classifieurs traditionnels qui apparient \textit{nécessairement} le signal d'entrée avec une des formes stockées dans la structure, la séparation de l'espace des signaux entre signaux réducteurs et signaux non-réducteurs s'apparente à un opérateur  d'\textit{appariement conditionnel} tel que~:
 \begin{itemize}
 	\item les signaux de forme connue s'apparient avec une des formes stockées dans le réseau;
-	\item les signaux inconnus ne s'apparient avec aucune des formes stockées dans le réseau.  
+	\item les signaux inconnus ne s'apparient avec aucune des formes stockées dans le réseau et sont \textit{rejetés}.  
 \end{itemize}
 
-\paragraph{}Autrement dit l'appariement conditionnel autorise le réseau à \textit{ne pas choisir}. Parmi l'ensemble des réponses possibles, le réseau produit la réponse ``je ne sais pas'' lorsque le signal présenté n'est pas suffisamment proche d'une forme connue.
+\paragraph{}Autrement dit l'appariement conditionnel (avec rejet) autorise le réseau à \textit{ne pas choisir}. Parmi l'ensemble des réponses possibles, le réseau produit la réponse ``je ne sais pas'' lorsque le signal présenté n'est pas suffisamment proche d'une forme connue.
 
 \begin{itemize}
 	\item Ce rejet des entrées inconnues correspond, dans la littérature statistique, au principe de ``rejet de distance'', lorsqu'un phénomène observé est trop éloigné du modèle et classé comme ``aberrant''.
@@ -1332,7 +1341,8 @@ modifie donc les caractéristiques de la fonction de réponse des neurones (eq. 
 Le mécanisme de plasticité introduit une interdépendance complexe entre le graphe, l'activité et le signal d'entrée s'il existe.
 
 Le modèle de plasticité synaptique le mieux établi est la \textit{règle de Hebb} \shortcite{Heb49}, confirmée à de nombreuses reprises par les observations \shortcite{Bli73,BIPOO98}. 
-La règle de Hebb inscrit dans la structure du graphe les conjonctions d'activité pré et post-synaptique se produisant de façon répétée au cours du temps (voir section \ref{sec:app-plast}). 
+La règle de Hebb inscrit dans la structure du graphe les conjonctions d'activité pré et post-synaptique se produisant de façon répétée au cours du temps.
+% (voir section \ref{sec:app-plast}). 
 
 Dans le cadre 
 proposé par Donald Hebb en 1949, la plasticité est essentiellement un mécanisme local dépendant des échanges entre les cellules pré et post-synaptiques. On parle de potentiation à long terme (Long Term Potentiation - LTP). Le poids $J_{ij}$ est alors une quantité qui évolue au cours du temps sous la forme :
@@ -1388,13 +1398,62 @@ Une assemblée neuronale\footnote{La notion d'assemblée se distingue de la noti
 %		assemblée de neurones actifs est une forme (un vecteur caractéristique)  ``stockée'' dans le réseau, qui a la possibilité de s'''activer'' en fonction du contexte.}
 
 
-Il est possible,  par ailleurs,  d'identifier  l'activation d'une assemblée à la réalisation d'une tâche spécifique. On parlera dans la suite, pour désigner cette activité coordonnée, d'une activité \textit{macroscopique} (par opposition à l'activité microscopique du neurone seul). On retrouve une idée voisine dans les travaux de Hermann Haken \shortcite{Haken1983}, qui a conceptualisé le principe de réponse par réduction de la dynamique collective à travers la notion de \textit{paramètre d'ordre}, permettant de constituer une ``variété centrale'' sur laquelle le système dynamique évolue (\textit{center manifold reduction}).
+Il est possible,  par ailleurs,  d'identifier  l'activation d'une assemblée à la réalisation d'une tâche spécifique. On parlera dans la suite, pour désigner cette activité coordonnée, d'une activité \textit{macroscopique} (par opposition à l'activité microscopique du neurone seul).
 
-Une assemblée de neurones peut être vue comme une \textit{unité de description} de l'activité du réseau\footnote{de la même manière qu'un \textit{paramètre d'ordre} \shortcite{Wei89}, dans le cas de l'étude des transitions de phase, permet de mesurer un type d'organisation spécifique. Il est nul
-	si le milieu étudié est dans une phase différente de la phase décrite par l'opérateur. Il est ``actif'' lorsque le milieu obéit à cette organisation spécifique.}.
 A un instant donné, une assemblée se trouve soit dans l'état inactif, soit dans l'état ``activé''. L'état du réseau est alors décrit, de manière macroscopique, par la (ou les) assemblée(s) particulière(s) qui est (sont) active(s) à cet instant.
 
-Ainsi, selon cette perspective, le réseau de neurones se comporte comme un \textit{graphe  reconfigurable} au sein duquel des circuits (assemblées) peuvent être activés ou désactivés au cours du temps.
+La perspective des assemblées neuronales permet de voir les réseaux de neurones  comme des \textit{graphes  reconfigurables} au sein desquels des circuits (assemblées) peuvent être activés ou désactivés au cours du temps.
+
+.
+
+
+\subsubsection{Grands réseaux et champ moyen}
+
+ On retrouve une idée voisine dans les travaux de Hermann Haken \shortcite{Haken1983}, qui a conceptualisé le principe de réponse par réduction de la dynamique collective à travers la notion de \textit{paramètre d'ordre}, permettant de constituer une ``variété centrale'' sur laquelle le système dynamique évolue (\textit{center manifold reduction}).
+ Un paramètre d'ordre peut être vue comme une \textit{unité de description} de l'activité d'un système dynamique, généralement de grande taille.
+ Dans le cas de l'étude des transitions de phase dans les milieux désordonnés, permet de mesurer un type d'organisation spécifique. Il est ``caractéristique'' de cette organisation spécifique \shortcite{Wei89}.
+
+%Le problème des disparités d'échelle est souvent abordé à l'aide de descripteurs macroscopiques (dites variables de champ moyen) servant à décrire de manière concise l'activité de grandes populations  de neurones.
+
+	
+	Les modèles mathématique permettant de déduire les propriétés ``macroscopiques'' ( comportements moyens, 
+	corrélations d'activité, etc.) à partir de caractéristiques
+	``microscopique'' s'appellent les modèles de ``champ moyen'' \shortcite{Wilson1972,Ama72,Amit1985,Som88,Ces94B,Ami97}, etc.
+	Les modèle de champ moyen considèrent l'activité instantanée de populations de neurones à travers un ou plusieurs paramètres d'ordre, également appelées variables macroscopiques, qui expriment une caractéristique d'ensemble de l'activité qui se développe dans le réseau. 
+	La variable d'ensemble la plus utilisée est la fréquence de décharge moyenne d'une population $\nu(t)$, qui exprime, à un instant
+	donné, le nombre de neurones émettant un potentiel
+	d'action divisé par la taille de la population.
+	
+	
+
+{\color{Gray}
+	
+	analogie paramètre d'ordre / variable macroscopique
+	
+	%Les modèle qui servent de fondement aux neurosciences computationnelles 
+	%sont les modèles de neurones à conductance [REF DESTEXHE] dont le plus connu est le modèle de Hudgkin-Huxley. 
+	
+	
+	L'activité des neurones telle que mesurée par électrophysiologie présente
+	un caractère irrégulier où les temps d'émission des potentiels d'action (PA) semblent obéir à un processus de Poisson [CITATION].
+	Un tel processus est caractérisé par sa fréquence instantanée $\nu(t)$, qui donne le nombre de PA émis par seconde.
+	Cette grandeur peut être mesurée 
+	à travers l'observation d'un train de PA produit par un neurone particulier (nombre de PA émis divisé par
+	l'intervalle d'observation).
+	
+	De nombreux modèles stochastiques de neurones ont été proposés qui prennent en compte le caractère stochastique de la 
+	réponse des neurones biologiques \shortcite{Tuc88,gerstner02}.
+	[REF : IF neuron, modèle de ]. 
+	
+	[MATHS??]
+
+	
+}
+
+
+
+\paragraph{}
+
 
 %\subsubsection{Fonctionnement fractionnaire et fonctionnement intégré}
 
@@ -1439,40 +1498,7 @@ Malgré des limitations bien connues en terme de capacité de stockage \shortcit
 Le réseau de Hopfield implémente un principe de \textit {mémoire associative}. Il apprend ``par cœur'' un certain nombre de scènes (ou images). Il est ensuite capable, lorsque certains constituants d'une scène apprise sont présentés, de compléter la scène avec les éléments manquants, de rectifier les valeurs erronées etc. 
 L'espace d'états est organisé en un nombre fini de \textit{bassins d'attraction} définissant des patrons d'activité spécifiques et mutuellement exclusifs. L'activité du réseau finit par converger vers un de ces patrons en fonction des conditions initiales. Chacun des attracteurs s'interprète ici comme une assemblée distincte, c'est à dire comme un circuit de renforcement mutuel aboutissant à la stabilisation d'un patron d'activité macroscopique. 
 
-\subsection{Grands réseaux et champ moyen}
 
-{\color{Cyan}
-	
-	
-	
-	
-	%Les modèle qui servent de fondement aux neurosciences computationnelles 
-	%sont les modèles de neurones à conductance [REF DESTEXHE] dont le plus connu est le modèle de Hudgkin-Huxley. 
-	
-	
-	L'activité des neurones telle que mesurée par électrophysiologie présente
-	un caractère irrégulier où les temps d'émission des potentiels d'action (PA) semblent obéir à un processus de Poisson [CITATION].
-	Un tel processus est caractérisé par sa fréquence instantanée $\nu(t)$, qui donne le nombre de PA émis par seconde.
-	Cette grandeur peut être mesurée 
-	à travers l'observation d'un train de PA produit par un neurone particulier (nombre de PA émis divisé par
-	l'intervalle d'observation).
-	
-	De nombreux modèles stochastiques de neurones ont été proposés qui prennent en compte le caractère aléatoire de la 
-	réponse des neurones biologiques \shortcite{Tuc88,gerstner02}.
-	[REF : IF neuron, modèle de ]. 
-	
-	[MATHS??]
-	
-	Les modèles mathématique permettant de déduire les propriétés ``macroscopiques'' ( comportements moyens, 
-	corrélations d'activité, etc.) à partir de caractéristiques
-	``microscopique'' s'appellent les modèles de ``champ moyen'' \shortcite{Wilson1972,Ama72,Amit1985,Som88,Ces94B,Ami97}, etc.
-	Les modèle de champ moyen considèrent l'activité instantanée de populations de neurones à travers leur fréquence de décharge moyenne $\nu(t)$, qui exprime, à un instant
-	donné, le nombre de neurones émettant un potentiel
-	d'action divisé par la taille de la population.
-	
-	
-	
-}
 
 \subsection{Passage d'échelle en contrôle moteur} \label{sec:echelle}
 
@@ -2005,10 +2031,6 @@ négatif? Peut-on
 s'adapter à un environnement autrement qu'en extrayant des ``dictionnaires'' d'invariants
 perceptifs et moteurs de l'environnement?
 
-
-
-
-\subsection{Problème des disparités d'échelle}\label{sec:disparite}
 La séparation conceptuelle et pratique entre d'une part l'approche systèmes dynamiques, d'autre part la reconnaissance de formes 
 semble reposer sur le caractère disparate, d'une part de l'environnement métrique sur lequel s'applique
 le contrôle, et d'autre part sur la multitude des récepteurs supports de l'information sensorielle.
@@ -2023,16 +2045,6 @@ Le problème des disparités d'échelle, reconnu de longue date dans le champ de
 	spatiales macroscopiques et des échelles temporelles lentes,
 	\item et d'autre part la contrainte du circuit microscopique, constitué d'unité neuronales échangeant rapidement des signaux discrets.
 \end{itemize}
-
-Nous insistons sur la différence de nature
-(ou l'hétérogénéité) entre d'une part le milieu extérieur, caractérisé par des grandeurs extensives (des masses et
-des articulations en déplacement, des changements continus) 
-et le milieu intérieur (milieu logiciel) caractérisé par des activité bornées, discrètes,
-changeant rapidement et de manière abrupte.
-Entre les deux,  un niveau architectural (dit ``mésoscopique'') est également considéré, constitué de circuits imbriqués intégrant l'activité de larges portion du cerveau.
-Chacun de ces niveaux de description est traditionnellement considéré de manière séparée, 
-et l'effort consistant à traduire un des niveaux de description dans un autre, effort ayant pris une place importante dans les neurosciences computationnelles, s'appelle l'approche ``multi-échelles'' \shortcite{Varela2001}.
-
 
 
 
