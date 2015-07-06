@@ -3172,10 +3172,10 @@ Les résultats présentés dans la section précédente peuvent être regroupés
 
 Le principe de l'appariement par rétroaction positive correspond à une recherche de correspondance entre un signal présenté en entrée  et une des ``formes'' possibles que peut prendre l'activité du réseau (étude {\bf a}). Le nombre de formes possibles (le ``vocabulaire'') semble être maximal lorsque le système est en régime critique, c'est à dire proche d'un point de bifurcation dans l'espace des paramètres de contrôle (études {\bf a} et {\bf d}). L'activité est également plus riche (moins stéréotypée) lorsque le graphe de connexions est fortement hétérogène (étude {\bf b}).
 
-La réponse du programme n'est pas instantanée, mais s'inscrit dans une trame temporelle. Il s'apparente à un mécanisme d'\textit{intégration} (études {\bf g}, {\bf h} et {\bf k}). L'implémentation neuronale peut reposer sur des mécanismes cellulaires seuls (étude {\bf e}), ou sur une relaxation à l'échelle d'une population (études {\bf a}, {\bf c} et {\bf g}) 
+La réponse du programme n'est pas instantanée, mais s'inscrit dans une trame temporelle. Elle s'apparente à un mécanisme d'\textit{intégration} (études {\bf g}, {\bf h} et {\bf k}). L'implémentation neuronale peut reposer sur des mécanismes cellulaires seuls (étude {\bf e}), ou sur une relaxation à l'échelle d'une population (études {\bf a}, {\bf c} et {\bf g}) 
 %La correspondance conduit à une réponse spécifique. L'absence de correspondance conduit à une réponse générique.
 
-Le mécanisme de l'appariement, au centre des algorithmes d'apprentissage, prend la forme d'une réduction de complexité de la dynamique intrinsèque (étude {\bf f}). Deux grandes familles  plasticités sont abordées. 
+Le mécanisme de l'appariement, au centre des algorithmes d'apprentissage, prend la forme d'une réduction de complexité de la dynamique intrinsèque (étude {\bf f}). Deux grandes familles  plasticités sont abordées~:
 \begin{itemize}
 	\item Les plasticités d'{``ordre 0''}, guidées par un signal de renforcement, identifient les relations d'entrée-sortie les plus favorables, selon un principe qui s'apparente gradient logistique (études {\bf j} et {\bf l}).
 	\item Les plasticités d'{``ordre 1''} amplifient, au sein du réseau, des séquences d'activation récurrente, permettant de construire des réponses relatives à des événements temporellement séparés (études {\bf g} et {\bf h}).
@@ -3192,11 +3192,16 @@ Enfin, nous avons montré que cette activité intrinsèque peut servir de suppor
 dans les rapports à l'environnement, c'est à dire principalement de proposer de nouvelles
 réponses comportementales, éventuellement stabilisées dans le cas où elles apportent une amélioration (étude {\bf j}).
 
+%La règle de Hebb est une règle de confirmation qui a tendance à faciliter la réapparition des mêmes séquences d'activation. 
+
+Etendu au cas des systèmes de contrôle en boucle fermée, l'appariement par feedback positif suppose une double relaxation, à la fois du dispositif mécanique et du contrôleur neuronal, vers un attracteur comportemental mutuel (étude {\bf i}). La réduction de la dynamique d'ensemble devrait en outre permettre, transitoirement, de faire fonctionner les ensembles de neurones aux mêmes échelles de temps et d'espace que les déplacements moteurs associés.
+
 \subsection{Questions ouvertes}
 Le travail de compilation et de relecture/réexamen de résultats parfois anciens liés à la rédaction de ce rapport a été l'occasion de développer quelques rapprochements qui ne sont pas présents en tant que telles dans les publications. 
 
 Il m'a permis de mettre à jour ce qui semble être une difficulté fondamentale dans l'apprentissage de compétences motrices, qui nécessite probablement un examen fouillé dépassant le cadre de ce rapport.
 
+\paragraph{}
 Comme nous l'avons vu, la plupart des algorithmes d'apprentissage fonctionnent selon un principe d'\textit{appariement} (``pattern matching''), c'est à dire sur la construction, à partir des données, d'un ensemble de vecteurs ``caractéristiques''. 
 \begin{itemize}
 	\item Ces vecteurs caractéristiques, vus comme un dictionnaire de formes, constituent une base de description synthétique des données d'entrée. 
@@ -3204,19 +3209,21 @@ Comme nous l'avons vu, la plupart des algorithmes d'apprentissage fonctionnent s
 \end{itemize} 
 L’apprentissage revient donc à la constitution d'un vocabulaire de base qui sert de clé d'interprétation des données d'entrée. 
 
-{\color{Orange}Nous avons souligné dans la partie précédente le caractère parfois incompatible entre d'une part la théorie du contrôle, et d'autre part l'apprentissage moteur. }
+\paragraph{} 
+Il existe cependant peu d'exemples dans la littérature où ces familles d'algorithmes, dits d'auto-encodage,
+ aboutissent à l'apprentissage d'une loi de contrôle dans un espace d'actions continu.
+Il semble y avoir une séparation conceptuelle et pratique entre d'une part l'approche systèmes dynamiques, d'autre part la reconnaissance de formes. 
+Cette difficulté semble être liée au fait que les distances, telles qu'elles sont définies dans l'espace euclidien de la commande, ne sont pas conservées dans les espaces de redescription. 
+%La multitude des récepteurs sensoriels, d'une part, et le caractère continu des déplacements, d'autre part, forment un tout disparate. 
+Pour chaque tâche, les différentes réponses liées aux différentes dispositions des actionneurs et des capteurs dans l'espace physique devraient donc être apprises ``par cœur''.
 
-Il semble y avoir une 
+%{\color{Orange}Nous avons souligné dans la partie précédente le caractère parfois incompatible entre d'une part la théorie du contrôle, et d'autre part l'apprentissage moteur. }
 
-
-La séparation conceptuelle et pratique entre d'une part l'approche systèmes dynamiques, d'autre part la reconnaissance de formes 
-semble reposer sur le caractère disparate, d'une part de l'environnement métrique sur lequel s'applique
-le contrôle, et d'autre part sur la multitude des récepteurs supports de l'information sensorielle.
 %L'interaction entre un monde distribué et digital, propice au feedback
 %positif, et un monde métrique et continu, propice au feedback négatif, 
 
-
-Le problème des disparités d'échelle, reconnu de longue date dans le champ des sciences cognitives, repose sur la constatation de la difficulté à considérer sur le même plan~:
+\paragraph{Disparités d'échelle}
+Le problème des disparités d'échelle, pourtant connu de longue date dans le champ des sciences cognitives, désigne la difficulté à considérer sur le même plan~:
 \begin{itemize} 
 	\item d'une part la contrainte physique du corps, engagé dans différentes tâches, à des échelles
 	spatiales macroscopiques et des échelles temporelles lentes,
@@ -3253,6 +3260,63 @@ reposent sur un compromis, sur un ``bricolage'' entre les deux approches, ne pre
 toujours en compte le caractère parfois incompatible des deux modes de fonctionnement.
 
 
+	\subsubsection{Espace métrique et espace sensoriel}	
+	Dans le cadre des algorithmes d'apprentissage, l'universalité de l'apprentissage (sa capacité à
+	apprendre n'importe quelle application) passe par l'utilisation de fonctions non-linéaires 
+	à une étape au moins du traitement, soit des fonctions seuil, sigmoïdes ou encore des
+	fonctions à support compact \shortcite{Hay99}. L'opération algorithmique réalisée par le pattern matching est alors graduelle : degré d'appartenance
+	(ou de correspondance) à un patron donné, sur un intervalle borné (en général entre 0 et 1). 
+	L'opération répétée sur de multiples patrons produit de 
+	nombreux degrés d'appartenance, cet ensemble de degrés d'appartenance pouvant lui-même être interprété 
+	comme une nouvelle forme pour un traitement ultérieur (sur le principe du ``deep learning'' \shortcite{Hinton2006} par exemple),
+	constituant un principe de calcul distribué efficace.
+	
+	Cette transformation non-linéaire, imposée par la condition d'universalité (capacité à séparer des données 
+	non-linéairement séparables par exemple) a pour contrepartie de rendre difficile la définition
+	d'une distance entre deux signaux. 
+	Les distances au sein de l'espace initial n'ont pas de traduction au sein de
+	l'espace de redescription.
+	L'approche par pattern matching ne garantit donc pas la proportionnalité des traitements entre signaux proches 
+	et signaux éloignés, comme le font les transformations linéaires (ou géométriques) traditionnelles.
+	Autrement dit la distance définie au sein de l'espace de redescription (l'espace contenant les caractéristiques du signal)
+	ne respecte pas nécessairement les distances ou la topologie de l'espace initial.
+	On parlera de manière générale d'espace ``qualitatif'' pour décrire cet espace de redescription, ou encore d'espace
+	``digital'' pour décrire un ensemble (non nécessairement relié) de caractéristiques.
+	
+	Le caractère distribué de l'activité nerveuse suggère d'une part la distribution d'une même composante sensorielle 
+	sur de nombreux neurones, chaque neurone étant sensible à une manifestation particulière
+	de cette composante. L'exemple le plus extrême est celui de la rétine dont l'activité met en jeu 
+	plusieurs millions de neurone sensoriels, chaque neurone étant la manifestation d'une valeur de luminance
+	(et de longueur d'onde) en un point précis de la scène visuelle.
+	
+	Cette distribution de l'activité rend néanmoins difficile la réalisation d'opérations simples comme l'addition ou la différence
+	de deux quantités, comme cela est pourtant nécessaire lorsque les déplacements doivent prendre en compte des sources sensorielles 
+	multiples issues de référentiels variés (proprioception de la position du corps et coordonnées rétiniennes pour attraper
+	une cible par exemple). 
+	Si chaque composante sensorielle de l'espace métrique environnant 
+	est décomposé en constituants élémentaires (intervalles ou ``pixels'' d'environnement), activant
+	ou désactivant différentes populations de neurones primaires, 
+	alors les transformations aussi simples que les translations, rotations, ainsi
+	que les co-variations, 
+	etc. doivent être apprises ``par cœur'' \cite{Pouget1997} et ne peuvent résulter de la combinaison d'activités unitaires,
+	c'est à dire d'un calcul.
+	
+	Ceci pose un problème en particulier lorsqu'il s'agit de contrôler les déplacements du corps à partir de l'activité
+	distribuée induite par les récepteurs sensoriels.
+	Le problème se pose lorsqu'il faut
+	réaliser des opérations arithmétiques entre plusieurs grandeurs du monde physique,
+	%moduler une réponse à partir d'un écart à une valeur de référence par exemple, 
+	c'est à
+	dire plus généralement lorsqu'il s'agit d'estimer, au sein de l'espace de description
+	qualitatif, des quantités \textit{relatives} à différents
+	points de l'espace métrique ou de l'espace sensoriel (et non des quantités absolues). 
+	
+	L'approche de la cognition par correspondance de forme offre donc un support efficace à la plasticité,
+	mais pose en revanche quelques problèmes lorsqu'il s'agit d'utiliser ce mode de codage pour contrôler un 
+	appareil moteur, c'est à dire schématiquement effectuer la transformation inverse du qualitatif vers 
+	le quantitatif.
+
+\paragraph{Hypothèse}
 Nous formons l'hypothèse que cette difficulté à faire apprendre des compétences motrices à un dispositif artificiel repose sur l'opposition entre deux grands principes fonctionnels~: le feedback positif et le feedback négatif.
 \begin{itemize}
 	\item Le mécanisme d'appariement, central dans l'apprentissage, repose majoritairement sur une logique de feedback positif (ou résonance)
@@ -3274,7 +3338,7 @@ Si l'on souhaite construire des dispositifs artificiels capable d'apprendre des 
 
 Cette approche implique, comme dans le cas de l'analyse des signaux, une \textit{décomposition de l'espace des tâches} en tâches élémentaires, autrement dit la capacité à constituer de très nombreux circuits de commande associés à des configurations précises de l'environnement. 
 
-
+{\color{Violet}
 \subsubsection{Espace visuel et espace pré-moteur}
 L'activité humaine est fortement guidée par la composante visuelle.
 Si on regarde de plus près l'interrelation entre l'exploration visuelle et
@@ -3326,62 +3390,7 @@ ce même référentiel du tronc. Il existe donc une application qui à partir de
 référentiel définit la position des mêmes objets dans un autre référentiel. La bijection entre les deux espaces offre
 un bon support à l'invariance ainsi qu'à la prédiction sensorielle (``predictive coding'' \shortcite{Rao1999}). 
 
-{\color{Violet}
-\subsubsection{Espace métrique et espace sensoriel}	
-Dans le cadre des algorithmes d'apprentissage, l'universalité de l'apprentissage (sa capacité à
-apprendre n'importe quelle application) passe par l'utilisation de fonctions non-linéaires 
-à une étape au moins du traitement, soit des fonctions seuil, sigmoïdes ou encore des
-fonctions à support compact \shortcite{Hay99}. L'opération algorithmique réalisée par le pattern matching est alors graduelle : degré d'appartenance
-(ou de correspondance) à un patron donné, sur un intervalle borné (en général entre 0 et 1). 
-L'opération répétée sur de multiples patrons produit de 
-nombreux degrés d'appartenance, cet ensemble de degrés d'appartenance pouvant lui-même être interprété 
-comme une nouvelle forme pour un traitement ultérieur (sur le principe du ``deep learning'' \shortcite{Hinton2006} par exemple),
-constituant un principe de calcul distribué efficace.
 
-Cette transformation non-linéaire, imposée par la condition d'universalité (capacité à séparer des données 
-non-linéairement séparables par exemple) a pour contrepartie de rendre difficile la définition
-d'une distance entre deux signaux. 
-Les distances au sein de l'espace initial n'ont pas de traduction au sein de
-l'espace de redescription.
-L'approche par pattern matching ne garantit donc pas la proportionnalité des traitements entre signaux proches 
-et signaux éloignés, comme le font les transformations linéaires (ou géométriques) traditionnelles.
-Autrement dit la distance définie au sein de l'espace de redescription (l'espace contenant les caractéristiques du signal)
-ne respecte pas nécessairement les distances ou la topologie de l'espace initial.
-On parlera de manière générale d'espace ``qualitatif'' pour décrire cet espace de redescription, ou encore d'espace
-``digital'' pour décrire un ensemble (non nécessairement relié) de caractéristiques.
-
-Le caractère distribué de l'activité nerveuse suggère d'une part la distribution d'une même composante sensorielle 
-sur de nombreux neurones, chaque neurone étant sensible à une manifestation particulière
-de cette composante. L'exemple le plus extrême est celui de la rétine dont l'activité met en jeu 
-plusieurs millions de neurone sensoriels, chaque neurone étant la manifestation d'une valeur de luminance
-(et de longueur d'onde) en un point précis de la scène visuelle.
-
-Cette distribution de l'activité rend néanmoins difficile la réalisation d'opérations simples comme l'addition ou la différence
-de deux quantités, comme cela est pourtant nécessaire lorsque les déplacements doivent prendre en compte des sources sensorielles 
-multiples issues de référentiels variés (proprioception de la position du corps et coordonnées rétiniennes pour attraper
-une cible par exemple). 
-Si chaque composante sensorielle de l'espace métrique environnant 
-est décomposé en constituants élémentaires (intervalles ou ``pixels'' d'environnement), activant
-ou désactivant différentes populations de neurones primaires, 
-alors les transformations aussi simples que les translations, rotations, ainsi
-que les co-variations, 
-etc. doivent être apprises ``par cœur'' \cite{Pouget1997} et ne peuvent résulter de la combinaison d'activités unitaires,
-c'est à dire d'un calcul.
-
-Ceci pose un problème en particulier lorsqu'il s'agit de contrôler les déplacements du corps à partir de l'activité
-distribuée induite par les récepteurs sensoriels.
-Le problème se pose lorsqu'il faut
-réaliser des opérations arithmétiques entre plusieurs grandeurs du monde physique,
-%moduler une réponse à partir d'un écart à une valeur de référence par exemple, 
-c'est à
-dire plus généralement lorsqu'il s'agit d'estimer, au sein de l'espace de description
-qualitatif, des quantités \textit{relatives} à différents
-points de l'espace métrique ou de l'espace sensoriel (et non des quantités absolues). 
-
-L'approche de la cognition par correspondance de forme offre donc un support efficace à la plasticité,
-mais pose en revanche quelques problèmes lorsqu'il s'agit d'utiliser ce mode de codage pour contrôler un 
-appareil moteur, c'est à dire schématiquement effectuer la transformation inverse du qualitatif vers 
-le quantitatif.
 }
 
 
