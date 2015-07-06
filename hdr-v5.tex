@@ -1603,9 +1603,7 @@ et de contrôle des mouvements, mais offre un cadre moins propice à la plastici
 Malgré de nombreuses tentatives, il manque encore, semble-t-il, un principe d'unification des
 deux approches. 
 \end{itemize}
-D'une certaine façon, la plupart des modèles en neurosciences computationnelles 
-reposent sur un compromis, sur un ``bricolage'' entre les deux approches, ne prenant pas 
-toujours en compte le caractère parfois incompatible des deux modes de fonctionnement.
+
 
 Ce chapitre présente les différentes approches d'un point de vue mathématique, et indique quelques pistes de synthèses telles que proposées dans la littérature.
 
@@ -1906,32 +1904,11 @@ Plus précisément~:
 	\item L'équation (\ref{eq:SD-closed-out}) décrit le lien entre les actions produites et les sensations.
 	\item L'équation (\ref{eq:SD-closed-in}) décrit le traitement appliqué à l'entrée sensorielle.
 \end{itemize}
-\paragraph {Remarques~:}
-\begin{enumerate}
-	\item L'état de l'environnement n'est connu du contrôleur qu'à travers une projection $h_\text{in}$ qui n'est pas nécessairement inversible. On dit dans ce cas que l'environnement (ou une partie de l'environnement) est ``caché''.
-	\item 	La simplification, qui consiste à considérer un milieu intérieur (intensif) et un milieu extérieur (extensif)
-	couplés comme un seul et même système dynamique, se
-	heurte souvent au caractère inhomogène de ce couplage~:
-	\begin{itemize}  
-		\item Dans domaine biologique, les échelles de temps et d'espace des comportements macroscopiques 
-		(mouvements, déplacements, activité motrice)  
-		se distinguent des échelles de temps et d'espace observées au niveau de l'activité
-		nerveuse.
-		Les actions produites par le corps sont à une échelle temporelle lente en comparaison des potentiels d'action
-		produits par les neurones. On parle de \textit{Disparité d'échelle}.
-		\item 
-		En plus de la disparité d'échelle, les lois régissant les deux systèmes ne sont pas de même nature. 
-		Le monde physique est assez bien décrit par 
-		l'approximation newtonienne des masses en mouvement dans un milieu tri-dimensionnel.
-		%On parlera pour simplifier du milieu extensif pour désigner le monde physique, l'endroit où sont
-		%possibles des déplacements de masses par l'action des forces, les frottements et le contact. 
-		A l'inverse, l'activité logicielle s'inscrit dans un réseau où l'intensité des interactions est 
-		faiblement liée à la disposition spatiale, essentiellement produite par la connectique et 
-		les transports d'activité électrique.
-		%On parle pour simplifier de milieu intensif. % (ou milieu logiciel).
-	\end{itemize}
-	\item {\color{Cyan} On peut compléter l'équation de manière symétrique avec une plasticité de l'environnement représentant la non-stationnarité, l'usure, le vieillissement et toutes sortes de changement ``lents''.}
-\end{enumerate}
+\paragraph {Remarque~:}
+ L'état de l'environnement n'est connu du contrôleur qu'à travers une projection $h_\text{in}$ qui n'est pas nécessairement inversible. On dit dans ce cas que l'environnement (ou une partie de l'environnement) est ``caché''.
+%	\item 
+%	\item {\color{Cyan} On peut compléter l'équation de manière symétrique avec une plasticité de l'environnement représentant la non-stationnarité, l'usure, le vieillissement et toutes sortes de changement ``lents''.}
+%\end{enumerate}
 
 \subsubsection{Estimation d'état}
 Le cas le plus courant en robotique et en modélisation biologiquement inspirée correspond à une situation où l'état de l'environnement n'est pas directement observable. Deux cas se présentent~: 
@@ -2060,24 +2037,6 @@ Peut-on contrôler efficacement un corps sans faire appel à la notion d'attract
 négatif? Peut-on 
 s'adapter à un environnement autrement qu'en extrayant des ``dictionnaires'' d'invariants
 perceptifs et moteurs de l'environnement?
-
-La séparation conceptuelle et pratique entre d'une part l'approche systèmes dynamiques, d'autre part la reconnaissance de formes 
-semble reposer sur le caractère disparate, d'une part de l'environnement métrique sur lequel s'applique
-le contrôle, et d'autre part sur la multitude des récepteurs supports de l'information sensorielle.
-%L'interaction entre un monde distribué et digital, propice au feedback
-%positif, et un monde métrique et continu, propice au feedback négatif, 
-Cette dichotomie implique un mode de fonctionnement composite, basé d'une part sur des rapports entre quantités (monde physique), 
-et d'autre part sur des rapports entre formes (monde digital).
-
-Le problème des disparités d'échelle, reconnu de longue date dans le champ des sciences cognitives, repose sur la constatation de la difficulté à considérer sur le même plan~:
-\begin{itemize} 
-	\item d'une part la contrainte physique du corps, engagé dans différentes tâches, à des échelles
-	spatiales macroscopiques et des échelles temporelles lentes,
-	\item et d'autre part la contrainte du circuit microscopique, constitué d'unité neuronales échangeant rapidement des signaux discrets.
-\end{itemize}
-
-
-
 
 
 %{\color{Gray} Nous considérons ici un dispositif logiciel contrôlant un appareil 
@@ -2546,7 +2505,39 @@ régionaux mis en évidence par une analyse structurelle \shortcite{Hagmann2008}
 identifiés sur les signaux fMRI de l'état de repos \shortcite{Damoiseaux2006}.
 Ils permettent de simuler certains aspects de la dynamique large échelle (en particulier l'alternance entre différents patrons d'activité au cours du temps).
 
-\subsubsection{e. La plasticité de Hebb, appliquée à des réseaux de neurones récurrents aléatoires, provoque une réduction de complexité des dynamiques spontanée et induites}
+\subsubsection{e. La durée d'une commande balistique peut être contrôlée par un mécanisme d'intégration sous-liminaire}
+
+L'orientation visuelle est un comportement moteur très spécifique, qui 
+s'apparente plus au monde de la perception qu'au monde de la motricité, reposant sur des circuits de
+contrôle distincts des circuits de commande de l'appareil moteur.
+La saccade oculaire est un mouvement présent chez l'ensemble des vertébrés consistant à orienter 
+la partie centrale de la rétine (la fovea) vers un point d'intérêt de l'espace visuel.
+Le comportement d'orientation saccadique, par opposition aux comportements locomoteurs
+ou alimentaires, est constitué de mouvements brefs (discrets), permettant 
+d'explorer la scène visuelle. La saccade oculaire est le prototype des mouvements 
+dits ``balistiques'', partant d'une posture initiale et s'achevant sur une posture finale
+(par opposition a des mouvements d'ajustement ou de contrôle guidé par 
+un feedback comme la poursuite oculaire par exemple).
+
+La structure au carrefour de la transformation 
+visuo-motrice est
+une carte rétinotopique située sur la partie supérieure du tectum,
+appelée le colliculus supérieur. 
+L'étude présentée dans \shortcite{Dauce2011} (voir page \pageref{sec:orientation-spatiale} et annexe \ref{app:CNS11B}), c'est à dire sur un intervalle temporel précis, ``programmé''.
+Notre étude, en implémentant de façon détaillée des populations de neurones à impulsions, 
+\begin{itemize}
+	
+	\item simule l'activité autonome d'une carte colliculaire bidimensionnelle constituée de plusieurs milliers de neurones
+	\item implémente un mécanisme de décision par ``levée d'inhibition'' 
+	\item contrôle l'activité sur la carte dans le temps et dans l'espace via des mécanismes d'\textit{intégration}
+	\item utilise, pour le contrôle de la durée (100~ms environ), des neurones à constante de membrane lente, 
+	faisant l'économie d'un mécanisme d'intégration par population.
+\end{itemize}
+
+Nous montrons donc que des mécanismes d'intégration sous-liminaires (en dessous du seuil de tir) peuvent contrôler l'intégralité du circuit de la saccade oculaire, et plus généralement la durée de mouvement balistiques dont la durée n'excède pas la centaine de millisecondes.
+
+
+\subsubsection{f. La plasticité de Hebb, appliquée à des réseaux de neurones récurrents aléatoires, provoque une réduction de complexité des dynamiques spontanée et induites}
 L'appariement 
 par relaxation/réduction, sous sa forme la plus simple, 
 s'exprime comme une transition
@@ -2596,6 +2587,15 @@ les entrées similaires au motif appris, en produisant une réponse \textit{spé
 Le réseau peut donc être vu comme un ``réservoir'' de réponses qualitativement distinctes,
 construites par le mécanisme de plasticité en présence de signaux présentés  de manière répétée. 
 
+\paragraph{}  En détail, nous faisons les propositions suivantes~:
+\begin{itemize}
+	\item Un réseau récurrent (en régime ``persistant'') se comporte comme un ``réservoir'' de patrons d'activité (ou ``assemblées'' de neurones). Chaque patron d'activité correspond à l'activation d'un circuit spécifique sur le graphe.
+	\item Le calcul repose sur l'appariement entre l'entrée (le signal extérieur) et un des patrons d'activité activables sur le graphe. On parle de \textit{reconfiguration} du circuit.
+	\item Cet appariement se traduit par une réduction de complexité 
+	correspondant à la relaxation du système dynamique vers un attracteur de dimension faible.
+	\item Cette réduction sélective de complexité repose sur l'action de la plasticité de Hebb sur le graphe en présence de signaux contenant ``suffisamment'' de régularités.
+\end{itemize}
+
 La principale difficulté rencontrée pour ces réseaux est la contamination 
 de la réaction induite à des patrons non appris. Si des motifs voisins du motif initialement appris
 induisent également une réduction de la dynamique, la réitération de l'apprentissage sur plusieurs motifs différents
@@ -2607,7 +2607,7 @@ Cette capacité s'avère assez faible en pratique.
 Dans notre cas, comme dans le cas du réseau de Hopfield, elle semble
 dépendre linéairement de la taille du réseau.
 
-\subsubsection{f. La plasticité de Hebb inscrit, dans des réseaux récurrents à deux couches, des fonctions de réponse auto-associatives sur des signaux d'entrée spatio-temporels périodiques.}
+\subsubsection{g. La plasticité de Hebb inscrit, dans des réseaux récurrents à deux couches, des fonctions de réponse auto-associatives sur des signaux d'entrée spatio-temporels périodiques.}
  
 Les travaux présentés dans \shortcite{Dau00,Dau02} implémentent un modèle de la perception de signaux spatio-temporels périodiques, sur un réseau récurrent aléatoire à deux couches, constitué d'une couche primaire sans dynamique intrinsèque et une couche associative possédant une dynamique intrinsèque, analogue aux réseaux récurrents aléatoires
 simples présentés précédemment (figure~\ref{fig:BC02-archi}, page~\pageref{fig:BC02-archi}).
@@ -2643,9 +2643,24 @@ capable de compléter les morceaux manquants, selon un mécanisme auto-associati
 \end{itemize} 
 
 
-\subsubsection{g. Dans les réseaux récurrents aléatoires de neurones à impulsions, la STDP permet de construire une fonction de réponse arbitraire sur un espace  d'entrée de séquences d'activation.}
+\subsubsection{h. Dans les réseaux récurrents aléatoires de neurones à impulsions, la STDP permet de construire une fonction de réponse arbitraire sur un espace  d'entrée de séquences d'activation.}
 
-{\color{Cyan} STDP}
+
+La plasticité dépendante des instants de tir (\textit{Spike-timing dependent plasticity} -- STDP)  est  une règle de plasticité dépendant de l'ordre de tir des neurones pré-synaptique et post-synaptique
+\cite{BIPOO98}.
+%L'utilisation d'une échelle temporelle fine permet d'améliorer le principe Hebbien~: %de transformation de la conjugaison
+%d'activité en causalité. 
+Cette règle est facilitatrice pour les synapses où l'activité 
+pré-synaptique précède causalement l'activité post-synaptique, et, à
+l'inverse, suppressive pour les synapses où l'activité post-synaptique précède (de manière anti-causale) l'activité pré-synaptique.
+Cette règle tend donc à favoriser les conjugaisons d'activité causalement liées, mais surtout, de manière symétrique, d'empêcher les 
+activités non causalement liées. 
+
+
+
+Une formulation possible de la règle est la suivante~:
+$$\dot{J}_{ij} = F((s_i^\text{out} \times m_j^\text{in}) - (s_j^\text{in} \times m_i^\text{out} ), J_{ij})$$
+où $s_j^\text{in}$ est l'activité pré-synaptique, $s_i^\text{out}$ est l'activité post-synaptique, $m_j^\text{in}$ une trace exponentielle de l'activité pré-synaptique, et $m_i^\text{out}$ une trace exponentielle de l'activité post-synaptique. Cette règle peut formellement être reliée aux règles de plasticité d'ordre 1 (voir page \ref{page:hebb-ordre}).
 
 La discrimination entre les différentes séquences temporelles repose sur l'entretien
 au niveau de la couche récurrente d'une activité qui permet de conserver la mémoire 
@@ -2686,7 +2701,7 @@ peut être amplifiée par la plasticité (voir figure~\ref{fig:ESANN14}, page~\p
  l'émergence de séquences d'activation stables, comme postulé par \shortcite{izhikevich04,izhikevich06} ( 
  et contrairement aux observations de \shortcite{morrison07}). 
  
-\subsubsection{h. L'apprentissage ``par cœur'' d'appariements sensori-moteurs spécifiques met en évidence, en milieu ouvert, des couplages transitoires entre la dynamique d'un réseau récurrent aléatoire et les trajectoires motrices.}
+\subsubsection{i. L'apprentissage ``par cœur'' d'appariements sensori-moteurs spécifiques met en évidence, en milieu ouvert, des couplages transitoires entre la dynamique d'un réseau récurrent aléatoire et les trajectoires motrices.}
 
 Certaines activités motrices (périodiques en particulier) 
 semblent reposer sur un mécanisme de feedback positif,
@@ -2720,7 +2735,7 @@ mécanisme de désynchronisation, qui peut reposer sur des facteurs déstabilisa
 mauvaise correspondance internes ou externe, 
 mais également sur des mécanismes actifs de désynchronisation, comme la fatigue neuronale par exemple.
 
-\subsubsection{i. Dans des espaces d'état et d'action continus, l'apprentissage par renforcement peut être implémenté via la plasticité Hebbienne induite et le principe de trace synaptique. La dynamique endogène joue le rôle d'un bruit d'exploration.}
+\subsubsection{j. Dans des espaces d'état et d'action continus, l'apprentissage par renforcement peut être implémenté via la plasticité Hebbienne induite et le principe de trace synaptique. La dynamique endogène joue le rôle d'un bruit d'exploration.}
 
 L'apprentissage par renforcement définit un cadre formel à l'apprentissage de règles de contrôle moteur selon un principe
 d'essais/erreur.
@@ -2802,7 +2817,7 @@ c'est à dire par décomposition de la tâche complète en sous-tâches élémen
 %{\color{Gray}de manière continue  selon un principe de feedback négatif (le signal transitant
 %principalement sous la forme de corrections à apporter à la trajectoire courante)}.
 
-\subsubsection{j. L'appariement par ``accumulation d'évidence'' implémente un mécanisme de mise à jour et de révision des croyances dans un espace de choix concurrents.}
+\subsubsection{k. L'appariement par ``accumulation d'évidence'' implémente un mécanisme de révision des croyances dans un espace de choix concurrents.}
 
 Les modèles probabilistes basés sur des processus stochastiques Markoviens (voir equations (\ref{eq:accum1}) - (\ref{eq:accum2})) sont très populaires en modélisation biologiquement inspirée du fait de leur capacité rendre compte des profils de réponse extrêmement bruités à la fois de l'activité neuronale et des réponses comportementales.
 Les processus markoviens peuvent également implémenter, au même titre que les modèles déterministes, les phénomènes d'activité persistante, de rémanence et de mémoire à court terme, etc.
@@ -2841,36 +2856,6 @@ Les modèles mis en place dans le cadre de l'orientation temporelle \shortcite{M
  \end{itemize}
 
 
-\subsubsection{k. La durée d'une commande balistique peut être contrôlée par un mécanisme d'intégration sous-liminaire}
-
-	L'orientation visuelle est un comportement moteur très spécifique, qui 
-	s'apparente plus au monde de la perception qu'au monde de la motricité, reposant sur des circuits de
-	contrôle distincts des circuits de commande de l'appareil moteur.
-La saccade oculaire est un mouvement présent chez l'ensemble des vertébrés consistant à orienter 
-la partie centrale de la rétine (la fovea) vers un point d'intérêt de l'espace visuel.
-Le comportement d'orientation saccadique, par opposition aux comportements locomoteurs
-ou alimentaires, est constitué de mouvements brefs (discrets), permettant 
-d'explorer la scène visuelle. La saccade oculaire est le prototype des mouvements 
-dits ``balistiques'', partant d'une posture initiale et s'achevant sur une posture finale
-(par opposition a des mouvements d'ajustement ou de contrôle guidé par 
-un feedback comme la poursuite oculaire par exemple).
-	
-La structure au carrefour de la transformation 
-visuo-motrice est
-une carte rétinotopique située sur la partie supérieure du tectum,
-appelée le colliculus supérieur. 
-L'étude présentée dans \shortcite{Dauce2011} (voir page \pageref{sec:orientation-spatiale} et annexe \ref{app:CNS11B}), c'est à dire sur un intervalle temporel précis, ``programmé''.
-Notre étude, en implémentant de façon détaillée des populations de neurones à impulsions, 
-\begin{itemize}
-
-	\item simule l'activité autonome d'une carte colliculaire bidimensionnelle constituée de plusieurs milliers de neurones
-	\item implémente un mécanisme de décision par ``levée d'inhibition'' 
-		\item contrôle l'activité sur la carte dans le temps et dans l'espace via des mécanismes d'\textit{intégration}
-	\item utilise, pour le contrôle de la durée (100~ms environ), des neurones à constante de membrane lente, 
-	faisant l'économie d'un mécanisme d'intégration par population.
-\end{itemize}
-
-Nous montrons donc que des mécanismes d'intégration sous-liminaires (en dessous du seuil de tir) peuvent contrôler l'intégralité du circuit de la saccade oculaire, et plus généralement la durée de mouvement balistiques dont la durée n'excède pas la centaine de millisecondes.
 
 \subsubsection{l. En présence de signaux de renforcement binaires instantanés, l'apprentissage par exploration non-stochastique a les mêmes bornes d'erreur que l'apprentissage supervisé.}
 
@@ -2878,14 +2863,14 @@ L'analogie entre les algorithmes d'apprentissage par renforcement et la recherch
 Avec un choix judicieux des valeurs de récompense, la mise à jour du policy gradient \textit{rejoint en espérance} le gradient logistique, ce qui permet d'appliquer une politique de \textit{choix non stochastique} (politique du maximum a posteriori). 
 
 \begin{itemize}
-	\item Cette approche est mise en oeuvre dans le cadre d'un clavier virtuel P300 guidé par une touche ``backspace''  \shortcite{Dauce2013b,Dauce2015} (voir page et annexe \ref{app:IJCNN15}). 
+	\item Cette approche est mise en oeuvre dans le cadre d'un clavier virtuel P300 guidé par une touche ``backspace''  \shortcite{Dauce2013b,Dauce2015} (voir page \pageref{sec:BCI} et annexe \ref{app:IJCNN15}). 
 	\begin{itemize}
 		\item Nous montrons qu'avec une décision non-stochastique et en l'absence de modèle, le classifieur converge vers taux de réponse comparable à l'état de l'art en classification BCI.
-		\item Nous montrons également, dans le cas d'environnements non-stationnaires 
+		\item {\color{Cyan}Nous montrons également, dans le cas d'environnements non-stationnaires }
 	\end{itemize} 
 	\item Dans le cadre voisin de l'optimisation quadratique  \shortcite{Vapnik1998,Crammer2006}, nous montrons également, dans le cadre
 	d'un guidage binaire (dit de type ``bandit'' \-- travail de thèse d'Hongliang Zhong), que la borne de l'erreur cumulée est identique à celle obtenue avec un guidage complet.  
-	Contrairement à l'algorithme du banditron généralement utilisé dans ce cadre \shortcite{Kakade2008}, cette propriété conduit également à la possibilité de politiques d'exploration avec un bruit arbitrairement petit, autrement dit à une politique générale de choix non-stochastique.
+	Contrairement à l'algorithme du banditron généralement utilisé dans ce cadre \shortcite{Kakade2008}, cette propriété conduit également à la possibilité de politiques d'exploration avec un bruit arbitrairement petit, autrement dit à une politique  de choix non-stochastique.
 \end{itemize}
  
 
@@ -2894,22 +2879,9 @@ Avec un choix judicieux des valeurs de récompense, la mise à jour du policy gr
 
 \section{Dynamique et expressivité des grands réseaux de neurones}
 
-\paragraph{}
-Les résultats présentés s'appuient en grande partie sur les comportements de systèmes dynamiques de grande dimension, c'est  dire constitués par l'interaction de nombreuses unités couplées~:
-\begin{itemize}
-	\item 
-	\item Le but est d'exploiter des comportements d'ensemble simples qui peuvent apparaître dans les systèmes de grande dimension, selon le principe de \textit{réduction} proposé dans le cadre de la physique des systèmes hors d'équilibre \shortcite{Haken1983}.
-	\item Les comportements d'ensemble  sont alors interprétés comme des \textit{implémentations} d'opérateurs  plus simples.
-\end{itemize}
 
-\paragraph{}  En détail, nous faisons les propositions suivantes~:
-\begin{itemize}
-	\item Un réseau récurrent (en régime ``persistant'') se comporte comme un ``réservoir'' de patrons d'activité (ou ``assemblées'' de neurones). Chaque patron d'activité correspond à l'activation d'un circuit spécifique sur le graphe.
-	\item Le calcul repose sur l'appariement entre l'entrée (le signal extérieur) et un des patrons d'activité activables sur le graphe. On parle de \textit{reconfiguration} du circuit.
-	\item Cet appariement se traduit par une réduction de complexité 
-	correspondant à la relaxation du système dynamique vers un attracteur de dimension faible.
-	\item Cette réduction sélective de complexité repose sur l'action de la plasticité de Hebb sur le graphe en présence de signaux contenant ``suffisamment'' de régularités.
-\end{itemize}
+
+
  
 %Ces circuits concurrents  Leur activation est conditionnée par des configurations spécifiques de l'environnement moteur et sensoriel ainsi que par des mécanismes de sélection internes.
 % L'apparition ou la disparition de certains circuits au cours du développement de l'individu repose sur des mécanismes de plasticité. 
@@ -3142,7 +3114,53 @@ Comme nous l'avons vu, la plupart des algorithmes d'apprentissage fonctionnent s
 \end{itemize} 
 L’apprentissage revient donc à la constitution d'un vocabulaire de base qui sert de clé d'interprétation des données d'entrée. 
 
-Nous avons souligné dans la partie précédente le caractère parfois incompatible entre d'une part la théorie du contrôle, et d'autre part l'apprentissage moteur. Nous formons l'hypothèse que cette difficulté à faire apprendre des compétences motrices à un dispositif artificiel repose sur l'opposition entre deux grands principes fonctionnels~: le feedback positif et le feedback négatif.
+{\color{Orange}Nous avons souligné dans la partie précédente le caractère parfois incompatible entre d'une part la théorie du contrôle, et d'autre part l'apprentissage moteur. }
+
+La séparation conceptuelle et pratique entre d'une part l'approche systèmes dynamiques, d'autre part la reconnaissance de formes 
+semble reposer sur le caractère disparate, d'une part de l'environnement métrique sur lequel s'applique
+le contrôle, et d'autre part sur la multitude des récepteurs supports de l'information sensorielle.
+%L'interaction entre un monde distribué et digital, propice au feedback
+%positif, et un monde métrique et continu, propice au feedback négatif, 
+
+
+Le problème des disparités d'échelle, reconnu de longue date dans le champ des sciences cognitives, repose sur la constatation de la difficulté à considérer sur le même plan~:
+\begin{itemize} 
+	\item d'une part la contrainte physique du corps, engagé dans différentes tâches, à des échelles
+	spatiales macroscopiques et des échelles temporelles lentes,
+	\item et d'autre part la contrainte du circuit microscopique, constitué d'unité neuronales échangeant rapidement des signaux discrets.
+\end{itemize}
+
+La simplification, qui consiste à considérer un milieu intérieur (intensif) et un milieu extérieur (extensif)
+couplés comme un seul et même système dynamique, se
+heurte ainsi au caractère inhomogène de ce couplage~:
+\begin{itemize}  
+	\item Dans domaine biologique, les échelles de temps et d'espace des comportements macroscopiques 
+	(mouvements, déplacements, activité motrice)  
+	se distinguent des échelles de temps et d'espace observées au niveau de l'activité
+	nerveuse.
+	Les actions produites par le corps sont à une échelle temporelle lente en comparaison des potentiels d'action
+	produits par les neurones. On parle de \textit{Disparité d'échelle}.
+	\item 
+	En plus de la disparité d'échelle, les lois régissant les deux systèmes ne sont pas de même nature. 
+	Le monde physique est assez bien décrit par 
+	l'approximation newtonienne des masses en mouvement dans un milieu tri-dimensionnel.
+	%On parlera pour simplifier du milieu extensif pour désigner le monde physique, l'endroit où sont
+	%possibles des déplacements de masses par l'action des forces, les frottements et le contact. 
+	A l'inverse, l'activité logicielle s'inscrit dans un réseau où l'intensité des interactions est 
+	faiblement liée à la disposition spatiale, essentiellement produite par la connectique et 
+	les transports d'activité électrique.
+	%On parle pour simplifier de milieu intensif. % (ou milieu logiciel).
+\end{itemize}
+
+
+Cette dichotomie implique un mode de fonctionnement composite, basé d'une part sur des rapports entre quantités (monde physique), 
+et d'autre part sur des rapports entre formes (monde digital).
+D'une certaine façon, la plupart des modèles en neurosciences computationnelles 
+reposent sur un compromis, sur un ``bricolage'' entre les deux approches, ne prenant pas 
+toujours en compte le caractère parfois incompatible des deux modes de fonctionnement.
+
+
+Nous formons l'hypothèse que cette difficulté à faire apprendre des compétences motrices à un dispositif artificiel repose sur l'opposition entre deux grands principes fonctionnels~: le feedback positif et le feedback négatif.
 \begin{itemize}
 	\item Le mécanisme d'appariement, central dans l'apprentissage, repose majoritairement sur une logique de feedback positif (ou résonance)
 	\item La théorie du contrôle, telle qu'elle est définie en sciences de l'ingénieur, repose majoritairement sur une logique de feedback négatif (correction de l'erreur motrice)
@@ -3864,6 +3882,13 @@ plus proches de ceux qu'un sujet expérimente quotidiennement avec son entourage
 Je présente dans une première section quelques notions essentielles concernant la modélisation des neurones et des réseaux de neurones. 
 La deuxième section présente quelques notions plus spécifiques à l'étude des grands réseaux de neurones ainsi que des propositions propres à ce mémoire. 
 Enfin, la troisième section récapitule les résultats issus des travaux auxquels j'ai participé dans ce cadre.}
+
+\paragraph{}
+Les résultats présentés s'appuient en grande partie sur les comportements de systèmes dynamiques de grande dimension, c'est  dire constitués par l'interaction de nombreuses unités couplées~:
+\begin{itemize}
+	\item Le but est d'exploiter des comportements d'ensemble simples qui peuvent apparaître dans les systèmes de grande dimension, selon le principe de \textit{réduction} proposé dans le cadre de la physique des systèmes hors d'équilibre \shortcite{Haken1983}.
+	\item Les comportements d'ensemble  sont alors interprétés comme des \textit{implémentations} d'opérateurs  plus simples.
+\end{itemize}
 
 %\cleardoublepage
 
@@ -5518,7 +5543,7 @@ favorisé le dévelopement de nombreux modèles computationnels~:
 
 Une formulation possible de la règle est la suivante~:
 $$\dot{J}_{ij} = F((s_i^\text{out} \times m_j^\text{in}) - (s_j^\text{in} \times m_i^\text{out} ), J_{ij})$$
-où $s_j^\text{in}$ est l'activité pré-synaptique, $s_i^\text{out}$ est l'activité post-synaptique, $m_j^\text{in}$ une trace exponentielle de l'activité pré-synaptique, et $m_i^\text{out}$ une trace exponentielle de l'activité post-synaptique. Cette règle peut formellement être  aux règles de plasticité d'ordre 1 (voir page \ref{page:hebb-ordre}).
+où $s_j^\text{in}$ est l'activité pré-synaptique, $s_i^\text{out}$ est l'activité post-synaptique, $m_j^\text{in}$ une trace exponentielle de l'activité pré-synaptique, et $m_i^\text{out}$ une trace exponentielle de l'activité post-synaptique. Cette règle peut formellement être reliée aux règles de plasticité d'ordre 1 (voir page \ref{page:hebb-ordre}).
 
 En utilisant la technique de transfert d'échelle temporelle (augmentation du pas de discrétisation d'Euler), il est par ailleurs facile
 d'établir la correspondance entre la STDP et la règle TD décrite précédemment \shortcite{Dau07},
