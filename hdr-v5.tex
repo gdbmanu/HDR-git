@@ -480,7 +480,7 @@ et des appels d'offres internationaux.
 %}
 
 
-\subsection{Etat de l'art} 
+\subsection{Principales avancées} 
 
 {\color{cyan}
 Le champ de recherche s'organise autour de plusieurs pôles. 
@@ -1082,7 +1082,7 @@ de transformation de ces signaux soient les mêmes~:
 		Le signal extérieur est généralement considéré comme indépendant de l'activité du réseau de neurones.
 		\item L'équivalent formel de l'encodage 
 		est un ``patron d'activité'' $\boldsymbol{S}(t)$ constitué de
-		l'ensemble des états de sortie du réseau depuis l'instant initial, i.e.  $\boldsymbol{S}(t) = \{s_i(t')\}_{i \in \{1,...,N\}, t' \in [t_0, t[}$. 
+		l'ensemble des états de sortie des neurones depuis l'instant initial, i.e.  $\boldsymbol{S}(t) = \{s_i(t')\}_{i \in \{1,...,N\}, t' \in [t_0, t[}$. 
 		Le calcul est quant à lui réalisé au travers des liens récurrents liant mutuellement les 
 		composantes actives (liens d'affinité ou d'incompatibilité principalement). 
 		C'est le résultat des interactions entre les différentes composantes qui constitue le calcul.
@@ -1098,7 +1098,7 @@ de transformation de ces signaux soient les mêmes~:
 La description du réseau est donné par une \textit{fonction de couplage},
 définie le plus souvent par un tableau à double entrée noté $G$. Chaque neurone
 se voit attribuer un indice $i \in 1,...,N$ où $N$ est le nombre de neurones dans le réseau. Le tableau
-$G[i,j]$ contient alors les caractéristiques du lien du neurone $i$ vers le neurone $j$.
+$G[i,j]$ contient alors les caractéristiques du lien du neurone $j$ vers le neurone $i$.
 Un exemple de paramétrisation est le temps de propagation $\tau_{ij}$ et poids synaptique $J_{ij}$. 
 Lorsque le poids synaptique est non-nul, on dit que les neurones $i$ et $j$ sont couplés. 
 Si $N$ est le nombre de neurones, le nombre de paramètres du réseau est en $O(N^2)$, correspondant à un principe de transmission du signal \textit{de plusieurs à plusieurs} (un neurone envoie son signal de sortie vers plusieurs destinataires, un neurone reçoit des signaux de plusieurs émetteurs).
@@ -1176,7 +1176,39 @@ Dans une chaîne de traitement séquentiel, chaque couche de
 traitement est constituée d'un certain nombre de filtres sélectionnant 
 certaines caractéristiques de la scène sensorielle. Puis les couches suivantes effectuent
 des combinaisons de ces filtres, puis les suivantes des combinaisons de combinaisons etc.
-On parle en anglais de ``pattern matching'' que nous avons traduit ici par ``appariement''.
+On parle  de ``pattern matching''.
+
+\paragraph{}
+Le  ``pattern matching'' (correspondance de forme)
+est l'opération consistant 
+à mettre en correspondance un modèle $\boldsymbol{w}$ (patron) avec une forme $\boldsymbol{I}$ (signal), dans le cas le plus simple
+via un produit scalaire $\langle\boldsymbol{w},\boldsymbol{I}\rangle$. 
+On utilisera ici le terme ``appariement'' comme traduction de ``pattern matching''.
+
+Le principe de l'appariement appartient au monde de 
+l'apprentissage automatique et du traitement du signal~:
+\begin{itemize}
+	\item Il prend historiquement ses racines dans la décomposition
+	de Fourier, et s'est développé d'une part sous la forme de la compression de signal, 
+	comme par exemple la décomposition en des ondelettes, ou plus généralement sur des bases de filtres orthogonaux
+	ou pas, incomplets, complets ou ``surcomplets''.
+	\item L'appariement est également le principe 
+	à la base des algorithmes d'apprentisage automatique, où des dictionnaires $\{\boldsymbol{w}_1, ..., \boldsymbol{w}_K\}$ se construisent par 
+	extraction d'invariants morphologiques (ou vecteurs caractéristiques) à partir des données présentées.
+\end{itemize} 
+
+Cette approche se traduit en modélisation neuronale par le terme de
+``champ récepteur'', avec une réponse maximale de la cellule lorsque le signal correspond à la forme 
+fixée \shortcite{HUBELWIESEL62}. 
+Elle donne naissance à la reconnaissance par dictionnaire de formes, très utilisée 
+à la fois en traitement d'images et pour les modèles de la perception visuelle \shortcite{Rao1999}.
+L'apprentissage de vecteurs caractéristiques est au cœur des théories de l'apprentissage automatique, où
+les patrons caractéristiques sont déduits des données présentées \shortcite{Vapnik1998}.
+%Par exemple : apprentissage d'une base de filtres via des algos de type EM.
+
+
+
+
 Différents algorithmes permettent, comme nous le verrons par la suite, de 
 construire de telles chaînes de traitement de manière automatique à partir d'une simple 
 base d'exemples, via des mécanismes d'{``auto-encodage''}.
@@ -1289,35 +1321,34 @@ On note $n \leq N$ le nombre de degrés de liberté sur lesquels évolue  \texti
 	\item lorsqu'au contraire l'entrée suscite l'activation d'une assemblée neuronale spécifique, la valeur de $n$  tend à être faible (quelques unités) 
 \end{itemize} 
 
-\paragraph{}
-Cette approche permet plus généralement de distinguer des signaux ``stabilisateurs'', tendant à corréler les neurones, des signaux déstabilisateurs, tendant à décorréler les neurones.
-L'étude de la dimension effective de l'activité induite permet, entre autres, d'opérer une séparation entre~:
-\begin{itemize}
-	\item les signaux d'entrée qui induisent une réduction de la dynamique
-	\item et ceux qui ne font pas.
-\end{itemize}
-Cette distinction, au sein de l'espace des signaux d'entrée, entre signaux réducteurs et signaux non-réducteurs correspond à un principe de \textit{sélection}.
 
 De manière schématique, 
 \begin{itemize}
-	\item une activité à faible nombre de degrés de liberté correspond à un réseau de neurones ``activé'' (le signal est sélectionné).
-	\item une activité à haut nombre de degrés de liberté correspond à un réseau de neurones ``inactif'' (le signal est rejeté).
+	\item une activité à faible nombre de degrés de liberté correspond à un réseau de neurones ``activé''.
+	\item une activité à haut nombre de degrés de liberté correspond à un réseau de neurones ``inactif''.
 \end{itemize}
 Cette notion d'activation ``macroscopique'' est à distinguer de l'activation  ``microscopique'' des neurones.
 On parlera par la suite de \textit{réponse de population} (ou réponse collective)  lorsque le réseau ``réagit'' ainsi à une entrée particulière en réduisant son nombre de degrés de liberté.
 
 \paragraph{Appariement / rejet}\label{page:appariement-conditionnel}
-Contrairement aux classifieurs traditionnels qui apparient \textit{nécessairement} le signal d'entrée avec une des formes stockées dans la structure, la séparation de l'espace des signaux entre signaux réducteurs et signaux non-réducteurs s'apparente à un opérateur  d'\textit{appariement conditionnel} tel que~:
+
+La mesure de la dimension effective permet donc de distinguer des signaux ``stabilisateurs'', tendant à corréler les neurones, des signaux déstabilisateurs, tendant à décorréler les neurones.
+Cette séparation entre les signaux d'entrée qui induisent une réduction de la dynamique
+et ceux qui ne font pas
+correspond en outre à un principe de \textit{sélection}
+%
+%Contrairement aux classifieurs traditionnels qui apparient \textit{nécessairement} le signal d'entrée avec une des formes stockées dans la structure, la séparation de l'espace des signaux entre signaux réducteurs et signaux non-réducteurs s'apparente à un opérateur  d'\textit{appariement conditionnel} 
+tel que~:
 \begin{itemize}
-	\item les signaux de forme connue s'apparient avec une des formes stockées dans le réseau;
-	\item les signaux inconnus ne s'apparient avec aucune des formes stockées dans le réseau et sont \textit{rejetés}.  
+	\item La réduction signe l'appariement avec une des formes stockées dans le réseau, et désigne les signaux connus.
+	\item L'absence de réduction signe l'absence d'appariement avec les formes stockées dans le réseau, et désigne les signaux inconnus.  
 \end{itemize}
 
-\paragraph{}Autrement dit l'appariement conditionnel (avec rejet) autorise le réseau à \textit{ne pas choisir}. Parmi l'ensemble des réponses possibles, le réseau produit la réponse ``je ne sais pas'' lorsque le signal présenté n'est pas suffisamment proche d'une forme connue.
+\paragraph{}Ce type d'appariement dit conditionnel (avec rejet) autorise le réseau à \textit{ne pas nécessairement choisir} parmi l'ensemble des choix possibles. Autrement dit, le réseau peut produire la réponse ``je ne sais pas'' lorsque le signal présenté n'est pas suffisamment proche d'une forme connue.
 
 \begin{itemize}
 	\item Ce rejet des entrées inconnues correspond, dans la littérature statistique, au principe de ``rejet de distance'', lorsqu'un phénomène observé est trop éloigné du modèle et classé comme ``aberrant''.
-	\item une implémentation connue de ce principe dans le cadre des réseaux de neurones est le réseau ART \cite{ART98}, qui implémente un principe de ``vigilance'' correspondant à l'identification d'une entrée non-référencée par le réseau.
+	\item Une implémentation connue de ce principe dans le cadre des réseaux de neurones est le réseau ART \cite{ART98}, qui implémente un principe de ``vigilance'' correspondant à l'identification d'une entrée non-référencée par le réseau.
 	\item Ce principe de sélection par la dynamique d'un réseau récurrent a 
 	été exprimé dans les travaux de Walter Freeman \shortcite{ska87} dans le cadre d'un modèle de la perception des odeurs.
 \end{itemize}
@@ -1328,6 +1359,10 @@ Contrairement aux classifieurs traditionnels qui apparient \textit{nécessaireme
 
 \subsubsection{(ii) Plasticité}
 
+La synapse biologique est l'interface permettant la communication entre les neurones.
+Il s'agit d'une petite surface d'échange chimique (``bouton'' synaptiques) située à l'extrémité de l'arborisation terminale des axones. A l'arrivée d'un potentiel d'action, les synapses libèrent des neurotransmetteurs qui agissent sur les canaux ioniques des dendrites de la cellule post-synaptique (``libèrent'' des ions), ce qui a pour effet de modifier le potentiel de membrane de la cellule post-synaptique.
+
+L'efficacité d'une synapse dépend de plusieurs facteurs, comme la taille du bouton synaptique, la quantité de neurotransmetteurs disponibles,  ainsi que la sensibilité de la cellule post-synaptique. Dans le cadre de ce mémoire,  cet ensemble de facteurs est résumé  sous la forme d'une valeur unique $J_{ij}$ : le ``poids'' de la synapse, où  $j$ est l'index du neurone pré-synaptique et $i$ l'index du neurone post-synaptique.
 
 La plasticité synaptique est un mécanisme biologique qui modifie l'efficacité de la synapse au cours du temps. En reprenant 
 les notations de l'équation (\ref{eq:SD}), 
@@ -1336,16 +1371,19 @@ les notations de l'équation (\ref{eq:SD}),
 &\boldsymbol{J}' = \psi(\boldsymbol{x},\boldsymbol{J},t) \label{eq:SD-plast-J}
 \end{align}
 où $\boldsymbol{x}$ est un vecteur représentant l'état du système dynamique et $\boldsymbol{J}$ une matrice représentant le graphe de connexions.
+
+Dans le cadre de ce mémoire, on considérera l'évolution des poids synaptiques comme ``lente'' par rapport à la dynamique d'activation (autrement dit que les poids synaptiques sont quasi-stationnaires sur de petits intervalles de temps).
 La plasticité (eq. \ref{eq:SD-plast-J})
 modifie donc les caractéristiques de la fonction de réponse des neurones (eq. \ref{eq:SD-plast-x}) et vice-versa. 
 Le mécanisme de plasticité introduit une interdépendance complexe entre le graphe, l'activité et le signal d'entrée s'il existe.
+Cette dynamique lente a un impact sur le comportement du réseau de neurones sur le long terme. 
 
-Le modèle de plasticité synaptique le mieux établi est la \textit{règle de Hebb} \shortcite{Heb49}, confirmée à de nombreuses reprises par les observations \shortcite{Bli73,BIPOO98}. 
-La règle de Hebb inscrit dans la structure du graphe les conjonctions d'activité pré et post-synaptique se produisant de façon répétée au cours du temps.
+
 % (voir section \ref{sec:app-plast}). 
 
 Dans le cadre 
-proposé par Donald Hebb en 1949, la plasticité est essentiellement un mécanisme local dépendant des échanges entre les cellules pré et post-synaptiques. On parle de potentiation à long terme (Long Term Potentiation - LTP). Le poids $J_{ij}$ est alors une quantité qui évolue au cours du temps sous la forme :
+proposé par Donald Hebb en 1949, la plasticité est essentiellement un mécanisme \textit{local} dépendant des échanges entre les cellules pré et post-synaptiques. La règle de Hebb inscrit dans la structure du graphe les conjonctions d'activité pré et post-synaptique se produisant de façon répétée au cours du temps. 
+Le poids $J_{ij}$ est alors une quantité qui évolue au cours du temps sous la forme :
 \begin{align}
 	\dot{J}_{ij} = F(\boldsymbol{S}_i(t), \boldsymbol{S}_j(t), J_{ij}) \label{eq:plast-hebb}
 \end{align}
@@ -1355,8 +1393,13 @@ et $F$ la fonction de mise à jour des synapses.
 %La plasticité est donc essentiellement un mécanisme \textit{local} qui modifie le couplage des cellules $i$ et $j$ en fonction 
 %de leurs activités respectives.  
 
+Il s'agit essentiellement, selon l'idée initiale de Hebb, d'un mécanisme 
+de sélection dans lequel \textit{des activités corrélées tendent à se connecter, et des activité décorrélées à se déconnecter}. 
+Ce modèle de plasticité synaptique, dite ``potentiation à long terme'' (Long Term Potentiation - LTP). \shortcite{Heb49}, a été confirmée à de nombreuses reprises par les observations \shortcite{Bli73,BIPOO98}. 
 
-La plasticité de Hebb est une règle de modification locale du graphe fondée sur les conjonctions d'activité pré- et post-synaptiques. 
+%La règle de Hebb s'interprète donc généralement comme une règle qui inscrit dans le graphe la structure de covariance présente dans l'activité des neurones. 
+Lorsque l'activité est elle-même induite par le signal d'entrée, le graphe reflète en partie les covariances présentes dans le signal.
+%La plasticité de Hebb est une règle de modification locale du graphe fondée sur les conjonctions d'activité pré- et post-synaptiques. 
 La règle de Hebb est une règle essentiellement additive et s'interprète comme la règle de ``\textit{plus du même}''. 
 En pratique, le mécanisme facilitateur de Hebb est couplé avec un mécanisme stabilisateur (soustractif) qui évite la divergence du processus (via un principe de sélection compétitive) \cite{abbott00}.  
 
@@ -1381,7 +1424,7 @@ Les implémentations les plus connues du principe de Hebb sont~:
 
 
 
-\paragraph{Assemblées neuronales} Le principe de plasticité par conjonction d'activité est articulé, dans le livre de Hebb, avec le concept d'\textit{assemblée neuronale} \cite{Heb49}. 
+\subsubsection{Assemblées neuronales} Le principe de plasticité par conjonction d'activité est articulé, dans le livre de Hebb, avec le concept d'\textit{assemblée neuronale} \cite{Heb49}. 
 Une assemblée neuronale\footnote{La notion d'assemblée se distingue de la notion de population~: 
 	\begin{itemize}
 		\item les populations de neurones sont définies par des caractères anatomiques ou architecturaux
@@ -1407,9 +1450,9 @@ La perspective des assemblées neuronales permet de voir les réseaux de neurone
 .
 
 
-\subsubsection{Activité de champ moyen}
+\paragraph{Champ moyen}
 
- On retrouve une idée voisine dans les travaux de Hermann Haken \shortcite{Haken1983}, qui a conceptualisé le principe de réponse par réduction de la dynamique collective à travers la notion de \textit{paramètre d'ordre}, permettant de constituer une ``variété centrale'' sur laquelle le système dynamique évolue (\textit{center manifold reduction}).
+ De manière plus quantitative, on trouve une idée voisine dans les travaux de Hermann Haken \shortcite{Haken1983}, qui a conceptualisé le principe de réponse par réduction de la dynamique collective à travers la notion de \textit{paramètre d'ordre}, permettant de constituer une ``variété centrale'' sur laquelle le système dynamique évolue (\textit{center manifold reduction}).
  Un paramètre d'ordre peut être vue comme une \textit{unité de description} de l'activité d'un système dynamique, généralement de grande taille.
  Dans le cas de l'étude des transitions de phase dans les milieux désordonnés, permet de mesurer un type d'organisation spécifique. Il est ``caractéristique'' de cette organisation spécifique \shortcite{Wei89}.
 
@@ -1482,7 +1525,7 @@ où:
 Le principe d'assemblée neuronale s'interprète principalement dans le cadre des réseaux de neurones récurrents. 
 Nous avons vu que les réseaux de neurones récurrents sont capables de développer une activité propre (activité ``endogène''), c'est à dire que les neurones peuvent demeurer dans un état ``actif'' en absence de stimulation extérieure. Cette activité interne repose sur la transmission ``en boucle'' de l'activité des neurones sur le graphe. 
 
-Dans ce cadre, une assemblée peut être vue comme une séquence d'activation interne stable au cours du temps. On parle parfois de ``chaîne d'activation'' \--- \textit{synfire chain} \shortcite{Abe93}. Un certain nombre de modèles artificiels implémentent ce principe, comme le modèle des  ``groupes polychrones'' 
+Dans ce cadre, une assemblée peut être vu comme une séquence d'activation interne stable au cours du temps. On parle parfois de ``chaîne d'activation'' \--- \textit{synfire chain} \shortcite{Abe93}. Un certain nombre de modèles artificiels implémentent ce principe, comme le modèle des  ``groupes polychrones'' 
 postulé par \shortcite{Izh06}.
 
 {\color{Gray}	
@@ -1568,36 +1611,24 @@ Ce chapitre présente les différentes approches d'un point de vue mathématique
 
 
 \section{Apprentissage et plasticité}\label{sec:app-plast}
-\subsection{L'appariement (``Pattern matching'')}
 
-Le  ``pattern matching'' (correspondance de forme)
-est l'opération consistant 
-à mettre en correspondance un modèle $\boldsymbol{w}$ (patron) avec une forme $\boldsymbol{I}$ (signal), dans le cas le plus simple
-via un produit scalaire $\langle\boldsymbol{w},\boldsymbol{I}\rangle$. 
-On utilisera ici le terme ``appariement'' comme traduction de ``pattern matching''.
 
-Le principe de l'appariement appartient au monde de 
-l'apprentissage automatique et du traitement du signal~:
+Selon une perspective biologique et développementale, l'apprentissage
+est le processus de changement comportemental, 
+en relation avec ce mécanisme de plasticité. 
+L'apprentissage est au sens large
+l'ensemble des processus épigénétiques (historiques) inscrivant dans l'animal ou l'individu 
+les éléments d'expérience qui contribuent à accroître l'adaptation de ses réponses à son
+milieu.  
+
+Cette capacité à inscrire des événements ou des faits particuliers en vue de les exploiter dans le futur est une des
+propriétés essentielle du système nerveux des être vivants. 
+Mieux comprendre les mécanismes biologiques qui sous-tendent cet apprentissage est un des défis majeurs pour les neurosciences computationnelles. Si la plasticité synaptique semble être le principe explicatif majeur de l'apprentissage, il reste encore de nombreuses zones d'ombre 
 \begin{itemize}
-	\item Il prend historiquement ses racines dans la décomposition
-	de Fourier, et s'est développé d'une part sous la forme de la compression de signal, 
-	comme par exemple la décomposition en des ondelettes, ou plus généralement sur des bases de filtres orthogonaux
-	ou pas, incomplets, complets ou ``surcomplets''.
-	\item L'appariement est également le principe 
-	à la base des algorithmes d'apprentisage automatique, où des dictionnaires $\{\boldsymbol{w}_1, ..., \boldsymbol{w}_K\}$ se construisent par 
-	extraction d'invariants morphologiques (ou vecteurs caractéristiques) à partir des données présentées.
-\end{itemize} 
-
-Cette approche se traduit en modélisation neuronale par le terme de
-``champ récepteur'', avec une réponse maximale de la cellule lorsque le signal correspond à la forme 
-fixée \shortcite{HUBELWIESEL62}. 
-Elle donne naissance à la reconnaissance par dictionnaire de formes, très utilisée 
-à la fois en traitement d'images et pour les modèles de la perception visuelle \shortcite{Rao1999}.
-L'apprentissage de vecteurs caractéristiques est au cœur des théories de l'apprentissage automatique, où
-les patrons caractéristiques sont déduits des données présentées \shortcite{Vapnik1998}.
-%Par exemple : apprentissage d'une base de filtres via des algos de type EM.
-
-
+	\item sur les caractéristiques précises de cette plasticité;
+	\item sur les mécanismes de choix qui vont sélectionner certains signaux et certains événements plus significatifs;
+	\item sur les déterminants macroscopiques des changements microscopiques et vice-versa.
+\end{itemize}
 
 \subsection{Apprentissage automatique}
 
@@ -2343,17 +2374,17 @@ Par ailleurs~:
 	\end{itemize}  	
 \end{itemize}
 
-{\color{Gray}
-Les travaux présentés sont centrés sur l'apprentissage au sens large et plus particulièrement l'apprentissage moteur.
-Dans le cadre de ce rapport, nous regardons plus particulièrement les contraintes suivantes~:
-\begin{itemize}
-	\item Existence d'une activité endogène, produite par la transmission
-	en boucle du signal produit par les neurones à travers un graphe de connexions récurrentes.
-	\item Utilisation de graphes aléatoires pour décrire les interactions entre les neurones. Les neurones sont donc branchés aléatoirement sur tout ou partie de leurs voisins.
-	\item Caractère local de la plasticité synaptique. Seuls les signaux pré et post-synaptiques déterminent les changements structuraux.
-	\item Existence de boucles de rétroaction entre le réseau de neurones et son environnement. Les entrées du réseau sont causalement liées aux réponses produites par le réseau aux instants précédents. 
-\end{itemize}
-}
+%{\color{Gray}
+%Les travaux présentés sont centrés sur l'apprentissage au sens large et plus particulièrement l'apprentissage moteur.
+%Dans le cadre de ce rapport, nous regardons plus particulièrement les contraintes suivantes~:
+%\begin{itemize}
+%	\item Existence d'une activité endogène, produite par la transmission
+%	en boucle du signal produit par les neurones à travers un graphe de connexions récurrentes.
+%	\item Utilisation de graphes aléatoires pour décrire les interactions entre les neurones. Les neurones sont donc branchés aléatoirement sur tout ou partie de leurs voisins.
+%	\item Caractère local de la plasticité synaptique. Seuls les signaux pré et post-synaptiques déterminent les changements structuraux.
+%	\item Existence de boucles de rétroaction entre le réseau de neurones et son environnement. Les entrées du réseau sont causalement liées aux réponses produites par le réseau aux instants précédents. 
+%\end{itemize}
+%}
 
 
 Je liste ici  quelques résultats que je considère comme significatifs~:
@@ -2773,7 +2804,7 @@ c'est à dire par décomposition de la tâche complète en sous-tâches élémen
 
 \subsubsection{j. L'appariement par ``accumulation d'évidence'' implémente un mécanisme de mise à jour et de révision des croyances dans un espace de choix concurrents.}
 
-Les modèles probabilistes basés sur des processus stochastiques markoviens (voir equations (\ref{eq:accum1}) - (\ref{eq:accum2})) sont très populaires en modélisation biologiquement inspirée du fait de leur capacité rendre compte des profils de réponse extrêmement bruités à la fois de l'activité neuronale et des réponses comportementales.
+Les modèles probabilistes basés sur des processus stochastiques Markoviens (voir equations (\ref{eq:accum1}) - (\ref{eq:accum2})) sont très populaires en modélisation biologiquement inspirée du fait de leur capacité rendre compte des profils de réponse extrêmement bruités à la fois de l'activité neuronale et des réponses comportementales.
 Les processus markoviens peuvent également implémenter, au même titre que les modèles déterministes, les phénomènes d'activité persistante, de rémanence et de mémoire à court terme, etc.
 
 Nous considérons ici le cadre 
@@ -2789,94 +2820,57 @@ L'évolution de $\hat{f}$ au cours du temps décrit le processus de mise à jour
 
 Dans le cadre des modèles de l'appariement, l'évolution temporelle de  $\hat{f}$ modélise un mécanisme de décision par délibération, où, comme dans le cas des réseaux de neurones récurrents, plusieurs ``passages'' sont nécessaires pour aboutir à un compromis. L'estimation faite à l'instant $t$ sert de prior pour affiner l'estimation à l'instant $t+1$. 
 
-{\color{Cyan}
-[il manque des refs sur le sampling temporel et les intégrateurs neuronaux  \shortcite{Gold2001,Simen2011,khoei2013}
-/ la simulation motrice \cite{Haruno2001}]
-}
+%{\color{Cyan}
+%[il manque des refs sur le sampling temporel et les intégrateurs neuronaux  
+%/ la simulation motrice \cite{Haruno2001}]
+%}
 
 \begin{itemize}
-	\item Le modèle présenté dans \shortcite{Malhotra2011} reproduit des données psychométriques sur les temps de réponse à des ``périodes préparatrices'' de longueur variable (``variable foreperiod''). Plusieurs modèles génératifs $P_1, ..., P_k$ sont mis en concurrence. Le défilement du temps au cours d'un essai permet d'éliminer certaines hypothèses, réduisant l'incertitude et les temps de réponse au stimulus.
-	\item Une application récente de ce mécanisme concerne les interfaces cerveau-machine de type ``clavier virtuel P300'' \shortcite{Dau14b}. Le programme repose sur un modèle générique de la réponse EEG au stimulus cible (dite ``onde P300''). Le mécanisme d'accumulation  permet ici d'optimiser les temps de réponse du dispositif. Un seuil de décision définit l'instant où suffisamment d'évidence a été accumulée pour afficher la lettre courante et passer à la suivante.  
+	\item Le modèle présenté dans \shortcite{Malhotra2011} (voir page \pageref{sec:orientation-temporelle} et annexe \ref{app:CNS11A}) reproduit des données psychométriques sur les temps de réponse à des ``périodes préparatrices'' de longueur variable (``variable foreperiod''). Plusieurs modèles génératifs $P_1, ..., P_k$ sont mis en concurrence. Le défilement du temps au cours d'un essai permet d'éliminer certaines hypothèses, réduisant l'incertitude et les temps de réponse au stimulus.
+	\item Une application de ce mécanisme concerne les interfaces cerveau-machine de type ``clavier virtuel P300'' \shortcite{Dau14b} (voir page \pageref{sec:BCI} et annexe \ref{app:ESANN14B}). Le programme repose sur un modèle générique de la réponse EEG au stimulus cible (dite ``onde P300''). Le mécanisme d'accumulation  permet ici d'optimiser les temps de réponse du dispositif. Un seuil de décision définit l'instant où suffisamment d'évidence a été accumulée pour afficher la lettre courante et passer à la suivante.  
 \end{itemize}
-Ces algorithmes reposent par ailleurs sur des modèles paramétriques de la mesure, qui permettent la mise à jour du modèle après chaque série de mesures, selon le principe du maximum de vraisemblance, implémenté via une descente de gradient ou via l'algorithme EM (voir page \pageref{eq:Friston}). 
+
+De manière générale, ces modèles rendent compte du passage du temps dans l'élaboration d'une réponse, autrement dit modélisent un processus de délibération.
+De nombreux modèles de la perception utilisent ces principes pour rendre compte des temps de réponse à des stimuli plus ou moins ambigus \shortcite{Gold2001,Simen2011,khoei2013}.
+Les modèles mis en place dans le cadre de l'orientation temporelle \shortcite{Malhotra2011} se placent sur des échelles de temps un peu plus grandes (plusieurs secondes), qui les rapprochent des modèles probabilistes du contrôle moteur \shortcite{Wolpert2000,Haruno2001} suggèrant un lien possible entre l'estimation temporelle et la simulation motrice \cite{Jeannerod2001}. 
+
+\paragraph{}Par ailleurs, ces algorithmes reposent  sur des modèles paramétriques de la mesure, qui permettent la mise à jour du modèle après chaque série de mesures, selon le principe du maximum de vraisemblance, implémenté via une descente de gradient ou via l'algorithme EM (voir page \pageref{eq:Friston}). 
  \begin{itemize}
  	\item Dans le cas du clavier virtuel P300, la mise à jour du modèle de la mesure permet, en partant d'un modèle d'utilisateur générique, d'adapter l'interface à l'utilisateur, ce qui améliore la réactivité de l'interface au fur et à mesure de son utilisation \cite{Dau14b}
  	\item Par ailleurs, de manière analogue à \shortcite{Kivinen2004}, l'utilisation d'un terme de régularisation dans la mise à jour réalise un modèle de mesure ``glissant'' qui permet de s'adapter aux non-stationnarités de l'environnement \shortcite{Dauce2013b,Dauce2015}.
  \end{itemize}
 
-{\color{Violet}
-L'idée est donc que la réactivité au stimulus (readiness) est proportionnelle à cette probabilité 
-estimée d'apparition.
 
-Nous avons regardé en particulier le cas de la période préparatrice variable (``variable foreperiod''), 
-où les stimuli apparaissant à des intervalles variant d'un essai à l'autre.
-Dans ce cas, les temps de réponse
-indiquent une meilleure réactivité pour les intervalles
-les plus longs. Ainsi les ressources attentionnelles ne sont pas équitablement
-réparties.
-Conformément à un principe de révision des croyances, 
-le passage du temps permet en effet d'éliminer les hypothèses
-portant sur les intervalles courts, donnant plus de vraisemblance 
-(et donc des temps de réaction plus courts) 
-aux hypothèses les plus tardives. 
+\subsubsection{k. La durée d'une commande balistique peut être contrôlée par un mécanisme d'intégration sous-liminaire}
 
-
-Les modèles mis en place dans le cadre de l'orientation temporelle \shortcite{Malhotra2011} mettent à
-jour des mécanismes prenant place sur des échelles de l'ordre plusieurs secondes, 
-qui semblent quant à eux liés à la simulation motrice via une possible boucle réentrante. 
-Le principe de boucle réentrante dans lequel des états de l'environnement sont progressivement invalidés 
-s'apparente à un mécanisme d'accroissement d'évidence dans 
-le cadre de la mise en concurrence d'hypothèses variées, analogue fonctionnellement aux schémas
-basés sur l'accumulation d'évidence (ou vraisemblance Bayésienne) \shortcite{Wolpert2000,Haruno2001}.
-Ces mêmes schémas sont par ailleurs mis en oeuvre dans la réalisation d'architectures de contrôle
-très concrètes dans un cadre de traitement du signal pur (interfaces cerveau-machines) \shortcite{Thomas2014}.
-
-}
-
-{\color{Cyan}
-\subsubsection{k. Commande balistique et intégratin sous-liminaires}
-}
-{\color{Violet}
-L'orientation visuelle est un comportement moteur très spécifique, qui 
-s'apparente plus au monde de la perception qu'au monde de la motricité, reposant sur des circuits de
-contrôle distincts des circuits de commande de l'appareil moteur.
-Ce système, situé dans le tectum (partie supérieure du tronc cérébral) 
-au niveau des couches profondes
-du colliculus supérieur, développe une activité topographiqement organisée responsable de la commande
-des mouvements rapides des globes oculaires.
-
-Même si on se limite aux saccades à tête fixe, le circuit de la commande saccadique demeure assez complexe
-et non totalement élucidé. Si l'on exclut les étapes de traitement visuel conduisant à l'identification
-d'un point d'intérêt en périphérie de la rétine, la structure au carrefour de la transformation 
+	L'orientation visuelle est un comportement moteur très spécifique, qui 
+	s'apparente plus au monde de la perception qu'au monde de la motricité, reposant sur des circuits de
+	contrôle distincts des circuits de commande de l'appareil moteur.
+La saccade oculaire est un mouvement présent chez l'ensemble des vertébrés consistant à orienter 
+la partie centrale de la rétine (la fovea) vers un point d'intérêt de l'espace visuel.
+Le comportement d'orientation saccadique, par opposition aux comportements locomoteurs
+ou alimentaires, est constitué de mouvements brefs (discrets), permettant 
+d'explorer la scène visuelle. La saccade oculaire est le prototype des mouvements 
+dits ``balistiques'', partant d'une posture initiale et s'achevant sur une posture finale
+(par opposition a des mouvements d'ajustement ou de contrôle guidé par 
+un feedback comme la poursuite oculaire par exemple).
+	
+La structure au carrefour de la transformation 
 visuo-motrice est
 une carte rétinotopique située sur la partie supérieure du tectum,
 appelée le colliculus supérieur. 
-Le déclenchement de la saccade implique 
-de nombreuses catégories de neurones du tronc cérébral, incluant des inhibiteurs toniques,
-des neurones prémoteurs excitateurs et inhibiteurs variés appartenant à la formation réticulée, 
-une dérivation via le cervelet et enfin des motoneurones oculaires. 
+L'étude présentée dans \shortcite{Dauce2011} (voir page \pageref{sec:orientation-spatiale} et annexe \ref{app:CNS11B}), c'est à dire sur un intervalle temporel précis, ``programmé''.
+Notre étude, en implémentant de façon détaillée des populations de neurones à impulsions, 
+\begin{itemize}
 
-L'étude et la reproduction des mécanismes neuronaux d'orientation visuelle,
-tels que tentés dans \shortcite{Dauce2011},
-montrent l'existence d'une activité autonome contrôlée dans le temps et dans l'espace sur
-la durée de la saccade (100~ms environ), c'est à dire sur un intervalle temporel précis, ``programmé''.
-Notre étude, en implémentant de façon très détaillée les populations de neurones en jeu, 
-a permis de 
-souligner l'importance sans doute sous-évaluée des neurones d'une structure 
-de la région réticulaire (centro-medial reticular formation - cMRF) dans le contrôle de la saccade. 
-}
+	\item simule l'activité autonome d'une carte colliculaire bidimensionnelle constituée de plusieurs milliers de neurones
+	\item implémente un mécanisme de décision par ``levée d'inhibition'' 
+		\item contrôle l'activité sur la carte dans le temps et dans l'espace via des mécanismes d'\textit{intégration}
+	\item utilise, pour le contrôle de la durée (100~ms environ), des neurones à constante de membrane lente, 
+	faisant l'économie d'un mécanisme d'intégration par population.
+\end{itemize}
 
-{\color{Cyan}
-L'étude des mouvements d'orientation visuelle constitue un champ de recherche à part entière en neurosciences.
-
-poursuite vs. commande balistique.
-
-Rôle des intégrateurs neuronaux
-
-Mécanisme de décision par ``levée d'inhibition'' (niveau ellulaire etnon au niveau de population)
-}
-
-
+Nous montrons donc que des mécanismes d'intégration sous-liminaires (en dessous du seuil de tir) peuvent contrôler l'intégralité du circuit de la saccade oculaire, et plus généralement la durée de mouvement balistiques dont la durée n'excède pas la centaine de millisecondes.
 
 \subsubsection{l. En présence de signaux de renforcement binaires instantanés, l'apprentissage par exploration non-stochastique a les mêmes bornes d'erreur que l'apprentissage supervisé.}
 
@@ -3120,6 +3114,19 @@ sur certains aspects du calcul neuronal.
 	de répondre aux sollicitations de l'environnement qui laisse de la marge à un certain libre-arbitre.}
 }
 
+
+
+{\color{Cyan}
+	Les mêmes principes ont été observés à différentes échelles :
+	
+	- temporellement : de la dizaine de milliseconde à la dizaine de secondes. 
+	
+	- spatialement : de l'activité d'un neurone à spikes à la commmande motrice. appariement avec seuil (avec rejet)
+	
+	Mécanisme de délibération inscrit dans le temps : relaxation / 
+	
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -3155,6 +3162,7 @@ un changement de référentiel, prédit la disposition de ces mêmes objets sur 
 Si l'on souhaite construire des dispositifs artificiels capable d'apprendre des tâches motrices de la même manière qu'ils apprennent à classifier des signaux et des images, il faut opérer un renversement conceptuel en théorie du contrôle afin de rendre compatible le contrôle moteur avec l'apprentissage, en particulier \textit{utiliser les principes du feedback positif et de l'appariement pour le contrôle moteur.}
 
 Cette approche implique, comme dans le cas de l'analyse des signaux, une \textit{décomposition de l'espace des tâches} en tâches élémentaires, autrement dit la capacité à constituer de très nombreux circuits de commande associés à des configurations précises de l'environnement. 
+
 
 \subsubsection{Espace visuel et espace pré-moteur}
 L'activité humaine est fortement guidée par la composante visuelle.
@@ -4626,7 +4634,7 @@ montre que la réponse de
 population à des stimuli spatio-temporels suit une séquence reproductible (mais bruitée) qui 
 peut être amplifiée par la plasticité.
 La sensibilité acquise à des patrons spatio-temporels spécifiques, telles qu'existant également dans les modèles fréquentiels (voir chapitre \ref{sec:FPos}), 
-peut donc etre observée à l'échelle de quelques millisecondes, mettant en jeu un faible nombre de spikes par neurone.
+peut donc être observée à l'échelle de quelques millisecondes, mettant en jeu un faible nombre de spikes par neurone.
 La clé semble donc être la mise en évidence de mécanismes similaires à différentes échelles, les opérations
 à échelle temporelle courte étant elles-même ``portées'' (ou embarquées) dans des opérations à échelle temporelle plus larges.
 
@@ -4753,10 +4761,7 @@ Ce chapitre est consacré à l'étude des mécanismes d'apprentissage dans les r
 
 \subsection{Plasticité synaptique}
 
-La synapse biologique est l'interface permettant la communication entre les neurones.
-Il s'agit d'une petite surface d'échange chimique (``bouton'' synaptiques) située à l'extrémité de l'arborisation terminale des axones. A l'arrivée d'un potentiel d'action, les synapses libèrent des neurotransmetteurs qui agissent sur les canaux ioniques des dendrites de la cellule post-synaptique (``libèrent'' des ions), ce qui a pour effet de modifier le potentiel de membrane de la cellule post-synaptique.
 
-L'efficacité d'une synapse dépend de plusieurs facteurs, comme la taille du bouton synaptique, la quantité de neurotransmetteurs disponibles,  ainsi que la sensibilité de la cellule post-synaptique. Dans le cadre de ce mémoire,  cet ensemble de facteurs est résumé  sous la forme d'une valeur unique $J_{ij}$ : le ``poids'' de la synapse, où  $j$ est l'index du neurone pré-synaptique et $i$ l'index du neurone post-synaptique.
 
 
 
@@ -4764,11 +4769,7 @@ L'efficacité d'une synapse dépend de plusieurs facteurs, comme la taille du bo
 
 
 {\color{Orange} Il existe, du point de vue biologique, des mécanismes de plasticité synaptique à court terme [REF STD] et à long terme [REF LTP]. On parle de potentiation à court terme vs. potentiation à long terme.}
-Dans le cadre de ce mémoire, on considérera l'évolution des poids synaptiques comme ``lente'' par rapport à la dynamique d'activation (autrement dit que les poids synaptiques sont quasi-stationnaires sur de petits intervalles de temps).
 
-Cette dynamique lente a un impact sur le comportement du réseau de neurones sur le long terme. Il s'agit essentiellement, selon l'idée initiale de Hebb, d'un mécanisme 
-de sélection dans lequel des activités corrélées tendent à se connecter, et des activité décorrélées à se déconnecter. 
-La règle de Hebb s'interprète donc généralement comme une règle qui inscrit dans le graphe la structure de covariance présente dans l'activité des neurones. Lorsque l'activité est elle-même induite par le signal d'entrée, le graphe reflète en partie les covariances présentes dans le signal.
 
 {\color{Cyan}
 Exemples (avec maths):
@@ -4786,23 +4787,7 @@ Exemples (avec maths):
 
 \subsection{Apprentissage}
 
-\subsubsection{Perspective biologique}
-Selon une perspective biologique et développementale, l'apprentissage
-est le processus de changement comportemental, 
-en relation avec ce mécanisme de plasticité. 
-L'apprentissage est au sens large
-l'ensemble des processus épigénétiques (historiques) inscrivant dans l'animal ou l'individu 
-les éléments d'expérience qui contribuent à accroître l'adaptation de ses réponses à son
-milieu.  
 
-Cette capacité à inscrire des événements ou des faits particuliers en vue de les exploiter dans le futur est une des
-propriétés essentielle du système nerveux des être vivants. 
-Mieux comprendre les mécanismes biologiques qui sous-tendent cet apprentissage est un des défis majeurs pour les neurosciences computationnelles. Si la plasticité synaptique semble être le principe explicatif majeur de l'apprentissage, il reste encore de nombreuses zones d'ombre 
-\begin{itemize}
-	\item sur les caractéristiques précises de cette plasticité;
-	\item sur les mécanismes de choix qui vont sélectionner certains signaux et certains événements plus significatifs;
-	\item sur les déterminants macroscopiques des changements microscopiques et vice-versa.
-\end{itemize}
 
 
 
@@ -7149,8 +7134,19 @@ leur exposition à des signaux d'intérêt. Nous étudions deux modalités de ce
 	temporelle, c'est à dire la capacité du sujet à concentrer ses ressources attentionnelles à un instant choisi dans le temps.
 \end{itemize} 
 
-\subsubsection{Modèles de l'orientation spatiale}
+\subsubsection{Modèles de l'orientation spatiale}\label{sec:orientation-spatiale}
 
+
+
+	L'orientation visuelle est un comportement moteur très spécifique, qui 
+	s'apparente plus au monde de la perception qu'au monde de la motricité, reposant sur des circuits de
+	contrôle distincts des circuits de commande de l'appareil moteur.
+	Ce système, situé dans le tectum (partie supérieure du tronc cérébral) 
+	au niveau des couches profondes
+	du colliculus supérieur, développe une activité topographiqement organisée responsable de la commande
+	des mouvements rapides des globes oculaires.
+	
+	
 
 
 La saccade oculaire est un mouvement présent chez l'ensemble des vertébrés consistant à orienter 
@@ -7173,6 +7169,19 @@ Elle implique la traduction d'une activité exprimant des coordonnées spatiales
 vers une activité temporellement bornée exprimant une vélocité motrice transitoire.
 Une version simplifiée de la tâche est la saccade à tête fixe consistant à orienter le globe
 oculaire seul.
+
+Même si on se limite aux saccades à tête fixe, le circuit de la commande saccadique demeure assez complexe
+et non totalement élucidé. Si l'on exclut les étapes de traitement visuel conduisant à l'identification
+d'un point d'intérêt en périphérie de la rétine, la structure au carrefour de la transformation 
+visuo-motrice est
+une carte rétinotopique située sur la partie supérieure du tectum,
+appelée le colliculus supérieur. 
+Le déclenchement de la saccade implique 
+de nombreuses catégories de neurones du tronc cérébral, incluant des inhibiteurs toniques,
+des neurones prémoteurs excitateurs et inhibiteurs variés appartenant à la formation réticulée, 
+une dérivation via le cervelet et enfin des motoneurones oculaires. 
+
+
 
 Le colliculus est une carte topographique bilatérale (champ visuel droit, champ visuel gauche) 
 dont la stimulation électrique permet de déclencher des saccades.
@@ -7237,6 +7246,16 @@ inhibitrices à longue distance). Les projections directes des neurones collicul
 obéissent à un gradient exponentiel, l'amplitude de la saccade augmentant non linéairement
 avec l'excentricité. 
 
+L'étude et la reproduction des mécanismes neuronaux d'orientation visuelle,
+tels que tentés dans \shortcite{Dauce2011},
+montrent l'existence d'une activité autonome contrôlée dans le temps et dans l'espace sur
+la durée de la saccade (100~ms environ), c'est à dire sur un intervalle temporel précis, ``programmé''.
+Notre étude, en implémentant de façon très détaillée les populations de neurones en jeu, 
+a permis de 
+souligner l'importance sans doute sous-évaluée des neurones d'une structure 
+de la région réticulaire (centro-medial reticular formation - cMRF) dans le contrôle de la saccade. 
+
+
 Notre modèle repose sur l'hypothèse d'un contrôle effectué selon trois modalités:
 contrôle du déclenchement, contrôle de la vélocité et contrôle de la durée.
 Si la vélocité repose bien sur les projection directe du colliculus vers les neurones pré-moteurs,
@@ -7268,9 +7287,36 @@ des neurones prémoteurs présentait néanmoins des tracés de saccades moins pr
 %\includepdf[pages=2,offset=-70 -30]{pdf/2011-CNS-mouraud.pdf}
 
 
-\subsubsection{Modèles de l'orientation temporelle}
+\subsubsection{Modèles de l'orientation temporelle}\label{sec:orientation-temporelle}
 
-
+{\color{Violet}
+	L'idée est donc que la réactivité au stimulus (readiness) est proportionnelle à cette probabilité 
+	estimée d'apparition.
+	
+	Nous avons regardé en particulier le cas de la période préparatrice variable (``variable foreperiod''), 
+	où les stimuli apparaissant à des intervalles variant d'un essai à l'autre.
+	Dans ce cas, les temps de réponse
+	indiquent une meilleure réactivité pour les intervalles
+	les plus longs. Ainsi les ressources attentionnelles ne sont pas équitablement
+	réparties.
+	Conformément à un principe de révision des croyances, 
+	le passage du temps permet en effet d'éliminer les hypothèses
+	portant sur les intervalles courts, donnant plus de vraisemblance 
+	(et donc des temps de réaction plus courts) 
+	aux hypothèses les plus tardives. 
+	
+	
+	Les modèles mis en place dans le cadre de l'orientation temporelle \shortcite{Malhotra2011} mettent à
+	jour des mécanismes prenant place sur des échelles de l'ordre plusieurs secondes, 
+	qui semblent quant à eux liés à la simulation motrice via une possible boucle réentrante. 
+	Le principe de boucle réentrante dans lequel des états de l'environnement sont progressivement invalidés 
+	s'apparente à un mécanisme d'accroissement d'évidence dans 
+	le cadre de la mise en concurrence d'hypothèses variées, analogue fonctionnellement aux schémas
+	basés sur l'accumulation d'évidence (ou vraisemblance Bayésienne) \shortcite{Wolpert2000,Haruno2001}.
+	Ces mêmes schémas sont par ailleurs mis en oeuvre dans la réalisation d'architectures de contrôle
+	très concrètes dans un cadre de traitement du signal pur (interfaces cerveau-machines) \shortcite{Thomas2014}.
+	
+}
 
 La problématique de l'orientation temporelle est celle des mécanismes neuronaux supports de l'orientation de l'attention vers des instants
 précis, ``situés'' sur un axe temporel.
