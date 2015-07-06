@@ -932,7 +932,7 @@ Les résultats  ont été organisés autour de trois grandes thématiques~:
 \end{enumerate}
 
 
-\part{\color{Orange}Résultats et perspectives}
+\part{Vue d'ensemble}
 
 \chapter{Préambule}
 
@@ -1666,9 +1666,9 @@ Le choix de ces formes caractéristiques est bien sûr dépendant des capacités
 
 
 
-{\color{Gray}Reconnaissance de formes. Feedback positif / feedback négatif. Mémoire associative. interpolation. 
-	
-	Résonance.}
+%{\color{Gray}Reconnaissance de formes. Feedback positif / feedback négatif. Mémoire associative. interpolation. 
+%	
+%	Résonance.}
 
 
 
@@ -1717,9 +1717,9 @@ permettant de mieux prédire et classifier les données nouvelles.
 \paragraph{Exemples}
 \begin{itemize}
 	\item Les approches discriminatives \shortcite{Vap95}
-	extraient des représentants caractéristiques des données (vecteurs supports). {\color{Cyan} Vecteurs les plus discriminants.}
+	extraient des représentants caractéristiques des données (vecteurs supports  \-- vecteurs les plus discriminants).
 	\item Les approches prédictives \shortcite{Bishop2006}
-	identifient la source cachée des observations (les facteurs causaux) selon des modèles probabilistes pré-définis. {\color{Cyan} Vecteurs caractéristiques d'une classe.}
+	identifient la source cachée des observations (les facteurs causaux) selon des modèles probabilistes pré-définis. Elles définissent des vecteurs \textit{caractéristiques} d'une classe.
 	\item Les réseaux de neurones (voir section suivante), 
 	dont les caractéristiques propres (nombre de neurones, nombre de couches cachées, architecture
 	et patron de connexions), déterminent une
@@ -1776,21 +1776,20 @@ tels qu'il se sont développés depuis le perceptron \shortcite{Rosen58}, repose
 un principe de traitement séquentiel (``\textit{feed forward}'').
 %[REFERENCES : PMC, Vapnik, LeCun, ].
 %une notion implicite de ressource limitée.
-
-{\color{Cyan} Dans le calcul de la fonction de réponse $f_T$, les couches interédiaires implémentent les résultats de calcul intermédiaires.}
+%où les couches ``cachées'' implémentent les opérations de calcul intermédiaires.
 
 L'organisation d'un réseau à couches correspond à la transformation d'un signal d'entrée par étapes successives pour produire un signal de sortie. Les couches dites ``cachées'' correspondent à des étapes de calcul intermédiaires. 
 La programmation des modèles à couches repose sur un principe de \textit{propagation du signal d'erreur} dans le sens inverse de la propagation des données, de la sortie vers l'entrée \shortcite{RumAL86PDP}.  
 
 \begin{itemize}
 	\item Le modèle de perceptron le plus simple, possédant une cellule de sortie unique, sépare son espace d'entrée en deux régions.
-	{\color{Gray}
-	Les données provenant de la première région produisent une activité de sortie ``haute'', qui s'apparente
-	au {\color{Orange} mode ``actif''}.  Les données provenant 
-	de la seconde région produisent une une activité de sortie ``basse'', qui s'apparente au {\color{Orange} mode ``inactif''}.}
+	%{\color{Gray}
+	%Les données provenant de la première région produisent une activité de sortie ``haute'', qui s'apparente
+	%au {\color{Orange} mode ``actif''}.  Les données provenant 
+	%de la seconde région produisent une une activité de sortie ``basse'', qui s'apparente au {\color{Orange} mode ``inactif''}.}
 	\item Dans le cas du perceptron multi-couches \shortcite{RumAL86PDP},
 	chaque neurone de la couche cachée est un séparateur permettant de distinguer deux régions de son espace d'entrée. 
-	{\color{Gray} Le nombre de régions séparables (le nombre maximal de modes de sortie) augmente exponentiellement avec le nombre de neurones dans la couche  cachée.}
+	%{\color{Gray} Le nombre de régions séparables (le nombre maximal de modes de sortie) augmente exponentiellement avec le nombre de neurones dans la couche  cachée.}
 	Le concepteur fixe à l'avance le nombre de neurones à mettre dans la couche cachée,
 	et donc la complexité des opérations de ségrégation produites par le réseau.
 	\item Enfin, le modèle des séparateurs à vaste marge (SVM) \shortcite{Vap95} repose sur le modèle du perceptron. Les données d'entrée sont projetées dans un espace de redescription de dimension élevée. La fonction de réponse est déterminée  selon un principe d'optimisation quadratique. 
@@ -1858,9 +1857,22 @@ est un déplacement moteur qui corrige l'écart observé.
 Les systèmes cybernétiques offrent un exemple élémentaire d'autonomie logicielle,
 avec une ``prise de décision'' basée sur des échanges de signaux entre le
 contrôleur et son environnement.
-Le point d'opération (le point où l'on retourne) d'un tel système est analogue
+
+La théorie du contrôle classique décrit un problème de contrôle comme un problème d'optimisation basé sur~:
+\begin{itemize}
+	\item une consigne, correspondant à un état nominal $\boldsymbol{x}^*$ dans lequel on souhaite voir le milieu physique,
+	\item un contrôleur doté de capteurs et d'actuateurs,
+	\item et le milieu physique situé dans l'état $\boldsymbol{x}_\text{out}$.
+\end{itemize}
+
+Le problème d'optimisation consiste à programmer une fonction de réponse $\phi_\text{in}$ qui, étant donnée une consigne $\boldsymbol{x}^* \in \mathcal{C}$, conduit le milieu physique dans l'état désiré. 
+\paragraph{Remarque~:} Il est possible d'établir une analogie entre consigne et programme. Une consigne s'apparente plus précisément à un \textit{programme moteur} qui conditionne la manière dont le contrôleur traite ses entrées sensorielles~: pour deux consignes différentes, les mêmes entrées sensorielles ne produisent pas la même réponse.  
+
+
+
+\paragraph{}Le point d'opération (le point où l'on retourne) d'un tel système est analogue
 formellement aux attracteurs des systèmes dynamiques contraints. Un changement
-du signal d'entrée induit un déplacement vers un nouvel attracteur (une nouvelle configuration
+de consigne induit un déplacement vers un nouvel attracteur (une nouvelle configuration
 mécanique ou spatiale) où l'appareil se stabilise.
 %[CONTROLE MOTEUR - SCHONER]
 Concevoir bon contrôleur nécessite donc de connaître l'ensemble du dispositif, autrement dit le circuit
@@ -1876,6 +1888,36 @@ mesurées dans l'environnement.
 %repose à la base sur l'étude des comportements mécaniques
 %des solides, et traite de quantités continues auxquelles sont appliqués des opérateurs ou des tenseurs,
 %qui conditionnent l'évolution de ces quantités sur des échelle de temps également continues.
+
+%{\color{Violet}
+%\subsubsection{Tâches et problèmes de contrôle}
+%
+%Le contrôle en boucle fermée \cite{Wiener1965}
+%consiste à programmer le contrôleur de telle sorte que les actions produites dans le milieu se conforment à un certain nombre de critères (ou contraintes) définis \textit{a priori}.	
+%Ces critères peuvent être :
+%\begin{itemize}
+%	\item le caractère non délétère des actions produites (endommagement du dispositif moteur ou de l'environnement)
+%	\item la minimisation de certaine dépenses (consommation énergétique, effort, usure, chauffage des composants, ...)
+%	\item la rapidité de la réponse
+%	\item la résilience, la capacité à résister aux perturbations (homéostasie)
+%	\item la stabilité et la reproductibilité des réponses, la robustesse.
+%	\item etc. 
+%\end{itemize}
+%
+%Ces problèmes ont été analysés de longue date dans le cadre de la théorie de l'automatique (contrôle linéaire) et de la commande optimale, en particulier sous l'angle de la stabilité de la réponse à la commande et de l'homéostasie {\color{Orange}[REFS]}.
+%
+%
+%
+%{\bf Exemple~}: Dans le cas d'un bras mécanique, $\boldsymbol{x}_\text{out}$ peut décrire les coordonnées spatiales d'un effecteur et $\boldsymbol{x}^*$ la position finale désirée.
+%
+%{	\color{Gray}Dans le cadre de problèmes de robotique, on distingue généralement~: 
+%	\begin{itemize}
+%		\item l'espace de la tâche (par exemple atteindre une certaine position de l'espace  avec l'extrémité du bras)
+%		\item et l'espace des articulations, décrivant le détail des positions des éléments mécaniques composant le robot.
+%	\end{itemize}	
+%	Pour une position finale unique, il existe en général plusieurs configurations des articulations. 
+%}
+%}
 
 
 
@@ -2027,7 +2069,13 @@ L'écart entre les deux distributions est l'\textit{erreur de prédiction}, éga
 
 
 \section{Approche mixte~: modèles et problèmes}
-Nous montrons ici le caractère problématique du pattern matching
+Nous abordons ici les problèmes d'apprentissage dans le contexte de la commande motrice. 
+La plupart des modèles s'inscrivent dans le cadre de la commande et de la mesure décrits précédemment,
+c'est à dire reposant sur des modèles de l'environnement physique. L'apprentissage, en ce sens, se justifie lorsque, d'une manière ou d'une autre, les modèles ne sont pas considérés satisfaisants et doivent être ``améliorés''. 
+
+
+
+Nous cherchons également à montrer ici le caractère problématique du pattern matching
 lorsqu'il s'agit de contrôler un corps dans un environnement, et le caractère problématique 
 de l'approche systèmes dynamiques lorsqu'il s'agit de projeter un
 feedback moteur sur des espaces sensoriels complexes (modèle forward).
@@ -2048,10 +2096,7 @@ perceptifs et moteurs de l'environnement?
 
 
 
-
 \subsection{Approche probabiliste}
-
-Le cadre du contrôle présenté ici repose sur des modèles de l'environnement physique. L'apprentissage au sens classique se justifie lorsque, d'une manière ou d'une autre, les modèles ne sont pas considérés satisfaisants et doivent être ``améliorés''. 
 
 Dans le cadre du contrôle tel présenté précédemment, l'apprentissage consiste donc à modifier le contrôleur décrit par la fonction  $\phi_\text{in}$ (voir eqs. \ref{eq:SD-closed-in} et \ref{eq:feed-noise-3}) dans un sens qui améliore un critère de performance prédéfini. La mise à jour d'un modèle ou d'une fonction de réponse consiste en général à modifier un jeu de paramètres $\Theta$ qui décrit le modèle.
 
@@ -2223,14 +2268,47 @@ Ces tâches globales sont réalisées par l'activité coordonnée de différents
 \end{itemize}
 
 \paragraph{Modèles}\label{sec:feed-plus}
+
+
+
+Le principe de contrôle par rétroaction négative (\textit{negative feedback control})  correspond à une commande directement proportionnelle à l'erreur motrice, autrement dit $\boldsymbol{u}(t) \propto \boldsymbol{x}^* - \boldsymbol{x}_\text{out}(t)$. En tenant compte de l'inertie et des temps de réponse, il permet d'obtenir un contrôleur homéostatique stable  (résistant aux perturbations). 
+
+La différence $\boldsymbol{x}^* - \boldsymbol{x}_\text{out}(t)$ est appelée l'\textit{erreur motrice}.
+
 Il existe de nombreux modèles utilisant les principes du contrôle adaptatif pour modéliser
 l'activité nerveuse. On citera parmi les plus connus \shortcite{Rob75,Wolpert1998}.
 Les schémas de guidage par correction d'erreur sont par ailleurs 
 présents au niveau des structures sensori-motrices profondes,
 comme dans le cadre du contrôle vestibulaire \shortcite{Ito1982}.
 
-Par contraste avec le feedback négatif, certaines activités motrices (périodiques en particulier) 
-semblent reposer sur un mécanisme de feedback positif,
+\paragraph{}
+On oppose généralement au contrôle par feedback négatif (égalementt appelé \textit{poursuite}) le contrôle dit \textit{balistique} dans lequel l'erreur motrice n'est pas mesurée. Le contrôle repose sur la consigne $\boldsymbol{x}^*$ seule. On parle aussi de contrôle en position. 
+
+Plusieurs méthodes permettent d'implémenter ce type de contrôle:
+\begin{itemize}
+	\item Dans le cadre du contrôle linéaire, la commande balistique repose sur l'inversion de la fonction de transfert de l'environnement. Si $\boldsymbol{x}^*$ est la position finale désirée, on a $\boldsymbol{u} =  \phi_\text{out}^{-1}(\boldsymbol{x}^*)$. On parle de commande par modèle inverse.
+	\item Le cas des modèles non-linéaires peut être traité via  la combinaison de ``primitives motrices'' dans l'espace de la tâche \shortcite{Mussa2004}.
+	%\subsubsection{Erreur motrice et erreur de prédiction}
+	
+\end{itemize}
+
+Le contrôle balistique présente plusieurs propriétés intéressantes~:
+\begin{itemize}
+	\item la commande $\boldsymbol{u}$ reste constante pendant toute la durée d'exécution.
+	\item la commande est insensible aux conditions initiales. Quelle que soit la position initiale du contrôleur, la commande conduit ``mécaniquement'' le système contrôlé vers son point fixe $\boldsymbol{x}^*$. %
+	\item le contrôleur est insensible à ses entrées sensorielles. Autrement dit la conséquence sensorielle de la commande n'est pas utile pour le contrôle lui-même. Le signal mesuré sur les capteurs peut néanmoins conduite le contrôleur à \textit{réviser la consigne} si le signal d'entrée  n'est pas conforme au signal attendu.
+\end{itemize}
+
+Une version ``dynamique'' du contrôle balistique a été proposée par \shortcite{Schoner97}, dans laquelle~:
+\begin{itemize}
+	\item la commande motrice est implémentée sous la forme d'un champ de potentiel dans l'espace de la tâche  (combinaison de champs de force);
+	\item la consigne évolue continuellement en fonction des entrées sensorielles.
+\end{itemize} 
+
+
+\paragraph{}
+Enfin, certaines activités motrices (périodiques en particulier) 
+semblent reposer sur un mécanisme de feedback \textit{positif},
 dans lesquels le milieu physique et la commande motrice forment un couple qui s'auto-renforce, 
 comme dans le cas de la locomotion. Cette activité rythmique spontanée peut être modulée par divers facteurs
 (contacts avec le sol ou avec des obstacles, orientation visuelle, ...).
@@ -2253,6 +2331,8 @@ comme dans le cas de la locomotion. Cette activité rythmique spontanée peut ê
 \end{itemize} 
 
 
+
+
 Les mécanismes de contrôle par feedback positif ont jusqu'à présent principalement été étudiés 
 sous la forme d'oscillateurs simples ou couplés \shortcite{Haken1985,Sternad2008}, servant de support à schémas moteurs périodiques.
 comme celui de la locomotion. 
@@ -2265,8 +2345,8 @@ La rétroaction positive, et les effets de mémoire qu'elle
 permet, est probablement un composant essentiel des opérations réalisées dans le cerveau \shortcite{Compte2006}.    
 Le mécanisme  dit de ``réverbération'' \shortcite{Heb49} a été modélisé de longue date \shortcite{Wilson1972, Ama77B, Hop82},
 mais reste peu utilisé  dans les architectures de contrôle. 
-On note quand même 
-un contexte applicatif proposé par G. Schöner en robotique mobile \shortcite{Schoner95}.
+%On note quand même 
+%un contexte applicatif proposé par G. Schöner en robotique mobile \shortcite{Schoner95}.
 
 Le manque de développements applicatifs vient probablement 
 \begin{itemize}
@@ -2346,7 +2426,7 @@ Par ailleurs~:
 %}
 
 
-Je liste ici  quelques résultats que je considère comme significatifs~:
+Ces travaux sont présentés en détail dans la partie \ref{part:detail}. Je liste ici  quelques résultats que je considère comme significatifs~:
 
 \subsubsection{a. Un réseau récurrent aléatoire en régime critique et soumis à un signal extérieur catégorise arbitrairement son environnement sensoriel.}
 L'étude publiée dans \shortcite{Dau98A} porte sur la réaction (spontanée ou acquise) d'un réseau de neurones récurrent aléatoire
@@ -2673,7 +2753,7 @@ irrégulière (chaos profond), la population de neurones semble en effet garder 
 mémoire assez faible des faits passés (autocorrélation du même ordre de grandeur) {\color{Cyan}[REF?]}. 
 Les réponses produites par la STDP sur des entrées statiques s'apparente à des ``bursts'' (bouffées) d'activité, qui impliquent 
 une grande partie des neurones du réseau
-\cite{Hen08b}, peu spécifiques et peu différents des comportement obtenus avec des neurones fréquentiels.
+\cite{Hen08B}, peu spécifiques et peu différents des comportement obtenus avec des neurones fréquentiels.
 
 L'étude présentée dans \shortcite{henry07} (voir annexe \ref{app:NCO07}) montre néanmoins
 le caractère séquentiel de l'activité induite par la STDP, support ici de la mémoire à court terme.
@@ -2943,26 +3023,7 @@ Résultat principaux :
 
 {\bf !!Capacités computationnelles des substrats neuronaux aléatoires récurrents!!}
 
-A l'issue de ces recherches, nous avons donc identifié un rôle possible
-de l'activité spontanée dans la consolidation de patrons d'activité
-spécifiques à des configurations ``connues'' de l'environnement.
-%(dans un substrat à expressivité limitée -- c'est à dire ne traduisant
-%pas parfaitement les caractéristiques physiques, mécaniques ou chimiques de l'environnement).
-Nous avons émis des hypothèses sur le rôle de cette activité intrinsèque pour produire 
-des basculements d'activité faisant évoluer la relation entre le système et l'environnement 
-(changement de mode de couplage avec l'environnement, déplacements moteurs).
-Un deuxième rôle est celui de la mémoire à court terme, se traduisant parfois sous la
-forme d'une ``résistance au changement'', c'est à dire une persévération de l'activité interne 
-malgré des changements au niveau des signaux sensoriels.
-Un troisième rôle, commun aux architectures ``à réservoir'', 
-est la capacité des dynamiques intrinsèques à capturer certaines dépendances 
-temporelles présentes dans le signal, et de les exploiter pour produire des réponses (ou des
-prédictions) plus précises.
-Enfin, nous avons montré que cette activité intrinsèque peut servir de support à l'innovation
-dans les rapports à l'environnement, c'est à dire principalement de proposer de nouvelles
-réponses comportementales, éventuellement stabilisées dans le cas où elles apportent 
-une amélioration (soit dans la capacité de prédiction, soit dans la réception de signaux
-de récompense plus intenses).
+
 
 Ces éléments sont présentés plus en détail ci-dessous.
 
@@ -3105,7 +3166,36 @@ sur certains aspects du calcul neuronal.
 \section{Bilan}
 
 
+\subsection{Résumé}
+
+Les résultats présentés dans la section précédente peuvent être regroupés sous un postulat commun~: dans les architectures neuronales définies par un graphe de connexions récurrent, l'apprentissage et le contrôle s'implémentent selon le mécanisme de la \textit{rétroaction positive}.
+
+Le principe de l'appariement par rétroaction positive correspond à une recherche de correspondance entre un signal présenté en entrée  et une des ``formes'' possibles que peut prendre l'activité du réseau (étude {\bf a}). Le nombre de formes possibles (le ``vocabulaire'') semble être maximal lorsque le système est en régime critique, c'est à dire proche d'un point de bifurcation dans l'espace des paramètres de contrôle (études {\bf a} et {\bf d}). L'activité est également plus riche (moins stéréotypée) lorsque le graphe de connexions est fortement hétérogène (étude {\bf b}).
+
+La réponse du programme n'est pas instantanée, mais s'inscrit dans une trame temporelle. Il s'apparente à un mécanisme d'\textit{intégration} (études {\bf g}, {\bf h} et {\bf k}). L'implémentation neuronale peut reposer sur des mécanismes cellulaires seuls (étude {\bf e}), ou sur une relaxation à l'échelle d'une population (études {\bf a}, {\bf c} et {\bf g}) 
+%La correspondance conduit à une réponse spécifique. L'absence de correspondance conduit à une réponse générique.
+
+Le mécanisme de l'appariement, au centre des algorithmes d'apprentissage, prend la forme d'une réduction de complexité de la dynamique intrinsèque (étude {\bf f}). Deux grandes familles  plasticités sont abordées. 
+\begin{itemize}
+	\item Les plasticités d'{``ordre 0''}, guidées par un signal de renforcement, identifient les relations d'entrée-sortie les plus favorables, selon un principe qui s'apparente gradient logistique (études {\bf j} et {\bf l}).
+	\item Les plasticités d'{``ordre 1''} amplifient, au sein du réseau, des séquences d'activation récurrente, permettant de construire des réponses relatives à des événements temporellement séparés (études {\bf g} et {\bf h}).
+\end{itemize}  
+
+Le couplage entre une activité persistante et un signal extérieur 
+conduit de plus à des mécanismes de mémoire à court terme, se traduisant parfois sous la
+forme d'une ``résistance au changement'', c'est à dire une persévération de l'activité interne 
+malgré des changements au niveau des signaux sensoriels (études {\bf c} et {\bf g}).
+La ``perception du changement'' se traduit par 
+des basculements d'activité, faisant évoluer la relation entre le système et l'environnement 
+(études {\bf g} et {\bf i}).
+Enfin, nous avons montré que cette activité intrinsèque peut servir de support à l'innovation
+dans les rapports à l'environnement, c'est à dire principalement de proposer de nouvelles
+réponses comportementales, éventuellement stabilisées dans le cas où elles apportent une amélioration (étude {\bf j}).
+
+\subsection{Questions ouvertes}
 Le travail de compilation et de relecture/réexamen de résultats parfois anciens liés à la rédaction de ce rapport a été l'occasion de développer quelques rapprochements qui ne sont pas présents en tant que telles dans les publications. 
+
+Il m'a permis de mettre à jour ce qui semble être une difficulté fondamentale dans l'apprentissage de compétences motrices, qui nécessite probablement un examen fouillé dépassant le cadre de ce rapport.
 
 Comme nous l'avons vu, la plupart des algorithmes d'apprentissage fonctionnent selon un principe d'\textit{appariement} (``pattern matching''), c'est à dire sur la construction, à partir des données, d'un ensemble de vecteurs ``caractéristiques''. 
 \begin{itemize}
@@ -3115,6 +3205,9 @@ Comme nous l'avons vu, la plupart des algorithmes d'apprentissage fonctionnent s
 L’apprentissage revient donc à la constitution d'un vocabulaire de base qui sert de clé d'interprétation des données d'entrée. 
 
 {\color{Orange}Nous avons souligné dans la partie précédente le caractère parfois incompatible entre d'une part la théorie du contrôle, et d'autre part l'apprentissage moteur. }
+
+Il semble y avoir une 
+
 
 La séparation conceptuelle et pratique entre d'une part l'approche systèmes dynamiques, d'autre part la reconnaissance de formes 
 semble reposer sur le caractère disparate, d'une part de l'environnement métrique sur lequel s'applique
@@ -3836,7 +3929,7 @@ plus proches de ceux qu'un sujet expérimente quotidiennement avec son entourage
 
 
 
-\part{Résultats détaillés}
+\part{Résultats détaillés}\label{part:detail}
 
 
 
@@ -5997,73 +6090,8 @@ les réponses produites et les manifestations sensorielles suivantes.
 
 
 
-\subsubsection{Tâches et problèmes de contrôle}
-
-Le contrôle en boucle fermée \cite{Wiener1965}
-consiste à programmer le contrôleur de telle sorte que les actions produites dans le milieu se conforment à un certain nombre de critères (ou contraintes) définis \textit{a priori}.	
-Ces critères peuvent être :
-\begin{itemize}
-	\item le caractère non délétère des actions produites (endommagement du dispositif moteur ou de l'environnement)
-	\item la minimisation de certaine dépenses (consommation énergétique, effort, usure, chauffage des composants, ...)
-	\item la rapidité de la réponse
-	\item la résilience, la capacité à résister aux perturbations (homéostasie)
-	\item la stabilité et la reproductibilité des réponses, la robustesse.
-	\item etc. 
-\end{itemize}
-
-Ces problèmes ont été analysés de longue date dans le cadre de la théorie de l'automatique (contrôle linéaire) et de la commande optimale, en particulier sous l'angle de la stabilité de la réponse à la commande et de l'homéostasie {\color{Orange}[REFS]}.
-
-La théorie du contrôle classique décrit un problème de contrôle comme un problème d'optimisation basé sur~:
-\begin{itemize}
-	\item une consigne, correspondant à un état nominal $\boldsymbol{x}^*$ dans lequel on souhaite voir le milieu physique,
-	\item un contrôleur doté de capteurs et d'actuateurs,
-	\item et le milieu physique situé dans l'état $\boldsymbol{x}_\text{out}$.
-\end{itemize}
-
-Le problème d'optimisation consiste à programmer une fonction de réponse $\phi_\text{in}$ qui, étant donnée une consigne $\boldsymbol{x}^* \in \mathcal{C}$, conduit le milieu physique dans l'état désiré. 
 
 
-{\bf Exemple~}: Dans le cas d'un bras mécanique, $\boldsymbol{x}_\text{out}$ peut décrire les coordonnées spatiales d'un effecteur et $\boldsymbol{x}^*$ la position finale désirée.
-
-{	\color{Gray}Dans le cadre de problèmes de robotique, on distingue généralement~: 
-	\begin{itemize}
-		\item l'espace de la tâche (par exemple atteindre une certaine position de l'espace  avec l'extrémité du bras)
-		\item et l'espace des articulations, décrivant le détail des positions des éléments mécaniques composant le robot.
-	\end{itemize}	
-	Pour une position finale unique, il existe en général plusieurs configurations des articulations. 
-}
-
-\paragraph{Remarque~:} Il est possible d'établir une analogie entre consigne et programme. Une consigne s'apparente plus précisément à un \textit{programme moteur} qui conditionne la manière dont le contrôleur traite ses entrées sensorielles~: pour deux consignes différentes, les mêmes entrées sensorielles ne produisent pas la même réponse.  
-
-\subsubsection{Rétroaction négative vs. contrôle balistique}
-
- Le principe de contrôle par rétroaction négative (\textit{negative feedback control})  correspond à une commande directement proportionnelle à l'erreur motrice, autrement dit $\boldsymbol{u}(t) \propto \boldsymbol{x}^* - \boldsymbol{x}_\text{out}(t)$. En tenant compte de l'inertie et des temps de réponse, il permet d'obtenir un contrôleur homéostatique stable  (résistant aux perturbations). 
- 
- La différence $\boldsymbol{x}^* - \boldsymbol{x}_\text{out}(t)$ est appelée l'\textit{erreur motrice}.
-  
- On oppose au contrôle par feedback négatif le contrôle dit \textit{balistique} dans lequel l'erreur motrice n'est pas mesurée. Le contrôle repose sur la consigne $\boldsymbol{x}^*$ seule. On parle aussi de contrôle en position. 
- 
- Plusieurs méthodes permettent d'implémenter ce type de contrôle:
- \begin{itemize}
- 	\item Dans le cadre du contrôle linéaire, la commande balistique repose sur l'inversion de la fonction de transfert de l'environnement. Si $\boldsymbol{x}^*$ est la position finale désirée, on a $\boldsymbol{u} =  \phi_\text{out}^{-1}(\boldsymbol{x}^*)$. On parle de commande par modèle inverse.
-	\item Le cas des modèles non-linéaires peut être traité via  la combinaison de ``primitives motrices'' dans l'espace de la tâche \shortcite{Mussa2004}.
-%\subsubsection{Erreur motrice et erreur de prédiction}
-
-\end{itemize}
-
-Le contrôle balistique présente plusieurs propriétés intéressantes~:
-\begin{itemize}
-	\item la commande $\boldsymbol{u}$ reste constante pendant toute la durée d'exécution.
-    \item la commande est insensible aux conditions initiales. Quelle que soit la position initiale du contrôleur, la commande conduit ``mécaniquement'' le système contrôlé vers son point fixe $\boldsymbol{x}^*$. %
-    \item le contrôleur est insensible à ses entrées sensorielles. Autrement dit la conséquence sensorielle de la commande n'est pas utile pour le contrôle lui-même. Le signal mesuré sur les capteurs peut néanmoins conduite le contrôleur à \textit{réviser la consigne} si le signal d'entrée  n'est pas conforme au signal attendu.
-\end{itemize}
-
-Une version ``dynamique'' du contrôle balistique a été proposée par \shortcite{Schoner97}, dans laquelle~:
-\begin{itemize}
-	\item la commande motrice est implémentée sous la forme d'un champ de potentiel dans l'espace de la tâche  (combinaison de champs de force);
-	\item la consigne évolue continuellement en fonction des entrées sensorielles.
-\end{itemize} 
- 
 
 
 %La fonction $\phi_\text{in}$ est dans ce cadre une fonction paramétrique, décrite par l'ensemble de paramètres $\Theta$.
