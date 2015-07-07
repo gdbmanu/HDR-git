@@ -3374,6 +3374,7 @@ restent statiques dans l'espace pré-moteur lorsque le regard bouge. \begin{item
 	de prédire leur position dans l'espace pré-moteur étant donné le déplacement du corps (il est difficile de bouger à la fois le corps et le regard)
 \end{itemize} 
 
+{\color{Gray}
 Ces prédictions s'apparentent à des opérations géométriques (isométriques), soit des translations et
 des rotations. Par exemple, les objets visibles sont translatés vers la gauche du champ visuel lorsque le regard  tourne
 vers la droite. Nous avons donc un référentiel (celui de la direction du regard) qui est translaté, redéfinissant
@@ -3381,6 +3382,7 @@ les coordonnées des différents objets qui composent la scène visuelle. Le ré
 tronc (le support stable des mouvements de la tête), et l'axe de la direction du regard se définit par rapport à un autre référentiel qui 
 est le référentiel du tronc. Les objets de la même scène sont également définis (en tant que point final des mouvements) dans
 ce même référentiel du tronc. 
+}
 
 Il existe donc une application qui à partir de la position des objets dans un premier 
 référentiel définit la position des mêmes objets dans un autre référentiel. 
@@ -3389,13 +3391,13 @@ un bon support à l'invariance ainsi qu'à la prédiction sensorielle selon le p
 
 \subsubsection{Problème de l'assemblage}
 Cette description des transformations sensori-motrices repose implicitement sur l'hypothèse d'un espace physique extensif où prennent place des transformations linéaires.  
-
 Le caractère distribué (``digital'') de l'activité neuronale 
 rend difficile, comme nous l'avons vu, la réalisation d'opérations simples comme l'addition ou la différence
 	de deux quantités, comme cela est pourtant nécessaire lorsque les déplacements doivent prendre en compte des sources sensorielles 
-	multiples issues de référentiels variés, comme par exemple
-	prédire la disposition des objets sur la scène visuelle,
-	étant donnés (1) la position de ces objets dans l'espace pré-moteur et (2) la direction du regard. %proprioception de la position du corps et coordonnées rétiniennes pour attraper
+	multiples issues de référentiels variés.
+	%, comme par exemple
+	%prédire la disposition des objets sur la scène visuelle,
+	%étant donnés (1) la position de ces objets dans l'espace pré-moteur et (2) la direction du regard. %proprioception de la position du corps et coordonnées rétiniennes pour attraper
 	%une cible par exemple
 	Le problème se pose plus généralement lorsqu'il s'agit d'estimer, au sein de l'espace de redescription, des quantités \textit{relatives} à différents
 	points de l'espace pré-moteur ou de l'espace sensoriel (et non des quantités absolues).
@@ -3415,8 +3417,7 @@ Par exemple, un simple ``pattern matching'' nécessiterait un apprentissage par 
 de toutes les combinaisons de dispositions d'objets et de tous les changements de référentiel tronc-tête, ce qui parait 
 computationnellement très coûteux (\shortcite{Pouget1997,Pouget2002}). Il est nécessaire néanmoins que le ``lien'' praxo-visuel entre les différents objets de la scène ne soit pas perdu
 au cours des déplacement moteurs
-(Un raisonnement symétrique peut être appliqué pour le cas des déplacements du corps dans un environnement visuel stable).
-	
+(Un raisonnement symétrique peut être appliqué pour le cas des déplacements du corps dans un environnement visuel stable).	
 %	Ceci pose un problème en particulier lorsqu'il s'agit de contrôler les déplacements du corps à partir de l'activité
 %	distribuée induite par les récepteurs sensoriels.
 %	Le problème se pose lorsqu'il faut
@@ -3424,9 +3425,6 @@ au cours des déplacement moteurs
 %	multiples issues de référentiels variés (proprioception de la position du corps et coordonnées rétiniennes pour attraper
 %	une cible par exemple).
 %	%moduler une réponse à partir d'un écart à une valeur de référence par exemple, 
-	
-
-\paragraph{}
 	Ce problème du lien entre les différentes manifestations sensorielles d'un même objet s'appelle le problème de l'``assemblage'' (``binding problem''). Il a été identifié de longue date dans les sciences cognitives sans qu'une solution définitive ne  puisse lui être apportée \shortcite{VdM86}.{	\color{Gray}
 Il existe trois grandes catégories d'approches pour traiter de cette question~: (1) l'activité tierce, (2) l'assemblage
 dynamique et (3) la mémoire (ou les transformations) extérieure(s).
