@@ -324,7 +324,7 @@ claire séparation entre le substrat neuronal, le circuit de traitement et l'esp
 %XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 \paragraph{Approche ascendante (ou ``bottom-up'')}
 La méthodologie ``bottom-up'' consiste à étudier les
-\emph{conditions d'émergence} de fonctions de haut niveau à partir 
+\textit{conditions d'émergence} de fonctions de haut niveau à partir 
 des caractéristiques d'un réseau de neurones plongé dans un
 environnement contraignant.
 Les réseaux de neurones sont en effet capables de manifester des formes d'organisation spontanée~: comportement critique, 
@@ -341,7 +341,7 @@ l'activité des neurones comme syntaxe de base.
 }
 
 \paragraph{Approche descendance (ou ``top-down'')}
-La méthodologie ``top-down'' consiste à étudier les \emph{conditions de réalisation}
+La méthodologie ``top-down'' consiste à étudier les \textit{conditions de réalisation}
 d'une certaine tâche par étapes descendantes, de la contrainte générale du corps engagé dans la tâche
 à la réalisation matérielle du circuit qui la résout.
 L'approche descendante consiste souvent à identifier les aspects non-triviaux
@@ -360,8 +360,17 @@ des articulations en déplacement, des changements continus)
 et le milieu intérieur (milieu logiciel) caractérisé par des activité bornées, discrètes,
 changeant rapidement et de manière abrupte.
 Entre les deux,  un niveau architectural (dit ``mésoscopique'') doit également être considéré, constitué de circuits imbriqués intégrant l'activité de larges portion du cerveau.
+
 Chacun de ces niveaux de description est traditionnellement considéré de manière séparée, 
-et l'effort consistant à traduire un des niveaux de description dans un autre, effort ayant pris une place importante dans les neurosciences computationnelles, s'appelle l'approche ``multi-échelles'' \shortcite{Varela2001}.
+et l'effort consistant à traduire un des niveaux de description dans un autre, effort ayant pris une place importante dans les neurosciences computationnelles, s'appelle l'approche ``multi-échelles'' \shortcite{WILSON89,Varela2001}. 
+Cette approche utilise le formalisme de la physique statistique pour décrire un ``milieu'' neuronal dont les variables d'état évoluent (ou peuvent être décrites) 
+selon différentes échelles spatiales et temporelles, chaque échelle de description étant explicative du comportement observé à l'échelle
+supérieure (par des variables dites ``macroscopiques''). 
+%
+%vise à établir des passerelles entre un substrat constitué d'éléments 
+%microscopique caractérisés par des processus rapides localisés et un environnement
+%physique caractérisé par des processus macroscopiques lents et spatialement étendus.
+%consiste à considérer un substrat 
 
 \subsection{Développement}
 Les neurosciences computationnelles se sont fortement développées, et ont commencé à
@@ -1197,21 +1206,28 @@ l'apprentissage automatique et du traitement du signal~:
 	extraction d'invariants morphologiques (ou vecteurs caractéristiques) à partir des données présentées.
 \end{itemize} 
 
-Cette approche se traduit en modélisation neuronale par le terme de
+L'apprentissage de vecteurs caractéristiques est au cœur des théories de l'apprentissage automatique, où
+les patrons caractéristiques sont déduits des données présentées \shortcite{Vapnik1998}. Différents algorithmes permettent, comme nous le verrons par la suite, de 
+construire de telles chaînes de traitement de manière automatique à partir d'une simple 
+base d'exemples, via des mécanismes d'{``auto-encodage''}. L'opération algorithmique réalisée par le pattern matching est alors graduelle : degré d'appartenance
+(ou de correspondance) à un patron donné, sur un intervalle borné (en général entre 0 et 1). 
+L'opération répétée sur de multiples patrons produit de 
+nombreux degrés d'appartenance, cet ensemble de degrés d'appartenance pouvant lui-même être interprété 
+comme une nouvelle forme pour un traitement ultérieur (sur le principe du ``deep learning'' \shortcite{Hinton2006} par exemple),
+constituant un principe de calcul distribué efficace.
+
+En modélisation neuronale, cette approche se traduit par le terme de
 ``champ récepteur'', avec une réponse maximale de la cellule lorsque le signal correspond à la forme 
 fixée \shortcite{HUBELWIESEL62}. 
 Elle donne naissance à la reconnaissance par dictionnaire de formes, très utilisée 
 à la fois en traitement d'images et pour les modèles de la perception visuelle \shortcite{Rao1999}.
-L'apprentissage de vecteurs caractéristiques est au cœur des théories de l'apprentissage automatique, où
-les patrons caractéristiques sont déduits des données présentées \shortcite{Vapnik1998}.
+
 %Par exemple : apprentissage d'une base de filtres via des algos de type EM.
 
 
 
 
-Différents algorithmes permettent, comme nous le verrons par la suite, de 
-construire de telles chaînes de traitement de manière automatique à partir d'une simple 
-base d'exemples, via des mécanismes d'{``auto-encodage''}.
+
 
 \paragraph{}
 Par opposition à ce  traitement séquentiel, nous considérons 
@@ -1287,16 +1303,29 @@ d'appariement au cas des dynamiques de relaxation  signifie essentiellement~:
 	entre les différentes régions, voire d'en créer de nouvelles et d'en faire disparaître.
 \end{itemize}
 
-{\color{Gray}Le but est d'étudier l'appariement tel qu'il se réalise dans des réseaux de neurones récurrents soumis à la règle de Hebb.
-	La règle de Hebb %, souvent sous-estimée pour ses plus faibles performances pratiques, doit être réexaminée dans le cadre des réseaux de neurones récurrents.
-	%Autrement dit la plasticité de Hebb 
-	doit être interprétée selon la logique des réseaux de neurones récurrents, cette logique étant largement différente de celle des réseaux à couches, comme nous l'avons vu~:
-	\begin{itemize}
-		\item La logique à l’œuvre dans les réseaux de neurones à couches est celle d'un calcul \textit{réparti}. Le calcul est produit par étapes des couches d'entrée jusqu'à la couche de sortie; les couches cachées réalisent les calculs intermédiaires.
-		\item Le calcul implémenté par les réseaux de neurones récurrents est un calcul \textit{distribué}, c'est à dire que l'ensemble du calcul est réparti à parts égales sur les différents nœuds du réseau. Le ``temps de calcul'' correspond au temps de relaxation vers un attracteur. % Ce calcul est réalisé par l'ensemble des neurones du réseau. 
-		On parle aussi de réponse de population (ne dépendant pas d'un neurone seul).
-	\end{itemize} 
-}
+\paragraph{} Une des thèses principales développées ici est que :
+\begin{itemize}
+	\item[]
+	\textit{La plasticité de Hebb construit une fonction d'\textbf{appariement conditionnel} s'appuyant sur les propriétés de l'activité persistante d'un système dynamique de grande dimension.}
+\end{itemize}
+où:
+\begin{itemize}
+	\item[]
+	\textit{Le mécanisme d'appariement est assimilé, dans le cas des réseaux de neurones récurrents, à une \textbf{ réduction sélective de la complexité} de la dynamique.} 
+\end{itemize}
+
+
+
+%{\color{Gray}Le but est d'étudier l'appariement tel qu'il se réalise dans des réseaux de neurones récurrents soumis à la règle de Hebb.
+%	La règle de Hebb %, souvent sous-estimée pour ses plus faibles performances pratiques, doit être réexaminée dans le cadre des réseaux de neurones récurrents.
+%	%Autrement dit la plasticité de Hebb 
+%	doit être interprétée selon la logique des réseaux de neurones récurrents, cette logique étant largement différente de celle des réseaux à couches, comme nous l'avons vu~:
+%	\begin{itemize}
+%		\item La logique à l’œuvre dans les réseaux de neurones à couches est celle d'un calcul \textit{réparti}. Le calcul est produit par étapes des couches d'entrée jusqu'à la couche de sortie; les couches cachées réalisent les calculs intermédiaires.
+%		\item Le calcul implémenté par les réseaux de neurones récurrents est un calcul \textit{distribué}, c'est à dire que l'ensemble du calcul est réparti à parts égales sur les différents nœuds du réseau. Le ``temps de calcul'' correspond au temps de relaxation vers un attracteur. % Ce calcul est réalisé par l'ensemble des neurones du réseau. 
+%		On parle aussi de réponse de population (ne dépendant pas d'un neurone seul).
+%	\end{itemize} 
+%}
 
 \subsubsection{(i) Séparation des signaux} 
 
@@ -1364,7 +1393,7 @@ Il s'agit d'une petite surface d'échange chimique (``bouton'' synaptiques) situ
 
 L'efficacité d'une synapse dépend de plusieurs facteurs, comme la taille du bouton synaptique, la quantité de neurotransmetteurs disponibles,  ainsi que la sensibilité de la cellule post-synaptique. Dans le cadre de ce mémoire,  cet ensemble de facteurs est résumé  sous la forme d'une valeur unique $J_{ij}$ : le ``poids'' de la synapse, où  $j$ est l'index du neurone pré-synaptique et $i$ l'index du neurone post-synaptique.
 
-La plasticité synaptique est un mécanisme biologique qui modifie l'efficacité de la synapse au cours du temps. En reprenant 
+La \textit{plasticité synaptique} est un mécanisme biologique qui modifie l'efficacité de la synapse au cours du temps. En reprenant 
 les notations de l'équation (\ref{eq:SD}), 
 \begin{align}
 &\boldsymbol{x}' = \phi(\boldsymbol{x},\boldsymbol{J},t) \label{eq:SD-plast-x}\\
@@ -1469,28 +1498,28 @@ La perspective des assemblées neuronales permet de voir les réseaux de neurone
 	
 	
 
-{\color{Gray}
-	
-	analogie paramètre d'ordre / variable macroscopique
-	
-	%Les modèle qui servent de fondement aux neurosciences computationnelles 
-	%sont les modèles de neurones à conductance [REF DESTEXHE] dont le plus connu est le modèle de Hudgkin-Huxley. 
-	
-	
-	L'activité des neurones telle que mesurée par électrophysiologie présente
-	un caractère irrégulier où les temps d'émission des potentiels d'action (PA) semblent obéir à un processus de Poisson [CITATION].
-	Un tel processus est caractérisé par sa fréquence instantanée $\nu(t)$, qui donne le nombre de PA émis par seconde.
-	Cette grandeur peut être mesurée 
-	à travers l'observation d'un train de PA produit par un neurone particulier (nombre de PA émis divisé par
-	l'intervalle d'observation).
-	
-
-	[REF : IF neuron, modèle de ]. 
-	
-	[MATHS??]
-
-	
-}
+%{\color{Gray}
+%	
+%	analogie paramètre d'ordre / variable macroscopique
+%	
+%	%Les modèle qui servent de fondement aux neurosciences computationnelles 
+%	%sont les modèles de neurones à conductance [REF DESTEXHE] dont le plus connu est le modèle de Hudgkin-Huxley. 
+%	
+%	
+%	L'activité des neurones telle que mesurée par électrophysiologie présente
+%	un caractère irrégulier où les temps d'émission des potentiels d'action (PA) semblent obéir à un processus de Poisson [CITATION].
+%	Un tel processus est caractérisé par sa fréquence instantanée $\nu(t)$, qui donne le nombre de PA émis par seconde.
+%	Cette grandeur peut être mesurée 
+%	à travers l'observation d'un train de PA produit par un neurone particulier (nombre de PA émis divisé par
+%	l'intervalle d'observation).
+%	
+%
+%	[REF : IF neuron, modèle de ]. 
+%	
+%	[MATHS??]
+%
+%	
+%}
 
 
 
@@ -1506,20 +1535,10 @@ La perspective des assemblées neuronales permet de voir les réseaux de neurone
 
 
 
-\paragraph{} Une des thèses principales développées ici est que :
-\begin{itemize}
-	\item[]
-	\textit{La plasticité de Hebb construit une fonction d'\textbf{appariement conditionnel} s'appuyant sur les propriétés de l'activité persistante d'un système dynamique de grande dimension.}
-\end{itemize}
-où:
-\begin{itemize}
-	\item[]
-	\textit{Le mécanisme d'appariement est assimilé, dans le cas des réseaux de neurones récurrents, à une \textbf{ réduction sélective de la complexité} de la dynamique.} 
-\end{itemize}
 
 \section{Exemples}
 
-\subsection{Réseaux de neurones récurrents}
+
 
 
 Le principe d'assemblée neuronale s'interprète principalement dans le cadre des réseaux de neurones récurrents. 
@@ -1528,11 +1547,13 @@ Nous avons vu que les réseaux de neurones récurrents sont capables de dévelop
 Dans ce cadre, une assemblée peut être vu comme une séquence d'activation interne stable au cours du temps. On parle parfois de ``chaîne d'activation'' \--- \textit{synfire chain} \shortcite{Abe93}. Un certain nombre de modèles artificiels implémentent ce principe, comme le modèle des  ``groupes polychrones'' 
 postulé par \shortcite{Izh06}.
 
-{\color{Gray}	
-	pouvant présenter des régularités liée aux régularités du graphe ou liée à une influence extérieure (activité induite). 
-	%La règle de Hebb s'interprète dans ce cadre comme le fait de capturer dans la structure du réseau les régularités statistiques (covariances) présentes dans l'activité spontanée. 
-	Une assemblées apparaissant fréquemment tend à s'inscrire dans le graphe de connexions, ce qui tend à favoriser sa réapparition dans le futur.
-}
+%{\color{Gray}	
+%	pouvant présenter des régularités liée aux régularités du graphe ou liée à une influence extérieure (activité induite). 
+%	%La règle de Hebb s'interprète dans ce cadre comme le fait de capturer dans la structure du réseau les régularités statistiques (covariances) présentes dans l'activité spontanée. 
+%	Une assemblées apparaissant fréquemment tend à s'inscrire dans le graphe de connexions, ce qui tend à favoriser sa réapparition dans le futur.
+%}
+
+\subsection{Réseau de Hopfield}
 
 Le modèle mathématique qui implémente le principe d'assemblée de la manière la plus simple est le modèle de Hopfield \shortcite{Hop82}. Ce modèle est un réseau de neurones récurrent à unités binaires développant une dynamique de point fixe multistable. 
 Malgré des limitations bien connues en terme de capacité de stockage \shortcite{Amit1985}, le réseau de Hopfield présente l'avantage de fonctionner avec des principes compatibles avec les idées de Hebb (caractère local de la règle de plasticité, analogie possible entre attracteur et assemblée), et donc de constituer un modèle plus ``biologiquement plausible'' que les réseaux de neurones traditionnels.
@@ -1540,48 +1561,107 @@ Malgré des limitations bien connues en terme de capacité de stockage \shortcit
 Le réseau de Hopfield implémente un principe de \textit {mémoire associative}. Il apprend ``par cœur'' un certain nombre de scènes (ou images). Il est ensuite capable, lorsque certains constituants d'une scène apprise sont présentés, de compléter la scène avec les éléments manquants, de rectifier les valeurs erronées etc. 
 L'espace d'états est organisé en un nombre fini de \textit{bassins d'attraction} définissant des patrons d'activité spécifiques et mutuellement exclusifs. L'activité du réseau finit par converger vers un de ces patrons en fonction des conditions initiales. Chacun des attracteurs s'interprète ici comme une assemblée distincte, c'est à dire comme un circuit de renforcement mutuel aboutissant à la stabilisation d'un patron d'activité macroscopique. 
 
+\subsection{Réseaux récurrents aléatoires}
+
+Un réseau de neurones aléatoire est un graphe orienté et pondéré $G$ constitué de $N$ nœuds défini par~:
+\begin{itemize}
+	\item la matrice des 
+	couplages $\boldsymbol{J} = \{J_{i,j}\}_{i \in 1..N,j \in 1..N}$ 
+	\item les seuils d'activation $\boldsymbol{\theta} = \{\theta_i\}_{i \in 1..N}$
+	\item les temps de propagation  $\boldsymbol{\tau} = \{\tau_{i,j}\}_{i \in 1..N,j \in 1..N}$
+	\item etc.
+\end{itemize} 
+tel que~:
+\begin{align}
+G \sim \mathcal{D}(\Xi) \label{eq:graphe-aleatoire}
+\end{align}
+où $\mathcal{D}$ est une distribution de probabilité sur l'espace des graphes et  $\Xi$ est un ensemble de paramètres ``macroscopiques'' qui définissent cette distribution.
+La notion d'aléa ne porte donc pas sur la dynamique d'état mais sur le patron de connexions du réseau. 
+On parle de bruit ``figé'' dans les connexions (``\textit{quenched disorder}'').
+
+L'ajout d'une fonction de réponse sur les nœuds définit un système dynamique déterministe, constitué de $N$ neurones.
+La dynamique à temps discret, et à temps de propagation constant est, en notation matricielle, définie par l'équation de récurrence ~:
+\begin{align}
+&\boldsymbol{x}(0) = \boldsymbol{x}_0&&\nonumber\\
+&\forall t > 0 :&& \nonumber\\
+&&\boldsymbol{h}(t) &= \boldsymbol{J} \mathbf{x}(t-1) - \boldsymbol{\theta} + \boldsymbol{I}(t) \\
+&& \boldsymbol{x}(t) &= f(\boldsymbol{h}(t);g)\nonumber
+\end{align}
+avec $f$ fonction de réponse sigmoïde et $g$ paramètre de contrôle (gain de la fonction de réponse du neurone). 
+
+L'indépendance statistique entre les différents liens est une caractéristique importante, qui permet d'analyser le comportement du modèle 
+à la limite des grandes tailles, c'est à dire en faisant tendre la taille $N$ vers l'infini. Avec un \textit{scaling} des poids approprié 
+(espérance, variance de la loi de tirage initial des poids en $O(\frac{1}{N}$)), on peut montrer que la dynamique (déterministe) tend à la limite thermodynamique 
+vers un processus aléatoire (processus Gaussien), la corrélation entre les nœuds tendant vers 0 \shortcite{Som88,Ces94,Moy00a}.
+
+Les réseaux étudiés étant normalisés, 
+leur comportement est réglé par deux paramètres~: le gain $g$ de la fonction de réponse neuronale (assimilable
+à l'inverse d'une température) et la variabilité $\sigma_\theta$ du seuil d'activation.
+Le signal présenté en entrée du réseau est un vecteur aléatoire  qui vient se surimposer au seuil 
+d'activation (rendant donc les neurones plus ou moins excitables).
+Le réseau soumis à un tel signal converge vers un nouvel attracteur (autrement dit se reconfigure).
+
+L'existence d'un 
+paramètre de contrôle (le gain de la fonction de transfert des neurones) permet de reproduire, dans ces réseaux aléatoires, 
+un  comportement générique de déstabilisation, appelé route vers le chaos par ``quasi-périodicité'' \shortcite{Berger1988,Doyon1993} (voir figure \ref{fig:hermes-bif}).
 
 
-\subsection{Passage d'échelle en contrôle moteur} \label{sec:echelle}
 
+Le comportement d'une classe de réseaux (l'ensemble des réseaux définis par la même distribution) peut être décrit à la limite thermodynamique par 
+des équations dites de ``champ moyen''. Ces équations définissent le processus aléatoire limite, décrit par la dynamique temporelle de grandeurs caractéristiques comme l'activité moyenne, 
+le moments d'ordre 2 et la covariance dans le temps \shortcite{Ces95}. 
+
+Lorsque les poids synaptiques sont tirés indépendamment selon une loi de moyenne $\frac{\mu_J}{N}$ et d'écart-type $\frac{\sigma_J}{\sqrt{N}}$, et les seuils selon une loi de moyenne  $\mu_\theta$ et d'écart-type $\sigma_\theta$,
+le processus Gaussien limite est défini au temps $t$ par~: 
+\begin{itemize}
+	\item sa moyenne $\mu_h(t) = \langle h_i(t)\rangle$
+	\item sa variance $\sigma_h^2(t) = \langle (h_i(t) - \mu_h(t))^2\rangle$
+	%\item et sa covariance temporelle $\Delta_h(t,t') = \langle h_i(t) h_i(t') \rangle - \langle h_i(t) \rangle \langle h_i(t') \rangle$
+\end{itemize}
+où $h_i(t)$ est une variable aléatoire, selon:
+\begin{align}
+&\mu_h(t) = \mu_J m(t-1) + \mu_\theta\\
+&\sigma_h^2(t) = \sigma_J^2 q(t-1) + \sigma_\theta^2 %\\
+\end{align}
+avec~:
+\begin{align}
+&m(t) = \int_{-\infty}^{+\infty} Dh f\left(h\sigma_h(t) + \mu(t)\right)\\
+&q(t) = \int_{-\infty}^{+\infty} Dh f^2\left(h\sigma_h(t) + \mu(t)\right)
+\end{align}
+
+avec $Dh = \frac{1}{\sqrt{2\pi}} \exp -\frac{h^2}{2} dh$.
+
+Les équations de champ moyen, qui forment un système à petit nombre de degrés de liberté, offrent ainsi une description ``macroscopique'' de l'activité d'un réseau,
+représentative de l'activité moyenne qu'on peut attendre dans un réseau de taille finie issu d'un tirage particulier. Elles 
+constituent de fait un cadre d'analyse adapté à une approche ``multi-échelles''.
+
+\subsection{Champ neuronal}
+%Le modèle du ``champ neuronal'' est un modèle de type champ moyen, c'est à dire qu'il décrit les réseaux de neurones d'un point de vue macroscopique. 
+La vocation des modèles de champ neuronal \shortcite{Ama77B} est principalement la modélisation d'un substrat neuronal spatialisé vu à ``large échelle'' 
+(continuum d'activité sur la surface corticale).
+L'activité de larges populations de neurones s'apparente en effet, à la limite des grandes tailles, à un milieu continu dans lequel chaque portion de l'espace peut être décrit par la ``densité'' d'activité qui s'y développe.
+
+
+Le modèle le plus connu est décrit par des équation intégro-différentielles. Soit $x$ un point d'un espace (ou d'une portion d'espace) cartésien $\mathcal{X}$.
+Dans le modèle d'Amari \shortcite{Ama77B}, les neurones sont décrits par leur potentiel d'activation $V$ et par la sortie binaire de la fonction d'activation $f$ (fonction de Heaviside).  Le potentiel d'activation d'un neurone est donné par l'équation~:
+\begin{align}
+\tau \frac{dV(x,t)}{dt} = -V(x,t) + I(x,t) - \theta + \int_{y \in \mathcal{X}} W(||x-y||) f(V(y,t)) dy
+\end{align} 
+où $I$ est un signal extérieur et $W$ un noyau décrivant les interactions réciproques entre neurones en fonction de la distance $||x - y||$.
+
+Selon le noyau choisi, le réseau développe un ou plusieurs 
+foyers d'activité métastables  interprétables au choix comme un patron d'activité ou comme un
+ensemble de grandeurs scalaires (en fonction des barycentres des foyers d'activité).
+Ce modèle partage avec le réseau de Hopfield \cite{Hop82} la capacité à conserver et entretenir 
+une activité autonome indépendamment de son signal d'entrée. 
+Il implémente néanmoins des opérations tout à fait spécifiques et intéressantes du point de vue computationnel. 
+Un champ neuronal implémente simultanément une ``mémoire de travail'' (capacité à conserver la trace d'une stimulation passée), et 
+un mécanisme de traitement (ici résumé à quelques opérations simples : émergence, extinction, fusion, poursuite) \shortcite{Schoner95}. 
+La combinaison de ces deux compétences (mémoire et calcul)
+au sein d'une architecture unique fait en principe du neural field un environnement computationnel complet \shortcite{Siegelmann1999,Maclennan1999,Potthast2013}. 
 
 %
 
-
-
-L'hypothèse du \textit{passage d'échelle} suggère des moments transitoires où l'activité microscopique rejoint 
-l'activité macroscopique lors des épisodes de synchronisation, conduisant à une réduction de 
-complexité selon le principe déjà évoqué suggéré par la synergétique \shortcite{Haken1983}.
-L'hypothèse est ici que ce couplage transitoire entre activité motrice et activité neuronale repose sur la réduction du nombre de degrés de liberté, au sein d'assemblées neuronales spécifiques, se traduisant une synchronisation des activités et des corrélations à grande échelle \shortcite{Gra89}.
-
-Dans le cadre de l'analyse des mécanismes d'appariement présentés dans les sections précédentes, %. d'\textit{identifier ces couplages transitoires aux }
-nous considérons la commande motrice comme un mécanisme de relaxation qui conjugue~:
-\begin{itemize}
-	\item un attracteur appartenant à l'espace des activités neuronales 
-	\item avec un attracteur appartenant à l'espace de la réalisation motrice.
-\end{itemize}
-(voir eqs. \ref{eq:SD-closed-out}-\ref{eq:SD-closed-in})
-
-\paragraph{}
-\begin{itemize}
-	\item Le mécanisme de synchronisation transitoire, ou de résonance, 
-	au sein de systèmes constitués de nombreuses unités couplées, est interprété
-	comme favorisant la \textit{communication entre les différentes échelles} \shortcite{Dau02c1}. 
-	Ce type de mécanisme n'est pas encore, à ma connaissance, implémenté dans des architectures de contrôle, 
-	mais son importance a déjà été souligné dans \shortcite{Konig1995} et \shortcite{Varela2001}.
-	\item 
-	La \textit{non-reconnaissance} correspondrait à une situation où le milieu neuronal 
-	produit une activité à haut degré de liberté, sans effet macroscopique par absence de coordination. 
-	\item
-	La \textit{reconnaissance} correspondrait à 
-	une situation où le milieu neuronal ``renonce'' transitoirement à ses degrés de liberté et se coordonne, 
-	favorisant le couplage 
-	avec la dynamique macroscopique. 
-	La coordination de la population permettrait \textit{le passage à une description ``grande échelle''} de l'activité neuronale, 
-	perceptible au niveau de description supérieur, 
-	caractérisé par une échelle spatiale plus large et une échelle temporelle plus lente,
-	le même mécanisme pouvant en principe se décliner à différentes échelles.
-\end{itemize}
 
 
 
@@ -2429,49 +2509,10 @@ Par ailleurs~:
 Ces travaux sont présentés en détail dans la partie \ref{part:detail}. Je liste ici  quelques résultats que je considère comme significatifs~:
 
 \subsubsection{a. Un réseau récurrent aléatoire en régime critique et soumis à un signal extérieur catégorise arbitrairement son environnement sensoriel.}
-L'étude publiée dans \shortcite{Dau98A} porte sur la réaction (spontanée ou acquise) d'un réseau de neurones récurrent aléatoire
-à des patrons (stimuli) également aléatoires.
-Un réseau de neurones aléatoire est un graphe orienté et pondéré $G$ constitué de $N$ nœuds défini par~:
-\begin{itemize}
-	\item la matrice des 
-	couplages $\boldsymbol{J} = \{J_{i,j}\}_{i \in 1..N,j \in 1..N}$ 
-	\item les seuils d'activation $\boldsymbol{\theta} = \{\theta_i\}_{i \in 1..N}$
-	\item les temps de propagation  $\boldsymbol{\tau} = \{\tau_{i,j}\}_{i \in 1..N,j \in 1..N}$
-	\item etc.
-\end{itemize} 
-tel que~:
-\begin{align}
-G \sim \mathcal{D}(\Xi) \label{eq:graphe-aleatoire}
-\end{align}
-où $\mathcal{D}$ est une distribution de probabilité sur l'espace des graphes et  $\Xi$ est un ensemble de paramètres ``macroscopiques'' qui définissent cette distribution.
-La notion d'aléa ne porte donc pas sur la dynamique d'état mais sur le patron de connexions du réseau. 
-On parle de bruit ``figé'' dans les connexions (``\textit{quenched disorder}'').
+%L'étude publiée dans \shortcite{Dau98A} porte sur la réaction (spontanée ou acquise) d'un réseau de neurones récurrent aléatoire
+%à des patrons (stimuli) également aléatoires.
 
-L'ajout d'une fonction de réponse sur les nœuds définit un système dynamique déterministe, constitué de $N$ neurones.
-La dynamique à temps discret, et à temps de propagation constant est, en notation matricielle, définie par l'équation de récurrence ~:
-\begin{align}
-&\boldsymbol{x}(0) = \boldsymbol{x}_0&&\nonumber\\
-&\forall t > 0 :&& \nonumber\\
-&&\boldsymbol{h}(t) &= \boldsymbol{J} \mathbf{x}(t-1) - \boldsymbol{\theta} + \boldsymbol{I}(t) \\
-&& \boldsymbol{x}(t) &= f(\boldsymbol{h}(t);g)\nonumber
-\end{align}
-avec $f$ fonction de réponse sigmoïde et $g$ paramètre de contrôle (gain de la fonction de réponse du neurone). 
 
-L'indépendance statistique entre les différents liens est une caractéristique importante, qui permet d'analyser le comportement du modèle 
-à la limite des grandes tailles, c'est à dire en faisant tendre la taille $N$ vers l'infini. Avec un \textit{scaling} des poids approprié 
-(espérance, variance de la loi de tirage initial des poids en $O(\frac{1}{N}$)), on peut montrer que la dynamique (déterministe) tend à la limite thermodynamique 
-vers un processus aléatoire (processus Gaussien), la corrélation entre les nœuds tendant vers 0 \shortcite{Som88,Ces94,Moy00a}.
- 
-Les réseaux étudiés étant normalisés, 
-leur comportement est réglé par deux paramètres~: le gain $g$ de la fonction de réponse neuronale (assimilable
-à l'inverse d'une température) et la variabilité $\sigma_\theta$ du seuil d'activation.
-Le signal présenté en entrée du réseau est un vecteur aléatoire  qui vient se surimposer au seuil 
-d'activation (rendant donc les neurones plus ou moins excitables).
-Le réseau soumis à un tel signal converge vers un nouvel attracteur (autrement dit se reconfigure).
-
-L'existence d'un 
-paramètre de contrôle (le gain de la fonction de transfert des neurones) permet de reproduire, dans ces réseaux aléatoires, 
-un  comportement générique de déstabilisation, appelé route vers le chaos par ``quasi-périodicité'' \shortcite{Berger1988,Doyon1993} (voir figure \ref{fig:hermes-bif}).
 L'étude proposée dans \shortcite{Beslon2002},
 également rapportée dans \shortcite{Dau07}, porte sur un réseau récurrent aléatoire comportant une seule population. 
 Le paramètre de contrôle
@@ -2487,34 +2528,6 @@ distinctes dans le spectre de Fourier du signal moyen (voir section \ref{sec:cri
 
 
 %Lorsque les liens $J_{ij}$ sont indépendants . 
-
-Le comportement d'une classe de réseaux (l'ensemble des réseaux définis par la même distribution) peut être décrit à la limite thermodynamique par 
-des équations dites de ``champ moyen''. Ces équations définissent le processus aléatoire limite, décrit par la dynamique temporelle de grandeurs caractéristiques comme l'activité moyenne, 
-le moments d'ordre 2 et la covariance dans le temps \shortcite{Ces95}. 
-
-Lorsque les poids synaptiques sont tirés indépendamment selon une loi de moyenne $\frac{\mu_J}{N}$ et d'écart-type $\frac{\sigma_J}{\sqrt{N}}$, et les seuils selon une loi de moyenne  $\mu_\theta$ et d'écart-type $\sigma_\theta$,
-le processus Gaussien limite est défini au temps $t$ par~: 
-\begin{itemize}
-	\item sa moyenne $\mu_h(t) = \langle h_i(t)\rangle$
-	\item sa variance $\sigma_h^2(t) = \langle (h_i(t) - \mu_h(t))^2\rangle$
-	\item et sa covariance temporelle $\Delta_h(t,t') = \langle h_i(t) h_i(t') \rangle - \langle h_i(t) \rangle \langle h_i(t') \rangle$
-\end{itemize}
-où $h_i(t)$ est une variable aléatoire, selon:
-\begin{align}
-&\mu_h(t) = \mu_J m(t-1) + \mu_\theta\\
-&\sigma_h^2(t) = \sigma_J^2 q(t-1) + \sigma_\theta^2 %\\
-\end{align}
-avec~:
-\begin{align}
-&m(t) = \int_{-\infty}^{+\infty} Dh f\left(h\sigma_h(t) + \mu(t)\right)\\
-&q(t) = \int_{-\infty}^{+\infty} Dh f^2\left(h\sigma_h(t) + \mu(t)\right)
-\end{align}
-
-avec $Dh = \frac{1}{\sqrt{2\pi}} \exp -\frac{h^2}{2} dh$.
-
-Les équations de champ moyen, qui forment un système à petit nombre de degrés de liberté, offrent ainsi une description ``macroscopique'' de l'activité d'un réseau,
-représentative de l'activité moyenne qu'on peut attendre dans un réseau de taille finie issu d'un tirage particulier. Elles 
-constituent de fait un cadre d'analyse adapté à une approche ``multi-échelles''.
 
 
 Les réseaux de neurones dits ``équilibrés''  (balanced neural networks) sont des réseaux  constitués d'une population de noeuds inhibiteurs et d'une population de noeuds excitateurs. L'équilibre se référant à l'idée d'équilibre
@@ -2539,14 +2552,6 @@ le caractère régulateur du paramètre d'hétérogénéité dans les régimes d
 
 
 \subsubsection{c. Les graphes de connexions à la fois topographiquement organisés et équilibrés permettent d'implémenter une mémoire à court terme sur des neurones impulsionnels, sans faire appel à des mécanismes cellulaires spécifiques.}
-Le modèle du ``champ neuronal'' est un modèle de type champ moyen, c'est à dire qu'il décrit les réseaux de neurones d'un point de vue macroscopique. L'activité de larges populations de neurones s'apparente en effet, à la limite des grandes tailles, à un milieu continu dans lequel chaque portion de l'espace peut être décrit par la ``densité'' d'activité qui s'y développe.
-
-Le modèle le plus connu est décrit par des équation intégro-différentielles. Soit $x$ un point d'un espace (ou d'une portion d'espace) cartésien $\mathcal{X}$.
-Dans le modèle d'Amari \shortcite{Ama77B}, les neurones sont décrits par leur potentiel d'activation $V$ et par la sortie binaire de la fonction d'activation $f$ (fonction de Heaviside).  Le potentiel d'activation d'un neurone est donné par l'équation~:
-\begin{align}
-\tau \frac{dV(x,t)}{dt} = -V(x,t) + I(x,t) - \theta + \int_{y \in \mathcal{X}} W(||x-y||) f(V(y,t)) dy
-\end{align} 
-où $I$ est un signal extérieur et $W$ un noyau décrivant les interactions réciproques entre neurones en fonction de la distance $||x - y||$.
 
 La question adressée par le modèle publié en 2004 \shortcite{Dau04} est celle de l'implémentation d'un modèle de champ neuronal sur un support composé
 d'unités discrètes.
@@ -2806,6 +2811,27 @@ L'erreur (la non-correspondance) ne produit pas une correction mais une transiti
 qui s'apparente à une exploration aléatoire de l'espace des couplages sensori-moteurs jusqu'à atteindre un nouvel
 attracteur comportemental.
 
+\paragraph{}
+\begin{itemize}
+	\item Le mécanisme de synchronisation transitoire, ou de résonance, 
+	au sein de systèmes constitués de nombreuses unités couplées, est interprété
+	comme favorisant la \textit{communication entre les différentes échelles} \shortcite{Dau02c1}. 
+	Ce type de mécanisme n'est pas encore, à ma connaissance, implémenté dans des architectures de contrôle, 
+	mais son importance a déjà été souligné dans \shortcite{Konig1995} et \shortcite{Varela2001}.
+	\item 
+	La \textit{non-reconnaissance} correspondrait à une situation où le milieu neuronal 
+	produit une activité à haut degré de liberté, sans effet macroscopique par absence de coordination. 
+	\item
+	La \textit{reconnaissance} correspondrait à 
+	une situation où le milieu neuronal ``renonce'' transitoirement à ses degrés de liberté et se coordonne, 
+	favorisant le couplage 
+	avec la dynamique macroscopique. 
+	La coordination de la population permettrait \textit{le passage à une description ``grande échelle''} de l'activité neuronale, 
+	perceptible au niveau de description supérieur, 
+	caractérisé par une échelle spatiale plus large et une échelle temporelle plus lente,
+	le même mécanisme pouvant en principe se décliner à différentes échelles.
+\end{itemize}
+
 \paragraph{}\label{page:alternance}
 L'importance de la désynchronisation, comme complément de la synchronisation, est également souligné dans \shortcite{Rod99}.
 Le fonctionnement en boucle fermée par couplage positif (par renforcement mutuel) contient en effet fondamentalement
@@ -2873,7 +2899,7 @@ Les résultats principaux sont les suivants~:
 	
 	Le lien entre le 
 	policy gradient et la plasticité de Hebb induite est établi dans 
-	\shortcite{Dau09} (page~\pageref{page:ICANN09} sur un modèle de neurones à impulsions,  et dans  \cite{Dauce2010}, (page~\pageref{page:NCO10} et annexe \ref{app:NCO10}) sur des neurones  fréquentiels. 	
+	\shortcite{Dau09} (page~\pageref{page:ICANN09}) sur un modèle de neurones à impulsions,  et dans  \cite{Dauce2010}, (page~\pageref{page:NCO10} et annexe \ref{app:NCO10}) sur des neurones  fréquentiels. 	
 	\begin{itemize}
 		\item 	Ces modèles
 		systématisent de plus l'usage du codage topographique
@@ -2954,176 +2980,176 @@ Avec un choix judicieux des valeurs de récompense, la mise à jour du policy gr
 \end{itemize}
  
 
-
-{\color{Gray}
-
-\section{Dynamique et expressivité des grands réseaux de neurones}
-
-
-
-
- 
-%Ces circuits concurrents  Leur activation est conditionnée par des configurations spécifiques de l'environnement moteur et sensoriel ainsi que par des mécanismes de sélection internes.
-% L'apparition ou la disparition de certains circuits au cours du développement de l'individu repose sur des mécanismes de plasticité. 
-%Le problème est donc de regarder comment un tel processus se r matériellement.
- 
- 
-\subsection{Réseaux de neurones récurrents aléatoires} 
-
-Au sein de ce problème générique, nous étudions plus particulièrement les propriétés 
-de la dynamique des réseaux de neurones définis par des graphes aléatoires.
-
-
-
-
-
-
-
-- le rôle du hasard dans la constitution de tels circuits.
-
-- plasticité de Hebb
-
-  - propriétés dynamiques des circuits aléatoires
-
-  - hasard et plasticité
-
-- le rôle de l'activité endogène dans le mécanisme d 'appariement
-
-- approche multi-échelles et hypothèse du ``passage d'échelle''
-
-- codage par population
-
-- signaux spatio-temporels
-
-- apprentissage en ligne
-
-- apprentissage par renforcement
-
-Nous utilisons des modèles de réseaux de neurones  
-
-Expressivité 
-
-
-
-
-Résultat principaux :
-
-- la plasticité de Hebb réduit la dynamique d'un RRNN récurrent. Environ 50 \% des papiers publiés portent  sur la plasticité de Hebb.
-
-- sur les réseaux équilibrés : importance de l'hétérogénéité.
-
-- rapprochement entre règle de Hebb et Policy gradient. Rôle exploratoire de la dynamique endogène. Analogie chaos / bruit d'exploration.
-
-
-
-%\emph{Essayons de résumer les différents résultats mis en évidence par les recherches présentées. 
-%	Nous sommes partis de la question du rôle computationnel de l'activité intrinsèque 
-%	des réseau de neurones récurrents. A quoi peut servir une activité se développement
-%	spontanément, sans lien avec un milieu extérieur?}
-
-{\bf !!Capacités computationnelles des substrats neuronaux aléatoires récurrents!!}
-
-
-
-Ces éléments sont présentés plus en détail ci-dessous.
-
-
-
-Les différentes architectures neuronales étudiées ont tout d'abord
-permis d'identifier des comportements caractéristiques, décrits sous la forme de différents régimes dynamiques. 
-Nous avons cherché à caractériser l'expressivité de ces substrats, c'est à dire leur capacité à produire
-des patrons d'activité pouvant servir de support à des opérations cognitives. 
-
-
-
-
-
-
-Une des hypothèses que nous avons mise en avant est que cette activité de population (résonance) 
-permet le ``passage d'échelle'', c'est à dire rend sensible à une échelle supérieure (macroscopique) 
-l'activité répartie d'une population d'unités: passage d'activités unitaires à une activité de population, passage
-d'une activité de population à un déplacement moteur.
-
-Une autre hypothèse est que le substrat nerveux est un réservoir de patrons sensori-moteurs, 
-et l'apparition de précurseurs sensoriels ou moteurs au sein de l'activité nerveuse suscite 
-la convergence de la dynamique vers l'attracteur correspondant, 
-favorisant une activité macroscopique (un attracteur comportemental) qui lui-même favorise 
-l'attracteur neuronal par boucle de rétroaction positive \shortcite{Dau02,Dau02c1}.
-
-\section{Résonance et apprentissage}
-
-\subsection{Plasticité d'ordre 1}
-
-\paragraph{Apprentissage Hebbien dans les réseaux aléatoires}
-
-
-
-\paragraph{Modèles de la perception}
-
-L'architecture proposée dans \shortcite{Dau02} {\bf (!!FIGURE!!)} implémente un principe de traitement
-sélectif de la scène sensorielle, en séparant l'espace des sensations entre ce qui est connu (ce qui produit 
-un changement qualitatif sous forme de résonance 
-perceptive) et ce qui est inconnu (pas de changement qualitatif).
-La reconnaissance se traduit par le franchissement d'un seuil (seuil de ``vigilance''),
-favorisant le développement d'une activité 
-spécifique qui participe à la consolidation et l'entretien de la résonance.
-Le changement par rapport au modèle à une couche réside dans l'utilisation effective des changements qualitatifs 
-induits par la plasticité sous la forme du signal de feedback. 
-
-L'existence de correspondances statistiques entre l'activité interne et l'activité 
-sensorielle produit une intensification des motifs d'entrée par l'activité de feedback.
-La plasticité permet d'instituer des processus attentionnels spécifiques à certaines configurations
-spatio-temporelles apprises. Ces configurations connues, en activant une résonance, révèlent la nature
-des connaissance acquises par le réseau.
-Cette projection induite de l'activité interne vers la couche sensorielle
-agit comme une prédiction \emph{dans le présent}, autrement dit fait reposer la connaissance de l'entrée
-sensorielle actuelle sur des informations observées dans le passé {\bf (!!FIGURE!!)}.
-
-
-
-
-
-\paragraph{Réseaux de neurones impulsionnels}
-
-
-\paragraph{Discrimination de signaux spatio-temporels} 
-
-
-
-\subsection{Plasticité induite}
-
-
-
-\section{Contrôle en boucle fermée}
-
-
-%La structure du substrat logiciel joue dans ce cas un rôle important.
-
-
-
-
-
-
-\section{Modèles biologiques du contrôle moteur et de l'attention}
-
-Les modèles développés dans un cadre de modélisation biologique  
-apportent quelques éclairages supplémentaires
-sur certains aspects du calcul neuronal.
-
-
-\paragraph{Orientation visuelle}
-
-
-%en lien avec le déplacement
-%Exploration visuelle par scanning
-%de l'environnement. 
-%L'exploration de l'espace visuel implique une métrique qui repose sur les
-%récepteurs vestibulaires.
-%(Les récepteurs vestibulaires sont par ailleurs au coeur du maintien de la position verticale)
-
-\paragraph{Orientation temporelle}
-
-}
+%
+%{\color{Gray}
+%
+%\section{Dynamique et expressivité des grands réseaux de neurones}
+%
+%
+%
+%
+% 
+%%Ces circuits concurrents  Leur activation est conditionnée par des configurations spécifiques de l'environnement moteur et sensoriel ainsi que par des mécanismes de sélection internes.
+%% L'apparition ou la disparition de certains circuits au cours du développement de l'individu repose sur des mécanismes de plasticité. 
+%%Le problème est donc de regarder comment un tel processus se r matériellement.
+% 
+% 
+%\subsection{Réseaux de neurones récurrents aléatoires} 
+%
+%Au sein de ce problème générique, nous étudions plus particulièrement les propriétés 
+%de la dynamique des réseaux de neurones définis par des graphes aléatoires.
+%
+%
+%
+%
+%
+%
+%
+%- le rôle du hasard dans la constitution de tels circuits.
+%
+%- plasticité de Hebb
+%
+%  - propriétés dynamiques des circuits aléatoires
+%
+%  - hasard et plasticité
+%
+%- le rôle de l'activité endogène dans le mécanisme d 'appariement
+%
+%- approche multi-échelles et hypothèse du ``passage d'échelle''
+%
+%- codage par population
+%
+%- signaux spatio-temporels
+%
+%- apprentissage en ligne
+%
+%- apprentissage par renforcement
+%
+%Nous utilisons des modèles de réseaux de neurones  
+%
+%Expressivité 
+%
+%
+%
+%
+%Résultat principaux :
+%
+%- la plasticité de Hebb réduit la dynamique d'un RRNN récurrent. Environ 50 \% des papiers publiés portent  sur la plasticité de Hebb.
+%
+%- sur les réseaux équilibrés : importance de l'hétérogénéité.
+%
+%- rapprochement entre règle de Hebb et Policy gradient. Rôle exploratoire de la dynamique endogène. Analogie chaos / bruit d'exploration.
+%
+%
+%
+%%\emph{Essayons de résumer les différents résultats mis en évidence par les recherches présentées. 
+%%	Nous sommes partis de la question du rôle computationnel de l'activité intrinsèque 
+%%	des réseau de neurones récurrents. A quoi peut servir une activité se développement
+%%	spontanément, sans lien avec un milieu extérieur?}
+%
+%{\bf !!Capacités computationnelles des substrats neuronaux aléatoires récurrents!!}
+%
+%
+%
+%Ces éléments sont présentés plus en détail ci-dessous.
+%
+%
+%
+%Les différentes architectures neuronales étudiées ont tout d'abord
+%permis d'identifier des comportements caractéristiques, décrits sous la forme de différents régimes dynamiques. 
+%Nous avons cherché à caractériser l'expressivité de ces substrats, c'est à dire leur capacité à produire
+%des patrons d'activité pouvant servir de support à des opérations cognitives. 
+%
+%
+%
+%
+%
+%
+%Une des hypothèses que nous avons mise en avant est que cette activité de population (résonance) 
+%permet le ``passage d'échelle'', c'est à dire rend sensible à une échelle supérieure (macroscopique) 
+%l'activité répartie d'une population d'unités: passage d'activités unitaires à une activité de population, passage
+%d'une activité de population à un déplacement moteur.
+%
+%Une autre hypothèse est que le substrat nerveux est un réservoir de patrons sensori-moteurs, 
+%et l'apparition de précurseurs sensoriels ou moteurs au sein de l'activité nerveuse suscite 
+%la convergence de la dynamique vers l'attracteur correspondant, 
+%favorisant une activité macroscopique (un attracteur comportemental) qui lui-même favorise 
+%l'attracteur neuronal par boucle de rétroaction positive \shortcite{Dau02,Dau02c1}.
+%
+%\section{Résonance et apprentissage}
+%
+%\subsection{Plasticité d'ordre 1}
+%
+%\paragraph{Apprentissage Hebbien dans les réseaux aléatoires}
+%
+%
+%
+%\paragraph{Modèles de la perception}
+%
+%L'architecture proposée dans \shortcite{Dau02} {\bf (!!FIGURE!!)} implémente un principe de traitement
+%sélectif de la scène sensorielle, en séparant l'espace des sensations entre ce qui est connu (ce qui produit 
+%un changement qualitatif sous forme de résonance 
+%perceptive) et ce qui est inconnu (pas de changement qualitatif).
+%La reconnaissance se traduit par le franchissement d'un seuil (seuil de ``vigilance''),
+%favorisant le développement d'une activité 
+%spécifique qui participe à la consolidation et l'entretien de la résonance.
+%Le changement par rapport au modèle à une couche réside dans l'utilisation effective des changements qualitatifs 
+%induits par la plasticité sous la forme du signal de feedback. 
+%
+%L'existence de correspondances statistiques entre l'activité interne et l'activité 
+%sensorielle produit une intensification des motifs d'entrée par l'activité de feedback.
+%La plasticité permet d'instituer des processus attentionnels spécifiques à certaines configurations
+%spatio-temporelles apprises. Ces configurations connues, en activant une résonance, révèlent la nature
+%des connaissance acquises par le réseau.
+%Cette projection induite de l'activité interne vers la couche sensorielle
+%agit comme une prédiction \emph{dans le présent}, autrement dit fait reposer la connaissance de l'entrée
+%sensorielle actuelle sur des informations observées dans le passé {\bf (!!FIGURE!!)}.
+%
+%
+%
+%
+%
+%\paragraph{Réseaux de neurones impulsionnels}
+%
+%
+%\paragraph{Discrimination de signaux spatio-temporels} 
+%
+%
+%
+%\subsection{Plasticité induite}
+%
+%
+%
+%\section{Contrôle en boucle fermée}
+%
+%
+%%La structure du substrat logiciel joue dans ce cas un rôle important.
+%
+%
+%
+%
+%
+%
+%\section{Modèles biologiques du contrôle moteur et de l'attention}
+%
+%Les modèles développés dans un cadre de modélisation biologique  
+%apportent quelques éclairages supplémentaires
+%sur certains aspects du calcul neuronal.
+%
+%
+%\paragraph{Orientation visuelle}
+%
+%
+%%en lien avec le déplacement
+%%Exploration visuelle par scanning
+%%de l'environnement. 
+%%L'exploration de l'espace visuel implique une métrique qui repose sur les
+%%récepteurs vestibulaires.
+%%(Les récepteurs vestibulaires sont par ailleurs au coeur du maintien de la position verticale)
+%
+%\paragraph{Orientation temporelle}
+%
+%}
 
 \chapter{Discussion}
 
@@ -3194,10 +3220,28 @@ réponses comportementales, éventuellement stabilisées dans le cas où elles a
 
 %La règle de Hebb est une règle de confirmation qui a tendance à faciliter la réapparition des mêmes séquences d'activation. 
 
-Etendu au cas des systèmes de contrôle en boucle fermée, l'appariement par feedback positif suppose une double relaxation, à la fois du dispositif mécanique et du contrôleur neuronal, vers un attracteur comportemental mutuel (étude {\bf i}). La réduction de la dynamique d'ensemble devrait en outre permettre, transitoirement, de faire fonctionner les ensembles de neurones aux mêmes échelles de temps et d'espace que les déplacements moteurs associés.
+\paragraph{}
+De manière un peu plus générale~:
+\begin{itemize}
+\item Dans un réseau récurrent, le caractère hétérogène et irrégulier du graphe de con\-ne\-xions permet, en régime critique, de constituer un ensemble  varié de  réponses à des signaux extérieurs. Le hasard (l'aléa des connexions) constitue ici un principe structurant qui sépare l'environnement en régions distinctes, autrement dit qui ``digitalise'' l'environnement, selon un principe proche de l'{``auto-encodage''} tel qu'il est mis en œuvre dans les réseaux profonds \shortcite{Hinton2006} (études {\bf a}, {\bf b}, {\bf c} et {\bf d}).  
+\item Il semble possible d'établir un lien entre la plasticité d'ordre 1 (études {\bf g} et {\bf h}) et le principe d'``accumulation d'évidence'' dans un environnement incertain (étude {\bf k}). Sur des échelles de temps relativement courtes, la plasticité dépendante des instants de tir contribue à renforcer certaines séquences d'activation spécifiques, et donc à établir des liens causaux entre événements séparés. Ce mécanisme conduit également à une réponse de population via la synchronisation et la réduction de complexité (études {\bf f}, {\bf g} et {\bf h}), 
+ qui pourrait correspondre à la formation d'un ``canal de communication'' transitoire entre l'échelle microscopique et l'échelle macroscopique, autorisant la mise en œuvre de programmes moteurs spécifiques. 
+ \item Nous avons également contribué, selon un principe de codage fréquentiel (non lié aux instants de tir), à établir une correspondance entre la règle de Hebb, dans sa variante ``guidée'', et la recherche du maximum de vraisemblance dans un espace de couples (perception, action), où la combinaison de recherches d'optima locaux s'apparente à la recherche d'un optimum global en l'absence de modèle de l'environnement (étude {\bf j} et {\bf l}).   
+%Dans le cadre des systèmes de contrôle en boucle fermée, nous avons considéré la commande motrice comme un mécanisme de relaxation qui conjugue un attracteur appartenant à l'espace des activités neuronales 
+% avec un attracteur appartenant à l'espace de la réalisation motrice (étude {\bf i}).  c'est à dire  dans  forment un répertoire ont une traduction en imagerie fonctionnelle sous la forme de corrélations longue distance telles qu'observées dans le cas de l'état de repos (étude {\bf d}).
+ 
+%(voir eqs. \ref{eq:SD-closed-out}-\ref{eq:SD-closed-in})l'appariement par feedback positif suppose une double relaxation, à la fois du dispositif mécanique et du contrôleur neuronal, vers un attracteur comportemental mutuel . 
+%La réduction de la dynamique d'ensemble devrait en outre permettre, transitoirement, de faire fonctionner les ensembles de neurones aux mêmes échelles de temps et d'espace que les déplacements moteurs associés.
+\end{itemize}
+
+
+
+
+
+% corrélations grande échelle : \cite{Gra89}
 
 \subsection{Questions ouvertes}
-Le travail de compilation et de relecture/réexamen de résultats parfois anciens liés à la rédaction de ce rapport a été l'occasion de développer quelques rapprochements qui ne sont pas présents en tant que telles dans les publications. 
+Le travail de compilation et de relecture/réexamen de résultats parfois anciens liés à la rédaction de ce rapport a été l'occasion de développer quelques rapprochements qui ne sont pas présents en tant que tels dans les publications. 
 
 Il m'a permis de mettre à jour ce qui semble être une difficulté fondamentale dans l'apprentissage de compétences motrices, qui nécessite probablement un examen fouillé dépassant le cadre de ce rapport.
 
@@ -3212,35 +3256,39 @@ L’apprentissage revient donc à la constitution d'un vocabulaire de base qui s
 \paragraph{} 
 Il existe cependant peu d'exemples dans la littérature où ces familles d'algorithmes, dits d'auto-encodage,
  aboutissent à l'apprentissage d'une loi de contrôle dans un espace d'actions continu.
-Il semble y avoir une séparation conceptuelle et pratique entre d'une part l'approche systèmes dynamiques, d'autre part la reconnaissance de formes. 
+Il semble y avoir une séparation conceptuelle et pratique entre, d'une part, l'approche systèmes dynamiques et, d'autre part, la reconnaissance de formes. 
 Cette difficulté semble être liée au fait que les distances, telles qu'elles sont définies dans l'espace euclidien de la commande, ne sont pas conservées dans les espaces de redescription. 
 %La multitude des récepteurs sensoriels, d'une part, et le caractère continu des déplacements, d'autre part, forment un tout disparate. 
 Pour chaque tâche, les différentes réponses liées aux différentes dispositions des actionneurs et des capteurs dans l'espace physique devraient donc être apprises ``par cœur''.
+
+La simplification, qui consiste à considérer un milieu intérieur (intensif) et un milieu extérieur (extensif)
+couplés comme un seul et même système dynamique, se
+heurte ainsi au caractère inhomogène de ce couplage~:
 
 %{\color{Orange}Nous avons souligné dans la partie précédente le caractère parfois incompatible entre d'une part la théorie du contrôle, et d'autre part l'apprentissage moteur. }
 
 %L'interaction entre un monde distribué et digital, propice au feedback
 %positif, et un monde métrique et continu, propice au feedback négatif, 
 
-\paragraph{Disparités d'échelle}
-Le problème des disparités d'échelle, pourtant connu de longue date dans le champ des sciences cognitives, désigne la difficulté à considérer sur le même plan~:
-\begin{itemize} 
-	\item d'une part la contrainte physique du corps, engagé dans différentes tâches, à des échelles
-	spatiales macroscopiques et des échelles temporelles lentes,
-	\item et d'autre part la contrainte du circuit microscopique, constitué d'unité neuronales échangeant rapidement des signaux discrets.
-\end{itemize}
+\subsubsection{Disparités d'échelle}
+Dans domaine biologique, les échelles de temps et d'espace des comportements macroscopiques 
+(mouvements, déplacements, activité motrice)  
+se distinguent des échelles de temps et d'espace observées au niveau de l'activité
+nerveuse.
+On a d'un côté des échelles
+spatiales macroscopiques et des échelles temporelles lentes, et de l'autre des circuits microscopiques, constitués d'unités neuronales échangeant rapidement des signaux discrets.
+Les actions produites par le corps sont à une échelle temporelle lente en comparaison des potentiels d'action
+produits par les neurones. On parle de \textit{Disparité d'échelle}.
+%Le problème des disparités d'échelle, pourtant connu de longue date dans le champ des sciences cognitives.
 
-La simplification, qui consiste à considérer un milieu intérieur (intensif) et un milieu extérieur (extensif)
-couplés comme un seul et même système dynamique, se
-heurte ainsi au caractère inhomogène de ce couplage~:
-\begin{itemize}  
-	\item Dans domaine biologique, les échelles de temps et d'espace des comportements macroscopiques 
-	(mouvements, déplacements, activité motrice)  
-	se distinguent des échelles de temps et d'espace observées au niveau de l'activité
-	nerveuse.
-	Les actions produites par le corps sont à une échelle temporelle lente en comparaison des potentiels d'action
-	produits par les neurones. On parle de \textit{Disparité d'échelle}.
-	\item 
+Ce problème a été abordé de longue date dans les sciences cognitives.
+L'hypothèse du \textit{passage d'échelle} suggère des moments transitoires où l'activité microscopique rejoint 
+l'activité macroscopique lors des épisodes de synchronisation, conduisant à une réduction de 
+complexité selon le principe déjà évoqué suggéré par la synergétique \shortcite{Haken1983}.
+L'hypothèse est ici que ce couplage transitoire entre activité motrice et activité neuronale repose sur la réduction du nombre de degrés de liberté, au sein d'assemblées neuronales spécifiques, se traduisant une synchronisation des activités et des corrélations à grande échelle \shortcite{Gra89}.
+Cette théorie n'a cependant pas encore, comme nous l'avons vu, abouti à des réalisations pratiques dans le domaine du contrôle moteur.
+
+\paragraph{}
 	En plus de la disparité d'échelle, les lois régissant les deux systèmes ne sont pas de même nature. 
 	Le monde physique est assez bien décrit par 
 	l'approximation newtonienne des masses en mouvement dans un milieu tri-dimensionnel.
@@ -3250,26 +3298,20 @@ heurte ainsi au caractère inhomogène de ce couplage~:
 	faiblement liée à la disposition spatiale, essentiellement produite par la connectique et 
 	les transports d'activité électrique.
 	%On parle pour simplifier de milieu intensif. % (ou milieu logiciel).
-\end{itemize}
-
-
-Cette dichotomie implique un mode de fonctionnement composite, basé d'une part sur des rapports entre quantités (monde physique), 
+	
+Cette dichotomie  implique un mode de fonctionnement composite, basé d'une part sur des rapports entre quantités (monde physique), 
 et d'autre part sur des rapports entre formes (monde digital).
 D'une certaine façon, la plupart des modèles en neurosciences computationnelles 
 reposent sur un compromis, sur un ``bricolage'' entre les deux approches, ne prenant pas 
 toujours en compte le caractère parfois incompatible des deux modes de fonctionnement.
 
-
 	\subsubsection{Espace métrique et espace sensoriel}	
-	Dans le cadre des algorithmes d'apprentissage, l'universalité de l'apprentissage (sa capacité à
+
+
+ Dans le cadre des algorithmes d'apprentissage, l'universalité de l'apprentissage (sa capacité à
 	apprendre n'importe quelle application) passe par l'utilisation de fonctions non-linéaires 
 	à une étape au moins du traitement, soit des fonctions seuil, sigmoïdes ou encore des
-	fonctions à support compact \shortcite{Hay99}. L'opération algorithmique réalisée par le pattern matching est alors graduelle : degré d'appartenance
-	(ou de correspondance) à un patron donné, sur un intervalle borné (en général entre 0 et 1). 
-	L'opération répétée sur de multiples patrons produit de 
-	nombreux degrés d'appartenance, cet ensemble de degrés d'appartenance pouvant lui-même être interprété 
-	comme une nouvelle forme pour un traitement ultérieur (sur le principe du ``deep learning'' \shortcite{Hinton2006} par exemple),
-	constituant un principe de calcul distribué efficace.
+	fonctions à support compact \shortcite{Hay99}. 
 	
 	Cette transformation non-linéaire, imposée par la condition d'universalité (capacité à séparer des données 
 	non-linéairement séparables par exemple) a pour contrepartie de rendre difficile la définition
@@ -3283,64 +3325,17 @@ toujours en compte le caractère parfois incompatible des deux modes de fonction
 	On parlera de manière générale d'espace ``qualitatif'' pour décrire cet espace de redescription, ou encore d'espace
 	``digital'' pour décrire un ensemble (non nécessairement relié) de caractéristiques.
 	
-	Le caractère distribué de l'activité nerveuse suggère d'une part la distribution d'une même composante sensorielle 
+De manière similaire, le caractère distribué de l'activité nerveuse suggère  la distribution d'une même composante sensorielle 
 	sur de nombreux neurones, chaque neurone étant sensible à une manifestation particulière
 	de cette composante. L'exemple le plus extrême est celui de la rétine dont l'activité met en jeu 
 	plusieurs millions de neurone sensoriels, chaque neurone étant la manifestation d'une valeur de luminance
 	(et de longueur d'onde) en un point précis de la scène visuelle.
+
 	
-	Cette distribution de l'activité rend néanmoins difficile la réalisation d'opérations simples comme l'addition ou la différence
-	de deux quantités, comme cela est pourtant nécessaire lorsque les déplacements doivent prendre en compte des sources sensorielles 
-	multiples issues de référentiels variés (proprioception de la position du corps et coordonnées rétiniennes pour attraper
-	une cible par exemple). 
-	Si chaque composante sensorielle de l'espace métrique environnant 
-	est décomposé en constituants élémentaires (intervalles ou ``pixels'' d'environnement), activant
-	ou désactivant différentes populations de neurones primaires, 
-	alors les transformations aussi simples que les translations, rotations, ainsi
-	que les co-variations, 
-	etc. doivent être apprises ``par cœur'' \cite{Pouget1997} et ne peuvent résulter de la combinaison d'activités unitaires,
-	c'est à dire d'un calcul.
+
 	
-	Ceci pose un problème en particulier lorsqu'il s'agit de contrôler les déplacements du corps à partir de l'activité
-	distribuée induite par les récepteurs sensoriels.
-	Le problème se pose lorsqu'il faut
-	réaliser des opérations arithmétiques entre plusieurs grandeurs du monde physique,
-	%moduler une réponse à partir d'un écart à une valeur de référence par exemple, 
-	c'est à
-	dire plus généralement lorsqu'il s'agit d'estimer, au sein de l'espace de description
-	qualitatif, des quantités \textit{relatives} à différents
-	points de l'espace métrique ou de l'espace sensoriel (et non des quantités absolues). 
-	
-	L'approche de la cognition par correspondance de forme offre donc un support efficace à la plasticité,
-	mais pose en revanche quelques problèmes lorsqu'il s'agit d'utiliser ce mode de codage pour contrôler un 
-	appareil moteur, c'est à dire schématiquement effectuer la transformation inverse du qualitatif vers 
-	le quantitatif.
-
-\paragraph{Hypothèse}
-Nous formons l'hypothèse que cette difficulté à faire apprendre des compétences motrices à un dispositif artificiel repose sur l'opposition entre deux grands principes fonctionnels~: le feedback positif et le feedback négatif.
-\begin{itemize}
-	\item Le mécanisme d'appariement, central dans l'apprentissage, repose majoritairement sur une logique de feedback positif (ou résonance)
-	\item La théorie du contrôle, telle qu'elle est définie en sciences de l'ingénieur, repose majoritairement sur une logique de feedback négatif (correction de l'erreur motrice)
-\end{itemize}
-
-Le caractère à la fois distribué et qualitatif de l'activité neuronale abolit la notion de distance entre signaux (voir section \ref{sec:disparite}), ce qui rend difficile 
-la réalisation d'opérations (quantitatives) simples comme l'addition ou la différence
-de deux quantités, pourtant nécessaires lorsque les réponses motrices doivent prendre en compte des sources sensorielles 
-multiples issues de référentiels variés (proprioception de la position du corps et coordonnées rétiniennes pour attraper
-une cible par exemple). 
-Le caractère distribué de l'activité neuronale 
-rend ainsi difficile les opérations de type ``forward'', c'est-à-dire 
-une transformation qui, étant donnés des 
-objets sur un espace de manipulations et 
-un changement de référentiel, prédit la disposition de ces mêmes objets sur la scène visuelle.
-
-Si l'on souhaite construire des dispositifs artificiels capable d'apprendre des tâches motrices de la même manière qu'ils apprennent à classifier des signaux et des images, il faut opérer un renversement conceptuel en théorie du contrôle afin de rendre compatible le contrôle moteur avec l'apprentissage, en particulier \textit{utiliser les principes du feedback positif et de l'appariement pour le contrôle moteur.}
-
-Cette approche implique, comme dans le cas de l'analyse des signaux, une \textit{décomposition de l'espace des tâches} en tâches élémentaires, autrement dit la capacité à constituer de très nombreux circuits de commande associés à des configurations précises de l'environnement. 
-
-{\color{Violet}
-\subsubsection{Espace visuel et espace pré-moteur}
-L'activité humaine est fortement guidée par la composante visuelle.
+\subsubsection{Espace visuel et espace pratique (pré-moteur)}
+Si nous regardons maintenant l'activité sensori-motrice telle qu'elle se déploie à l'échelle macroscopique, on constate que l'activité humaine est fortement guidée par la composante visuelle.
 Si on regarde de plus près l'interrelation entre l'exploration visuelle et
 l'action simple consistant à manipuler des objets situés à portée de bras,
 deux grands domaines attentionnels peuvent être définis. 
@@ -3351,22 +3346,22 @@ deux grands domaines attentionnels peuvent être définis.
 	l'espace de travail, organisé autour des opérations sur des objets
 	attrapables ou manipulables. 
 \end{itemize} 
-Si on se place selon la perspective de l'invariance du monde environnant \shortcite{Gib79}, il est intéressant de
+%Si on se place selon la perspective de l'invariance du monde environnant \shortcite{Gib79}, 
+Il est intéressant de
 constater que ces deux types d'activité (exploration visuelle, utilisation) sont rarement
-simultanées. De manière un peu schématique, 
+simultanées  \shortcite{Paillard1978}. De manière un peu schématique, 
 \begin{itemize}
 	\item l'espace de travail reste invariant pendant
 	l'exploration visuelle, 
 	\item et, réciproquement, le regard reste statique (focalisé) durant
-	l'activité de manipulation \shortcite{Paillard1978}.
+	l'activité de manipulation.
 \end{itemize}
 En particulier, le déplacement du corps dans l'environnement se fait généralement
 dans un environnement visuel stable grâce au réflexe vestibulo-oculaire qui maintient le regard
-en direction d'un même objet pendant le déplacement.
+en direction d'un même objet pendant le déplacement (``ancrage'' visuel).
 
 Cette stabilité sélective d'une partie des composantes de l'environnement apparaît comme un 
 élément important de l'apprentissage du référentiel extérieur. 
-
 C'est également un bon modèle pour questionner les opérations nécessaires à la projection de
 l'espace pré-moteur vers l'espace visuel et vice-versa. Si on fait appel aux notion piagetiennes
 de permanence de l'objet \cite{Piaget1973}, les différentes objets de la scène varient dans l'espace pré-moteur 
@@ -3379,79 +3374,64 @@ restent statiques dans l'espace pré-moteur lorsque le regard bouge. \begin{item
 	de prédire leur position dans l'espace pré-moteur étant donné le déplacement du corps (il est difficile de bouger à la fois le corps et le regard)
 \end{itemize} 
 
-
-La nature de cette prédiction fondamentalement celle d'opérations géométriques (isométriques), soit des translations et
+Ces prédictions s'apparentent à des opérations géométriques (isométriques), soit des translations et
 des rotations. Par exemple, les objets visibles sont translatés vers la gauche du champ visuel lorsque le regard  tourne
 vers la droite. Nous avons donc un référentiel (celui de la direction du regard) qui est translaté, redéfinissant
 les coordonnées des différents objets qui composent la scène visuelle. Le référentiel visuel est lui-même défini par rapport au
 tronc (le support stable des mouvements de la tête), et l'axe de la direction du regard se définit par rapport à un autre référentiel qui 
 est le référentiel du tronc. Les objets de la même scène sont également définis (en tant que point final des mouvements) dans
-ce même référentiel du tronc. Il existe donc une application qui à partir de la position des objets dans un premier 
-référentiel définit la position des mêmes objets dans un autre référentiel. La bijection entre les deux espaces offre
-un bon support à l'invariance ainsi qu'à la prédiction sensorielle (``predictive coding'' \shortcite{Rao1999}). 
+ce même référentiel du tronc. 
 
+Il existe donc une application qui à partir de la position des objets dans un premier 
+référentiel définit la position des mêmes objets dans un autre référentiel. 
+La bijection entre les deux espaces offre
+un bon support à l'invariance ainsi qu'à la prédiction sensorielle selon le principe du ``predictive coding'' \shortcite{Rao1999}. 
 
-}
+\subsubsection{Problème de l'assemblage}
+Cette description des transformations sensori-motrices repose implicitement sur l'hypothèse d'un espace physique extensif où prennent place des transformations linéaires.  
 
+Le caractère distribué (``digital'') de l'activité neuronale 
+rend difficile, comme nous l'avons vu, la réalisation d'opérations simples comme l'addition ou la différence
+	de deux quantités, comme cela est pourtant nécessaire lorsque les déplacements doivent prendre en compte des sources sensorielles 
+	multiples issues de référentiels variés, comme par exemple
+	prédire la disposition des objets sur la scène visuelle,
+	étant donnés (1) la position de ces objets dans l'espace pré-moteur et (2) la direction du regard. %proprioception de la position du corps et coordonnées rétiniennes pour attraper
+	%une cible par exemple
+	Le problème se pose plus généralement lorsqu'il s'agit d'estimer, au sein de l'espace de redescription, des quantités \textit{relatives} à différents
+	points de l'espace pré-moteur ou de l'espace sensoriel (et non des quantités absolues).
+	Si chaque composante sensorielle de l'espace métrique environnant 
+	est décomposé en constituants élémentaires (intervalles ou ``pixels'' d'environnement), activant
+	ou désactivant différentes populations de neurones primaires, 
+	alors les transformations aussi simples que les translations, rotations, voire même l'identité, 
+	etc. doivent être apprises ``par cœur'' \cite{Pouget1997} et ne peuvent résulter de la combinaison d'activités unitaires,
+	c'est à dire d'un calcul.
 
-Le problème est, comme nous l'avons vu, le caractère distribué de l'activité neuronale 
-qui rend difficile les opérations de ce type. Une transformation qui, étant donnés des objets sur un espace de manipulations et 
-un changement de référentiel, prédit la disposition de ces mêmes objets sur la scène visuelle.
-Par exemple, un simple ``pattern matching'' nécessiterait un apprentissage par coeur de la conséquence visuelle 
+%La ``traduction'' de ces deux espaces (visuel et pré-moteur) sous forme de patrons d'activité distribués correspond au passage vers un espace de description digital. D'une part, la scène visuelle sous la forme d'un ensemble complexe de contours et de textures se détachant d'un fond. De l'autre une scène pré-motrice organisée comme un ensemble d'actions indexées sur différents points de l'espace péri-corporel.  
+
+% comme nous l'avons vu, les opérations de ce type~: une transformation qui, étant  et 
+%un changement de référentiel,  nécessite de faire référence à deux points de l'espace .
+	
+Par exemple, un simple ``pattern matching'' nécessiterait un apprentissage par cœur de la conséquence visuelle 
 de toutes les combinaisons de dispositions d'objets et de tous les changements de référentiel tronc-tête, ce qui parait 
-computationellement très coûteux (\shortcite{Pouget1997,Pouget2002}). Il est nécessaire néanmoins que le ``lien'' praxo-visuel entre les différents objets de la scène ne soit pas perdu
-au cours des déplacement moteurs. 
-(Un raisonnement symétrique peut être appliqué pour le cas des déplacements du corps dans un environnement visuel stable)
-
-{\color{Violet}
-Néanmoins, si chaque composante sensorielle de l'espace métrique environnant 
-est décomposée en constituants élémentaires (intervalles ou ``pixels'' d'environnement), activant
-ou désactivant différentes populations de neurones primaires, 
-alors les transformations aussi simples que les translations, rotations, ou même les simples copies d'activité, 
-doivent être apprises ``par coeur'' \cite{Pouget1997} et ne peuvent résulter de la combinaison 
-(additives ou soustractives) d'activités unitaires.
-
-Par exemple, un simple ``pattern matching'' nécessiterait un apprentissage par coeur de la conséquence visuelle 
-de toutes les combinaisons de dispositions d'objets et de tous les changements de référentiel tronc-tête, ce qui parait 
-computationellement très coûteux. Il est nécessaire néanmoins que le ``lien'' praxo-visuel entre les différents 
-objets de la scène ne soit pas perdu
-au cours des déplacement du regard. 
-(Un raisonnement symétrique peut être appliqué pour le cas des déplacements du corps dans un environnement visuel stable)
-}
-%c'est à dire d'un calcul.
-
-%{\color{Violet}
-%Ceci pose un problème en particulier lorsqu'il s'agit de contrôler les déplacements du corps à partir de l'activité
-%distribuée induite par les récepteurs sensoriels.
-%En fait, le passage par un domaine de description qualitatif
-%ne pose pas de problème tant qu'il s'agit d'associer (de manière univoque) un
-%patron d'activité (un attracteur {\color{red}[ATTENTION NOTION D'ATTRACTEUR = MIXTE]}) et une commande motrice%, comme dans le
-%cas de la carte colliculaire vue précédemment. 
-%Le problème se pose lorsqu'il faut
-%réaliser des opérations arithmétiques entre plusieurs grandeurs du monde physique,
-%moduler une réponse à partir d'un écart à une valeur de référence par exemple, 
-%c'est à
-%dire plus généralement lorsqu'il s'agit d'estimer, au sein de l'espace de description
-%qualitatif, des quantités \emph{relatives} à différents
-%points de l'espace métrique ou de l'espace sensoriel (et non des quantités absolues). 
-%}
-
-
-
-%[NE PAS OUBLIER L'ACTIVITE VESTIBULAIRE]
-
-
-
-
-
+computationnellement très coûteux (\shortcite{Pouget1997,Pouget2002}). Il est nécessaire néanmoins que le ``lien'' praxo-visuel entre les différents objets de la scène ne soit pas perdu
+au cours des déplacement moteurs
+(Un raisonnement symétrique peut être appliqué pour le cas des déplacements du corps dans un environnement visuel stable).
+	
+%	Ceci pose un problème en particulier lorsqu'il s'agit de contrôler les déplacements du corps à partir de l'activité
+%	distribuée induite par les récepteurs sensoriels.
+%	Le problème se pose lorsqu'il faut
+%	réaliser des opérations arithmétiques entre plusieurs grandeurs du monde physique, par exemple lorsque les réponses motrices doivent prendre en compte des sources sensorielles 
+%	multiples issues de référentiels variés (proprioception de la position du corps et coordonnées rétiniennes pour attraper
+%	une cible par exemple).
+%	%moduler une réponse à partir d'un écart à une valeur de référence par exemple, 
+	
 
 \paragraph{}
-Il existe trois grandes catégories d'approches pour traiter de cette question, plus
-généralement appelée ``question
-de l'assemblage'' (``binding problem'')~: (1) l'activité tierce, (2) l'assemblage
+	Ce problème du lien entre les différentes manifestations sensorielles d'un même objet s'appelle le problème de l'``assemblage'' (``binding problem''). Il a été identifié de longue date dans les sciences cognitives sans qu'une solution définitive ne  puisse lui être apportée \shortcite{VdM86}.{	\color{Gray}
+Il existe trois grandes catégories d'approches pour traiter de cette question~: (1) l'activité tierce, (2) l'assemblage
 dynamique et (3) la mémoire (ou les transformations) extérieure(s).
-{\bf!!Par ailleurs, la manière dont les liens entre les deux espaces (pratique et visuel) se construisent est également une question
-	à part entière, dont la mise en oeuvre pratique dépend largement du choix computationnel (1, 2 ou 3) effectué.!!}
+%{\bf!!Par ailleurs, la manière dont les liens entre les deux espaces (pratique et visuel) se construisent est également une question
+%	à part entière, dont la mise en oeuvre pratique dépend largement du choix computationnel (1, 2 ou 3) effectué.!!}
 
 \paragraph{Activité tierce}	La structure algorithmique la plus simple est celle de l'activité tierce (ou  projection inverse), 
 c'est à 
@@ -3521,6 +3501,77 @@ constituant le socle d'interprétation des éléments de la scène.
 %donc peu de place aux processus de décision et à la mémoire.
 La mise en relation entre les éléments se réduit ici à un schéma d'exploration (ou d'utilisation) 
 caractéristique de ces différents éléments, constitutif d'une unité d'action. 
+}
+
+\paragraph{}	
+	
+	L'approche de la cognition par correspondance de forme offre donc un support efficace à la plasticité,
+	mais pose en revanche quelques problèmes lorsqu'il s'agit d'utiliser ce mode de codage pour contrôler un 
+	appareil moteur, c'est à dire schématiquement effectuer la transformation inverse du qualitatif vers 
+	le quantitatif.
+	
+	
+
+\paragraph{Hypothèse}
+Nous formons l'hypothèse que cette difficulté à faire apprendre des compétences motrices à un dispositif artificiel repose sur l'opposition entre deux grands principes fonctionnels~: le feedback positif et le feedback négatif.
+\begin{itemize}
+	\item Le mécanisme d'appariement, central dans l'apprentissage, repose majoritairement sur une logique de feedback positif (ou résonance)
+	\item La théorie du contrôle, telle qu'elle est définie en sciences de l'ingénieur, repose majoritairement sur une logique de feedback négatif (correction de l'erreur motrice)
+\end{itemize}
+
+
+Si l'on souhaite construire des dispositifs artificiels capable d'apprendre des tâches motrices de la même manière qu'ils apprennent à classifier des signaux et des images, il faut opérer un renversement conceptuel en théorie du contrôle afin de rendre compatible le contrôle moteur avec l'apprentissage, en particulier \textit{utiliser les principes du feedback positif et de l'appariement pour définir les tâches de contrôle moteur.}
+
+Cette approche implique, comme dans le cas de l'analyse des signaux, une \textit{décomposition de l'espace des tâches} en tâches élémentaires, autrement dit la capacité à constituer de très nombreux circuits de commande associés à des configurations précises de l'environnement. 
+
+{\color{Violet}
+
+
+
+
+
+{\color{Violet}
+Néanmoins, si chaque composante sensorielle de l'espace métrique environnant 
+est décomposée en constituants élémentaires (intervalles ou ``pixels'' d'environnement), activant
+ou désactivant différentes populations de neurones primaires, 
+alors les transformations aussi simples que les translations, rotations, ou même les simples copies d'activité, 
+doivent être apprises ``par coeur'' \cite{Pouget1997} et ne peuvent résulter de la combinaison 
+(additives ou soustractives) d'activités unitaires.
+
+Par exemple, un simple ``pattern matching'' nécessiterait un apprentissage par coeur de la conséquence visuelle 
+de toutes les combinaisons de dispositions d'objets et de tous les changements de référentiel tronc-tête, ce qui parait 
+computationellement très coûteux. Il est nécessaire néanmoins que le ``lien'' praxo-visuel entre les différents 
+objets de la scène ne soit pas perdu
+au cours des déplacement du regard. 
+(Un raisonnement symétrique peut être appliqué pour le cas des déplacements du corps dans un environnement visuel stable)
+}
+%c'est à dire d'un calcul.
+
+%{\color{Violet}
+%Ceci pose un problème en particulier lorsqu'il s'agit de contrôler les déplacements du corps à partir de l'activité
+%distribuée induite par les récepteurs sensoriels.
+%En fait, le passage par un domaine de description qualitatif
+%ne pose pas de problème tant qu'il s'agit d'associer (de manière univoque) un
+%patron d'activité (un attracteur {\color{red}[ATTENTION NOTION D'ATTRACTEUR = MIXTE]}) et une commande motrice%, comme dans le
+%cas de la carte colliculaire vue précédemment. 
+%Le problème se pose lorsqu'il faut
+%réaliser des opérations arithmétiques entre plusieurs grandeurs du monde physique,
+%moduler une réponse à partir d'un écart à une valeur de référence par exemple, 
+%c'est à
+%dire plus généralement lorsqu'il s'agit d'estimer, au sein de l'espace de description
+%qualitatif, des quantités \emph{relatives} à différents
+%points de l'espace métrique ou de l'espace sensoriel (et non des quantités absolues). 
+%}
+
+
+
+%[NE PAS OUBLIER L'ACTIVITE VESTIBULAIRE]
+
+
+
+
+
+
 
 
 \section{[TODO]}
@@ -4226,11 +4277,7 @@ le caractère extrêmement inhomogène des réseaux de neurones naturels~:
  
 
 {\color{Violet}
-L'approche ``Multi-échelle'' \shortcite{WILSON89,Varela2001} consiste à considérer un substrat dont les variables d'état évoluent (ou peuvent être décrites) 
-selon différentes échelles spatiales et temporelles, chaque échelle de description étant explicative du comportement observé à l'échelle
-supérieure (par des variables dites ``macroscopiques''). L'idée est ici encore d'établir des passerelles entre un substrat constitué d'éléments 
-microscopique caractérisés par des processus rapides localisés et un environnement
-physique caractérisé par des processus macroscopiques lents et spatialement étendus.}
+}
 
 {	
 \color{Gray}
@@ -4327,7 +4374,11 @@ où $I$ est un signal extérieur et $W$ un noyau décrivant les interactions ré
 
 
 {\color{Cyan}
-{\bf!! Attention répétitions!!}
+{\bf!! Attention codage topo n'est pas synonyme de champ neuronal!!}
+Le codage topographique est la manière la plus naturelle de représenter les signaux sensoriels 
+dans les architectures neuronales.
+Il correspond également aux observations sur l'organisation des couches sensorielles primaires (à l'exception de l'olfaction).
+
 
 Le codage topographique est une des manière d'exprimer des grandeurs
 continues dans un substrat neuronal. 
@@ -4346,25 +4397,7 @@ L'étude des zones motrices primaires plaident plutôt pour un caractère quanti
 la contraction des muscles étant proportionnelle au taux de décharge.
 
 Le modèle fondateur du codage topographique est le champ neuronal (``Neural Field'') d'Amari \shortcite{Ama77B},
-déjà mentionné dans la section \ref{sec:NField}. Selon le noyau choisi, le réseau développe un ou plusieurs 
-foyers d'activité métastables  interprétables au choix comme un patron d'activité ou comme un
-ensemble de grandeurs scalaires (en fonction des barycentres des foyers d'activité).
-Le codage topographique est la manière la plus naturelle de représenter les signaux sensoriels 
-dans les architectures neuronales.
-Il correspond également aux observations sur l'organisation des couches sensorielles primaires (à l'exception de l'olfaction).
-
-
-
-La vocation des modèles de champ neuronal \shortcite{Ama77B} est principalement la modélisation d'un substrat neuronal spatialisé vu à ``large échelle'' 
-(continuum d'activité sur la surface corticale).
-Ce modèle partage avec le réseau de Hopfield \cite{Hop82} la capacité à conserver et entretenir 
-une activité autonome indépendamment de son signal d'entrée. 
-Il implémente néanmoins des opérations tout à fait spécifiques et intéressantes du point de vue computationnel. 
-Un champ neuronal implémente simultanément une ``mémoire de travail'' (capacité à conserver la trace d'une stimulation passée), et 
-un mécanisme de traitement (ici résumé à quelques opérations simples : émergence, extinction, fusion, poursuite) \shortcite{Schoner95}. 
-La combinaison de ces deux compétences (mémoire et calcul)
-au sein d'une architecture unique fait en principe du neural field un environnement computationnel complet \shortcite{Siegelmann1999,Maclennan1999,Potthast2013}. 
-
+déjà mentionné dans la section \ref{sec:NField}. 
 L'avantage du codage topographique est sa plus grande expressivité. 
 Un foyer d'activité unique sur un substrat 
 bidimensionnel exprime ainsi une grandeur vectorielle (typiquement la position d'une cible sur une rétine).
