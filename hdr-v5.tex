@@ -783,7 +783,7 @@ en collaboration avec Alain Guillaume, travaillant à l'Institut des Sciences du
 et Anthony Mouraud, qui a effectué un séjour
 post-doctoral en 2010 sous notre supervision \shortcite{Dauce2011}(voir section \ref{sec:orientation}). 
 
-Deux études sur le rôle du codage topographique dans l'apprentissage d'une cinématique inverse, en collaboration avec Alain Dutech du LORIA,  ont également été réalisé dans ce cadre (voir section \ref{sec:topo-renf} et annexes \ref{app:ICANN09} et \ref{app:NCO10}). 
+Deux études sur le rôle du codage topographique dans l'apprentissage d'une cinématique inverse, en collaboration avec Alain Dutech du LORIA,  ont également été réalisées dans ce cadre (voir section \ref{sec:topo-renf} et annexes \ref{app:ICANN09} et \ref{app:NCO10}). 
 	
 
 \paragraph{NOAT}
@@ -2745,7 +2745,7 @@ activités non causalement liées.
 
 Une formulation possible de la règle est la suivante~:
 $$\dot{J}_{ij} = F((s_i^\text{out} \times m_j^\text{in}) - (s_j^\text{in} \times m_i^\text{out} ), J_{ij})$$
-où $s_j^\text{in}$ est l'activité pré-synaptique, $s_i^\text{out}$ est l'activité post-synaptique, $m_j^\text{in}$ une trace exponentielle de l'activité pré-synaptique, et $m_i^\text{out}$ une trace exponentielle de l'activité post-synaptique. Cette règle peut formellement être reliée aux règles de plasticité d'ordre 1 (voir page \ref{page:hebb-ordre}).
+où $s_j^\text{in}$ est l'activité pré-synaptique, $s_i^\text{out}$ est l'activité post-synaptique, $m_j^\text{in}$ une trace exponentielle de l'activité pré-synaptique, et $m_i^\text{out}$ une trace exponentielle de l'activité post-synaptique. Cette règle peut formellement être reliée aux règles de plasticité d'ordre 1 (voir page \pageref{page:hebb-ordre}).
 
 La discrimination entre les différentes séquences temporelles repose sur l'entretien
 au niveau de la couche récurrente d'une activité qui permet de conserver la mémoire 
@@ -3334,7 +3334,7 @@ De manière similaire, le caractère distribué de l'activité nerveuse suggère
 	
 
 	
-\subsubsection{Espace visuel et espace pratique (pré-moteur)}
+\subsubsection{Espace visuel et espace praxique (pré-moteur)}
 Si nous regardons maintenant l'activité sensori-motrice telle qu'elle se déploie à l'échelle macroscopique, on constate que l'activité humaine est fortement guidée par la composante visuelle.
 Si on regarde de plus près l'interrelation entre l'exploration visuelle et
 l'action simple consistant à manipuler des objets situés à portée de bras,
@@ -3521,6 +3521,31 @@ Nous formons l'hypothèse que cette difficulté à faire apprendre des compéten
 Si l'on souhaite construire des dispositifs artificiels capable d'apprendre des tâches motrices de la même manière qu'ils apprennent à classifier des signaux et des images, il faut opérer un renversement conceptuel en théorie du contrôle afin de rendre compatible le contrôle moteur avec l'apprentissage, en particulier \textit{utiliser les principes du feedback positif et de l'appariement pour définir les tâches de contrôle moteur.}
 
 Cette approche implique, comme dans le cas de l'analyse des signaux, une \textit{décomposition de l'espace des tâches} en tâches élémentaires, autrement dit la capacité à constituer de très nombreux circuits de commande associés à des configurations précises de l'environnement. 
+
+Appliquée dans un cadre de contrôle classique, nécessitant des transformations isométriques, cette approche conduit, comme nous l'avons vu, a une explosion combinatoire des combinaisons sensori-motrices à apprendre.
+Pour éviter ce problème, il faut donc établir des règles de contrôle \textit{ne nécessitant pas} de comparaison entre des grandeurs de l'espace environnant.
+
+Plusieurs pistes se présentent à nous~:
+\begin{itemize}
+	\item La commande balistique / par champ de vecteurs ne nécessite pas référence à un point d'opération [REFS]. La dynamique de relaxation et les constantes de temps propres à l'environnement contrôlé ``conduisent'' les actionneurs vers leur point d'équilibre. 
+	\begin{itemize}
+		\item L'avantage de ce type de commande est qu'elle définit l'espace péripersonnel comme un ensemble de ponts fixes que la main peut atteindre.
+		\item seul compte le point d'opération final. Il y a donc une commande unique quel que soit le point de départ.
+	\end{itemize} 
+	\item l'alternance entre un ancrage pré-moteur et un ancrage  visuel permet de constituer un double mécanisme d'appariement prédictif permettant de construire un espace métrique péricorporel (en situant chaque point de l'espace visuel dans l'espace péricorporel, et inversement).
+	\begin{itemize}
+		\item organisé autour du triplet direction du regard (u1) / point d'opération (u2) / scène visuelle (I)
+		\item doit s'appuyer sur une activité persistante
+		\item déplacement moteur dans une scène visuelle fixe = changement du point d'ancrage moteur = changement d'objet; apprentissage des différents points (lieux d'objets)de la scène visuelle I.
+		\item Les différents points de la scène visuelle sont appariés aux différents points de la scène prémotrice selon ce point d'ancrage visuel spécifique.
+	    \item construction : mouvement de la main vers la fovea (u1,u2,I) $-->$ (u1,u2',I')
+		\item déplacement du regard dans une scène motrice fixe = changement du point d'ancrage visuel. 
+	\item les différents points de la scène prémotrice sont appariés aux différents points de la scène visuelle selon ce point d'ancrage prémoteur spécifique (??).
+	\item construction : mouvement du regard (foveation) vers le point d'ancrage prémoteur.  		
+    (u1,u2,I) $-->$ (u1',u2,I')
+	\end{itemize}    
+\end{itemize}
+ 
 
 {\color{Violet}
 
