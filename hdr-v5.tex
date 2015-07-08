@@ -944,7 +944,7 @@ La première partie (``Vue d'ensemble'') offre un aperçu complet des problèmes
 Le chapitre 2 présente certains grands principes lié à la modélisation biologiquement inspirée des réseaux de neurones. Il s'adresse principalement aux non-spécialistes du domaine.
 Le chapitre 3 présente les principes fondamentaux de l'apprentissage et du contrôle tels qu'on les trouve dans la littérature. Il sert de point d'appui à la compréhension des principaux résultats de mon activité de recherche, présentés dans le chapitre 4. Enfin, le chapitre 5 met en perspective ces différents résultats, et développe plusieurs pistes d'études pouvant servir de base à des travaux futurs.
 
-La deuxième partie (``résultats détaillés'') offre un niveau de détail plus élevé sur les différents résultats et publications évoqués dans la première partie. Elle est organisée en trois chapitres.
+	La deuxième partie (``Résultats détaillés'') offre donc un niveau de détail plus élevé sur les différents résultats et publications évoqués dans la première partie. Elle est organisée en trois chapitres.
 Le chapitre 6 aborde la question de l'expressivité des grands réseaux de neurones récurrents, c'est à dire de leur capacité à traiter et transformer des signaux. Le chapitre 7 aborde la question de la plasticité, en lien avec l'apprentissage de dépendances temporelles et de prédiction des signaux. Enfin, le chapitre 8 traite la question des interactions entre un contrôleur neuronal et son environnement, dans le cadre de l'apprentissage moteur.
 
 Les annexes contiennent une liste de publications que je considère comme les plus significatives.
@@ -3649,7 +3649,7 @@ Pour éviter ce problème, il faut donc établir des règles de contrôle \texti
 	Varela, FJ
 \end{flushright}	
 
-Un premier projet que je souhaiterais développer dans ce cadre est d'identifier les principes de construction de l'espace métrique tridimensionnel courant.
+Un premier projet que je souhaiterais développer dans ce cadre est d'identifier les principes de construction de l'espace métrique tridimensionnel courant,
 tel que nous l'expérimentons dans nos interactions quotidiennes avec l'environnement. 
 
 Si nous regardons l'activité sensori-motrice telle qu'elle se déploie à l'échelle macroscopique, on constate que l'activité humaine est fortement guidée par la composante visuelle.
@@ -3698,7 +3698,7 @@ La bijection entre les deux espaces offre
 un bon support à l'invariance ainsi qu'à la prédiction sensorielle selon le principe du ``predictive coding'' \shortcite{Rao1999}. 
 
 Le mécanisme de construction de l'espace métrique environnant reste encore à l'heure actuelle non-élucidée. Nous avons vu que le caractère ``digital'' de l'activité neuronale rend difficile, en interne, la construction d'opérateurs sur cet espace.
-Ce mécanisme semble pourtant pouvoir être implémenté sur la base de principes d'appariement très simple, mais n'a, à ma connaissance, pas encore été proposée en modélisation. Deux principes semblent s'imposer dans ce cadre : 
+Ce mécanisme semble pourtant pouvoir être implémenté sur la base de principes d'appariement très simples, mais n'a, à ma connaissance, pas encore été proposée en modélisation. Deux principes semblent s'imposer dans ce cadre : 
 \begin{enumerate}
 	\item La commande par champ de vecteurs
 	\item Le principe de l'alternance visuo-motrice
@@ -3742,7 +3742,7 @@ un e posture de la main. A ces deux espaces s'ajoute un troisième, qui est celu
 Dans ce cadre, l'apprentissage de l'espace (le fait de pouvoir situer dans l'espace péripersonnel l'ensemble des points de la scène visuelle) peut s'organiser autour de deux mécanismes d'appariement~:
 \begin{itemize}
 	\item Appariement par ancrage visuel. L'ancrage visuel signifie que la direction du regard est fixe $\boldsymbol{u_v}$. L'activité de manipulation permet, dans le contexte défini par $\boldsymbol{u_v}$, d'apparier différentes scènes visuelles $\boldsymbol{I}_1, \boldsymbol{I}_2, ...$ avec différentes positions de la main $\boldsymbol{u}_{p,1}, \boldsymbol{u}_{p,2}, ...$.
-	\item Appariement par ancrage postural. Un point de l'espace péripersonnel s'apparente ici à un ``objet'', c'est à dire un élément de l'environnement atteignable par la main. L'ancrage postural correspond ici à la positon de la main sur (ou à la préparation d'un mouvement de la main vers) ce point de l'espace. Si on suppose un ancrage postural fixe $\boldsymbol{u_p}$,  l'activité d'orientation (changement de point focal du regard)  permet, dans le contexte défini par $\boldsymbol{u_p}$, d'apparier différentes scènes visuelles $\mathcal{I}_1, \mathcal{I}_2, ...$ avec différentes directions du regard $\boldsymbol{u}_{v,1}, \boldsymbol{u}_{v,2}, ...$, ce qui permet de constituer la \textit{permanence de l'objet} à travers différentes scènes visuelles.  
+	\item Appariement par ancrage postural. Un point de l'espace péripersonnel s'apparente ici à un ``objet'', c'est à dire un élément de l'environnement atteignable par la main. L'ancrage postural correspond ici à la positon de la main sur (ou à la préparation d'un mouvement de la main vers) ce point de l'espace. Si on suppose un ancrage postural fixe $\boldsymbol{u_p}$,  l'activité d'orientation (changement de point focal du regard)  permet, dans le contexte défini par $\boldsymbol{u_p}$, d'apparier différentes scènes visuelles $\boldsymbol{I}_1, \boldsymbol{I}_2, ...$ avec différentes directions du regard $\boldsymbol{u}_{v,1}, \boldsymbol{u}_{v,2}, ...$, ce qui permet de constituer la \textit{permanence de l'objet} à travers différentes scènes visuelles.  
 \end{itemize}
 
 Il reste à déterminer dans ce cadre (1) l'appariement à mettre en œuvre (par produit scalaire, probabiliste ou par relaxation vers un attracteur), (2) de préciser le mécanisme spécifiant l'alternance entre les deux principes d'ancrage, et (3) le principe qui guide le choix et l'actualisation de la commande motrice. 
@@ -3997,7 +3997,7 @@ et de désassemblage des assemblées neuronales successivement actives, comme pr
 Une interprétation possibles est celle d'une alternance active, au sein du cerveau, entre une activité 
 principalement perceptive, préparatrice de l'action, et une activité principalement motrice, préparatrice
 de la perception. Cette alternance rapide entre préparation motrice et préparation 
-perceptive est un cadre possible à la réalisation du \emph{predictive coding}, comme stipulé par 
+perceptive est un cadre possible à la réalisation du \textit{predictive coding}, comme stipulé par 
 \shortcite{Rao1999} (voir aussi \shortcite{Wurtz2008,Rolfs2011}). Les alternances à plus longue constante
 temporelle pourraient quant à elles reposer sur l'alternance déjà évoquée entre les activité d'exploration
 sensorielle au sens large et les activités liées à la manipulation et à l'utilisation des objets
@@ -6468,7 +6468,7 @@ et enfin le caractère convexe ou non de la tâche.
 Le choix entre les réponses peut être départagé selon l'espérance de récompense 
 associée à chacune d'elles, mais aussi selon le degré d'incertitude associé, 
 certaines réponses mal connues (ou certaines sources et/ou chemins mal modélisés) pouvant potentiellement apporter des 
-récompenses supérieures. C'est le fameux dilemne ``exploration/exploitation''.
+récompenses supérieures. C'est le fameux dilemme ``exploration/exploitation''.
 
 %\subsubsection{Plasticité de Hebb}
 %Nous étudions, comme dans les chapitres précédents, l'apprentissage sous l'angle de la plasticité, en particulier la plasticité synaptique
