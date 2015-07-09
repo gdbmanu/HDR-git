@@ -3697,7 +3697,7 @@ référentiel définit la position des mêmes objets dans un autre référentiel
 La bijection entre les deux espaces offre
 un bon support à l'invariance ainsi qu'à la prédiction sensorielle selon le principe du ``predictive coding'' \shortcite{Rao1999}. 
 
-Le mécanisme de construction de l'espace métrique environnant reste encore à l'heure actuelle non-élucidée. Nous avons vu que le caractère ``digital'' de l'activité neuronale rend difficile, en interne, la construction d'opérateurs sur cet espace.
+Le mécanisme de construction de l'espace métrique environnant reste encore à l'heure actuelle non-élucidé. Nous avons vu que le caractère ``digital'' de l'activité neuronale rend difficile, en interne, la construction d'opérateurs sur cet espace.
 Ce mécanisme semble pourtant pouvoir être implémenté sur la base de principes d'appariement très simples, mais n'a, à ma connaissance, pas encore été proposée en modélisation. Deux principes semblent s'imposer dans ce cadre : 
 \begin{enumerate}
 	\item La commande par champ de vecteurs
@@ -3717,7 +3717,7 @@ trajectoire métrique à partir de l'activité de différents neurones \shortcit
 La commande balistique par combinaison de champ de vecteurs, telle qu'elle a été proposée par \shortcite{Mussa2004}, permet de rendre compte de cette organisation spatiale de la commande motrice. Selon cette approche~:
 \begin{itemize}
 	\item les commandes motrices balistiques correspondent à la définition d'un attracteur dans l'espace de la tâche.  Cet attracteur est produit comme combinaison de différents champs de vecteurs (appelés ``primitives motrices''). Ce type de commande ne nécessite pas référence à un point d'opération externe (voir aussi page \pageref{sec:feed-plus}). La dynamique de relaxation et les constantes de temps propres à l'effecteur contrôlé conduisent les différentes articulations vers leur point d'équilibre.
-	\item L'ensemble des points que le bras peut atteindre forme un espace tridimensionnel. Le cortex moteur reproduit cette organisation spatiale~: le cortex est organisé sous la forme d'une carte motrice tridimensionnelle où chaque région de la carte correspond à une combinaison différente de primitives motrices conduisant la main vers un point de l'espace environnant (péripersonnel). 
+	\item L'ensemble des points que le bras peut atteindre forme un espace tridimensionnel. Le cortex moteur reproduit cette organisation spatiale~: le cortex est organisé sous la forme d'une carte motrice bidimensionelle où chaque région de la carte correspond à une combinaison différente de primitives motrices conduisant la main vers un point de l'espace tridimensionel environnant (péripersonnel). 
 \end{itemize}
 Ainsi:
 	\begin{itemize}
@@ -3737,7 +3737,7 @@ sans faire appel à des transformations complexes entre référentiels
 
 Le principe d'alternance entre un ancrage pré-moteur et un ancrage  visuel suppose l'existence de deux systèmes de commande non-simultanés correspondant, pour le premier, à l'orientation du regard (commande d'orientation), et pour le second à la manipulation de l'environnement proche (``utilisation'' de l'environnement).
 Ces deux systèmes de commandes définissent deux espaces~: l'espace de la direction du regard $\mathcal{U}_v$ (constitué de l'ensemble des points focaux où le regard se pose), avec $\boldsymbol{u}_v$ la commande d'orientation, et l'espace péripersonnel $\mathcal{U}_p$ (espace atteignable/manipulable par la main), avec $\boldsymbol{u}_p$
-un e posture de la main. A ces deux espaces s'ajoute un troisième, qui est celui de la \textit{scène visuelle} $\mathcal{I}$, correspondant à l'ensemble des points de la rétine. 
+une posture de la main. A ces deux espaces s'ajoute un troisième, qui est celui de la \textit{scène visuelle} $\mathcal{I}$, correspondant à l'ensemble des points de la rétine. 
 
 Dans ce cadre, l'apprentissage de l'espace (le fait de pouvoir situer dans l'espace péripersonnel l'ensemble des points de la scène visuelle) peut s'organiser autour de deux mécanismes d'appariement~:
 \begin{itemize}
@@ -5195,7 +5195,7 @@ Ce chapitre est consacré à l'étude des mécanismes d'apprentissage dans les r
 %fourni sous forme de condition initiale, et un des patrons stockés dans le graphe.
 %{\color{Cyan} Il s'agit également une optimisation sous contraintes. Les liens sont les contraintes, il existe un terme d'énergie, avec convergence vers une solution locale (trouver ref dans bouquin ``dynamique des syst. complexes''+ à mettre en lien avec Berrou).}
 
-\section{Apprentissage, persévération et prédiction}\label{sec:filtrage}
+\section{Modèles de la perception}\label{sec:filtrage}
 
 Selon les modèles classiques, la perception sensorielle s'apparente à un mécanisme de \textit{filtrage} des entrées perceptives.
 Le filtrage d'un signal correspond fonctionnellement au fait de pouvoir \textit{prédire le présent}. 
