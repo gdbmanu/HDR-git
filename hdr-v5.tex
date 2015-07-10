@@ -1630,12 +1630,7 @@ L'indépendance statistique entre les différents liens est une caractéristique
 (espérance, variance de la loi de tirage initial des poids en $O(\frac{1}{N}$)), on peut montrer que la dynamique (déterministe) tend à la limite thermodynamique 
 vers un processus aléatoire (processus Gaussien), la corrélation entre les nœuds tendant vers 0 \shortcite{Som88,Ces94,Moy00a}.
 
-Les réseaux étudiés étant normalisés, 
-leur comportement est réglé par deux paramètres~: le gain $g$ de la fonction de réponse neuronale (assimilable
-à l'inverse d'une température) et la variabilité $\sigma_\theta$ du seuil d'activation.
-Le signal présenté en entrée du réseau est un vecteur aléatoire  qui vient se surimposer au seuil 
-d'activation (rendant donc les neurones plus ou moins excitables).
-Le réseau soumis à un tel signal converge vers un nouvel attracteur (autrement dit se reconfigure).
+
 
 L'existence d'un 
 paramètre de contrôle (le gain de la fonction de transfert des neurones) permet de reproduire, dans ces réseaux aléatoires, 
@@ -4649,8 +4644,12 @@ se comportent comme des processus stochastiques indépendants sur chaque neurone
 
 Dans le cas des réseaux de neurones récurrents aléatoires (voir page \pageref{sec:RRNN}), il est intéressant de constater que le processus stochastique limite, tel que décrit par les équations de champ moyen, 
 a une traduction à taille finie
-sous la forme d'une activité de type \textit{chaos déterministe}. L'existence d'un 
-paramètre de contrôle (le gain de la fonction de transfert des neurones) permet de reproduire, dans ces réseaux aléatoires, 
+sous la forme d'une activité de type \textit{chaos déterministe}. 
+Les réseaux étudiés étant normalisés, 
+leur comportement est réglé par deux paramètres~: le gain $g$ de la fonction de réponse neuronale (assimilable
+à l'inverse d'une température) et la variabilité $\sigma_\theta$ du seuil d'activation.
+L'existence de ces
+paramètres de contrôle  permet de reproduire, dans ces réseaux aléatoires, 
 un  comportement générique de déstabilisation, appelé route vers le chaos par ``quasi-périodicité'' \shortcite{Berger1988,Doyon1993} (voir figure \ref{fig:hermes-bif}).
 L'existence d'une telle frontière entre l'ordre et le chaos est également prouvée à la limite thermodynamique, mais dans ce
 cas la transition se fait brutalement, avec un passage discret d'un processus de type point fixe à un processus stochastique \shortcite{Ces95}.
@@ -4668,7 +4667,9 @@ où la variabilité de la dynamique, et donc potentiellement {\color{Orange} l'e
 	\label{fig:hermes-critic}
 \end{figure} 
 
-
+Le signal présenté en entrée du réseau est un vecteur aléatoire  qui vient se surimposer au seuil 
+d'activation (rendant donc les neurones plus ou moins excitables).
+Le réseau soumis à un tel signal converge vers un nouvel attracteur (autrement dit se reconfigure).
 Une manière simple de caractériser le comportement non-linéaire (ou critique) d'une population de neurones consiste à introduire de petites perturbations
 dans la dynamique du réseau. 
 Une étude proposée dans le 3ème chapitre de l'ouvrage que nous avons co-dirigé avec Agnès Guillot \shortcite{Beslon2002} illustre le propos.
