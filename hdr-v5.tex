@@ -131,7 +131,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Book's title and subtitle
-\title{\Huge \textbf{Apprentissage dans les architectures cognitives}  \\ \vspace{1cm} \huge Contributions pour l'informatique et les neurosciences \\ \vspace{1cm}}
+\title{\Huge \textbf{Apprentissage et contrôle dans les architectures neuronales} }
 % Author
 \author{\textsc{Emmanuel Daucé}}%\thanks{\url{www.example.com}}}
 
@@ -218,11 +218,11 @@ restées ouvertes, et pouvant faire l'objet de développements futurs.
 
 Ces différentes contributions appartiennent à un champ de recherche assez large à l'intersection
 des neurosciences et de l'informatique, généralement appelé ``\textit{neurosciences computationnelles}''.
-Le terme computationnel fait référence à la notion de calcul. On peut donc également parler de neuro-calcul,
-bien que ce terme soit peu usité\footnote{  
-sans doute pour ne pas le confondre avec le bio-calcul, 
-qui concerne les opérations réalisées au niveau moléculaire, autrement dit
-le fonctionnement de la cellule en tant que machine.}.
+Le terme computationnel fait référence à la notion de calcul. On peut donc également parler de neuro-calcul.
+%bien que ce terme soit peu usité\footnote{  
+%sans doute pour ne pas le confondre avec le bio-calcul, 
+%qui concerne les opérations réalisées au niveau moléculaire, autrement dit
+%le fonctionnement de la cellule en tant que machine.}.
 \textit{Les neurosciences computationnelles 
 visent donc à identifier ce qui, dans l'activité des neurones, s'apparente à un calcul; à identifier 
 le type et la nature des opérations réalisées par le système nerveux}. 
@@ -977,8 +977,9 @@ qui transportent le signal entre les différentes unités de calcul.
 Le signal produit par les neurones biologiques n'est pas une grandeur continue.
 Le système nerveux est donc caractérisé par l'émission et la réception de signaux discrets, qui présentent 
 à première vue une certaine analogie avec les signaux numériques, 
-à ceci près qu'il n'existe pas d'horloge centrale pour cadencer les opérations\footnote{
-	Cette question reste néanmoins débattue. Elle a été récemment relancée par \shortcite{Koubeissi2014}.}.
+à ceci près qu'il n'existe pas d'horloge centrale pour cadencer les opérations.
+%\footnote{
+%	Cette question reste néanmoins débattue. Elle a été récemment relancée par \shortcite{Koubeissi2014}.}.
 C'est ce caractère discret des opérations neuronales qui avait inspiré les premiers modèles de neurones,
 au sein desquels les unités neuronales se comportaient comme des portes logiques \shortcite{MCu43}, par analogie avec 
 les circuits logiques des architectures informatiques.
@@ -2513,7 +2514,7 @@ Le manque de développements applicatifs vient probablement
 \chapter{Panorama des principaux résultats}
 
 \paragraph{}
-Les travaux présentés dans ce mémoire offrent des portes d'entrée vers ce principe de contrôle par appariement et feedback positif
+Les travaux présentés dans ce mémoire offrent des portes d'entrée vers le principe de contrôle par appariement et feedback positif
 évoqué dans le chapitre précédent.
 Pour les développer, nous avons utilisé un certain nombre de parti-pris méthodologiques~:
 \begin{itemize}
@@ -2812,7 +2813,7 @@ la capture de dépendances aux échelles temporelles fines.
 Dans le cas d'une activité fortement
 irrégulière (chaos profond), la population de neurones semble en effet garder une 
 mémoire assez faible des faits passés (autocorrélation du même ordre de grandeur) {\color{Cyan}[REF?]}. 
-Les réponses produites par la STDP sur des entrées statiques s'apparente à des ``bursts'' (bouffées) d'activité, qui impliquent 
+Les réponses produites par la STDP sur des entrées statiques s'apparentent à des ``bursts'' (bouffées) d'activité, qui impliquent 
 une grande partie des neurones du réseau
 \cite{Hen08B}, peu spécifiques et peu différents des comportement obtenus avec des neurones fréquentiels.
 
@@ -3309,7 +3310,7 @@ heurte ainsi au caractère inhomogène de ce couplage~:
 %L'interaction entre un monde distribué et digital, propice au feedback
 %positif, et un monde métrique et continu, propice au feedback négatif, 
 
-\subsubsection{Disparités d'échelle}
+\subsubsection{Disparités d'échelle}\label{page:echelle}
 Dans domaine biologique, les échelles de temps et d'espace des comportements macroscopiques 
 (mouvements, déplacements, activité motrice)  
 se distinguent des échelles de temps et d'espace observées au niveau de l'activité
@@ -4382,29 +4383,7 @@ et non en nombre de noeuds/vecteurs supports etc.
 %\end{align}
 %}
 
-\subsubsection{Route vers le chaos}
 
-\begin{figure}[b!]
-	\centerline{
-		\includegraphics[width = 0.7\linewidth]{figs/hermes_diagr_bif.eps}
-	}
-	\caption{Transitions de phase.
-		La figure représente l’activité moyenne d'un réseau récurrent aléatoire de 200 neurones sur 14 000 pas de temps,
-		tandis que l’on augmente lentement le gain
-		entre $g=4$ et $g=6$ (Beslon \& Daucé, 2002)}
-	\label{fig:hermes-bif}
-\end{figure} 
-
-
-Dans le cas des réseaux de neurones récurrents aléatoires (voir page \pageref{sec:RRNN}), il est intéressant de constater que le processus stochastique limite, tel que décrit par les équations de champ moyen, 
-a une traduction à taille finie
-sous la forme d'une activité de type \textit{chaos déterministe}. L'existence d'un 
-paramètre de contrôle (le gain de la fonction de transfert des neurones) permet de reproduire, dans ces réseaux aléatoires, 
-un  comportement générique de déstabilisation, appelé route vers le chaos par ``quasi-périodicité'' \shortcite{Berger1988,Doyon1993} (voir figure \ref{fig:hermes-bif}).
-L'existence d'une telle frontière entre l'ordre et le chaos est également prouvée à la limite thermodynamique, mais dans ce
-cas la transition se fait brutalement, avec un passage discret d'un processus de type point fixe à un processus stochastique \shortcite{Ces95}.
-Cette frontière entre ordre et chaos est par principe intéressante puisqu'elle indique le lieu
-où la variabilité de la dynamique, et donc potentiellement {\color{Orange} l'expressivité du réseau est la plus importante. }
 
 \subsubsection{Réseaux équilibrés} \label{sec:balanced}
 
@@ -4434,7 +4413,7 @@ excitatrice et l'influence inhibitrice.
 De manière intéressante, une grande variété de comportements dynamiques peuvent être observés
 à la frontière, et entre l'extinction et l'activité soutenue, comme les oscillations synchronisées \shortcite{brunel00} et/ou le chaos \shortcite{Van98}. 
 
-\subsubsection{Rôle computationnel des oscillations synchronisées}
+\paragraph{Rôle computationnel des oscillations synchronisées}
 Plusieurs hypothèses ont été proposées sur le rôle
 des oscillations synchronisées, 
 \begin{itemize}
@@ -4654,6 +4633,29 @@ Un des intérêts principaux des réseaux à connectivité aléatoire est leur c
 endogènes (donc sans stimulation extérieure). Ces dynamiques, bien que reposant sur des équations déterministes,
 se comportent comme des processus stochastiques indépendants sur chaque neurone. Ce comportement n'est pourtant pas analogue
 à un simple bruit passif. 
+
+
+\begin{figure}[b!]
+	\centerline{
+		\includegraphics[width = 0.7\linewidth]{figs/hermes_diagr_bif.eps}
+	}
+	\caption{Transitions de phase.
+		La figure représente l’activité moyenne d'un réseau récurrent aléatoire de 200 neurones sur 14 000 pas de temps,
+		tandis que l’on augmente lentement le gain
+		entre $g=4$ et $g=6$ (Beslon \& Daucé, 2002)}
+	\label{fig:hermes-bif}
+\end{figure} 
+
+
+Dans le cas des réseaux de neurones récurrents aléatoires (voir page \pageref{sec:RRNN}), il est intéressant de constater que le processus stochastique limite, tel que décrit par les équations de champ moyen, 
+a une traduction à taille finie
+sous la forme d'une activité de type \textit{chaos déterministe}. L'existence d'un 
+paramètre de contrôle (le gain de la fonction de transfert des neurones) permet de reproduire, dans ces réseaux aléatoires, 
+un  comportement générique de déstabilisation, appelé route vers le chaos par ``quasi-périodicité'' \shortcite{Berger1988,Doyon1993} (voir figure \ref{fig:hermes-bif}).
+L'existence d'une telle frontière entre l'ordre et le chaos est également prouvée à la limite thermodynamique, mais dans ce
+cas la transition se fait brutalement, avec un passage discret d'un processus de type point fixe à un processus stochastique \shortcite{Ces95}.
+Cette frontière entre ordre et chaos est par principe intéressante puisqu'elle indique le lieu
+où la variabilité de la dynamique, et donc potentiellement {\color{Orange} l'expressivité du réseau est la plus importante. }
 
 \begin{figure}[b!]
 	\centerline{
@@ -5667,7 +5669,7 @@ Entre autres,
 	\item le papier présente une nouvelle règle de plasticité Hebbienne, 
 la règle TD (qui présente des analogies avec la règle des différences temporelles de Sutton et Barto \shortcite{SUTTON98}), qui est 
 une règle du premier ordre (voir page \pageref{page:hebb-ordre}) stricte basée sur la conjugaison de l'activité entrante et la \textit{différence d'activité} sortante~:
-$$\dot{J}_{ij} - F((s_i^\text{out}(t)-s_i^\text{out}(t-1)) \times s_j^\text{in}, J_{ij})$$
+$$\dot{J}_{ij} = F((s_i^\text{out}(t)-s_i^\text{out}(t-1)) \times s_j^\text{in}(t), J_{ij})$$
 \item 
 L'étude présente en premier lieu une région paramétrique dans laquelle on peut observer des transitions entre 
 un régime de faible activité et un régime chaotique synchronisé, en fonction du coefficient de variation 
@@ -5730,7 +5732,7 @@ favorisé le dévelopement de nombreux modèles computationnels~:
 
 Une formulation possible de la règle est la suivante~:
 $$\dot{J}_{ij} = F((s_i^\text{out} \times m_j^\text{in}) - (s_j^\text{in} \times m_i^\text{out} ), J_{ij})$$
-où $s_j^\text{in}$ est l'activité pré-synaptique, $s_i^\text{out}$ est l'activité post-synaptique, $m_j^\text{in}$ une trace exponentielle de l'activité pré-synaptique, et $m_i^\text{out}$ une trace exponentielle de l'activité post-synaptique. Cette règle peut formellement être reliée aux règles de plasticité d'ordre 1 (voir page \ref{page:hebb-ordre}).
+où $s_j^\text{in}$ est l'activité pré-synaptique, $s_i^\text{out}$ est l'activité post-synaptique, $m_j^\text{in}$ une trace exponentielle de l'activité pré-synaptique, et $m_i^\text{out}$ une trace exponentielle de l'activité post-synaptique. Cette règle peut formellement être reliée aux règles de plasticité d'ordre 1 (voir page \pageref{page:hebb-ordre}).
 
 En utilisant la technique de transfert d'échelle temporelle (augmentation du pas de discrétisation d'Euler), il est par ailleurs facile
 d'établir la correspondance entre la STDP et la règle TD décrite précédemment \shortcite{Dau07},
@@ -6282,8 +6284,8 @@ c'est à dire une mémoire locale des co-activations récentes pour appliquer la
 Hebbien ou anti-Hebbien selon les cas. 
 %a prise en compte de la boucle de rétroact
 
-{\color{Cyan}
-	Les maths du Policy gradient}
+%{\color{Cyan}
+%	Les maths du Policy gradient}
 
 
 %\subsubsection{Codage prédictif et commande motrice}
@@ -6590,7 +6592,7 @@ Cette prise en compte du ``vieillissement'' de l'environnement conduit à accord
 récentes qu'à des observations anciennes \shortcite{Kivinen2004}. 
 
 \begin{itemize}
-	\item L'apprentissage ``en ligne'' \shortcite{} {\color{Cyan} [NIPS LECUN 2002]}
+	\item L'apprentissage ``en ligne'' \shortcite{leCun2004}
 	apporte un cadre d'analyse naturel au
 	traitement de la non stationnarité. 
 	L'ajustement permanent du contrôleur  
@@ -6803,7 +6805,7 @@ qui s'apparente à une exploration aléatoire de l'espace des couplages sensori-
 attracteur comportemental.
 
 Une interprétation possible de ces résultats du point de vue de l'approche dynamique de la
-cognition articielle a été proposée dans le livre que j'ai co-édité avec Agnès Guillot en 2002 \shortcite{Gui02}, selon le principe du \textit{passage d'échelle}.  
+cognition articielle a été proposée dans le livre que j'ai co-édité avec Agnès Guillot en 2002 \shortcite{Gui02}, selon le principe du \textit{passage d'échelle} (voir discussion page \pageref{page:echelle}).  
 
 
 %- Comportement d’itinerance au niveau du couple agent/environnement (robot ETIS). “Accrochage” = perte d’autonomie / information mutuelle. Alternance entre synchronisation et désynchronisation (bruit destructeur).
