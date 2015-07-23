@@ -272,7 +272,7 @@ Il s'agit d'une certaine façon d'identifier ce qui dans l'activité nerveuse s'
 utilisés dans des tâches computationnelles variées, comme le contrôle, l'apprentissage, le traitement des images et des données;
 voir si les solutions mises au point dans des contextes d'ingénierie proches de celui face auquel se trouve
 le système nerveux ont des équivalents au sein de l'activité nerveuse (ou si, au contraire, la nature 
-utilise des principes et méthodes différents). L'objectif est, à partir des observations, de mieux 
+utilise des principes différents). L'objectif est, à partir des observations, de mieux 
 identifier les rôles et les interactions à l'intérieur du système nerveux, et potentiellement
 de mieux soigner les désordres et maladies neurologiques. 
 
@@ -353,7 +353,7 @@ Ce peuvent être des contraintes physiques (limites d'extension, de course, ...)
 L'élaboration d'un modèle descriptif prenant en compte plusieurs échelles permet alors d'émettre des hypothèses 
 sur les sources (physiques ou logiques) des limitations comportementales observées. 
 
-\paragraph{}
+\paragraph{Approche ``Multi-échelles''}
 Il importe dans tous les cas de prendre en compte la différence de nature
 (ou l'hétérogénéité) entre d'une part le milieu extérieur, caractérisé par des grandeurs extensives (des masses et
 des articulations en déplacement, des changements continus) 
@@ -386,14 +386,14 @@ On notera également l'initiative BRAIN (Brain Research through Advancing Innova
 pilotée par la NIH et la NSF aux Etats Unis.
 Ce champ de recherche commence également à s'insérer dans les programmes de deuxième cycle, comme le montrent les
 nombreux cours en ligne disponibles sur le Web
-(voir par exemple ceux de Sébastien Seung au MIT, Andrew Ng à l'Université de Washington, etc.)
+(voir par exemple ceux de Sébastien Seung au MIT, Andrew Ng à Stanford, Rajesh Rao à l'Université de Washington, etc.)
 
 Au niveau des revues scientifiques, les neurosciences computationnelles ne bénéficient pas de la même
 couverture académique que les disciplines plus anciennement implantées. 
 Les revues qui ont historiquement participé à son développement sont les revues traitant des 
 réseaux de neurones artificiels apparues à la fin des années 80 (Neural Networks, Neural 
 Computation, Neural Computing Letters, Biogical Cybernetics, etc.).
-Certaine revues plutôt dédiées au traitement du signal, comme Neuroimage, acceptent également des papiers du domaine.
+Plusieurs revues de neurosciences, comme Neuroimage ou J. Neurosciences, acceptent également des papiers du domaine.
 Enfin, les revues de physique (Physica-D) hébergent également des papiers traitant des neurosciences computationnelles.  
 Suite au développement du champ de recherche et de sa couverture relativement lacunaire par les revues scientifiques, 
 sont apparues des revues en ``Open Acces'' spécialement dédiées au domaine. 
@@ -419,11 +419,11 @@ plusieurs instituts %(ISC, Lyon),
 et de masters de sciences cognitives.  
 Les neurosciences computationnelles ont ensuite reçu un soutien 
 spécifique avec l'ACI ``Neurosciences intégratives et computationnelles'' en 2001,
-achevée en 2007, qui a permis l'émergence de nouvelles questions dans le champ des neurosciences~: 
+achevée en 2007, qui a vu l'émergence de nouvelles questions dans le champ des neurosciences~: 
 notion de connectivité fonctionnelle, approche ``multi-échelles'', dynamiques  de populations et 
 codage par populations \shortcite{Faugeras2007}...
 La mise en place de l'agence nationale de la recherche en 2005 a rebattu les cartes, avec un système de financement 
-centré sur de projets non thématiques. 
+centré sur de projets non-thématiques. 
 En parallèle avec l'apparition des grands programmes internationaux mentionnés, la communauté naissante a 
 perduré et s'est auto-organisée, avec des initiatives nationales 
 comme le groupe ``Neurocomp'' qui a tenté de fédérer la communauté française de neurosciences computationnelles 
@@ -438,7 +438,7 @@ historiquement liée aux sciences cognitives.},
 la communauté des neurosciences computationnelles reste relativement stable avec une
 repésentation assez équilibrée entre des laboratoires de sciences de la vie, de
 physique théorique, d'informatique et de robotique, mais continuent de bénéficier 
-globalement des budgets importants alloués aux neurosciences (cf. le projet ``Neurospin'') 
+globalement des budgets importants alloués aux neurosciences en général (cf. le projet ``Neurospin'') 
 et des appels d'offres internationaux. 
 
 
@@ -491,21 +491,47 @@ et des appels d'offres internationaux.
 
 \subsection{Principales avancées} 
 
-{\color{cyan}
+
 Le champ de recherche s'organise autour de plusieurs pôles. 
-(1) simulation neuro-réaliste : mieux comprendre le fonctionnement du neurone, et des interacions entre neurones. 
-se cantonne parfois au simple neurone, à la stucture de la cellule. Modèles de plasticité synaptique, de la transmission
-du signal nerveux, des échanges avec le milieu... (2) modèles conceptuels, principes de traitement de l'information,
+\begin{enumerate}
+	\item Le premier pôle concerne les simulations neuro-réalistes. Le but est de mieux comprendre le fonctionnement du neurone, et des interactions entre neurones.  Ces modèles étudient en détail (i) la structure de la cellule neuronale, (ii) les échanges entre la cellule et son milieu, via les synapses et l'émission de potentiels d'action, et enfin (iii) la plasticité et les changements de ces échanges au cours du temps.
+	
+	Les principales avancées dans ce cadre sont~:
+	\begin{itemize}
+		\item le modèle Hodgkin et Huxley  \shortcite{HH52} et les modèles à compartiments \shortcite{Rall1959} qui servent encore à l'heure actuelle de fondement pour les modèles neuro-réalistes, aboutissant aux modèles détaillés de colonnes corticales constituées de dizaines de milliers de cellules \shortcite{Binzegger2004,Markram2006,Markram2012}.
+		\item L'étude de la plasticité synaptique \shortcite{Bli73,BIPOO01} et des mécanismes cellulaires associés \shortcite{Harris1984,Shouval2002,ODonnell2011,Graupner2012,Cui2015} conduit à mieux comprendre la sélectivité neuronale et la formation de champs récepteurs \shortcite{Bienenstock1982,Oja1982,VanRossum2000,song00,Billings2009}.
+	\end{itemize}
+\item Le second pôle concerne l'étude des dynamiques de populations de neurones. Les neurones sont dans ce cadre des unités de traitement simplifiées (neurones à spikes, neurones stochastiques, neurones fréquentiels,...). Le but est de comprendre les interactions entre populations de neurones, et d'étudier les conditions d'émergence de certaines signatures d'activité (corrélations large échelle, couplages de phase, champs récepteurs, ...) observés en électrophysiologie chez le sujet sain et dans les pathologies nerveuses.
+
+	Les principales avancées dans ce cadre sont~:
+	\begin{itemize}
+		\item L'activité spontanée du cerveau, qui est (i) désordonnée, (ii) de faible intensité, (iii) avec une réponse linéaire aux fluctuations d'entrée, (iv) et des corrélations à large échelle \cite{Palva2013},
+		est une activité de ``haute conductance''  \shortcite{Van98,brunel00,Destexhe2003}, correspond à un équilibre dynamique entre les influences excitatrices et les influences inhibitrices. Les neurones travaillent dans un état ``critique'', c'est à dire très proches de leur seuil de décharge.
+		\item Modélisation de l'activité persistante de population sur des ensembles de neurones 
+		\item La phase, les fréquences, modèles basés sur la phase, les theta neurons
+		\item  
+	\end{itemize}
+\item Enfin, le troisième pôle concerne les modèles conceptuels, principes de traitement de l'information, qui expliquent la réception et la transmission de l'information nerveuse
 codes neuronaux, mécanismes de mémoire et d'apprentissage;
-(3) architectures neuronales, dynamique à large échelle, neurones à spikes, réseaux équilibrés (plutôt physique
-théorique)...
+
+	Les principales avancées dans ce cadre sont~:
+	\begin{itemize}
+	 \item Les modèles du système visuel, inspirés des observations de Hubel et Wiesel, meten en évidence une organisation hiérarchique ds couches de traitement visuelles.  e système Visuel, Olshausen, les champs récepteurs, les architectures profondes, approche profonde; non-negative matrix factorization [LEE + SEUNG 1999][Rao-Ballard]. sparse représentation.
+	 \item modèles de l'hippocampe
+	 \item modèles des ganglions de la base
+	 \item modèles bayésiens bruit dans l'activité neuronale interprété 
+		\item Populatino coding, Gibbs sampling, Free energy
+		\item Modèles de l'apprentissage, du renforcement et de la sélection de l'action
+	\end{itemize}
+\end{enumerate}
 
 Les principales avancées sont:
 \begin{itemize}
- \item le système Visuel, Olshausen, les champs récepteurs, les architectures profondes, approche profonde; non-negative matrix factorization [LEE + SEUNG 1999][Rao-Ballard]. sparse représentation.
- \item dynamique stochastique, Fokker-Planck, etats de haute conductance, réseaux équilibrés, réponse linéaire
+	
+
+ \item 
  \item généralisation des modèles physiques à l'analyse de l'imagerie... Modèles inverses. Friston
- \item STDP et codage par rang
+
  \item modèles de la décision et circuit de la récompense. Modèles du cervelet. Kalman.
  \item ce qui se fait en robotique. Franceschini. Japonais. Peters. MIT.
 \end{itemize}
@@ -515,7 +541,7 @@ Problèmes rencontrés : foisonnement des modèles et des simulateurs informatiq
 problème de la validation des modèles. Confrontation aux données empiriques. 
 
 Il manque : des principes fondateurs, un langage commun, 
-}
+
 
 \section{Parcours personnel} \label{sec:bio}
 
@@ -7918,18 +7944,7 @@ of Adaptive Behavior (SAB'04)~: 305-314
 \includepdf[pages=24,offset=-70 -20]{pdf/2015-PLOS-CB.pdf}
 \includepdf[pages=25,offset=70 -20]{pdf/2015-PLOS-CB.pdf}
 \includepdf[pages=26,offset=-70 -20]{pdf/2015-PLOS-CB.pdf}
-\includepdf[pages=27,offset=70 -20]{pdf/2015-PLOS-CB.pdf}
-\includepdf[pages=28,offset=-70 -20]{pdf/2015-PLOS-CB.pdf}
-\includepdf[pages=29,offset=70 -20]{pdf/2015-PLOS-CB.pdf}
-\includepdf[pages=30,offset=-70 -20]{pdf/2015-PLOS-CB.pdf}
-\includepdf[pages=31,offset=70 -20]{pdf/2015-PLOS-CB.pdf}
-\includepdf[pages=32,offset=-70 -20]{pdf/2015-PLOS-CB.pdf}
-\includepdf[pages=33,offset=70 -20]{pdf/2015-PLOS-CB.pdf}
-\includepdf[pages=34,offset=-70 -20]{pdf/2015-PLOS-CB.pdf}
-\includepdf[pages=35,offset=70 -20]{pdf/2015-PLOS-CB.pdf}
-\includepdf[pages=36,offset=-70 -20]{pdf/2015-PLOS-CB.pdf}
-\includepdf[pages=37,offset=70 -20]{pdf/2015-PLOS-CB.pdf}
-\includepdf[pages=38,offset=-70 -20]{pdf/2015-PLOS-CB.pdf}
+
 
 
 \end{document}
