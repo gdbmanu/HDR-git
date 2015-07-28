@@ -148,6 +148,56 @@
 %Dedicated to Calvin and Hobbes.
 %\end{dedication}
 
+%%%%%%%%%%%% Endyet daag koepf dokumentet %%%%%%%%%%%%%%%
+% TODO : page de titre / remerciements
+\chapter*{Résumé}
+
+%Les études présentées dans ce rapport portent sur des algorithmes permettant de ``programmer'' des graphes constitués de nombreuses unités de calcul élémentaires.
+%%Ces programmes sont vus comme des solutions de problèmes d'optimisation sous contraintes (voir section précédente).
+%Nous nous plaçons dans une perspective de modélisation biologique~: 
+%les nœuds du graphe sont les neurones et les arêtes sont les axones transportant le signal d'un neurone à l'autre.
+%Nous cherchons donc à identifier les algorithmes ``naturels'' permettant au cerveau
+%de s'adapter à son environnement. La contrainte de plausibilité biologique impose de prendre en compte les observations et données expérimentales dans l'élaboration des modèles.  
+
+Les connaissances en plein essor sur le fonctionnement
+du cerveau permettent d'envisager de nouvelles méthodologies 
+dans le développement d'objets interagissant de manière ``naturelle'' avec leur utilisateur.
+C'est à travers une connaissance plus approfondie de la logique et des mécanismes
+computationnels à l’œuvre dans le cerveau 
+que l'on pourra peut-être repenser la manière de concevoir des objets communicants (robots mobiles
+mais également interfaces vocales, jeux, etc.) à travers des modes de communication
+plus proches de ceux qu'un sujet expérimente quotidiennement avec son environnement.
+
+\paragraph{}
+Plus concrètement, ce rapport présente mes contributions à la recherche 
+en neurosciences computationnelles, apprentissage automatique et contrôle moteur.
+Ces travaux reposent, comme nous le verrons, sur un certain nombre de parti-pris méthodologiques~:
+\begin{itemize}
+	\item Utiliser le cerveau comme source d'inspiration. La plasticité de Hebb, en particulier, est considérée comme le modèle de référence pour les algorithmes d'apprentissage.
+	\item Généraliser le principe d'appariement (``pattern matching''), à l’œuvre en apprentisage automatique, au cas des systèmes dynamiques non-linéaires bouclés.
+	\item Implémenter un calcul \textit{distribué} par les réseaux de neurones récurrents, de sorte que l'ensemble du calcul soit réparti à parts égales sur les différents nœuds du réseau. Le ``temps de calcul'' correspond au temps de relaxation vers un \textit{attracteur}. % Ce calcul est réalisé par l'ensemble des neurones du réseau. 
+\end{itemize}
+
+\paragraph{}
+%Les résultats ont été organisés autour de trois grandes thématiques~:
+%\begin{enumerate}
+%	\item La thématique des ``capacités d'expression'' des réseaux de neurones à couplages aléatoires, dans le cadre de leur interaction avec un signal extérieur. 
+%	\item La thématique de la plasticité synaptique et de l'apprentissage, via une \textit{réduction de dynamique} induite par la plasticité de Hebb.
+%	\item La thématique du contrôle moteur et de l'apprentissage moteur dans des espaces continus.
+%\end{enumerate}
+
+
+Ce travail de relecture et de compilation a également été l'occasion de mettre à jour certaines difficultés fondamentales liées à la modélisation de l'apprentissage de compétences motrices.
+Il existe en effet peu d'exemples dans la littérature où les principes de l'apprentissage automatique 
+aboutissent à l'apprentissage d'une loi de contrôle dans un espace d'actions continu.
+Ce rapport propose donc quelques pistes de recherche pour y remédier, à travers des principes de contrôle moteur fondés sur la \textit{rétroaction positive}.
+
+
+\chapter*{Abstract}
+
+Bla Bla
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Auto-generated table of contents, list of figures and list of tables %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -210,7 +260,7 @@
 % Qu'est-ce qu'un système apprenant
 
 Le but de ce document est de fournir un aperçu détaillé des questions et des approches que j'ai 
-eu l'occasion d'aborder au cours des vingts dernières années, depuis mes premiers pas en recherche. 
+eu l'occasion d'aborder au cours des vingt dernières années, depuis mes premiers pas en recherche. 
 Ce document est organisé autour des différentes contributions et productions scientifiques auxquelles
 j'ai participé, dans un ordre non chronologique mais thématique.
 A l'issue de ce parcours, il fournit également un aperçu d'un certain nombre de questions 
@@ -503,45 +553,29 @@ Le champ de recherche s'organise autour de plusieurs pôles.
 	\end{itemize}
 \item Le second pôle concerne l'étude des dynamiques de populations de neurones. Les neurones sont dans ce cadre des unités de traitement simplifiées (neurones à spikes, neurones stochastiques, neurones fréquentiels,...). Le but est de comprendre les interactions entre de grands groupes de neurones, et d'étudier les conditions d'émergence de certaines signatures d'activité (corrélations large échelle, couplages de phase, champs récepteurs, ...) observés en électrophysiologie chez le sujet sain et dans les pathologies nerveuses.
 
-
 	\begin{itemize}
-		\item L'activité des populations de neurones, qui est (i) irrégulière \cite{Softky1993}, et (ii) de faible fréquence \shortcite{Dean1981}, se modélise comme un régime de ``haute conductance''  \shortcite{Shadlen1998,Van98,brunel00,Destexhe2003}, correspondant à un équilibre dynamique entre les influences excitatrices et les influences inhibitrices au sein d'une même population. 
-		\item Les neurones travaillent dans un régime ``sous-critique'' \shortcite{Pasquale2008,Rubinov2011,Palva2013}, c'est à dire très proches de leur seuil de décharge. La présence de fréquences caractéristiques dans l'activité des neurones \shortcite{Bremer1949} traduit la proximité de la frontière avec un régime d'oscillations synchronisées \shortcite{Wang1996,brunel00,WangXJ2010}.
-		\item Les populations de neurones peuvent conserver une activité soutenue en l'absence de stimulation par des mécanismes de réverbération internes \shortcite{Ama77B,Hop82,Cam98,Bru01,Lansner2009}. %La synchronisation de phase tels qu'observée lors de la réalisation de certaines tâches \shortcite{Gra89} peut s'expliquer par un accrochage de fréquence entre différentes 
+		\item Les neurones travaillent dans un régime dit ``sous-critique'' \shortcite{Beggs2004,Petermann2009,Rubinov2011,Haimovici2013}, encore appelé régime de ``haute conductance'' \shortcite{Shadlen1998,Destexhe2003}, qui explique à la fois le caractère très irrégulier de leur activité \shortcite{Dean1981,Softky1993,Van98}, et 
+		leur tendance à se synchroniser à courte \shortcite{Gra89,Wang1996,brunel00,WangXJ2010} et longue distance \shortcite{Rod99,Palva2005,Busch2009}.
+		\item Les populations de neurones peuvent conserver une activité soutenue en l'absence de stimulation par des mécanismes de réverbération internes \shortcite{Heb49,Ama77B,Hop82,Fun89,Cam98,Bru01,Lansner2009}. %La synchronisation de phase tels qu'observée lors de la réalisation de certaines tâches \shortcite{Gra89} peut s'expliquer par un accrochage de fréquence entre différentes 
 %		\item L'activité des ensembles de neurones est une activité multistable.  
 %		\item La phase, les fréquences, modèles basés sur la phase, les theta neurons
-%		\item  . , (iv) et des corrélations à large échelle ,
+%		\item  
 	\end{itemize}
-\item Enfin, le troisième pôle concerne les modèles conceptuels, principes de traitement de l'information, qui expliquent la réception et la transmission de l'information nerveuse
+\item Enfin, le troisième pôle concerne les modèles conceptuels, principes de traitement de l'information, qui expliquent la réception et la transmission de l'information nerveuse,
 les codes neuronaux, les mécanismes de la mémoire et de l'apprentissage;
 
 Les principales avancées dans ce cadre sont~:
 	\begin{itemize}
-	 \item Les modèles du système visuel, inspirés des observations de Hubel et Wiesel, meten en évidence une organisation hiérarchique ds couches de traitement visuelles.  e système Visuel, Olshausen, les champs récepteurs, les architectures profondes, approche profonde; non-negative matrix factorization [LEE + SEUNG 1999][Rao-Ballard]. sparse représentation.
-	 \item modèles de l'hippocampe
-	 \item modèles des ganglions de la base
-	 \item modèles bayésiens bruit dans l'activité neuronale interprété 
-		\item Populatino coding, Gibbs sampling, Free energy
-		\item Modèles de l'apprentissage, du renforcement et de la sélection de l'action
+	 \item Les modèles du système visuel, inspirés des observations de Hubel et Wiesel \shortcite{HUBELWIESEL62}, mettent en évidence une organisation hiérarchique des couches de traitement visuelles, dont la formation est modélisée par des algorithmes d'auto-encodage non-supervisés \shortcite{Olshausen1997,Lee1999,Rao1999,Hinton2006,Lecun2015}.
+	 \item Les principaux sous-systèmes du système nerveux central ont fait l'objet de modélisations spécifiques, comme le complexe hippocampe-cortex entorhinal pour la mémoire et la navigation \shortcite{OKe78,Treves1994,Skaggs1996,Buzsaki2013}, le cervelet pour le contrôle adaptatif \shortcite{Wolpert1998,Haruno2001,Dean2010} et le complexe cortex-ganglions de la base-thalamus pour la sélection de l'action \shortcite{Schultz1997,Gurney2001,Joel2002}.
+	 \item Le principe du codage par population, inspiré par l'activité des régions prémotrices et motrices du cortex \shortcite{Georgopoulos1986} et les champs récepteurs à l'orientation de V1 \shortcite{Bonhoeffer1991}, permet d'interpréter l'activité irrégulière des populations de neurones comme un échantillonnage de grandeurs continues ``latentes'' \shortcite{Pouget1997,Pouget2002,Fiser2010,Stewart2011,Boerlin2013}.
 	\end{itemize}
 \end{enumerate}
 
-Les principales avancées sont:
-\begin{itemize}
-	
-
- \item 
- \item généralisation des modèles physiques à l'analyse de l'imagerie... Modèles inverses. Friston
-
- \item modèles de la décision et circuit de la récompense. Modèles du cervelet. Kalman.
- \item ce qui se fait en robotique. Franceschini. Japonais. Peters. MIT.
-\end{itemize}
-
-
-Problèmes rencontrés : foisonnement des modèles et des simulateurs informatiques. Difficulté à  reproduire les résultats. 
-problème de la validation des modèles. Confrontation aux données empiriques. 
-
-Il manque : des principes fondateurs, un langage commun, 
+ De nombreuses librairies et environnements de simulation ont par ailleurs été développés, de la cellule jusqu'aux populations de neurones à large échelle \shortcite{Eliasmith2004,BRETTE08,Furber2013,Leon2013}.
+ 
+ Enfin, le domaine connaît actuellement une forte tentative d'unification autour de principes issus de l'inférence statistique. Le cerveau construirait une interprétation de son environnement perceptif à l'aide d'un petit nombre de variables explicatives, ou ``facteurs causaux''. Le calcul probabiliste sur les distributions multimodales complexes issues des capteurs serait réalisé par échantillonnage \shortcite{Buesing2011}, via des mécanismes d'optimisation basés sur la parcimonie (minimiser les causes) et la vraisemblance (maximiser la justesse)
+ \shortcite{Rao1999,Friston2009}. Même si ces principes apparaissent séduisants, avec des connexions intéressantes vers les algorithmes d'auto-encodage développés en apprentissage automatique \shortcite{Hinton2006}, leur réalisation matérielle dans le substrat neuronal reste à découvrir. Il manque également, même si des tentatives sont en cours \shortcite{Sutskever2009,Perrinet2014,Huang2015}, de nombreuses ``briques'' pour construire un modèle général de l'apprentissage  des flux sensoriels et des transformations sensori-motrices, comme nous le verrons plus loin.
 
 
 \section{Parcours personnel} \label{sec:bio}
@@ -564,7 +598,7 @@ septembre 1994. Bernard Doyon y présentait  l'étude de comportements chaotique
 obtenus par simulation de réseaux de neurones, en faisant le parallèle avec le fonctionnement du cerveau 
 (en particulier avec l'étude des dimensions fractales des signaux électrophysiologiques pour différents états de veille
 et de sommeil, développée à l'époque par l'équipe d'Agnès Babloyantz à Bruxelles \shortcite{Bab85}, ainsi que les travaux
-de Walter Freeman \shortcite{ska87} sur la réponse aus stimuli olfactifs sur des grilles d'électrodes chez le lapin).
+de Walter Freeman \shortcite{ska87} sur la réponse aux stimuli olfactifs sur des grilles d'électrodes chez le lapin).
 
 J'ai décidé de m'engager dans cette voie de recherche (simulation de réseaux de neurones
 chaotiques) dans le cadre d'un stage du DEA de Representation de la Connaissance et Formalisation
@@ -968,11 +1002,22 @@ Les résultats  ont été organisés autour de trois grandes thématiques~:
 \end{enumerate}
 
 La première partie (``Vue d'ensemble'') offre un aperçu complet des problèmes  et thématiques abordées au cours de mon activité de recherche. Il contient également un bilan critique, ainsi que différentes suggestions et projets pouvant servir à des développements futurs de ce champ de recherche.
-Le chapitre 2 présente certains grands principes lié à la modélisation biologiquement inspirée des réseaux de neurones. Il s'adresse principalement aux non-spécialistes du domaine.
-Le chapitre 3 présente les principes fondamentaux de l'apprentissage et du contrôle tels qu'on les trouve dans la littérature. Il sert de point d'appui à la compréhension des principaux résultats de mon activité de recherche, présentés dans le chapitre 4. Enfin, le chapitre 5 met en perspective ces différents résultats, et développe plusieurs pistes d'études pouvant servir de base à des travaux futurs.
+\begin{itemize}
+	\item Le chapitre 2 présente certains grands principes lié à la modélisation biologiquement inspirée des réseaux de neurones. Il s'adresse principalement aux non-spécialistes du domaine.
+	\item Le chapitre 3 présente les principes fondamentaux de l'apprentissage et du contrôle tels qu'on les trouve dans la littérature. 
+	\item Le chapitre 4 présente dans les principaux résultats de mon activité de recherche.
+	\item  Enfin, le chapitre 5 met en perspective ces différents résultats, et développe plusieurs pistes d'études pouvant servir de base à des travaux futurs.
+\end{itemize}
 
-	La deuxième partie (``Résultats détaillés'') offre donc un niveau de détail plus élevé sur les différents résultats et publications évoqués dans la première partie. Elle est organisée en trois chapitres.
-Le chapitre 6 aborde la question de l'expressivité des grands réseaux de neurones récurrents, c'est à dire de leur capacité à traiter et transformer des signaux. Le chapitre 7 aborde la question de la plasticité, en lien avec l'apprentissage de dépendances temporelles et de prédiction des signaux. Enfin, le chapitre 8 traite la question des interactions entre un contrôleur neuronal et son environnement, dans le cadre de l'apprentissage moteur.
+
+
+	La deuxième partie (``Résultats détaillés'') offre donc un niveau de détail plus élevé sur les différents résultats et publications évoqués dans la première partie. Elle est organisée en trois chapitres:
+	\begin{itemize}
+		\item Le chapitre 6 aborde la question de l'expressivité des grands réseaux de neurones récurrents, c'est à dire de leur capacité à traiter et transformer des signaux.
+		\item Le chapitre 7 aborde la question de la plasticité, en lien avec l'apprentissage de dépendances temporelles et de prédiction des signaux.
+		\item  Enfin, le chapitre 8 traite la question des interactions entre un contrôleur neuronal et son environnement, dans le cadre de l'apprentissage moteur.
+	\end{itemize}
+ 
 
 Les annexes contiennent une liste de publications que je considère comme les plus significatives.
 
@@ -1530,7 +1575,7 @@ A un instant donné, une assemblée se trouve soit dans l'état inactif, soit da
 
 La perspective des assemblées neuronales permet de voir les réseaux de neurones  comme des \textit{graphes  reconfigurables} au sein desquels des circuits (assemblées) peuvent être activés ou désactivés au cours du temps.
 
-.
+
 
 
 \paragraph{Champ moyen}
@@ -2663,7 +2708,7 @@ La dynamique, inspirée par \cite{Hopfield1984}, est définie par l' équation d
 où $g$ est le gain, $p$ une constante de proportionnalité (ratio excitation/inhibition) et $ \boldsymbol{J}$ la matrice des couplages issue de l'imagerie fonctionnelle humaine.
 
 Ces travaux ont permis de mettre en évidence un nombre très important d'attracteurs dans certaines gammes de paramètres.
-L'analyse des ensembles d'attracteurs obtenus permet d'identifier une douzaine de ``modes'' différents, chaque
+L'analyse des ensembles d'attracteurs obtenus permet d'identifier une huitaine de ``modes'' différents, chaque
 mode correspondant à l'activation d'un réseau anatomique particulière. Ces modes peuvent être comparés aux modules 
 régionaux mis en évidence par une analyse structurelle \shortcite{Hagmann2008} ainsi qu'avec les composants indépendants 
 identifiés sur les signaux fMRI de l'état de repos \shortcite{Damoiseaux2006}.
@@ -2834,7 +2879,7 @@ dans les réseaux de neurones à impulsions rend difficile
 la capture de dépendances aux échelles temporelles fines.
 Dans le cas d'une activité fortement
 irrégulière (chaos profond), la population de neurones semble en effet garder une 
-mémoire assez faible des faits passés (autocorrélation du même ordre de grandeur) {\color{Cyan}[REF?]}. 
+mémoire assez faible des faits passés (autocorrélation du même ordre de grandeur). %{\color{Cyan}[REF?]}. 
 Les réponses produites par la STDP sur des entrées statiques s'apparentent à des ``bursts'' (bouffées) d'activité, qui impliquent 
 une grande partie des neurones du réseau
 \cite{Hen08B}, peu spécifiques et peu différents des comportement obtenus avec des neurones fréquentiels.
@@ -3718,7 +3763,7 @@ restent statiques dans l'espace pré-moteur lorsque le regard bouge. \begin{item
 Il existe donc une application qui à partir de la position des objets dans un premier 
 référentiel définit la position des mêmes objets dans un autre référentiel. 
 La bijection entre les deux espaces offre
-un bon support à l'invariance ainsi qu'à la prédiction sensorielle selon le principe du ``predictive coding'' \shortcite{Rao1999}. 
+un bon support à l'invariance ainsi qu'à la prédiction sensorielle. % selon le principe du ``predictive coding'' \shortcite{Rao1999}. 
 
 Le mécanisme de construction de l'espace métrique environnant reste encore à l'heure actuelle non-élucidé. Nous avons vu que le caractère ``digital'' de l'activité neuronale rend difficile, en interne, la construction d'opérateurs sur cet espace.
 Ce mécanisme semble pourtant pouvoir être implémenté sur la base de principes d'appariement très simples, mais n'a, à ma connaissance, pas encore été proposée en modélisation. Deux principes semblent s'imposer dans ce cadre : 
@@ -4591,7 +4636,7 @@ permis d'identifier des comportements caractéristiques, décrits sous la forme 
 	\centerline{
 		\includegraphics[width = 0.7\linewidth]{figs/map_2pop.eps}
 	}
-	\caption{Diagramme de bifurcation à la lite thermodynamique sur un réseau aléatoire équilibré à 2 populations, en fonction de $d$ (homogénéité) et $J$ (amplification).}
+	\caption{Diagramme de bifurcation à la limite thermodynamique sur un réseau aléatoire équilibré à 2 populations, en fonction de $d$ (homogénéité) et $J$ (amplification).}
 	\label{fig:diagr-2pop}
 \end{figure} 
 
@@ -4618,7 +4663,7 @@ Nous étudions le rôle contrasté de deux paramètres de contrôle (voir Figure
 \begin{itemize}
 	\item Le premier paramètre, $J$, représente l'amplification du signal. L'augmentation
 	continue de ce paramètre tend à produire une bifurcation entre un régime simple (point fixe) et une activité 
-	complexe (de type chaotique) {\color{Orange} comme précédemment.}
+	complexe (de type chaotique). % {\color{Orange} comme précédemment.}
 	\item Un second paramètre, nommé $d$, représente l'inverse du \textit{coefficient de variation} des liens, autrement dit le 
 	degré d'homogénéite. Augmenter ce paramètre tend à rendre les poids plus homogènes. 
 \end{itemize}
@@ -4631,9 +4676,9 @@ ce dernier régime étant à notre connaissance mis en évidence pour la premiè
 
 
 Notre étude a donc ouvert la voie à l'étude multi-population systématique des réseaux de neurones à connectivité aléatoire,
-voir par exemple \shortcite{Faugeras2009,Cabana2013}. %L'accent sur l'équilibre dynamique entre populations escitatrice et inhibitrice
+voir par exemple \shortcite{Soula2006,Faugeras2009,Cabana2013}. %L'accent sur l'équilibre dynamique entre populations escitatrice et inhibitrice
 
-{\color{Cyan}[CITER SOULA-BESLON] et ECM avec IF neurons}
+%{\color{Cyan}[CITER SOULA-BESLON] et ECM avec IF neurons}
 
 
 %{\color{Violet}
@@ -4681,7 +4726,7 @@ un  comportement générique de déstabilisation, appelé route vers le chaos pa
 L'existence d'une telle frontière entre l'ordre et le chaos est également prouvée à la limite thermodynamique, mais dans ce
 cas la transition se fait brutalement, avec un passage discret d'un processus de type point fixe à un processus stochastique \shortcite{Ces95}.
 Cette frontière entre ordre et chaos est par principe intéressante puisqu'elle indique le lieu
-où la variabilité de la dynamique, et donc potentiellement {\color{Orange} l'expressivité du réseau est la plus importante. }
+où la variabilité de la dynamique, et donc potentiellement l'expressivité du réseau, est la plus importante. 
 
 \begin{figure}[b!]
 	\centerline{
@@ -4699,6 +4744,7 @@ d'activation (rendant donc les neurones plus ou moins excitables).
 Le réseau soumis à un tel signal converge vers un nouvel attracteur (autrement dit se reconfigure).
 Une manière simple de caractériser le comportement non-linéaire (ou critique) d'une population de neurones consiste à introduire de petites perturbations
 dans la dynamique du réseau. 
+
 Une étude proposée dans le 3ème chapitre de l'ouvrage que nous avons co-dirigé avec Agnès Guillot \shortcite{Beslon2002} illustre le propos.
 Cette étude porte sur le modèle le plus simple, un réseau récurrent aléatoire comportant une seule population. Le paramètre de contrôle
 choisi place le réseau dans une région chaotique, proche de la transition vers le cycle limite.  
@@ -4743,13 +4789,13 @@ présentés dans la section \ref{sec:BioCyb02}.
 
 L'intérêt du comportement spontané des réseaux récurrents à connectivité aléatoires a été largement confirmé depuis. 
 Une étude plus systématique de la réponse linéaire dans les réseaux récurrents \shortcite{Cessac2007} met en évidence 
-l'existence de modes et de résonances extrêmement variés lorsque le signal est applique sur un seul noeud du réseau (micro-stimulation). 
+l'existence de modes et de résonances extrêmement variés lorsque le signal est applique sur un seul nœud du réseau (micro-stimulation). 
 Les modèles de ``réservoir
 computing'' proposés par l'équipe de Wolfgang Maas \shortcite{Maass2002} reposent sur le même principe : un réseau de neurones aléatoire récurrent soumis à un signal
 spatio-temporel est capable de conserver une mémoire de quelques unités de temps utilisables pour produire des classifieurs sensibles
 au contexte temporel.
 
-{\color{Cyan} Image du papillon-chenille.}
+%{\color{Cyan} Image du papillon-chenille.}
 
 Ce modèle de réseau à connexions aléatoire offre un exemple de substrat dont la caractéristique principale est la \textit{capture dynamique}, reposant
 sur des transformations morphologiques des patrons d'activités (changements des distributions spatiales et temporelles des activités). Bien que construits sur
@@ -4810,6 +4856,24 @@ entre la distribution uniforme initiale et un noyau gaussien conservatif).
 Le mécanisme du champ neuronal, qui se caractérise par une connectivité majoritairement excitatrice à 
 courte distance, et inhibitrice à longue distance, est implémenté à l'aide de ces noyaux gaussiens 
 tels que le rayon du noyau des liens excitateurs est plus faible que celui des liens inhibiteurs.  
+
+\begin{figure}[t!]
+	\centerline{
+		\includegraphics[width = 0.7\linewidth]{figs/nc_funn_field_global_2.png}
+	}
+	\caption{Input presentation in a topologically organized network (only the excitatory layer owns a topology). The network is composed of $N^{(1)} = 1000$ neurons and $N^{(2)} = 300$ neurons. %The effective sparsity are ρ (11) = 2.6%, ρ (12) = 22.5%, ρ (21) = 7.6%,
+	%	(22)
+	%	= 22%. 
+	The excitatory links are globally faster ( $\simeq 5$ time steps) than inhibitory links ($\simeq 9$ time steps). Four inputs (red) are sent. The first input is sent at time 301–340 on neurons
+		591–600. The second input is sent at time 501–520 on neurons 181–200. The third input is
+		sent at time 701–740 on neurons 691–700. The last input crosses the whole field, activating 10
+		neurons at each time step. {\bf Upper left~:} global activity of the excitatory layer. {\bf Lower left~:} mean
+		activity on excitatory layer. {\bf Middle right~:} global activity of the inhibitory layer. {\bf Lower right~:}
+		mean activity on inhibitory layer. {\bf Upper right insets~:} distribution of the sum of incoming
+		weights from excitatory and inhibitory populations, for 1000 excitatory neurons (left) and 300
+		inhibitory neurons (right) (from Daucé, 2004).}
+	\label{fig:nc-field}
+\end{figure} 
 
 Le papier montre alors que les propriétés des réseaux aléatoires récurrents et celles des champs neuronaux s'additionnent dans ce modèle,
 puisqu'on peut mettre en évidence sur ce substrat la présence simultanée d'une activité de fond chaotique,
@@ -4945,14 +5009,25 @@ Cet ensemble de noeuds présente des points communs avec le patron d'activité `
 
 En partant de la structure du connectome, nous avons utilisé pour l'activation des noeuds
 différentes variantes du modèle ``à réponse graduelle'' de Hopfield \shortcite{Hopfield1984}, 
-en changeant les caractéristiques du seuil d'activation afin de contrôle le niveau d'activation moyen.
+en changeant les caractéristiques du seuil d'activation afin de contrôler le niveau d'activation moyen.
 Ces travaux ont permis de mettre en évidence un nombre très important d'attracteurs dans certaines gammes de paramètres.
 Ainsi, en condition de ``basse température'', le nombre d'attracteurs distincts peut atteindre plusieurs milliers
 (sur un modèle comportant 998 noeuds). %cette prolifération d'attracteurs est un indicateur du caractère 
-L'analyse des ensembles d'attracteurs obtenus permet d'identifier une douzaine de ``modes'' différents, chaque
+L'analyse des ensembles d'attracteurs obtenus permet d'identifier une huitaine de ``modes'' différents (voir figure \ref{fig:PLOS}), chaque
 mode correspondant à l'activation d'une région anatomique particulière. Ces modes peuvent être comparés aux modules 
 régionaux mis en évidence par une analyse structurelle \shortcite{Hagmann2008} ainsi qu'avec les composants indépendants 
 identifiés sur les signaux fMRI de l'état de repos \shortcite{Damoiseaux2006}.
+
+\begin{figure}[!t]
+\begin{center}
+	\includegraphics[width=\textwidth]{figs/Fig8.png}
+\end{center}
+\caption{
+	{\bf Cores of the 8 principal clusters, on a SL attractor set}. The initial attractors set contains 28,849 attractors, with $P =1$ and $G=900$. 
+	The clusters are obtained by a double-pass clustering, with inclusion match similarity ($k = 0.8$). The cores are defined as the 10\% most active nodes in a cluster. {\bf a:} core of cluster 1 (4,089 attractors);  {\bf b:} core of cluster 2 (3,048 attractors);  {\bf c:} core of cluster 3 (2,045 attractors);  {\bf d:} core of cluster 4 (1,573 attractors);  {\bf e:} core of cluster 5 (907 attractors);  {\bf f:} core of cluster 6 (892 attractors);  {\bf g:} core of cluster 7 (881 attractors);  {\bf h:} core of cluster 8 (844 attractors) (from Golos et al, \textit{submitted}).  
+}
+\label{fig:PLOS}
+\end{figure}
 
 L'ajout d'un terme de bruit dans l'équation de mise à jour permet de simuler une activité multistable \textit{temporellement}, 
 s'apparentant aux régimes dits de ``dynamique itinérante'' \shortcite{Tsuda92,Kan90},
@@ -7579,12 +7654,11 @@ Nous avons également
 regardé comment le choix d'un biais sur la récompense permet de réduire la variance de l'estimateur. 
 Nous avons enfin regardé la tolérance de l'algorithme au bruit, soit en dégradant le signal 
 traité, soit en dégradant le signal de renforcement. 
-
-Le modèle proposé utilisait un terme de régularisation combiné à un paramètre d'apprentissage permettant
+Le modèle proposé utilise un terme de régularisation combiné à un paramètre d'apprentissage permettant
 de définir une constante de temps caractéristique correspondant à la durée pendant laquelle les données 
-du passé sont prises en compte avant d'être oubliées.
+du passé sont prises en compte avant d'être oubliées \shortcite{Dauce2015}.
 
-{\color{Cyan} TODO --- papier envoyé à IJCNN}
+%{\color{Cyan} TODO --- papier envoyé à IJCNN}
 
 \paragraph{Accumulation d'évidence} Considérons un classifieur 
 probabiliste qui, à chaque illumination d'un nouveau groupe de lettres (toutes les 200 ms),  
