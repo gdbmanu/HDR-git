@@ -1244,7 +1244,7 @@ l'activité conjointe (et parallèle) des neurones du réseau, on se situe dans 
 séquentiel centralisé réalisé par les ordinateurs traditionnels.
 
 
-\section{Notre approche}
+\section{Traitement séquentiel et traitement récurrent}
 L'idée est donc que le graphe qui sert à modéliser l'activité nerveuse 
 est organisé de telle sorte qu'il existe une multitude de circuits ``concurrents''.
 A un instant donné, un seul de ces circuits est ``actif'', et les autres sont ``désactivés''.
@@ -1385,7 +1385,9 @@ d'appariement au cas des dynamiques de relaxation  signifie essentiellement~:
 	entre les différentes régions, voire d'en créer de nouvelles et d'en faire disparaître.
 \end{itemize}
 
-\paragraph{} Une des thèses principales développées ici est que :
+\section{Notre approche} 
+
+Une des thèses principales développées ici est que :
 \begin{itemize}
 	\item[]
 	\textit{La plasticité de Hebb construit une fonction d'\textbf{appariement conditionnel} s'appuyant sur les propriétés de l'activité persistante d'un système dynamique de grande dimension.}
@@ -1409,7 +1411,7 @@ où:
 %	\end{itemize} 
 %}
 
-\subsubsection{(i) Séparation des signaux} 
+\subsection{Séparation des signaux} 
 
 La transformation des données d'entrée sous la forme d'un (ou plusieurs) vecteur(s) caractéristique(s) correspond à une   \textit{simplification} de ces données.
 \begin{itemize}
@@ -1468,7 +1470,7 @@ tel que~:
 
 
 
-\subsubsection{(ii) Plasticité}
+\subsection{Plasticité}
 
 La synapse biologique est l'interface permettant la communication entre les neurones.
 Il s'agit d'une petite surface d'échange chimique (``bouton'' synaptiques) située à l'extrémité de l'arborisation terminale des axones. A l'arrivée d'un potentiel d'action, les synapses libèrent des neurotransmetteurs qui agissent sur les canaux ioniques des dendrites de la cellule post-synaptique (``libèrent'' des ions), ce qui a pour effet de modifier le potentiel de membrane de la cellule post-synaptique.
@@ -1553,7 +1555,7 @@ ainsi qu'à la modélisation des mécanismes de plasticité liés à la récompe
 
 
 
-\subsubsection{Assemblées neuronales} Le principe de plasticité par conjonction d'activité est articulé, dans le livre de Hebb, avec le concept d'\textit{assemblée neuronale} \cite{Heb49}. 
+\subsection{Assemblées neuronales} Le principe de plasticité par conjonction d'activité est articulé, dans le livre de Hebb, avec le concept d'\textit{assemblée neuronale} \cite{Heb49}. 
 Une assemblée neuronale\footnote{La notion d'assemblée se distingue de la notion de population~: 
 	\begin{itemize}
 		\item les populations de neurones sont définies par des caractères anatomiques ou architecturaux
