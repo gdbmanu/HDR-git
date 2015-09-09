@@ -162,36 +162,35 @@
 
 
 Les ``neurosciences computationnelles'', qui 
-se développent depuis une quarantaine d'années, visent à mieux comprendre l'organisation des circuits neuronaux selon la double perspective du traitement et
+se développent depuis une quarantaine d'années, visent à mieux comprendre la logique à l'œuvre dans les circuits neuronaux, selon la double perspective du traitement et
 de la transformation des signaux sensoriels, d'une part, et du contrôle et de la coordination des actions, d'autre part. 
-Il s'agit, au niveau microscopique, de mieux comprendre le sens des signaux émis par les cellules nerveuses, mais également, au niveau ``macroscopique'', de mieux comprendre la manière dont le système nerveux des êtres vivants organise 
-leur environnement sensoriel et moteur. 
-Le développement rapide des neurosciences invite à constamment réviser les principes fonctionnels qui y sont à l’œuvre.
+Il s'agit, au niveau microscopique, de mieux comprendre le ``code'' des signaux émis par les cellules nerveuses, mais également, au niveau ``macroscopique'', de mieux comprendre les principes organisationnels 
+permettant à ce réseau complexe qu'est le cerveau de contrôler l'appareil sensoriel et moteur. 
+Le développement rapide des neurosciences invite par ailleurs à constamment réviser nos modèles et hypothèses sur ces questions.
 Ce ``travail en progression'' devrait conduire à terme à améliorer le diagnostic et la réhabilitation de certaines pathologies nerveuses, mais également à changer la manière de concevoir des objets communicants (robots mobiles, interfaces vocales, jeux, etc.), afin qu'ils interagissant de manière plus ``naturelle'' avec leur utilisateur.
 
 \paragraph{}
 Plus concrètement, ce rapport présente mes contributions à la recherche 
-en neurosciences computationnelles, apprentissage automatique et contrôle moteur.
-Ces travaux reposent, comme nous le verrons, sur un certain nombre de parti-pris méthodologiques~:
+en neurosciences computationnelles, apprentissage automatique et contrôle moteur. Les résultats s'appuient en grande partie sur les comportements de systèmes dynamiques de grande dimension, c'est  dire constitués par l'interaction de nombreuses unités couplées.
+Ces travaux reposent, comme nous le verrons, sur un certain nombre de choix méthodologiques~:
 \begin{itemize}
-	\item Utiliser le cerveau comme source d'inspiration. La plasticité de Hebb, en particulier, est considérée comme le modèle de référence pour les algorithmes d'apprentissage.
-	\item Généraliser le principe d'appariement (``pattern matching''), à l’œuvre en apprentisage automatique, au cas des systèmes dynamiques non-linéaires bouclés.
-	\item Implémenter un calcul \textit{distribué} par les réseaux de neurones récurrents, de sorte que l'ensemble du calcul soit réparti à parts égales sur les différents nœuds du réseau. Le ``temps de calcul'' correspond au temps de relaxation vers un \textit{attracteur}. % Ce calcul est réalisé par l'ensemble des neurones du réseau. 
+	\item Aborder l'apprentissage automatique dans une perspective neuro-réaliste. Prendre en compte les contraintes biologiques, comme la contrainte de localité de Hebb, le caractère récurrent et hétérogène du graphe de connexions, ou encore le caractère discret des signaux émis par les neurones, pour développer nos modèles.
+	\item Étudier les principes du calcul ``collectif'' dans les architectures neuronales récurrentes, de sorte que le ``temps de calcul'' corresponde au temps de relaxation vers un \textit{attracteur}. % Ce calcul est réalisé par l'ensemble des neurones du réseau. 
+	Les comportements d'ensemble  sont alors interprétés comme des \textit{implémentations} d'opérateurs  plus simples.
+	\item  Étendre certains principes liés à l'apprentissage de formes  au cas du contrôle moteur, en particulier dans le cadre du contrôle dit ``en boucle fermée'', et du guidage de l'apprentissage par un signal de renforcement. 
 \end{itemize}
 
 \paragraph{}
-%Les résultats ont été organisés autour de trois grandes thématiques~:
-%\begin{enumerate}
-%	\item La thématique des ``capacités d'expression'' des réseaux de neurones à couplages aléatoires, dans le cadre de leur interaction avec un signal extérieur. 
-%	\item La thématique de la plasticité synaptique et de l'apprentissage, via une \textit{réduction de dynamique} induite par la plasticité de Hebb.
-%	\item La thématique du contrôle moteur et de l'apprentissage moteur dans des espaces continus.
-%\end{enumerate}
+
+Dans les architectures neuronales définies par un graphe de connexions récurrent, nous montrons que la reconnaissance de formes fonctionne selon le principe de la \textit{rétroaction positive} (ou résonance) entre un signal présenté en entrée  et une des ``formes'' possibles que peut prendre l'activité du réseau.
+Ce principes semble pouvoir s'étendre au cas de l'apprentissage moteur.
+Néanmoins, le travail de relecture et de compilation occasionné par la rédaction de ce rapport a mis en lumière certaines difficultés fondamentales liées à la modélisation de l'apprentissage de compétences motrices, qui freinent la possibilité d'émergence d'une loi de contrôle dans un espace d'actions continu.
+Ce rapport propose donc quelques pistes de recherche pour y remédier, en proposant un contrôle moteur fondé sur la rétroaction \textit{positive}.
 
 
-Le travail de relecture et de compilation nécessaire à la rédaction de ce rapport a également été l'occasion de mettre en lumière certaines difficultés fondamentales liées à la modélisation de l'apprentissage de compétences motrices.
-Il existe en effet peu d'exemples dans la littérature où les principes de l'apprentissage automatique 
-aboutissent à l'émergence d'une loi de contrôle dans un espace d'actions continu.
-Ce rapport propose donc quelques pistes de recherche pour y remédier, au travers de principes de contrôle moteur fondés sur la rétroaction \textit{positive}.
+
+
+
 
 
 \chapter*{Abstract}
@@ -5100,7 +5099,7 @@ Ce chapitre est consacré à l'étude des mécanismes d'apprentissage dans les r
 	Nous regardons  comment les règles de plasticité synaptique  vont permettre à certaines
 	stimulations sensorielles (désignées comme intéressantes) de ``creuser'' au sein du réseau un mode de réponse particulier (une ``résonance''),
 	cette résonance étant le support des interpolations perceptives futures. Nous regardons également en quoi ces architectures dites ``à feedback positif'', 
-	contrairement au modèle classique du ``predictive coding'' 
+	contrairement au modèle classique du ``predictive coding'', 
 	implémentent le comportement de  ``résistance au changement'' (ou persévération). 
 
 
