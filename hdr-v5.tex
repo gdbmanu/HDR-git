@@ -171,27 +171,21 @@ Ce ``travail en progression'' devrait conduire à terme à améliorer le diagnos
 
 \paragraph{}
 Plus concrètement, ce rapport présente mes contributions à la recherche 
-en neurosciences computationnelles, apprentissage automatique et contrôle moteur. Les résultats s'appuient en grande partie sur les comportements de systèmes dynamiques de grande dimension, c'est  dire constitués par l'interaction de nombreuses unités couplées.
+en neurosciences computationnelles, apprentissage automatique et contrôle moteur. 
 Ces travaux reposent, comme nous le verrons, sur un certain nombre de choix méthodologiques~:
 \begin{itemize}
 	\item Aborder l'apprentissage automatique dans une perspective neuro-réaliste. Prendre en compte les contraintes biologiques, comme la contrainte de localité de Hebb, le caractère récurrent et hétérogène du graphe de connexions, ou encore le caractère discret des signaux émis par les neurones, pour développer nos modèles.
 	\item Étudier les principes du calcul ``collectif'' dans les architectures neuronales récurrentes, de sorte que le ``temps de calcul'' corresponde au temps de relaxation vers un \textit{attracteur}. % Ce calcul est réalisé par l'ensemble des neurones du réseau. 
-	Les comportements d'ensemble  sont alors interprétés comme des \textit{implémentations} d'opérateurs  plus simples.
+	Les comportements d'ensemble  sont alors interprétés comme des implémentations d'opérateurs  plus simples.
 	\item  Étendre certains principes liés à l'apprentissage de formes  au cas du contrôle moteur, en particulier dans le cadre du contrôle dit ``en boucle fermée'', et du guidage de l'apprentissage par un signal de renforcement. 
 \end{itemize}
 
 \paragraph{}
 
-Dans les architectures neuronales définies par un graphe de connexions récurrent, nous montrons que la reconnaissance de formes fonctionne selon le principe de la \textit{rétroaction positive} (ou résonance) entre un signal présenté en entrée  et une des ``formes'' possibles que peut prendre l'activité du réseau.
-Ce principes semble pouvoir s'étendre au cas de l'apprentissage moteur.
-Néanmoins, le travail de relecture et de compilation occasionné par la rédaction de ce rapport a mis en lumière certaines difficultés fondamentales liées à la modélisation de l'apprentissage de compétences motrices, qui freinent la possibilité d'émergence d'une loi de contrôle dans un espace d'actions continu.
-Ce rapport propose donc quelques pistes de recherche pour y remédier, en proposant un contrôle moteur fondé sur la rétroaction \textit{positive}.
-
-
-
-
-
-
+Les résultats s'appuient en grande partie sur les comportements de systèmes dynamiques de grande dimension, c'est  dire constitués par l'interaction de nombreuses unités couplées. Nous montrons que, dans ce cadre, la reconnaissance de formes fonctionne selon le principe de la \textit{rétroaction positive} (ou résonance) entre un signal présenté en entrée  et une des ``formes'' possibles que peut prendre l'activité du réseau.
+Ce principe semble pouvoir s'étendre au cas de l'apprentissage moteur.
+Néanmoins, le travail de relecture et de compilation occasionné par la rédaction de ce rapport a permis de mettre en lumière certaines difficultés fondamentales, qui freinent la possibilité d'émergence d'une loi de contrôle dans un espace d'actions continu.
+Ce rapport propose donc quelques pistes de recherche pour y remédier, en proposant en particulier de développer des principes de contrôle moteur fondés sur la rétroaction positive, par opposition au cadre classique de la rétroaction négative.
 
 \chapter*{Abstract}
 
