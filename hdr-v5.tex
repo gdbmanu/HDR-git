@@ -159,7 +159,7 @@
 %Nous cherchons donc à identifier les algorithmes ``naturels'' permettant au cerveau
 %de s'adapter à son environnement. La contrainte de plausibilité biologique impose de prendre en compte les observations et données expérimentales dans l'élaboration des modèles.  
 
-
+	
 
 %Les ``neurosciences computationnelles'', qui 
 %se développent depuis une quarantaine d'années, visent à mieux comprendre la logique à l'œuvre au sein du cerveau, et du système
@@ -185,36 +185,47 @@ afin qu'ils interagissant de manière plus ``naturelle'' avec leur environnement
  
 %Ces travaux reposent, comme nous le verrons, sur un certain nombre de choix méthodologiques~:
  Les modèles étudiés sont des systèmes dynamiques de grande dimension, 
-	définis par un graphe d'interactions entre des unités de calcul élémentaires. Nous étudions les principes du calcul ``collectif'' 
-	dans ces architectures, tels que le ``temps de calcul'' corresponde au temps 
-	de relaxation vers un \textit{attracteur}. % Ce calcul est réalisé par l'ensemble des neurones du réseau. 
-	Les comportements d'ensemble  sont alors interprétés comme des implémentations d'opérateurs  plus simples.
-	Nous montrons en particulier que l'utilisation d'un graphe de connexions aléatoire permet, 
-	en régime critique, de constituer un ensemble  varié de  réponses à des signaux extérieurs. 
-    L'aléa des connexions permet donc de structurer l'espace des entrées sensorielles
-    en régions distinctes, autrement dit ``digitalise'' ses entrées, selon un principe 
-    d'{``auto-encodage''}.
+	définis par un graphe d'interactions entre des unités de calcul élémentaires. 
+	\begin{itemize}
+		\item Nous étudions les principes du calcul ``collectif'' 
+		dans ces architectures, tels que le ``temps de calcul'' corresponde au temps 
+		de relaxation vers un \textit{attracteur}. % Ce calcul est réalisé par l'ensemble des neurones du réseau. 
+		Les comportements d'ensemble  sont alors interprétés comme des implémentations d'opérateurs  plus simples.
+		\item Nous montrons en particulier que l'utilisation d'un graphe de connexions aléatoire permet, 
+		en régime critique, de %constituer un ensemble  varié de  réponses à des signaux extérieurs. 
+		%L'aléa des connexions permet donc de 
+		structurer l'espace des entrées sensorielles
+		en régions distinctes, %autrement dit ``digitalise'' ses entrées, 
+		selon un principe proche de l'{``auto-encodage''}.
+	\end{itemize}
+	
     
 	L'apprentissage automatique est abordé dans une perspective neuro-réaliste. 
-	Nous prenons en compte les contraintes biologiques, comme la contrainte de localité de Hebb, 
-	le caractère récurrent du graphe de connexions, ou encore le caractère 
-	discret des signaux émis par les neurones, pour développer nos modèles. Dans ce cadre, 
-	nous montrons que la reconnaissance de formes fonctionne selon le principe 
-	de la \textit{rétroaction positive} (ou résonance) entre un signal présenté en entrée  
-	et une des ``formes'' possibles que peut prendre l'activité du réseau.
+	\begin{itemize}
+		\item Nous prenons en compte les contraintes biologiques, comme la contrainte de localité de Hebb, 
+		le caractère récurrent du graphe de connexions, ou encore le caractère 
+		discret des signaux émis par les neurones, pour développer nos modèles.
+		\item Dans ce cadre, 
+		nous montrons que la reconnaissance de formes fonctionne selon le principe 
+		de la \textit{rétroaction positive} (ou résonance) entre un signal présenté en entrée  
+		et une des ``formes'' possibles que peut prendre l'activité du réseau.
+	\end{itemize}
+	 
 	
 	Toujours dans une perspective de réalisme, nous cherchons à prendre en compte 
 	les causalités circulaires existant entre un contrôleur neuromimétique et son environnement, 
 	sur des tâches de contrôle moteur
-	dites ``en boucle fermée''. Nous cherchons dans ce cadre à étendre 
-	certains principes utilisés pour l'apprentissage de formes, 
-	en particulier lorsque l'apprentissage est guidé par un signal de renforcement. 
-	Dans ce cadre, nous avons contribué à établir une correspondance entre la règle de Hebb, 
-	dans sa variante ``guidée'', et la recherche du maximum de vraisemblance dans un espace de couples 
-	(perception, action), où la combinaison de recherches d'optima locaux s'apparente à la 
-	recherche d'un optimum global en l'absence de modèle de l'environnement.
-
-
+	dites ``en boucle fermée''.
+	\begin{itemize}
+		\item Nous cherchons  à étendre 
+		certains principes utilisés pour l'apprentissage de formes, 
+		en particulier lorsque l'apprentissage est guidé par un signal de renforcement. 
+		\item Dans ce cadre, nous avons contribué à établir une correspondance entre la règle de Hebb, 
+		dans sa variante ``guidée'', et la recherche du maximum de vraisemblance dans un espace de couples 
+		(perception, action), où la combinaison de recherches d'optima locaux s'apparente à la 
+		recherche d'un optimum global en l'absence de modèle de l'environnement.
+	\end{itemize} 
+	
 Le travail de relecture et de compilation, occasionné par la rédaction de ce mémoire, 
 a également permis de mettre en lumière certaines difficultés fondamentales, 
 qui freinent l'apprentissage de lois de contrôle dans un espace d'actions continu.
