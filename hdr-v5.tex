@@ -4882,7 +4882,7 @@ tels que le rayon du noyau des liens excitateurs est plus faible que celui des l
 	}
 	\caption{
 		Réponse à différentes entrées sur un réseau de neurones organisé topographiquement sur la couche excitatrice. Le réseau comporte 1000 neurones excitateurs et 300 neurones inhibiteurs. Les liens excitateurs sont globalement
-		plus rapides que les liens inhibiteurs. Quatre entrées différentes (trace rouge) sont présentées au réseau. Le premier signal excite les neurones 591-600 entre les instants 301 et 340. Le second signal excite les neurones 181-200 entre les instants 501 et 520.  Le troisième signal excite les neurones 691-700 entre les instants 701 et 740.  Le dernier signal est une rampe qui traverse la couche excitatrice en activant 10 neurones à chaque instant. {\bf En haut, à gauche~:} patron d'activité global de la couche excitatrice.  {\bf En bas, à gauche~:} activité moyenne de la couche excitatrice. {\bf En haut, à droite~:} Histogramme de la somme des poids entrants pour l apopulation excitatrice (gauche) et la population inhibitrice (droite). {\bf Au milieu, à droite~:} patron d'activité global de la couche inhibitrice. {\bf En bas, à droite~:} activité moyenne de la couche inhibitrice. Extrait de (Daucé, 2004).} 
+		plus rapides que les liens inhibiteurs. Quatre entrées différentes (trace rouge) sont présentées au réseau. Le premier signal excite les neurones 591-600 entre les instants 301 et 340. Le second signal excite les neurones 181-200 entre les instants 501 et 520.  Le troisième signal excite les neurones 691-700 entre les instants 701 et 740.  Le dernier signal est une rampe qui traverse la couche excitatrice en activant 10 neurones à chaque instant. {\bf En haut, à gauche~:} patron d'activité global de la couche excitatrice.  {\bf En bas, à gauche~:} activité moyenne de la couche excitatrice. {\bf En haut, à droite~:} Histogramme de la somme des poids entrants pour l apopulation excitatrice (gauche) et la population inhibitrice (droite). {\bf Au milieu, à droite~:} patron d'activité global de la couche inhibitrice. {\bf En bas, à droite~:} activité moyenne de la couche inhibitrice. D'après (Daucé, 2004).} 
 	\label{fig:nc-field}
 \end{figure} 
 
@@ -5046,7 +5046,7 @@ identifiés sur les signaux fMRI de l'état de repos \shortcite{Damoiseaux2006}.
 	{\bf f:} vecteur caractéristique du cluster 6 (892 attracteurs);  
 	{\bf g:} vecteur caractéristique du cluster 7 (881 attracteurs);  
 	{\bf h:} vecteur caractéristique du cluster 8 (844 attracteurs) 
-	(extrait de Golos et al, \textit{submitted}).  
+	(d'après Golos et al, \textit{submitted}).  
 }
 \label{fig:PLOS}
 \end{figure}
@@ -5347,11 +5347,11 @@ selon le principe de l'``observateur''
 
 La présence d'une erreur sensorielle fait entrer le système dans un conflit qui peut se résoudre de deux manières~:
 \begin{itemize}
-	\item Les modèles de la perception fondés sur un appariement négatif \shortcite{Rao1999,Friston2009} font disparaître de la scène sensorielle les
+	\item Les modèles de la perception fondés sur la rétroaction négative \shortcite{Rao1999,Friston2009} font disparaître de la scène sensorielle les
 	éléments prédits, de sorte que, selon cette théorie, 
 	ce qui est ``perçu'' (ou intégré) est l'erreur sensorielle,
 	autrement dit la différence entre sensation et la prédiction.
-	\item Les modèles de la perception fondés sur un appariement positif ``complètent'' le signal d'entrée avec le signal prédit:
+	\item Les modèles de la perception fondés sur la rétroaction positive ``complètent'' le signal d'entrée avec le signal prédit:
 	\begin{itemize}
 		\item Si l'écart est faible, le système tend à ignorer ce changement
 		et persévère dans sa prédiction.
@@ -5369,14 +5369,14 @@ capable de compléter les morceaux manquants, selon un mécanisme auto-associati
 à celui des réseaux de Hopfield. Le réseau peut continuer par exemple à ``croire'' à l'intégrité des éléments de la scène visuelle
 (sensorielle) non perçus à cause de phénomènes d'occlusion.
 
-Chacune des approches présente des avantages et des inconvénients. 
+D'un point de vue fonctionnel, chacun de ces modèles de la perception présente des avantages et des inconvénients~:
 \begin{itemize}
-	\item L'appariement positif apporte de la robustesse, de la
+	\item La rétroaction positive apporte de la robustesse, de la
 	mémoire à court terme (complétion, interpolation des données manquantes, traitement des ambiguïtés perceptives) 
 	mais peut également produire une résistance excessive aux changements
 	de la scène sensorielle. Le cas limite correspond au réseau qui ignore totalement son entrée sensorielle, 
 	persévérant indéfiniment sur un illusion perceptive produite par l'activité interne (``hallucination'').
-	\item L'appariement négatif apporte une parcimonie (perception de la différence d'activité), qui permet d'implémenter 
+	\item La rétroaction négative apporte une parcimonie (perception de la différence d'activité), qui permet d'implémenter 
 	un principe de ``matching pursuit'' pour un traitement rapide du flux visuel \shortcite{Perrinet2010}.
 	Il présente cependant une sensibilité au bruit de mesure, 
 	 et nécessite dans certains cas la mise en place d'une remise à zéro 
@@ -5461,12 +5461,9 @@ Le réseau soumis à un tel signal converge vers un nouvel attracteur (autrement
 	\centerline{
 		\includegraphics[width = 0.5\linewidth]{figs/NN98-inverse.png}
 	}
-	\caption{\footnotesize{(A) Evolution of the stimulus-forced average activity $m_\text{net}(t)$ versus time $t$
-			during the learning process. There is one learning step every 100 time step.
-			In that example the dynamics is reduced to a fixed point after 12 learning
-			steps ($t = 1200$). (B) Representation of the corresponding attractors in the
-			$[m_\text{net}(t), m_\text{net} (t+1)]$ phase plane. Note the decrease of the diameter of the limit
-			cycles at each learning step (From Daucé et al., 1998)}.}
+	\caption{\footnotesize{(Haut) Activité moyenne  $m_\text{net}(t)$ en dynamique contrainte en fonction du temps $t$,
+	au cours d'une séance d'apprentissage. La règle de plasticité est appliquée tous les 100 pas de temps. Dans cet exemple, la dynamique se réduit sur un point fixe après 12 cycles d'apprentissage ($t = 1200$). (Bas) Même activité, représentée dans le plan de phase
+	$[m_\text{net}(t), m_\text{net} (t+1)]$. On notera la décroissance du diamètre du cycle limite à chaque application de la règle de plasticité (extrait de Daucé et al., 1998)}.}
 	\label{fig:inverse}
 \end{figure} 
 
@@ -5536,7 +5533,7 @@ activité simplifiée pour des odeurs connues, activité de fond chaotique pour 
 Chaque réponse à un motif se traduit par une activité spatio-temporellement distincte,
 l'apprentissage ayant pour effet de capturer (ou plutôt accentuer) un \textit{mode dynamique} particulier.
 Le réseau est vu comme un ``réservoir'' de comportements dynamiques spatio-temporellement différents. Le comportement
-spatio-temporel asocié au motif change sous l'effet de la plasticité, en conservant certaines
+spatio-temporel associé au motif change sous l'effet de la plasticité, en conservant certaines
 de ses caractéristiques comme la période intrinsèque, qui se manifeste de façon ``pure'' 
 sous la forme d'un cycle limite. Ce comportement temporellement périodique 
 finit par disparaître si l'apprentissage est poussé jusqu'au point fixe. La règle 
@@ -5552,13 +5549,13 @@ dynamique à l'ensemble des motifs.
 La capacité d'un réseau est définie comme le nombre de motifs pouvant être 
 appris sans provoquer cet effondrement.
 Cette capacité s'avère assez faible en pratique. 
-Dans notre cas, comme dans le cas du réseau de Hopfield, elle semble
+Dans notre cas, comme dans le cas du réseau de Hopfield \shortcite{Hop82}, elle semble
 dépendre linéairement de la taille du réseau.
 
 Des changements marginaux sur la règle de plasticité, en limitant drastiquement le nombre
 de liens éligibles,
 permettent d'augmenter significativement la capacité des réseaux \shortcite{Dau98B,Dau98C},
-avec une 'loading capacity' empirique de l'ordre de 8\% (le nombre de
+avec une ``capacité de charge'' (``\textit{loading capacity}'') empirique de l'ordre de 8\% (le nombre de
 motifs pouvant être appris avant l'effondrement catastrophique est de l'ordre de
 8 \% du nombre de neurones, ce qui reste relativement faible).
 
@@ -5593,7 +5590,7 @@ Maas et Markram \cite{MAASS02,Buonomano2009}.
 \subsection{Architectures multi-couches} \label{sec:BioCyb02}
 
 
-Les travaux présentés dans \shortcite{Dau00,Dau02} présentent une architecture 
+Les travaux présentés dans \shortcite{Dau00,Dau02} (voir annexe \ref{app:BC02}) présentent une architecture 
 neuronale  permettant d'implémenter un modèle de la perception des signaux spatio-temporels.
 Ils reposent sur une architecture de réseaux récurrents aléatoires à plusieurs couches (deux ou trois).
 Le formalisme multi-couches est le même que celui utilisé dans les réseaux équilibrés (voir section \ref{sec:balanced}).
@@ -5619,14 +5616,9 @@ le comportement ``différent'' est un comportement acquis.
 \begin{figure}[b!]
 	\centering
 	{\includegraphics[width=\linewidth]{figs/bc_archi.eps}}
-	\caption{\footnotesize{{\bf Architecture of the ReST model}.
-			Our model is composed of two layers. Their respective sizes are
-			not necessarily equal. Only few links are represented. The primary
-			layer is submitted to a spatio-temporal input pattern. 
-			The secondary layer has no input signal. The
-			links are monodirectional. The activity of the secondary layer (inner
-			signal) is chaotic. The activity on the primary layer depends both on
-			the input signal and feedback signal from the secondary layer (from Daucé et al, 2002).} }
+	\caption{\footnotesize{{\bf Architecture du modèle ReST}.
+Notre modèle est composé de deux couches, dont la taille n'est pas nécessairement égale. Seuls quelques liens sont représentés. La couche primaire est soumise à un signal d'entrée spatio-temporel. La couche secondaire n'est soumise à aucun signal. Les liens sont monodirectionnels. L'activité de la couche secondaire (signal interne) est chaotique. L'activité de la couche primaire dépend à la fois 
+du signal d'entrée et du signal de rétroaction en provenance de la couche secondaire	(extrait de Daucé et al, 2002).} }
 	\label{fig:BC02-archi}
 \end{figure}
 
@@ -5707,7 +5699,7 @@ Le papier de la conférence ICANN 2001 \shortcite{Dau01c} présente une version 
 avec une règle d'apprentissage légèrement plus simple que celle du papier de Biological Cybernetics. 
 Le papier de SAB (2000) \shortcite{Dau00b} comporte une partie montrant l'effet de l'apprentissage sur des signaux mixtes composés
 d'une partie statique et d'une partie périodique. L'association apprise entre motifs statiques et motifs dynamiques 
-se manifeste alors par un niveau de correlation élévé entre la dynamique induite par les motifs mixtes
+se manifeste alors par un niveau de corrélation élevé entre la dynamique induite par les motifs mixtes
 et la dynamique induite par les motifs statiques seuls (les activités étant par contre qualitativement différentes).
 
 %%\cleardoublepage
