@@ -6871,29 +6871,12 @@ Les rotations irrégulières induisent une succession de signaux visuels qui, pa
 		\hspace{1cm}
 		\includegraphics[width = 0.45\linewidth]{figs/traj_masquage.eps}
 	}	
-	\caption{\footnotesize{{\bf Motor displacements after learning.} 
-	{\bf a:}  Successive positions of the robot after a motor command
-sequence ($+30^\circ$,$+60^\circ$,$+90^\circ$). The robot stands
-in an open environment (it is not a simulation). The association
-of a set of landmarks (high curvature points, denoted as 'x' on
-the figure) with their angular positions constitutes the visual
-input. After 3 commands, the robot is facing backwards (issuing
-these commands again let the robot face its initial visual
-scene).
-{\bf b:}  Example of recalibration after a shift. The
-first two steps are transients. Then the rotations issued
-correspond to the learned periodic sequence $(+30^\circ,
-+60^\circ, +90^\circ)$ in accordance with its associated visual
-inputs (so that vision and movements are dynamically locked). Due
-to friction on the ground, the real robot angle (and thus the
-visual scene) shifts, leading to a progressive mismatch between
-the visual scene and the movement. One can observe a sudden change
-in the robot behavior ($t=25$), corresponding to an unlock between
-the visual flow and the associated movements. Finally, after new
-transients, the robot finds a good matching and resumes the
-periodic sequence. {\bf c:} After the robot has reached its
-periodic behavior, the camera is hidden. The lack of visual
-information rapidly leads the robot to a "chaotic" behavior }(From Dauce et al., 2002).
+	\caption{\footnotesize{{\bf Mouvements du robot après apprentissage.} 
+	{\bf a:}  Positions successives du robot durant une séquence motrice
+($+30^\circ$,$+60^\circ$,$+90^\circ$). La robot est placé dasn un environnement ouvert (ce n'est pas une simulation). L'association entre un jeu d'amers visuels (points de contraste élevé, notés par un 'x' sur la figure) combinés avec leur position angulaire constitue l'entrée visuelle. Après trois mouvements, le robot a fait un demi-tour (la répétition de ces 3 mouvements ramène le robot sur sa position initiale).
+{\bf b:}  Example de recalage moteur suite à un décalage visuel. Les deux premiers pas de temps correspondent à la dynamique transitoire. Les mouvements suivants correspondent à la séquence périodique apprise $(+30^\circ,
++60^\circ, +90^\circ)$, accompagnée de la séquence visuelle apprise (de sorte que vision et mouvement sont dynamiquement associés). En raison de frottements au niveau du sol, le mouvement réel, ainsi que la scène visuelle, se décalent, conduisant à une dissociation progressive de 
+la scène visuelle et du mouvement. Un changement de comportement est observé à $t=25$, correspondant au décrochage entre le flux visuel et les mouvements associés. Finalement, après de nouveaux transitoires, le robot trouve à nouveau une bonne correspondance visuelle et réitère sa séquence périodique. {\bf c:} Après que le robot a atteint son comportement périodique, l'entrée visuelle est masquée. L'absence d'information visuelle conduit rapidement le robot vers un comportement ``chaotique'' (d'après Dauce et al., 2002).}
 	}
 	\label{fig:PerAc-2}
 \end{figure} 
@@ -6951,7 +6934,7 @@ cognition articielle a été proposée dans le livre que j'ai co-édité avec Ag
 		de l'activité interne. 
 		\item Le caractère irrégulier de l'activité initiale doit traduire 
 		l'absence de direction privilégiée de la réponse motrice. 
-		Le caractère organisateur des règles Hebbiennes était censé induire un comportement plus prédictible 
+		Le caractère organisateur des règles Hebbiennes était censée induire un comportement plus prédictible 
 		au fil du temps.
 		La prise en compte du signal de renforcement dans la règle de plasticité était censé augmenter
 		l'adéquation des comportements à la contrainte exprimée par le signal.
@@ -6998,13 +6981,13 @@ cognition articielle a été proposée dans le livre que j'ai co-édité avec Ag
 	\centerline{
 		\includegraphics[width=0.7\linewidth]{figs/controleur_diagram3.eps}
 	}
-	\caption{\footnotesize{{\bf Interconnection pattern for the perception-action network} 
-		The network is composed of 6 populations. Filled arrows represent excitatory connections. Unfilled arrows represent inhibitory connections. A functional module is composed of two strongly interconnected populations, one excitatory and one inhibitory. Sensory module {\bf S1} is composed of populations 1 and 2, motor module {\bf M1} of populations 3 and 4, motor module {\bf M2} of populations 5 and 6. Module S1 owns a topology in its interconnection pattern (topological links are mentioned with symbol ``T'').  The 3 modules are interconnected through excitatory links (the inhibitory neurons only act locally). Module S1 sends (excitatory) signals toward toward modules M1 and M2. Modules M1 and M2 can inhibit each other through the excitation of their neighbor inhibitory layer (dotted links). Those lateral interactions are initially set to zero (from (Daucé, 2004a)).}}
+	\caption{\footnotesize{{\bf Architecture du réseau perception-action} 
+Le réseau est composé de 6 populations. Les flèches pleines représentent les connexions excitatrices. Les flèches évidées représentent les connexions inhibitrices. Un module fonctionnel est composé de deux populations fortement interconnectées, l'une excitatrice, l'autre inhibitrice. Le module sensoriel {\bf S1} est composé des populations 1 et 2, le module moteur {\bf M1} des populations 3 et 4, et le moule moteur {\bf M2} des populations 5 et 6. Le module S1 présente un patron de connexions topologiquement organisé (liens mentionnés avec un ``T'').  Les 3 modules sont interconnectés par des liens excitateurs (les neurones inhibiteurs agissant seulement localement). Le module S1 envoie un signal (excitateur) vers les modules M1 et M2. Les modules M1 et M2 peuvent s'inhiber mutuellement en excitant les neurones inhibiteurs de leur voisin (lignes pointillées). Ces interactions latérales sont initialisées à zéro (d'après Daucé, 2004a).}}
 	\label{fig_controleur}
 \end{figure}
 Le premier papier présentant une application des problèmes de renforcement 
 dans le cadre de réseaux récurrents aléatoires a été publié dans les proceedings de 
-la conférence SAB'04 (Simulation of Adaptive Behaviors) \shortcite{Dau04b}. 
+la conférence SAB'04 (Simulation of Adaptive Behaviors) \shortcite{Dau04b} (voir annexe \ref{app:SAB04}). 
 L'architecture neuronale repose sur 3 modules~: un module sensoriel et deux
 modules moteurs. 
 Chaque module est constitué de deux populations de neurones~: une population
@@ -7036,7 +7019,7 @@ synapses différentes dans le cas de signaux de renforcement positifs et négati
 	
 
 \subsubsection{Modèle de 2007}\label{page:EPJST}
-Un second modèle, présenté dans \shortcite{Dau07}, implémente cette fois-ci le principe 
+Un second modèle, présenté dans \shortcite{Dau07} (voir annexe \ref{app:EPJ07}), implémente cette fois-ci le principe 
 d'une application alternée de règles Hebbiennes (resp. anti-Hebbiennes) pour les récompenses positives (resp. négatives),
 conformément aux idées exprimées dans \shortcite{dauce05},
 sur les liens excitateurs uniquement.
@@ -7077,8 +7060,7 @@ de mise en évidence de résonance et/ou de persévérance entre certains coupla
 \subsection{Codage topographique et renforcement}\label{sec:topo-renf}
 
 Deux études portant sur des mécanismes d'apprentissage par renforcement dans des architectures neuronales ont
-été publiées dans le cadre de l'étude du codage topographique 
-dans le cadre de l'ANR MAPS (voir section \ref{sec:MAPS}). 
+été publiées dans le cadre de l'étude du codage topographique  dans l'ANR MAPS (voir section \ref{sec:MAPS}, page \pageref{sec:MAPS}). 
 
 \begin{figure}[t!]
 	\centerline{
@@ -7087,13 +7069,13 @@ dans le cadre de l'ANR MAPS (voir section \ref{sec:MAPS}).
 			\includegraphics[height=6cm]{figs/network_2D_noise.png}
 		\end{tabular}
 	}
-	\caption{\footnotesize{{\bf a: Environment}~: A rotating eyeball is tracking a punctual target (cross)~: $\theta$ is the actual eye direction, $\phi$ is the subjective target direction (relative to the pupil's direction). {\bf b: Controller}~: The visual layer is composed of 256 neurons sending excitatory axons toward a motor layer composed of 32 neurons. The premotor neurons inhibit each other. A slow noise $b(t)$ is added to every premotor neuron. $I(t)$ is the visual signal, and $u(t)$ is the command %(see text for more details) 
-			(from Daucé, 2009).}}
+	\caption{\footnotesize{{\bf a: Environnement}~: Un globe oculaire doté d'un mouvement de rotation poursuit une cible oculaire ponctuelle (croix)~: $\theta$ est la position courante de l’œil, $\phi$ est la direction subjective de la cible (relativement à la direction de la pupille). {\bf b: Contrôleur}~: la couche visuelle est constituée de 256 neurones envoyant des axones excitateurs vers une couche motrice constituée de 32 neurones. Les neurones prémoteurs s'inhibent mutuellement. Un bruit blanc filtré $b(t)$ est ajouté sur chaque neurone prémoteur. $I(t)$ est l'entrée visuelle, et $u(t)$ est la commande %(see text for more details) 
+			(d'après Daucé, 2009).}}
 	\label{fig:ICANN09}
 \end{figure}
 
 \subsubsection{Modèle de 2009}\label{page:ICANN09}
-La première étude, publiée dans \shortcite{Dau09}, est une extension des architectures présentées dans la section
+La première étude, publiée dans \shortcite{Dau09} (voir annexe \ref{app:ICANN09}), est une extension des architectures présentées dans la section
 précédente. La tâche est l'apprentissage d'un comportement de poursuite oculaire dans un environnement en
 forme de tore (de ``donut'').
 L'environnement contient une cible visuelle effectuant un mouvement circulaire simple.
@@ -7118,7 +7100,7 @@ Celle-ci est remplacée par un bruit exploratoire conforme à la théorie du Pol
 		\end{tabular}
 	}
 
-	\caption{\footnotesize{{\bf a:} Evolution of the mean distance ($\|\psi-\theta\|$) on a 1 s interval, during the 250 s of the learning process. {\bf b:} Samples from the controller and target dynamics, on 200 ms intervals, with 10 ms resolution. The red dots give the target direction (the diamond gives the final direction in the interval). The blue dots give the eye direction. {\bf c:} (top) Initial average motor output for a target appearing at the considered subjective direction, (bottom) final average motor output (from (Daucé, 2009)).}}
+	\caption{\footnotesize{{\bf a:} Évolution de la distance moyenne ($\|\psi-\theta\|$) sur des intervalles d'1~s, durant les 250~s du processus d'apprentissage. {\bf b:} extrait des trajectoires du contrôleur et de la cible, sur des intervalles de 200 ms, par pas de 10 ms. Les points rouges donnent la position angulaire de la cible (le diamant donnant la position finale sur l'intervalle considéré). Les points bleus donnent la position angulaire de l’œil. {\bf c:} (top) carte des réponses motrices initiales, (bottom) carte des réponses motrices finales (d'après Daucé, 2009).}}
 	\label{fig:ICANN09-2}
 \end{figure}
 
