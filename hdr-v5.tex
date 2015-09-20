@@ -1409,7 +1409,7 @@ d'appariement au cas des dynamiques de relaxation  signifie essentiellement~:
 	entre les différentes régions, voire d'en créer de nouvelles et d'en faire disparaître.
 \end{itemize}
 
-\section{Notre approche} 
+\section{Notre approche} \label{sec:appariement-conditionnel}
 
 Une des thèses principales développées ici est que :
 \begin{itemize}
@@ -2510,7 +2510,7 @@ On oppose généralement au contrôle par feedback négatif (également appelé 
 
 Plusieurs méthodes permettent d'implémenter ce type de contrôle:
 \begin{itemize}
-	\item Dans le cadre du contrôle linéaire, la commande balistique repose sur l'inversion de la fonction de transfert de l'environnement. Si $\boldsymbol{x}^*$ est la position finale désirée, on a $\boldsymbol{u} =  \phi_\text{out}^{-1}(\boldsymbol{x}^*)$. On parle de commande par modèle inverse.
+	\item \label{key:modele-inverse} Dans le cadre du contrôle linéaire, la commande balistique repose sur l'inversion de la fonction de transfert de l'environnement. Si $\boldsymbol{x}^*$ est la position finale désirée, on a $\boldsymbol{u} =  \phi_\text{out}^{-1}(\boldsymbol{x}^*)$. On parle de commande par modèle inverse.
 	\item Le cas des modèles non-linéaires peut être traité via  la combinaison de ``primitives motrices'' dans l'espace de la tâche \shortcite{Mussa2004}.
 	%\subsubsection{Erreur motrice et erreur de prédiction}
 	
@@ -5663,21 +5663,18 @@ sensorielle actuelle sur des informations observées dans le passé.
 \centering{
 \includegraphics[width=\linewidth]{figs/bc_fig2.eps}
 	}
-\caption{\footnotesize{Learning dynamics, between $t=1$ and $t=200$. %(with
-$N^{(1)}=1600$, $N^{(2)}=200$). 
-The system is continuously
-stimulated by a periodic spatio-temporal pattern (a frog jump).
-%Parameters are in Tab.\ref{tab_param}. 
-{\bf --~a~--} Neuronal
-activity on the secondary layer. 30 individual signals (out of 200)
-have been represented, and their mean activity is represented
-below. {\bf --~b~--} Time evolution of the input signal
-$\mathbf{I}(t)$ and feedback signal
-$\mathbf{F}(t)$, between $t=51$ and $t=155$ (For
-readability, most of the time steps have been discarded). At each
-time step, the 1600 values of the input layer are represented as $40\times40$
-images, where white corresponds to 0 and black to 1 (in-between
-values are gray tones) (from Daucé et al, 2002).} } \label{fig:BC02-app}
+\caption{\footnotesize{{\bf Dynamique d'apprentissage, entre $t=1$ et $t=300$, avec %(with
+$N^{(1)}=1600$ et $N^{(2)}=200$}. 
+Le système est continuellement simulé par un patron spatio-temporel périodique de période 6
+(représentant un saut de grenouille).
+{\bf a.} Activité neuronale sur la couche secondaire. 30 signaux individuels (sur 200)
+sont représentés. La figure inférieure donne l'activité globale moyenne.
+{\bf b.} Evolution au  cours du temps du signal d'entrée 
+$\mathbf{I}(t)$ et du signal de retour de la couche secondaire
+$\mathbf{F}(t)$, pour $t \in 51, ..., 55$, $t \in 101, ..., 105$ et $t \in 151, .., 155$. 
+A chaque pas de temps, les 1600 valeurs projetées sur la couche 
+d'entrée sont présentées en niveaux de gris sous forme de vignettes 40 x 40, 
+avec le blanc correspondant à 0 et le noir à 1 (extrait de Daucé et al, 2002).} } \label{fig:BC02-app}
 \end{figure}
 
 %{\color{Gray} L'architecture proposée dans \shortcite{Dau02} implémente un principe de traitement
@@ -5829,7 +5826,7 @@ Cette règle tend donc à favoriser les conjugaisons d'activité causalement li�
 activités non causalement liées. 
 
 La mise en évidence de cette règle sur les synapses naturelles \shortcite{Bi98} a
-favorisé le dévelopement de nombreux modèles computationnels~:
+favorisé le développement de nombreux modèles computationnels~:
 \begin{itemize}
 	\item  
 	Dans des architectures feed-forward,  la STDP  réduit la latence de réponse des neurones 
@@ -5841,7 +5838,7 @@ favorisé le dévelopement de nombreux modèles computationnels~:
 		l'émergence de séquences d'activation stables \shortcite{izhikevich04,izhikevich06}.
 		\item 
 		D'autres modèles, utilisant une implémentation différente, indiquent une absence de 
-		structuration de l'activité, avec des synapses instables sur touts la durée de la simulation \shortcite{morrison07}. 
+		structuration de l'activité, avec des synapses instables sur toute la durée de la simulation \shortcite{morrison07}. 
 	\end{itemize}
 \end{itemize}
 
@@ -5862,7 +5859,7 @@ comme cela avait déjà été noté par \shortcite{Rao01}.
 
 
 \paragraph{STDP dans les réseaux récurrents aléatoires} 
-L'étude présentée dans \shortcite{Hen08B} 
+L'étude présentée dans \shortcite{Hen08B} (voir annexe \ref{app:NCP08})
 est motivée par de nombreuses observations sur le rôle des oscillations 
 et de la synchronisation dans le fonctionnement du système nerveux.
 Les réseaux aléatoires équilibrés offrent, comme on l'a vu (section \ref{sec:balanced}), la possibilité de développer des régimes 
@@ -5881,7 +5878,7 @@ Les réponses induites par les motifs ne sont pas qualitativement différentes.
 
 Plusieurs indicateurs de complexité ont été mis en place pour mesurer la nature des dynamiques spontanée et induite.
 L'analyse du spectre de Fourier ne permet pas d'établir de fréquence caractéristique.
-L'autocorrélogramme du signal moyen montre une décroissance exponentielle caractéristique d'un bruit lissé. 
+L'autocorrélogramme du signal moyen montre une décroissance exponentielle caractéristique d'un bruit filtré. 
 Nous utilisons également un indicateur du nombre de degrés de liberté (reposant sur l'Analyse en Composantes Principales \shortcite{wright01}) qui montre
 une dimension intrinsèque du signal de l'ordre de 35 pour un réseau de 100 neurones, ce qui indique
 une très faible corrélation entre l'activité des différents neurones.
@@ -5907,11 +5904,9 @@ réseau est soumis à des motifs binaires.
 		\includegraphics[width=.45\linewidth,height=4cm]{figs/dof-learn2.png}
 		\includegraphics[width=.45\linewidth]{figs/stdp-homeostatic-spontaneous.png}}
 	\centerline{\textbf{a}\hspace{7cm}\textbf{b}}
-	\caption{\footnotesize{\textbf{a} \--- Estimated
-			number of degrees of freedom during when STDP is
-			applied after 5 s of simulation. \textbf{b} \---
-			Evolution of the average firing rate when STDP is applied
-			for different values of internal coupling (From Henry \& Daucé, 2008).
+	\caption{\footnotesize{\textbf{a}. 
+			Estimation du nombre de degrés de libertés, pr pas de 100 ms, sur 25 secondes (25000 ms) de dynamique. La STDP est appliquée après 5 secondes. \textbf{b}. 
+			Evolution du taux de décharge moyen sur la même durée. Les différentes traces correspondent à  différentes valeurs du couplage moyen (extrait de Henry \& Daucé, 2008b).
 		}}
 		\label{fig:NC08}
 	\end{figure} 
@@ -5932,10 +5927,10 @@ L'activité finale est caractérisée par une périodicité intrinsèque marqué
 de l'ordre de 20 ms (50 Hz). Cette période correspond à environ deux fois le délai moyen \shortcite{Hen08B},
 avec une même séquence d'activation qui se répète en boucle.
 L'effet de simplification et de stabilisation d'un régime périodique 
-dans les réseaux développant activité intrinsèque a été 
+dans les réseaux développant une activité intrinsèque a été 
 moins souvent noté dans la littérature.
 Il semble ici être le résultat de la capture de régularités présentes dans la dynamique initiale,
-qui se distingue donc d'un pur processus aléatoire.
+qui se distingue donc d'un  processus aléatoire stationnaire.
 La différence entre périodicité globale (50 Hz) et activité individuelle (200 Hz) s'explique par le fait
 que les neurones tirent en moyenne quatre fois par cycle.
 
@@ -5992,7 +5987,7 @@ délais longs ($>$ 8 ms) et une dépression des délais intermédiaires (4-8 ms)
 %\cleardoublepage
 \paragraph{STDP et action de population}
 
-Une dernière étude, publiée récemment dans les proceedings d'ESANN \shortcite{Dau14a}, étudie l'effet de la STDP 
+Une dernière étude, publiée récemment dans les proceedings d'ESANN \shortcite{Dau14a} (voir annexe \ref{app:ESANN14A}), étudie l'effet de la STDP 
 dans un réseau équilibré sous influence d'un signal spatio-temporel. Deux cas sont considérés : signal périodique
 (se répétant toutes les 30 ms) ou signal non-périodique. L'activité spontanée sous influence de ces deux types de signaux
 est qualitativement la même initialement. La plasticité est appliquée 
@@ -6026,7 +6021,7 @@ Le même mécanisme peut donc être identifiés à différentes échelles, les o
 \textbf{-A-}&\textbf{-B-}
 \end{tabular}
 }
-\caption{\footnotesize{Excitatory population activity during STDP learning. -A- Non-periodic input -B- Periodic input (from Daucé, 2014).}}
+\caption{\footnotesize{Activité de la population excitatrice durant la STDP. -A- Entrée non-périodique -B- Entrée périodique (extrait de Daucé, 2014).}}
 \label{fig:ESANN14}
 \end{figure}
 
@@ -6146,21 +6141,16 @@ motifs présentés.
 \begin{figure}[t!]
 \centering
 \includegraphics[width=\linewidth]{figs/archi.png}
-\caption{ \footnotesize{{\bf Experimental setup}. $N$ temporal patterns are to be presented to the network 
-in order to be classified in $K$ categories. The network is composed 
-of three populations. The input layer is composed of 4 neurons (labeled A, B, C and D). 
-The input connections follow a random Gaussian law of mean zero and standard 
-deviation 0.04. The hidden layer contains 100 fully connected neurons. The 
-recurrent connections follow a random Gaussian law of mean 0 and standard deviation 
-of 0.02. The output layer is composed of $K$ neurons, with lateral inhibition (not represented).
-The output connections follow a random gaussian law of mean 0.09 and standard 
-deviation 0.01 (from Henry et al., 2007).}}
+\caption{ \footnotesize{{\bf Dispositif expérimental}. $N$ patrons spatio-temporels sont présentés au réseau afin d'être classés en $K$ catégories. Le réseau est composé de 3 populations. La couche d'entrée est composée de 4 neurones (étiquetés A, B, C et D).
+Les connexions d'entrée suivent une loi Gaussienne de moyenne 0 et d'écart-type 0,04. 		 
+La couche cachée contient 100 neurones complètement connectés. Les poids synaptiques de la couche récurrente suivent une loi Gaussienne de moyenne 0 et d'écart-type 0,02. La couche de sortie est composée de $K$ neurones, avec des connexions latérales inhibitrices (non représentées). Les poids de sortie suivent une loi Gaussienne de moyenne 0,09 et d'écart-type 0,01
+(extrait de Henry et al., 2007).}}
 \label{fig:3layer}
 \end{figure}
 
 
 
-Dans une étude antérieure datant de 2006, nous avons également considéré une architecture 
+Dans une étude antérieure \shortcite{henry07} (voir annexe \ref{app:NCO07}), nous avons également considéré une architecture 
 à entrées-sorties complète~:
 \begin{itemize}
 	\item
@@ -6337,9 +6327,9 @@ La recherche de principes généraux à l'apprentissage moteur en biologie se he
 Le cadre général défini jusqu'à présent permet néanmoins de fixer quelques lignes directrices. 
 \begin{enumerate} 
 	\item Nous mettons en avant le rôle de l'activité endogène dans la production motrice, et particulièrement l'exploration motrice dans le cadre de l'apprentissage.
-	\item Nous cherchons à identifier des mécanismes d'appariement sensori-moteurs compatibles avec le paradigme de l'apprentissage Hebbien et de la formation d'assemblées neuronales. Plus généralement, dans le cadre des systèmes dynamiques couplés (voir les équations (\ref{eq:feed-noise-1})-(\ref{eq:feed-noise-4}), page \pageref{eq:feed-noise-1}), nous regardons le principe de l'appariement conditionnel vu dans le chapitre \ref{chap:app}.
+	\item Nous cherchons à identifier des mécanismes d'appariement sensori-moteurs compatibles avec le paradigme de l'apprentissage Hebbien et de la formation d'assemblées neuronales. Plus généralement, dans le cadre des systèmes dynamiques couplés (voir les équations (\ref{eq:feed-noise-1})-(\ref{eq:feed-noise-4}), page \pageref{eq:feed-noise-1}), nous regardons le principe de l'appariement conditionnel vu page \pageref{sec:appariement-conditionnel}.
 	\item Nous cherchons également à établir un lien plus général entre apprentissage moteur et reconnaissance de formes.  Nous développons des modèles 
-	séquentiels dans lesquels la règle de plasticité s'apparente à un apprentissage ``par coeur'' de la fonction de réponse du contrôleur $\phi_\text{out}^{-1}(\boldsymbol{x}^*)$.
+	séquentiels dans lesquels la règle de plasticité s'apparente à un apprentissage ``par coeur'' de la fonction de réponse du contrôleur $\phi_\text{out}^{-1}(\boldsymbol{x}^*)$ (voir page \pageref{key:modele-inverse}).
 \end{enumerate}
 
 
@@ -6351,7 +6341,7 @@ Le cadre général défini jusqu'à présent permet néanmoins de fixer quelques
 Les réseaux de neurones récurrents aléatoires offrent, comme nous l'avons vu,
 un cadre propice à l'étude des couplages entre un contrôleur neuronal et un environnement
 physique. 
-Dans le cadre de la production des ordres moteurs, l'activité récurrente endogène, telles qu'elle se développe par exemple dans les réseaux récurrents aléatoires, apparaît propre à susciter des commandes relativement indépendantes du contexte sensoriel. 
+Dans le cadre de la production des ordres moteurs, l'activité récurrente endogène, telle qu'elle se développe par exemple dans les réseaux récurrents aléatoires, apparaît propre à susciter des commandes relativement indépendantes du contexte sensoriel. 
 
 %{\color{Cyan} Production de signal = activité récurrente autonome. Exemple d'un système coupé de ses entrées temporairement--> possibilité de poursuivre la commande mais risque de dérive.
 %	
@@ -6541,7 +6531,7 @@ Hebbien ou anti-Hebbien selon les cas.
 	 
 \paragraph{Dilemme exploration exploitation.}
 
-Le dilemme exploration/exploitation, exprimé sous sa forme la plus simple 
+Le dilemme exploration/exploitation s'exprime, sous sa forme la plus simple, 
 comme un problème d'échantillonnage aléatoire de l'espace des choix (problème dit du ``bandit manchot'').
 Chaque tirage apporte une information qu'il convient d'exploiter au mieux, en établissant un compromis
 entre recherche d'information (réduction d'incertitude) et exploitation effective de l'information 
@@ -6551,10 +6541,21 @@ la différence entre les gains obtenus par l'algorithme et les gains
 attendus en toute connaissance de cause.
 L'apprentissage séquentiel statistique est le socle d'une famille de méthodes d'apprentissage 
 fondée sur l'échantillonnage de l'environnement, comme le Q-learning ou le TD-learning dans le
-cadre de l'apprentissage par renforcement classiques. Cette approche a renouvelé le domaine, en proposant 
+cadre de l'apprentissage par renforcement classique. Cette approche a renouvelé le domaine, en proposant 
 par exemple des politiques non-stochastiques (algorithme UCB), ou en étendant le modèle au cas ``adversarial'' 
 (théorie des jeux) \shortcite{Auer2002}. 
 
+%Chaque tirage apporte une information qu'il convient d'exploiter au mieux, en établissant un compromis
+%entre recherche d'information (réduction d'incertitude) et exploitation effective de l'information 
+%(pour maximiser le gain).
+%Cette forme d'apprentissage séquentiel établit des modèles qui visent à réduire 
+%la différence entre les gains obtenus par l'algorithme et les gains
+%attendus en toute connaissance de cause.
+%L'apprentissage séquentiel statistique est le socle d'une famille de méthodes d'apprentissage 
+%fondée sur l'échantillonnage de l'environnement, comme le Q-learning ou le TD-learning dans le
+%cadre de l'apprentissage par renforcement classiques. Cette approche a renouvelé le domaine, en proposant 
+%par exemple des politiques non-stochastiques (algorithme UCB), ou en étendant le modèle au cas ``adversarial'' 
+%(théorie des jeux) \shortcite{Auer2002}. 
 	 
 \paragraph{Temporal credit assignment}
 
@@ -6700,33 +6701,22 @@ de l'interface (côté l'humain).
 %}
 
 
-Ainsi les régularités observées durant les premières phases de l'apprentisage ne sont plus nécessairement présentes
+Ainsi les régularités observées durant les premières phases de l'apprentissage ne sont plus nécessairement présentes
 à une étape ultérieure de l'apprentissage~: certaines trajectoires sont ``abandonnées''. Dans une perspective de parcimonie 
 (ou de ressource limitée), il est avantageux d'oublier certains faits passés pour mieux appréhender les faits nouveaux, autrement
 dit oublier pour mieux apprendre.
 Cette prise en compte du ``vieillissement'' de l'environnement conduit à accorder plus de crédit à des observations
 récentes qu'à des observations anciennes \shortcite{Kivinen2004}. 
-
-\begin{itemize}
-	\item L'apprentissage ``en ligne'' \shortcite{leCun2004}
+%\begin{itemize}
+	%\item 
+	L'apprentissage ``en ligne'' \shortcite{leCun2004}
 	apporte un cadre d'analyse naturel au
-	traitement de la non stationnarité. 
-	L'ajustement permanent du contrôleur  
-	lui permet en effet de suivre les changements environnementaux en mettant à jour son modèle.
-	\item Le lien avec l'apprentissage par renforcement se fait naturellement, {\color{Cyan} via...}
-\end{itemize}
+	traitement de la non stationnarité, l'ajustement permanent du contrôleur  
+	lui permettant en effet de suivre les changements environnementaux en mettant à jour son modèle.
+%	\item Le lien avec l'apprentissage par renforcement se fait naturellement, %{\color{Cyan} via...}
+%\end{itemize}
 
-Chaque tirage apporte une information qu'il convient d'exploiter au mieux, en établissant un compromis
-entre recherche d'information (réduction d'incertitude) et exploitation effective de l'information 
-(pour maximiser le gain).
-Cette forme d'apprentissage séquentiel établit des modèles qui visent à réduire 
-la différence entre les gains obtenus par l'algorithme et les gains
-attendus en toute connaissance de cause.
-L'apprentissage séquentiel statistique est le socle d'une famille de méthodes d'apprentissage 
-fondée sur l'échantillonnage de l'environnement, comme le Q-learning ou le TD-learning dans le
-cadre de l'apprentissage par renforcement classiques. Cette approche a renouvelé le domaine, en proposant 
-par exemple des politiques non-stochastiques (algorithme UCB), ou en étendant le modèle au cas ``adversarial'' 
-(théorie des jeux) \shortcite{Auer2002}. 
+
 
 %{\color{cyan} APPRENTISSAGE DIRECT DE LA POLITIQUE}
 
@@ -6840,7 +6830,7 @@ Dans le cadre d'un court séjour de fin de thèse (juillet 1999), j'ai particip�
 sur une plate-forme robotique réelle  
 au sein de l'équipe de neurocybernetique dirigée par Philippe Gaussier au laboratoire ETIS (Cergy-Pontoise).
 L'expérience a été conduite sur la plateforme de contrôle robotique PerAc \shortcite{Gaussier1995}, et publiée dans 
-\shortcite{Quo00,Dau00b,Quoy2001,Dau02}. 
+\shortcite{Quo00,Dau00b,Quoy2001,Dau02} (voir annexe \ref{app:BC02}). 
 
 \begin{figure}[t!]
 	\centerline{
@@ -6848,7 +6838,7 @@ L'expérience a été conduite sur la plateforme de contrôle robotique PerAc \s
 	}
 	\caption{\footnotesize{{\bf Architecture de contrôle.}
 La couche primaire est séparée en deux couches perceptives : couche visuelle primaire et couche sensori-motrice primaire.
-L'intégration des informations visuelles et sensori-motrices est réalisée par la couche récurrente (From Dauce et al., 2002).}}
+L'intégration des informations visuelles et sensori-motrices est réalisée par la couche récurrente (extrait de Dauce et al., 2002).}}
 	\label{fig:PerAc}
 \end{figure} 
 
