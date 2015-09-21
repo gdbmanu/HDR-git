@@ -1400,17 +1400,21 @@ par l'intégration sur le flot de la condition initiale $\boldsymbol{x}_0$.
 	\end{itemize}
 \end{itemize}
 
-La réponse du réseau correspond alors à un compromis entre les contraintes internes, exprimées
-par le graphe, et les contraintes externes, exprimées par le signal, via une \textit{relaxation} vers la dynamique stationnaire. 
+Dans le cas des systèmes autonomes dissipatifs, on appelle \textit{attracteur} une région de l'espace d'état qui tend à attirer les trajectoires du système pour les temps longs. Un attracteur est formellement défini comme une région de l'espace d'états invariante par le flot, c'est à dire un ensemble de points $\mathcal{A} \subset \mathcal{X}$ tel que  si $\boldsymbol{x}(t) \in \mathcal{A}$, alors $\boldsymbol{x}(t+\tau) \in \mathcal{A}$, avec $\tau > 0$. Un attracteur est dit stable s'il existe un voisinage de $\mathcal{A}$ tel que tout point de ce voisinage converge vers l'attracteur pour les temps longs. La trajectoire qui va de la condition initiale vers l'attracteur s'appelle la dynamique de \textit{relaxation}. L'ensemble des conditions initiales convergeant vers un attracteur donné s'appelle le \textit{bassin d'attraction}.
+
+Dans le cas des systèmes non-autonomes, la réponse du réseau correspond à un compromis entre les contraintes internes, exprimées
+par le graphe, et les contraintes externes, exprimées par le signal. On pourra également parler de dynamique de \textit{relaxation} pour caractériser la convergence vers un attracteur lorsque le signal extérieur est 
+stationnaire, ou encore lorsque
+les changements du signal extérieur sont suffisamment ``lents'' pour laisser la dynamique converger vers une région de faible volume.
 
 La  généralisation  des opérateurs
 d'appariement au cas des dynamiques de relaxation  signifie essentiellement~:
 \begin{itemize}
 	\item[(i)] que la dynamique de relaxation doit 
 	permettre de séparer l'espace des signaux en régions distinctes.
-	Les dynamiques de relaxation obtenues
-	pour certaines classes de signaux doivent être \textit{qualitativement différentes}
-	de celles obtenues pour d'autres classes de signaux.  
+	Les attracteurs atteints
+	pour certaines classes de signaux doivent être \textit{qualitativement différents}
+	de ceux obtenus pour d'autres classes de signaux.  
 	\item[(ii)] qu'il existe des mécanismes de plasticité permettant de faire ``bouger les frontières''
 	entre les différentes régions, voire d'en créer de nouvelles et d'en faire disparaître.
 \end{itemize}
@@ -2026,36 +2030,17 @@ Les systèmes de contrôle en boucle fermée appartiennent à la tradition cyber
 formée autour de la commande à feedback négatif \shortcite{Wiener1965}. 
 Les systèmes cybernétiques sont essentiellement des boucles de régulation, qui maintiennent un certain
 nombre de variables de contrôle dans un domaine de viabilité via un mécanisme de correction
-d'erreur. Dans ce schéma, la perception est principalement l'écart à la valeur nominale et la commande
-est un déplacement moteur qui corrige l'écart observé.
+d'erreur. Dans ce schéma, 
+\begin{itemize}
+	\item la perception est principalement l'écart à la valeur nominale
+	\item et la commande
+	est un déplacement moteur qui corrige l'écart observé.
+\end{itemize} 
 Les systèmes cybernétiques offrent un exemple élémentaire d'autonomie logicielle,
 avec une ``prise de décision'' reposant sur des échanges de signaux entre le
 contrôleur et son environnement.
 
-La théorie du contrôle classique décrit un problème de contrôle comme un problème d'optimisation reposant sur~:
-\begin{itemize}
-	\item une consigne, correspondant à un état nominal $\boldsymbol{x}^*$ dans lequel on souhaite voir le milieu physique,
-	\item un contrôleur doté de capteurs et d'actuateurs,
-	\item et le milieu physique situé dans l'état $\boldsymbol{x}_\text{out}$.
-\end{itemize}
 
-Le problème d'optimisation consiste à programmer une fonction de réponse $\phi_\text{in}$ qui, étant donnée une consigne $\boldsymbol{x}^* \in \mathcal{C}$, conduit le milieu physique dans l'état désiré. 
-\paragraph{Remarque~:} Il est possible d'établir une analogie entre consigne et programme. Une consigne s'apparente plus précisément à un \textit{programme moteur} qui conditionne la manière dont le contrôleur traite ses entrées sensorielles~: pour deux consignes différentes, les mêmes entrées sensorielles ne produisent pas la même réponse.  
-
-
-
-\paragraph{}Le point d'opération (le point où l'on retourne) d'un tel système est analogue
-formellement aux attracteurs des systèmes dynamiques contraints. Un changement
-de consigne induit un déplacement vers un nouvel attracteur (une nouvelle configuration
-mécanique ou spatiale) où l'appareil se stabilise.
-%[CONTROLE MOTEUR - SCHONER]
-Concevoir bon contrôleur nécessite donc de connaître l'ensemble du dispositif, autrement dit le circuit
-logiciel, les mécanismes de transduction et l'effet des commandes motrices sur le
-signal sensoriel (le ``modèle du monde'' ou ``modèle forward'') \cite{Wolpert2000}. 
-Cet ensemble constitue un système dynamique, soumis à des influences extérieures 
-(les facteurs non modélisés) face auxquels le système produit des réponses.
-Ces modèles reposent implicitement sur le traitement de grandeurs extensives (positions, vitesses)
-mesurées dans l'environnement.
 
 %La définition des systèmes dynamiques remonte à la découverte du calcul différentiel, au dix-huitième
 %siècle.
@@ -2097,10 +2082,10 @@ mesurées dans l'environnement.
 
 
 \subsection{Couplages sensori-moteurs}\label{sec:consigne}
-Ce lien entre les actions et les sensations est décrit, au niveau le plus général, par le modèle physique 
+Le lien entre les actions et les entrées sensorielles est décrit, au niveau le plus général, par le modèle physique 
 au sein duquel le logiciel est plongé.
 
-Nous reprenons ici le formalisme des systèmes dynamiques proposé dans l'équation (\ref{eq:SD}), page \pageref{eq:SD}. On suppose que le milieu physique et le programme obéissent à une description d'état, où 
+Nous reprenons ici le formalisme des systèmes dynamiques proposé dans l'équation (\ref{eq:SD}), page \pageref{eq:SD}. On suppose que le milieu physique et le programme obéissent à une description d'état, où~:
 \begin{itemize}
 	\item $\boldsymbol{x}_\text{out}$ est un vecteur d'état  décrivant le milieu physique (actuateurs compris)
 	\item $\boldsymbol{x}_\text{in}$ est un vecteur d'état  décrivant le contrôleur \--- ou encore ``milieu'' logiciel (entrées sensorielles comprises).
@@ -2108,8 +2093,8 @@ Nous reprenons ici le formalisme des systèmes dynamiques proposé dans l'équat
 
 L'évolution du système au cours du temps est alors décrite par le jeu d'équations~:
 \begin{align}
-&\boldsymbol{x}_\text{out}' = \phi_\text{out}(\boldsymbol{x}_\text{out},h_\text{out}(\boldsymbol{x}_\text{in})) \label{eq:SD-closed-out}\\
-&\boldsymbol{x}_\text{in}' = \phi_\text{in}(\boldsymbol{x}_\text{in},h_\text{in}(\boldsymbol{x}_\text{out})) \label{eq:SD-closed-in}
+&\dot{\boldsymbol{x}}_\text{out} = \phi_\text{out}(\boldsymbol{x}_\text{out},h_\text{out}(\boldsymbol{x}_\text{in})) \label{eq:SD-closed-out}\\
+&\dot{\boldsymbol{x}}_\text{in} = \phi_\text{in}(\boldsymbol{x}_\text{in},h_\text{in}(\boldsymbol{x}_\text{out})) \label{eq:SD-closed-in}
 \end{align}
 où $h_\text{in}$ et $h_\text{out}$ représentent (de manière simplifiée) les mécanismes de transduction entre le milieu physique et le circuit logiciel  et $\phi_\text{in}$ et $\phi_\text{out}$ les fonctions d'évolution d'état.
 
@@ -2117,9 +2102,39 @@ Plus précisément~:
 \begin{itemize}
 	\item On note $\boldsymbol{I}(t) = h_\text{in}(\boldsymbol{x}_\text{out}(t))$ le signal d'entrée du contrôleur.
 	\item On note $\boldsymbol{u}(t) = h_\text{out}(\boldsymbol{x}_\text{in}(t))$  la commande motrice.
-	\item L'équation (\ref{eq:SD-closed-out}) décrit le lien entre les actions produites et les sensations.
-	\item L'équation (\ref{eq:SD-closed-in}) décrit le traitement appliqué à l'entrée sensorielle.
+	\item L'équation (\ref{eq:SD-closed-out}) décrit le lien de causalité entre les actions produites et les (futures) sensations.
+	\item L'équation (\ref{eq:SD-closed-in}) décrit les transformations appliquées à l'entrée sensorielle.
 \end{itemize}
+
+\paragraph{}
+La théorie du contrôle classique décrit un problème de contrôle comme un problème d'optimisation reposant sur~:
+\begin{itemize}
+	\item une consigne, correspondant à un état nominal $\boldsymbol{x}^*$, dans lequel on souhaite voir le milieu physique,
+	\item un contrôleur doté de capteurs et d'actuateurs,
+	\item et un milieu physique situé dans l'état $\boldsymbol{x}_\text{out}$.
+\end{itemize}
+
+Le problème consiste à programmer une fonction de réponse $\phi_\text{in}$ qui, étant donnée une consigne $\boldsymbol{x}^*$, conduit le milieu physique dans cet état désiré, soit~:
+\begin{equation}
+\max_{\phi_\text{in}} ||\boldsymbol{x}_\text{out} - \boldsymbol{x}^*||^2
+\end{equation}
+
+\paragraph{Remarque~:} Il est possible d'établir un lien entre une consigne et  la fonction de réponse correspondante. Une consigne s'apparente plus précisément à un \textit{programme moteur} qui conditionne la manière dont le contrôleur traite ses entrées sensorielles~: pour deux consignes différentes, les mêmes entrées sensorielles ne produisent pas la même réponse.  
+
+
+\paragraph{}Le point d'opération (le point où l'on retourne) d'un tel système est analogue
+formellement aux attracteurs des systèmes dynamiques contraints. Un changement
+de consigne induit un déplacement vers un nouvel attracteur (une nouvelle configuration
+mécanique ou spatiale) où l'appareil se stabilise.
+%[CONTROLE MOTEUR - SCHONER]
+Concevoir un bon contrôleur nécessite donc de connaître l'ensemble du dispositif, autrement dit le circuit
+logiciel, les mécanismes de transduction et l'effet des commandes motrices sur le
+signal sensoriel (le ``modèle du monde'' ou ``modèle forward'') \cite{Wolpert2000}. 
+Cet ensemble constitue un système dynamique, soumis à des influences extérieures 
+(les facteurs non modélisés) face auxquels le système produit des réponses.
+Ces modèles reposent implicitement sur le traitement de grandeurs extensives (positions, vitesses)
+mesurées dans l'environnement.
+
 \paragraph {Remarque~:}
  L'état de l'environnement n'est connu du contrôleur qu'à travers une projection $h_\text{in}$ qui n'est pas nécessairement inversible. On dit dans ce cas que l'environnement (ou une partie de l'environnement) est ``caché''.
 %	\item 
