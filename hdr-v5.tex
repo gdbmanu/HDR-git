@@ -1303,7 +1303,7 @@ certaines caractéristiques de la scène sensorielle. Puis les couches suivantes
 des combinaisons de ces filtres, puis les suivantes des combinaisons de combinaisons etc.
 On parle  de ``pattern matching''.
 
-\paragraph{}
+\paragraph{} \label{key:pattern-matching}
 Le  ``pattern matching'' (correspondance de forme)
 est l'opération consistant 
 à mettre en correspondance un modèle $\boldsymbol{w}$ (patron) avec une forme $\boldsymbol{I}$ (signal), dans le cas le plus simple
@@ -1822,21 +1822,21 @@ d'un tableau de paramètres via un ensemble de contraintes
 remonte historiquement au principes de la programmation dynamique \shortcite{Bellman1956}.
 
 
-Le mécanisme fondamental sur lequel s'appuient la plupart des algorithmes d'apprentissage automatique est celui de l'\textit{appariement} (``\textit{pattern matching}'') entre un \textit{dictionnaires de formes} et un vecteur (ou un ensemble de vecteurs) d'entrée. 
+Le mécanisme fondamental sur lequel s'appuient la plupart des algorithmes d'apprentissage automatique est celui de l'\textit{appariement} (``\textit{pattern matching}'') entre un \textit{dictionnaires de formes} et un vecteur (ou un ensemble de vecteurs) d'entrée (voir aussi page \pageref{key:pattern-matching}). 
 Cet appariement se réalise:
 \begin{itemize}
-	\item à l'aide d'un produit scalaire
-	\item par un calcul de distance
-	\item par un calcul probabiliste (vraisemblance, probabilité \textit{a posteriori},...) %accumulation d'évidence (identification de composants caractéristiques)
-	\item par une dynamique de relaxation (réseau de Hopfield)
+	\item à l'aide d'un produit scalaire;
+	\item par un calcul de distance;
+	\item par un calcul probabiliste (vraisemblance, probabilité \textit{a posteriori},...); %accumulation d'évidence (identification de composants caractéristiques)
+	\item par une dynamique de relaxation (réseau de Hopfield);
 	%\item par prédiction et interpolation
 	\item etc.
 \end{itemize}
 
-La plupart des algorithmes d'apprentissage consistent à construire des dictionnaires de formes qui servent de clé d'interprétation des données d'entrée. 
+La plupart des algorithmes d'apprentissage construisent des dictionnaires de formes qui servent de clé d'interprétation des données d'entrée. 
 Le choix de ces formes caractéristiques est bien sûr dépendant des capacités d'expression de la fonction de réponse~:
 \begin{itemize}
-	\item nombre de formes (taille du dictionnaire)
+	\item nombre de formes (taille du dictionnaire);
 	\item types de dépendances pouvant être capturées (dépendances entre classes, dépendances spatiales, hiérarchies, dépendances temporelles, etc.)
 \end{itemize}
 
@@ -1852,8 +1852,8 @@ Le choix de ces formes caractéristiques est bien sûr dépendant des capacités
 
 \paragraph{Types de problèmes}
 
-La fonction de réponse $h$ (voir équation (ref{eq:SIG}), page \pageref{eq:SIG}) est en général une projection sur un espace $\mathcal{U}$ de dimension plus petite que l'espace d'entrée $\mathcal{I}$.
-La fonction opère donc une \textit{réduction} de son espace d'entrée, c'est-à-dire qu'elle réduit les données d'entrée à un petit nombre de caractéristiques. C'est donc un transformation non-inversible du signal d'entrée avec perte d'information.
+La fonction de réponse $h$ d'un réseau de neurones (voir équation (\ref{eq:SIG}), page \pageref{eq:SIG}) est en général une projection d'un espace d'entrée $\mathcal{I}$ vers un espace de sortie $\mathcal{U}$ de dimension plus petite que l'entrée.
+La fonction opère donc une \textit{réduction} de son espace d'entrée, c'est-à-dire qu'elle réduit les données d'entrée à un petit nombre de caractéristiques. Il s'agit donc une transformation non-inversible du signal d'entrée, avec perte d'information.
 
 La nature de cet espace de sortie (continu ou discret) définit deux grands types de problèmes d'apprentissage. 
 
@@ -1861,7 +1861,7 @@ La nature de cet espace de sortie (continu ou discret) définit deux grands type
 	\item Lorsque l'espace de sortie est discret, la réponse est une \textit{catégorie}. On parle de catégorisation ou de classification des données d'entrée. 
 	Dans ce cas, la fonction de réponse repose sur un mécanisme d'\textit{appariement sélectif} (ou ``choix''), c'est-à-dire qu'en fin de compte, une forme unique est identifiée comme correspondant aux données d'entrée. Ce mécanisme est mieux connu sous le nom de ``winner takes all'' (le gagnant prend tout), implémenté par la fonction \textit{argmax}~:
 	$$ u = \arg\max_{k\in{1..K}} \langle\boldsymbol{w}_k,\boldsymbol{I}\rangle$$
-	\item Lorsque l'espace de sortie est continu, on parle de problème de régression (ou de prédiction). La réponse est en général le résultat d'une \textit{décomposition} des données d'entrée sur une base de plus petite dimension. On parle dans ce cas d'\textit{appariement non exclusif} puisque les données d'entrée s'apparient à des degrés divers aux différentes formes de la base pour produire la réponse. 
+	\item Lorsque l'espace de sortie est continu, on parle de problème de régression. La réponse résulte d'une \textit{décomposition} des données d'entrée sur une base de plus petite dimension. L'appariement, dans ce cas, est dit non exclusif. 
 	$$ \boldsymbol{u} =  h(\langle\boldsymbol{w}_1,\boldsymbol{I}\rangle, ..., \langle\boldsymbol{w}_K,\boldsymbol{I}\rangle)$$
 \end{itemize}
 
@@ -1871,7 +1871,7 @@ La nature de cet espace de sortie (continu ou discret) définit deux grands type
 Le but d'un algorithme d'apprentissage est de définir 
 le jeu de paramètres $\Theta$ de manière à produire une sortie 
 conforme au calcul souhaité. 
-Le jeu de paramètres est assimilables à un \textit{programme}, par exemple
+Le jeu de paramètres est assimilable à un \textit{programme}, par exemple
  $\Theta = \{\boldsymbol{w}_1, ..., \boldsymbol{w}_K\}$, ou
  encore $\Theta =G$ (graphe -- voir aussi page \pageref{page:graphe}), et
 le choix de ces paramètres correspond à la programmation du réseau. 
@@ -1886,22 +1886,20 @@ où $\Theta$ est le ``programme'' et $\mathbf{D}$ les ``méta-données''.
 
 Dans le cadre de l'apprentissage automatique, les contraintes $\mathbf{D}$ sont les données d'apprentissage, et prennent la forme d'une base d'exemples  organisée sous forme de couples $\{(\boldsymbol{I}_1,u_1),...,(\boldsymbol{I}_n,u_n)\}$.  L'optimisation consiste à trouver une fonction de l'espace des entrées $\mathcal{I}$ vers l'espace des sorties $\mathcal{U}$ qui minimise la distance aux données. 
 
-
-L'optimisation par énumération est généralement impossible pour les problèmes de grande dimension. On a alors recours à des algorithmes dits d'''optimisation stochastique'', utilisant des hypothèses simplificatrices (comme la séparabilité linéaire des données ou encore le caractère Gaussien de distributions génératrices).  
-Le but de l'algorithme d'apprentissage est alors d'extraire des données fournies des régularités non apparentes, des facteurs explicatifs,
+L'optimisation par énumération est généralement impossible pour les problèmes de grande dimension. On a alors recours à des algorithmes dits d'''optimisation stochastique'', ou encore des algorithmes utilisant des hypothèses simplificatrices (comme la séparabilité linéaire des données ou encore le caractère Gaussien de distributions génératrices).  
+Le but des algorithmes d'apprentissage est alors d'extraire des données fournies des régularités non apparentes, des facteurs explicatifs,
 permettant de mieux prédire et classifier les données nouvelles.
-
 
 \paragraph{Exemples}
 \begin{itemize}
 	\item Les approches discriminatives \shortcite{Vap95}
 	extraient des représentants caractéristiques des données (vecteurs supports  \-- vecteurs les plus discriminants).
-	\item Les approches prédictives \shortcite{Bishop2006}
+	\item Les approches génératives \shortcite{Bishop2006}
 	identifient la source cachée des observations (les facteurs causaux) selon des modèles probabilistes pré-définis. Elles définissent des vecteurs \textit{caractéristiques} d'une classe.
 	\item Les réseaux de neurones (voir section suivante), 
 	dont les caractéristiques propres (nombre de neurones, nombre de couches cachées, architecture
-	et patron de connexions), déterminent une
-	méthode d'optimisation spécifique.
+	et patron de connexions), déterminent des
+	méthodes d'optimisation spécifiques.
 \end{itemize}
 
 
@@ -1919,8 +1917,8 @@ Dans ce cadre~:
 	$f(U=u|I=\boldsymbol{I};\Theta)$, déduite de la distribution génératrice et des observations à partir de la formule de Bayes.
 \end{itemize} 
 
-Les modèles probabilistes se distinguent des modèles d'appariement standard par le caractère probabiliste de la réponse. Autrement dit, le programme fournit une liste des  probabilités de réponses et non une réponse unique. Le caractère combinatoire et facilement interprétable des probabilités donne à ces modèles une 
-puissance supérieure aux modèles standard.
+Les modèles probabilistes se distinguent des modèles d'appariement standard par le caractère probabiliste de la réponse. Autrement dit, le programme fournit une liste des  probabilités de réponses et non une réponse unique. Le caractère combinable et facilement interprétable des probabilités donne à ces modèles une 
+puissance supérieure aux classifieurs binaires standards.
 
 \subsubsection{Réseaux de neurones en apprentissage automatique}
 
@@ -1930,19 +1928,18 @@ Les premiers modèles remontent historiquement aux années 60-70 \shortcite{HUBE
 %es premiers modèles sur la formation des patrons de réponse visuelle  remontent également à cette époque \shortcite{}. 
 L'idée générale est celle d'un système dynamique de grande dimension, constitué d'un grand nombre de
 variables d'état, chaque variable d'état reflétant une composante de la scène sensorielle, les différentes composantes
-interagissant par des relations de voisinage excitatrices ou inhibitrices. De ces modèles sont issus les grands
-principes architecturaux, avec le principe d'un signal transitant par différentes ``couches'', et les
+interagissant par des relations de voisinage excitatrices ou inhibitrices. De ces modèles sont issus les principales architectures neuronales, avec le principe d'un signal transitant par différentes ``couches'', et les
 notions de liens feed-forward, feedback et latéraux.
 Ces modèles ont connu un développement important dans les années 80, aboutissant aux modèles classiques
 \shortcite{Hop82,Koh82,Car87}.
 
 
-Ils à l'heure actuelle sont principalement utilisés pour
+Ils sont, à l'heure actuelle, principalement utilisés pour
 des tâches de catégorisation de leurs données d'entrée.
 Les méta-données sont alors constituées 
 d'un jeu de données d'entrée ainsi que des sorties attendues,
 appelé \textit{base d'apprentissage}.
-La plupart des algorithmes d'apprentissages s'affranchissent de la contrainte de localité définie par Hebb et implémentent des mécanismes de mise à jour reposant sur la propagation d'erreur (et non sur la conjonction d'activité).  
+La plupart des algorithmes d'apprentissage s'affranchissent de la contrainte de localité définie par Hebb et implémentent des mécanismes de mise à jour reposant sur la propagation d'erreur (et non sur la conjonction d'activité).  
 
 % programme = paramètres
 % algorithme = meta programme
@@ -1952,7 +1949,7 @@ La plupart des algorithmes d'apprentissages s'affranchissent de la contrainte de
 \paragraph{Modèles à couches}
 
 Les modèles de réseaux de neurones, % (encore dite approche ``distribuée''), 
-tels qu'il se sont développés depuis le perceptron \shortcite{Rosen58}, reposent majoritairement sur
+tels qu'il se sont développés depuis le Perceptron \shortcite{Rosen58}, reposent majoritairement sur
 un principe de traitement séquentiel (``\textit{feed forward}'').
 %[REFERENCES : PMC, Vapnik, LeCun, ].
 %une notion implicite de ressource limitée.
@@ -1962,40 +1959,23 @@ L'organisation d'un réseau à couches correspond à la transformation d'un sign
 La programmation des modèles à couches repose sur un principe de \textit{propagation du signal d'erreur} dans le sens inverse de la propagation des données, de la sortie vers l'entrée \shortcite{RumAL86PDP}.  
 
 \begin{itemize}
-	\item Le modèle de perceptron le plus simple, possédant une cellule de sortie unique, sépare son espace d'entrée en deux régions.
+	\item Le modèle de Perceptron le plus simple, possédant une cellule de sortie unique, sépare son espace d'entrée en deux régions.
 	%{\color{Gray}
 	%Les données provenant de la première région produisent une activité de sortie ``haute'', qui s'apparente
 	%au {\color{Orange} mode ``actif''}.  Les données provenant 
 	%de la seconde région produisent une une activité de sortie ``basse'', qui s'apparente au {\color{Orange} mode ``inactif''}.}
-	\item Dans le cas du perceptron multi-couches \shortcite{RumAL86PDP},
+	\item Dans le cas du Perceptron multi-couches \shortcite{RumAL86PDP},
 	chaque neurone de la couche cachée est un séparateur permettant de distinguer deux régions de son espace d'entrée. 
 	%{\color{Gray} Le nombre de régions séparables (le nombre maximal de modes de sortie) augmente exponentiellement avec le nombre de neurones dans la couche  cachée.}
 	Le concepteur fixe à l'avance le nombre de neurones à mettre dans la couche cachée,
 	et donc la complexité des opérations de ségrégation produites par le réseau.
-	\item Enfin, le modèle des séparateurs à vaste marge (SVM) \shortcite{Vap95} repose sur le modèle du perceptron. Les données d'entrée sont projetées dans un espace de redescription de dimension élevée. La fonction de réponse est déterminée  selon un principe d'optimisation quadratique. 
-	Il propose en outre une définition quantitative de la complexité d'un classifieur~: la
-	dimension de Vapnik-Chervonenkis, qui correspond au nombre de pivots utilisé pour
+	\item Enfin, le modèle des séparateurs à vaste marge (SVM) \shortcite{Vap95} repose sur le modèle du Perceptron. Les données d'entrée sont plongées dans un espace de redescription de dimension élevée. La fonction de réponse est déterminée  selon un principe d'optimisation quadratique. 
+	Une définition quantitative de la complexité d'un classifieur est proposée dans ce cadre~: la
+	dimension de Vapnik-Chervonenkis, correspondant dans ce cas précis au nombre minimal de vecteurs supports nécessaires pour correctement
 	séparer les données d'entrée. 
 \end{itemize}
 
-\paragraph{Apprendre et oublier}
 
-Une dernière distinction concerne le caractère stationnaire ou non-stationnaire des données d'apprentissage lorsque le jeu de données est indexé sur l'axe temporel. 
-
-On parle d'apprentissage ``en ligne'' lorsque les données sont présentées séquentiellement.
-L'apprentissage consiste à appliquer de petits ajustements à chaque nouvelle donnée dans un 
-sens qui augmente localement la justesse de la fonction de réponse, en espérant que chacun de ces ajustements locaux 
-augmente la justesse globale,
-selon le principe de la descente de gradient ``stochastique''.
-
-Ce mécanisme d'apprentissage en ligne a l'avantage de rester valide lorsque les données sont non-stationnaires. Ainsi les régularités observées durant les premières phases de l’apprentissage ne sont plus nécessairement présentes
-à une étape ultérieure de l'apprentissage.
-%~: certaines trajectoires sont ``abandonnées''. 
-Dans une perspective de parcimonie 
-(ou de ressource limitée), il est avantageux d'oublier certains faits passés pour mieux appréhender les faits nouveaux, autrement
-dit oublier pour mieux apprendre.
-Cette prise en compte du ``vieillissement'' de l'environnement conduit à accorder plus de crédit à des observations
-récentes qu'aux observations anciennes \shortcite{Kivinen2004}, et donc \textit{oublier pour mieux apprendre}. 
 
 %\subsubsection{Modèles récurrents}
 %{\color{Cyan}
@@ -2014,7 +1994,7 @@ récentes qu'aux observations anciennes \shortcite{Kivinen2004}, et donc \textit
 
 De nombreux points communs peuvent être établis entre l'apprentissage computationnel et  l'apprentissage biologique. L'apprentissage automatique identifie en effet des \textit{communautés de problèmes}:
 \begin{itemize}
-	\item définissant des contraintes sur le type de solutions attendues
+	\item définissant des contraintes sur le type de solutions attendues;
 	\item nécessitant souvent des méthodes de résolution spécifiques.
 \end{itemize} 
 %Les problèmes identifiés dans le cadre computationnel sont souvent transposables au cas biologique. Dans ce cadre, 
@@ -2026,23 +2006,18 @@ De nombreux points communs peuvent être établis entre l'apprentissage computat
 
 {\bf Remarque :} la communauté de problèmes n'implique pas nécessairement la \textit{ communauté de mise en œuvre}. Comme nous avons vu dans l'introduction~:
 \begin{itemize}
-	\item identifier correctement les problèmes et les contraintes des systèmes biologiques sont des enjeux à part entière
-	\item il existe des contraintes spécifiques aux systèmes biologiques, telles que la contrainte de localité (plasticité de Hebb)  
-	\item Rien n'indique à l'heure actuelle que les méthodes mise en œuvre soient les mêmes. Les méthodes d'optimisation développées en apprentissage automatique peuvent servir de guide à l'interprétation des données biologiques, mais sont souvent fort éloignées de la réalité biologique.  
+	\item identifier correctement les problèmes et les contraintes des systèmes biologiques sont des enjeux à part entière;
+	\item il existe des contraintes spécifiques aux systèmes biologiques, telles que la contrainte de localité (plasticité de Hebb) ; 
+	\item le critère d'efficacité qui guide le développement des méthodes d'apprentissage automatique ne préjuge pas de leur plausibilité biologique.  
 \end{itemize}
 
-
-
-
 \paragraph{}
-La correspondance formelle entre l'apprentissage (au sens informatique) et la plasticité (voir équation (ref{eq:SD-plast-x}), page \pageref{eq:SD-plast-x}) consiste à identifier~:
+Dans le cadre  des réseaux de neurones, vus précédemment, la fonction de réponse est implémentée sous la forme d'un graphe, les nœuds sont les ``neurones'', et les arêtes sont les ``synapses''. La correspondance formelle entre l'apprentissage (au sens informatique) et la plasticité (voir équation (\ref{eq:SD-plast-x}), page \pageref{eq:SD-plast-x}) consiste à identifier~:
 \begin{itemize}
 	\item les paramètres de la fonction de réponse avec les poids synaptiques,
 	\item et la plasticité avec un mécanisme de mise à jour des paramètres guidé par les données.
 \end{itemize} 
-Ce cadre général est celui des réseaux de neurones~: la fonction de réponse est implémentée sous la forme d'un graphe : les nœuds sont les ``neurones'' et les arêtes sont les ``synapses''. 
-Nous aurons l'occasion d'étudier par la suite les modèles plus directement inspirés par la biologie. Avant cela, nous abordons l'autre grande approche utilisée en modélisation neuronale, à savoir les modèles issus de la théorie des systèmes dynamiques et du contrôle.
-
+Nous aurons l'occasion d'étudier par la suite des modèles plus directement inspirés par la biologie. Avant cela, nous abordons l'autre grande approche utilisée en modélisation neuronale, à savoir les modèles issus de la théorie des systèmes dynamiques et du contrôle.
 
 
 \section{Systèmes dynamiques et contrôle}
@@ -6723,6 +6698,23 @@ récentes qu'à des observations anciennes \shortcite{Kivinen2004}.
 %	\item Le lien avec l'apprentissage par renforcement se fait naturellement, %{\color{Cyan} via...}
 %\end{itemize}
 
+%\paragraph{Apprendre et oublier}
+%
+%Une dernière distinction concerne le caractère stationnaire ou non-stationnaire des données d'apprentissage lorsque le jeu de données est indexé sur l'axe temporel. 
+%
+%On parle d'apprentissage ``en ligne'' lorsque les données sont présentées séquentiellement.
+%L'apprentissage consiste à appliquer de petits ajustements du modèle à chaque nouvelle donnée dans un 
+%sens qui augmente localement la justesse de la fonction de réponse, en espérant que chacun de ces ajustements locaux 
+%augmente la justesse globale,
+%selon le principe de la descente de gradient ``stochastique''.
+%
+%Ce mécanisme d'apprentissage en ligne a l'avantage faire preuve de robustesse lorsque les données d'entrée sont non-stationnaires. 
+%%~: certaines trajectoires sont ``abandonnées''. 
+%Dans une perspective de parcimonie 
+%(ou de ressource limitée), il est de plus avantageux d'oublier certains faits passés pour mieux appréhender les faits nouveaux, les régularités initiales du jeu de données n'étant plus nécessairement présentes
+%à une étape ultérieure de l'apprentissage.
+%Cette prise en compte du ``vieillissement'' de l'environnement conduit ainsi à accorder plus de crédit aux observations
+%récentes qu'aux observations anciennes \shortcite{Kivinen2004}, et donc \textit{oublier pour mieux apprendre}. 
 
 
 %{\color{cyan} APPRENTISSAGE DIRECT DE LA POLITIQUE}
