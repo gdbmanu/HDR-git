@@ -9,6 +9,8 @@
 
 \documentclass[12pt,twoside,openright]{book}
 
+%nœud
+
 %\usepackage{soul}
 
 %\documentclass[a4paper,11pt]{book}
@@ -958,7 +960,7 @@ Dans le cadre d'un travail de co-direction de la thèse de Mathieu Golos à l'In
 j'ai contribué à une étude sur la multistablité dans les systèmes neuronaux artificiels
 construits à partir du connectome \shortcite{Golos2013,Golos2014}. Nous sommes partis d'un 
 modèle simplifié ignorant le terme de diffusion latérale. 
-Chaque noeud du réseau est simplement identifié à une masse neuronale. 
+Chaque nœud du réseau est simplement identifié à une masse neuronale. 
 Partant de l'analogie avec les réseaux de Hopfield \shortcite{Hop82}, le but
 était d'identifier le nombre et l'organisation anatomique des
 attracteurs se développant au sein d'un tel réseau.
@@ -1210,7 +1212,7 @@ de transformation de ces signaux soient les mêmes~:
 		%Le calcul repose sur la transmission sur les liens récurrents  (liens d'affinité ou d'incompatibilité principalement). 
 		Les échanges de signaux entre les différentes neurones, via les liens récurrents, constituent le calcul.
 		%Dans le cas le plus extrême (Winner takes all), 
-		%le résultat du calcul est l'activité d'un noeud unique du réseau.
+		%le résultat du calcul est l'activité d'un nœud unique du réseau.
 		%La généralisation 
 		%aux calculateurs universels se fait à travers la présence de mémoires, c'est-à-dire d'unités capables de
 		%conserver un état (haut ou bas) pour une durée indéterminée. 
@@ -1400,7 +1402,7 @@ par l'intégration sur le flot de la condition initiale $\boldsymbol{x}_0$.
 	\end{itemize}
 \end{itemize}
 
-Dans le cas des systèmes autonomes dissipatifs, on appelle \textit{attracteur} une région de l'espace d'état qui tend à attirer les trajectoires du système pour les temps longs. Un attracteur est formellement défini comme une région de l'espace d'états invariante par le flot, c'est à dire un ensemble de points $\mathcal{A} \subset \mathcal{X}$ tel que  si $\boldsymbol{x}(t) \in \mathcal{A}$, alors $\boldsymbol{x}(t+\tau) \in \mathcal{A}$, avec $\tau > 0$. Un attracteur est dit stable s'il existe un voisinage de $\mathcal{A}$ tel que tout point de ce voisinage converge vers l'attracteur pour les temps longs. La trajectoire qui va de la condition initiale vers l'attracteur s'appelle la dynamique de \textit{relaxation}. L'ensemble des conditions initiales convergeant vers un attracteur donné s'appelle le \textit{bassin d'attraction}.
+Dans le cas des systèmes autonomes dissipatifs, on appelle \textit{attracteur} \label{key:attracteur} une région de l'espace d'état qui tend à attirer les trajectoires du système pour les temps longs. Un attracteur est formellement défini comme une région de l'espace d'états invariante par le flot, c'est à dire un ensemble de points $\mathcal{A} \subset \mathcal{X}$ tel que  si $\boldsymbol{x}(t) \in \mathcal{A}$, alors $\boldsymbol{x}(t+\tau) \in \mathcal{A}$, avec $\tau > 0$. Un attracteur est dit stable s'il existe un voisinage de $\mathcal{A}$ tel que tout point de ce voisinage converge vers l'attracteur pour les temps longs. La trajectoire qui va de la condition initiale vers l'attracteur s'appelle la dynamique de \textit{relaxation}. L'ensemble des conditions initiales convergeant vers un attracteur donné s'appelle le \textit{bassin d'attraction}.
 
 Dans le cas des systèmes non-autonomes, la réponse du réseau correspond à un compromis entre les contraintes internes, exprimées
 par le graphe, et les contraintes externes, exprimées par le signal. On pourra également parler de dynamique de \textit{relaxation} pour caractériser la convergence vers un attracteur lorsque le signal extérieur est 
@@ -1668,7 +1670,7 @@ L'espace d'états est organisé en un nombre fini de \textit{bassins d'attractio
 %d'un facteur exponentiel ($2^N$ configurations distribuées possibles), 
 %la capacité effective est en pratique beaucoup plus réduite, 
 %se limitant à un nombre de modes (attracteurs) distincts en $O(N)$, 
-%c'est-à-dire de l'ordre du nombre de noeuds \shortcite{Amit1987,Tso88}.
+%c'est-à-dire de l'ordre du nombre de nœuds \shortcite{Amit1987,Tso88}.
 %La nature des opérations réalisables par le substrat est également différent puisqu'il s'agit principalement ici d'une
 %dynamique de relaxation adaptée à des opération de complétion et d'interpolation de données manquantes, implémentant un
 %mécanisme de mémoire dite ``auto-associative''. 
@@ -2087,7 +2089,7 @@ au sein duquel le logiciel est plongé.
 
 Nous reprenons ici le formalisme des systèmes dynamiques proposé dans l'équation (\ref{eq:SD}), page \pageref{eq:SD}. On suppose que le milieu physique et le programme obéissent à une description d'état, où~:
 \begin{itemize}
-	\item $\boldsymbol{x}_\text{out}$ est un vecteur d'état  décrivant le milieu physique (actuateurs compris)
+	\item $\boldsymbol{x}_\text{out}$ est un vecteur d'état  décrivant le milieu physique (actuateurs compris);
 	\item $\boldsymbol{x}_\text{in}$ est un vecteur d'état  décrivant le contrôleur \--- ou encore ``milieu'' logiciel (entrées sensorielles comprises).
 \end{itemize}
 
@@ -2123,7 +2125,7 @@ Le problème consiste à programmer une fonction de réponse $\phi_\text{in}$ qu
 
 
 \paragraph{}Le point d'opération (le point où l'on retourne) d'un tel système est analogue
-formellement aux attracteurs des systèmes dynamiques contraints. Un changement
+formellement aux attracteurs des systèmes dynamiques contraints (voir page \pageref{key:attracteur}). Un changement
 de consigne induit un déplacement vers un nouvel attracteur (une nouvelle configuration
 mécanique ou spatiale) où l'appareil se stabilise.
 %[CONTROLE MOTEUR - SCHONER]
@@ -2216,8 +2218,8 @@ Il s'agit donc de produire la meilleure estimation \textit{à chaque instant} de
 Dans le cadre des modèles de filtrage, l'état interne tel que défini dans l'équation (\ref{eq:SD-closed-in}), page \pageref{eq:SD-closed-in}, est le résultat d'un processus \textit{récurrent} reposant~:
 \begin{itemize} 
 	\item sur des facteurs internes représentés par la probabilité a priori 
-	$P(\boldsymbol{x}_{t+1}|\boldsymbol{x}_t,\boldsymbol{u}_t)$ 
-	\item sur des facteurs externes représentés par la vraisemblance $ Q(\boldsymbol{I}_t|\boldsymbol{x}_t)$
+	$P(\boldsymbol{x}_{t+1}|\boldsymbol{x}_t,\boldsymbol{u}_t)$;
+	\item sur des facteurs externes représentés par la vraisemblance $ Q(\boldsymbol{I}_t|\boldsymbol{x}_t)$;
 \end{itemize}
 où les indices représentent le temps en notation discrète.
 
@@ -2236,29 +2238,33 @@ Le jeu d'équations (\ref{eq:accum1})-(\ref{eq:accum2}) forme une équation d'\t
 L'équation (\ref{eq:accum1}) représente la première étape de l'estimation aboutissant à une prédiction ``interne''  sur l'espace des sources. Cette prédiction est combinée (eq. \ref{eq:accum2}) à la vraisemblance $Q$ , qui peut être vue comme une prédiction ``inverse'' sur l'espace des sources. 
 L'écart entre les deux distributions est l'\textit{erreur de prédiction}, également appelée \textit{innovation} \cite{Kalman1960}. Les différences de variance entre les distributions permettent de privilégier l'un ou l'autre selon que le bruit d'état ou le bruit de mesure dominent le processus d'observation.
 
-\paragraph{Remarques~:}
-\begin{itemize}
-	\item Pour des raisons de précision numérique, il est fréquent d'utiliser des logarithme de probabilités au lieu des probabilités elles-mêmes (le produit étant ``remplacé'' par une somme).
+\paragraph{Remarque~:}
+%\begin{itemize}
+%	\item Pour des raisons de précision numérique, il est fréquent d'utiliser des logarithme de probabilités au lieu des probabilités elles-mêmes (le produit étant ``remplacé'' par une somme).
 	%	\item Dans le cas de modélisation par processus gaussiens, {\color{Orange} le produit de deux  gaussiennes est une gaussienne }. L'équation d'évolution est remplacée par l'évolution des paramètres de la distribution (moyenne et matrice de variance-covariance). Les modèles de filtrage classique 
 	%	utilisent l'erreur de {\color{Orange} prédiction sensorielle -- ou prédiction dans l'espace d'état?? (ou ``innovation'') $\boldsymbol{e}_\text{in}(t+dt)=\boldsymbol{I}(t+dt) - h_\text{in}(\boldsymbol{x}'_\text{out}(t+dt))$ pour corriger la prédiction interne. A REPRENDRE}
-	
-	\item Un cas particulier important est le modèle sans transition d'état ($\forall t, \boldsymbol{x}_{\text{out}}(t) = \boldsymbol{x}_\text{out}$). Ce cas correspond à des mesures bruitées multiples opérées sur les mêmes données. Le fait de multiplier les observations permet de réduire à chaque mesure l'incertitude sur l'état ``réel'' observé. Ce mécanisme, est appelé d'\textit{accumulation d'évidence}. Dans le cadre de campagnes de mesures, il permet de décider à chaque mesure s'il est nécessaire ou pas d'en effectuer une nouvelle, en fonction d'un seuil de fiabilité fixé \cite{Wald47}.
-\end{itemize}
-
-\paragraph{Exemples}~:
+	%
+	%\item 
+	Un cas particulier important est le modèle sans transition d'état ($\forall t, \boldsymbol{x}_{\text{out}}(t) = \boldsymbol{x}_\text{out}$). Ce cas correspond à des mesures bruitées multiples opérées sur les mêmes données. Le fait de multiplier les observations permet de réduire à chaque mesure l'incertitude sur l'état ``réel'' observé. Ce mécanisme, est appelé \textit{accumulation d'évidence}. Dans le cadre de campagnes de mesures, il permet de décider à chaque mesure s'il est nécessaire d'en effectuer une nouvelle, en fonction d'un seuil de fiabilité fixé \cite{Wald47}.
+%\end{itemize}
+\newline
+\newline
+\newline
+\newline
+{{\bf Exemples}~:
 \begin{itemize}
-	\item Le filtre de Kalman \shortcite{Kalman1960} utilise des modèles de bruit gaussiens, définis par une moyenne et une matrice de variance-covariance. L'environnement est modélisé comme un processus gaussien soumis à une commande extérieure connue.
-	\item Les modèles de chaines de Markov cachés \shortcite{Baum1966} utilisent une représentaton d'état discrète. L'environnement est  une chaîne de Markov connue. Chaque état de la chaîne génère une mesure selon une distribution connue. Le problème consiste principalement, à partir de la mesure, à identifier les transitions d'état (algorithmes forward-backward, de Viterbi,...).   
+	\item Le filtre de Kalman \shortcite{Kalman1960} utilise des modèles de bruit Gaussiens, définis par une moyenne et une matrice de variance-covariance. L'environnement est modélisé comme un processus Gaussien soumis à une commande extérieure connue.
+	\item Les modèles de Markov cachés \shortcite{Baum1966} utilisent une représentaton d'état discrète. L'environnement est  une chaîne de Markov connue. Chaque état de la chaîne génère une mesure selon une distribution connue. Le problème consiste principalement, à partir de la mesure, à identifier les probabilités de transition d'état (algorithmes forward-backward, de Viterbi,...).   
 	\item Les filtres particulaires \shortcite{Doucet2001} utilisent une approche de Monte Carlo pour échantillonner l'espace d'état du processus externe à chaque instant. Chaque ``particule'' suit la dynamique stochastique du processus externe $P({\boldsymbol{x}}_{t+1}|{\boldsymbol{x}}_t,\boldsymbol{u}_t)$ et se voit attribuer un score de vraisemblance selon $Q(\boldsymbol{I}_{t+1}|{\boldsymbol{x}}_{t+1})$. 
 \end{itemize} 
-
+}
 %\subsection{Modèles de l'activité nerveuse}
 
 
 \section{Approche mixte~: modèles et problèmes}
 Nous abordons ici les problèmes d'apprentissage dans le contexte de la commande motrice. 
 La plupart des modèles s'inscrivent dans le cadre de la commande et de la mesure décrits précédemment,
-c'est-à-dire reposant sur des modèles de l'environnement physique. L'apprentissage, en ce sens, se justifie lorsque, d'une manière ou d'une autre, les modèles ne sont pas considérés satisfaisants et doivent être ``améliorés''. 
+c'est-à-dire qu'ils reposent sur des modèles de l'environnement physique. L'apprentissage, en ce sens, se justifie lorsque, d'une manière ou d'une autre, les modèles ne sont pas considérés satisfaisants et doivent être ``améliorés''. 
 
 
 
@@ -2268,8 +2274,7 @@ de l'approche systèmes dynamiques lorsqu'il s'agit de projeter un
 feedback moteur sur des espaces sensoriels complexes (modèle forward).
 %La question qui se pose est donc de savoir si la combinaison de ces deux approches est \emph{nécessaire}
 %ou simplement contingente à l'évolution de la vie. 
-Peut-on contrôler efficacement un corps sans faire appel à la notion d'attracteur et de feedback
-négatif? Peut-on 
+Peut-on contrôler efficacement un corps sans faire appel à la notion d'attracteur et de feedback négatif? Peut-on 
 s'adapter à un environnement autrement qu'en extrayant des ``dictionnaires'' d'invariants
 perceptifs et moteurs de l'environnement?
 
@@ -2285,7 +2290,7 @@ perceptifs et moteurs de l'environnement?
 
 \subsection{Approche probabiliste}
 
-Dans le cadre du contrôle tel présenté précédemment, l'apprentissage consiste donc à modifier le contrôleur décrit par la fonction  $\phi_\text{in}$ (voir l'équation (\ref{eq:SD-closed-in}), page \pageref{eq:SD-closed-in}, et l'équation (\ref{eq:feed-noise-3}), page \pageref{eq:feed-noise-3}) dans un sens qui améliore un critère de performance prédéfini. La mise à jour d'un modèle ou d'une fonction de réponse consiste en général à modifier un jeu de paramètres $\Theta$ qui décrit le modèle.
+Dans le cadre du contrôle tel que présenté précédemment, l'apprentissage consiste donc à modifier le contrôleur décrit par la fonction  $\phi_\text{in}$ (voir l'équation (\ref{eq:SD-closed-in}), page \pageref{eq:SD-closed-in}, et l'équation (\ref{eq:feed-noise-3}), page \pageref{eq:feed-noise-3}) dans un sens qui améliore un critère de performance prédéfini. La mise à jour d'un modèle ou d'une fonction de réponse consiste en général à modifier un jeu de paramètres $\Theta$ qui décrit le modèle.
 
 Cette approche repose sur un modèle \textit{génératif}  $P(X|\boldsymbol{x},\boldsymbol{u},\Theta)$ et $Q(I|\boldsymbol{x},\Theta)$, où $\Theta$ est le jeu de paramètres définissant les deux distributions.  
 Dans le cas des modèles de filtrage, il s'agit par exemple d'améliorer les modèles $P$ (processus externe) et $Q$ (mesure), afin de mieux prendre en compte les facteurs exogènes non modélisés et de mieux prédire les entrées.  %L'apprentissage consiste ainsi à 
@@ -2348,11 +2353,10 @@ Une idée récente, proposée par \cite{Friston2010},
 %reprenant en partie le concept de ``réservoir computing'', 
 est de définir à la fois l'apprentissage et le contrôle 
 comme un problème d'optimisation dans un cadre conceptuel lié à la prédiction 
-des signaux. Il s'agit d'une certaine façon de façonner l'activité interne de
+des signaux. Il s'agit de façonner l'activité interne de
 manière à rendre le signal arrivant à l'instant $t$ le plus prédictible possible, d'être le moins surpris, 
 et d'utiliser l'erreur de prédiction pour améliorer autant que possible les prédictions futures, soit 
 par un mécanisme de plasticité, soit par le déclenchement d'une action visant à réduire l'écart à la prédiction.
-
 
 L'absence de consigne conduit à effectuer l'optimisation à la fois sur les paramètres du modèle et sur la commande, soit, en reprenant les notations précédentes~:  
 $$\max_{\Theta',\boldsymbol{u}'}\int L(\boldsymbol{x},\Theta',\boldsymbol{u}')\hat{f}(\boldsymbol{x}) d\boldsymbol{x} %= \min_{\Theta',\boldsymbol{u}'} \int -  \log\hat{f}(\boldsymbol{x}) d\boldsymbol{x} 
@@ -2361,8 +2365,8 @@ $$
 %{\color{Cyan} Dans le cas des modèles du cervelet $I$ est la conséquence proprioceptive de la commande.}
 où la distribution a posteriori $\hat{f}(\boldsymbol{x})$ est générée selon un principe de ``codage par population'' \shortcite{Georgopoulos1986,Averbeck2006}, autrement dit via un échantillonnage de $P_\Theta$. 
 
-Ce cadre est intéressant dans la mesure où il offre 
-une interprétation relativement nouvelle 
+Ce cadre %est intéressant dans la mesure où il 
+offre une interprétation relativement nouvelle 
 au déclenchement des actions. 
 %Contrairement au cadre conceptuel classique, 
 Le point d'opération du système
@@ -2428,7 +2432,7 @@ On distingue ainsi classiquement~:
 	\item l'orientation (déplacement les organes des sens vers les stimuli d'intérêt, 
 	éloignement et évitement des stimuli aversifs), 
 	\item 
-	la locomotion (déplacement du corps) 
+	la locomotion (déplacement du corps),
 	\item 
 	et l'ensemble des comportements consistant à utiliser les ressources de l'environnement (activité alimentaire
 	par exemple) \shortcite{brembs03,Grillner2008,Stephenson2011}.
@@ -2483,7 +2487,7 @@ Le contrôle balistique présente plusieurs propriétés intéressantes~:
 \begin{itemize}
 	\item la commande $\boldsymbol{u}$ reste constante pendant toute la durée d'exécution.
 	\item la commande est insensible aux conditions initiales. Quelle que soit la position initiale du contrôleur, la commande conduit ``mécaniquement'' le système contrôlé vers son point fixe $\boldsymbol{x}^*$. %
-	\item le contrôleur est insensible à ses entrées sensorielles. Autrement dit la conséquence sensorielle de la commande n'est pas utile pour le contrôle lui-même. Le signal mesuré sur les capteurs peut néanmoins conduite le contrôleur à \textit{réviser la consigne} si le signal d'entrée  n'est pas conforme au signal attendu.
+	\item le contrôleur est insensible à ses entrées sensorielles. Autrement dit la conséquence sensorielle de la commande n'est pas utile pour le contrôle lui-même. Le signal mesuré sur les capteurs peut néanmoins conduire le contrôleur à \textit{réviser la consigne} si le signal d'entrée  n'est pas conforme au signal attendu.
 \end{itemize}
 
 Une version ``dynamique'' du contrôle balistique a été proposée par \shortcite{Schoner97}, dans laquelle~:
@@ -2498,7 +2502,7 @@ Enfin, certaines activités motrices (périodiques en particulier)
 semblent reposer sur un mécanisme de feedback \textit{positif},
 dans lesquels le milieu physique et la commande motrice forment un couple qui s'auto-renforce, 
 comme dans le cas de la locomotion. Cette activité rythmique spontanée peut être modulée par divers facteurs
-(contacts avec le sol ou avec des obstacles, orientation visuelle, ...).
+(contacts avec le sol ou avec des obstacles, orientation visuelle, etc.).
 %Dans le cadre du contrôle, 
 \begin{itemize}
 	\item La rétroaction positive correspond à la résonance entre des schémas moteurs internes concurrents, la disposition des effecteurs et l'environnement.
@@ -2521,7 +2525,7 @@ comme dans le cas de la locomotion. Cette activité rythmique spontanée peut ê
 
 
 Les mécanismes de contrôle par feedback positif ont jusqu'à présent principalement été étudiés 
-sous la forme d'oscillateurs simples ou couplés \shortcite{Haken1985,Sternad2008}, servant de support à schémas moteurs périodiques.
+sous la forme d'oscillateurs simples ou couplés \shortcite{Haken1985,Sternad2008}, servant de support à des schémas moteurs périodiques,
 comme celui de la locomotion. 
 L'idée de la sélection d'un canal de réponse par résonance avec les signaux de l'environnement de trouve 
 néanmoins déjà dans des articles plus anciens \shortcite{Greene1962}.
@@ -2556,7 +2560,7 @@ Le manque de développements applicatifs vient probablement
 %, c'est-à-dire un mouvement simultané de contestation 
 %(de l'ancienne évidence) et d'adhésion (à la nouvelle évidence).
 %Chaque attracteur (statique ou périodique) définit des relations causale entre les éléments qui le composent
-%(entre les noeuds du réseau, entre les variables d'état du système dynamique).
+%(entre les nœuds du réseau, entre les variables d'état du système dynamique).
 
 
 
@@ -2564,12 +2568,13 @@ Le manque de développements applicatifs vient probablement
 \chapter{Panorama des principaux résultats}
 
 \paragraph{}
-Les travaux présentés dans ce mémoire offrent des portes d'entrée vers le principe de contrôle par appariement et feedback positif
-évoqué dans le chapitre précédent.
-Pour les développer, nous avons utilisé un certain nombre de parti-pris méthodologiques~:
+Les travaux présentés dans ce mémoire offrent des points d'entrée vers le développement d'architectures de contrôle utilisant les principes d'appariement 
+dynamique
+évoqués dans les deux chapitres précédents.
+Pour les développer, nous avons utilisé un certain nombre de parti pris méthodologiques~:
 \begin{itemize}
 	\item Utiliser le cerveau comme source d'inspiration. Nos travaux reposent largement sur la littérature et les observations en neurosciences. Nous considérons en particulier la plasticité de Hebb comme modèle de référence pour nos algorithmes d'apprentissage.
-	\item Nous adoptons l'hypothèse d'architectures de contrôle reposant sur l'opérateur d'appariement. En particulier nous cherchons à généraliser le principe d'appariement (``pattern matching''), à l’œuvre en apprentisage automatique, au cas des systèmes dynamiques non-linéaires bouclés.
+	\item Nous adoptons l'hypothèse d'architectures de contrôle reposant sur l'opérateur d'appariement. En particulier nous cherchons à généraliser le principe d'appariement (``pattern matching'') à l’œuvre en apprentisage automatique au cas des systèmes dynamiques non-linéaires bouclés.
 	\item Nous partons d'une hypothèse de calcul \textit{distribué} implémenté par les réseaux de neurones récurrents, c'est-à-dire que l'ensemble du calcul est réparti à parts égales sur les différents nœuds du réseau. Le ``temps de calcul'' correspond au temps de relaxation vers un attracteur. % Ce calcul est réalisé par l'ensemble des neurones du réseau. 
 	On parle aussi de réponse de population (ne dépendant pas d'un neurone seul).
 \end{itemize}
@@ -2594,9 +2599,9 @@ Par ailleurs~:
 	\item Les études sur la plasticité synaptique reposent largement sur  la simulation numérique. Les simulations numériques visent à établir des comportements d'ensemble difficilement déductibles du modèle, en particulier lorsque les modifications locales introduites par la plasticité synaptique ont des conséquences sur la dynamique d'ensemble. 
 	\item Nous validons principalement les modèles d'apprentissage proposés sur des tâches liées au contrôle moteur. Nous cherchons à établir les conditions dans lesquelles un réseau de neurones peut acquérir des compétences de contrôle sur l'appareil moteur et/ou sur des périphériques de sortie.  Ces validations impliquent~:
 	\begin{itemize}
-		\item Des problèmes ``jouets'' dont nous maîtrisons les paramètres,
-		\item Des architectures neuronales directement inspirées par les observations biologiques 
-		\item Des applications relevant du domaine de l’ingénierie (interfaces cerveau-machine en particulier)
+		\item des problèmes ``jouets'' dont nous maîtrisons les paramètres,
+		\item des architectures neuronales directement inspirées par les observations biologiques,
+		\item des applications relevant du domaine de l’ingénierie (interfaces cerveau-machine en particulier).
 	\end{itemize}  	
 \end{itemize}
 
@@ -2621,13 +2626,13 @@ Ces travaux sont présentés en détail dans la partie \ref{part:detail}. Je lis
 
 
 L'étude proposée dans \shortcite{Beslon2002},
-également rapportée dans \shortcite{Dau07}, porte sur un réseau récurrent aléatoire comportant une seule population. 
+également rapportée dans \shortcite{Dau07}, porte sur un réseau récurrent aléatoire comportant une seule population (voir section \ref{sec:RRNN}, page \pageref{sec:RRNN}). 
 Le paramètre de contrôle
 choisi place le réseau dans une région chaotique, proche de la transition vers le cycle limite.  
 Le réseau est soumis à une stimulation extérieure quasi stationnaire, évoluant à une vitesse très lente par rapport à la vitesse de 
 mise à jour du réseau. Une succession de régimes dynamiques distincts, séparés par des transitions brusques, est mise en évidence.
 Chaque régime est caractérisé par une distribution d'activité différente, qui se manifeste par la présence de fréquences caractéristiques
-distinctes dans le spectre de Fourier du signal moyen (voir section \ref{sec:criticalite}, page \pageref{sec:criticalite}). La différence qualitative entre les différents régimes observés (différence de fréquence principale) peut servir de support à une catégorisation des l'espace des entrées.  
+distinctes dans le spectre de Fourier du signal moyen (voir section \ref{sec:criticalite}, page \pageref{sec:criticalite}). La différence qualitative entre les différents régimes observés (différence de fréquence principale) peut servir de support à une catégorisation de l'espace des entrées.  
 
 
 
@@ -2637,12 +2642,12 @@ distinctes dans le spectre de Fourier du signal moyen (voir section \ref{sec:cri
 %Lorsque les liens $J_{ij}$ sont indépendants . 
 
 
-Les réseaux de neurones dits ``équilibrés''  (balanced neural networks) sont des réseaux  constitués d'une population de noeuds inhibiteurs et d'une population de noeuds excitateurs. L'équilibre se référant à l'idée d'équilibre
+Les réseaux de neurones dits ``équilibrés'' (balanced neural networks) sont des réseaux  constitués d'une population de nœuds inhibiteurs et d'une population de nœuds excitateurs. L'équilibre se référant à l'idée d'équilibre
 dynamique entre deux forces opposantes~: la dynamique du réseau est amenée à converger vers un point d'équilibre
 traduisant localement (et globalement) le ``poids'' des deux influences. Une configuration des poids se traduisant
 par une activité endogène soutenue 
 traduit une domination de l'influence excitatrice. 
-A l'inverse, une configuration où l'activité intrinsèque disparait après un certain temps 
+A l'inverse, une configuration où l'activité intrinsèque disparaît après un certain temps 
 traduit une domination de l'activité inhibitrice.
 Comme dans le cas des réseaux aléatoires simples, il existe un paramètre de contrôle correspondant au rapport entre l'influence 
 excitatrice et l'influence inhibitrice. De manière intéressante, une grande variété de comportements dynamiques peuvent être observés
@@ -2652,7 +2657,7 @@ En étendant les équations de champ moyen au cas des populations multiples, nou
 d'axones (son coefficient de variation), jouant sur la nature des régimes développés (extinction, activité chaotique non spécifique et oscillations 
 synchronisées). Nous mettons en évidence
 le caractère régulateur du paramètre d'hétérogénéité dans les régimes de forte amplification (dits aussi de ``haute conductance'')~: l'hétérogénéité des liens défavorise le développement de dynamiques d'ensemble simples (type oscillations synchronisées) et favorise des signaux individuels fortement indépendants
-(voir section \ref{sec:multi_pop}, page \pageref{sec:multi_pop}).
+(voir section \ref{sec:multi_pop} et annexe \ref{app:NPL01}).
  
 %Le point de départ consistait à modéliser et reproduire certains comportements observés dans les 
 %réseaux de neurones naturels composés d'une population de neurones excitateurs et d'une population de neurones inhibiteurs.
@@ -2660,7 +2665,7 @@ le caractère régulateur du paramètre d'hétérogénéité dans les régimes d
 
 \subsubsection{c. Les graphes de connexions à la fois topographiquement organisés et équilibrés permettent d'implémenter une mémoire à court terme sur des neurones impulsionnels, sans faire appel à des mécanismes cellulaires spécifiques.}
 
-La question adressée par le modèle publié en 2004 \shortcite{Dau04} est celle de l'implémentation d'un modèle de champ neuronal sur un support composé
+La question abordée par le modèle publié en 2004 \shortcite{Dau04} est celle de l'implémentation d'un modèle de champ neuronal sur un support composé
 d'unités discrètes.
 %, comme l'activité dite ``persistante'' ainsi qu'une bonne sensibilité au signal d'entrée (switch). 
 Sur les modèles jusqu'alors proposés, dans un cas l'activité focale était soit uniquement réactive \shortcite{Han96},  
@@ -2670,7 +2675,7 @@ plasticité synaptique à court terme \shortcite{Com00}.
 Notre modèle est une des premières implémentations d'un champ neuronal sur support discret reposant sur des mécanismes de réseau
 uniquement.
 
-Le modèle proposé dans \shortcite{Dau04,Dau04b} (voir section \ref{sec:NatComp}) met en évidence la présence simultanée d'une activité de fond chaotique,
+Le modèle proposé dans \shortcite{Dau04b,Dau04} (voir section \ref{sec:NatComp} et annexe \ref{app:NC04}) met en évidence la présence simultanée d'une activité de fond chaotique,
 de grandes oscillations lentes et de foyers d'activité de type champ neuronal, sur un réseau de neurones composé d'unités neuronales binaires.
 Comme dans le cas du champ neuronal continu \shortcite{Ama77B}, l'activité persistante repose sur l'activité excitatrice locale, avec 
 un effet de lissage lié à l'hétérogénéité des connexions. Les oscillations lentes reposent sur 
@@ -2685,7 +2690,7 @@ dynamique de relaxation d'un réseau de neurones dont le graphe
 de connexions est issu de l'analyse des faisceaux de matière blanche à l'échelle du cerveau entier \shortcite{Hagmann2008}.
 
 La dynamique, inspirée par \cite{Hopfield1984}, est définie par l' équation différentielle~:
-			$$\tau\frac{dx_i}{dt} = -x_i + \frac{1}{2} \sum_{j=1}^N J_{ij} (1 + \tanh(g(p x_j - \theta_j)))
+			$$\tau\dot{x}_i = -x_i + \frac{1}{2} \sum_{j=1}^N J_{ij} (1 + \tanh(g(p x_j - \theta_j)))
 		\hspace{1cm}\text{avec}\hspace{1cm}
 			\theta_i = \frac{1}{2}\sum_{j=1}^N J_{ij}$$
 où $g$ est le gain, $p$ une constante de proportionnalité (ratio excitation/inhibition) et $ \boldsymbol{J}$ la matrice des couplages issue de l'imagerie fonctionnelle humaine.
@@ -2718,10 +2723,9 @@ appelée le colliculus supérieur.
 L'étude présentée dans \shortcite{Dauce2011} (voir page \pageref{sec:orientation-spatiale} et annexe \ref{app:CNS11B}), c'est-à-dire sur un intervalle temporel précis, ``programmé''.
 Notre étude, en implémentant de façon détaillée des populations de neurones à impulsions, 
 \begin{itemize}
-	
-	\item simule l'activité autonome d'une carte colliculaire bidimensionnelle constituée de plusieurs milliers de neurones
-	\item implémente un mécanisme de décision par ``levée d'inhibition'' 
-	\item contrôle l'activité sur la carte dans le temps et dans l'espace via des mécanismes d'\textit{intégration}
+	\item simule l'activité autonome d'une carte colliculaire bidimensionnelle constituée de plusieurs milliers de neurones,
+	\item implémente un mécanisme de décision par ``levée d'inhibition'' ,
+	\item contrôle l'activité sur la carte dans le temps et dans l'espace via des mécanismes d'\textit{intégration},
 	\item utilise, pour le contrôle de la durée (100~ms environ), des neurones à constante de membrane lente, 
 	faisant l'économie d'un mécanisme d'intégration par population.
 \end{itemize}
@@ -2748,7 +2752,7 @@ Ces règles de plasticité ne sont pas nécessairement convergentes. Elles sont 
 
 Dans le cadre de systèmes dynamiques ouverts (c'est-à-dire soumis à un signal d'entrée, voir l'équation (\ref{eq:recurrence}) page \pageref{eq:recurrence}), nous mettons en évidence deux mécanismes de réduction distincts~:
 \begin{itemize}
-	\item L'article \shortcite{Dau98A} met en évidence  une simplification systématique de l'activité intrinsèque dans le cas d'une règle d'ordre 0. 
+	\item L'article \shortcite{Dau98A} (voir section \ref{sec:NN98} page \pageref{sec:NN98} et annexe \ref{app:NN98}) met en évidence  une simplification systématique de l'activité intrinsèque dans le cas d'une règle d'ordre 0. 
 	La réponse au motif
 	d'entrée change sous l'effet de la plasticité~:
 	en partant d'un régime chaotique, la dynamique évolue vers un cycle limite, puis, de manière asymptotique, vers le point fixe. On parle de ``réduction'' de la dynamique, la plasticité 
@@ -2804,7 +2808,7 @@ Les travaux présentés dans \shortcite{Dau00,Dau02} implémentent un modèle de
 simples présentés précédemment (figure~\ref{fig:BC02-archi}, page~\pageref{fig:BC02-archi}).
 \begin{itemize}
 	\item 
-Sur des réseaux récurrents de grande taille, les signaux périodiques sont ``capturés par la dynamique interne du réseau par accrochage de fréquence. Ils activent spontanément un circuit spécifique sur la couche secondaire (figure \ref{fig:periode_expl}, page \pageref{fig:periode_expl}).
+Sur des réseaux récurrents de grande taille, les signaux périodiques sont ``capturés'' par la dynamique interne du réseau par ``accrochage de fréquence'' \cite{Arn78}. Ils activent spontanément un circuit spécifique sur la couche secondaire (figure \ref{fig:periode_expl}, page \pageref{fig:periode_expl}).
 \item  
 La plasticité, en présence d'un signal d'entrée spatio-temporel, régularise ce circuit d'activité interne. Du fait des correspondances statistiques entre cette activité interne et la couche d'entrée, la plasticité a également pour effet d'intensifier le motif spatio-temporel d'entrée via les liens de feedback (figure \ref{fig:BC02-app}, page \pageref{fig:BC02-app})
 	\item L'aller-retour du signal entre la couche primaire et la couche secondaire conduit à une \textit{résonance} (ou réverbération) entre l'entrée sensorielle et la couche interne.
@@ -2830,21 +2834,20 @@ capable de compléter les morceaux manquants, selon un mécanisme auto-associati
 	
 	Au cours du temps, les caractéristiques du signal présenté en entrée conduisent à des alternances de décomposition et de recomposition de l'activité réverbérante.
 	On peut également assimiler ces transitions au passage d'un état ``bas'' (non spécifique) à un état ``haut''
-	(spécifique), puis au retour vers un état ``bas'', etc., un peu comme dans le modèle de \shortcite{Brunel2000persistent} (voir aussi page~\pageref{page:alternance}).
+	(spécifique), puis au retour vers un état ``bas'', etc., un peu comme dans le modèle de \shortcite{Brunel2000persistent} (voir aussi étude {\bf i}).
 \end{itemize} 
 
 
 \subsubsection{h. Dans les réseaux récurrents aléatoires de neurones à impulsions, la STDP permet de construire une fonction de réponse arbitraire sur un espace  d'entrée de séquences d'activation.}
 
 
-La plasticité dépendante des instants de tir (\textit{Spike-timing dependent plasticity} -- STDP)  est  une règle de plasticité dépendant de l'ordre de tir des neurones pré-synaptique et post-synaptique
+La plasticité dépendante des instants de tir (\textit{Spike-timing dependent plasticity} -- STDP)  est  une règle de plasticité dépendant de l'ordre de tir des neurones pré-synaptiques et post-synaptiques
 \cite{BIPOO98}.
 %L'utilisation d'une échelle temporelle fine permet d'améliorer le principe Hebbien~: %de transformation de la conjugaison
 %d'activité en causalité. 
 Cette règle est facilitatrice pour les synapses où l'activité 
-pré-synaptique précède causalement l'activité post-synaptique, et, à
-l'inverse, suppressive pour les synapses où l'activité post-synaptique précède (de manière anti-causale) l'activité pré-synaptique.
-Cette règle tend donc à favoriser les conjugaisons d'activité causalement liées, mais surtout, de manière symétrique, d'empêcher les 
+pré-synaptique précède causalement l'activité post-synaptique, et, inversement, suppressive pour les synapses où l'activité post-synaptique précède (de manière anti-causale) l'activité pré-synaptique.
+Cette règle tend donc à favoriser les conjugaisons d'activité causalement liées, mais surtout, de manière symétrique, à empêcher les 
 activités non causalement liées. 
 
 
@@ -2862,11 +2865,11 @@ la capture de dépendances aux échelles temporelles fines.
 Dans le cas d'une activité fortement
 irrégulière (chaos profond), la population de neurones semble en effet garder une 
 mémoire assez faible des faits passés (autocorrélation du même ordre de grandeur). %{\color{Cyan}[REF?]}. 
-Les réponses produites par la STDP sur des entrées statiques s'apparentent à des ``bursts'' (bouffées) d'activité, qui impliquent 
+Les réponses induites par la STDP sur des entrées statiques s'apparentent à des ``bursts'' (bouffées) d'activité, qui impliquent 
 une grande partie des neurones du réseau
-\cite{Hen08B}, peu spécifiques et peu différents des comportement obtenus avec des neurones fréquentiels.
+\cite{Hen08B} (voir section \ref{sec:STDP} et annexe \ref{app:NCP08}), peu spécifiques et peu différents des comportement obtenus avec des neurones fréquentiels.
 
-L'étude présentée dans \shortcite{henry07} (voir annexe \ref{app:NCO07}) montre néanmoins
+L'étude présentée dans \shortcite{henry07} (voir section \ref{sec:STDP} et annexe \ref{app:NCO07}) montre néanmoins
 le caractère séquentiel de l'activité induite par la STDP, support ici de la mémoire à court terme.
 L'activité auto-entretenue 
 permet la prise en compte de dépendances entre des événements séparés par 
@@ -2879,7 +2882,7 @@ La présence de séquences d'activation spatio-temporelles reproductibles (dites
 telles que postulées par \shortcite{Izh06} en tant
 qu'unités opérationnelles élémentaires, 
 peut également être mise en évidence dans les réseaux aléatoires.
-Une étude que j'ai publiée récemment, utilisant des unités neuronales un peu plus détaillées \shortcite{Dau14a}  (voir annexe \ref{app:ESANN14A})
+Une étude que j'ai publiée récemment, utilisant des unités neuronales plus détaillées \shortcite{Dau14a}  (voir annexe \ref{app:ESANN14A})
 montre que la réponse de
 population à des stimuli spatio-temporels suit une séquence reproductible (mais bruitée) qui 
 peut être amplifiée par la plasticité (voir figure~\ref{fig:ESANN14}, page~\pageref{fig:ESANN14}).
@@ -2889,8 +2892,7 @@ peut être amplifiée par la plasticité (voir figure~\ref{fig:ESANN14}, page~\p
  et ceux qui ne le font pas.
  La STDP induit donc bien une structuration de l'activité interne 
  en amplifiant certaines séquences d'activation présentées de manière répétée (mais non périodiques) en entrée du réseau, favorisant
- l'émergence de séquences d'activation stables, comme postulé par \shortcite{izhikevich04,izhikevich06} ( 
- et contrairement aux observations de \shortcite{morrison07}). 
+ l'émergence de séquences d'activation stables, comme postulé par \shortcite{izhikevich04,izhikevich06} (et contrairement aux observations de \shortcite{morrison07}). 
  
 \subsubsection{i. L'apprentissage ``par cœur'' d'appariements sensori-moteurs spécifiques met en évidence, en milieu ouvert, des couplages transitoires entre la dynamique d'un réseau récurrent aléatoire et les trajectoires motrices.}
 
@@ -2898,7 +2900,7 @@ Certaines activités motrices (périodiques en particulier)
 semblent reposer sur un mécanisme de feedback positif,
 dans lesquels le milieu physique et la commande motrice forment un couple qui s'auto-renforce, 
 comme dans le cas de la locomotion. Cette activité rythmique spontanée peut être modulée par divers facteurs
-(contacts avec le sol ou avec des obstacles, orientation visuelle, ...) (voir aussi page \pageref{sec:feed-plus}).
+(contacts avec le sol ou avec des obstacles, orientation visuelle, etc.) (voir aussi page \pageref{sec:feed-plus}).
 
 L'expérience présentée dans 
 \shortcite{Quo00,Dau00b,Quoy2001,Dau02} a été conduite sur la plateforme de contrôle robotique PerAc \shortcite{Gaussier1995}.
@@ -2953,7 +2955,7 @@ L'apprentissage par renforcement définit un cadre formel à l'apprentissage de 
 d'essais/erreur.
 Le bruit moteur (réponse motrice aléatoire) joue un rôle important dans cette famille d'algorithmes.
 On parle d'\textit{exploration motrice}.
-La fonction d'appariement probabiliste $\pi_\Theta(\boldsymbol{u}|\boldsymbol{I})$, qui associe des probabilités de réponses aux différentes sorties en fonction de l'entrée, est appelée la ``politique''. Dans un système de contrôle en boucle fermée, la réponse effective $\boldsymbol{u}$ induit alors une nouvelle observation $\boldsymbol{I}'$ via l'échantillonnage du modèle inconnu $P$, etc. A l'instant $t$, un signal de récompense $r_t$ indique si cette séquence de choix était correcte ou pas. La séquence de décisions $\boldsymbol{u}_{1:t}$ vise ici à maximiser l'espérance de $r(t)$, qui joue le rôle d'une ``vraisemblance'' sur l'espace des couplages sensori-moteurs $(\boldsymbol{I},\boldsymbol{u})$.
+La fonction d'appariement probabiliste $\pi_\Theta(\boldsymbol{u}|\boldsymbol{I})$, qui associe des probabilités de réponses aux différentes sorties en fonction de l'entrée, est appelée la ``politique''. Dans un système de contrôle en boucle fermée, la réponse effective $\boldsymbol{u}$ induit alors une nouvelle observation $\boldsymbol{I}'$ via l'échantillonnage du modèle inconnu $P$, qui elle-même induit une nouvelle réponse $\boldsymbol{u}'$, etc. A l'instant $t$, un signal de récompense $r_t$ indique si cette séquence de choix était correcte ou pas. La séquence de décisions $\boldsymbol{u}_{1:t}$ vise ici à maximiser l'espérance de $r(t)$, qui joue le rôle d'une ``vraisemblance'' sur l'espace des couplages sensori-moteurs $(\boldsymbol{I},\boldsymbol{u})$.
 
 Les algorithmes  classiques
 utilisent un signal de renforcement pour guider l'apprentissage.  
@@ -2963,8 +2965,8 @@ L'algorithme du ``policy gradient'' \cite{Wil92,peters08}, par exemple,  met à 
 Dans un contexte de réseau de neurones récurrents aléatoires, le   caractère irrégulier de la dynamique intrinsèque  sert de support à l'exploration 
 motrice. 
 
-L'utilisation de récompenses ponctuelles nécessite de plus de prendre en compte (et produire les 
-modifications synaptiques) liées à la totalité de la trajectoire motrice
+L'utilisation de récompenses ponctuelles nécessite de prendre en compte (et produire les 
+modifications synaptiques liées à) la totalité de la trajectoire motrice
 (problème du ``temporal credit assignment'' \shortcite{SUTTON98}).
 Ce principe peut être mis en place via un mécanisme de trace synaptique, 
 c'est-à-dire une mémoire locale des co-activations récentes pour appliquer la modification synaptique.
@@ -3020,13 +3022,13 @@ c'est-à-dire par décomposition de la tâche complète en sous-tâches élémen
 
 \subsubsection{k. L'appariement par ``accumulation d'évidence'' implémente un mécanisme de révision des croyances dans un espace de choix concurrents.}
 
-Les modèles probabilistes fondés sur des processus stochastiques Markoviens (voir les équations (\ref{eq:accum1}) et (\ref{eq:accum2}), page \pageref{eq:accum1}) sont très populaires en modélisation biologiquement inspirée du fait de leur capacité rendre compte des profils de réponse extrêmement bruités à la fois de l'activité neuronale et des réponses comportementales.
-Les processus markoviens peuvent également implémenter, au même titre que les modèles déterministes, les phénomènes d'activité persistante, de rémanence et de mémoire à court terme, etc.
+Les modèles probabilistes fondés sur des processus stochastiques Markoviens (voir les équations (\ref{eq:accum1}) et (\ref{eq:accum2}), page \pageref{eq:accum1}) sont très populaires en modélisation biologiquement inspirée du fait de leur capacité à rendre compte des profils de réponse extrêmement bruités à la fois de l'activité neuronale et des réponses comportementales.
+Les processus Markoviens peuvent également implémenter, au même titre que les modèles déterministes, les phénomènes d'activité persistante, de rémanence, de mémoire à court terme, etc.
 
 Nous considérons ici le cadre 
  restreint où le modèle d'état  $P$ n'est pas connu. 
 %L'apprentissage consiste à construire ce modèle à partir des observations, en maximisant sa vraisemblance, étant données les observations (voir équation \ref{eq:Friston}) ainsi que des a priori sur la nature de ce modèle (nombre d'états, caractère Gaussien du bruit de mesure etc.).
-Nous considérons le cas où l'\textit{observation} $\boldsymbol{I}_{1:t} = (\boldsymbol{I}(1),...,\boldsymbol{I}(t)))$ est 
+Nous considérons le cas où l'\textit{observation} $\boldsymbol{I}_{1:t} = (\boldsymbol{I}(1),...,\boldsymbol{I}(t))$ est 
 le résultat de l'échantillonnage
  de ce modèle caché $P$.
  Le calcul de la distribution a posteriori $\hat{f}$ repose sur l'observation $Q_\Theta(I|X)$ uniquement (voir l'équation (\ref{eq:accum2}), page \pageref{eq:accum2}).  
@@ -3034,7 +3036,7 @@ L'évolution de $\hat{f}$ au cours du temps décrit le processus de mise à jour
 % Si  $\boldsymbol{I}(t_f)$ est la dernière observation, $\hat{f}(t_f)$ permet de produire une 
 % décision basée sur l'{``accumulation d'évidence''}.
 
-Dans le cadre des modèles de l'appariement, l'évolution temporelle de  $\hat{f}$ modélise un mécanisme de décision par délibération, où, comme dans le cas des réseaux de neurones récurrents, plusieurs ``passages'' sont nécessaires pour aboutir à un compromis. L'estimation faite à l'instant $t$ sert de prior pour affiner l'estimation à l'instant $t+1$. 
+Dans le cadre des modèles de l'appariement, l'évolution temporelle de  $\hat{f}$ modélise un mécanisme de décision par délibération où, comme dans le cas des réseaux de neurones récurrents, plusieurs ``passages'' sont nécessaires pour aboutir à un compromis. L'estimation faite à l'instant $t$ sert de prior pour affiner l'estimation à l'instant $t+1$. 
 
 %{\color{Cyan}
 %[il manque des refs sur le sampling temporel et les intégrateurs neuronaux  
@@ -3060,18 +3062,18 @@ Les modèles mis en place dans le cadre de l'orientation temporelle \shortcite{M
 
 \subsubsection{l. En présence de signaux de renforcement binaires instantanés, l'apprentissage par exploration non-stochastique a les mêmes bornes d'erreur que l'apprentissage supervisé.}
 
-L'analogie entre les algorithmes d'apprentissage par renforcement et la recherche du maximum de vraisemblance peut être poussée un peu plus loin dans le cas où le problème d'apprentissage consiste à apparier une entrée $\boldsymbol{I}_t$ à une catégorie $\boldsymbol{u}_t$ sur la base d'un signal de renforcement instantané binaire $r_t$ de type ``bien/pas bien''. Une correspondance formelle peut alors être établie entre l'algorithme du policy gradient (sans trace) et l'algorithme du gradient logistique qui suit le maximum de vraisemblance sous hypothèse gaussienne.
+L'analogie entre les algorithmes d'apprentissage par renforcement et la recherche du maximum de vraisemblance peut être poussée un peu plus loin dans le cas où le problème d'apprentissage consiste à apparier une entrée $\boldsymbol{I}_t$ à une catégorie $\boldsymbol{u}_t$ sur la base d'un signal de renforcement instantané binaire $r_t$ de type ``bien/pas bien''. Une correspondance formelle peut alors être établie entre l'algorithme du policy gradient (sans trace) et l'algorithme du gradient logistique qui suit le maximum de vraisemblance sous hypothèse Gaussienne.
 Avec un choix judicieux des valeurs de récompense, la mise à jour du policy gradient \textit{rejoint en espérance} le gradient logistique, ce qui permet d'appliquer une politique de \textit{choix non stochastique} (politique du maximum a posteriori). 
 
 \begin{itemize}
 	\item Cette approche est mise en oeuvre dans le cadre d'un clavier virtuel P300 guidé par une touche ``backspace''  \shortcite{Dauce2013b,Dauce2015} (voir page \pageref{sec:BCI} et annexe \ref{app:IJCNN15}). 
 	\begin{itemize}
-		\item Nous montrons qu'avec une décision non-stochastique et en l'absence de modèle, le classifieur converge vers taux de réponse comparable à l'état de l'art en classification BCI.
+		\item Nous montrons qu'avec une décision non-stochastique et en l'absence de modèle, le classifieur converge vers un taux de réponse comparable à l'état de l'art en classification BCI.
 		\item Nous montrons également, dans le cas d'environnements non-stationnaires, que l'utilisation d'un terme de régularisation dans la règle de mise à jour définit un modèle ``glissant'' qui s'adapte aux changements de l'environnement.
 	\end{itemize} 
 	\item Dans le cadre voisin de l'optimisation quadratique  \shortcite{Vapnik1998,Crammer2006}, nous montrons également, dans le cadre
 	d'un guidage binaire (dit de type ``bandit'' \-- travail de thèse d'Hongliang Zhong), que la borne de l'erreur cumulée est identique à celle obtenue avec un guidage complet.  
-	Contrairement à l'algorithme du banditron généralement utilisé dans ce cadre \shortcite{Kakade2008}, cette propriété conduit également à la possibilité de politiques d'exploration avec un bruit arbitrairement petit, autrement dit à une politique  de choix non-stochastique.
+	Contrairement à l'algorithme du Banditron généralement utilisé dans ce cadre \shortcite{Kakade2008}, cette propriété conduit également à la possibilité de politiques d'exploration avec un bruit arbitrairement petit, autrement dit à une politique  de choix non-stochastique.
 \end{itemize}
  
 
@@ -3250,10 +3252,10 @@ Avec un choix judicieux des valeurs de récompense, la mise à jour du policy gr
 
 
 
-\textit{Ce chapitre présente enfin un certain nombre de questions laissées ouvertes par ces travaux, et présente
+Ce chapitre présente enfin un certain nombre de questions laissées ouvertes par ces travaux, et présente
 	un cadre conceptuel général pour des développements possibles en neurosciences computationnelles. Deux projets
 	de recherche plus concrets sont également proposés, d'une part dans le cadre de la simulation large échelle des fonctions
-	cérébrales, et d'autre part dans le cadre des interfaces cerveau-machine.}
+	cérébrales, et d'autre part dans le cadre des interfaces cerveau-machine.
 
 %{\color{Orange}\textit{Dans la plupart des études que nous avons présentées, le fonctionnement du système nerveux nous a servi de guide pour
 %	développer des architectures cognitives susceptibles de développer une certaine ``subjectivité''.
@@ -3290,7 +3292,7 @@ Le principe de l'appariement par rétroaction positive correspond à une recherc
 La réponse du programme n'est pas instantanée, mais s'inscrit dans une trame temporelle. Elle s'apparente à un mécanisme d'\textit{intégration} (études {\bf g}, {\bf h} et {\bf k}). L'implémentation neuronale peut reposer sur des mécanismes cellulaires seuls (étude {\bf e}), ou sur une relaxation à l'échelle d'une population (études {\bf a}, {\bf c} et {\bf g}) 
 %La correspondance conduit à une réponse spécifique. L'absence de correspondance conduit à une réponse générique.
 
-Le mécanisme de l'appariement, au centre des algorithmes d'apprentissage, prend la forme d'une réduction de complexité de la dynamique intrinsèque (étude {\bf f}). Deux grandes familles  plasticités sont abordées~:
+Le mécanisme de l'appariement, au centre des algorithmes d'apprentissage, prend la forme d'une réduction de complexité de la dynamique intrinsèque (étude {\bf f}). Deux grandes familles de plasticité sont abordées~:
 \begin{itemize}
 	\item Les plasticités d'{``ordre 0''}, guidées par un signal de renforcement, identifient les relations d'entrée-sortie les plus favorables, selon un principe qui s'apparente au gradient logistique (études {\bf j} et {\bf l}).
 	\item Les plasticités d'{``ordre 1''} amplifient, au sein du réseau, des séquences d'activation récurrente, permettant de construire des réponses relatives à des événements temporellement séparés (études {\bf g} et {\bf h}).
@@ -3312,10 +3314,10 @@ réponses comportementales, éventuellement stabilisées dans le cas où elles a
 \paragraph{}
 De manière un peu plus générale~:
 \begin{itemize}
-\item Dans un réseau récurrent, le caractère hétérogène et irrégulier du graphe de con\-ne\-xions permet, en régime critique, de constituer un ensemble  varié de  réponses à des signaux extérieurs. Le hasard (l'aléa des connexions) constitue ici un principe structurant qui sépare l'environnement en régions distinctes, autrement dit qui ``digitalise'' l'environnement, selon un principe proche de l'{``auto-encodage''} tel qu'il est mis en œuvre dans les réseaux profonds \shortcite{Hinton2006} (études {\bf a}, {\bf b}, {\bf c} et {\bf d}).  
+\item Dans un réseau récurrent, le caractère hétérogène du graphe de con\-ne\-xions permet, en régime critique, de constituer un ensemble  varié de  réponses à des signaux extérieurs. Le hasard (l'aléa des connexions) constitue ici un principe structurant qui sépare l'environnement en régions distinctes, autrement dit qui ``digitalise'' l'environnement, selon un principe proche de l'{``auto-encodage''} tel qu'il est mis en œuvre dans les réseaux profonds \shortcite{Hinton2006} (études {\bf a}, {\bf b}, {\bf c} et {\bf d}).  
 \item Il semble possible d'établir un lien entre la plasticité d'ordre 1 (études {\bf g} et {\bf h}) et le principe d'``accumulation d'évidence'' dans un environnement incertain (étude {\bf k}). Sur des échelles de temps relativement courtes, la plasticité dépendante des instants de tir contribue à renforcer certaines séquences d'activation spécifiques, et donc à établir des liens causaux entre événements séparés. Ce mécanisme conduit également à une réponse de population via la synchronisation et la réduction de complexité (études {\bf f}, {\bf g} et {\bf h}), 
  qui pourrait correspondre à la formation d'un ``canal de communication'' transitoire entre l'échelle microscopique et l'échelle macroscopique, autorisant la mise en œuvre de programmes moteurs spécifiques. 
- \item Nous avons également contribué, selon un principe de codage fréquentiel (non lié aux instants de tir), à établir une correspondance entre la règle de Hebb, dans sa variante ``guidée'', et la recherche du maximum de vraisemblance dans un espace de couples (perception, action), où la combinaison de recherches d'optima locaux s'apparente à la recherche d'un optimum global en l'absence de modèle de l'environnement (étude {\bf j} et {\bf l}).   
+ \item Nous avons également contribué, selon un principe de codage fréquentiel (non lié aux instants de tir), à établir une correspondance entre la règle de Hebb, dans sa variante ``guidée'', et la recherche du maximum de vraisemblance dans un espace de couples (perception, action), où la combinaison de recherches d'optima locaux s'apparente à la recherche d'un optimum global en l'absence de modèle de l'environnement (études {\bf j} et {\bf l}).   
 %Dans le cadre des systèmes de contrôle en boucle fermée, nous avons considéré la commande motrice comme un mécanisme de relaxation qui conjugue un attracteur appartenant à l'espace des activités neuronales 
 % avec un attracteur appartenant à l'espace de la réalisation motrice (étude {\bf i}).  c'est-à-dire  dans  forment un répertoire ont une traduction en imagerie fonctionnelle sous la forme de corrélations longue distance telles qu'observées dans le cas de l'état de repos (étude {\bf d}).
  
@@ -3332,7 +3334,7 @@ De manière un peu plus générale~:
 \subsection{Discussion}
 Le travail de compilation et de relecture/réexamen de résultats parfois anciens liés à la rédaction de ce rapport a été l'occasion de développer quelques rapprochements qui ne sont pas présents en tant que tels dans les publications. 
 
-Il m'a permis de mettre à jour ce qui semble être une difficulté fondamentale dans l'apprentissage de compétences motrices, qui nécessite probablement un examen fouillé dépassant le cadre de ce rapport.
+Il m'a permis de mettre à jour ce qui semble être une difficulté fondamentale liée au fait de vouloir appliquer les principes de l'apprentissage automatique à l'acquisition de compétences motrices. Cette difficulté nécessiterait probablement un examen fouillé dépassant le cadre de ce rapport.
 
 \paragraph{}
 Comme nous l'avons vu, la plupart des algorithmes d'apprentissage fonctionnent selon un principe d'\textit{appariement} (``pattern matching''), c'est-à-dire sur la construction, à partir des données, d'un ensemble de vecteurs ``caractéristiques''. 
@@ -3345,14 +3347,20 @@ L’apprentissage revient donc à la constitution d'un vocabulaire de base qui s
 \paragraph{} 
 Il existe cependant peu d'exemples dans la littérature où ces familles d'algorithmes, dits d'auto-encodage,
  aboutissent à l'apprentissage d'une loi de contrôle dans un espace d'actions continu.
-Il semble y avoir une séparation conceptuelle et pratique entre, d'une part, l'approche systèmes dynamiques et, d'autre part, la reconnaissance de formes. 
-Cette difficulté semble être liée au fait que les distances, telles qu'elles sont définies dans l'espace euclidien de la commande, ne sont pas conservées dans les espaces de redescription. 
-%La multitude des récepteurs sensoriels, d'une part, et le caractère continu des déplacements, d'autre part, forment un tout disparate. 
-Pour chaque tâche, les différentes réponses liées aux différentes dispositions des actionneurs et des capteurs dans l'espace physique devraient donc être apprises ``par cœur''.
+Cette difficulté semble liée à la séparation conceptuelle et pratique entre, d'une part, l'approche systèmes dynamiques et, d'autre part, la reconnaissance de formes. 
+\begin{itemize}
+%	\item D'autre part, %la multitude des récepteurs sensoriels et le caractère continu des déplacements forment un tout disparate. 
+	%Pour chaque tâche, les différentes réponses liées aux différentes dispositions des actionneurs et des capteurs dans l'espace physique devraient donc être apprises ``par cœur''.
+\item La simplification, qui consiste à considérer un milieu intérieur (intensif) et un milieu extérieur (extensif)
+	couplés comme un seul et même système dynamique, se
+	heurte ainsi au caractère inhomogène de ce couplage. 
+\item En particulier les distances, telles qu'elles sont définies dans l'espace Euclidien de la commande, ne sont pas conservées dans les espaces de redescription utilisés en reconnaissance de formes. 
+\item Le caractère disparate de ces espace de caractéristiques conduit à poser le problème de leur ``assemblage'' pour produire des réponses adaptées aux  dispositions des actionneurs et des capteurs dans l'espace physique.
+\end{itemize}
 
-La simplification, qui consiste à considérer un milieu intérieur (intensif) et un milieu extérieur (extensif)
-couplés comme un seul et même système dynamique, se
-heurte ainsi au caractère inhomogène de ce couplage~:
+
+
+
 
 %{\color{Orange}Nous avons souligné dans la partie précédente le caractère parfois incompatible entre d'une part la théorie du contrôle, et d'autre part l'apprentissage moteur. }
 
@@ -3380,7 +3388,7 @@ Cette théorie n'a cependant pas encore, comme nous l'avons vu, abouti à des r�
 \paragraph{}
 	En plus de la disparité d'échelle, les lois régissant les deux systèmes ne sont pas de même nature. 
 	Le monde physique est assez bien décrit par 
-	l'approximation newtonienne des masses en mouvement dans un milieu tri-dimensionnel.
+	l'approximation Newtonienne des masses en mouvement dans un milieu tri-dimensionnel.
 	%On parlera pour simplifier du milieu extensif pour désigner le monde physique, l'endroit où sont
 	%possibles des déplacements de masses par l'action des forces, les frottements et le contact. 
 	A l'inverse, l'activité logicielle s'inscrit dans un réseau où l'intensité des interactions est 
@@ -3392,7 +3400,7 @@ Cette dichotomie  implique un mode de fonctionnement composite, fondé d'une par
 et d'autre part sur des rapports entre formes (monde digital).
 D'une certaine façon, la plupart des modèles en neurosciences computationnelles 
 reposent sur un compromis, sur un ``bricolage'' entre les deux approches, ne prenant pas 
-toujours en compte le caractère parfois incompatible des deux modes de fonctionnement.
+toujours en compte le caractère inhomogène de ces deux ``mondes''.
 
 	\subsubsection{Espace métrique et espace sensoriel}	
 
@@ -3408,26 +3416,22 @@ toujours en compte le caractère parfois incompatible des deux modes de fonction
 	Les distances au sein de l'espace initial n'ont pas de traduction au sein de
 	l'espace de redescription.
 	L'approche par pattern matching ne garantit donc pas la proportionnalité des traitements entre signaux proches 
-	et signaux éloignés, comme le font les transformations linéaires (ou géométriques) traditionnelles.
+	et signaux éloignés, comme le font les transformations linéaires  traditionnelles.
 	Autrement dit la distance définie au sein de l'espace de redescription (l'espace contenant les caractéristiques du signal)
 	ne respecte pas nécessairement les distances ou la topologie de l'espace initial.
 	On parlera de manière générale d'espace ``qualitatif'' pour décrire cet espace de redescription, ou encore d'espace
-	``digital'' pour décrire un ensemble (non nécessairement relié) de caractéristiques.
+	``digital'' pour décrire un tel ensemble de caractéristiques.
 	
 De manière similaire, le caractère distribué de l'activité nerveuse suggère  la distribution d'une même composante sensorielle 
 	sur de nombreux neurones, chaque neurone étant sensible à une manifestation particulière
 	de cette composante. L'exemple le plus extrême est celui de la rétine dont l'activité met en jeu 
-	plusieurs millions de neurone sensoriels, chaque neurone étant la manifestation d'une valeur de luminance
+	plusieurs millions de neurones sensoriels, chaque neurone étant la manifestation d'une valeur de luminance
 	(et de longueur d'onde) en un point précis de la scène visuelle.
 
-	
 
-
-
-
-\subsubsection{Problème de l'assemblage}
+\subsubsection{Problème de l'assemblage (``\textit{Binding problem}'')}
 Les modèles classiques de la commande motrice reposent implicitement sur l'hypothèse d'un espace physique extensif où prennent place des transformations linéaires\footnote{
-	Ces prédictions s'apparentent à des opérations géométriques (isométriques), soit des translations et
+	où les prédictions s'apparentent à des opérations isométriques, soit des translations et
 	des rotations. Par exemple, les objets visibles sont translatés vers la gauche du champ visuel lorsque le regard  tourne
 	vers la droite. Nous avons donc un référentiel (celui de la direction du regard) qui est translaté, redéfinissant
 	les coordonnées des différents objets qui composent la scène visuelle. Le référentiel visuel est lui-même défini par rapport au
@@ -3445,8 +3449,8 @@ rend difficile, comme nous l'avons vu, la réalisation d'opérations simples com
 	%une cible par exemple
 	Le problème se pose plus généralement lorsqu'il s'agit d'estimer, au sein de l'espace de redescription, des quantités \textit{relatives} à différents
 	points de l'espace pré-moteur ou de l'espace sensoriel (et non des quantités absolues).
-	Si chaque composante sensorielle de l'espace métrique environnant 
-	est décomposé en constituants élémentaires (intervalles ou ``pixels'' d'environnement), activant
+	Si chaque modalité sensorielle de l'espace métrique environnant 
+	est décomposée en constituants élémentaires (intervalles ou ``pixels'' d'environnement), activant
 	ou désactivant différentes populations de neurones primaires, 
 	alors les transformations aussi simples que les translations, rotations, voire même l'identité, 
 	etc. doivent être apprises ``par cœur'' \cite{Pouget1997} et ne peuvent résulter de la combinaison d'activités unitaires,
@@ -3457,11 +3461,11 @@ rend difficile, comme nous l'avons vu, la réalisation d'opérations simples com
 % comme nous l'avons vu, les opérations de ce type~: une transformation qui, étant  et 
 %un changement de référentiel,  nécessite de faire référence à deux points de l'espace .
 	
-Par exemple, un simple ``pattern matching'' nécessiterait un apprentissage par cœur de la conséquence visuelle 
+L'apprentissage, par exemple, de la conséquence visuelle d'une commande d'orientation visuelle par ``pattern matching'' nécessiterait un apprentissage par cœur de la conséquence visuelle 
 de toutes les combinaisons de dispositions d'objets et de tous les changements de référentiel tronc-tête, ce qui parait 
-computationnellement très coûteux (\shortcite{Pouget1997,Pouget2002}). Il est nécessaire néanmoins que le ``lien'' praxo-visuel entre les différents objets de la scène ne soit pas perdu
+computationnellement très coûteux (\shortcite{Pouget1997,Pouget2002}). Il est néanmoins nécessaire  que le ``lien'' praxo-visuel entre les différents objets de la scène ne soit pas perdu
 au cours des déplacement moteurs
-(Un raisonnement symétrique peut être appliqué pour le cas des déplacements du corps dans un environnement visuel stable).	
+(un raisonnement symétrique peut être appliqué pour le cas des déplacements du corps dans un environnement visuel stable, comme dans le cas du réflexe vestibulo-oculaire \cite{Paillard1978}).	
 %	Ceci pose un problème en particulier lorsqu'il s'agit de contrôler les déplacements du corps à partir de l'activité
 %	distribuée induite par les récepteurs sensoriels.
 %	Le problème se pose lorsqu'il faut
@@ -3513,7 +3517,7 @@ L'hypothèse de l'assemblage dynamique est celle qui, à l'heure actuelle, sembl
 d'implémenter le lien praxo-visuel, sans faire appel à une activité centrale spécifique ou
 à un modèle interne. Elle évite en particulier le coût combinatoire des changements de
 référentiels. Le mécanisme le plus populaire est celui qui a été proposé initialement
-par \shortcite{Konig91a} (voir également \shortcite{Rod99,Wang2010}) 
+par \shortcite{Konig91a} (voir également \shortcite{Rod99,WangXJ2010}) 
 reposant sur les résonances entre oscillateurs. Il reste néanmoins
 de nombreuses questions relatives à l'implémentaton concrète (ou opérationnelle) de ces mécanismes,
 ainsi que sur leur caractère (ou non) prédictif. 
@@ -3699,15 +3703,15 @@ Pour éviter ce problème, il faut donc établir des règles de contrôle \texti
 	Varela, FJ
 \end{flushright}	
 
-Un premier projet que je souhaiterais développer dans ce cadre est d'identifier les principes de construction de l'espace métrique tridimensionnel courant,
+Un premier projet que je souhaiterais développer dans ce cadre est d'identifier les principes de construction de l'espace métrique tridimensionnel courant
 tel que nous l'expérimentons dans nos interactions quotidiennes avec l'environnement. 
 
 Si nous regardons l'activité sensori-motrice telle qu'elle se déploie à l'échelle macroscopique, on constate que l'activité humaine est fortement guidée par la composante visuelle.
 Si on regarde de plus près l'interrelation entre l'exploration visuelle et
 l'action simple consistant à manipuler des objets situés à portée de bras,
-deux grands domaines attentionnels peuvent être définis. 
+deux grands domaines attentionnels peuvent être définis~:
 \begin{itemize}
-	\item D'une part 
+	\item d'une part 
 	le domaine visuel, organisé autour de la direction du regard;
 	\item d'autre part,
 	l'espace de travail, organisé autour des opérations sur des objets
@@ -3735,10 +3739,10 @@ de permanence de l'objet \cite{Piaget1973}, les différentes objets de la scène
 et restent statiques dans l'espace visuel lorsque le corps bouge, et inversement varient dans l'espace visuel et 
 restent statiques dans l'espace pré-moteur lorsque le regard bouge. \begin{itemize}
 	\item Etant supposée par exemple la permanence
-	des objets dans l'espace de pré-moteur, il est possible de prédire leur position dans le champ visuel étant
+	des objets dans l'espace pré-moteur, il est possible de prédire leur position dans le champ visuel étant
 	donnée la direction du regard.
 	\item Inversement, étant donnée la permanence des objets dans l'espace visuel, il est possible
-	de prédire leur position dans l'espace pré-moteur étant donné le déplacement du corps (il est difficile de bouger à la fois le corps et le regard)
+	de prédire leur position dans l'espace pré-moteur étant donné le déplacement du corps (il est difficile de bouger à la fois le corps et le regard).
 \end{itemize} 
 
 
@@ -3747,11 +3751,11 @@ référentiel définit la position des mêmes objets dans un autre référentiel
 La bijection entre les deux espaces offre
 un bon support à l'invariance ainsi qu'à la prédiction sensorielle. % selon le principe du ``predictive coding'' \shortcite{Rao1999}. 
 
-Le mécanisme de construction de l'espace métrique environnant reste encore à l'heure actuelle non-élucidé. Nous avons vu que le caractère ``digital'' de l'activité neuronale rend difficile, en interne, la construction d'opérateurs sur cet espace.
+Le mécanisme de construction de l'espace métrique environnant reste à l'heure actuelle non-élucidé. Nous avons vu que le caractère ``digital'' de l'activité neuronale rend difficile, en interne, la construction d'opérateurs sur cet espace.
 Ce mécanisme semble pourtant pouvoir être implémenté sur la base de principes d'appariement très simples, mais n'a, à ma connaissance, pas encore été proposé en modélisation. Deux principes semblent s'imposer dans ce cadre : 
 \begin{enumerate}
-	\item La commande par champ de vecteurs
-	\item Le principe de l'alternance visuo-motrice
+	\item la commande par champ de vecteurs,
+	\item le principe de l'alternance visuo-motrice.
 \end{enumerate}
 
 
@@ -3766,7 +3770,7 @@ trajectoire métrique à partir de l'activité de différents neurones \shortcit
 
 La commande balistique par combinaison de champ de vecteurs, telle qu'elle a été proposée par \shortcite{Mussa2004}, permet de rendre compte de cette organisation spatiale de la commande motrice. Selon cette approche~:
 \begin{itemize}
-	\item les commandes motrices balistiques correspondent à la définition d'un attracteur dans l'espace de la tâche.  Cet attracteur est produit comme combinaison de différents champs de vecteurs (appelés ``primitives motrices''). Ce type de commande ne nécessite pas référence à un point d'opération externe (voir aussi page \pageref{sec:feed-plus}). La dynamique de relaxation et les constantes de temps propres à l'effecteur contrôlé conduisent les différentes articulations vers leur point d'équilibre.
+	\item les commandes motrices balistiques correspondent à la définition d'un attracteur dans l'espace de la tâche.  Cet attracteur est produit comme combinaison de différents champs de vecteurs (appelés ``primitives motrices''). Ce type de commande ne nécessite pas de référence à un point d'opération externe (voir aussi page \pageref{sec:feed-plus}). La dynamique de relaxation et les constantes de temps propres à l'effecteur contrôlé conduisent les différentes articulations vers leur point d'équilibre.
 	\item L'ensemble des points que le bras peut atteindre forme une région de l'espace tridimensionnel. Le cortex moteur reproduit cette organisation spatiale~: le cortex est organisé sous la forme d'une carte motrice bidimensionnelle où chaque région de la carte correspond à une combinaison différente de primitives motrices conduisant la main vers un point de l'espace tridimensionnel environnant (péripersonnel). 
 \end{itemize}
 Ainsi:
@@ -3791,8 +3795,8 @@ une posture de la main. A ces deux espaces s'ajoute un troisième, qui est celui
 
 Dans ce cadre, l'apprentissage de l'espace (le fait de pouvoir situer dans l'espace péripersonnel l'ensemble des points de la scène visuelle) peut s'organiser autour de deux mécanismes d'appariement~:
 \begin{itemize}
-	\item Appariement par ancrage visuel. L'ancrage visuel signifie que la direction du regard est fixe $\boldsymbol{u_v}$. L'activité de manipulation permet, dans le contexte défini par $\boldsymbol{u_v}$, d'apparier différentes scènes visuelles $\boldsymbol{I}_1, \boldsymbol{I}_2, ...$ avec différentes positions de la main $\boldsymbol{u}_{p,1}, \boldsymbol{u}_{p,2}, ...$.
-	\item Appariement par ancrage postural. Un point de l'espace péripersonnel s'apparente ici à un ``objet'', c'est-à-dire un élément de l'environnement atteignable par la main. L'ancrage postural correspond ici à la positon de la main sur (ou à la préparation d'un mouvement de la main vers) ce point de l'espace. Si on suppose un ancrage postural fixe $\boldsymbol{u_p}$,  l'activité d'orientation (changement de point focal du regard)  permet, dans le contexte défini par $\boldsymbol{u_p}$, d'apparier différentes scènes visuelles $\boldsymbol{I}_1, \boldsymbol{I}_2, ...$ avec différentes directions du regard $\boldsymbol{u}_{v,1}, \boldsymbol{u}_{v,2}, ...$, ce qui permet de constituer la \textit{permanence de l'objet} à travers différentes scènes visuelles.  
+	\item Appariement par ancrage visuel. L'ancrage visuel signifie que la direction du regard $\boldsymbol{u_v}$ est fixe. L'activité de manipulation permet, dans le contexte défini par $\boldsymbol{u_v}$, d'apparier différentes scènes visuelles $\boldsymbol{I}_1, \boldsymbol{I}_2, ...$ avec différentes positions de la main $\boldsymbol{u}_{p,1}, \boldsymbol{u}_{p,2}, ...$.
+	\item Appariement par ancrage postural. Un point de l'espace péripersonnel s'apparente ici à un ``objet'', c'est-à-dire un élément de l'environnement atteignable par la main. L'ancrage postural correspond ici à la position de la main sur (ou à la préparation d'un mouvement de la main vers) ce point de l'espace. Si on suppose un ancrage postural fixe $\boldsymbol{u_p}$,  l'activité d'orientation (changement de point focal du regard)  permet, dans le contexte défini par $\boldsymbol{u_p}$, d'apparier différentes scènes visuelles $\boldsymbol{I}_1, \boldsymbol{I}_2, ...$ avec différentes directions du regard $\boldsymbol{u}_{v,1}, \boldsymbol{u}_{v,2}, ...$, ce qui permet de constituer la \textit{permanence de l'objet} à travers différentes scènes visuelles.  
 \end{itemize}
 
 Il reste à déterminer dans ce cadre (1) l'appariement à mettre en œuvre (par produit scalaire, probabiliste ou par relaxation vers un attracteur), (2) de préciser le mécanisme spécifiant l'alternance entre les deux principes d'ancrage, et (3) le principe qui guide le choix et l'actualisation de la commande motrice. 
@@ -3939,7 +3943,7 @@ Dans ce cadre,
 \subsection{Vers une approche computationnelle de l'activité à large échelle}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Le milieu Marseillais offre des possibilités de collaboration nombreuses dans le domaine
+L'environnement Marseillais offre des possibilités de collaborations nombreuses dans le domaine
 de la modélisation biologiquement inspirée. Nous avons sur le campus de la Timone (faculté de Médecine)
 deux laboratoires de neurosciences directement intéressés par les problématiques de modélisation : l'INT
 (Institut de Neurosciences de la Timone), laboratoire CNRS en pointe sur la modélisation du système visuel,
@@ -3947,10 +3951,10 @@ du système moteur ainsi que sur l'analyse des données d'imagerie optique, et l
 des Systèmes), laboratoire INSERM en pointe sur l'analyse et la modélisation de l'épilepsie ainsi que sur la 
 modélisation dite à large échelle de l'activité nerveuse, à travers le projet TVB (The Virtual Brain) porté
 par Viktor Jirsa et Randy McIntosh (Université de Toronto). 
-Le laboratoire (INS) héberge également un centre de calcul principalement dédié à 
+L'INS héberge également un centre de calcul principalement dédié à 
 la mise en oeuvre des calculs coûteux liés à la simulation détaillée des processus de 
 diffusion à la surface d'une reconstruction 3D du cortex, dans le cadre de 
-l'interface de simulation TVB.
+l'interface de simulation du projet TVB.
 
 Cet environnement donne accès à des données d'observation sur l'animal, mais également chez l'humain dans le cadre
 des chirurgies pré-opératoires consistant à implémenter des électrodes stéréotaxiques profondes chez les
@@ -3961,7 +3965,7 @@ Les signaux obtenus dans le cadre de l'analyse pré-opératoire correspondent à
 se développant sur des échelles de temps et d'espace macroscopiques.
 L'objectif clinique (opérer le patient sans produire de lésions incapacitantes) nécessite une compréhension
 fine des grands mécanismes de réseau à l'oeuvre dans le cerveau.
-L'un des objectifs de l'ANR ``Vibrations'', financée à partir de 2014, et à laquelle je participe est de 
+L'un des objectifs de l'ANR ``Vibrations'', financée à partir de 2014, et à laquelle je participe, est de 
 produire des modèles large-échelle personnalisés pour chaque patient en observation. Il s'agit 
 en particulier d'améliorer le diagnostic (identifier la zone épileptogène) 
 ainsi que prédire les conséquences de la chirurgie, pour minimiser les
@@ -3986,7 +3990,7 @@ grandeurs caractéristiques de l'environnement.
 
 L'étude que nous avons conduite sur l'orientation visuelle (étude {\bf e})
 met en évidence une caractéristique importante de la commande motrice~:
-la simultanéité entre l'activité des structures motrice ou prémotrice
+la simultanéité entre l'activité des structures motrices ou prémotrices
 et le déplacement moteur correspondant (co-activité sur un intervalle de 
 l'ordre de 100~ms dans le cas de la saccade).
 Les données de la littérature indiquent que 
@@ -4044,15 +4048,15 @@ millisecondes \shortcite{van2010} (analyse EEG) ou quelques dizaines de secondes
 L'alternance rapide de l'activité semble être le support de  traitements cognitifs
 élémentaires. Le caractère rapide de ces alternances laisse supposer un mécanisme actif d'assemblage
 et de désassemblage des assemblées neuronales successivement actives, comme proposé dans \shortcite{Rod99}. 
-Une interprétation possibles est celle d'une alternance active, au sein du cerveau, entre une activité 
+Une interprétation possible est celle d'une alternance active, au sein du cerveau, entre une activité 
 principalement perceptive, préparatrice de l'action, et une activité principalement motrice, préparatrice
 de la perception. Cette alternance rapide entre préparation motrice et préparation 
 perceptive est un cadre possible à la réalisation du \textit{predictive coding}, comme stipulé par 
 \shortcite{Rao1999} (voir aussi \shortcite{Wurtz2008,Rolfs2011}). Les alternances à plus longue constante
 temporelle pourraient quant à elles reposer sur l'alternance déjà évoquée entre les activité d'exploration
 sensorielle au sens large et les activités liées à la manipulation et à l'utilisation des objets
-de l'environnement (sous la forme éventuelle de la simulation motrice), qui peuvent s'apparenter dans
-une certaine mesures aux processus internes et externes stipulés dans \shortcite{Fox2005}.
+de l'environnement (sous la forme éventuelle de la simulation motrice), qui peuvent s'apparenter, dans
+une certaine mesure, aux processus internes et externes stipulés dans \shortcite{Fox2005}.
 L'analyse des patrons d'activité développés à large échelle nécessite plus généralement une analyse
 fonctionnelle et non simplement structurelle. Il s'agirait ici de sortir des approches quantitatives
 pour poser les bases d'une interprétation plus computationnelle 
@@ -4063,13 +4067,13 @@ des modèles informatiques plus précis.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Nous avons également à Marseille une forte tradition en informatique théorique, portée
-historiquement par le LIF (Laboratoire d'Informatique Fondamentale), avec une expertise poussée 
+historiquement par le LIF (Laboratoire d'Informatique Fondamentale de Marseille), avec une expertise poussée 
 dans le domaine des langages fonctionnels, mais qui développe également une
 recherche de pointe en apprentissage automatique (Machine Learning).
 L'I2M (Institut de Mathématiques de Marseille) est également impliqué sur des
 thématiques proches du machine learning, en particulier dans le cadre du développement de
 modèles probabilistes en traitement du signal.
-Le centre INRIA de Sophia-Antipolis est également impliqués dans des 
+Le centre INRIA de Sophia-Antipolis est également impliqué dans des 
 collaborations régulières avec les laboratoires de neurosciences
 Marseillais, sur des thématiques en lien avec le traitement du signal et la 
 construction de modèles inverses en imagerie.
@@ -4088,7 +4092,7 @@ se basent sur une démarche de classification automatique, ne permettant pas une
 de l'évolution spatio-temporelle de l'EEG. 
 
 L'idée générale d'un projet applicatif de ce type serait de construire une interface
-dont les principes de fonctionnement devraient être aussi proche que possible, étant données
+dont les principes de fonctionnement devraient être aussi proches que possible, étant données
 les connaissance actuelles, du fonctionnement du système nerveux.
 Il s'agit, d'un côté, de bien comprendre l'activité large-échelle pour mieux
 interpréter les données issues des capteurs non invasifs (EEG, voire MEG).
@@ -4298,14 +4302,14 @@ du graphe de contraintes.
 %offre  un éclairage différent. 
 %sur l'expressivité d'un substrat en mettant en 
 %avant le caractère distribué (non-local) de l'activité. 
-%Contrairement à l'idée classique d'un noeud de sortie comme unité d'expression, 
+%Contrairement à l'idée classique d'un nœud de sortie comme unité d'expression, 
 %(par exemple unité de séparation dans le cas des classifieurs, 
 %unité de description dans le cas des cartes auto-organisées etc.), 
 L'expressivité du réseau est vue sous l'angle du nombre
 de patrons distribués (patterns) pouvant être obtenus en tant qu'état final (attracteur) atteint par le système
 dynamique décrit par les poids (arêtes) du réseau.
 La capacité s'exprime ici en nombre de modes (configurations atteignables) 
-et non en nombre de noeuds/vecteurs supports etc.
+et non en nombre de nœuds/vecteurs supports etc.
 
 
 
@@ -4831,8 +4835,8 @@ et donc l'hypothèse de chaos local (indépendance des activités) n'est plus va
 Les unités neuronales de chaque population reçoivent des coordonnées spatiales (ici prises uniformément sur un intervalle borné). %$[-\pi,\pi]$).
 Le tirage des poids synaptiques devient dépendant de la distance qui sépare deux unités.
 La valeur moyenne d'un poids est identique à celle du modèle précédent, 
-mais les noeuds les plus proches ont en espérance une valeur
-plus forte, et les noeuds les plus éloignés une valeur plus faible 
+mais les nœuds les plus proches ont en espérance une valeur
+plus forte, et les nœuds les plus éloignés une valeur plus faible 
 (la distribution des poids synaptiques repose sur le produit
 entre la distribution uniforme initiale et un noyau gaussien conservatif).
 Le mécanisme du champ neuronal, qui se caractérise par une connectivité majoritairement excitatrice à 
@@ -4975,18 +4979,18 @@ L'analyse du connectome (analyse ``structurelle'')  vient en complément
 de l'analyse des patrons d'activité observés dans l'exercice d'une tâche (analyse fonctionnelle).
 %(les mêmes grandes autoroutes sont présentes)
 Dans le cadre de cette analyse structurelle, 
-plusieurs indicateurs ont été proposées pour distinguer les noeuds les plus centraux (les plus ``importants'')
-des noeuds périphériques. Il est possible de mettre en évidence d'un ``noyau central'' \shortcite{Hagmann2008}  
-regroupant des noeuds médians servant de lien (ou de relais) entre la plupart des autres régions.
-Cet ensemble de noeuds présente des points communs avec le patron d'activité ``par défaut'' observé en imagerie fonctionnelle 
+plusieurs indicateurs ont été proposées pour distinguer les nœuds les plus centraux (les plus ``importants'')
+des nœuds périphériques. Il est possible de mettre en évidence d'un ``noyau central'' \shortcite{Hagmann2008}  
+regroupant des nœuds médians servant de lien (ou de relais) entre la plupart des autres régions.
+Cet ensemble de nœuds présente des points communs avec le patron d'activité ``par défaut'' observé en imagerie fonctionnelle 
 (l'activité observée lorsque le sujet n'est pas occupé à accomplir une tâche) \shortcite{Raichle2001}. 
 
-En partant de la structure du connectome, nous avons utilisé pour l'activation des noeuds
+En partant de la structure du connectome, nous avons utilisé pour l'activation des nœuds
 différentes variantes du modèle ``à réponse graduelle'' de Hopfield \shortcite{Hopfield1984}, 
 en changeant les caractéristiques du seuil d'activation afin de contrôler le niveau d'activation moyen \cite{Golos2014} \-- voir annexe \ref{app:PLOSsub}.
 Ces travaux ont permis de mettre en évidence un nombre très important d'attracteurs dans certaines gammes de paramètres.
 Ainsi, en condition de ``basse température'', le nombre d'attracteurs distincts peut atteindre plusieurs milliers
-(sur un modèle comportant 998 noeuds). %cette prolifération d'attracteurs est un indicateur du caractère 
+(sur un modèle comportant 998 nœuds). %cette prolifération d'attracteurs est un indicateur du caractère 
 L'analyse des ensembles d'attracteurs obtenus permet d'identifier une huitaine de ``modes'' différents (voir figure \ref{fig:PLOS}), chaque
 mode correspondant à l'activation d'une région anatomique particulière. Ces modes peuvent être comparés aux modules 
 régionaux mis en évidence par une analyse structurelle \shortcite{Hagmann2008} ainsi qu'avec les composants indépendants 
@@ -5018,7 +5022,7 @@ L'ajout d'un terme de bruit dans l'équation de mise à jour permet de simuler u
 s'apparentant aux régimes dits de ``dynamique itinérante'' \shortcite{Tsuda92,Kan90},
 et dont les caractéristiques sont plus proches des signaux observés à l'état de repos. 
 Cette multistabilité temporelle conduit fréquemment le réseau vers des régimes d'activité plus simples 
-(noeuds uniformément actifs
+(nœuds uniformément actifs
 ou inactifs) par dérive lente de l'activité moyenne. 
 Seul un modèle à ``feedback négatif global'' présente une multistabilité temporelle à long terme,
 grâce au contrôle du niveau d'activité  qui empêche d'atteindre les régimes triviaux.
@@ -6335,7 +6339,7 @@ Ce cadre se rapproche formellement d'une version simplifiée de l'apprentissage 
 appelée ``Direct policy gradient'' \shortcite{Wil92,Bar99}, où la réponse est construite 
 par ajustement direct des paramètres de la politique (la règle qui détermine le choix
 entre les différentes réponses possibles). L'amélioration de la politique au cours du temps passe par 
-un principe de descente de gradient guidé par les récompenses (c'est-à-dire qui tend à augmenter l'espérance
+un principe de descente de gradient guidé par les récompenses (c'est-à-dire qui vise à augmenter l'espérance
 de la récompense au cours du temps).
 La traduction de ces principes sous la forme d'une règle de plasticité conduit à une règle qui s'apparente à 
 la règle de Hebb \shortcite{florian06}. 
@@ -6675,7 +6679,7 @@ ainsi qu'à la modélisation des mécanismes de plasticité liés à la récompe
 
 
 
-Les modèles probabiliste de l'apprentissage utilisent souvent une hypothèse de stationnarité qui 
+Les modèles probabiliste de l'apprentissage reposent souvent sur une hypothèse de stationnarité qui 
 suppose que les données d'entrée sont issues d'un processus stochastique dont les caractéristiques
 ne varient pas au cours du temps.
 %Seul le programme voit ses caractéristiques évoluer par effet de la plasticité au cours du temps.
@@ -6701,7 +6705,7 @@ de l'interface (côté l'humain).
 Ainsi les régularités observées durant les premières phases de l'apprentissage ne sont plus nécessairement présentes
 à une étape ultérieure de l'apprentissage~: certaines trajectoires sont ``abandonnées''. Dans une perspective de parcimonie 
 (ou de ressource limitée), il est avantageux d'oublier certains faits passés pour mieux appréhender les faits nouveaux, autrement
-dit oublier pour mieux apprendre.
+dit d'oublier pour mieux apprendre.
 Cette prise en compte du ``vieillissement'' de l'environnement conduit à accorder plus de crédit à des observations
 récentes qu'à des observations anciennes \shortcite{Kivinen2004}. 
 %\begin{itemize}
@@ -7633,7 +7637,7 @@ Par ailleurs, des dégradations du signal peuvent aussi
 être observées en cas de lassitude, de distraction, de somnolence...
 
 Dans le cadre du projet CO-ADAPT (voir section \ref{sec:bio}), 
-ma contribution a principalement porté sur une l'interfaces de type clavier virtuel appelée ``P300 speller''.
+ma contribution a principalement porté sur une interfaces de type clavier virtuel appelée ``P300 speller''.
 L'onde ``P300'' est une activité positive à dominante occipitale qui apparait environ 300 ms après un stimulus 
 ``surprenant'', ou différent des autres, dans une série de stimuli qui lui est préssentée.
 Le P300-speller est constitué d'une grille de symboles. Des groupes de symboles sont illuminés 
@@ -7669,7 +7673,7 @@ du passé sont prises en compte avant d'être oubliées \shortcite{Dauce2015} (v
 \paragraph{Accumulation d'évidence} Considérons un classifieur 
 probabiliste qui, à chaque illumination d'un nouveau groupe de lettres (toutes les 200 ms),  
 donne un nombre entre 0 et 1, interprété comme la probabilité que ce groupe de lettre ait produit un P300.
-A l'aide de ce nombre, il est possible mettre à jour
+A l'aide de ce nombre, il est possible de mettre à jour
 les probabilités attachées à chaque symbole de la grille. 
 Ainsi, à chaque nouveau flash, la probabilité s'affine jusqu'à ce qu'un symbole soit déclaré ``gagnant''
 lorsque la probabilité qui lui est attachée dépasse un certain seuil. % (dans notre cas 0.9).
@@ -7679,7 +7683,7 @@ avec des taux de réussites proches de l'état de l'art des classifieurs spécif
 Le principe d'accumulation permet également d'optimiser le nombre
 de flashs. % (le nombre de flash est adaptatif). 
 Enfin, en ajoutant une hypothèse Gaussienne, il est possible de 
-définir un algorithme adaptatif (gradient logistique) qui met à jour en permanence le classifieur afin mieux correspondre aux
+définir un algorithme adaptatif (gradient logistique) qui met à jour en permanence le classifieur afin de mieux correspondre aux
 données du sujet et améliorer le taux de réussite et la vitesse de la réponse. 
 La validation du modèle adaptatif Gaussien sur des données P300 a été présenté à la conférence ESANN 2014 \shortcite{Dau14b} (voir annexe \ref{app:ESANN14B}).
 Le schéma d'accumulation d'évidence fait partie de la mise à jour du logiciel OpenVibes \shortcite{Renard2010} développé
