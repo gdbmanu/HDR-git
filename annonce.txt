@@ -3,7 +3,7 @@ En vue d'obtenir une Habilitation à Diriger les Recherches, je soutiendrai :
 le lundi 18 janvier 2016 à 14h,
 en salle de thèses No 2 de la Faculté de Médecine de la Timone,
 27 Boulevard Jean Moulin, 13005 Marseille
-(Plan : https://goo.gl/maps/pdYJtuyKXT52)
+(plan d'accès: https://goo.gl/maps/pdYJtuyKXT52)
 
 Apprentissage et contrôle dans les architectures neuronales
 
@@ -19,13 +19,13 @@ Laurent Pézard, PR AMU, LNIA, Marseille, président
 
 RESUME
 
-Au delà de ses fonctions primaires de régulation sensori-motrice, le cerveau est une formidable machine adaptative capable de développer des réponses nouvelles dans des contextes nouveaux. Les principes de l'apprentissage automatique ("machine learning"), en plein développement à l'heure actuelle, peuvent être utiles à la compréhension des processus d'apprentissage dans le cerveau. On parle de modèles computationnels de l'apprentissage, dont les "réseaux de neurones artificiels à couches" sont la réalisation la plus connue. Nous verrons dans le cadre de cette présentation des modèles de réseaux de neurones obéissant plus strictement aux contraintes biologiques, en particulier concernant le caractère récurrent du graphe d'interaction neuronale, le caractère discret des signaux émis par les neurones et le caractère local des règles de plasticité qui régissent les changements synaptiques. Nous montrerons en particulier comment les réseaux de neurones récurrents organisent leurs données d'entrée en régions distinctes, comment la plasticité synaptique conduit les réseau de neurones vers des activités d'ensemble plus simples, permettant de mieux différencier et prédire les stimuli sensoriels, et comment l'apprentissage moteur peut se fonder sur l'appariement entre primitives motrices et données sensorielles pour organiser l'environnement physique. Différents projets sont proposés, visant à développer ce idées sur des modèles de l'activité du cerveau à large échelle, ou encore dans le cadre des interfaces cerveau-machine.
+Au delà de ses fonctions primaires de régulation sensori-motrice, le cerveau est une formidable machine adaptative capable de développer des réponses nouvelles dans des contextes nouveaux. Les principes de l'apprentissage automatique ("machine learning"), en plein développement à l'heure actuelle, peuvent être utiles à la compréhension des processus d'apprentissage dans le cerveau. On parle de modèles computationnels de l'apprentissage, dont les "réseaux de neurones artificiels à couches" sont la réalisation la plus connue. Nous verrons dans le cadre de cette présentation des modèles de réseaux de neurones obéissant plus strictement aux contraintes biologiques, en particulier concernant le caractère récurrent du graphe d'interaction neuronale, le caractère discret des signaux émis par les neurones et le caractère local des règles de plasticité qui régissent les changements synaptiques. Nous montrerons en particulier comment les réseaux de neurones récurrents organisent leurs données d'entrée en régions distinctes, comment la plasticité synaptique conduit les réseau de neurones vers des activités d'ensemble plus simples, permettant de mieux différencier et prédire les stimuli sensoriels, et comment l'apprentissage moteur peut se fonder sur l'appariement entre primitives motrices et données sensorielles pour organiser l'environnement physique. Différents projets sont proposés, visant à développer ces idées sur des modèles de l'activité du cerveau à large échelle, ou encore dans le cadre des interfaces cerveau-machine.
 
 ABSTRACT
 
 The brain, beyond its primary sensori-motor regulation functions, is an outstanding adaptive machine, capable of developping novel responses in novel situations. The principles of machine learning, a fast-developping domain, are at stake for a better understanding of the learning processes in the brain. Computational models of learning have provided several success stories, from which the "layered neural networks" are the most famous ones. We will see in this presentation different kinds neural networks models, displaying a more strict obedience to the biological constraints, in particular regarding the recurrent aspect of the neuronal interaction graph, the discreteness of the signals emitted by the neurons and the local aspect of the plasticity rules that govern the synaptic changes. We will show in particular how recurrent neural networks organize their sensory input in different regions,  how the the synaptic plasticity drives the network toward a more "simple" collective activity, allowing a better separation and prediction of the sensory stimuli, and how motor learning can rely on matching motor primitives with sensory data to organize the physical environment. Several projects are proposed, aiming at expanding some of those ideas into large-scale brain activity models, or also for the design of brain-computer interfaces.
 
-La soutenance sera suivie d'un pot à l'Institut de Neurosciences des Systèmes (aile rouge cinquième étage) auquel vous êtes cordialement conviés.
+La soutenance sera suivie d'un pot à l'Institut de Neurosciences des Systèmes (aile rouge cinquième étage) auquel vous êtes cordialement invités.
 
 --
 Emmanuel Daucé
@@ -35,3 +35,8 @@ Mobile : +33 659 59 47 34
 Fax : +33 491 05 45 65
 http://ins.medecine.univmed.fr/fr/research-teams/team-member/e.dauce/
 (personal) http://emmanuel.dauce.free.fr 
+
+--
+
+
+
