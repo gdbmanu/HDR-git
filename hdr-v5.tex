@@ -38,7 +38,7 @@
 %\usepackage{biblatex}
 \usepackage{mslapa}
 
-\usepackage{ulem}
+\usepackage[normalem]{ulem}
 
 %\usepackage{apacite}
 %\usepackage[longnamesfirst,nonamebreak]{natbib}
@@ -2209,7 +2209,7 @@ Le problème consiste à programmer une fonction de réponse $\phi_\text{in}$ qu
 \max_{\phi_\text{in}} ||\boldsymbol{x}_\text{out} - \boldsymbol{x}^*||^2
 \end{equation}
 
-\paragraph{Remarque~:} Il est possible d'établir un lien entre une consigne et  la fonction de réponse correspondante. Une consigne s'apparente plus précisément à un \textit{programme moteur} qui conditionne la manière dont le contrôleur traite ses entrées sensorielles~: pour deux consignes différentes, les mêmes entrées sensorielles ne produisent pas la même réponse.  
+\paragraph{Remarque~:} La fonction solution $\phi_\text{in}(\boldsymbol{x}^*,.)$, lorsqu'elle existe, s'apparente à un \textit{programme moteur} qui conditionne la manière dont le contrôleur traite ses entrées sensorielles~: pour deux consignes différentes, les mêmes entrées sensorielles ne produisent pas la même réponse.  
 
 
 \paragraph{}Le point d'opération (le point où l'on retourne) d'un tel système est analogue
@@ -2745,7 +2745,7 @@ En étendant les équations de champ moyen au cas des populations multiples, nou
 d'axones (son coefficient de variation), jouant sur la nature des régimes développés (extinction, activité chaotique non spécifique et oscillations 
 synchronisées). Nous mettons en évidence
 le caractère régulateur du paramètre d'hétérogénéité dans les régimes de forte amplification (dits aussi de ``haute conductance'')~: l'hétérogénéité des liens défavorise le développement de dynamiques d'ensemble simples (type oscillations synchronisées) et favorise des signaux individuels fortement indépendants
-(voir section \ref{sec:multi_pop} et annexe \ref{app:NPL01}).
+(voir section \ref{sec:multi_pop} page \pageref{sec:multi_pop} et annexe \ref{app:NPL01}).
  
 %Le point de départ consistait à modéliser et reproduire certains comportements observés dans les 
 %réseaux de neurones naturels composés d'une population de neurones excitateurs et d'une population de neurones inhibiteurs.
@@ -2763,7 +2763,7 @@ plasticité synaptique à court terme \shortcite{Com00}.
 Notre modèle est une des premières implémentations d'un champ neuronal sur support discret reposant sur des mécanismes de réseau
 uniquement.
 
-Le modèle proposé dans \shortcite{Dau04b,Dau04} (voir section \ref{sec:NatComp} et annexe \ref{app:NC04}) met en évidence la présence simultanée d'une activité de fond chaotique,
+Le modèle proposé dans \shortcite{Dau04b,Dau04} (voir section \ref{sec:NatComp} page \pageref{sec:NatComp} et annexe \ref{app:NC04}) met en évidence la présence simultanée d'une activité de fond chaotique,
 de grandes oscillations lentes et de foyers d'activité de type champ neuronal, sur un réseau de neurones composé d'unités neuronales binaires.
 Comme dans le cas du champ neuronal continu \shortcite{Ama77B}, l'activité persistante repose sur l'activité excitatrice locale, avec 
 un effet de lissage lié à l'hétérogénéité des connexions. Les oscillations lentes reposent sur 
@@ -2773,7 +2773,7 @@ permettant des basculements d'activité lorsque ces
 changements sont forts, ou encore une mémoire à court terme (rémanence) lorsque le signal d'entrée s'éteint. 
 
 \subsubsection{d. Les graphes de connexion intra-cérébraux, tels qu'observés en imagerie fonctionnelle, peuvent servir de support à des dynamiques multistables.}
-L'étude proposée dans \shortcite{Golos2014} (voir section \ref{sec:PLOSsub}, et annexe \ref{app:PLOSsub}) étudie la 
+L'étude proposée dans \shortcite{Golos2014} (voir section \ref{sec:PLOSsub} page \pageref{sec:PLOSsub}, et annexe \ref{app:PLOSsub}) étudie la 
 dynamique de relaxation d'un réseau de neurones dont le graphe 
 de connexions est issu de l'analyse des faisceaux de matière blanche à l'échelle du cerveau entier \shortcite{Hagmann2008}.
 
@@ -2808,7 +2808,9 @@ La structure au carrefour de la transformation
 visuo-motrice est
 une carte rétinotopique située sur la partie supérieure du tectum,
 appelée le colliculus supérieur. 
-L'étude présentée dans \shortcite{Dauce2011} (voir page \pageref{sec:orientation-spatiale} et annexe \ref{app:CNS11B}), c'est-à-dire sur un intervalle temporel précis, ``programmé''.
+L'étude présentée dans \shortcite{Dauce2011} (voir page \pageref{sec:orientation-spatiale} et annexe \ref{app:CNS11B})
+montre l'existence d'une activité autonome contrôlée dans le temps et dans l'espace sur
+la durée de la saccade (100~ms environ), c'est-à-dire sur un intervalle temporel précis, ``programmé''.
 Notre étude, en implémentant de façon détaillée des populations de neurones à impulsions, 
 \begin{itemize}
 	\item simule l'activité autonome d'une carte colliculaire bidimensionnelle constituée de plusieurs milliers de neurones,
@@ -2955,7 +2957,7 @@ irrégulière (chaos profond), la population de neurones semble en effet garder 
 mémoire assez faible des faits passés (autocorrélation du même ordre de grandeur). %{\color{Cyan}[REF?]}. 
 Les réponses induites par la STDP sur des entrées statiques s'apparentent à des ``bursts'' (bouffées) d'activité, qui impliquent 
 une grande partie des neurones du réseau
-\cite{Hen08B} (voir section \ref{sec:STDP} et annexe \ref{app:NCP08}), peu spécifiques et peu différents des comportement obtenus avec des neurones fréquentiels.
+\cite{Hen08B} (voir section \ref{sec:STDP} page \pageref{sec:STDP} et annexe \ref{app:NCP08}), peu spécifiques et peu différents des comportement obtenus avec des neurones fréquentiels.
 
 L'étude présentée dans \shortcite{henry07} (voir section \ref{sec:STDP} et annexe \ref{app:NCO07}) montre néanmoins
 le caractère séquentiel de l'activité induite par la STDP, support ici de la mémoire à court terme.
@@ -3140,7 +3142,7 @@ De manière générale, ces modèles rendent compte du passage du temps dans l'�
 De nombreux modèles de la perception utilisent ces principes pour rendre compte des temps de réponse à des stimuli plus ou moins ambigus \shortcite{Gold2001,Simen2011,khoei2013}.
 Les modèles mis en place dans le cadre de l'orientation temporelle \shortcite{Malhotra2011} se placent sur des échelles de temps un peu plus grandes (plusieurs secondes), qui les rapprochent des modèles probabilistes du contrôle moteur \shortcite{Wolpert2000,Haruno2001} suggèrant un lien possible entre l'estimation temporelle et la simulation motrice \cite{Jeannerod2001}. 
 
-\paragraph{}Par ailleurs, ces algorithmes reposent  sur des modèles paramétriques de la mesure, qui permettent la mise à jour du modèle après chaque série de mesures, selon le principe du maximum de vraisemblance, implémenté via une descente de gradient ou via l'algorithme EM (voir l'équation (ref{eq:Friston}), page \pageref{eq:Friston}). 
+\paragraph{}Par ailleurs, ces algorithmes reposent  sur des modèles paramétriques de la mesure, qui permettent la mise à jour du modèle après chaque série de mesures, selon le principe du maximum de vraisemblance, implémenté via une descente de gradient ou via l'algorithme EM (voir l'équation (\ref{eq:Friston}), page \pageref{eq:Friston}). 
  \begin{itemize}
  	\item Dans le cas du clavier virtuel P300, la mise à jour du modèle de la mesure permet, en partant d'un modèle d'utilisateur générique, d'adapter l'interface à l'utilisateur, ce qui améliore la réactivité de l'interface au fur et à mesure de son utilisation \cite{Dau14b}
  	\item Par ailleurs, de manière analogue à \shortcite{Kivinen2004}, l'utilisation d'un terme de régularisation dans la mise à jour réalise un modèle de mesure ``glissant'' qui permet de s'adapter aux non-stationnarités de l'environnement \shortcite{Dauce2013b,Dauce2015}.
