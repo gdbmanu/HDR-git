@@ -43,7 +43,14 @@
 %\usepackage{apacite}
 %\usepackage[longnamesfirst,nonamebreak]{natbib}
 
-
+\ifpdf
+\pdfinfo{
+	/Author (Emmanuel Daucé)
+	/Title (HDR)
+	/Keywords (Learning; Motor control; Neural networks)
+	/CreationDate (2016/01/18)
+}
+\fi
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -101,6 +108,7 @@
    \vspace*{\stretch{1}}
    \hfill\begin{minipage}[t]{0.66\textwidth}
    \raggedright
+  
 }
 {
    \end{minipage}
@@ -132,6 +140,9 @@
 %  - Book title, subtitle                         %
 %  - Book author name                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Declare figure/table as a subfloat.
+
 
 % Book's title and subtitle
 \title{\Huge \textbf{Apprentissage et contrôle dans les architectures neuronales} }
@@ -165,12 +176,11 @@
 			Theoretical Neurosciences Group \\
 			Institut de Neurosciences des Systèmes \\
 			INSERM UMR\_S 1106 	
-		\vskip 2cm
+		\vskip 3cm
 	{\Large Mémoire d'Habilitation à Diriger les Recherches }
-	\vskip 2cm
+	\vskip 3.5cm
 	
 
-		\vskip 2cm
 		
 	
    Travaux présentés le 18 Janvier 2016 devant un Jury composé de :		
@@ -200,11 +210,26 @@
 % Add a dedication paragraph to dedicate your book to someone %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\begin{dedication}
-%Dedicated to Calvin and Hobbes.
+
+\newpage
+{\em
+Je remercie Liva Ralaivola, Professeur d'informatique à la faculté de Sciences de l'Université d'Aix-Marseille pour avoir accepté d'endosser le rôle de tuteur pour ce travail, pour son soutien et sa relecture minutieuse.
+Merci également à Bruno Torresani, Professeur de mathématiques à la faculté de Sciences de l'Université d'Aix-Marseille, et rapporteur interne de ce document, pour son exigence critique et ses conseils rédactionnels. 
+
+J'adresse toute ma reconnaissance à mes trois rapporteurs, Frédéric Alexandre, Directeur de Recherche à l'INRIA Bordeaux-Sud Ouest, Benoît Girard, Directeur de Recherche à l'Institut des Systèmes Intelligents et de Robotique,  et Jean-Pierre Nadal, Directeur de Recherche au Laboratoire de Physique Statistique de l'Ecole Normale Supérieure, et Directeur d'Etudes à l'Ecole des Hautes Etudes en Sciences Sociales, pour leur disponibilité et leurs encouragements. Je remercie également Manuel Samuelidès, Professeur de mathématiques à l'Institut Supérieur de l’Aéronautique et de l'Espace, Rémi Munos, Directeur de Recherche à l'INRIA Lille Nord-Europe, et Laurent Pézard, Professeur en neurosciences à l'Université d'Aix-Marseille, pour leur participation à l'animation de ce jury d'HDR. 
+
+Les travaux présentés dans ce document sont le fruit de nombreuses collaborations et interactions au sein des différents instituts au sein desquels j'ai effectué mes recherches. Merci en particulier à Reinoud Bootsma et Jean-Louis Vercher pour leur accueil au sein de l'Institut des Sciences du Mouvement ainsi que Viktor Jirsa, pour son accueil au sein de l'Institut de Neurosciences des Systèmes. 
+
+Parmi tous les collègues, coauteurs, étudiants et ...
+     
+}
+\newpage
+
 %\end{dedication}
 
 %%%%%%%%%%%% Endyet daag koepf dokumentet %%%%%%%%%%%%%%%
 % TODO : page de titre / remerciements
+\newpage
 \section*{Résumé}
 
 %Les études présentées dans ce rapport portent sur des algorithmes permettant de ``programmer'' des graphes constitués de nombreuses unités de calcul élémentaires.
