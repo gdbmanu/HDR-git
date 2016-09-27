@@ -43,7 +43,14 @@
 %\usepackage{apacite}
 %\usepackage[longnamesfirst,nonamebreak]{natbib}
 
-
+\ifpdf
+\pdfinfo{
+	/Author (Emmanuel Daucé)
+	/Title (HDR)
+	/Keywords (Learning; Motor control; Neural networks)
+	/CreationDate (2016/01/18)
+}
+\fi
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -101,6 +108,7 @@
    \vspace*{\stretch{1}}
    \hfill\begin{minipage}[t]{0.66\textwidth}
    \raggedright
+  
 }
 {
    \end{minipage}
@@ -133,15 +141,19 @@
 %  - Book author name                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% Declare figure/table as a subfloat.
+
+
 % Book's title and subtitle
 \title{\Huge \textbf{Apprentissage et contrôle dans les architectures neuronales} }
 % Author
 \author{\textsc{Emmanuel Daucé}}%\thanks{\url{www.example.com}}}
 
+\makeindex
 
 \begin{document}
 
-%\frontmatter
+\frontmatter
 %\maketitle
 
 \begin{titlepage}
@@ -149,11 +161,18 @@
 	\begin{center}
 		%\vskip 2cm
 		%\emph{\Large \BookTitle }%
-		\vspace{4cm}
-		{\Huge \textsc{Apprentissage et contrôle} 
+	{\Large Mémoire présenté en vue de l'obtention}
+	\vskip .2cm
+	{\Large du diplôme d'Habilitation à Diriger les Recherches }
+	\vskip 1cm
+	{\Large Spécialité Informatique}
+	\vskip 2cm	
+		{\Huge \textsc{Apprentissage et Contrôle} 
 		\vskip 1cm
-		\textsc{dans les architectures neuronales}}
+		\textsc{dans les Architectures Neuronales}}
 		\vskip 2cm
+		par
+		\vskip .5cm
 		{\Large Emmanuel \textsc{Daucé}}
 	
 		%\begin{tabular}[t]{ccc}
@@ -162,15 +181,18 @@
 			%	\includegraphics[height=2.5cm]{U2_logo.pdf} 
 		%\end{tabular}
 		\vskip .5cm
-			Theoretical Neurosciences Group \\
-			Institut de Neurosciences des Systèmes \\
+			Theoretical Neurosciences Group,
+			Institut de Neurosciences des Systèmes 
+		\vskip.1cm
 			INSERM UMR\_S 1106 	
-		\vskip 2cm
-	{\Large Mémoire d'Habilitation à Diriger les Recherches }
-	\vskip 2cm
+		\vskip.1cm
+		et
+	   \vskip.1cm
+	    Ecole Centrale de Marseille
+		\vskip 1.2cm
+
 	
 
-		\vskip 2cm
 		
 	
    Travaux présentés le 18 Janvier 2016 devant un Jury composé de :		
@@ -180,7 +202,7 @@
 			Dr. Benoît \textsc{Girard} & ISIR - Univ. Paris VI (rapporteur) \\
 			Dr. Jean-Pierre \textsc{Nadal}  & LPS - Ecole Normale Supérieure, Paris (rapporteur) \\
 			Pr. Manuel \textsc{Samuelides} & Institut Supérieur de l'Aeronautique et de l'Espace, Toulouse \\
-			Dr. Rémi \textsc{Munos} &  Google DeepMind, London \\
+			Dr. Rémi \textsc{Munos} &  Google DeepMind, Londres \\
 			Pr. Liva \textsc{Ralaivola} & LIF, Aix-Marseille Université \\
 			Pr. Laurent \textsc{Pézard} & LNIA, Aix-Marseille Université (président)\\
 			\hline
@@ -188,7 +210,7 @@
 		\vfill		
 
 			Ecole Doctorale en Mathématiques et Informatique de Marseille (ED 184)\\
-			Faculté de Sciences, \\
+			Faculté de Sciences \\
 			Aix-Marseille Université, France\\
 		
 		
@@ -200,11 +222,33 @@
 % Add a dedication paragraph to dedicate your book to someone %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\begin{dedication}
-%Dedicated to Calvin and Hobbes.
+
+\newpage
+
+\paragraph{}
+
+\section*{Remerciements}
+
+\vskip .5cm
+
+\paragraph{}Je remercie Liva {\sc Ralaivola}, Professeur d'Informatique à la Faculté de Sciences d'Aix-Marseille Université pour avoir accepté d'endosser le rôle de tuteur pour ce travail, pour son soutien et sa relecture minutieuse.
+Merci également à Bruno {\sc Torresani}, Professeur de Mathématiques à la Faculté de Sciences d'Aix-Marseille Université, et rapporteur interne de ce document, pour son exigence critique et ses conseils rédactionnels. 
+
+\paragraph{}J'adresse toute ma reconnaissance à mes trois rapporteurs, Frédéric {\sc Alexandre}, Directeur de Recherche à l'INRIA Bordeaux-Sud Ouest, Benoît {\sc Girard}, Directeur de Recherche à l'Institut des Systèmes Intelligents et de Robotique,  et Jean-Pierre {\sc Nadal}, Directeur de Recherche au Laboratoire de Physique Statistique de l’École Normale Supérieure, et Directeur d’Études à l’École des Hautes Études en Sciences Sociales, pour leur disponibilité et leurs encouragements. Je remercie également Manuel {\sc Samuelidès}, Professeur de mathématiques à l'Institut Supérieur de l’Aéronautique et de l'Espace, Rémi {\sc Munos}, Directeur de Recherche à l'INRIA Lille Nord-Europe, actuellement en détachement à Google DeepMind à Londres, et Laurent {\sc Pézard}, Professeur en Neurosciences à la Faculté de Sciences d'Aix-Marseille Université, pour leur participation à l'animation de ce jury d'HDR. 
+
+\paragraph{}Les travaux présentés ici sont le fruit de nombreuses collaborations et interactions pluridisciplinaires au sein de différents groupes de travail, ACI, ANR, conférences, rencontres, ateliers et réunions informelles dans les différents instituts où j'ai effectué mes recherches. Les collègues, maîtres et amis qui ont participé à mes travaux sont cités dans le document et il est impossible d'établir la liste de tous ceux dont les discussions, recherches et travaux ont permis d'en tisser les fils. 
+Je tiens donc à remercier ceux qui, en mettant à disposition les conditions matérielles de la recherche, rendent possible son développement, ses bifurcations et ses ramifications nouvelles, et en particulier, pour leur accueil et leur ouverture pluridisciplinaire, Reinoud {\sc Bootsma}, ancien chef de l'équipe Dynamique du Mouvement et Directeur de l'Ecole Doctorale de Sciences du Mouvement Humain, et Jean-Louis {\sc Vercher}, ancien Directeur de l'Institut des Sciences du Mouvement, unité mixte CNRS rattachée à la Faculté des Sciences du Sport d'Aix-Marseille Université, ainsi que Viktor {\sc Jirsa}, Directeur de l'Institut de Neurosciences des Systèmes, unité mixte INSERM rattachée à la Faculté de Médecine d'Aix-Marseille Université. 
+
+\paragraph{} Je remercie bien sûr mes collègues et confrères de l'Institut de Neurosciences de Systèmes, ainsi que ceux de l'équipe pédagogique Mathématiques et Informatique de l'Ecole Centrale de Marseille, pour leur bonne humeur au quotidien et leurs conseils dans les derniers préparatifs, et merci bien sûr à ma famille et à mes amis pour la joie et le soutien de tous les jours. 
+     
+
+\newpage
+
 %\end{dedication}
 
 %%%%%%%%%%%% Endyet daag koepf dokumentet %%%%%%%%%%%%%%%
 % TODO : page de titre / remerciements
+\newpage
 \section*{Résumé}
 
 %Les études présentées dans ce rapport portent sur des algorithmes permettant de ``programmer'' des graphes constitués de nombreuses unités de calcul élémentaires.
@@ -225,7 +269,7 @@
 %mais également, au niveau macroscopique, de mieux comprendre les principes organisationnels 
 %permettant au cerveau de contrôler l'appareil sensoriel et moteur. 
 
-Ce mémoire d'Habilitation à Diriger les Recherches présente mes contributions à la recherche 
+\paragraph{}Ce mémoire d'Habilitation à Diriger les Recherches présente mes contributions à la recherche 
 en modélisation mathématique et informatique des dynamiques neuronales et de l'apprentissage.
 Le but de ces travaux est de mieux comprendre la logique à l'œuvre au sein du système
 nerveux des êtres vivants, afin d'améliorer la connaissance du cerveau et des pathologies nerveuses.
@@ -233,7 +277,7 @@ Il s'agit également de s'inspirer du cerveau pour repenser la manière de conce
 communicants et agissants (robots mobiles, interfaces vocales, jeux, etc.), 
 afin qu'ils interagissant de manière plus ``naturelle'' avec leur environnement.
 
-Les modèles de réseaux de neurones étudiés sont des systèmes dynamiques de grande dimension, 
+\paragraph{}Les modèles de réseaux de neurones étudiés sont des systèmes dynamiques de grande dimension, 
 définis par un graphe d'interactions entre des unités de calcul élémentaires. 
 Nous étudions les principes du calcul ``collectif'' 
 dans ces architectures, tels que le ``temps de calcul'' corresponde au temps 
@@ -243,7 +287,7 @@ Nous montrons en particulier que l'utilisation d'un graphe de connexions aléato
 en régime critique, de structurer l'espace des entrées sensorielles
 en régions distinctes, selon un principe proche de l'{``auto-encodage''}.
 	
-L'apprentissage est abordé dans une 
+\paragraph{}L'apprentissage est abordé dans une 
 perspective neuro-réaliste, c'est-à-dire prenant en compte les principales contraintes biologiques, 
 comme le caractère local des changements synaptiques, le caractère récurrent 
 du graphe de connexions, ou encore le caractère 
@@ -259,7 +303,7 @@ Dans le cadre du contrôle moteur, nous montrons également comment la plasticit
 dans sa variante guidée, correspond à la recherche du maximum de vraisemblance dans un espace de couples 
 (perception, action), en l'absence de modèle de l'environnement.
 	
-Le travail de relecture et de compilation, occasionné par la rédaction de ce mémoire, 
+\paragraph{}Le travail de relecture et de compilation, occasionné par la rédaction de ce mémoire, 
 a également permis de mettre en lumière certaines difficultés fondamentales, 
 qui freinent les possibilités d'apprentissage de lois de contrôle dans un espace d'actions continu.
 En particulier, si l'on souhaite construire des dispositifs artificiels capable d'apprendre des tâches 
@@ -275,7 +319,7 @@ du cerveau à large échelle, ou encore dans le cadre des interfaces cerveau-mac
 \section*{Abstract}
 
 %Ce mémoire d'Habilitation à Diriger les Recherches présente mes contributions à la recherche 
-This ``Habilitation à Diriger les Recherches'' dissertation presents my research contributions to   
+\paragraph{}This ``Habilitation à Diriger les Recherches'' dissertation presents my research contributions to   
 %en modélisation mathématique et informatique des dynamiques neuronales et de l'apprentissage.
 mathematics and computer science modelling of neuronal dynamics and learning. 
 %Le but de ces travaux est de mieux comprendre la logique à l'œuvre au sein du système
@@ -290,7 +334,7 @@ devices (mobile robots, vocal interfaces, games, etc.)
 for they interact in a more ``natural'' way with their environment.
 
 %Les modèles de réseaux de neurones étudiés sont des systèmes dynamiques de grande dimension, 
-The neural network models addressed here are high dimensional dynamical systems,
+\paragraph{}The neural network models addressed here are high dimensional dynamical systems,
 %définis par un graphe d'interactions entre des unités de calcul élémentaires. 
 defined by the graph of couplings between elementary computational units. 
 %Nous étudions les principes du calcul ``collectif'' 
@@ -309,7 +353,7 @@ in the critical regime, to separate the sensory input space
 into distinct regions, in a way close to the ``auto-encoding'' principle. 
 
 %L'apprentissage est abordé dans une 
-Learning is addressed in a
+\paragraph{}Learning is addressed in a
 %perspective neuro-réaliste, c'est-à-dire prenant en compte les principales contraintes biologiques, 
 neuro-realistic perspective, i.e. taking into account the main biological constraints, 
 %comme le caractère local des changements synaptiques, le caractère récurrent 
@@ -340,7 +384,7 @@ in its guided variant, corresponds to the search for the maximum likelihood in a
 (perception, action) couples, in the absence of an environment model.
 
 %Le travail de relecture et de compilation, occasionné par la rédaction de ce mémoire, 
-The proofreading work and papers compilation, needed by the writing of this dissertation, 
+\paragraph{}The proofreading work and papers compilation, needed by the writing of this dissertation, 
 %a également permis de mettre en lumière certaines difficultés fondamentales, 
 also allowed to shed light on some fundamental impediments 
 %qui freinent les possibilités d'apprentissage de lois de contrôle dans un espace d'actions continu.
@@ -369,6 +413,7 @@ brain activity models, or also for the design of brain-computer interfaces.
 \tableofcontents
 %\listoffigures
 %\listoftables
+%\printindex
 
 \mainmatter
 
@@ -615,9 +660,7 @@ sont apparues des revues en ``Open Acces'' spécialement dédiées au domaine.
 On notera en particulier PLOS-Computational Biology et Frontiers in Computational Neurosciences qui ont aidé à compenser
 la relatif manque de visibilité du domaine.
 Il existe enfin quelques conférences spécifiquement dédiées à ce champ de recherche, comme la conférence CNS (Computational
-Neurosciences) et la conférence CoSyNe (Computational and Systems Neuroscience). Dans le domaine de la robotique bio-inspirée,
-on peut citer la conférence SAB (Simulation of Adaptive Behavior) qui a eu un fort impact au début des années 2000 mais a 
-fini par disparaître faute d'audience. 
+Neurosciences), la conférence CoSyNe (Computational and Systems Neuroscience) ainsi que la conférence SAB (Simulation of Adaptive Behavior) dans le domaine de la robotique bio-inspirée. 
 
 \paragraph{Les neurosciences computationnelles en France}
 %Voir : https://web.archive.org/web/20131020013653/http://neurocomp.fr/
@@ -713,8 +756,8 @@ Le champ de recherche s'organise autour de plusieurs pôles.
 	
 	Les principales avancées dans ce cadre sont~:
 	\begin{itemize}
-		\item le modèle Hodgkin et Huxley  \shortcite{HH52} et les modèles à compartiments \shortcite{Rall1959} qui servent encore à l'heure actuelle de fondement pour les modèles neuro-réalistes, aboutissant aux modèles détaillés de colonnes corticales constituées de dizaines de milliers de cellules \shortcite{Binzegger2004,Markram2006,Markram2012}.
-		\item L'étude de la plasticité synaptique \shortcite{Bli73,BIPOO01} et des mécanismes cellulaires associés \shortcite{Harris1984,Shouval2002,ODonnell2011,Graupner2012,Cui2015} conduit à mieux comprendre la sélectivité neuronale et la formation de champs récepteurs \shortcite{Bienenstock1982,Oja1982,VanRossum2000,song00,Billings2009}.
+		\item Le modèle Hodgkin et Huxley  \shortcite{HH52} et les modèles à compartiments \shortcite{Rall1959} qui servent encore à l'heure actuelle de fondement pour les modèles neuro-réalistes, aboutissant aux modèles détaillés de colonnes corticales constituées de dizaines de milliers de cellules \shortcite{Binzegger2004,Markram2006,Markram2012}.
+		\item L'étude de la plasticité synaptique \shortcite{Bli73,BIPOO01} et des mécanismes cellulaires associés \shortcite{Harris1984,Shouval2002,ODonnell2011,Graupner2012,Cui2015} conduit à mieux comprendre la sélectivité neuronale et la formation de champs récepteurs \shortcite{Bienenstock1982,Oja1982,VanRossum2000,song00,Billings2009};
 	\end{itemize}
 \item Le second pôle concerne l'étude des dynamiques de populations de neurones. Les neurones sont dans ce cadre des unités de traitement simplifiées (neurones à spikes, neurones stochastiques, neurones fréquentiels,...). Le but est de comprendre les interactions entre de grands groupes de neurones, et d'étudier les conditions d'émergence de certaines signatures d'activité (corrélations large échelle, couplages de phase, champs récepteurs, ...) observés en électrophysiologie chez le sujet sain et dans les pathologies nerveuses.
 
@@ -791,7 +834,7 @@ dans le cas discret, par Moynot et Samuelides \shortcite{Moy00a}.
 Lors de mon arrivée, deux étudiants venaient de passer leur thèse sur ce thème.
 D'un côté, Bruno Cessac, diplômé en physique théorique de l'université Paul Sabatier, avait travaillé sur l'analyse en
 champ moyen des réseaux de neurones récurrents aléatoires \shortcite{Ces95}. De l'autre, Mathias Quoy, diplômé de l'ENSEEIHT,
-avait travaillé sur le comportement à taille finie (route vers le chaos) \shortcite{Doyon1993,CESSAC94}.
+avait travaillé sur le comportement à taille finie (route vers le chaos) \shortcite{Doyon1993,CES94}.
 Mon rôle était alors principalement de poursuivre l'analyse des propriétés du réseau,
 et en particulier d'approfondir la question de la plasticité synaptique
 et de l'apprentissage. 
@@ -817,27 +860,27 @@ La première série de résultats concerne l'étude du mécanisme d'apprentissag
 travaillé en particulier sur les comportements à taille finie 
 du modèle de réseau de neurones aléatoire.
 Le premier article qui présente ces idées  est celui de Neural Networks \shortcite{Dau98A}, étudiant la réaction (spontanée ou acquise) d'un réseau de neurones récurrent aléatoire
-à des patrons (stimuli) également aléatoires (voir section \ref{sec:NN98} et annexe \ref{app:NN98}).
+à des patrons (stimuli) également aléatoires (voir section \ref{sec:NN98} page \pageref{sec:NN98} et annexe \ref{app:NN98}).
 
 Un deuxième travail, portant sur des architectures
 multi-couches, a été réalisé en collaboration avec Olivier Moynot, étudiant diplômé de l'ENS Cachan, qui a entamé 
 sa thèse sous la direction de Manuel Samuelidès un an après moi, et Olivier Pinaud, étudiant en DEA 
 de physique théorique, qui a effectué son stage à l'ONERA au printemps 1998 %(RNA) multi-populations 
-\shortcite{Dau99A,dauce01a} (voir section \ref{sec:balanced} et annexe \ref{app:NPL01}).
+\shortcite{Dau99A,dau01a} (voir section \ref{sec:balanced} page \pageref{sec:balanced} et annexe \ref{app:NPL01}).
 Nous avons, dans le cadre de réseaux équilibrés (constitués d'une population excitatrice et d'une population inhibitrice),
 mis en évidence l'existence de deux paramètres de contrôle caractéristiques (l'amplification et l'homogénéité d'un faisceau 
 d'axones) jouant sur la nature des régimes développés (extinction, activité chaotique non spécifique et oscillations 
-synchronisées) \shortcite{dauce01a}. 
+synchronisées) \shortcite{dau01a}. 
 
 La troisième série de résultats de la thèse et des publications associées \shortcite{Dau00,Dau02} porte sur une architecture 
 neuronale  permettant d'implémenter un modèle de la perception des signaux spatio-temporels.
 Ces résultats reposent sur une architecture de réseaux récurrents aléatoires à plusieurs couches (deux ou trois).
-Le formalisme multi-couches est le même que celui utilisé dans les réseaux équilibrés (voir section \ref{sec:BioCyb02} et annexe \ref{app:BC02}).
+Le formalisme multi-couches est le même que celui utilisé dans les réseaux équilibrés (voir section \ref{sec:BioCyb02} page \pageref{sec:BioCyb02} et annexe \ref{app:BC02}).
 
-Cette thèse m'a également permis d'assister à l'essor du champ des neurosciences computationnelles au cours des 
+Cette thèse m'a également permis d'assister à l'essor des neurosciences computationnelles au cours des 
 années 1995-2000, avec les premiers neurones à impulsions \shortcite{Tho96,Lindblad1998}, l'émergence du concept de connectivité fonctionnelle large échelle \shortcite{Rod99},
-l'application des modèles de champ neuronaux au contrôle moteur \shortcite{Schoner95}, les modèles de formation des champs récepteurs \shortcite{Olshausen1997}, etc.
-Dans le même temps, le champ des réseaux de neurones artificiels se rapproche de plus en plus de l'apprentissage 
+l'application des modèles de champ neuronal au contrôle moteur \shortcite{Schoner95}, les modèles de formation des champs récepteurs \shortcite{Olshausen1997}, etc.
+Dans le même temps, le domaine des réseaux de neurones artificiels se rapproche de plus en plus de l'apprentissage 
 statistique (qui deviendra le ``Machine Learning'') avec l'essor des machines à vecteurs supports (SVM) à la fin des
 années 90 \shortcite{Vapnik1998}.
 % 1999 - Moynot - Pinaud - Samuelides
@@ -871,7 +914,7 @@ L'apprentissage dans ce contexte revient à stabiliser par plasticité synaptiqu
 certaines séquences d'interaction (certaines séquences d'associations sensori-motrices). 
 L'expérience, qui met en évidence un mécanisme spontané de couplage/découplage entre l'activité récurrente interne 
 et de la séquence motrice, a été conduite sur la plateforme de contrôle robotique PerAc \shortcite{Gaussier1995}, et publiée dans 
-\shortcite{Quo00,Dau00b,Quoy2001,Dau02} (voir section \ref{sec:alt}). 
+\shortcite{Quo00,Dau00b,Quoy2001,Dau02} (voir section \ref{sec:alt} page \pageref{sec:alt}). 
 %Le point de départ des études auxquelles j'ai participé dans le cadre du contrôle moteur repose toujours sur les mêmes
 %prémisses~: l'étude de mécanismes de plasticité permettant d'induire dans le substrat des dynamiques 
 %plus simples face aux signaux appris. 
@@ -898,16 +941,16 @@ Je suis resté au sein de ce laboratoire jusqu'en 2011. Tout en conservant ma th
 mes recherches se sont orientées vers la question du rôle des dynamiques intrinsèques 
 dans l'apprentissage moteur~:
 \begin{itemize}
- \item Etude sur le comportement critique des réseaux aléatoires de taille finie, dans le cadre d'une co-direction d'ouvrage \shortcite{Gui02} (voir section \ref{sec:criticalite}).
+ \item Etude sur le comportement critique des réseaux aléatoires de taille finie, dans le cadre d'une co-direction d'ouvrage \shortcite{Gui02} (voir section \ref{sec:criticalite} page \pageref{sec:criticalite}).
  La perturbation d'un réseau récurrent par un signal externe à variations lentes produit 
  des transitions brusques, caractéristiques d'un comportement critique, support potentiel d'une catégorisation (discrète)
  de l'environnement \shortcite{Beslon2002}.
  \item Extension des modèles de réseaux aléatoires équilibrés, avec  couplages aléatoires dépendants de la distance
- permettant de développer des dynamiques méta-stables à ``foyers d'activité''  \shortcite{Dau04} (voir section \ref{sec:NatComp} et annexe \ref{app:NC04}). La combinaison de patrons de connexion à la fois topographiquement organisés et
+ permettant de développer des dynamiques méta-stables à ``foyers d'activité''  \shortcite{Dau04} (voir section \ref{sec:NatComp} page \pageref{sec:NatComp} et annexe \ref{app:NC04}). La combinaison de patrons de connexion à la fois topographiquement organisés et
  	équilibrés (autorisant une activité périodique
  	intrinsèque) permet d'implémenter une mémoire à court terme sur des neurones impulsionnels,
  	sans faire appel à des mécanismes cellulaires spécifiques. 
- \item Apprentissage d'un contrôle moteur en boucle fermée, modèles Hebbiens de l'apprentissage par renforcement \shortcite{Dau04b} (voir section \ref{sec:SAB04} et annexe \ref{app:SAB04})
+ \item Apprentissage d'un contrôle moteur en boucle fermée, modèles Hebbiens de l'apprentissage par renforcement \shortcite{Dau04b} (voir section \ref{sec:SAB04} page \pageref{sec:SAB04} et annexe \ref{app:SAB04})
 \end{itemize}
 %L'environnement pour approfondir [TODO].
 
@@ -970,11 +1013,11 @@ alternée d'une rège Hebbienne et d'une règle anti-Hebbienne
 permet de former une réponse 
 qui exploite la mémoire temporelle d'un substrat récurrent aléatoire
 (approche de type ``réservoir''). Elle a fait l'objet de deux publications de conférence
-et d'un article \shortcite{Henry06,Dau06,henry07}  (voir section \ref{sec:discri} et annexe \ref{app:NCO07}).
+et d'un article \shortcite{Henry06,Dau06,henry07}  (voir section \ref{sec:discri} page \pageref{sec:discri} et annexe \ref{app:NCO07}).
 \item
 Deux articles
 de conférences \shortcite{Hen08,Hen08B} étudient un protocole d'apprentissage où un réseau aléatoire est 
-soumis à des motifs statiques aléatoires (comme dans \shortcite{Dau98A}), montrant un caractère régulateur de la règle de Hebb sur la dynamique du réseau (voir section \ref{sec:STDP} et annexe \ref{app:NCP08}).
+soumis à des motifs statiques aléatoires (comme dans \shortcite{Dau98A}), montrant un caractère régulateur de la règle de Hebb sur la dynamique du réseau (voir section \ref{sec:STDP} page \pageref{sec:STDP} et annexe \ref{app:NCP08}).
 \item 
 Un patron de connectivité plus réaliste a été proposé dans une étude datée de 2009 \shortcite{Henry09},
 avec séparation fonctionnelle des neurones excitateurs et inhibiteurs, et utilisation de neurones à 
@@ -1002,9 +1045,9 @@ sur l'orientation visuelle à partir des données anatomiques et électrophysiol
 et des neurones prémoteurs du tronc cérébral,
 en collaboration avec Alain Guillaume, travaillant à l'Institut des Sciences du Mouvement, 
 et Anthony Mouraud, qui a effectué un séjour
-post-doctoral en 2010 sous notre supervision \shortcite{Dauce2011} (voir section \ref{sec:orientation} et annexe \ref{app:CNS11B}). 
+post-doctoral en 2010 sous notre supervision \shortcite{Dauce2011} (voir section \ref{sec:orientation} page \pageref{sec:orientation} et annexe \ref{app:CNS11B}). 
 
-Deux études sur le rôle du codage topographique dans l'apprentissage d'une cinématique inverse, en collaboration avec Alain Dutech du LORIA,  ont également été réalisées dans ce cadre (voir section \ref{sec:topo-renf} et annexes \ref{app:ICANN09} et \ref{app:NCO10}). 
+Deux études sur le rôle du codage topographique dans l'apprentissage d'une cinématique inverse, en collaboration avec Alain Dutech du LORIA,  ont également été réalisées dans ce cadre (voir section \ref{sec:topo-renf} page \pageref{sec:topo-renf} et annexes \ref{app:ICANN09} et \ref{app:NCO10}). 
 	
 
 \paragraph{NOAT}
@@ -1015,7 +1058,7 @@ Ce projet collaboratif portait sur des mécanismes attentionnels liés à un con
 Dans le cadre du projet ANR NOAT, en collaboration avec Jennifer Coull (LNC, Marseille) et 
 Daniele Schön (INCM, Marseille), j'ai également travaillé sur des modèles génératifs du comportement 
 d'orientation temporelle,
-en collaboration avec Gaurav Malhotra, chercheur post-doctorant en 2010-2011 sur cette question \shortcite{Malhotra2011} (voir section \ref{sec:orientation} et annexe \ref{app:CNS11A}).
+en collaboration avec Gaurav Malhotra, chercheur post-doctorant en 2010-2011 sur cette question \shortcite{Malhotra2011} (voir section \ref{sec:orientation} page \pageref{sec:orientation} et annexe \ref{app:CNS11A}).
 
 
 %, certains aspects de la commande (déplacement relatif) semblant directement
@@ -1074,7 +1117,7 @@ en étudiant les caractéristiques du problème
 dans le cadre plus général des classifieurs à noyaux. 
 \item
 Ces travaux ont été publiés dans plusieurs conférences \shortcite{Dauce2012,Dauce2013a,Dauce2013b,Dauce2015}
-(section \ref{sec:BCI} et annexe \ref{app:IJCNN15}). 
+(section \ref{sec:BCI} page \pageref{sec:BCI} et annexe \ref{app:IJCNN15}). 
 \end{itemize}
 
 Dans une deuxième étude, j'ai travaillé dans le cadre d'une collaboration 
@@ -1082,7 +1125,7 @@ avec Maureen Clerc, Eoin Thomas, Dieter Devlaminck et Loïc Mahé,
 travaillant à Sophia-Antipolis, 
 sur un modèle de gradient logistique dans la cadre de classifieurs 
 probabilistes calculés sur un groupe de sujets, selon le principe proposé 
-par \shortcite{Kindermans2012} (section \ref{sec:BCI} et annexe \ref{app:ESANN14B}).
+par \shortcite{Kindermans2012} (section \ref{sec:BCI} page \pageref{sec:BCI} et annexe \ref{app:ESANN14B}).
 
 \paragraph{Bornes d'erreur en classification multi-classes (2013-2016)}
 	Enfin, sur un projet de thèse financé par le mécanisme CSC (China Scholarship Council), dans le cadre des collaborations  entre Centrale Marseille et Centrale Pékin, et en co-direction avec Liva Ralaivola du LIF, nous travaillons jusqu'en février 2016 avec Hongliang Zhong sur l'estimation des bornes d'erreur d'algorithmes d'apprentissage en ligne de classifieurs multi-classes, lorsque l'erreur de classification n'est connue que par un signal binaire de type ``vrai/faux''. Nous montrons, dans le cadre d'un algorithme fondé sur un principe d'optimisation quadratique, que les bornes d'erreur sont identiques à celles obtenues lorsque l'information est complète.
@@ -1098,7 +1141,7 @@ et d'autre part la prise en compte de la connectivité longue distance.
 
 Dans le cadre d'un travail de co-direction de la thèse de Mathieu Golos à l'Institut de Neurosciences des Systèmes, 
 j'ai contribué à une étude sur la multistablité dans les systèmes neuronaux artificiels
-construits à partir du connectome \shortcite{Golos2013,Golos2014}. Nous sommes partis d'un 
+construits à partir du connectome \shortcite{Golos2013,Golos2015}. Nous sommes partis d'un 
 modèle simplifié ignorant le terme de diffusion latérale. 
 Chaque nœud du réseau est simplement identifié à une masse neuronale. 
 Partant de l'analogie avec les réseaux de Hopfield \shortcite{Hop82}, le but
@@ -1107,7 +1150,7 @@ attracteurs se développant au sein d'un tel réseau.
 L'étude de la dynamique de réseaux large échelle s'appuyant sur des patrons de connectivité réalistes 
 met en évidence des régions de forte multistabilité, permettant à la fois d'analyser les affinités fonctionnelles
 entre les différentes régions anatomiques, et de simuler certains aspects de la dynamique 
-large échelle (en particulier l'alternance entre différents patrons d'activité) \shortcite{Golos2014} (voir section \ref{sec:PLOSsub} et annexe \ref{app:PLOSsub}).
+large échelle (en particulier l'alternance entre différents patrons d'activité) \shortcite{Golos2015} (voir section \ref{sec:PLOSsub} page \pageref{sec:PLOSsub} et annexe \ref{app:PLOSsub}).
 
 %[NATURE DE LA COMMANDE MOTRICE]
 % ``pattern matching'' (correspondance de forme) de l’IA  et des 
@@ -1617,7 +1660,7 @@ De manière schématique,
 	\item une activité à haut nombre de degrés de liberté correspond à un réseau de neurones ``inactif''.
 \end{itemize}
 %Cette notion d'activation ``macroscopique'' est à distinguer de l'activation  ``microscopique'' des neurones.
-On parlera par la suite de \textit{réponse de population} (ou réponse collective)  lorsque le réseau ``réagit'' ainsi à une entrée particulière en réduisant son nombre de degrés de liberté.
+On parlera par la suite de \textit{réponse de population} (ou réponse collective)  \index{Réponse de population} lorsque le réseau ``réagit'' ainsi à une entrée particulière en réduisant son nombre de degrés de liberté.
 
 \paragraph{Appariement / rejet}\label{page:appariement-conditionnel}
 
@@ -1637,7 +1680,7 @@ tel que~:
 
 \begin{itemize}
 	\item Ce rejet des entrées inconnues correspond, dans la littérature statistique, au principe de ``rejet de distance'', lorsqu'un phénomène observé est trop éloigné du modèle et classé comme ``aberrant''.
-	\item Une implémentation connue de ce principe dans le cadre des réseaux de neurones est le réseau ART \cite{ART98}, qui implémente un principe de ``vigilance'' correspondant à l'identification d'une entrée non-référencée par le réseau.
+	\item Une implémentation connue de ce principe dans le cadre des réseaux de neurones est le réseau ART \shortcite{Car87}, qui implémente un principe de ``vigilance'' correspondant à l'identification d'une entrée non-référencée par le réseau.
 	\item Ce principe de sélection par la dynamique d'un réseau récurrent a 
 	été exprimé dans les travaux de Walter Freeman \shortcite{ska87} dans le cadre d'un modèle de la perception des odeurs.
 \end{itemize}
@@ -1680,7 +1723,7 @@ et $F$ la fonction de mise à jour des synapses.
 
 Il s'agit essentiellement, selon l'idée initiale de Hebb, d'un mécanisme 
 de sélection dans lequel \textit{des activités corrélées tendent à se connecter, et des activités décorrélées à se déconnecter}. 
-Ce modèle de plasticité synaptique, dite ``potentiation à long terme'' (Long Term Potentiation - LTP), a été confirmé à de nombreuses reprises par les observations \shortcite{Bli73,BIPOO98}. 
+Ce modèle de plasticité synaptique, dite ``potentiation à long terme'' (Long Term Potentiation - LTP), a été confirmé à de nombreuses reprises par les observations \shortcite{Bli73,BI98}. 
 
 %La règle de Hebb s'interprète donc généralement comme une règle qui inscrit dans le graphe la structure de covariance présente dans l'activité des neurones. 
 Lorsque l'activité est elle-même induite par le signal d'entrée, le graphe reflète en partie les covariances présentes dans le signal.
@@ -1725,7 +1768,7 @@ La perspective des assemblées neuronales permet de voir les réseaux de neurone
 
 
 
-\paragraph{Champ moyen}
+\paragraph{Paramètre d'ordre}
 
  De manière plus quantitative, on trouve une idée voisine dans les travaux de Hermann Haken \shortcite{Haken1983}, qui a conceptualisé le principe de réponse par réduction de la dynamique collective à travers la notion de \textit{paramètre d'ordre}, permettant de constituer une ``variété centrale'' sur laquelle le système dynamique évolue (\textit{center manifold reduction}).
  Un paramètre d'ordre peut être vu comme une \textit{unité de description} de l'activité d'un système dynamique, généralement de grande taille.
@@ -1733,7 +1776,7 @@ La perspective des assemblées neuronales permet de voir les réseaux de neurone
 
 %Le problème des disparités d'échelle est souvent abordé à l'aide de descripteurs macroscopiques (dites variables de champ moyen) servant à décrire de manière concise l'activité de grandes populations  de neurones.
 
-	
+\paragraph{Champ moyen}	
 	Les modèles mathématiques permettant de déduire les propriétés ``macroscopiques'' (comportements moyens, 
 	corrélations d'activité, etc.) à partir de caractéristiques
 	``microscopiques'' s'appellent les modèles de ``champ moyen'' \shortcite{Wilson1972,Ama72,Amit1985,Som88,Ces94B,Ami97}, etc.
@@ -1803,8 +1846,22 @@ postulé par \shortcite{Izh06}.
 Le modèle mathématique qui implémente le principe d'assemblée de la manière la plus simple est le modèle de Hopfield \shortcite{Hop82}. Ce modèle est un réseau de neurones récurrent à unités binaires développant une dynamique de point fixe multistable. 
 Malgré des limitations bien connues en terme de capacité de stockage \shortcite{Amit1985}, le réseau de Hopfield présente l'avantage de fonctionner avec des principes compatibles avec les idées de Hebb (caractère local de la règle de plasticité, analogie possible entre attracteur et assemblée), et donc de constituer un modèle plus ``biologiquement plausible'' que les réseaux de neurones traditionnels.
 
+Un réseau de Hopfield  est un graphe non-orienté et pondéré $G$, constitué de $N$ nœuds et défini par une matrice de couplages $\boldsymbol{J} = \{J_{i,j}\}_{i \in 1..N,j \in 1..N}$  ainsi que des seuils d'activation $\boldsymbol{\theta} = \{\theta_i\}_{i \in 1..N}$. La mise à jour de l'état du nœud $i$ repose sur l'observation locale de ses voisins, selon~:
+$$x_i \leftarrow H(\sum_j J_{ij} x_j - \theta_i)$$
+avec $H$ fonction de Heaviside.    
+
 Le réseau de Hopfield implémente un principe de \textit {mémoire associative}. Il apprend ``par cœur'' un certain nombre de scènes (ou images). Il est ensuite capable, lorsque certains constituants d'une scène apprise sont présentés, de compléter la scène avec les éléments manquants, de rectifier les valeurs erronées etc. 
-L'espace d'états est organisé en un nombre fini de \textit{bassins d'attraction} définissant des patrons d'activité spécifiques et mutuellement exclusifs. L'activité du réseau finit par converger vers un de ces patrons en fonction des conditions initiales. Chacun des attracteurs s'interprète ici comme une assemblée distincte, c'est-à-dire comme un circuit de renforcement mutuel aboutissant à la stabilisation d'un patron d'activité macroscopique. 
+Ainsi, si $\boldsymbol{P}^{(1)}, ..., \boldsymbol{P}^{(K)}$ est une base de vecteurs binaires (images) de taille $N$, le choix :
+$$
+\left\{
+\begin{array}{ll}
+\forall i,j, & J_{ij} = \sum_k ({P}_i^{(k)} - 0.5) (P_j^{(k)}-0.5) \\
+\forall i, & \theta_i = 0.5 \sum_j J_{ij}
+\end{array}
+\right.
+$$
+permet d'organiser l'espace d'états en un nombre fini de \textit{bassins d'attraction} associés aux différents motifs de la base. L'activité du réseau finit par converger vers un des ces patrons d'activité stationnaires, en fonction des conditions initiales. Chacun de ces attracteurs s'interprète ici comme une assemblée distincte, c'est-à-dire comme un circuit de renforcement mutuel aboutissant à la stabilisation d'un patron d'activité macroscopique. 
+
 
 %Si la capacité se trouve en principe augmentée
 %d'un facteur exponentiel ($2^N$ configurations distribuées possibles), 
@@ -2306,9 +2363,9 @@ Ces facteurs exogènes sont modélisés comme des signaux
 venant influencer le système, mais n'étant pas influencés par lui.   
 L'équation de mise à jour devient~:
 \begin{align}
-&\boldsymbol{x}_\text{out}' = \phi_\text{out}(\boldsymbol{x}_\text{out},\boldsymbol{u},\boldsymbol{\xi}_\text{out}) \label{eq:feed-noise-1} \\
+&\dot{\boldsymbol{x}}_\text{out} = \phi_\text{out}(\boldsymbol{x}_\text{out},\boldsymbol{u},\boldsymbol{\xi}_\text{out}) \label{eq:feed-noise-1} \\
 &\boldsymbol{I} = h_\text{in}(\boldsymbol{x}_\text{out},\boldsymbol{\chi}_\text{out}) \label{eq:feed-noise-2}\\
-&\boldsymbol{x}_\text{in}' = \phi_\text{in}(\boldsymbol{x}_\text{in},\boldsymbol{I},\boldsymbol{\xi}_\text{in}) \label{eq:feed-noise-3} \\
+&\dot{\boldsymbol{x}}_\text{in} = \phi_\text{in}(\boldsymbol{x}_\text{in},\boldsymbol{I},\boldsymbol{\xi}_\text{in}) \label{eq:feed-noise-3} \\
 &\boldsymbol{u} = h_\text{out}(\boldsymbol{x}_\text{in},\boldsymbol{\chi}_\text{in}) \label{eq:feed-noise-4}
 \end{align}
 où les entrées $\boldsymbol{\xi}_\text{out}(t)$, $\boldsymbol{\chi}_\text{out}(t)$, $\boldsymbol{\xi}_\text{in}(t)$, $\boldsymbol{\chi}_\text{in}(t)$ représentent les écarts entre le modèle et la ``réalité''. 
@@ -2316,11 +2373,13 @@ où les entrées $\boldsymbol{\xi}_\text{out}(t)$, $\boldsymbol{\chi}_\text{out}
 
 \subsection{Approche probabiliste}
 
+{\em Pour la simplicité de l'exposé, nous passons ici en notation discrète pour les indices temporels. La généralisation aux modèles à temps continu peut être trouvée dans \shortcite{Kushner1964}.}
+
 Les écarts entre le modèle et les observations sont fréquemment modélisés comme des \textit{bruits}, issus de tirages aléatoires indépendant de la dynamique d'état, où~:
 \begin{itemize}
 	\item  %$\boldsymbol{\xi}_\text{in}(t)$ et
 	$\boldsymbol{\xi}_\text{out}(t)$ est le bruit d'état et $P$ le modèle de transition d'état externe, selon~:
-	\begin{align}\boldsymbol{x}_\text{out}(t+dt)\sim P(\boldsymbol{X}|\boldsymbol{x}_\text{out}(t),\boldsymbol{u}(t))
+	\begin{align}\boldsymbol{x}_\text{out}(t+1)\sim P(\boldsymbol{X}|\boldsymbol{x}_\text{out}(t),\boldsymbol{u}(t))
 	\end{align}
 	\item  %$\boldsymbol{\chi}_\text{in}(t)$ et
 	$\boldsymbol{\chi}_\text{out}(t)$ est le bruit de mesure et $Q$ le modèle de mesure, selon~:
@@ -2332,12 +2391,12 @@ Les équations (\ref{eq:feed-noise-1})-(\ref{eq:feed-noise-4}) décrivent alors 
 
 Étant donné l'état connu $\boldsymbol{x}_\text{out}(t)$, l'estimation d'état suivant peut être produite à l'aide de la formule de Bayes~:
 \begin{align}\label{eq:bayes}
-\mathbb{P}(\boldsymbol{x}|\boldsymbol{I}(t+dt)) = \frac{P(\boldsymbol{x}|\boldsymbol{x}_\text{out}(t),\boldsymbol{u}(t)) Q(\boldsymbol{I}(t+dt)|\boldsymbol{x})}{\int_{\mathcal{X}}P(\boldsymbol{y}|\boldsymbol{x}_\text{out}(t),\boldsymbol{u}(t)) Q(\boldsymbol{I}(t+dt)|\boldsymbol{y})d\boldsymbol{y}}
+\mathbb{P}(\boldsymbol{x}|\boldsymbol{I}(t+1)) = \frac{P(\boldsymbol{x}|\boldsymbol{x}_\text{out}(t),\boldsymbol{u}(t)) Q(\boldsymbol{I}(t+1)|\boldsymbol{x})}{\int_{\mathcal{X}}P(\boldsymbol{y}|\boldsymbol{x}_\text{out}(t),\boldsymbol{u}(t)) Q(\boldsymbol{I}(t+1)|\boldsymbol{y})d\boldsymbol{y}}
 \end{align}  
 où~:
 \begin{itemize}
 	\item $P(\boldsymbol{x}|\boldsymbol{x}_\text{out}(t),\boldsymbol{u}(t))$ est la probabilité \textit{a priori}.
-	\item  $Q(\boldsymbol{I}(t+dt)|\boldsymbol{x})$ est la vraisemblance de l'observation $\boldsymbol{I}$ étant donné $\boldsymbol{x}$. 
+	\item  $Q(\boldsymbol{I}(t+1)|\boldsymbol{x})$ est la vraisemblance de l'observation $\boldsymbol{I}$ étant donné $\boldsymbol{x}$. 
 \end{itemize}
 
 \subsubsection{Filtrage}\label{page:filtrage}
@@ -2439,7 +2498,7 @@ Le produit du processus de mesure est la distribution \textit{a posteriori} $\ha
 L'amélioration du processus repose alors sur le fait de trouver de nouveaux paramètres $\Theta'$ en estimant la vraisemblance $L(\boldsymbol{x},\Theta')$\footnote{égale à $Q(\boldsymbol{I}|\boldsymbol{x},\Theta')$ quand il n'y a pas de dynamique d'état et à  $Q(\boldsymbol{I}_{t+1}|{\boldsymbol{x}}_{t+1},\Theta')P({\boldsymbol{x}}_{t+1}|{\boldsymbol{x}}_t,\boldsymbol{u}_t,\Theta')$ quand il y a une dynamique d'état.} des paramètres étant donné l'état latent $\boldsymbol{x}$, en maximisant~:
 \begin{align}
 	\max_{\Theta'} \int L(\boldsymbol{x},\Theta')
-	 \hat{f}(\boldsymbol{x}) d\boldsymbol{x} \label{eq:Friston}
+	 \hat{f}(\boldsymbol{x}) d\boldsymbol{x} \label{eq:Dempster}
 \end{align}
 ce qui permet, de manière récurrente, de produire une nouvelle distribution a posteriori  $\hat{f}'$ qui elle-même produit un nouveau jeu de paramètres $\Theta''$ etc.
 Cette succession d'estimations et de maximisations donne son nom à l'algorithme EM \shortcite{Dempster1977} qui, étant données les observations, converge vers une distribution limite $\hat{f}^*$.
@@ -2499,8 +2558,8 @@ et d'utiliser l'erreur de prédiction pour améliorer autant que possible les pr
 par un mécanisme de plasticité, soit par le déclenchement d'une action visant à réduire l'écart à la prédiction.
 
 L'absence de consigne conduit à effectuer l'optimisation à la fois sur les paramètres du modèle et sur la commande, soit, en reprenant les notations précédentes~:  
-$$\max_{\Theta',\boldsymbol{u}'}\int L(\boldsymbol{x},\Theta',\boldsymbol{u}')\hat{f}(\boldsymbol{x}) d\boldsymbol{x} %= \min_{\Theta',\boldsymbol{u}'} \int -  \log\hat{f}(\boldsymbol{x}) d\boldsymbol{x} 
-$$
+\begin{equation}\max_{\Theta',\boldsymbol{u}'}\int L(\boldsymbol{x},\Theta',\boldsymbol{u}')\hat{f}(\boldsymbol{x}) d\boldsymbol{x} \label{eq:Friston} %= \min_{\Theta',\boldsymbol{u}'} \int -  \log\hat{f}(\boldsymbol{x}) d\boldsymbol{x} 
+\end{equation}
 
 %{\color{Cyan} Dans le cas des modèles du cervelet $I$ est la conséquence proprioceptive de la commande.}
 où la distribution a posteriori $\hat{f}(\boldsymbol{x})$ est générée selon un principe de ``codage par population'' \shortcite{Georgopoulos1986,Averbeck2006}, autrement dit via un échantillonnage de $P_\Theta$. 
@@ -2674,7 +2733,7 @@ commencent également à être bien connus \shortcite{Grillner2008}.
 %Le mécanisme d'appariement, au cœur des modèles d'apprentissage, s'apparente, dans le cadre des systèmes dynamiques, au principe de la rétroaction positive. 
 La rétroaction positive, et les effets de mémoire qu'elle
 permet, est probablement un composant essentiel des opérations réalisées dans le cerveau \shortcite{Compte2006}.    
-Le mécanisme  dit de ``réverbération'' \shortcite{Heb49} a été modélisé de longue date \shortcite{Wilson1972, Ama77B, Hop82},
+Le mécanisme  dit de ``réverbération'' \shortcite{Heb49} a été modélisé de longue date \shortcite{Wilson1972,Ama77B,Hop82},
 mais reste peu utilisé  dans les architectures de contrôle. 
 %On note quand même 
 %un contexte applicatif proposé par G. Schöner en robotique mobile \shortcite{Schoner95}.
@@ -2793,7 +2852,7 @@ Comme dans le cas des réseaux aléatoires simples, il existe un paramètre de c
 excitatrice et l'influence inhibitrice. De manière intéressante, une grande variété de comportements dynamiques peuvent être observés
 à la frontière, et entre l'extinction et l'activité soutenue, comme les oscillations synchronisées \shortcite{brunel00} et/ou le chaos \shortcite{Van98}. 
 
-En étendant les équations de champ moyen au cas des populations multiples, nous étudions dans \shortcite{dauce01a} un régime de faible activité (où l'inhibition domine l'excitation). Nous regardons le comportement de deux paramètres de contrôle~: l'amplification et l'hétérogénéité d'un faisceau 
+En étendant les équations de champ moyen au cas des populations multiples, nous étudions dans \shortcite{dau01a} un régime de faible activité (où l'inhibition domine l'excitation). Nous regardons le comportement de deux paramètres de contrôle~: l'amplification et l'hétérogénéité d'un faisceau 
 d'axones (son coefficient de variation), jouant sur la nature des régimes développés (extinction, activité chaotique non spécifique et oscillations 
 synchronisées). Nous mettons en évidence
 le caractère régulateur du paramètre d'hétérogénéité dans les régimes de forte amplification (dits aussi de ``haute conductance'')~: l'hétérogénéité des liens défavorise le développement de dynamiques d'ensemble simples (type oscillations synchronisées) et favorise des signaux individuels fortement indépendants
@@ -2825,7 +2884,7 @@ permettant des basculements d'activité lorsque ces
 changements sont forts, ou encore une mémoire à court terme (rémanence) lorsque le signal d'entrée s'éteint. 
 
 \subsubsection{d. Les graphes de connexion intra-cérébraux, tels qu'observés en imagerie fonctionnelle, peuvent servir de support à des dynamiques multistables.}
-L'étude proposée dans \shortcite{Golos2014} (voir section \ref{sec:PLOSsub} page \pageref{sec:PLOSsub}, et annexe \ref{app:PLOSsub}) étudie la 
+L'étude proposée dans \shortcite{Golos2015} (voir section \ref{sec:PLOSsub} page \pageref{sec:PLOSsub}, et annexe \ref{app:PLOSsub}) étudie la 
 dynamique de relaxation d'un réseau de neurones dont le graphe 
 de connexions est issu de l'analyse des faisceaux de matière blanche à l'échelle du cerveau entier \shortcite{Hagmann2008}.
 
@@ -2884,11 +2943,12 @@ statique \shortcite{Dau98A,Hen08B}.
 
 Les règles de plasticité Hebbiennes définissent une dynamique sur les liens synaptiques (voir les équations (\ref{eq:SD-plast-x}), (\ref{eq:SD-plast-J}) et (\ref{eq:plast-hebb}), page~\pageref{eq:plast-hebb}), selon les valeurs des activités pré et post-synaptiques. Dans la forme simple étudiée ici, la plasticité  
 repose soit sur la conjonction des activités pré et post-synaptiques, i.e~:
-\begin{equation}\dot{J}_{ij} = F(s_i^\text{out} \times s_j^\text{in},{J}_{ij}) \label{eq:plast-0}\end{equation}
+\begin{equation}\dot{J}_{ij} = F(s_i^\text{out} \times s_j^\text{in},{J}_{ij}) \label{eq:plast-0}
+\end{equation}
+\label{page:hebb-ordre}
 (on parle alors de règle d'ordre 0),
 soit sur des différences d'activité, i.e. 
 \begin{equation}\dot{J}_{ij} = F((s_i^\text{out} - m_i^\text{out})  \times(s_j^\text{in}-m_j^\text{in}),{J}_{ij})\label{eq:plast-0}\end{equation}
-\label{page:hebb-ordre}
 où $m_i^\text{in/out}$ est une activité de référence,  par exemple l'activité moyenne. On parle dans ce cas de règle d'ordre 1. 
 Ces règles de plasticité ne sont pas nécessairement convergentes. Elles sont généralement appliquées sur des durées brèves, en fonction des études (par exemple jusqu'à l'apparition d'un changement de régime dynamique).
 
@@ -2954,7 +3014,7 @@ Sur des réseaux récurrents de grande taille, les signaux périodiques sont ``c
 \item  
 La plasticité, en présence d'un signal d'entrée spatio-temporel, régularise ce circuit d'activité interne. Du fait des correspondances statistiques entre cette activité interne et la couche d'entrée, la plasticité a également pour effet d'intensifier le motif spatio-temporel d'entrée via les liens de feedback (figure \ref{fig:BC02-app}, page \pageref{fig:BC02-app})
 	\item L'aller-retour du signal entre la couche primaire et la couche secondaire conduit à une \textit{résonance} (ou réverbération) entre l'entrée sensorielle et la couche interne.
-	\item L'activité de réverbération constitue une réponse de population. La réponse est ``activée'' en présence de signaux concordants avec les formes spatio-temporelles apprises, et ``désactivée'' dans le cas contraire, conformément au principe d'appariement conditionnel (voir page \pageref{page:appariement-conditionnel}). 
+	\item L'activité de réverbération constitue une réponse de population . La réponse est ``activée'' en présence de signaux concordants avec les formes spatio-temporelles apprises, et ``désactivée'' dans le cas contraire, conformément au principe d'appariement conditionnel (voir page \pageref{page:appariement-conditionnel}). 
 \end{itemize}
 
 La réponse induite par la plasticité correspond fonctionnellement à un mécanisme de filtrage (voir page \pageref{page:filtrage}), autrement dit une \textit{prédiction dans le présent}.
@@ -2984,7 +3044,7 @@ capable de compléter les morceaux manquants, selon un mécanisme auto-associati
 
 
 La plasticité dépendante des instants de tir (\textit{Spike-timing dependent plasticity} -- STDP)  est  une règle de plasticité dépendant de l'ordre de tir des neurones pré-synaptiques et post-synaptiques
-\cite{BIPOO98}.
+\cite{BI98}.
 %L'utilisation d'une échelle temporelle fine permet d'améliorer le principe Hebbien~: %de transformation de la conjugaison
 %d'activité en causalité. 
 Cette règle est facilitatrice pour les synapses où l'activité 
@@ -3034,7 +3094,7 @@ peut être amplifiée par la plasticité (voir figure~\ref{fig:ESANN14}, page~\p
  et ceux qui ne le font pas.
  La STDP induit donc bien une structuration de l'activité interne 
  en amplifiant certaines séquences d'activation présentées de manière répétée (mais non périodiques) en entrée du réseau, favorisant
- l'émergence de séquences d'activation stables, comme postulé par \shortcite{izhikevich04,izhikevich06} (et contrairement aux observations de \shortcite{morrison07}). 
+ l'émergence de séquences d'activation stables, comme postulé par \shortcite{izhikevich04,izh06} (et contrairement aux observations de \shortcite{morrison07}). 
  
 \subsubsection{i. L'apprentissage ``par cœur'' d'appariements sensori-moteurs spécifiques met en évidence, en milieu ouvert, des couplages transitoires entre la dynamique d'un réseau récurrent aléatoire et les trajectoires motrices.}
 
@@ -3191,10 +3251,10 @@ Dans le cadre des modèles de l'appariement, l'évolution temporelle de  $\hat{f
 \end{itemize}
 
 De manière générale, ces modèles rendent compte du passage du temps dans l'élaboration d'une réponse, autrement dit modélisent un processus de délibération.
-De nombreux modèles de la perception utilisent ces principes pour rendre compte des temps de réponse à des stimuli plus ou moins ambigus \shortcite{Gold2001,Simen2011,khoei2013}.
+De nombreux modèles de la perception utilisent ces principes pour rendre compte des temps de réponse à des stimuli plus ou moins ambigus \shortcite{Gold01,Simen2011,khoei2013}.
 Les modèles mis en place dans le cadre de l'orientation temporelle \shortcite{Malhotra2011} se placent sur des échelles de temps un peu plus grandes (plusieurs secondes), qui les rapprochent des modèles probabilistes du contrôle moteur \shortcite{Wolpert2000,Haruno2001} suggèrant un lien possible entre l'estimation temporelle et la simulation motrice \cite{Jeannerod2001}. 
 
-\paragraph{}Par ailleurs, ces algorithmes reposent  sur des modèles paramétriques de la mesure, qui permettent la mise à jour du modèle après chaque série de mesures, selon le principe du maximum de vraisemblance, implémenté via une descente de gradient ou via l'algorithme EM (voir l'équation (\ref{eq:Friston}), page \pageref{eq:Friston}). 
+\paragraph{}Par ailleurs, ces algorithmes reposent  sur des modèles paramétriques de la mesure, qui permettent la mise à jour du modèle après chaque série de mesures, selon le principe du maximum de vraisemblance, implémenté via une descente de gradient ou via l'algorithme EM (voir l'équation (\ref{eq:Dempster}), page \pageref{eq:Dempster}). 
  \begin{itemize}
  	\item Dans le cas du clavier virtuel P300, la mise à jour du modèle de la mesure permet, en partant d'un modèle d'utilisateur générique, d'adapter l'interface à l'utilisateur, ce qui améliore la réactivité de l'interface au fur et à mesure de son utilisation \cite{Dau14b}
  	\item Par ailleurs, de manière analogue à \shortcite{Kivinen2004}, l'utilisation d'un terme de régularisation dans la mise à jour réalise un modèle de mesure ``glissant'' qui permet de s'adapter aux non-stationnarités de l'environnement \shortcite{Dauce2013b,Dauce2015}.
@@ -3521,7 +3581,7 @@ produits par les neurones. On parle de \textit{Disparité d'échelle}.
 %Le problème des disparités d'échelle, pourtant connu de longue date dans le champ des sciences cognitives.
 
 Ce problème a été abordé de longue date dans les sciences cognitives.
-L'hypothèse du \textit{passage d'échelle} suggère des moments transitoires où l'activité microscopique rejoint 
+L'hypothèse du \textit{passage d'échelle} \index{Passage d'échelle} suggère des moments transitoires où l'activité microscopique rejoint 
 l'activité macroscopique lors des épisodes de synchronisation, conduisant à une réduction de 
 complexité selon le principe déjà évoqué suggéré par la synergétique \shortcite{Haken1983}.
 L'hypothèse est ici que ce couplage transitoire entre activité motrice et activité neuronale repose sur la réduction du nombre de degrés de liberté, au sein d'assemblées neuronales spécifiques, se traduisant une synchronisation des activités et des corrélations à grande échelle \shortcite{Gra89}.
@@ -3947,7 +4007,7 @@ Dans ce cadre,
 \begin{itemize}
 	\item Le simple fait de produire une commande arbitraire
 	(aléatoire) permet de tester la conséquence sensorielle de la commande de manière \textit{non-supervisée}.
-	L'apprentissage des contingences sensori-motrices a récemment fait l'objet d'un projet européen (eSMC project \-- extended Sensori-Motor Contingencies). Ce type d'apprentissage est par ailleurs peu évoqué dans le cadre applicatif de la robotique mobile, à l'exception notable de \shortcite{Andry2001}.
+	L'apprentissage des contingences sensori-motrices a récemment fait l'objet d'un projet européen (eSMC project \-- extended Sensori-Motor Contingencies). Ce type d'apprentissage est par ailleurs évoqué dans le cadre applicatif de la robotique développementale \shortcite{Andry2001,Revel2009}.
 	\item Dans un contexte donné, l'appariement consiste simplement à faire des associations point à point, sous forme de bijection. Si $N$ est le nombre de points à apparier entre deux scènes, il y a $O(N)$ appariements à apprendre par contexte. 
 	\item La prédiction des conséquences sensorielles de l'action, dans un contexte donné, découle simplement des appariements. Une préparation motrice prédit, \textit{en contexte}, sa conséquence sensorielle attendue.
 	\item Le principe d'ancrage nécessite qu'une activité persistante soit maintenue au cours des changements respectifs de posture ou d'orientation.
@@ -4729,7 +4789,7 @@ Les neurones à potentiel d'action disposent en principe d'une expressivité
 supérieure à celle des neurones à fréquence de décharge \shortcite{Izh06}.
 Ils offrent des possibilités d'opérations (tels le codage par rang, la polychronisation,...)
 ainsi qu'un support pour un traitement parallèle distribué (``multiplexage'') par décalage de phase
-ou par bande de fréquences \shortcite{Skaggs1996,wang96gamma,WangXJ2010}. % [CITATIONS].
+ou par bande de fréquences \shortcite{Skaggs1996,wang1996,WangXJ2010}. % [CITATIONS].
 Un des enjeux connus est la possibilité d'émuler un mécanisme de synchronisation/coordination 
 longue distance supposé à l'oeuvre dans le cerveau pour l'integration multimodale \shortcite{Rod99}.
 
@@ -4768,7 +4828,7 @@ permis d'identifier des comportements caractéristiques, décrits sous la forme 
 	\label{fig:diagr-2pop}
 \end{figure} 
 
-L'étude présentée dans \shortcite{Dau99A,dauce01a} (voir annexe \ref{app:NPL01}) étudie le comportement d'un réseau dit ``équilibré'' (voir section \ref{sec:balanced}). 
+L'étude présentée dans \shortcite{Dau99A,dau01a} (voir annexe \ref{app:NPL01}) étudie le comportement d'un réseau dit ``équilibré'' (voir section \ref{sec:balanced}). 
 %{\color{Gray} Le point de départ consistait à modéliser et reproduire certains comportements observés dans les 
 %réseaux de neurones naturels composés d'une population de neurones excitateurs et d'une population de neurones inhibiteurs (réseaux équilibrés,.}
 Cet article 
@@ -5129,7 +5189,7 @@ Cet ensemble de nœuds présente des points communs avec le patron d'activité `
 
 En partant de la structure du connectome, nous avons utilisé pour l'activation des nœuds
 différentes variantes du modèle ``à réponse graduelle'' de Hopfield \shortcite{Hopfield1984}, 
-en changeant les caractéristiques du seuil d'activation afin de contrôler le niveau d'activation moyen \cite{Golos2014} \-- voir annexe \ref{app:PLOSsub}.
+en changeant les caractéristiques du seuil d'activation afin de contrôler le niveau d'activation moyen \cite{Golos2015} \-- voir annexe \ref{app:PLOSsub}.
 Ces travaux ont permis de mettre en évidence un nombre très important d'attracteurs dans certaines gammes de paramètres.
 Ainsi, en condition de ``basse température'', le nombre d'attracteurs distincts peut atteindre plusieurs milliers
 (sur un modèle comportant 998 nœuds). %cette prolifération d'attracteurs est un indicateur du caractère 
@@ -5155,7 +5215,7 @@ identifiés sur les signaux fMRI de l'état de repos \shortcite{Damoiseaux2006}.
 	{\bf f:} vecteur caractéristique du cluster 6 (892 attracteurs);  
 	{\bf g:} vecteur caractéristique du cluster 7 (881 attracteurs);  
 	{\bf h:} vecteur caractéristique du cluster 8 (844 attracteurs) 
-	(d'après Golos et al, \textit{submitted}).  
+	(d'après Golos et al (2015)).  
 }
 \label{fig:PLOS}
 \end{figure}
@@ -5552,7 +5612,7 @@ avaient déjà montré l'effet de réduction produit par
 la plasticité Hebbienne dans les réseaux aléatoire récurrents à 
 dynamique chaotique intrinsèque.
 
-L'article qui présente ces idées de la manière la plus complète est celui de Neural Networks \shortcite{Dau98A} (voir annexe \ref{app:NN98}).
+L'article qui présente ces idées de la manière la plus complète est celui de Neural Networks \shortcite{Dau98A} (voir annexe \ref{app:NN98} page \pageref{app:NN98}).
 Il porte sur l'étude de la réaction (spontanée ou acquise) d'un réseau de neurones récurrent aléatoire
 à des patrons (stimuli) également aléatoires.
 Il fait la synthèse de plusieurs résultats sur les réseaux récurrents aléatoires, 
@@ -5598,13 +5658,12 @@ donc sur un mécanisme différent de celui proposé par Hopfield~:
 Il s'agit essentiellement d'une relaxation sous contrainte, chaque
 stimulus étant l'expression d'une contrainte différente.
 \item
-L'ensemble des réponses aux contraintes statiques possibles constitue le \textit{répertoire 
-	dynamique} du réseau.
+L'ensemble des réponses aux contraintes statiques possibles constitue le \textit{répertoire dynamique} du réseau.
 \end{itemize}
 
 Une règle de plasticité synaptique est ajoutée, correspondant à un dynamique lente sur les couplages, qui modifie 
 le graphe selon une règle inspirée de Hebb \shortcite{Heb49}~:
-$${J}_{ij}(t) - {J}_{ij}(t-1) \propto (s_i^\text{out}(t)-0.5)\times(s_j^\text{in}(t)-0.5)$$
+$${J}_{ij}(t) - {J}_{ij}(t-1) \propto (s_i^\text{out}(t)-0.5)\times(s_j^\text{in}(t-1)-0.5)$$
 (à savoir que le lien entre deux neurones se renforce s'il
 existe une corrélation entre l'activité pré-synaptique et l'activité post-synaptique).
 L'article étudie les changements dans le répertoire dynamique lorsque le réseau est soumis à ces changements 
@@ -5677,7 +5736,7 @@ la dynamique intrinsèque des réseaux récurrents aléatoires, a reçu une bonn
 un des premiers à présenter un cadre mathématique pour l'étude des réseaux de neurones récurrents perturbés
 par un signal extérieur. Le même principe est utilisé, dans une certaine mesure, dans les modèles de contrôle 
 proposés par Jun Tani dans les années 90 \cite{Tani2004}, ainsi que dans les modèles de réservoir computing proposés par 
-Maas et Markram \cite{MAASS02,Buonomano2009}.
+Maas et Markram \cite{MAASS2002,Buonomano2009}.
 
 
 
@@ -5735,7 +5794,7 @@ La règle Hebbienne utilisée est une règle d'ordre 1 (fondée sur les différe
 modifie les couplages synaptiques selon une estimation locale de la covariance entre les neurones 
 pré et post-synaptiques, en tenant compte du délai de transmission \shortcite{Sej77}. 
 
-$${J}_{ij}(t) - {J}_{ij}(t-1) \propto (s_i^\text{out}(t)-m_i^\text{out}(t))\times(s_j^\text{in}(t)-m_j^\text{in}(t))$$
+$${J}_{ij}(t) - {J}_{ij}(t-1) \propto (s_i^\text{out}(t)-m_i^\text{out}(t))\times(s_j^\text{in}(t-1)-m_j^\text{in}(t-1))$$
 avec~:
 $$m_i(t) = \beta s_i(t) + (1 - \beta) m_i(t-1) \text{, avec } \beta \in ]0,1[ $$
 
@@ -5944,7 +6003,7 @@ favorisé le développement de nombreux modèles computationnels~:
 	Le cas des réseaux récurrents est plus ambigu: 
 	\begin{itemize}
 		\item dans certaines implémentations, la STDP semble favoriser 
-		l'émergence de séquences d'activation stables \shortcite{izhikevich04,izhikevich06}.
+		l'émergence de séquences d'activation stables \shortcite{izhikevich04,izh06}.
 		\item 
 		D'autres modèles, utilisant une implémentation différente, indiquent une absence de 
 		structuration de l'activité, avec des synapses instables sur toute la durée de la simulation \shortcite{morrison07}. 
@@ -7903,9 +7962,23 @@ entre autres à l'INRIA, et a fait l'objet de plusieurs publications dans des co
 %	publisher={Taylor \& Francis}
 %}
 
-\bibliographystyle{mslapa}%{apalike}%{apacite}
 
+%\clearemptypage
+% Apparently the guidelines don't say anything about citations or
+% bibliography styles so I guess we can use anything.
+
+
+
+%\backmatter
+\bibliographystyle{mslapa}
+%\refstepcounter{chapter}
+
+\addcontentsline{toc}{chapter}{Bibliographie}
+\renewcommand{\refname}{Bibliographie}
+%\nocite{*}
+\renewcommand{\bibname}{Bibliographie}
 \bibliography{biblio}
+%\clearemptydoublepage
 
 
 \part{Annexes}
@@ -8132,18 +8205,18 @@ of Adaptive Behavior (SAB'04)~: 305-314
 \paragraph{Journal~:} Proceedings of the 2015 International Joint Conference on Neural Networks (IJCNN 2015)
 
 \cleardoublepage
-\includepdf[pages=1,offset=70 -30]{pdf/2015-ijcnn-ann.pdf}
-\includepdf[pages=2,offset=-70 -30]{pdf/2015-ijcnn-ann.pdf}
-\includepdf[pages=3,offset=70 -30]{pdf/2015-ijcnn-ann.pdf}
-\includepdf[pages=4,offset=-70 -30]{pdf/2015-ijcnn-ann.pdf}
-\includepdf[pages=5,offset=70 -30]{pdf/2015-ijcnn-ann.pdf}
-\includepdf[pages=6,offset=-70 -30]{pdf/2015-ijcnn-ann.pdf}
-\includepdf[pages=7,offset=70 -30]{pdf/2015-ijcnn-ann.pdf}
-\includepdf[pages=8,offset=-70 -30]{pdf/2015-ijcnn-ann.pdf}
+\includepdf[pages=1,offset=70 -30]{pdf/2015-ijcnn.pdf}
+\includepdf[pages=2,offset=-70 -30]{pdf/2015-ijcnn.pdf}
+\includepdf[pages=3,offset=70 -30]{pdf/2015-ijcnn.pdf}
+\includepdf[pages=4,offset=-70 -30]{pdf/2015-ijcnn.pdf}
+\includepdf[pages=5,offset=70 -30]{pdf/2015-ijcnn.pdf}
+\includepdf[pages=6,offset=-70 -30]{pdf/2015-ijcnn.pdf}
+\includepdf[pages=7,offset=70 -30]{pdf/2015-ijcnn.pdf}
+\includepdf[pages=8,offset=-70 -30]{pdf/2015-ijcnn.pdf}
 
-\chapter{Multistability in large-scale models of brain activity (submitted)}\label{app:PLOSsub}
+\chapter{Multistability in large-scale models of brain activity}\label{app:PLOSsub}
 \paragraph{Authors~:} Golos, M, Jirsa, V and Daucé, E
-\paragraph{Journal~:} PLoS Computational Biology
+\paragraph{Journal~:} PLoS Computational Biology  11(12), e1004644
 \cleardoublepage
 \includepdf[pages=1,offset=70 -20]{pdf/2015-PLOS-CB.pdf}
 \includepdf[pages=2,offset=-70 -20]{pdf/2015-PLOS-CB.pdf}
@@ -8171,7 +8244,12 @@ of Adaptive Behavior (SAB'04)~: 305-314
 \includepdf[pages=24,offset=-70 -20]{pdf/2015-PLOS-CB.pdf}
 \includepdf[pages=25,offset=70 -20]{pdf/2015-PLOS-CB.pdf}
 \includepdf[pages=26,offset=-70 -20]{pdf/2015-PLOS-CB.pdf}
-
+\includepdf[pages=27,offset=70 -20]{pdf/2015-PLOS-CB.pdf}
+\includepdf[pages=28,offset=-70 -20]{pdf/2015-PLOS-CB.pdf}
+\includepdf[pages=29,offset=70 -20]{pdf/2015-PLOS-CB.pdf}
+\includepdf[pages=30,offset=-70 -20]{pdf/2015-PLOS-CB.pdf}
+\includepdf[pages=31,offset=70 -20]{pdf/2015-PLOS-CB.pdf}
+\includepdf[pages=32,offset=-70 -20]{pdf/2015-PLOS-CB.pdf}
 
 
 \end{document}
