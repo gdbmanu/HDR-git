@@ -91,7 +91,7 @@
 
 
 % Book's title and subtitle
-\title{\Huge \textbf{Learning control in continuous action spaces} }
+\title{\Huge \textbf{Learning end-effector control in continuous action spaces} }
 % Author
 \author{\textsc{Emmanuel Daucé}}%\thanks{\url{www.example.com}}}
 
@@ -128,11 +128,96 @@ Learning then coincides with the construction of a vocabulary of shapes that ser
 There are however few examples in the literature where auto-encoding algorithms end up in learning a control law in a continuous actions space.  
 This difficulty seems to rely on the conceptual separation between, on one side, the dynamical systems approach and, on the other side, the pattern matching principles.
 
-From the dynamical system perspective, a usual simplification considers a controller and its environment as single dynamical system, with a reciprocal coupling between an internal part devoted to data processing and control and an external part consisting in material objects. The transformations from the internal state space toward the external state space are done through actuators. Reciprocally, the transformations from the external state space toward the internal state space are done through captors. 
+From the dynamical system perspective, a usual simplification considers a controller and its environment as a single dynamical system, with a reciprocal coupling between an internal part devoted to data processing and control and an external part consisting in material objects. The transformations from the internal state space toward the external state space are done through actuators. Reciprocally, the transformations from the external state space toward the internal state space are done through captors [REF moi,REF Friston]. 
 When considering the question of learning and updating actions, some inconsistencies may however rapidly show off. 
 
-On one side, learning essentially deals with matching patterns. On the other side, motor control essentially deals with estimating and correcting distances between actual and desired states. The projection of a sensory input toward a redescription space mainly means digitalizing the input data, from an "Euclidian" physical space toward a digital space. As soon as nonlinearities take part in the transformation, the distances between objects are not preserved by the transformation. The calculation of a command, seen as  the difference between an actual and a desired state, may then poses some difficulties. 
-More generally, the dissociation of objects in a set of features conducts to the difficult inverse problem of the binding of features into consistent objects in the redescription space. How do we know that ``parts'' belong to the same object or to different objects? What is the link between parts that allow to constitute elements of the scene?
+%On one side, learning essentially deals with matching patterns. On the other side, 
+\begin{itemize}
+	\item Motor control essentially deals with estimating and correcting differences between actual and desired states. The projection of a sensory input toward a redescription space mainly means digitalizing the input data, from a ``Euclidian'' physical space toward a digital space [REF Poincaré]. As soon as nonlinearities take part in the transformation, the distances between objects are not preserved by the transformation. The calculation of a command, seen as  the difference between an actual and a desired state, may then poses some difficulties. 
+	\item In biological modeling, the spatial and temporal scales of the macroscopic (limbs, neck and eyes) displacements are distinct from the spatial and temporal scales observed in neural activity. In particular, the motor commands operate on time scales that are much slower than the typical neuronal time constants. This problem is known as the scale disparity problem [REF Varela]. The passing from the internal state space toward the external action space needs at some point order parameters to be extracted from the microscopic activity [REF Haken]. This micro/macro upscale transformation is clearly addressed in the nonlinear view of neuronal population dynamics [REF], but generally overlooked (and/or reduced to linear transformations) in the machine learning and control communities [REF eliasmith].     
+	\item More generally, the dissociation of objects in a set of features conducts to the difficult inverse problem of the binding of features into consistent objects in the redescription space. How do we know that ``parts'' belong to the same object or to different objects? What is the link between parts that allow to constitute elements of the scene? (Binding problem)
+\end{itemize}
+%Those three problems were addressed from long time in computational neurosciences community [REFS], but the recent upscaling of machine learning techniques and their reintroduction into  
+
+
+
+ID : RECONSIRERER L'ACTION A PARTIR DU POINT DE VUE END-EFFECTOR. CE POINT DE VUE pERMET DE SIMPLIFIER CONSIDERABLEMENT LES 3 PROBLEMES 3HISTORIQUES" MENTIONNES;
+
+\section{Quick mathematical overview}
+
+Control systems are generally described using two state spaces, namely the controller space $\mathcal{X}_\text{in}$, whose state at time $t$ is $\boldsymbol{x}^\text{in}_t \in\mathcal{X}_\text{in} $ and the physical space $\mathcal{X}_\text{out}$, whose state at time $t$ is $\boldsymbol{x}^\text{out}_t \in\mathcal{X}_\text{out}$. The general evolution of the system is provided by a set of 4 stochastic update equations, i.e.:
+  \begin{align}
+  &{\boldsymbol{x}}^\text{out}_{t+dt} \sim P_\text{out}(\boldsymbol{x}^\text{out}_t,\boldsymbol{u}_t) \label{eq:feed-noise-1} \\
+  &\boldsymbol{I}_t \sim Q_\text{in}(\boldsymbol{x}^\text{out}_t) \label{eq:feed-noise-2}\\
+  &{\boldsymbol{x}}^\text{in}_{t+dt} \sim P_\text{in}(\boldsymbol{x}^\text{in}_t,\boldsymbol{I}_t) \label{eq:feed-noise-3} \\
+  &\boldsymbol{u}_t \sim Q_\text{out}(\boldsymbol{x}^\text{in}_t) \label{eq:feed-noise-4}
+  \end{align}
+where eq. (\ref{eq:feed-noise-1}) is the external update,  eq. (\ref{eq:feed-noise-2}) the sensors actualization, eq. (\ref{eq:feed-noise-3}) the internal update and  eq. (\ref{eq:feed-noise-4})  the motor realization, with $\boldsymbol{I}_ t$ the sensory input,  $\boldsymbol{u}_t$ the command, $P_\text{out}$ the (external) generative process, $Q_\text{in}$ the measure, $P_\text{in}$ the internal program, and  $Q_\text{out}$ the command transmission chain. 
+
+In most cases, the external process is considered hidden, and only the sensory consequence $\boldsymbol{I}(t)$ of the hidden state is observable. Then, learning is mainly inferring the parameters $\Theta$ that describe both the (inferred) generative and observation processes, $\hat{P}$ and $\hat{Q}$, i.e. 
+\begin{align}
+\max_{\boldsymbol{x},\Theta} L(\boldsymbol{x},\Theta)
+\end{align}
+with  $L(\boldsymbol{x},\Theta)$ the likelihood of the observation (given parameters $\Theta$ and a past estimation on $\boldsymbol{x}_t$):
+\begin{equation}
+L(\boldsymbol{x},\Theta) = \hat{Q}(\boldsymbol{I}_{t+dt}|{\boldsymbol{x}},\Theta)\hat{P}({\boldsymbol{x}}|{\boldsymbol{x}}_t,\boldsymbol{u}_t,\Theta) \label{eq:lik}
+\end{equation}
+
+which is intractable in the general case and must be decomposed in a marginalization ``expectation'' step:
+$$\hat{f}(\boldsymbol{x}) = L(\boldsymbol{x}|\Theta)$$
+and a parameter maximization step \shortcite{Dempster1977}:
+$$\max_{\Theta'} \int L(\boldsymbol{x},\Theta')
+\hat{f}(\boldsymbol{x}) d\boldsymbol{x} \label{eq:Dempster}$$
+
+The active inference paradigm, as proposed by [Friston], mainly innovate from this classical scheme by including the command in the optimization, i.e. 
+\begin{align}
+\max_{\boldsymbol{x},\boldsymbol{u},\Theta} L(\boldsymbol{x},\boldsymbol{u},\Theta)
+\end{align}
+which tells in short that the meaning of action is to participate in the likelihood maximization process by sampling regions of the sensory space that should reduce the uncertainty about the hidden state. The choice of action $\boldsymbol{u}_t$ is there related to the maximization of likelihood of the future hidden state estimate $\boldsymbol{x}_{t+dt}$ in the next observation step (see eq.\ref{eq:lik}), with action outcome estimated from current $\hat{P}$ and $\hat{Q}$. A particular modeling effort needs thus to be put on estimating the sensory prediction of action (forward model of action), which is the essence of the predictive coding scheme.  
+The approach, however, doesn't provide a insight on which motor control schemes are effectively suitable to implement such prediction.   
+
+Classical motor control schemes consider for instance actions as changes taking place in the physical (Euclidian) space where objects are defined by specific 3D coordinates. Active sensing means thus move the eyes, neck and trunk in order to estimate the nature and location of the objects that compose the scene.  
+Many referentials may be defined in relation to the different degrees of freedom of the main articulations taking part in scanning the visual environment. They can be reduced to the egocentric referential (trunk referential), the head-centered referential (relative to the direction of the head) and the retinocentric referential (relative to the direction of the sight). Since relevant referentials and DOFs are defined, an action mainly reduces to a referential change on a same ``external'' scene. For instance, moving the eyes to the right translates the visual field to the left in the direction opposite to the angular command. The  linear transformation undergone by the retinocentric referential has a predictable consequence on where the objects will project on it after change. 
+
+Realizing and implementing those predictive transformations in a neuronal medium (suitable for learning) reveals however more difficult than expected. This difficulty is mainly due to the absence of a definite (operational) distance in the digital spaces that implement learning, on contrary to the physical spaces that implement action.  
+
+When learning is considered, the universality of a learning scheme  (its capability to learn any transformation) mostly relies on using non-linear transfer functions at one step (at least) of the data processing pathway, with, e.g. threshold functions, argmax, sigmoid or kernels. The many modern learning techniques used in pattern matching rely on a those non-linear steps to gain enough discriminative capability and separate characteristic features from many samples. 
+One such transformations may correspond to ``digitalizing'' (segmenting) a continuous space in many contiguous regions. In any case, the initial distances between the physical objects are not expected to be preserved in the redescription space. Predicting the consequence of an action then means an additional training (instead of exploiting explicit geometric transformations). 
+Even feasible at arbitrary precision in theory, learning ``by heart'' the sensory consequences of action suffers from a superlinear (multiplicative) complexity growth  when several referential  changes are considered.      
+
+
+
+
+In that context, the precise 
+
+
+
+implementation of the predictive coding view,  
+
+is of course very appealing but, staying at a general standpoint, doesn't precisely address the many caveats mentioned earlier. 
+Action is generally seen as a sampling process 
+
+
+\paragraph{}
+En plus de la disparité d'échelle, les lois régissant les deux systèmes ne sont pas de même nature. 
+Le monde physique est assez bien décrit par 
+l'approximation Newtonienne des masses en mouvement dans un milieu tri-dimensionnel.
+%On parlera pour simplifier du milieu extensif pour désigner le monde physique, l'endroit où sont
+%possibles des déplacements de masses par l'action des forces, les frottements et le contact. 
+A l'inverse, l'activité logicielle s'inscrit dans un réseau où l'intensité des interactions est 
+faiblement liée à la disposition spatiale, essentiellement produite par la connectique et 
+les transports d'activité électrique.
+%On parle pour simplifier de milieu intensif. % (ou milieu logiciel).
+
+Cette dichotomie  implique un mode de fonctionnement composite, fondé d'une part sur des rapports entre quantités (monde physique), 
+et d'autre part sur des rapports entre formes (monde digital).
+D'une certaine façon, la plupart des modèles en neurosciences computationnelles 
+reposent sur un compromis, sur un ``bricolage'' entre les deux approches, ne prenant pas 
+toujours en compte le caractère inhomogène de ces deux ``mondes''.
+
+\section{}
+
+
 
 	%Pour chaque tâche, les différentes réponses liées aux différentes dispositions des actionneurs et des capteurs dans l'espace physique devraient donc être apprises ``par cœur''.
 %\item La simplification, qui consiste à considérer un milieu intérieur (intensif) et un milieu extérieur (extensif)
@@ -169,22 +254,7 @@ complexité selon le principe déjà évoqué suggéré par la synergétique \sh
 L'hypothèse est ici que ce couplage transitoire entre activité motrice et activité neuronale repose sur la réduction du nombre de degrés de liberté, au sein d'assemblées neuronales spécifiques, se traduisant une synchronisation des activités et des corrélations à grande échelle \shortcite{Gra89}.
 Cette théorie n'a cependant pas encore, comme nous l'avons vu, abouti à des réalisations pratiques dans le domaine du contrôle moteur.
 
-\paragraph{}
-	En plus de la disparité d'échelle, les lois régissant les deux systèmes ne sont pas de même nature. 
-	Le monde physique est assez bien décrit par 
-	l'approximation Newtonienne des masses en mouvement dans un milieu tri-dimensionnel.
-	%On parlera pour simplifier du milieu extensif pour désigner le monde physique, l'endroit où sont
-	%possibles des déplacements de masses par l'action des forces, les frottements et le contact. 
-	A l'inverse, l'activité logicielle s'inscrit dans un réseau où l'intensité des interactions est 
-	faiblement liée à la disposition spatiale, essentiellement produite par la connectique et 
-	les transports d'activité électrique.
-	%On parle pour simplifier de milieu intensif. % (ou milieu logiciel).
-	
-Cette dichotomie  implique un mode de fonctionnement composite, fondé d'une part sur des rapports entre quantités (monde physique), 
-et d'autre part sur des rapports entre formes (monde digital).
-D'une certaine façon, la plupart des modèles en neurosciences computationnelles 
-reposent sur un compromis, sur un ``bricolage'' entre les deux approches, ne prenant pas 
-toujours en compte le caractère inhomogène de ces deux ``mondes''.
+
 
 	\subsubsection{Espace métrique et espace sensoriel}	
 
