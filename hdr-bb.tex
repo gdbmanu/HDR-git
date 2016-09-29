@@ -16,7 +16,7 @@
 %\documentclass[a4paper,11pt]{book}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage[francais]{babel}
+%\usepackage[francais]{babel}
 
 \usepackage[usenames,dvipsnames]{color}
 
@@ -91,7 +91,7 @@
 
 
 % Book's title and subtitle
-\title{\Huge \textbf{Learning end-effector control in continuous action spaces} }
+\title{\Huge \textbf{Predicting the consequence of action in digital control state spaces} }
 % Author
 \author{\textsc{Emmanuel Daucé}}%\thanks{\url{www.example.com}}}
 
@@ -106,7 +106,7 @@
 
 
 The objective  of this dissertation is to shed light on some fundamental impediments 
-in learning control laws in continuous action state spaces. 
+in learning control laws in continuous state spaces. 
 In particular, if one wants to build artificial devices capable to learn motor tasks
 the same way they learn to classify signals and images, 
 one needs to establish control rules that \textit{do not necessitate} comparisons between quantities
@@ -114,13 +114,14 @@ of the surrounding space.
 We propose, in that context, to
 take inspiration from the ``end effector control'' principle, as suggested by neuroscience studies,  
 as opposed to the ``displacement control'' principle used in the classical control theory. 
-We also present some extensions toward large-scale 
-brain activity models, and the design of brain-computer interfaces.
+%We also present some extensions toward large-scale 
+%brain activity models, and the design of brain-computer interfaces.
 
 \end{abstract}
 
 \section{Problem statement}
 %Comme nous l'avons vu, la plupart des algorithmes d'apprentissage fonctionnent selon un principe d'\textit{appariement} (``pattern matching''), c'est-à-dire sur la construction, à partir des données, d'un ensemble de vecteurs ``caractéristiques''. 
+
 
 Most machine learning techniques rely on a pattern matching principle, with representative vectors constructed from many passes over large datasets of examples.
 The resulting set of prototypes then works as a dictionary of shapes, providing a reduced description of the input data. The projection of the input vectors on this redescription space is then expected to facilitate further data processing and interpretation.
@@ -128,24 +129,25 @@ Learning then coincides with the construction of a vocabulary of shapes that ser
 There are however few examples in the literature where auto-encoding algorithms end up in learning a control law in a continuous actions space.  
 This difficulty seems to rely on the conceptual separation between, on one side, the dynamical systems approach and, on the other side, the pattern matching principles.
 
-From the dynamical system perspective, a usual simplification considers a controller and its environment as a single dynamical system, with a reciprocal coupling between an internal part devoted to data processing and control and an external part consisting in material objects. The transformations from the internal state space toward the external state space are done through actuators. Reciprocally, the transformations from the external state space toward the internal state space are done through captors [REF moi,REF Friston]. 
-When considering the question of learning and updating actions, some inconsistencies may however rapidly show off. 
+From the dynamical system perspective, a usual simplification considers a controller and its environment as a single dynamical system, with a reciprocal coupling between an internal part devoted to data processing and control and an external part consisting in material objects. The transformations from the internal state space toward the external state space are done through actuators. Reciprocally, the transformations from the external state space toward the internal state space are done through captors . 
+When  the question of learning and updating actions is considered, some inconsistencies may however rapidly show off. 
 
 %On one side, learning essentially deals with matching patterns. On the other side, 
-\begin{itemize}
-	\item Motor control essentially deals with estimating and correcting differences between actual and desired states. The projection of a sensory input toward a redescription space mainly means digitalizing the input data, from a ``Euclidian'' physical space toward a digital space [REF Poincaré]. As soon as nonlinearities take part in the transformation, the distances between objects are not preserved by the transformation. The calculation of a command, seen as  the difference between an actual and a desired state, may then poses some difficulties. 
-	\item In biological modeling, the spatial and temporal scales of the macroscopic (limbs, neck and eyes) displacements are distinct from the spatial and temporal scales observed in neural activity. In particular, the motor commands operate on time scales that are much slower than the typical neuronal time constants. This problem is known as the scale disparity problem [REF Varela]. The passing from the internal state space toward the external action space needs at some point order parameters to be extracted from the microscopic activity [REF Haken]. This micro/macro upscale transformation is clearly addressed in the nonlinear view of neuronal population dynamics [REF], but generally overlooked (and/or reduced to linear transformations) in the machine learning and control communities [REF eliasmith].     
-	\item More generally, the dissociation of objects in a set of features conducts to the difficult inverse problem of the binding of features into consistent objects in the redescription space. How do we know that ``parts'' belong to the same object or to different objects? What is the link between parts that allow to constitute elements of the scene? (Binding problem)
-\end{itemize}
+%\begin{itemize}
+%	\item Motor control essentially deals with estimating and correcting differences between actual and desired states. The projection of a sensory input toward a redescription space mainly means digitalizing the input data, from a ``Euclidian'' physical space toward a digital space [REF Poincaré]. As soon as nonlinearities take part in the transformation, the distances between objects are not preserved by the transformation. The calculation of a command, seen as  the difference between an actual and a desired state, may then poses some difficulties. 
+%	\item In biological modeling, the spatial and temporal scales of the macroscopic (limbs, neck and eyes) displacements are distinct from the spatial and temporal scales observed in neural activity. In particular, the motor commands operate on time scales that are much slower than the typical neuronal time constants. This problem is known as the scale disparity problem [REF Varela]. The passing from the internal state space toward the external action space needs at some point order parameters to be extracted from the microscopic activity [REF Haken]. This micro/macro upscale transformation is clearly addressed in the nonlinear view of neuronal population dynamics [REF], but generally overlooked (and/or reduced to linear transformations) in the machine learning and control communities [REF eliasmith].     
+%	\item More generally, the dissociation of objects in a set of features conducts to the difficult inverse problem of the binding of features into consistent objects in the redescription space. How do we know that ``parts'' belong to the same object or to different objects? What is the link between parts that allow to constitute elements of the scene? (Binding problem)
+%\end{itemize}
 %Those three problems were addressed from long time in computational neurosciences community [REFS], but the recent upscaling of machine learning techniques and their reintroduction into  
 
 
 
-ID : RECONSIRERER L'ACTION A PARTIR DU POINT DE VUE END-EFFECTOR. CE POINT DE VUE pERMET DE SIMPLIFIER CONSIDERABLEMENT LES 3 PROBLEMES 3HISTORIQUES" MENTIONNES;
+%ID : RECONSIRERER L'ACTION A PARTIR DU POINT DE VUE END-EFFECTOR. CE POINT DE VUE pERMET DE SIMPLIFIER CONSIDERABLEMENT LES 3 PROBLEMES 3HISTORIQUES" MENTIONNES;
 
-\section{Quick mathematical overview}
+\section{Quick mathematic overview}
 
-Control systems are generally described using two state spaces, namely the controller space $\mathcal{X}_\text{in}$, whose state at time $t$ is $\boldsymbol{x}^\text{in}_t \in\mathcal{X}_\text{in} $ and the physical space $\mathcal{X}_\text{out}$, whose state at time $t$ is $\boldsymbol{x}^\text{out}_t \in\mathcal{X}_\text{out}$. The general evolution of the system is provided by a set of 4 stochastic update equations, i.e.:
+\subsection{Closed-loop control}
+Closed-loop control systems are generally described using two state spaces, namely the controller space $\mathcal{X}_\text{in}$, whose state at time $t$ is $\boldsymbol{x}^\text{in}_t \in\mathcal{X}_\text{in} $ and the physical space $\mathcal{X}_\text{out}$, whose state at time $t$ is $\boldsymbol{x}^\text{out}_t \in\mathcal{X}_\text{out}$. The general evolution of the system is provided by a set of 4 stochastic update equations, i.e.:
   \begin{align}
   &{\boldsymbol{x}}^\text{out}_{t+dt} \sim P_\text{out}(\boldsymbol{x}^\text{out}_t,\boldsymbol{u}_t) \label{eq:feed-noise-1} \\
   &\boldsymbol{I}_t \sim Q_\text{in}(\boldsymbol{x}^\text{out}_t) \label{eq:feed-noise-2}\\
@@ -154,7 +156,10 @@ Control systems are generally described using two state spaces, namely the contr
   \end{align}
 where eq. (\ref{eq:feed-noise-1}) is the external update,  eq. (\ref{eq:feed-noise-2}) the sensors actualization, eq. (\ref{eq:feed-noise-3}) the internal update and  eq. (\ref{eq:feed-noise-4})  the motor realization, with $\boldsymbol{I}_ t$ the sensory input,  $\boldsymbol{u}_t$ the command, $P_\text{out}$ the (external) generative process, $Q_\text{in}$ the measure, $P_\text{in}$ the internal program, and  $Q_\text{out}$ the command transmission chain. 
 
-In most cases, the external process is considered hidden, and only the sensory consequence $\boldsymbol{I}(t)$ of the hidden state is observable. Then, learning is mainly inferring the parameters $\Theta$ that describe both the (inferred) generative and observation processes, $\hat{P}$ and $\hat{Q}$, i.e. 
+
+\subsection{Active sensing}
+
+In most cases, the external process is considered hidden, and only the sensory consequence $\boldsymbol{I}_t$ of the hidden state is observable. Then, learning is mainly inferring the parameters $\Theta$ that describe both the (inferred) generative and observation processes, $\hat{P}$ and $\hat{Q}$, i.e. 
 \begin{align}
 \max_{\boldsymbol{x},\Theta} L(\boldsymbol{x},\Theta)
 \end{align}
@@ -173,49 +178,34 @@ The active inference paradigm, as proposed by [Friston], mainly innovate from th
 \begin{align}
 \max_{\boldsymbol{x},\boldsymbol{u},\Theta} L(\boldsymbol{x},\boldsymbol{u},\Theta)
 \end{align}
-which tells in short that the meaning of action is to participate in the likelihood maximization process by sampling regions of the sensory space that should reduce the uncertainty about the hidden state. The choice of action $\boldsymbol{u}_t$ is there related to the maximization of likelihood of the future hidden state estimate $\boldsymbol{x}_{t+dt}$ in the next observation step (see eq.\ref{eq:lik}), with action outcome estimated from current $\hat{P}$ and $\hat{Q}$. A particular modeling effort needs thus to be put on estimating the sensory prediction of action (forward model of action), which is the essence of the predictive coding scheme.  
+which tells in short that the meaning of action is to participate in the likelihood maximization process by sampling regions of the sensory space that should reduce the uncertainty about the hidden state. The choice of action $\boldsymbol{u}_t$ is there related to the maximization of the likelihood of the future hidden state estimate $\boldsymbol{x}_{t+dt}$ in the next observation step (see eq.\ref{eq:lik}), with action outcome estimated from current $\hat{P}$ and $\hat{Q}$. A particular modeling effort needs thus to be put on estimating the sensory prediction of action (forward model of action), which is the essence of the predictive coding scheme.  
 The approach, however, doesn't provide a insight on which motor control schemes are effectively suitable to implement such prediction.   
 
-Classical motor control schemes consider for instance actions as changes taking place in the physical (Euclidian) space where objects are defined by specific 3D coordinates. Active sensing means thus move the eyes, neck and trunk in order to estimate the nature and location of the objects that compose the scene.  
-Many referentials may be defined in relation to the different degrees of freedom of the main articulations taking part in scanning the visual environment. They can be reduced to the egocentric referential (trunk referential), the head-centered referential (relative to the direction of the head) and the retinocentric referential (relative to the direction of the sight). Since relevant referentials and DOFs are defined, an action mainly reduces to a referential change on a same ``external'' scene. For instance, moving the eyes to the right translates the visual field to the left in the direction opposite to the angular command. The  linear transformation undergone by the retinocentric referential has a predictable consequence on where the objects will project on it after change. 
+Classical motor control schemes consider for instance actions as changes taking place in the physical (Euclidian) space where objects are defined by specific 3D coordinates. Active sensing means thus moving the eyes, neck and trunk in order to estimate the nature and location of the objects that compose the scene.  
+Many referentials may be defined in relation to the different degrees of freedom of the main articulations taking part in scanning the visual environment, with e.g. the egocentric referential (trunk referential), the head-centered referential (relative to the direction of the head) and the retinocentric referential (relative to the direction of the sight). Since relevant referentials and DOFs are defined, an action mainly reduces to a referential change on an invariant scene. For instance, moving the eyes to the right translates the visual field to the left in the direction opposite to the angular command. The  linear transformation associated with action has a predictable consequence on where the objects will project on it after change. 
 
-Realizing and implementing those predictive transformations in a neuronal medium (suitable for learning) reveals however more difficult than expected. This difficulty is mainly due to the absence of a definite (operational) distance in the digital spaces that implement learning, on contrary to the physical spaces that implement action.  
+\section{Learning to predict}
 
-When learning is considered, the universality of a learning scheme  (its capability to learn any transformation) mostly relies on using non-linear transfer functions at one step (at least) of the data processing pathway, with, e.g. threshold functions, argmax, sigmoid or kernels. The many modern learning techniques used in pattern matching rely on a those non-linear steps to gain enough discriminative capability and separate characteristic features from many samples. 
-One such transformations may correspond to ``digitalizing'' (segmenting) a continuous space in many contiguous regions. In any case, the initial distances between the physical objects are not expected to be preserved in the redescription space. Predicting the consequence of an action then means an additional training (instead of exploiting explicit geometric transformations). 
-Even feasible at arbitrary precision in theory, learning ``by heart'' the sensory consequences of action suffers from a superlinear (multiplicative) complexity growth  when several referential  changes are considered.      
+Realizing and implementing those predictive transformations in a neuronal circuit (suitable for learning) happens however to be more difficult than expected. This difficulty is mainly due to the absence of a definite (operational) distance in the control space that implements learning, on contrary to the physical space that implements action.  
 
+When learning is considered, the universality of a learning scheme  (its capability to learn any transformation) mostly relies on using non-linear transfer functions at one step (at least) of the data processing pathway, with, e.g. threshold functions, argmax, sigmoid, kernels etc.  \shortcite{Hay99}. The many modern learning techniques used in pattern recognition rely on those non-linear steps to gain enough discriminative power and extract common features from many samples. The pattern matching approach thus does not guarantee the proportionality of treatments between close-by and distant parts of the physical space.   In other words, the distance that can be defined into the redescription space may not  respect the distance and topology of the initial space. The redescription space is generally considered as a ``qualitative'' space (or ``digital'' space), containing features,  by contrast with the external ``quantitative'' space. 
+%\sout{Such transformations often correspond to ``digitalizing'' (segmenting) a continuous space in many contiguous regions.} 
 
-
-
-In that context, the precise 
-
-
-
-implementation of the predictive coding view,  
-
-is of course very appealing but, staying at a general standpoint, doesn't precisely address the many caveats mentioned earlier. 
-Action is generally seen as a sampling process 
+In any case, as soon as the initial distances between the physical objects are not preserved, predicting the consequence of an action may necessitate a specific training (instead of considering explicit geometric transformations). If every sensory modality of the physical space is distributed on many neurons (whose receptive field may only respond to a particular interval or ``pixel''), then simple transformations such as translations, rotations (and even identity) need to be learned ``by heart'' \cite{Pouget1997} i.e. may not result from local operations on graded firing rate inputs. 
+%In the visual system for instance, the retinal cells are sensitive to a very small portion of the visual field ...
+Even feasible at arbitrary precision in theory, learning ``by heart'' the sensory consequences of action may thus suffers from a superlinear (squared) complexity when distances or referential transformations are considered. Learning, for instance, to predict the visual field consequence of visual orientation commands would necessitate to 
+learn every combination of objects under the many possible eye and head orientation with trunk-head and head-eye referential transfers, which may expectedly be very costly \shortcite{Pouget1997,Pouget2002}.
 
 
-\paragraph{}
-En plus de la disparité d'échelle, les lois régissant les deux systèmes ne sont pas de même nature. 
-Le monde physique est assez bien décrit par 
-l'approximation Newtonienne des masses en mouvement dans un milieu tri-dimensionnel.
-%On parlera pour simplifier du milieu extensif pour désigner le monde physique, l'endroit où sont
-%possibles des déplacements de masses par l'action des forces, les frottements et le contact. 
-A l'inverse, l'activité logicielle s'inscrit dans un réseau où l'intensité des interactions est 
-faiblement liée à la disposition spatiale, essentiellement produite par la connectique et 
-les transports d'activité électrique.
-%On parle pour simplifier de milieu intensif. % (ou milieu logiciel).
 
-Cette dichotomie  implique un mode de fonctionnement composite, fondé d'une part sur des rapports entre quantités (monde physique), 
-et d'autre part sur des rapports entre formes (monde digital).
-D'une certaine façon, la plupart des modèles en neurosciences computationnelles 
-reposent sur un compromis, sur un ``bricolage'' entre les deux approches, ne prenant pas 
-toujours en compte le caractère inhomogène de ces deux ``mondes''.
+ 
 
-\section{}
+	
+
+%La ``traduction'' de ces deux espaces (visuel et pré-moteur) sous forme de patrons d'activité distribués correspond au passage vers un espace de description digital. D'une part, la scène visuelle sous la forme d'un ensemble complexe de contours et de textures se détachant d'un fond. De l'autre une scène pré-motrice organisée comme un ensemble d'actions indexées sur différents points de l'espace péri-corporel.  
+
+% comme nous l'avons vu, les opérations de ce type~: une transformation qui, étant  et 
+%un changement de référentiel,  nécessite de faire référence à deux points de l'espace .
 
 
 
@@ -236,764 +226,65 @@ toujours en compte le caractère inhomogène de ces deux ``mondes''.
 %L'interaction entre un monde distribué et digital, propice au feedback
 %positif, et un monde métrique et continu, propice au feedback négatif, 
 
-\subsubsection{Disparités d'échelle}\label{page:echelle}
-Dans domaine biologique, les échelles de temps et d'espace des comportements macroscopiques 
-(mouvements, déplacements, activité motrice)  
-se distinguent des échelles de temps et d'espace observées au niveau de l'activité
-nerveuse.
-On a d'un côté des échelles
-spatiales macroscopiques et des échelles temporelles lentes, et de l'autre des circuits microscopiques, constitués d'unités neuronales échangeant rapidement des signaux discrets.
-Les actions produites par le corps sont à une échelle temporelle lente en comparaison des potentiels d'action
-produits par les neurones. On parle de \textit{Disparité d'échelle}.
-%Le problème des disparités d'échelle, pourtant connu de longue date dans le champ des sciences cognitives.
-
-Ce problème a été abordé de longue date dans les sciences cognitives.
-L'hypothèse du \textit{passage d'échelle} suggère des moments transitoires où l'activité microscopique rejoint 
-l'activité macroscopique lors des épisodes de synchronisation, conduisant à une réduction de 
-complexité selon le principe déjà évoqué suggéré par la synergétique \shortcite{Haken1983}.
-L'hypothèse est ici que ce couplage transitoire entre activité motrice et activité neuronale repose sur la réduction du nombre de degrés de liberté, au sein d'assemblées neuronales spécifiques, se traduisant une synchronisation des activités et des corrélations à grande échelle \shortcite{Gra89}.
-Cette théorie n'a cependant pas encore, comme nous l'avons vu, abouti à des réalisations pratiques dans le domaine du contrôle moteur.
 
 
-
-	\subsubsection{Espace métrique et espace sensoriel}	
-
-
- Dans le cadre des algorithmes d'apprentissage, l'universalité de l'apprentissage (sa capacité à
-	apprendre n'importe quelle application) passe par l'utilisation de fonctions non-linéaires 
-	à une étape au moins du traitement, soit des fonctions seuil, sigmoïdes ou encore des
-	fonctions à support compact \shortcite{Hay99}. 
-	
-	Cette transformation non-linéaire, imposée par la condition d'universalité (capacité à séparer des données 
-	non-linéairement séparables par exemple) a pour contrepartie de rendre difficile la définition
-	d'une distance entre deux signaux. 
-	Les distances au sein de l'espace initial n'ont pas de traduction au sein de
-	l'espace de redescription.
-	L'approche par pattern matching ne garantit donc pas la proportionnalité des traitements entre signaux proches 
-	et signaux éloignés, comme le font les transformations linéaires  traditionnelles.
-	Autrement dit la distance définie au sein de l'espace de redescription (l'espace contenant les caractéristiques du signal)
-	ne respecte pas nécessairement les distances ou la topologie de l'espace initial.
-	On parlera de manière générale d'espace ``qualitatif'' pour décrire cet espace de redescription, ou encore d'espace
-	``digital'' pour décrire un tel ensemble de caractéristiques.
-	
-De manière similaire, le caractère distribué de l'activité nerveuse suggère  la distribution d'une même composante sensorielle 
-	sur de nombreux neurones, chaque neurone étant sensible à une manifestation particulière
-	de cette composante. L'exemple le plus extrême est celui de la rétine dont l'activité met en jeu 
-	plusieurs millions de neurones sensoriels, chaque neurone étant la manifestation d'une valeur de luminance
-	(et de longueur d'onde) en un point précis de la scène visuelle.
-
-
-\subsubsection{Problème de l'assemblage (``\textit{Binding problem}'')}
-Les modèles classiques de la commande motrice reposent implicitement sur l'hypothèse d'un espace physique extensif où prennent place des transformations linéaires\footnote{
-	où les prédictions s'apparentent à des opérations isométriques, soit des translations et
-	des rotations. Par exemple, les objets visibles sont translatés vers la gauche du champ visuel lorsque le regard  tourne
-	vers la droite. Nous avons donc un référentiel (celui de la direction du regard) qui est translaté, redéfinissant
-	les coordonnées des différents objets qui composent la scène visuelle. Le référentiel visuel est lui-même défini par rapport au
-	tronc (le support stable des mouvements de la tête), et l'axe de la direction du regard se définit par rapport à un autre référentiel qui 
-	est le référentiel du tronc. Les objets de la même scène sont également définis (en tant que point final des mouvements) dans
-	ce même référentiel du tronc. 
-}.  
-Le caractère distribué (``digital'') de l'activité neuronale 
-rend difficile, comme nous l'avons vu, la réalisation d'opérations simples comme l'addition ou la différence
-	de deux quantités, comme cela est pourtant nécessaire lorsque les déplacements doivent prendre en compte des sources sensorielles 
-	multiples issues de référentiels variés.
 	%, comme par exemple
 	%prédire la disposition des objets sur la scène visuelle,
 	%étant donnés (1) la position de ces objets dans l'espace pré-moteur et (2) la direction du regard. %proprioception de la position du corps et coordonnées rétiniennes pour attraper
 	%une cible par exemple
-	Le problème se pose plus généralement lorsqu'il s'agit d'estimer, au sein de l'espace de redescription, des quantités \textit{relatives} à différents
-	points de l'espace pré-moteur ou de l'espace sensoriel (et non des quantités absolues).
-	Si chaque modalité sensorielle de l'espace métrique environnant 
-	est décomposée en constituants élémentaires (intervalles ou ``pixels'' d'environnement), activant
-	ou désactivant différentes populations de neurones primaires, 
-	alors les transformations aussi simples que les translations, rotations, voire même l'identité, 
-	etc. doivent être apprises ``par cœur'' \cite{Pouget1997} et ne peuvent résulter de la combinaison d'activités unitaires,
-	c'est-à-dire d'un calcul.
-
-%La ``traduction'' de ces deux espaces (visuel et pré-moteur) sous forme de patrons d'activité distribués correspond au passage vers un espace de description digital. D'une part, la scène visuelle sous la forme d'un ensemble complexe de contours et de textures se détachant d'un fond. De l'autre une scène pré-motrice organisée comme un ensemble d'actions indexées sur différents points de l'espace péri-corporel.  
-
-% comme nous l'avons vu, les opérations de ce type~: une transformation qui, étant  et 
-%un changement de référentiel,  nécessite de faire référence à deux points de l'espace .
 	
-L'apprentissage, par exemple, de la conséquence visuelle d'une commande d'orientation visuelle par ``pattern matching'' nécessiterait un apprentissage par cœur de la conséquence visuelle 
-de toutes les combinaisons de dispositions d'objets et de tous les changements de référentiel tronc-tête, ce qui parait 
-computationnellement très coûteux (\shortcite{Pouget1997,Pouget2002}). Il est néanmoins nécessaire  que le ``lien'' praxo-visuel entre les différents objets de la scène ne soit pas perdu
-au cours des déplacement moteurs
-(un raisonnement symétrique peut être appliqué pour le cas des déplacements du corps dans un environnement visuel stable, comme dans le cas du réflexe vestibulo-oculaire \cite{Paillard1978}).	
-%	Ceci pose un problème en particulier lorsqu'il s'agit de contrôler les déplacements du corps à partir de l'activité
-%	distribuée induite par les récepteurs sensoriels.
-%	Le problème se pose lorsqu'il faut
-%	réaliser des opérations arithmétiques entre plusieurs grandeurs du monde physique, par exemple lorsque les réponses motrices doivent prendre en compte des sources sensorielles 
-%	multiples issues de référentiels variés (proprioception de la position du corps et coordonnées rétiniennes pour attraper
-%	une cible par exemple).
-%	%moduler une réponse à partir d'un écart à une valeur de référence par exemple, 
-	Ce problème du lien entre les différentes manifestations sensorielles d'un même objet s'appelle le problème de l'``assemblage'' (``binding problem''). Il a été identifié de longue date dans les sciences cognitives sans qu'une solution définitive ne  puisse lui être apportée \shortcite{VdM86}\footnote{	
-Il existe trois grandes catégories d'approches pour traiter de cette question~: (1) l'activité tierce, (2) l'assemblage
-dynamique et (3) la mémoire (ou les transformations) extérieure(s).
-%{\bf!!Par ailleurs, la manière dont les liens entre les deux espaces (pratique et visuel) se construisent est également une question
-%	à part entière, dont la mise en oeuvre pratique dépend largement du choix computationnel (1, 2 ou 3) effectué.!!}
+\section{Alternate view}
 
-{\bf Activité tierce}	La structure algorithmique la plus simple est celle de l'activité tierce (ou  projection inverse), 
-c'est à 
-dire une zone d'activité (ou un neurone) instancie un objet complet, répondant 
-de manière sélective à une combinaison spécifique de ses différents constituants.
-Cette approche est celle dite du ``neurone grand-mère''. 
-S'il apparaît peu probable qu'un seul neurone soit le support de la liaison,
-rien n'exclut qu'une population de neurones puisse répondre de façon sélective
-à toutes les configurations d'interaction avec un objet particulier (par exemple
-notre grand-mère) \shortcite{Quiroga2005}, voir aussi \shortcite{Dehaene2011}.
-Une telle activité est donc la continuation à travers
-toutes ses transformations (déplacement du corps, mouvement des yeux) 
-d'un même objet de l'environnement,
-autrement dit une ``présence de l'objet''.
-Dans sa forme la plus élaborée, l'activité tierce est 
-un modèle de l'environnement, constituée des principales quantités 
-relatives aux objets d'intérêt, dans un espace extérocentré. 
-Malheureusement, cette reconstruction de la structure externe de l'environnement 
-par modèle inverse suppose implicitement des transformations géométriques au sein
-du substrat permettant de projeter l'objet invariant sur la scène prémotrice ou visuelle,
-la réalisation computationnelle de telles projections dans un substrat distribué n'étant pas garantie
-(à l'heure actuelle).
 
-{\bf Assemblage dynamique} L'approche ``distribuée'', également appelée approche ``dynamique'', stipule
-le caractère non exclusif des activités des population : il n'existe pas de
-neurone ou de population de neurones répondant exclusivement à un invariant 
-de haut niveau. Le lien doit reposer sur des
-canaux de communication transitoires, ou encore des résonances, s'établissant à travers le
-substrat entre différentes activités constituants partiels de la scène.
-L'invariance est ici la susceptibilité à ``résoner ensemble'' (la persistance de la résonance à 
-travers les changements; l'existence de canaux le permettant)
-qui distingue ce qui est possible de ce qui ne l'est pas (les associations de constituants
-plausibles et celles qui ne le sont pas).
-%Cette approche est bien sûr très séduisante, mais pose des difficultés importantes 
-%dès qu'il s'agit de 
-L'hypothèse de l'assemblage dynamique est celle qui, à l'heure actuelle, semble la plus susceptible
-d'implémenter le lien praxo-visuel, sans faire appel à une activité centrale spécifique ou
-à un modèle interne. Elle évite en particulier le coût combinatoire des changements de
-référentiels. Le mécanisme le plus populaire est celui qui a été proposé initialement
-par \shortcite{Konig91a} (voir également \shortcite{Rod99,WangXJ2010}) 
-reposant sur les résonances entre oscillateurs. Il reste néanmoins
-de nombreuses questions relatives à l'implémentaton concrète (ou opérationnelle) de ces mécanismes,
-ainsi que sur leur caractère (ou non) prédictif. 
+%The pattern matching approach thus offers an effective support to the modeling of plasticity and learning, but poses in counterpart some concerns when considering it for controlling a motor apparatus in the physical space, in particular when the inverse path toward predicting the consequences of action is considered.     
 
-{\bf Mémoire extérieure}	Une troisième approche, celle de la ``mémoire extérieure'' \cite{ORe01}
-reprend la tradition 
-de l'approche écologique impulsée par Gibson \cite{Gib79}. L'existence de 
-motifs invariants dans la relation de l'agent à son environnement (comme le point de fuite)
-sert de support à la manipulation de cet environnement.
-Le lien instrumental avec les objets (le mode d'utilisation des objets)
-institue une forme d'invariance  qui est reproduite à travers le temps à chaque rencontre
-avec le même type d'objets.
-L'approche Gibsonienne met donc au premier plan l'activité motrice en tant que soubassement
-de la constitution d'invariants dans le rapport au monde.
-D'un point de vue algorithmique, on peut imaginer par exemple des activités ``template'' 
-correspondant à des successions caractéristiques d'actions (actions stéréotypées).
-Dans le cadre de l'exploration visuelle, on peut imaginer des séquences caractéristiques
-de saccades selon le type de scène visuelle à explorer,
-%(le patron d'exploration
-%constituants le lien entre les points d'attention focale).
-%Il faut imaginer des patrons d'exploration visuelle caractéristiques, 
-ce ``plan de visite''
-%pour les différents types de scène,
-constituant le socle d'interprétation des éléments de la scène.
-%Cette approche procédurale, en faisant reposer l'invariance sur des ``dictionnaires'' de schémas 
-%sensori-moteurs, accorde peu de rôle à l'activité intrinsèque, laissant
-%donc peu de place aux processus de décision et à la mémoire.
-La mise en relation entre les éléments se réduit ici à un schéma d'exploration (ou d'utilisation) 
-caractéristique de ces différents éléments, constitutif d'une unité d'action. 
-}.
 
-\paragraph{}	
-	
-	L'approche de la cognition par correspondance de forme offre donc un support efficace à la plasticité,
-	mais pose en revanche quelques problèmes lorsqu'il s'agit d'utiliser ce mode de codage pour contrôler un 
-	appareil moteur, c'est-à-dire schématiquement effectuer la transformation inverse du qualitatif vers 
-	le quantitatif.
-	
-	
+%Nous formons l'hypothèse que cette difficulté à faire apprendre des compétences motrices à un dispositif artificiel repose sur l'opposition entre deux grands principes fonctionnels~: le feedback positif et le feedback négatif.
+%\begin{itemize}
+%	\item Le mécanisme d'appariement, central dans l'apprentissage, repose majoritairement sur une logique de feedback positif (ou résonance)
+%	\item La théorie du contrôle, telle qu'elle est définie en sciences de l'ingénieur, repose majoritairement sur une logique de feedback négatif (correction de l'erreur motrice)
+%\end{itemize}
 
 
+If one expects build artificial devices that learn motor tasks the same way they may learn to classify images and signals, one needs to reconsider motor control from the basements, in a way that renders compatible the auto-encoding and the predictive coding principles.  
+This first implies a digital description of motor commands and motor acts, i.e a decomposition of the task space in elementary components, the same way the sensory state space may de decomposed in elementary constituents. In counterpart, the isometric transformations and quantitative comparisons used in classical control theory should be eliminated when possible to avoid combinatorial explosion in learning ``by heart'' the linear (euclidian) transformations and distances in the controller state space. 
 
+In order to do predictive coding without learning transformations and distances, what one needs to do is directly learn a mapping from the motor command space toward the sensory space. 
+%This imposes of course a strong constraint on the way motor command may be encoded and enacted. 
+In complex bodies made of many joints, a motor space is made of many dimensions, and the spatial disposition of the different segments of the body (posture) are unambiguously defined by their respective coordinates. In particular, the orientation of the trunk, the neck and the sight (relatively to the ground) are unambiguously set. 
 
+When visual prediction is considered, a simple mapping of the postural information toward the visual field is possible.
+%, that may allow to learn and predict quite precisely the aspect, e.g. of the hand, in the visual field. 
+If, for simplicity, only the hand and vision are considered, many visual orientations may produce predictable  changes in the visual field for the same invariant hand position. Reversely, moving the hand or the fingers while keeping the eyes  fixed also induces predictable changes. 
+The visual consequences of possible combination of eyes and hand position may thus be learned in a straightforward way without intermediary transformation. 
 
+This has important consequences on the way motor control should be considered. A traditional view considers motor acts as displacements that are proportional to a certain positional error detected by the senses. In that perspective, a \emph{difference} between the desired external state $\boldsymbol{x}^*$ and the actual estimate $\hat{\boldsymbol{x}}$ needs to be calculated to issue a displacement command $\boldsymbol{u}$. This is the \emph{error-based} control framework and the \emph{displacement-based} command. There is thus no direct mapping from a displacement  $\boldsymbol{u}$ toward its visual consequence $\boldsymbol{I}$. One needs to pass through an intermediary object, the ``external state'' $\hat{\boldsymbol{x}}$  to perform a prediction. 
 
-
-
-
-
-
-%c'est-à-dire d'un calcul.
-
-%{\color{Violet}
-%Ceci pose un problème en particulier lorsqu'il s'agit de contrôler les déplacements du corps à partir de l'activité
-%distribuée induite par les récepteurs sensoriels.
-%En fait, le passage par un domaine de description qualitatif
-%ne pose pas de problème tant qu'il s'agit d'associer (de manière univoque) un
-%patron d'activité (un attracteur {\color{red}[ATTENTION NOTION D'ATTRACTEUR = MIXTE]}) et une commande motrice%, comme dans le
-%cas de la carte colliculaire vue précédemment. 
-%Le problème se pose lorsqu'il faut
-%réaliser des opérations arithmétiques entre plusieurs grandeurs du monde physique,
-%moduler une réponse à partir d'un écart à une valeur de référence par exemple, 
-%c'est à
-%dire plus généralement lorsqu'il s'agit d'estimer, au sein de l'espace de description
-%qualitatif, des quantités \emph{relatives} à différents
-%points de l'espace métrique ou de l'espace sensoriel (et non des quantités absolues). 
-%}
-
-
-
-%[NE PAS OUBLIER L'ACTIVITE VESTIBULAIRE]
-
-
-
-
-
-
-
-
-%\section{[TODO]}
-
-
-
-%\subsection{Contrôle en boucle fermée et systèmes dynamiques} 
-%
-%
-%
-%
-%{\color{Violet}
-%	
-%	
-%	l'approche par feedback négatif repose principalement sur le calcul d'une erreur de prédiction. 
-%	On suppose donc l'existence d'un modèle interne qui 
-%	anticipe la conséquence sensorielle de l'action [WOLPERT], et corrige éventuellement
-%	le modèle si cette 
-%	
-%	Une des prédictions, pour distinguer l'un de l'autre, serait d'identifier une activité liée à l'erreur perceptive. 
-%	vs une activité liée au matching perceptif (correspondance)
-%	
-%}
-
-
-%[ON/OFF] entre 0 (rien) et 1 (tout). Caractère binaire (digital) du pattern patching.
-
-%Dans le cas extrême où l'espace de redescription est constitué d'unités binaires, la notion de distance
-%disparait de l'espace de redescription, et seules subsistent les notions de ``même'' ou de ``différent'',
-%c'est-à-dire de ``matching'' et de ``mismatch''.
-
-%\subsection{Approches mixtes}
-
-
-
-%Une activité de population est parfaitement capable de définir
-%un déplacement moteur dans l'espace métrique, .
-%Le problème se pose lorsqu'il s'agit de combiner différents patrons d'activité pour établir
-%une réponse motrice relative (relative à différents objets ou à différentes propriétés d'un même objet).
-%Il faut pour cela regarder d'un peu plus près la nature de la commande motrice.
-
-%L'approche de la cognition par correspondance de forme offre donc un support efficace à la plasticité,
-%mais pose en revanche quelques problèmes lorsqu'il s'agit d'utiliser ce mode de codage pour contrôler un 
-%appareil moteur, c'est-à-dire schématiquement effectuer la transformation inverse du symbolique vers 
-%le quantitatif. [A REVOIR LA TRANSFORMATION INVERSE NE POSE PAS DE PB - PROBLEME AVEC LES OPERATIONS 
-%ENTRE PLUSIEURS QUANTITES]
-
-%Le pattern matching pose un problème lorsqu'il s'agit d'effectuer la traduction inverse 
-%d'un patron d'activité vers un espace métrique, par exemple lorsqu'il s'agit de prendre en compte
-%des erreurs sensorielles pour effectuer une correction motrice.
-%Il est nécessaire que la notion de distance ne soit pas perdue au cours des transformations,
-%pour rendre possible cette traduction inverse. 
-%Une possibilité serait
-%la conservation de l'information de distance via des liens latéraux, sur le principe 
-%des cartes de Kohonen. 
-%Avant d'envisager comment cette information peut se maintenir, nous essayons par la suite d'éclaircir 
-%la nature de ce rapport du métrique au symbolique (du quantitatif au qualitatif) au sein du
-%système nerveux.
-
-
-
-
-
-
-%{\color{Violet}
-%	Substrat et expressivité. en particulier une expressivité autorisant le binding, l'activation de ``canaux'' différents.
-%	Les canaux sont eux-mêmes congruents à de nombreuses configurations sensorielles (nombreuses expressions d'une même
-%	quantité)
-%}
-
-
-
-
-
-
-\section{Perspectives et projets}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Le projet de recherche que je cherche à défendre vise à approfondir la compréhension de certains des problèmes
-calculatoires rencontrés dans le cadre de ces efforts de modélisation biologiquement inspirée.
-
-Nous formons l'hypothèse que cette difficulté à faire apprendre des compétences motrices à un dispositif artificiel repose sur l'opposition entre deux grands principes fonctionnels~: le feedback positif et le feedback négatif.
-\begin{itemize}
-	\item Le mécanisme d'appariement, central dans l'apprentissage, repose majoritairement sur une logique de feedback positif (ou résonance)
-	\item La théorie du contrôle, telle qu'elle est définie en sciences de l'ingénieur, repose majoritairement sur une logique de feedback négatif (correction de l'erreur motrice)
-\end{itemize}
-
-
-Si l'on souhaite construire des dispositifs artificiels capable d'apprendre des tâches motrices de la même manière qu'ils apprennent à classifier des signaux et des images, il faut opérer un renversement conceptuel en théorie du contrôle afin de rendre compatible le contrôle moteur avec l'apprentissage, en particulier \textit{utiliser les principes du feedback positif et de l'appariement pour définir les tâches de contrôle moteur.}
-
-Cette approche implique, comme dans le cas de l'analyse des signaux, une \textit{décomposition de l'espace des tâches} en tâches élémentaires, autrement dit la capacité à constituer de très nombreux circuits de commande associés à des configurations précises de l'environnement. 
-
-Appliquée dans un cadre de contrôle classique, nécessitant des transformations isométriques, cette approche conduit, comme nous l'avons vu, a une explosion combinatoire des combinaisons sensori-motrices à apprendre.
-Pour éviter ce problème, il faut donc établir des règles de contrôle \textit{ne nécessitant pas} de comparaison entre des grandeurs de l'espace environnant.
-
-\subsection{Construction d'un espace métrique péripersonnel}
-
-\begin{quotation}
-	``le monde visuel est constitué par l'action.''
-	
-\end{quotation}
-\begin{flushright}
-	Varela, FJ
-\end{flushright}	
-
-Un premier projet que je souhaiterais développer dans ce cadre est d'identifier les principes de construction de l'espace métrique tridimensionnel courant
-tel que nous l'expérimentons dans nos interactions quotidiennes avec l'environnement. 
-
-Si nous regardons l'activité sensori-motrice telle qu'elle se déploie à l'échelle macroscopique, on constate que l'activité humaine est fortement guidée par la composante visuelle.
-Si on regarde de plus près l'interrelation entre l'exploration visuelle et
-l'action simple consistant à manipuler des objets situés à portée de bras,
-deux grands domaines attentionnels peuvent être définis~:
-\begin{itemize}
-	\item d'une part 
-	le domaine visuel, organisé autour de la direction du regard;
-	\item d'autre part,
-	l'espace de travail, organisé autour des opérations sur des objets
-	attrapables ou manipulables. 
-\end{itemize} 
-%Si on se place selon la perspective de l'invariance du monde environnant \shortcite{Gib79}, 
-Il est intéressant de
-constater que ces deux types d'activité (exploration visuelle, utilisation) sont rarement
-simultanées  \shortcite{Paillard1978}. De manière un peu schématique, 
-\begin{itemize}
-	\item l'espace de travail reste invariant pendant
-	l'exploration visuelle, 
-	\item et, réciproquement, le regard reste statique (focalisé) durant
-	l'activité de manipulation.
-\end{itemize}
-En particulier, le déplacement du corps dans l'environnement se fait généralement
-dans un environnement visuel stable grâce au réflexe vestibulo-oculaire qui maintient le regard
-en direction d'un même objet pendant le déplacement (``ancrage'' visuel).
-
-Cette stabilité sélective d'une partie des composantes de l'environnement apparaît comme un 
-élément important de l'apprentissage du référentiel extérieur. 
-C'est également un bon modèle pour questionner les opérations nécessaires à la projection de
-l'espace pré-moteur vers l'espace visuel et vice-versa. Si on fait appel aux notions Piagétiennes
-de permanence de l'objet \cite{Piaget1973}, les différentes objets de la scène varient dans l'espace pré-moteur 
-et restent statiques dans l'espace visuel lorsque le corps bouge, et inversement varient dans l'espace visuel et 
-restent statiques dans l'espace pré-moteur lorsque le regard bouge. \begin{itemize}
-	\item Etant supposée par exemple la permanence
-	des objets dans l'espace pré-moteur, il est possible de prédire leur position dans le champ visuel étant
-	donnée la direction du regard.
-	\item Inversement, étant donnée la permanence des objets dans l'espace visuel, il est possible
-	de prédire leur position dans l'espace pré-moteur étant donné le déplacement du corps (il est difficile de bouger à la fois le corps et le regard).
-\end{itemize} 
-
-
-Il existe donc une application qui à partir de la position des objets dans un premier 
-référentiel définit la position des mêmes objets dans un autre référentiel. 
-La bijection entre les deux espaces offre
-un bon support à l'invariance ainsi qu'à la prédiction sensorielle. % selon le principe du ``predictive coding'' \shortcite{Rao1999}. 
-
-Le mécanisme de construction de l'espace métrique environnant reste à l'heure actuelle non-élucidé. Nous avons vu que le caractère ``digital'' de l'activité neuronale rend difficile, en interne, la construction d'opérateurs sur cet espace.
-Ce mécanisme semble pourtant pouvoir être implémenté sur la base de principes d'appariement très simples, mais n'a, à ma connaissance, pas encore été proposé en modélisation. Deux principes semblent s'imposer dans ce cadre : 
-\begin{enumerate}
-	\item la commande par champ de vecteurs,
-	\item le principe de l'alternance visuo-motrice.
-\end{enumerate}
-
-
-\paragraph{Commande par champ de vecteurs} 
-Des stimulations directes du cortex moteur, sur des échelles de temps
-comparables à la durée d'un déplacement (500~ms), suscitent des mouvements
-complexes convergeant toujours vers la même posture finale, quelle que soit la position
-de départ \shortcite{Graziano2002}. 
-Une composante de direction peut également être mise en évidence, 
-aboutissant à des possibilités de reconstruction de la
-trajectoire métrique à partir de l'activité de différents neurones \shortcite{Georgopoulos1986,Wessberg2000}.
-
-La commande balistique par combinaison de champ de vecteurs, telle qu'elle a été proposée par \shortcite{Mussa2004}, permet de rendre compte de cette organisation spatiale de la commande motrice. Selon cette approche~:
-\begin{itemize}
-	\item les commandes motrices balistiques correspondent à la définition d'un attracteur dans l'espace de la tâche.  Cet attracteur est produit comme combinaison de différents champs de vecteurs (appelés ``primitives motrices''). Ce type de commande ne nécessite pas de référence à un point d'opération externe (voir aussi page \pageref{sec:feed-plus}). La dynamique de relaxation et les constantes de temps propres à l'effecteur contrôlé conduisent les différentes articulations vers leur point d'équilibre.
-	\item L'ensemble des points que le bras peut atteindre forme une région de l'espace tridimensionnel. Le cortex moteur reproduit cette organisation spatiale~: le cortex est organisé sous la forme d'une carte motrice bidimensionnelle où chaque région de la carte correspond à une combinaison différente de primitives motrices conduisant la main vers un point de l'espace tridimensionnel environnant (péripersonnel). 
-\end{itemize}
-Ainsi:
-	\begin{itemize}
-		\item L'espace péripersonnel se définit comme l'ensemble des points fixes que la main peut atteindre.
-		\item Seule compte la position finale. Il y a donc une commande unique quel que soit le point de départ.
-	\end{itemize} 
+An alternate view is to consider the \emph{end-effector}-based (or ``ballistic'') control framework. 
+Direct stimulations of the motor cortex have shown converging movements toward a same final posture whatever the initial position  \shortcite{Graziano2002}. The presence of motor vector fields were also observed in many species, and vector-field-based control was theorized by e.g. \shortcite{Mussa2004}. The vector field approach to control considers the end-position of the limb as the relevant control level over which the brain operates. An end-position mainly consists in the distal spatial coordinates of certain effector (tentacle, tongue or arm in animals). A motor vector field is a definite set of flexion/extension commands whose combination mechanically conducts the effector toward a particular end-point. To control an end-effector in 2D coordinates for instance, a simple referential can be set with three fields (whose end-points are not colinear). Then, controlling the effector within the triangle made by the three end-points is done by linear combination. A dot in the coordinate system is defined by three weights affected to the different fields. 
+This principle is generalizable to 3D physical spaces (four dots at least) and of course to the more complex (many degrees-based) postural states like, e.g., the fingers of the hand.
 
  
-\paragraph{Alternance visuo-motrice et permanence de l'objet}
+An interesting consequence, when the arm is considered, is the correspondence of every motor command with a particular position of the hand (end-effector) in the peripheral space. 
+One can thus postulate the hand-and-arm-controlling motor cortex to be organized like a map, where every particular position in the map codes for a specific ``motor primitive'' (a linear combination of motor fields) that may conduct the hand toward a particular position in the peripheral space.
+This (approximate) correspondence between a  motor command and a corresponding 3D coordinate in peripheral space renders  possible a direct prediction from the command $\boldsymbol{u}_\text{arm}$ toward its visually expected consequence $\boldsymbol{I}$ (as far as the hand is considered).
 
-Une idée que je souhaiterais développer dans le cadre de ce projet est que l'ancrage visuel, tel qu'il est observé dans le cadre des déplacements moteurs et de l'activité de manipulation, a pour contrepartie symétrique un ancrage postural qui peut servir de support au principe de \textit{permanence de l'objet}.
+Despite fewer biological evidence, the very same reasoning can be applied on eye orientation effectors.  Orienting the eye toward the peripheral space can be seen as setting the angular direction $\boldsymbol{u}_\text{eye}$ of central part of the retina (fovea) in rotational coordinates.
+As far as only the hand and the sight are considered, and ignoring all possible luminance and light incidence changes, a direct mapping from $(\boldsymbol{u}_\text{arm}, 
+	\boldsymbol{u}_\text{eye})$ toward $\boldsymbol{I}_\text{visual field}$ can be considered for learning from a systematic scan of every possible eye and arm command. This is the equivalent of the ``babbling'' seen in young humans and animals [ref], also addressed in epigenetic robotics \shortcite{Andry2001}. 
 
-L'hypothèse que je souhaite développer est que ces deux principes d'ancrage permettent de constituer un espace tridimensionnel péripersonnel, par appariement prédictif,
-sans faire appel à des transformations complexes entre référentiels
-(voir note de bas de page 1).
+A direct mapping and prediction from the action space toward the sensory space is thus made possible in a digital control space system provided specific ballistic control principles are considered. This first and preliminary insight is not a definite answer to the addressed question, but may help to reorient and radically simplify the learning control framework in order to address more challenging questions. 
 
+\section{Concluding remarks}
 
-Le principe d'alternance entre un ancrage pré-moteur et un ancrage  visuel suppose l'existence de deux systèmes de commande non-simultanés correspondant, pour le premier, à l'orientation du regard (commande d'orientation), et pour le second à la manipulation de l'environnement proche (``utilisation'' de l'environnement).
-Ces deux systèmes de commandes définissent deux espaces~: l'espace de la direction du regard $\mathcal{U}_v$ (constitué de l'ensemble des points focaux où le regard se pose), avec $\boldsymbol{u}_v$ la commande d'orientation, et l'espace péripersonnel $\mathcal{U}_p$ (espace atteignable/manipulable par la main), avec $\boldsymbol{u}_p$
-une posture de la main. A ces deux espaces s'ajoute un troisième, qui est celui de la \textit{scène visuelle} $\mathcal{I}$, correspondant à l'ensemble des points de la rétine. 
-
-Dans ce cadre, l'apprentissage de l'espace (le fait de pouvoir situer dans l'espace péripersonnel l'ensemble des points de la scène visuelle) peut s'organiser autour de deux mécanismes d'appariement~:
-\begin{itemize}
-	\item Appariement par ancrage visuel. L'ancrage visuel signifie que la direction du regard $\boldsymbol{u_v}$ est fixe. L'activité de manipulation permet, dans le contexte défini par $\boldsymbol{u_v}$, d'apparier différentes scènes visuelles $\boldsymbol{I}_1, \boldsymbol{I}_2, ...$ avec différentes positions de la main $\boldsymbol{u}_{p,1}, \boldsymbol{u}_{p,2}, ...$.
-	\item Appariement par ancrage postural. Un point de l'espace péripersonnel s'apparente ici à un ``objet'', c'est-à-dire un élément de l'environnement atteignable par la main. L'ancrage postural correspond ici à la position de la main sur (ou à la préparation d'un mouvement de la main vers) ce point de l'espace. Si on suppose un ancrage postural fixe $\boldsymbol{u_p}$,  l'activité d'orientation (changement de point focal du regard)  permet, dans le contexte défini par $\boldsymbol{u_p}$, d'apparier différentes scènes visuelles $\boldsymbol{I}_1, \boldsymbol{I}_2, ...$ avec différentes directions du regard $\boldsymbol{u}_{v,1}, \boldsymbol{u}_{v,2}, ...$, ce qui permet de constituer la \textit{permanence de l'objet} à travers différentes scènes visuelles.  
-\end{itemize}
-
-Il reste à déterminer dans ce cadre (1) l'appariement à mettre en œuvre (par produit scalaire, probabiliste ou par relaxation vers un attracteur), (2) de préciser le mécanisme spécifiant l'alternance entre les deux principes d'ancrage, et (3) le principe qui guide le choix et l'actualisation de la commande motrice. 
-
-Dans ce cadre,
-\begin{itemize}
-	\item Le simple fait de produire une commande arbitraire
-	(aléatoire) permet de tester la conséquence sensorielle de la commande de manière \textit{non-supervisée}.
-	L'apprentissage des contingences sensori-motrices a récemment fait l'objet d'un projet européen (eSMC project \-- extended Sensori-Motor Contingencies). Ce type d'apprentissage est par ailleurs peu évoqué dans le cadre applicatif de la robotique mobile, à l'exception notable de \shortcite{Andry2001}.
-	\item Dans un contexte donné, l'appariement consiste simplement à faire des associations point à point, sous forme de bijection. Si $N$ est le nombre de points à apparier entre deux scènes, il y a $O(N)$ appariements à apprendre par contexte. 
-	\item La prédiction des conséquences sensorielles de l'action, dans un contexte donné, découle simplement des appariements. Une préparation motrice prédit, \textit{en contexte}, sa conséquence sensorielle attendue.
-	\item Le principe d'ancrage nécessite qu'une activité persistante soit maintenue au cours des changements respectifs de posture ou d'orientation.
-	\item Chaque contexte définit (spécifie) un ensemble d'appariements distinct. Si ce principe est facile à définir mathématiquement (fonction indexée par le contexte, vraisemblance conditionnée au contexte, etc.), le mécanisme neuronal grâce auquel il peut être implémenté reste à découvrir. 
-\end{itemize}
-
-
+A first remark, as soon as  brain modeling is considered, is the probable combination of several control principles serving different purposes in biological systems. 
+If end-effector control happen to have interesting predictive capabilities, a counterpart is a certain lack of adaptivity in changing conditions.  Changes in body orientation, muscle fatigue, or any effector flaw may have a dramatic consequence on the final precision of movement. A parallel and fast-adapting control is expected to take place in the cerebellum, with the capability to deviate the motor orders on the fly at the time it is sent to the muscles.  The cerebellum has been shown to be sensible to the motor error, and capable to calculate a displacement correction [ref]. The huge number of neurons implied in that calculation may reflect the combinatorial problem encountered as soon as positional differences need to be calculated to set a command. 
  
+A follow-up of the hand/eye end-effector learning perspective is the learning the manipulation of objects by hand. The many different visual orientations of the different objects in the surrounding space are directly linkable to the way they can be handled by the hand. This is the essence of object affordances postulated by Gibson [ref]. Handling an object by hand is here an essential part of its identity (or category from the machine learning perspective). Scanning an object identity is here trying different manipulation schemes and inferring their visual and proprioceptive predictible consequences. An object in space can be seen as a grasping operation with a hand aperture and orientation compatible with its actual position and orientation. The visual field may then be interpreted from this motor perspective, and the many eye and head orientations associated unambiguously with a single grasping operation to establish its single invariant position in the surrounding space through its various perspectives. 
 
- 
-%L'idée est de prendre appui sur cette approche relativement nouvelle\footnote{Bien que les modèles computationnels pour
-%	le ``predictive coding'' datent
-%	des années 2000 \cite{Rao1999}, la définition proposée par Friston dans un cadre du contrôle
-%	moteur n'est pas encore (à ma connaissance) implémentée.}.
-%Nous allons essayer d'identifier les difficultés se cachant derrière ces définitions, 
-%et tenter d'établir des pistes de recherche visant à aborder la problématique du contrôle 
-%à l'intérieur des contraintes posées par un milieu logiciel distribué, de type ``réseau de neurones''
-%(activité répartie, les transformations et modification s'effectuant sur la base de 
-%l'activité locale).
-%Nous allons regarder plus particulièrement la problématique du ``modèle forward'', en essayant de 
-%comprendre dans quelle mesure l'activité interne au modèle traduit, ou fait émerger (ou pas) des
-%activités caractéristiques des grandeurs physiques extérieures dans l'élaboration de ses réponses motrices
-%ou dans son activité de prédiction sensorielle.
-%Nous regarderons en particulier comment la notion de \emph{distance} (telle qu'existant dans le milieu
-%physique extérieur)
-%peut apparaître (ou se manifester) au sein de l'activité
-%logicielle.
-%
-%\subsection{Référentiels et composition}
-%{\color{Violet}
-%
-%}
+if single object of the visual field may in principle be learned from this end-effector prospect, the detailed linkage and decomposition in features and components is still an open-ended question. For instance, as soon as hand manipulation is concerned, a detailed and exhaustive exploration of each and every end-effector configuration should reveal infeasible in practice and random-driven exploration rather be considered. Surprise-driven exploration (with unexpected changes preferred to known expectations) should thus be formalized and adapted to that specific prospect.
 
-
-
-%Nous partirons de l'activité humaine telle qu'elle se déploie à
-%l'échelle macroscopique.
-%L'activité humaine est fortement guidée par la composante visuelle.
-%Si on regarde de plus près l'interrelation entre l'exploration visuelle et
-%l'action simple consistant à manipuler des objets situés à portée de bras,
-%deux grands domaines attentionnels peuvent être définis. D'une part 
-%le domaine visuel, organisé autour de la direction du regard; d'autre part,
-%l'espace de travail, organisé autour des opérations sur des objets
-%attrapables ou maniplables. 
-%Si on se place selon la perspective de l'invariance du monde environnant \cite{Gib79}, il est intéressant de
-%constater que ces deux types d'activité (exploration visuelle, utilisation) sont rarement
-%simultanées. De manière un peu schématique, l'espace de travail reste invariant pendant
-%l'exploration visuelle, et, réciproquement, le regard reste statique (focalisé) durant
-%l'activité de manipulation \shortcite{Paillard1978}.
-%En particulier, le déplacement du corps dans l'environnement se fait généralement
-%vis-à-vis d'une scène visuelle stable grâce au réflexe vestibulo-oculaire qui maintient le regard
-%en direction d'un même objet pendant le déplacement.
-%
-%Cette stabilité sélective d'une partie des composantes de l'environnement apparaît comme un 
-%élément important de l'apprentissage du référentiel extérieur. 
-%C'est également un bon modèle pour questionner les opérations nécessaires à la projection de
-%l'espace pré-moteur vers l'espace visuel et vice-versa. Si on fait appel aux notion piagetiennes
-%de permanence de l'objet \cite{Piaget1973}, les différentes objets de la scène varient dans l'espace pré-moteur 
-%et restent statiques dans l'espace visuel lorsque le corps bouge, et inversement varient dans l'espace visuel et 
-%restent statiques dans l'espace pré-moteur lorsque le regard bouge. Etant supposée par exemple la permanence
-%des objets dans l'espace de pré-moteur, il est possible de prédire leur position dans le champ visuel étant
-%donnée la direction du regard. Inversement, étant donnée la permanence des objets dans l'espace visuel, il est possible
-%de prédire leur position dans l'espace pré-moteur étant donné le déplacement du corps
-%(il est difficile de bouger à la fois le corps et le regard)
-%
-%La nature de cette prédiction est fondamentalement celle d'opérations %géométriques 
-%isométriques, soit des translations et
-%des rotations. Par exemple, les objets visibles sont translatés vers la gauche du champ visuel lorsque le regard  tourne
-%vers la droite. Nous avons donc un référentiel (celui de la direction du regard) qui est translaté, redéfinissant
-%les coordonnées des différents objets qui composent la scène visuelle. Le référentiel visuel est lui-même défini par rapport au
-%tronc (le support stable des mouvements de la tête), et l'axe de la direction du regard se définit par rapport à un autre référentiel qui 
-%est le référentiel du tronc. Les objets de la même scène sont également définis (en tant que point final des mouvements) dans
-%ce même référentiel du tronc. Il existe donc une application qui à partir de la position des objets dans un premier 
-%référentiel définit la position des mêmes objets dans un autre référentiel. La bijection entre les deux espaces offre
-%un bon support à l'invariance ainsi qu'à la prédiction sensorielle (``forward model''). 
-
-%{\color{red} De manière schématique : espaces extensif/quantitatif = moteur - espace intensif/quantitatif = sensoriel}
-
-%Si nous poursuivons l'analogie nerveuse et biomécanique, le corps (les articulations du corps) décrit 
-%un espace métrique constitué par la position (et les variations de position) 
-%des éléments mobiles qui le composent.
-%Les objets extérieurs impactant les organes sensoriels sont également localisables dans un espace métrique
-%tridimensionnel constituant l'environnement immédiat du sujet. %{\color{red}[Mais la scène sensorielle est qualitative et non quantitative]}.
-%On peut parler d'un espace de description quantitatif pour décrire ce référentiel extérieur
-%par opposition à un espace de description qualitatif pour décrire le domaine des patrons d'activité induits
-%par les sens.
-
-%Néanmoins, le caractère distribué de l'activité nerveuse suggère la distribution d'une même composante sensorielle 
-%sur de nombreux neurones, chaque neurone étant sensible à une manifestation particulière
-%de cette composante. L'exemple le plus extrême est celui de la rétine dont l'activité met en jeu 
-%plusieurs millions de neurone sensoriels, chaque neurone étant la manifestation d'une valeur de luminance
-%(et de longueur d'onde) en un point précis de la scène visuelle.
-
-
-%{\color{red} Le pattern matching a un problème avec la dynamique, qui apparaît comme une déformation,
-%un changement de forme... L'approche de l'observateur (Kalman) est appliquée aux modèles de la perception
-%visuelle de manière statique (scène visuelle statique). Le modèle forward est alors la projection d'un état discret
-%vers la scène sensorielle. Transitions entre états discrets et algorithme de Viterbi.}
-
-%En particulier, il apparaît probable qu'une même composante n'active pas les même neurones selon sa position
-%dans un certain intervalle de valeurs. 
-
-%{\color{red}[Transition pas évidente. Déveloper lien entre opération / Notion de distance / similarité entre patrons / formes.
-%Les opérations arithmétiques simples n'ont pas d'équivalent au sein de l'espace de redescription]}
-
-
-
-
-
-%[ASSEMBLAGE DE CIRCONSTANCE - STRUCTURE PLASTIQUE VERSATILE - LIGANDS ENTRE DIFFERENTS PATRONS]
-
-%[COMPOSITIONNALITE] Assemblage toujours renouvelé de composantes. La compositionnalité concerne 
-%plus le coté sensoriel que le coté moteur. Au niveau moteur, on a plutot un principe d'instrumentalité
-%liée à des patrons fixes (figés)
-%(meme utilisation pour de nombreux assemblages sensoriels) (un assemblage est aussi lié au principe
-%d'accumulation d'évidence - une composition est aussi une ``accumulation de preuves'' --- un faisceau d'indices concordants)
-
-%[ANALOGIE LIENS LATERAUX - COLINEARITE DES CHAMPS]
-
-%CONSTITUTION D'UN META-PATRON
-
-
-
-%PROJET CONCRET
-
-%EXTENSIONS ET PERSPECTIVES PLUS LONGUES
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Vers une approche computationnelle de l'activité à large échelle}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-L'environnement Marseillais offre des possibilités de collaborations nombreuses dans le domaine
-de la modélisation biologiquement inspirée. Nous avons sur le campus de la Timone (faculté de Médecine)
-deux laboratoires de neurosciences directement intéressés par les problématiques de modélisation : l'INT
-(Institut de Neurosciences de la Timone), laboratoire CNRS en pointe sur la modélisation du système visuel,
-du système moteur ainsi que sur l'analyse des données d'imagerie optique, et l'INS (Institut de Neurosciences
-des Systèmes), laboratoire INSERM en pointe sur l'analyse et la modélisation de l'épilepsie ainsi que sur la 
-modélisation dite à large échelle de l'activité nerveuse, à travers le projet TVB (The Virtual Brain) porté
-par Viktor Jirsa et Randy McIntosh (Université de Toronto). 
-L'INS héberge également un centre de calcul principalement dédié à 
-la mise en oeuvre des calculs coûteux liés à la simulation détaillée des processus de 
-diffusion à la surface d'une reconstruction 3D du cortex, dans le cadre de 
-l'interface de simulation du projet TVB.
-
-Cet environnement donne accès à des données d'observation sur l'animal, mais également chez l'humain dans le cadre
-des chirurgies pré-opératoires consistant à implémenter des électrodes stéréotaxiques profondes chez les
-patients épileptiques pour identifier les régions épileptogènes à retirer.
-Nous avons donc accès à des données de première main concernant l'activité neuronale telle qu'elle se développe
-chez le sujet épileptique.
-Les signaux obtenus dans le cadre de l'analyse pré-opératoire correspondent à une activité ``large échelle'',
-se développant sur des échelles de temps et d'espace macroscopiques.
-L'objectif clinique (opérer le patient sans produire de lésions incapacitantes) nécessite une compréhension
-fine des grands mécanismes de réseau à l'oeuvre dans le cerveau.
-L'un des objectifs de l'ANR ``Vibrations'', financée à partir de 2014, et à laquelle je participe, est de 
-produire des modèles large-échelle personnalisés pour chaque patient en observation. Il s'agit 
-en particulier d'améliorer le diagnostic (identifier la zone épileptogène) 
-ainsi que prédire les conséquences de la chirurgie, pour minimiser les
-séquelles post-opératoires.
-
-Mes apports dans ce type de projet, et plus généralement dans le cadre de la
-modélisation large échelle, concernent principalement l'analyse et la modélisation
-des mécanismes mettant en jeu une activité intrinsèque et des interactions entre grandes
-populations de neurones, dans une des perspectives fonctionnelles évoquées 
-précédemment. Une idée que je cherche en particulier à développer est celle de 
-l'identité (ou de la simultanéité) de l'activité intrinsèque avec certaines 
-grandeurs caractéristiques de l'environnement.
-
-
-%Il s'agit dans ce cas d'une commmande motrice
-%codant pour la position finale, selon un principe de ``point fixe''.
-%Sachant que seule la commande de variation de contraction est communiquée à l'appareil neuro-musculaire,
-%le modèle proposé par \cite{Mussa2004,Flash2005} suggère une activation différenciée de différentes primitives motrices
-%se comportant comme des champs de force, des variations d'intensité conduisant
-%naturellement l'appareil moteur vers le même point d'équilibre (point d'équilibre de forces
-%opposantes).
-
-L'étude que nous avons conduite sur l'orientation visuelle (étude {\bf e})
-met en évidence une caractéristique importante de la commande motrice~:
-la simultanéité entre l'activité des structures motrices ou prémotrices
-et le déplacement moteur correspondant (co-activité sur un intervalle de 
-l'ordre de 100~ms dans le cas de la saccade).
-Les données de la littérature indiquent que 
-l'activité éléctrique motrice est le ``reflet'' d'une activité mécanique prenant place dans l'environnement
-physique externe.
-Des études portant sur le cortex moteur montrent également des corrélations entre l'activité  
-mesurée sur les neurones du cortex moteur et le
-mouvement effectif, confirmant leur coextensivité temporelle (l'activité s'arrête lorsque le mouvement s'arrête). 
-
-
-Le thème de la commande motrice nous offre ainsi un bon point d'appui pour caractériser certains aspects
-de l'activité se développant \textit{au cours du temps} dans le cerveau. Ce thème peut avoir d'intéressants
-développements, à la fois théoriques et pratiques.
-
-D'un point de vue théorique, l'activité motrice est la forme la plus élémentaire de prédiction
-relative à des grandeurs  de l'environnement physique, plus précisément l'activité motrice
-prédit que l'appareil moteur est en train de bouger.
-Cette correspondance terme à terme entre une activité électrique et un déplacement moteur n'est pas
-une nécessité fonctionnelle, et traduit une relation de fort couplage dont la
-raison d'être reste à établir. Une idée possible est que cette activité sert de point de départ
-pour établir des prédictions plus complexes sur l'espace métrique environnant, selon
-une modalité  qui reste à déterminer. 
-%dans le cadre de mécanismes liés au développement
-%et à l'apprentissage. 
-Une autre idée est que cette activité motrice définit l'échelle temporelle caractéristique 
-sur laquelle se déroulent les opérations réalisées par le cerveau (de 100 à 500 ms, voir aussi \shortcite{Petitot2002}).
-
-Une étude réalisable serait d'identifier chez des patients implantés  
-les activités électriques se développant 
-de manière simultanée avec des déplacements moteurs mesurables par des dispositifs externes (comme une caméra
-ou des dispositifs accélérométriques).
-Les outils (capteurs, caméras) existent à l'INS, de même que les outils de visualisation
-permettant d'identifier les
-régions anatomiques sur lesquelles l'activité se déploie.
-Un projet en cours à l'INS se propose d'ailleurs de caractériser certaines crises 
-du lobe frontal, se manifestant par des activités motrices complexes, à l'aide de 
-tels capteurs accélérométriques dans le but de mieux quantifier et classifier ces crises.
-
-
-Modéliser une telle activité électrique implique par ailleurs
-des mécanismes computationnels à implémenter, par exemple sous
-la forme de programmes moteurs, tels qu'observés
-dans le cadre de la saccade oculaire. 
-De tels programmes mettent probablement
-en jeu les circuits sous-corticaux (ganglions de la base, thalamus et peut-être cervelet) 
-qui ne sont pas encore
-implémentés sur l'outil de simulation TVB.
-
-En plus de ces mécanismes computationnels, l'analyse de l'activité
-spontanée du cerveau à l'état de repos, comme nous l'avons déjà évoqué, montre
-des alternances marquées entre différents patrons d'activité distribués, mettant en jeu des
-régions similaires d'un sujet à l'autre. Selon l'outil de mesure
-utilisé, ces alternances peuvent prendre place sur des échelles de quelques centaines de 
-millisecondes \shortcite{van2010} (analyse EEG) ou quelques dizaines de secondes \shortcite{Fox2005} (analyse fMRI).
-L'alternance rapide de l'activité semble être le support de  traitements cognitifs
-élémentaires. Le caractère rapide de ces alternances laisse supposer un mécanisme actif d'assemblage
-et de désassemblage des assemblées neuronales successivement actives, comme proposé dans \shortcite{Rod99}. 
-Une interprétation possible est celle d'une alternance active, au sein du cerveau, entre une activité 
-principalement perceptive, préparatrice de l'action, et une activité principalement motrice, préparatrice
-de la perception. Cette alternance rapide entre préparation motrice et préparation 
-perceptive est un cadre possible à la réalisation du \textit{predictive coding}, comme stipulé par 
-\shortcite{Rao1999} (voir aussi \shortcite{Wurtz2008,Rolfs2011}). Les alternances à plus longue constante
-temporelle pourraient quant à elles reposer sur l'alternance déjà évoquée entre les activité d'exploration
-sensorielle au sens large et les activités liées à la manipulation et à l'utilisation des objets
-de l'environnement (sous la forme éventuelle de la simulation motrice), qui peuvent s'apparenter, dans
-une certaine mesure, aux processus internes et externes stipulés dans \shortcite{Fox2005}.
-L'analyse des patrons d'activité développés à large échelle nécessite plus généralement une analyse
-fonctionnelle et non simplement structurelle. Il s'agirait ici de sortir des approches quantitatives
-pour poser les bases d'une interprétation plus computationnelle 
-des activités large-échelle observées, ouvrant la voie à
-des modèles informatiques plus précis.
-
-\subsection{Interfaces informatiques inspirées par la biologie}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Nous avons également à Marseille une forte tradition en informatique théorique, portée
-historiquement par le LIF (Laboratoire d'Informatique Fondamentale de Marseille), avec une expertise poussée 
-dans le domaine des langages fonctionnels, mais qui développe également une
-recherche de pointe en apprentissage automatique (Machine Learning).
-L'I2M (Institut de Mathématiques de Marseille) est également impliqué sur des
-thématiques proches du machine learning, en particulier dans le cadre du développement de
-modèles probabilistes en traitement du signal.
-Le centre INRIA de Sophia-Antipolis est également impliqué dans des 
-collaborations régulières avec les laboratoires de neurosciences
-Marseillais, sur des thématiques en lien avec le traitement du signal et la 
-construction de modèles inverses en imagerie.
-
-Cet environnement facilite le développement de projets mixtes, à l'interface du
-traitement du signal et de la modélisation biologique dans le cadre de l'étude des
-processus décisionnels classiques. 
-
-Les interfaces cerveau-machine, déjà abordées, offrent
-un cadre applicatif intéressant et potentiellement utile principalement pour
-les déficiences motrices et la réhabilitation motrice.
-%Le domaine des interfaces cerveau-machine est également une voie prometteuse pour cette approche.
-L'activité décelée dans le cadre des interfaces non-invasives (de type EEG) ne permet pas de reconstruction
-précise des activités internes à l'origine du signal de surface. La plupart des interfaces proposées
-se basent sur une démarche de classification automatique, ne permettant pas une interprétation
-de l'évolution spatio-temporelle de l'EEG. 
-
-L'idée générale d'un projet applicatif de ce type serait de construire une interface
-dont les principes de fonctionnement devraient être aussi proches que possible, étant données
-les connaissance actuelles, du fonctionnement du système nerveux.
-Il s'agit, d'un côté, de bien comprendre l'activité large-échelle pour mieux
-interpréter les données issues des capteurs non invasifs (EEG, voire MEG).
-De l'autre, il s'agit de s'inspirer des modes de fonctionnement du cerveau
-pour élaborer l'interface qui traite le signal. L'interface est en effet conceptuellement
-dans une situation similaire à celle d'un sujet humain~: elle fait face à un signal peu fiable,
-incomplet, bruité et doit apprendre à interpréter parfois compléter des données manquantes,
-pour produire des réponses (possiblement des déplacements moteurs dans le cas d'une interface de
-contrôle). Une avancée importante dans le domaine des interfaces cerveau-machine
-pourrait donc être la mise en place dans un cadre conceptuel bien contrôlé d'une véritable
-boucle de rétroaction entre l'interface et le sujet, en traitant le signal en temps réel 
-sur un principe d'anticipation et de prédiction pour compenser autant que possible les délais
-de traitement. 
-
-L'introduction de cette démarche ``en boucle fermée'', utilisant éventuellement des connaissances
-acquises lors de mesures invasives, devrait en principe permettre de traiter, sous une forme peut-être élémentaire,
-ces changements d'état rapide, et  améliorer ainsi l'interprétation 
-du signal et donc la fiabilité de l'interface.
-
-Une partie centrale du projet devrait être la prise en compte des mécanismes adaptatifs,
-en particulier dans le cadre d'une interface impliquant des stimuli visuels, pour ``caler''
-autant que possible les instants d'apparition des stimuli avec les rythmes et les féquences intrinsèques
-au cerveau, en respectant en particulier, s'ils peuvent être identifiés, les alternances
-entre les moments de préparation motrice et les moments de préparation perceptive. 
-D'autre part, le modèle devrait prendre en compte autant que faire se peut les caractéristiques
-à la fois structurelles et dynamiques du cerveau du sujet, en identifiant la localisation des
-circuits large échelle ainsi que les rythmes ou résonances propres de son activité cérébrale.
-
-En dernier lieu, il faut envisager des mécanismes adaptatifs agissant en direct pendant 
-l'interaction avec le sujet. On parle dans ce cas d'algorithmes d'apprentissage ``en ligne''. 
-Il s'agit d'une part d'en apprendre chaque jour un peu plus sur le sujet au travers des interactions répétées,
-pour affiner le modèle utilisé par l'interface. 
-D'autre part, il s'agit d'adapter ``en direct'' le modèle en fonction d'événements imprévus (comme
-des électrodes qui se déplacent ou se décollent) 
-ou de variations lentes de l'état du sujet (suite à la fatigue, à des baisses d'attention etc.).
-Dans ce cadre, le développement d'algorithmes adaptatifs spécifiques serait à
-envisager. 
-
-Plus généralement, les connaissances en plein essor sur le fonctionnement
-du cerveau à large échelle nous permettent d'envisager de nouvelles méthodologies 
-dans le développement d'objets interagissant de manière ``naturelle'' avec leur utilisateur.
-C'est à travers une connaissance plus approfondie de la logique et des mécanismes
-computationnels à l’œuvre dans le cerveau (en particulier à large
-échelle)
-qu'on pourra peut-être repenser la manière de concevoir des objets communicants (robots mobiles
-mais également interfaces vocales, jeux, etc.) à travers des modes de communication
-plus proches de ceux qu'un sujet expérimente quotidiennement avec son entourage.
+From the cognitive and developmental viewpoint, a more challenging perspective modeling the construction of objects, the assimilation (or generalization) of many perspectives in a single motor framework, as postulated by Piaget in the sensori-motor step \cite{Piaget1973}. This generalization capability, from multiple views toward a single concept, may correspond to the effective interpretation of an external ``cause'' $\hat{\boldsymbol{x}}$ to the actual sensation.  
 
 
 \bibliographystyle{mslapa}%{apalike}%{apacite}
